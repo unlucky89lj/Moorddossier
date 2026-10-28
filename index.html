@@ -485,6 +485,17 @@ function render(){
 // ---------- speurneus ----------
 const MORSE={A:'·−',B:'−···',C:'−·−·',D:'−··',E:'·',F:'··−·',G:'−−·',H:'····',I:'··',J:'·−−−',K:'−·−',L:'·−··',M:'−−',N:'−·',O:'−−−',P:'·−−·',Q:'−−·−',R:'·−·',S:'···',T:'−',U:'··−',V:'···−',W:'·−−',X:'−··−',Y:'−·−−',Z:'−−··'};
 const ABC='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+// --- geheimschrift-hulpjes (de puzzels worden hiermee opgebouwd, zodat ze altijd kloppen) ---
+const caesar=(t,k)=>t.replace(/[A-Z]/g,c=>ABC[(ABC.indexOf(c)+k+26)%26]);
+const atbashS=t=>t.replace(/[A-Z]/g,c=>ABC[25-ABC.indexOf(c)]);
+const T9={2:'ABC',3:'DEF',4:'GHI',5:'JKL',6:'MNO',7:'PQRS',8:'TUV',9:'WXYZ'};
+const multitap=t=>[...t].map(c=>{for(const k in T9){const i=T9[k].indexOf(c);if(i>=0)return k.repeat(i+1)}return ''}).join(' ');
+const everyNth=(t,n)=>{const f='QZKXWVMJPHTRLNBGDFSC';let out='',fi=0;for(const c of t.replace(/[^A-Z]/g,'')){for(let j=0;j<n-1;j++){out+=f[fi%f.length];fi+=7}out+=c}return out.match(/.{1,5}/g).join(' ')};
+const KB=['QWERTYUIOP','ASDFGHJKL','ZXCVBNM'];
+const kbRight=t=>t.replace(/[A-Z]/g,c=>{for(const r of KB){const i=r.indexOf(c);if(i>=0)return r[i+1]||c}return c});
+const PB='ABCDEFGHIKLMNOPQRSTUVWXYZ';
+const polybius=t=>[...t.replace(/J/g,'I')].map(c=>{const i=PB.indexOf(c);return `${Math.floor(i/5)+1}${i%5+1}`}).join(' ');
+const NATO={A:'Alfa',B:'Bravo',C:'Charlie',D:'Delta',E:'Echo',F:'Foxtrot',G:'Golf',H:'Hotel',I:'India',J:'Juliett',K:'Kilo',L:'Lima',M:'Mike',N:'November',O:'Oscar',P:'Papa',Q:'Quebec',R:'Romeo',S:'Sierra',T:'Tango',U:'Uniform',V:'Victor',W:'Whiskey',X:'X-ray',Y:'Yankee',Z:'Zulu'};
 const CASES=[
  {id:'veiling',title:'De laatste veiling',level:'Instap',blurb:'Tijdens een stormachtige tulpenveiling wordt de veilingmeester vermoord, en de zeldzaamste bol van het land is verdwenen.',
   intro:'Het stormt in Molenwijk. In het oude veilinghuis aan de gracht wordt vanavond de zeldzaamste tulpenbol van het land geveild: de Zwarte Parel. Inspecteur Mol is niet uitgenodigd, maar die ochtend lag er een vreemde brief op zijn deurmat.',
@@ -594,7 +605,201 @@ const CASES=[
      sol:'Alleen Maarten Duin heeft maat 45 en schoenen met een gladde leren zool.',after:''}
   ],
   culprit:'‘Het was <b>Maarten Duin</b>, op de <b>trap van de vuurtoren</b>!’',
-  epilogue:'‘Meneer Duin,’ zegt Inspecteur Mol, ‘om vijf over elf tekende u bon 43. Daarna pakte u een stormlantaarn uit de hal en liep u door de regen naar de vuurtoren. U wilde Jelle nog één keer overhalen om de toren te verkopen. Jelle zag u aankomen en seinde GEVAAR, maar alleen ik zag het. Op de trap kregen jullie ruzie, en u gaf hem een duw. Bij de toren zag Sterre uw lantaarn. Om vijf voor twaalf stond u weer achter de bar, alsof er niets gebeurd was.’ Maarten Duin zegt niets meer. Die middag vaart de veerboot weer. Maarten gaat mee, met handboeien om. En Teun Bot? Die krijgt een boete voor het oesterzoeken. Alleen een kleintje.'}
+  epilogue:'‘Meneer Duin,’ zegt Inspecteur Mol, ‘om vijf over elf tekende u bon 43. Daarna pakte u een stormlantaarn uit de hal en liep u door de regen naar de vuurtoren. U wilde Jelle nog één keer overhalen om de toren te verkopen. Jelle zag u aankomen en seinde GEVAAR, maar alleen ik zag het. Op de trap kregen jullie ruzie, en u gaf hem een duw. Bij de toren zag Sterre uw lantaarn. Om vijf voor twaalf stond u weer achter de bar, alsof er niets gebeurd was.’ Maarten Duin zegt niets meer. Die middag vaart de veerboot weer. Maarten gaat mee, met handboeien om. En Teun Bot? Die krijgt een boete voor het oesterzoeken. Alleen een kleintje.'},
+ {id:'ravensteyn',title:'Het spookslot van Ravensteyn',level:'Gevorderd',blurb:'Een spookweekend op een oud kasteel loopt uit op een moord. De jonkheer zit dood in zijn leunstoel, en in de muren klinken voetstappen.',
+  intro:'Jonkheer Willem van Ravensteyn (78) houdt elk jaar in oktober een spookweekend op zijn slot. Dit jaar heeft hij ook Inspecteur Mol uitgenodigd. ‘Ik heb uw hulp nodig,’ stond er in zijn brief. ‘Er spookt hier iets, en het is geen geest.’ Op de avond van 27 oktober staat Mol voor het grote smeedijzeren hek. Het zit op slot.',
+  ch:[
+    {t:'Het hek',
+     story:'Er is geen bel en geen intercom, alleen een cijferslot met vier wieltjes. Naast het hek hangt een bordje, en in de gevelsteen boven de poort staat een jaartal.',
+     doc:'<p>Welkom op Slot Ravensteyn, met zijn vier torens en zijn vele geheimen.</p><p class="code">ANNO MDCCXLIX</p><p>De code van het hek is het bouwjaar van het slot.</p>',
+     q:'Wat is de code van het hek?',ans:['1749'],
+     hints:['Dit zijn Romeinse cijfers. In het handboek staat wat elke letter waard is.','M = 1000, D = 500 en CC = 200. XL is 50 − 10 en IX is 10 − 1.'],
+     sol:'M (1000) + D (500) + CC (200) + XL (40) + IX (9) = 1749.',
+     after:'Het hek zwaait krakend open. Die avond is er een diner, met spookverhalen bij de haard. Om tien uur drinkt Willem zoals altijd een glas port en neemt hij zijn hartpil. Om elf uur gaat iedereen naar bed. De volgende ochtend vindt huishoudster Grift de jonkheer dood in zijn leunstoel in de bibliotheek.'},
+    {t:'De oude telefoon',
+     story:'Huisarts Bram Holtkamp logeert ook op het slot en onderzoekt het lichaam. ‘Zijn hart,’ zegt hij. ‘Het was al jaren zwak.’ Maar naast Willem ligt zijn oude mobiele telefoon. Er staat een berichtje klaar dat nooit is verstuurd. Op het schermpje staan alleen cijfers.',
+     doc:()=>`<p class="code">${multitap('VERGIF')}</p><p>Een telefoon van vroeger, met tien cijfertoetsen. Voor één letter druk je soms een paar keer op dezelfde toets.</p>`,
+     q:'Welk woord wilde Willem versturen?',ans:['VERGIF'],
+     hints:['Op toets 2 van een oude telefoon staan ABC, op toets 3 DEF, enzovoort. Het handboek heeft het hele overzicht.','Het aantal keer drukken bepaalt de letter: 33 is twee keer op de 3, dus de tweede letter van DEF: E.'],
+     sol:'Met de telefoontoetsen staat er V-E-R-G-I-F: VERGIF.',
+     after:'Vergif! De dokter fronst. ‘Onzin. Willem was in de war.’ Toch laat Mol het portglas en de fles meenemen voor onderzoek. Daarna wil hij weten wie er gisteravond bij de haard zat.'},
+    {t:'Bij de haard',
+     story:'Na het diner zaten zes mensen in een kring van zes stoelen rond de haard. Stoel 1 is de leunstoel van Willem, en de stoelen zijn met de klok mee genummerd. Mol zat er zelf ook bij, maar hij weet niet meer precies waar iedereen zat. Huishoudster Grift helpt hem.',
+     doc:'<ul><li>Barones Isolde, de zus van Willem, zat recht tegenover hem.</li><li>Neef Frederik zat naast Isolde, op de stoel met het hogere nummer.</li><li>Inspecteur Mol zat ook naast Isolde.</li><li>Dokter Holtkamp zat niet naast Frederik.</li><li>Schrijfster Lotte Kroon zat tussen twee mannen.</li></ul>',
+     q:'Op welke stoel zat Lotte Kroon?',ans:['6','ZES'],
+     hints:['Begin bij Isolde. Recht tegenover stoel 1 is stoel 4.','Frederik zit op 5 en Mol dus op 3. De dokter mag niet naast Frederik zitten. Welke stoel blijft er dan over voor Lotte?'],
+     sol:'Isolde zat op 4, Frederik op 5, Mol op 3 en de dokter op 2 (stoel 6 ligt naast Frederik). Lotte zat op 6, tussen Frederik en Willem.',
+     after:'Lotte Kroon schuift ongemakkelijk heen en weer. ‘Vanaf mijn stoel zag ik alles,’ zegt ze. ‘Frederik heeft die fles port uit de kelder gehaald.’ Frederik wordt rood. In zijn jaszak vindt Mol een brief van casino De Gouden Haan.'},
+    {t:'De brief van het casino',
+     story:'De brief ziet eruit als een rij willekeurige letters. Onderaan staat in kleine lettertjes: ‘Voor de slimme gast: tel tot drie.’',
+     doc:()=>`<p class="code" style="font-size:clamp(16px,4.6vw,22px)">${everyNth('BETAAL VOOR VRIJDAG',3)}</p><p style="text-align:right"><i>Casino De Gouden Haan</i></p>`,
+     q:'Vóór welke dag moet Frederik betalen?',ans:['VRIJDAG'],
+     hints:['Tel tot drie. Welke letters zou je dan moeten lezen?','Lees alleen elke derde letter: de 3e, de 6e, de 9e, enzovoort. De spaties doen niet mee.'],
+     sol:'Elke derde letter samen vormt: BETAAL VOOR VRIJDAG.',
+     after:'Frederik heeft grote schulden, en als enige neef erft hij het slot. ‘Ja, ik heb de port gehaald,’ zegt hij. ‘Maar de fles zat dicht! Ik heb hem pas bij de haard opengemaakt, waar iedereen bij was.’'},
+    {t:'Wie gaf het glas?',
+     story:'Huishoudster Grift schonk om tien uur vier glazen port in, op een dienblad. Iemand gaf Willem zijn glas. Vier mensen vertellen wie dat was. Mol kent dit huis inmiddels: hier spreekt bijna niemand de waarheid.',
+     doc:'<ul><li>Isolde: ‘Frederik gaf Willem het glas.’</li><li>Frederik: ‘Ik heb Willem geen glas gegeven.’</li><li>Dokter Holtkamp: ‘Isolde liegt.’</li><li>Grift: ‘De dokter gaf Willem het glas.’</li></ul><p style="margin-top:10px"><b>Precies één van deze vier spreekt de waarheid.</b></p>',
+     q:'Wie gaf Willem zijn glas port?',ans:['FREDERIK'],
+     hints:['Kijk naar wat Frederik en de dokter zeggen. Zeggen zij eigenlijk niet hetzelfde?','Frederik en de dokter zeggen allebei dat het Frederik niet was. Als dat waar is, spreken er al twee de waarheid. Dat mag niet.'],
+     sol:'Frederik en de dokter zeggen allebei dat Frederik het niet was. Die twee zijn dus samen waar of samen gelogen. Omdat er maar één eerlijk is, liegen ze allebei: Frederik gaf het glas. Alleen Isolde spreekt de waarheid.',
+     after:'Frederik slikt. ‘Goed, ik gaf hem het glas. Maar ik heb er niets in gedaan!’ Dan zegt Isolde iets vreemds. ‘Vannacht hoorde ik voetstappen in de muur van de bibliotheek. Dit slot heeft een geheime gang, dat weet ik zeker. Willem had het er altijd over.’'},
+    {t:'De geheime gang',
+     story:'Op de schoorsteenmantel in de bibliotheek hangt een koperen plaatje met een rijmpje. Ernaast staat een plank met boeken.',
+     doc:'<p>Wil je naar de toren, ongezien?<br>Trek dan het boek dat je niet hebt gezien:<br>zijn titel is verstopt in <b>TOLDUSO</b>.</p><p style="margin-top:10px">Op de plank: <i>De Waterlelie · Doolhof · Oud Slot · Het Zilveren Hert · Tussen Ons · Stout Lood</i></p>',
+     q:'Aan welk boek moet Mol trekken?',ans:['OUDSLOT'],
+     hints:['De letters van TOLDUSO staan door elkaar. Welke titel heeft precies dezelfde letters, niet meer en niet minder?','Het zijn zeven letters: twee keer O, en verder T, L, D, U en S.'],
+     sol:'TOLDUSO is een anagram van OUD SLOT. Stout Lood lijkt erop, maar heeft te veel letters.',
+     after:'Met een zucht schuift de boekenkast opzij. Een smalle, stoffige gang loopt naar de torenkamer, waar schrijfster Lotte Kroon slaapt. In het stof staan voetsporen. Tussen de spinnenwebben vindt Mol een half verkreukeld treinkaartje. Hij stopt het in zijn zak.'},
+    {t:'De schrijfster',
+     story:'‘Ik heb niemand gezien,’ zegt Lotte. ‘Ik heb de hele nacht geschreven, van tien uur tot twee uur. Twintig minuten per bladzijde, zo werk ik altijd.’ Ze geeft Mol de stapel nieuwe bladzijden. Ze zijn genummerd in Romeinse cijfers.',
+     doc:'<p>Eerste bladzijde: <b>XXXI</b><br>Laatste bladzijde: <b>XLII</b></p><p>‘Van tien uur ’s avonds tot twee uur ’s nachts. Twintig minuten per bladzijde, geen minuut pauze.’</p>',
+     q:'Hoeveel bladzijden telt de nieuwe stapel?',ans:['12','TWAALF'],
+     hints:['Zet de Romeinse cijfers eerst om. XXXI is 31.','XLII is 42. Tel van 31 tot en met 42, en vergeet de eerste bladzijde niet.'],
+     sol:'Van 31 tot en met 42 zijn 12 bladzijden. Twaalf keer twintig minuten is precies vier uur: van 22:00 tot 02:00. Lotte heeft echt de hele nacht geschreven.',
+     after:'Lottes verhaal klopt. ‘Wacht,’ zegt ze dan. ‘Om half tien, tijdens het dessert, hoorde ik ruzie in de hal. Willem en de dokter. Het ging over zilver.’ Op dat moment gaat Mols telefoon. Het is het lab.'},
+    {t:'Het lab',
+     story:'In het glas port zit géén gif, en in de fles ook niet. Wel vond het lab in Willems bloed een veel te hoge dosis van zijn eigen hartmedicijn. Mol pakt het potje pillen van het bijzettafeltje naast de leunstoel.',
+     doc:'<p><b>Apotheek Ravensteyn</b><br>Dhr. W. van Ravensteyn<br>30 tabletten D1 · 1 per dag, om 22:00<br>Voorgeschreven door: dr. B. Holtkamp<br>Eerste tablet: 1 oktober</p><p>Vanochtend is het 28 oktober.</p>',
+     q:'Hoeveel tabletten hadden er nog in het potje moeten zitten?',ans:['3','DRIE'],
+     hints:['Hoeveel avonden heeft Willem een tablet genomen, van 1 oktober tot en met gisteravond?','Van 1 tot en met 27 oktober zijn 27 avonden. Er zaten er 30 in.'],
+     sol:'Willem nam van 1 tot en met 27 oktober elke avond één tablet: 27 stuks. Er zaten er 30 in, dus er hadden er nog 3 moeten zitten.',
+     after:'Er zitten er inderdaad drie in. Maar ze zien er anders uit. Op de echte tabletten staat D1, op deze staat D5. Iemand heeft de tabletten verwisseld voor tabletten die vijf keer zo sterk zijn.'},
+    {t:'Een envelop voor de inspecteur',
+     story:'Barones Isolde komt aangelopen met een envelop uit het bureau van Willem. ‘Voor de inspecteur’ staat erop. Er zit één regel geheimschrift in, met een korte aanwijzing.',
+     doc:()=>`<p class="code">${caesar('HOLTKAMP STEELT HET ZILVER',4)}</p><p>De verschuiving is het aantal torens van dit huis. Kijk goed om je heen, inspecteur.</p>`,
+     q:'Wat schreef Willem?',ans:['HOLTKAMP'],
+     hints:['Hoeveel torens heeft Slot Ravensteyn? Blader terug naar het eerste hoofdstuk.','Het slot heeft vier torens. Schuif elke letter vier plaatsen terug in het alfabet: L wordt H.'],
+     sol:'Met een verschuiving van 4 staat er: HOLTKAMP STEELT HET ZILVER.',
+     after:'De dokter lacht schamper. ‘Willem werd vergeetachtig. Hij zag overal dieven.’ Mol loopt naar de vitrine in de hal, waar het familiezilver staat.'},
+    {t:'Het familiezilver',
+     story:'In de vitrine liggen acht zilveren stukken. Mol heeft het taxatierapport uit 2020: toen waren ze alle acht van echt zilver. Op echt zilver staat het keurmerk 925. Op verzilverd koper staat EPNS.',
+     doc:'<table><tr><th>Stuk</th><th>Stempel</th></tr><tr><td>Kandelaar links</td><td>925</td></tr><tr><td>Kandelaar rechts</td><td>EPNS</td></tr><tr><td>Theepot</td><td>EPNS</td></tr><tr><td>Melkkan</td><td>925</td></tr><tr><td>Taartschep</td><td>EPNS</td></tr><tr><td>Dienblad</td><td>EPNS</td></tr><tr><td>Soeplepel</td><td>925</td></tr><tr><td>Kaasschaaf</td><td>EPNS</td></tr></table>',
+     q:'Hoeveel stukken zijn vervangen door namaak?',ans:['5','VIJF'],
+     hints:['Echt zilver heeft het keurmerk 925. EPNS betekent dat het alleen een laagje zilver heeft.','Tel de stukken met EPNS.'],
+     sol:'Vijf stukken hebben het stempel EPNS, terwijl ze in 2020 allemaal van echt zilver waren.',
+     after:'‘De sleutel van de vitrine?’ zegt huishoudster Grift. ‘Die heeft alleen de dokter weleens geleend. Om het zilver te laten poetsen, zei hij.’ De dokter haalt zijn schouders op. ‘Ik kwam gisteravond pas om vijf voor tien aan, recht van het station. Vraag het iedereen maar.’ Mol pakt het treinkaartje uit de geheime gang.'},
+    {t:'Het treinkaartje',
+     story:'Het kaartje is gekreukt, maar de tekst is nog te lezen.',
+     doc:'<p><b>Enkele reis</b><br>Maastricht → Ravensteyn<br>Vertrek: 20:12<br>Reistijd: 35 minuten</p><p>Van het station naar het slot is 25 minuten lopen.</p>',
+     q:'Hoe laat kon de reiziger op z’n vroegst op het slot zijn? (bijvoorbeeld 19:45)',ans:['2112'],
+     hints:['Tel de reistijd op bij de vertrektijd. Hoe laat kwam de trein aan?','De trein kwam om 20:47 aan. Daarna nog 25 minuten lopen.'],
+     sol:'20:12 + 35 minuten is 20:47. Met 25 minuten lopen erbij is dat 21:12. Wie dit kaartje had, was al ruim voor tien uur op het slot.',
+     after:'Op de achterkant staat met potlood ‘B.H.’ geschreven. De dokter was dus al om twaalf over negen op het slot, en niet pas om vijf voor tien. Bijna drie kwartier waarin niemand hem zag. Mol vraagt de dokter zijn artsentas open te maken. Tussen de verbandrollen zit een doosje zonder naam, alleen met een rij getallen.'},
+    {t:'De artsentas',
+     story:'Op het doosje staan tweecijferige getallen. Aan de binnenkant van de klep heeft de dokter een raster van vijf bij vijf letters getekend.',
+     doc:()=>`<p class="code">${polybius('DIGOXINE')}</p><p>Op de tabletten in het doosje staat: <b>D5</b>.</p>`,
+     q:'Welk medicijn zit er in het doosje?',ans:['DIGOXINE'],
+     hints:['Elk getal is één letter. Het eerste cijfer is de rij, het tweede de kolom. Het raster staat in het handboek bij het vierkant van Polybius.','14 is rij 1, kolom 4: D. 24 is rij 2, kolom 4: I.'],
+     sol:'Met het vierkant van Polybius staat er D-I-G-O-X-I-N-E: digoxine, het hartmedicijn van Willem. Maar dan vijf keer zo sterk.',
+     after:'Het zijn precies dezelfde tabletten als in het potje van Willem. Mol klapt zijn notitieboekje open.'},
+    {t:'Wie deed het?',
+     story:'Iedereen zit weer in de kring bij de haard, net als gisteravond. Mol zet alles nog één keer op een rij.',
+     doc:'<ul><li>Frederik gaf Willem het glas, maar in het glas zat geen gif.</li><li>Lotte schreef de hele nacht, twaalf bladzijden lang.</li><li>Isolde zat tegenover Willem en kwam niet bij de pillen.</li><li>Iemand verwisselde Willems tabletten voor D5, vóór tien uur.</li><li>Iemand verving het zilver door namaak, en leende de sleutel van de vitrine.</li><li>Iemand loog over hoe laat hij aankwam, en liet zijn treinkaartje vallen in de geheime gang.</li></ul>',
+     q:'Wie vermoordde Jonkheer Willem?',ans:['HOLTKAMP','DOKTER','BRAM'],
+     hints:['Wie had de D5-tabletten in zijn tas?','Het treinkaartje, de D5-tabletten en de sleutel van de vitrine wijzen allemaal naar dezelfde persoon.'],
+     sol:'Dokter Bram Holtkamp verwisselde de tabletten, stal het zilver en loog over zijn aankomst.',after:''}
+  ],
+  culprit:'‘Het was <b>Dokter Holtkamp</b>, met <b>verwisselde hartpillen</b>, in de <b>bibliotheek</b>!’',
+  epilogue:'‘Dokter,’ zegt Inspecteur Mol, ‘u verving al maanden het familiezilver door namaak en verkocht het echte. Willem kreeg argwaan en schreef mij een brief. Gisteravond om half tien zei hij u in de hal dat hij de politie zou bellen. U kwam niet om vijf voor tien aan, maar om twaalf over negen. U sloop door de geheime gang naar de bibliotheek en verwisselde zijn hartpillen voor tabletten die vijf keer zo sterk waren. Om tien uur nam Willem zoals altijd zijn pil, met een glas port. U hoefde alleen maar te wachten.’ De dokter zegt geen woord meer. Frederik erft het slot, maar betaalt eerst zijn schulden bij De Gouden Haan. En Lotte Kroon schrijft er een boek over. Het heet Het spookslot van Ravensteyn, en het wordt een bestseller.'},
+
+ {id:'elfsteden',title:'Dood op de Elfstedentocht',level:'Expert',blurb:'Eindelijk gaat de Elfstedentocht weer door. Maar bij de stempelpost in Dokkum ligt de grote favoriet op het ijs, en zijn stempelkaart klopt niet.',
+  intro:'Na jaren wachten is het eindelijk zover: het heeft weken gevroren en de Elfstedentocht gaat door. Om half zes ’s ochtends starten duizenden schaatsers in Leeuwarden voor een tocht van 200 kilometer langs elf Friese steden. Inspecteur Mol staat met een thermoskan koffie langs de kant. Rond het middaguur kraakt zijn portofoon. Iemand spelt een plaatsnaam, letter voor letter.',
+  ch:[
+    {t:'De portofoon',
+     story:'De verbinding is slecht. Mol hoort alleen een rij woorden, en dan één zin.',
+     doc:()=>`<p class="code" style="font-size:clamp(15px,4.4vw,21px);letter-spacing:.06em">${[...'DOKKUM'].map(c=>NATO[c].toUpperCase()).join(' – ')}</p><p>‘Kom snel. Er is iets vreselijks gebeurd.’</p>`,
+     q:'Naar welke stad moet Mol?',ans:['DOKKUM'],
+     hints:['Elk woord staat voor één letter. Het is het internationale spelalfabet. Dat staat in het handboek.','Neem van elk woord de eerste letter.'],
+     sol:'De eerste letters van Delta, Oscar, Kilo, Kilo, Uniform en Mike vormen DOKKUM.',
+     after:'Bij de stempelpost in Dokkum ligt de grote favoriet Sietse Hoekstra op het ijs, achter de stempeltent. Iemand heeft hem een harde klap op zijn hoofd gegeven. Hij leeft niet meer. In zijn hand heeft hij nog zijn stempelkaart.'},
+    {t:'De stempelkaart',
+     story:'Bij elke stad moet een schaatser een stempel halen, als bewijs dat hij de hele route heeft gereden. Op de kaart van Sietse staat de route voorgedrukt. Mol bekijkt de stempels.',
+     doc:'<p><b>Route:</b> Leeuwarden – Sneek – IJlst – Sloten – Stavoren – Hindeloopen – Workum – Bolsward – Harlingen – Franeker – Dokkum – Leeuwarden</p><table><tr><th>Stempel</th><th>Tijd</th></tr><tr><td>Leeuwarden (start)</td><td>05:30</td></tr><tr><td>Sneek</td><td>06:28</td></tr><tr><td>IJlst</td><td>06:41</td></tr><tr><td>Sloten</td><td>07:22</td></tr><tr><td>Stavoren</td><td>07:58</td></tr><tr><td>Hindeloopen</td><td>08:31</td></tr><tr><td>Workum</td><td>08:52</td></tr><tr><td>Harlingen</td><td>09:35</td></tr><tr><td>Franeker</td><td>10:09</td></tr><tr><td>Dokkum</td><td>12:17</td></tr></table>',
+     q:'Welke stempel ontbreekt?',ans:['BOLSWARD'],
+     hints:['Leg de stempels naast de route, stad voor stad.','Na Workum komt volgens de route eerst nog een andere stad, en dan pas Harlingen.'],
+     sol:'Na Workum staat meteen Harlingen. De stempel van Bolsward ontbreekt.',
+     after:'Wedstrijdcommissaris Hendrikje Bouma schudt haar hoofd. ‘Zonder stempel van Bolsward was hij gediskwalificeerd. Is hij die stempel kwijtgeraakt? Of is hij helemaal niet in Bolsward geweest?’'},
+    {t:'Te snel',
+     story:'Sietse reed die dag gemiddeld precies 30 kilometer per uur. Van Workum via Bolsward naar Harlingen is 37 kilometer.',
+     doc:'<table><tr><th>Wat</th><th>Waarde</th></tr><tr><td>Stempel Workum</td><td>08:52</td></tr><tr><td>Stempel Harlingen</td><td>09:35</td></tr><tr><td>Afstand via Bolsward</td><td>37 km</td></tr><tr><td>Gemiddelde snelheid</td><td>30 km per uur</td></tr></table>',
+     q:'Hoeveel minuten had Sietse nodig moeten hebben van Workum naar Harlingen?',ans:['74'],
+     hints:['30 kilometer per uur betekent: elke kilometer kost 2 minuten.','37 kilometer keer 2 minuten.'],
+     sol:'37 kilometer × 2 minuten = 74 minuten. Maar tussen 08:52 en 09:35 zit maar 43 minuten.',
+     after:'Dat kan niet op schaatsen. Sietse heeft een stuk afgesneden, en iemand heeft hem daarbij geholpen. Een boer bij Workum zag om tien over negen een auto op de dijk staan. Er stapte een schaatser in. Drie mensen zagen de auto, en ze onthielden alle drie iets anders.'},
+    {t:'Het kenteken',
+     story:'Mol schrijft op wat de getuigen zeggen. Daarna vraagt hij welke auto’s er vandaag bij de wedstrijd hoorden.',
+     doc:'<ul><li>De boer: ‘Hij was zwart.’</li><li>De boerin: ‘Het kenteken begon met KS.’</li><li>Hun zoon: ‘Er stonden de cijfers 4, 1 en 8 in, in die volgorde.’</li></ul><table style="margin-top:10px"><tr><th>Eigenaar</th><th>Auto</th><th>Kenteken</th></tr><tr><td>Wiebe Zijlstra, trainer</td><td>blauwe bus</td><td>KL-482-B</td></tr><tr><td>Durk Kingma, sponsor</td><td>zwarte Audi</td><td>KS-418-D</td></tr><tr><td>Marit Veenstra, journaliste</td><td>rode Fiat</td><td>ST-418-K</td></tr><tr><td>Hendrikje Bouma, commissaris</td><td>zwarte Opel</td><td>KS-814-R</td></tr></table>',
+     q:'Van wie was de auto?',ans:['KINGMA','DURK'],
+     hints:['Streep eerst alle auto’s weg die niet zwart zijn.','Twee zwarte auto’s beginnen met KS. Bij welke staan de cijfers 4, 1, 8 in die volgorde?'],
+     sol:'De zwarte Audi met KS-418-D is van sponsor Durk Kingma. Bij de Opel staan de cijfers in de verkeerde volgorde.',
+     after:'Sponsor Durk Kingma, eigenaar van een grote kaasfabriek, zweet ondanks de vrieskou. ‘Ja, ik heb hem een stukje gereden. Hij had kramp! En mijn kaas staat op zijn pak, hij móést winnen.’ Op Kingma’s telefoon staat een berichtje dat hij die ochtend aan Sietse stuurde. Het lijkt nergens op.'},
+    {t:'Het berichtje',
+     story:'Kingma kijkt weg als Mol het bericht leest. ‘Dat is een geheimtaaltje van ons,’ mompelt hij.',
+     doc:()=>`<p class="code">${caesar('WIEBE WEET HET',13)}</p><p>Onder het bericht: <b>(13)</b></p>`,
+     q:'Wat schreef Kingma aan Sietse?',ans:['WIEBE'],
+     hints:['Het getal 13 is de sleutel. Kijk bij de verschuifcode in het handboek.','Schuif elke letter 13 plaatsen op. Bij 13 maakt het niet uit of je vooruit of achteruit schuift: J wordt W.'],
+     sol:'Met een verschuiving van 13 staat er: WIEBE WEET HET.',
+     after:'Wiebe Zijlstra is de trainer van Sietse. ‘Wiebe had door dat we gingen afsnijden,’ zegt Kingma. ‘En hij was woedend.’ Journaliste Marit Veenstra heeft die middag foto’s gemaakt bij de stempelpost in Dokkum. Ze laat Mol haar camera zien.'},
+    {t:'De foto’s',
+     story:'Marit kocht haar camera in Engeland, en de klok staat nog op Engelse tijd. In de winter is het in Nederland een uur later dan in Engeland.',
+     doc:'<table><tr><th>Camera</th><th>Wat staat erop</th></tr><tr><td>11:17</td><td>Sietse haalt zijn stempel bij Hendrikje.</td></tr><tr><td>11:21</td><td>Sietse drinkt uit een rode thermosfles, naast de tent.</td></tr><tr><td>11:25</td><td>Kingma bij zijn auto, de tent ver op de achtergrond.</td></tr><tr><td>11:33</td><td>Niemand achter de tent. Een rode thermosfles in de sneeuw.</td></tr></table>',
+     q:'Hoe laat, in Nederlandse tijd, staat Sietse voor het laatst levend op de foto? (bijvoorbeeld 10:05)',ans:['1221'],
+     hints:['Op welke foto is Sietse voor het laatst te zien?','Dat is de foto van 11:21 Engelse tijd. Tel er een uur bij op.'],
+     sol:'De laatste foto met Sietse is van 11:21 Engelse tijd, dus 12:21 Nederlandse tijd. Om 12:33 lag de rode fles al in de sneeuw.',
+     after:'Tussen 12:21 en 12:33 is het gebeurd. De rode thermosfles ligt nu bij de politie. Er zit een deuk in, en er kleeft bloed aan. Het is het wapen. Maar van wie is die fles?'},
+    {t:'Drie thermosflessen',
+     story:'Drie mensen hadden vandaag een thermosfles bij zich: Kingma, Marit en Wiebe. Er is een rode, een blauwe en een groene.',
+     doc:'<ul><li>Kingma’s fles is niet blauw en niet rood.</li><li>De blauwe fles is niet van Wiebe.</li><li>Iedereen heeft precies één fles.</li></ul>',
+     q:'Van wie is de rode thermosfles?',ans:['WIEBE','ZIJLSTRA'],
+     hints:['Begin bij Kingma. Welke kleur blijft er voor hem over?','Kingma heeft de groene. De blauwe is niet van Wiebe, dus van wie dan wel?'],
+     sol:'Kingma heeft de groene en Marit de blauwe. De rode is dus van trainer Wiebe Zijlstra.',
+     after:'‘Die fles is vanochtend uit mijn bus gestolen!’ roept Wiebe. ‘En trouwens: rond het middaguur zat ik in mijn bus te bellen met de regionale radio. Kijk maar in mijn telefoon.’'},
+    {t:'Het belgeheugen',
+     story:'Wiebe houdt Mol trots zijn telefoon voor.',
+     doc:'<table><tr><th>Gesprek</th><th>Begin</th><th>Duur</th></tr><tr><td>Inkomend, regionale radio</td><td>12:12</td><td>8 minuten</td></tr><tr><td>Uitgaand, regionale radio</td><td>12:31</td><td>7 minuten</td></tr></table>',
+     q:'Hoeveel minuten zat er tussen het eind van het eerste gesprek en het begin van het tweede?',ans:['11','ELF'],
+     hints:['Hoe laat was het eerste gesprek afgelopen?','Het eerste gesprek eindigde om 12:20. Het tweede begon om 12:31.'],
+     sol:'12:12 + 8 minuten = 12:20. Tot 12:31 is dat 11 minuten zonder telefoon.',
+     after:'Elf minuten, precies op het moment dat Sietse stierf. In de binnenzak van Wiebes jas vindt Mol een bonnetje van een wedkantoor, met een vreemde regel tekst.'},
+    {t:'Het wedbriefje',
+     story:'Onder de tekst staat een klein toetsenbord getekend, met een pijltje naar rechts.',
+     doc:()=>`<p class="code">${kbRight('DE VRIES WINT')}</p><p>[ Q W E R T Y … ] →</p>`,
+     q:'Op wie zette Wiebe zijn geld?',ans:['VRIES','JELMER'],
+     hints:['Kijk naar een toetsenbord. Elke letter is vervangen door een buurtoets.','Het pijltje wijst naar rechts: elke letter werd de toets er rechts naast. Ga dus steeds één toets naar links. F wordt D, R wordt E.'],
+     sol:'Elke letter één toets naar links op het toetsenbord geeft: DE VRIES WINT.',
+     after:'Jelmer de Vries is de grote rivaal van Sietse. De trainer van Sietse wedde dus op de tegenstander van zijn eigen schaatser! Op de achterkant van het bonnetje staat hoeveel hij inzette.'},
+    {t:'De inzet',
+     story:'Het bonnetje is van een klein wedkantoor in Leeuwarden.',
+     doc:'<p><b>Wedkantoor De Snelle Schaats</b></p><p>Inzet: € 4.000<br>Op: winst J. de Vries<br>Uitbetaling als hij wint: inzet × 5<br>Wint een ander: geen uitbetaling</p>',
+     q:'Hoeveel euro krijgt Wiebe als Jelmer de Vries wint?',ans:['20000'],
+     hints:['Lees goed wat er bij uitbetaling staat.','4.000 keer 5.'],
+     sol:'4.000 × 5 = 20.000 euro. Maar alleen als Sietse niet wint.',
+     after:'Twintigduizend euro, als Sietse niet zou winnen. En Sietse lag op kop. Toch zegt journaliste Marit dat ze Jelmer de Vries zelf bij de tent heeft gezien. Commissaris Hendrikje zegt van niet. En Jelmer zelf ontkent.'},
+    {t:'Wie liegt?',
+     story:'Mol zet de drie verklaringen naast elkaar.',
+     doc:'<ul><li>Jelmer: ‘Ik ben niet bij de tent geweest.’</li><li>Marit: ‘Jelmer was wél bij de tent.’</li><li>Hendrikje: ‘Marit liegt.’</li></ul><p style="margin-top:10px"><b>Precies één van hen drieën liegt.</b></p>',
+     q:'Wie liegt er?',ans:['MARIT','VEENSTRA'],
+     hints:['Marit en Hendrikje spreken elkaar precies tegen. Eén van die twee moet dus liegen.','Als de leugenaar Marit of Hendrikje is, en er maar één leugenaar is, dan spreekt Jelmer de waarheid. Wat betekent dat voor Marit?'],
+     sol:'Marit en Hendrikje kunnen niet allebei gelijk hebben, dus de leugenaar is één van hen. Dan spreekt Jelmer de waarheid: hij was niet bij de tent. Dus liegt Marit.',
+     after:'Marit bloost. ‘Ik wilde een spannende kop voor mijn krant. “Rivaal bij plaats delict”, dat verkoopt.’ Jelmer was het dus niet. Mol loopt naar de bus van Wiebe. Die staat een eind verderop langs de vaart.'},
+    {t:'De afstand',
+     story:'Mol meet het na met de meetlint van de wedstrijdleiding. Daarna loopt hij het stuk zelf, in hetzelfde tempo als Wiebe.',
+     doc:'<p>Van de bus van Wiebe tot de stempeltent: <b>240 meter</b> over het ijs.<br>Wiebe loopt op het ijs <b>80 meter per minuut</b>.</p>',
+     q:'Hoeveel minuten heeft Wiebe nodig om heen en terug te lopen?',ans:['6','ZES'],
+     hints:['Hoeveel minuten duurt 240 meter, als je 80 meter per minuut loopt?','Enkele reis duurt 3 minuten. Vergeet de terugweg niet.'],
+     sol:'240 : 80 = 3 minuten enkele reis, dus 6 minuten heen en terug. Dat past ruim in de 11 minuten tussen zijn telefoongesprekken.',
+     after:'Zes minuten lopen, en vijf minuten over. Mol heeft nu alle stukjes. Hij vraagt iedereen naar de stempeltent te komen.'},
+    {t:'De ontknoping',
+     story:'Het begint te sneeuwen. Mol slaat zijn notitieboekje open.',
+     doc:'<ul><li>Sietse leefde om 12:21 nog. Om 12:33 lag de rode fles in de sneeuw.</li><li>Kingma heeft de groene fles en stond om 12:25 bij zijn auto.</li><li>Jelmer was niet bij de tent. Marit loog daarover.</li><li>De rode fles is het wapen.</li><li>Iemand kreeg 20.000 euro als Sietse niet zou winnen.</li><li>Iemand had van 12:20 tot 12:31 niets te doen, en had maar 6 minuten nodig.</li></ul>',
+     q:'Wie vermoordde Sietse Hoekstra?',ans:['WIEBE','ZIJLSTRA'],
+     hints:['Van wie is de rode fles?','Wie had elf minuten zonder telefoon, en wedde op de rivaal van zijn eigen schaatser?'],
+     sol:'Trainer Wiebe Zijlstra had het wapen, het motief en de tijd.',after:''}
+  ],
+  culprit:'‘Het was <b>trainer Wiebe Zijlstra</b>, met de <b>rode thermosfles</b>, achter de <b>stempeltent in Dokkum</b>!’',
+  epilogue:'‘Wiebe,’ zegt Inspecteur Mol, ‘u zette 4.000 euro in op Jelmer de Vries. Als Sietse verloor, kreeg u 20.000 euro. Maar Sietse lag op kop, met hulp van zijn sponsor. Toen u ontdekte dat hij afsneed, besloot u dat hij niet mocht winnen. Na uw eerste radiogesprek, om 12:20, liep u met uw rode thermosfles over het ijs naar de tent. Daar kreeg u ruzie met Sietse, en sloeg u toe. Om 12:31 zat u weer in uw bus, precies op tijd voor het tweede gesprek. De fles liet u in de sneeuw vallen. Een gestolen fles, zou u zeggen.’ Wiebe laat zijn hoofd zakken. Die avond wint Jelmer de Vries de Elfstedentocht. Het wedkantoor betaalt niets uit. En Kingma krijgt een flinke boete, en verkoopt zijn kaas voortaan op een eerlijke manier.'}
+
 ];
 let game=store.get('md-game')||'murdle';
 function setGame(g){game=g;store.set('md-game',g);renderPanes();window.scrollTo({top:0})}
@@ -633,7 +838,7 @@ function handbookHTML(){
     <h4>Verschuifcode (Caesar)</h4>
     <p>Elke letter is een vast aantal plaatsen opgeschoven in het alfabet. Bij een verschuiving van 3 wordt A een D, en Z een C. Om te ontcijferen schuif je terug.</p>
     <div class="abc"><table>${row([...ABC])}${row([...ABC].map((c,i)=>ABC[(i+3)%26]))}</table></div>
-    <p class="hint">Boven de gewone letter, onder dezelfde letter met 3 verschoven.</p>
+    <p class="hint">Boven de gewone letter, onder dezelfde letter met 3 verschoven. Een verschuiving van 13 heet ook wel ROT13: dan is vooruit en terug hetzelfde.</p>
   </section>
   <section class="hb">
     <h4>Spiegelalfabet (Atbash)</h4>
@@ -655,10 +860,48 @@ function handbookHTML(){
     <p>Tekst die achterstevoren staat, alsof je hem in een spiegel ziet. Lees van rechts naar links, of houd je scherm voor een spiegel.</p>
   </section>
   <section class="hb">
+    <h4>Romeinse cijfers</h4>
+    <p>I = 1, V = 5, X = 10, L = 50, C = 100, D = 500, M = 1000. Tel de waarden op. Staat een kleiner teken vóór een groter, dan trek je het af: IV = 4, IX = 9, XL = 40, XC = 90, CD = 400, CM = 900.</p>
+    <p class="hint">Voorbeeld: MCMXC = 1000 + 900 + 90 = 1990.</p>
+  </section>
+  <section class="hb">
+    <h4>Telefoontoetsen</h4>
+    <p>Op een oude telefoon staan letters op de cijfertoetsen. Hoe vaak je drukt, bepaalt welke letter je krijgt: 2 = A, 22 = B, 222 = C.</p>
+    <div class="morse">${Object.entries(T9).map(([k,v])=>`<span><b>${k}</b> ${v}</span>`).join('')}</div>
+  </section>
+  <section class="hb">
+    <h4>Elke zoveelste letter</h4>
+    <p>Soms zit een bericht verstopt tussen onzinletters. Een aanwijzing als ‘tel tot drie’ betekent: lees alleen de 3e, 6e, 9e letter, enzovoort. Spaties tellen niet mee.</p>
+  </section>
+  <section class="hb">
+    <h4>Anagram</h4>
+    <p>Dezelfde letters in een andere volgorde. ROMA is bijvoorbeeld een anagram van AMOR. Tip: tel van elke letter hoe vaak hij voorkomt. Het antwoord moet precies dezelfde letters hebben, niet meer en niet minder.</p>
+  </section>
+  <section class="hb">
+    <h4>Vierkant van Polybius</h4>
+    <p>Een raster van vijf bij vijf letters. Elke letter wordt een getal van twee cijfers: eerst de rij, dan de kolom. De I en J delen een vakje.</p>
+    <div class="abc"><table><tr><td></td>${[1,2,3,4,5].map(n=>`<td><b>${n}</b></td>`).join('')}</tr>${[0,1,2,3,4].map(r=>`<tr><td><b>${r+1}</b></td>${[...PB.slice(r*5,r*5+5)].map(c=>`<td>${c==='I'?'I/J':c}</td>`).join('')}</tr>`).join('')}</table></div>
+    <p class="hint">Voorbeeld: 23 is rij 2, kolom 3: H.</p>
+  </section>
+  <section class="hb">
+    <h4>Spelalfabet</h4>
+    <p>Bij de radio en de politie spel je met woorden, zodat niemand letters door elkaar haalt. Elk woord staat voor de letter waarmee het begint.</p>
+    <div class="morse" style="grid-template-columns:repeat(auto-fill,minmax(120px,1fr))">${[...ABC].map(c=>`<span><b>${c}</b> ${NATO[c]}</span>`).join('')}</div>
+  </section>
+  <section class="hb">
+    <h4>Toetsenbordcode</h4>
+    <p>Elke letter is vervangen door een buurtoets op het toetsenbord. Een pijltje vertelt meestal welke kant op. Om te ontcijferen ga je de andere kant op.</p>
+    <div class="morse" style="grid-template-columns:1fr;letter-spacing:.3em">${KB.map(r=>`<span>${r}</span>`).join('')}</div>
+  </section>
+  <section class="hb">
+    <h4>Wie liegt er?</h4>
+    <p>Bij puzzels met leugenaars helpt het om twee uitspraken te zoeken die elkaar precies tegenspreken, of die eigenlijk hetzelfde zeggen. Die zijn samen waar of samen gelogen, of juist altijd één van de twee.</p>
+  </section>
+  <section class="hb">
     <h4>Kaarten en tijden</h4>
     <ul>
       <li>Op een kaart met vakken staan de letters meestal voor kolommen (west naar oost) en de cijfers voor rijen (noord naar zuid). B3 is dus kolom B, rij 3.</li>
-      <li>Reken bij tijden altijd met de echte tijd. Een klok kan voor- of achterlopen.</li>
+      <li>Reken bij tijden altijd met de echte tijd. Een klok kan voor- of achterlopen, en een camera uit het buitenland staat soms op een andere tijdzone.</li>
       <li>Vergeet de terugweg niet. Wie ergens heen loopt, moet ook weer terug.</li>
     </ul>
   </section>

@@ -122,6 +122,36 @@ td.e{border:0}
 .games button[aria-selected="true"]{background:var(--ink);color:var(--page)}
 .games button[aria-selected="true"] span{color:var(--band)}
 .games button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.lead{margin:0;font-size:17px;max-width:60ch}
+#spBack,#spBack2{align-self:flex-start}
+.bookbtn{display:flex;flex-direction:column;gap:2px;text-align:left;border:2px dashed var(--ink);border-radius:16px;background:var(--card);color:var(--ink);padding:12px 16px;cursor:pointer;font:inherit}
+.bookbtn b{font:800 19px var(--cond);text-transform:uppercase;letter-spacing:.03em}
+.bookbtn span{font-size:14px;color:var(--muted)}
+.bookbtn:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.caselist{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:640px){.caselist{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.casecard{background:var(--card);border:2px solid var(--ink);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.casecard h3{font:800 24px/1.05 var(--cond);text-transform:uppercase;margin:0}
+.casecard p{margin:0;font-size:15px}
+.casecard .controls{justify-content:space-between}
+.casecard.soon{border-style:dashed;border-color:var(--rule);background:transparent}
+.prog{height:8px;border-radius:99px;background:var(--band);overflow:hidden}
+.prog i{display:block;height:100%;background:var(--ok)}
+.mirror{display:block;transform:scaleX(-1);font:800 clamp(17px,5vw,22px) var(--cond);letter-spacing:.08em;color:var(--red);margin:8px 0!important}
+.doc table.map{border-collapse:collapse;min-width:0;width:100%}
+.doc table.map td{border:1.5px solid var(--ink);text-align:center;padding:8px 2px;font-size:clamp(11px,3.2vw,15px)}
+.doc table.map th{text-align:center;padding:4px;border:0}
+.hb{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.hb h4{font:800 19px var(--cond);text-transform:uppercase;letter-spacing:.04em;margin:0}
+.hb p,.hb ul{margin:0;max-width:65ch}
+.hb ul{padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.morse{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:4px 12px;font:600 16px var(--cond);letter-spacing:.06em}
+.morse b{display:inline-block;width:1.2em;color:var(--red)}
+.notes{display:flex;flex-direction:column;gap:6px}
+.notes label{font:800 16px var(--cond);text-transform:uppercase;letter-spacing:.05em}
+.notes label .hint{text-transform:none;letter-spacing:.02em;font-weight:500}
+.notes textarea{font:500 16px/1.5 var(--slab);padding:12px;border:2px solid var(--rule);border-radius:12px;background:var(--card);color:var(--ink);resize:vertical;width:100%}
+.notes textarea:focus-visible{outline:3px solid var(--red);outline-offset:2px}
 .kicker{font:700 13px var(--slab);text-transform:uppercase;letter-spacing:.12em;color:var(--red)}
 .storyhead{display:flex;flex-direction:column;gap:6px}
 .storyhead h3,.chapter h3{font:800 clamp(26px,7vw,34px)/1.05 var(--cond);text-transform:uppercase;margin:0;text-wrap:balance}
@@ -452,110 +482,253 @@ function render(){
   renderPanes();
 }
 
-// ---------- verhaalmodus ----------
-const STORY={
-  title:'De laatste veiling',
+// ---------- speurneus ----------
+const MORSE={A:'·−',B:'−···',C:'−·−·',D:'−··',E:'·',F:'··−·',G:'−−·',H:'····',I:'··',J:'·−−−',K:'−·−',L:'·−··',M:'−−',N:'−·',O:'−−−',P:'·−−·',Q:'−−·−',R:'·−·',S:'···',T:'−',U:'··−',V:'···−',W:'·−−',X:'−··−',Y:'−·−−',Z:'−−··'};
+const ABC='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const CASES=[
+ {id:'veiling',title:'De laatste veiling',level:'Instap',blurb:'Tijdens een stormachtige tulpenveiling wordt de veilingmeester vermoord, en de zeldzaamste bol van het land is verdwenen.',
   intro:'Het stormt in Molenwijk. In het oude veilinghuis aan de gracht wordt vanavond de zeldzaamste tulpenbol van het land geveild: de Zwarte Parel. Inspecteur Mol is niet uitgenodigd, maar die ochtend lag er een vreemde brief op zijn deurmat.',
   ch:[
     {t:'Een vreemde brief',
      story:'De brief is met de hand geschreven, in keurige krulletters. Er staat geen afzender op.',
      doc:'<p>Zeer geachte inspecteur,<br>Onze veiling van vanavond begint om acht uur.<br>Laat u niet afschrikken door de storm.<br>De bollen zijn dit jaar zeldzamer dan ooit.<br>Een van de gasten heeft kwade bedoelingen.<br>Raadt u waar ik op u wacht?</p><p class="sign">Een vriend</p>',
-     q:'Waar in het veilinghuis wacht de afzender op Inspecteur Mol?',
-     ans:['ZOLDER'],
+     q:'Waar in het veilinghuis wacht de afzender op Inspecteur Mol?',ans:['ZOLDER'],
      hints:['Kijk niet naar wat er staat, maar naar hoe elke regel begint.','Lees de eerste letter van elke regel, van boven naar beneden.'],
      sol:'De eerste letters van de regels vormen samen het woord ZOLDER.',
      after:'Mol klimt de krakende trap op naar de zolder. Daar wacht niemand meer op hem. Veilingmeester Cornelis Bloemkamp ligt levenloos naast een omgevallen staande klok.'},
     {t:'Op de zolder',
      story:'Naast het lichaam staat een ijzeren kist met een cijferslot van vier cijfers. In de vuist van Cornelis zit een verfrommeld briefje in zijn eigen handschrift. Zo onthield hij blijkbaar zijn code.',
      doc:'<p>Vier cijfers, en ik vergeet ze steeds. Dus:</p><ul><li>Het eerste cijfer is het dubbele van het laatste.</li><li>Het tweede cijfer is het eerste plus het laatste.</li><li>Het derde cijfer is één minder dan het tweede.</li><li>Alle vier samen zijn 26.</li></ul>',
-     q:'Wat is de code van de kist?',
-     ans:['6983'],
+     q:'Wat is de code van de kist?',ans:['6983'],
      hints:['Noem het laatste cijfer x, en schrijf de andere drie cijfers ook met x.','Het eerste cijfer is 2x, het tweede 3x en het derde 3x − 1. Opgeteld met x is dat 9x − 1, en dat moet 26 zijn.'],
      sol:'9x − 1 = 26, dus x = 3. Het eerste cijfer is 6, het tweede 9, het derde 8 en het laatste 3: de code is 6983.',
      after:'Klik. Het slot springt open. In de kist ligt de veilingcatalogus, en tussen de bladzijden zit een kaartje met onbegrijpelijke letters.'},
     {t:'Geheimschrift',
      story:'Cornelis vertrouwde niemand, zelfs zijn eigen kist niet. Op het kaartje staat één regel. Op het deksel van de kist is iets gekrast.',
      doc:'<p class="code">CRHN LQ GH NORN</p><p>Gekrast in het deksel: <b>III ←</b></p>',
-     q:'Waar moet Mol zoeken?',
-     ans:['KLOK'],
+     q:'Waar moet Mol zoeken?',ans:['KLOK'],
      hints:['Drie streepjes en een pijl naar links. Wat zou je drie keer terug moeten doen?','Schuif elke letter drie plaatsen terug in het alfabet: D wordt A, C wordt Z.'],
      sol:'Elke letter drie plaatsen terug geeft ZOEK IN DE KLOK.',
      after:'Mol opent het glazen deurtje van de omgevallen klok. Achter de slinger zit een fluwelen zakje met de Zwarte Parel erin. Cornelis had haar daar zelf verstopt. De wijzers van de klok staan stil op 21:23, en het glas is gebarsten.'},
     {t:'Het logboek',
      story:'Er is maar één trap naar de zolder, en portier Gijs schrijft in zijn logboek precies op wie er naar boven en naar beneden gaat. Om 21:10 belde Cornelis nog naar beneden voor een fles wijn, dus toen leefde hij nog. De klok viel om tijdens een worsteling.',
      doc:'<table><tr><th>Tijd</th><th>Wie</th><th>Richting</th></tr><tr><td>20:58</td><td>Baron van Kruidenier</td><td>↑ boven</td></tr><tr><td>21:08</td><td>Baron van Kruidenier</td><td>↓ beneden</td></tr><tr><td>21:12</td><td>Juffrouw Tulp</td><td>↑ boven</td></tr><tr><td>21:18</td><td>Juffrouw Tulp</td><td>↓ beneden</td></tr><tr><td>21:19</td><td>Kapitein Haring</td><td>↑ boven</td></tr><tr><td>21:26</td><td>Kapitein Haring</td><td>↓ beneden</td></tr><tr><td>21:27</td><td>Notaris Brouwer</td><td>↑ boven</td></tr><tr><td>21:33</td><td>Notaris Brouwer</td><td>↓ beneden</td></tr><tr><td>21:40</td><td>Inspecteur Mol</td><td>↑ boven</td></tr></table>',
-     q:'Wie was er op de zolder op het tijdstip dat de klok aanwijst?',
-     ans:['HARING'],
+     q:'Wie was er op de zolder op het tijdstip dat de klok aanwijst?',ans:['HARING'],
      hints:['De klok bleef staan toen hij omviel. Welke tijd wijst hij aan?','Om 21:23 was er maar één persoon boven. Wie ging om 21:19 naar boven?'],
      sol:'Volgens de klok was het 21:23. Toen was alleen Kapitein Haring boven (van 21:19 tot 21:26).',
      after:'Mol laat Kapitein Haring halen. De kapitein wordt rood als een kreeft. ‘Ja, ik was boven! Ik wilde Cornelis omkopen voor de Parel. Maar hij leefde nog toen ik wegging, dat zweer ik op mijn schip!’'},
     {t:'Een kwestie van tijd',
      story:'‘En die klok bewijst niks,’ bromt de kapitein. ‘Iedereen in Molenwijk weet dat die ouwe klok van Cornelis net zo is als hij zelf: altijd te laat.’ Mol bladert terug in de catalogus. Achterin staat een notitie van Cornelis.',
      doc:'<p>Klok laten repareren!! Loopt achter.</p><p>Bij de opening van de veiling, om 20:00 precies (echte tijd), wees hij 19:53 aan.</p>',
-     q:'Wie was er écht op de zolder toen de klok omviel?',
-     ans:['BROUWER'],
+     q:'Wie was er écht op de zolder toen de klok omviel?',ans:['BROUWER'],
      hints:['Hoeveel minuten loopt de klok achter? Hoe laat was het dan echt toen hij 21:23 aanwees?','De klok loopt 7 minuten achter, dus het was echt 21:30. Kijk in het logboek wie er toen boven was.'],
      sol:'De klok loopt 7 minuten achter. Toen hij 21:23 aanwees, was het echt 21:30. Toen was alleen Notaris Brouwer boven (van 21:27 tot 21:33).',
      after:'Notaris Brouwer poetst zijn bril. ‘Ik ben inderdaad even boven geweest, om het testament van Cornelis te bespreken. Een routinezaak.’ Maar zijn handen trillen.'},
     {t:'Het wapen',
      story:'Op de zolder liggen drie voorwerpen waarmee Cornelis neergeslagen kan zijn. Dan belt de patholoog met haar bevindingen.',
      doc:'<ul><li>Een koperen kandelaar, op het bureau.</li><li>Een houten veilinghamer, naast de klok.</li><li>Een houten wandelstok, bij het open raam.</li></ul><p style="margin-top:10px">‘Het wapen was niet van metaal. En het lag niet bij het raam: daar is alles doorweekt van de regen, en op het wapen zat geen druppel.’</p>',
-     q:'Met welk wapen werd Cornelis gedood?',
-     ans:['VEILINGHAMER','HAMER'],
+     q:'Met welk wapen werd Cornelis gedood?',ans:['VEILINGHAMER','HAMER'],
      hints:['Streep eerst het voorwerp van metaal weg.','De kandelaar is van koper en de wandelstok lag bij het natte raam. Wat blijft er over?'],
-     sol:'De kandelaar is van metaal en de wandelstok lag bij het raam. Dan blijft alleen de veilinghamer over.',
-     after:''}
+     sol:'De kandelaar is van metaal en de wandelstok lag bij het raam. Dan blijft alleen de veilinghamer over.',after:''}
   ],
-  epilogue:'‘Notaris Brouwer,’ zegt Inspecteur Mol, ‘u heeft het testament van Cornelis vervalst. In uw versie zou de Zwarte Parel na zijn dood naar ú gaan. Vanavond ontdekte Cornelis het bedrog. Er volgde een worsteling, de klok viel om, en u sloeg hem neer met zijn eigen veilinghamer. Daarna zocht u de Parel, maar die had Cornelis slim verstopt.’ Brouwer zakt in elkaar. ‘Die bol was meer waard dan dit hele veilinghuis…’ En de brief op Mols deurmat? Die bleek van Cornelis zelf. Hij voelde al dat er iets mis was. De Zwarte Parel gaat die avond alsnog onder de hamer. Een andere hamer, dit keer.'
-};
-const STKEY='md-story';
+  culprit:'‘Het was <b>Notaris Brouwer</b> met de <b>veilinghamer</b> op de <b>zolder</b>!’',
+  epilogue:'‘Notaris Brouwer,’ zegt Inspecteur Mol, ‘u heeft het testament van Cornelis vervalst. In uw versie zou de Zwarte Parel na zijn dood naar ú gaan. Vanavond ontdekte Cornelis het bedrog. Er volgde een worsteling, de klok viel om, en u sloeg hem neer met zijn eigen veilinghamer. Daarna zocht u de Parel, maar die had Cornelis slim verstopt.’ Brouwer zakt in elkaar. ‘Die bol was meer waard dan dit hele veilinghuis…’ En de brief op Mols deurmat? Die bleek van Cornelis zelf. Hij voelde al dat er iets mis was. De Zwarte Parel gaat die avond alsnog onder de hamer. Een andere hamer, dit keer.'},
+
+ {id:'wadoog',title:'Storm op Wadoog',level:'Gevorderd',blurb:'Een storm sluit het eiland Wadoog af van de wal. Op de ochtend daarna ligt de vuurtorenwachter onder aan zijn eigen trap.',
+  intro:'Inspecteur Mol is op vakantie op Wadoog, een klein eiland in de Waddenzee. Op de tweede avond steekt er een storm op en vaart de veerboot niet meer: niemand kan het eiland af. Mol zit om tien voor half twaalf nog met een kop thee voor het raam van Hotel De Duinroos, als hij de lamp van de vuurtoren vreemd ziet knipperen. Hij schrijft het patroon op een servetje.',
+  ch:[
+    {t:'Licht in de nacht',
+     story:'Het licht van een vuurtoren draait normaal rustig rond. Maar dit keer gaat het aan en uit: kort, lang, kort. Daarna is het stil. Mol schrijft precies op wat hij zag. Een streepje is een lange flits, een punt een korte.',
+     doc:()=>`<p class="code" style="letter-spacing:.06em">${'GEVAAR'.split('').map(c=>MORSE[c]).join(' &nbsp;/&nbsp; ')}</p><p>Op het servetje, in het handschrift van Mol.</p>`,
+     q:'Welk woord seinde de vuurtoren?',ans:['GEVAAR'],
+     hints:['Dit is morse. In het Speurneus-handboek staat de morsetabel.','Elke groep tussen twee schuine strepen is één letter. De eerste groep, lang-lang-kort, is een G.'],
+     sol:'In morse staat er G-E-V-A-A-R: GEVAAR.',
+     after:'De volgende ochtend is de storm gaan liggen. Mol fietst naar de vuurtoren. De deur staat open. Onder aan de wenteltrap ligt vuurtorenwachter Jelle Visser. Hij leeft niet meer.'},
+    {t:'Krijt op de muur',
+     story:'Het lijkt een ongeluk: een val van de steile trap. Maar boven in de lampkamer is een stoel omgegooid, en op de witte muur heeft iemand met krijt een rij getallen geschreven. Het krijtje ligt nog op de grond.',
+     doc:'<p class="code">20 · 5 · 21 · 14</p>',
+     q:'Welke naam staat er op de muur?',ans:['TEUN'],
+     hints:['Elk getal staat voor een letter. Welke letter zou 1 zijn?','A = 1, B = 2, C = 3 enzovoort. In het handboek staat de hele tabel.'],
+     sol:'Met A = 1 staat er T (20), E (5), U (21), N (14): TEUN.',
+     after:'Er woont maar één Teun op Wadoog: Teun Bot, de visser. Een grote, zwijgzame man met handen als kolenschoppen. Mol vindt hem bij zijn boot in de haven.'},
+    {t:'Het getij',
+     story:'‘Ik heb Jelle gisteravond niet gezien,’ zegt Teun. ‘Ik was op zee om mijn netten te halen. Om half elf voer ik de haven weer binnen. Daarna lag ik op bed.’ Aan de muur van het havenkantoor hangt de getijdentabel.',
+     doc:'<p><b>Haven van Wadoog</b>, getijden van gisteren</p><table><tr><th>Getij</th><th>Tijd</th></tr><tr><td>Hoogwater</td><td>16:25</td></tr><tr><td>Laagwater</td><td>22:40</td></tr></table><p style="margin-top:10px">Let op: rond laagwater valt de haven droog. Vanaf één uur vóór tot één uur ná laagwater kan geen boot naar binnen of buiten.</p>',
+     q:'Hoe laat kon Teun op z’n vroegst de haven weer binnenvaren? (bijvoorbeeld 21:15)',ans:['2340'],
+     hints:['Om half elf (22:30) is het bijna laagwater. Kon de haven toen gebruikt worden?','De haven ligt droog van 21:40 tot een uur na laagwater. Wanneer is dat?'],
+     sol:'Laagwater was om 22:40. De haven lag droog van 21:40 tot 23:40. Om half elf kon Teun dus niet binnenvaren. Op z’n vroegst kon dat om 23:40.',
+     after:'Teun kijkt naar zijn laarzen. ‘Goed dan. Ik was niet op zee. Ik liep over het wad om oesters te zoeken. Dat mag eigenlijk niet.’ Hij aarzelt. ‘Op de terugweg liep ik door de duinen. Daar struikelde ik over iets, maar het was te donker om te zien wat. Ik heb het op mijn kaartje aangestreept.’'},
+    {t:'De kaart van Teun',
+     story:'Teun tekent op een kaart van het eiland hoe hij liep. De kolommen hebben letters, van west naar oost. De rijen hebben cijfers, van noord naar zuid.',
+     doc:'<table class="map"><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr><tr><th>1</th><td>Vuurtoren</td><td>Strand</td><td>Strand</td><td>Zee</td></tr><tr><th>2</th><td>Duinen</td><td>Duinpan</td><td>Vogelhut</td><td>Wad</td></tr><tr><th>3</th><td>Bos</td><td>Helmgras</td><td>Dorp</td><td>Haven</td></tr><tr><th>4</th><td>Polder</td><td>Kerk</td><td>Hotel</td><td>Veerstoep</td></tr></table><p style="margin-top:10px">‘Ik ging bij de vuurtoren weg. Twee vakken naar het oosten, dan twee naar het zuiden, dan één naar het westen. Daar struikelde ik.’</p>',
+     q:'In welk vak struikelde Teun? (bijvoorbeeld D4)',ans:['B3','3B'],
+     hints:['Begin in het vak van de vuurtoren: A1.','Twee naar het oosten is C1. Twee naar het zuiden is C3. Eén naar het westen?'],
+     sol:'Van A1 twee naar het oosten is C1, twee naar het zuiden is C3, één naar het westen is B3: het helmgras.',
+     after:'In het helmgras van vak B3 vindt Mol een dure verrekijker. In het leer van de riem staan de letters S.d.W. Op het hele eiland is maar één persoon die ’s nachts met een verrekijker rondloopt: vogelaar Sterre de Wit.'},
+    {t:'Het vogelboekje',
+     story:'Sterre de Wit is blij haar verrekijker terug te hebben. ‘Ik zat vannacht in de duinen, de velduilen te tellen. Daarbij moet ik hem verloren hebben.’ Ze laat haar vogelboekje zien. Eén regel heeft ze vreemd opgeschreven. ‘Een oude gewoonte,’ zegt ze. ‘Dan kan niemand meelezen.’',
+     doc:'<p>23:00 &nbsp;2 velduilen<br>23:15 &nbsp;1 ransuil</p><p class="mirror">OM HALF TWAALF EEN LANTAARN BIJ DE TOREN</p><p>23:45 &nbsp;storm, naar huis</p>',
+     q:'Wat zag Sterre om half twaalf bij de toren?',ans:['LANTAAR','LANTAREN'],
+     hints:['De letters lijken achterstevoren te staan. Hoe lees je dat?','Het is spiegelschrift. Lees van rechts naar links, of houd je scherm voor een spiegel.'],
+     sol:'In spiegelschrift staat: OM HALF TWAALF EEN LANTAARN BIJ DE TOREN.',
+     after:'Een lantaarn. Mol denkt terug aan de hal van Hotel De Duinroos. Daar hangen precies zulke ouderwetse stormlantaarns, en eentje was er vanochtend nat van de regen. De hotelier, Maarten Duin, zegt dat hij de hele avond achter de bar stond.'},
+    {t:'De bonnetjes',
+     story:'‘Vraag het iedereen maar,’ zegt Maarten Duin. ‘Ik heb de hele avond getapt.’ Hij legt de bonnetjes van gisteravond op de bar. Op elk bonnetje staat een tijd en zijn paraaf. Mol weet hoe lang je loopt: van het hotel naar de vuurtoren is twintig minuten.',
+     doc:'<table><tr><th>Bon</th><th>Tijd</th><th>Paraaf</th></tr><tr><td>Nr. 41</td><td>22:35</td><td>M.D.</td></tr><tr><td>Nr. 42</td><td>22:50</td><td>M.D.</td></tr><tr><td>Nr. 43</td><td>23:05</td><td>M.D.</td></tr><tr><td>Nr. 44</td><td>23:55</td><td>M.D.</td></tr><tr><td>Nr. 45</td><td>00:10</td><td>M.D.</td></tr></table>',
+     q:'Hoeveel minuten kan Maarten hoogstens bij de vuurtoren zijn geweest?',ans:['10'],
+     hints:['Zoek de grootste pauze tussen twee bonnetjes.','Tussen 23:05 en 23:55 zit 50 minuten. Hoeveel daarvan ben je kwijt aan heen en terug lopen?'],
+     sol:'Tussen bon 43 (23:05) en bon 44 (23:55) zit 50 minuten. Heen en terug lopen kost 40 minuten. Maarten kan dus hoogstens 10 minuten bij de vuurtoren zijn geweest.',
+     after:'Tien minuten. Genoeg tijd voor een ruzie op een steile trap. Maar waarom zou de hotelier de vuurtorenwachter iets aandoen? Mol fietst terug naar de vuurtoren en vindt in de lampkamer het dagboek van Jelle. De laatste bladzijde is in een vreemd geheimschrift.'},
+    {t:'Het dagboek',
+     story:'Jelle was een voorzichtig man. Achter in zijn dagboek heeft hij met potlood een alfabet geschreven, met daaronder hetzelfde alfabet achterstevoren.',
+     doc:'<p class="code">NZZIGVM DRO WV GLIVM</p><p>Zondag. Hij kwam wéér langs. Ik zeg nee.</p>',
+     q:'Wat wilde Maarten van Jelle hebben?',ans:['TOREN'],
+     hints:['Het alfabet staat er twee keer: één keer gewoon en één keer achterstevoren. A hoort bij Z, B bij Y.','Dit heet het Atbash-geheimschrift en staat in het handboek. NZZIGVM wordt MAARTEN.'],
+     sol:'Met A↔Z, B↔Y enzovoort staat er MAARTEN WIL DE TOREN.',
+     after:'Maarten Duin wilde de vuurtoren kopen, om er een luxe hotelkamer met zeezicht van te maken. Jelle weigerde. Toch is een motief nog geen bewijs. Dan komt de fotograaf van de politie terug met de foto’s van de trap.'},
+    {t:'Voetsporen',
+     story:'Op de natte stenen van de trap staan duidelijke voetsporen van vannacht. Mol legt ze naast wat hij weet over de mensen op het eiland.',
+     doc:'<p><b>Voetspoor op de trap:</b> maat 45, gladde zool, geen profiel.</p><ul><li>Teun Bot: maat 46, rubberlaarzen met diep profiel.</li><li>Sterre de Wit: maat 39, wandelschoenen.</li><li>Maarten Duin: maat 45, nette leren schoenen.</li><li>Bakker Annie Kraai: maat 38, klompen.</li></ul>',
+     q:'Wie liet het voetspoor op de trap achter?',ans:['MAARTEN','DUIN'],
+     hints:['Kijk eerst alleen naar de schoenmaat.','Maat 45 met een gladde zool. Wie draagt geen laarzen of wandelschoenen?'],
+     sol:'Alleen Maarten Duin heeft maat 45 en schoenen met een gladde leren zool.',after:''}
+  ],
+  culprit:'‘Het was <b>Maarten Duin</b>, op de <b>trap van de vuurtoren</b>!’',
+  epilogue:'‘Meneer Duin,’ zegt Inspecteur Mol, ‘om vijf over elf tekende u bon 43. Daarna pakte u een stormlantaarn uit de hal en liep u door de regen naar de vuurtoren. U wilde Jelle nog één keer overhalen om de toren te verkopen. Jelle zag u aankomen en seinde GEVAAR, maar alleen ik zag het. Op de trap kregen jullie ruzie, en u gaf hem een duw. Bij de toren zag Sterre uw lantaarn. Om vijf voor twaalf stond u weer achter de bar, alsof er niets gebeurd was.’ Maarten Duin zegt niets meer. Die middag vaart de veerboot weer. Maarten gaat mee, met handboeien om. En Teun Bot? Die krijgt een boete voor het oesterzoeken. Alleen een kleintje.'}
+];
 let game=store.get('md-game')||'murdle';
 function setGame(g){game=g;store.set('md-game',g);renderPanes();window.scrollTo({top:0})}
-let sg=store.get(STKEY)||{view:0,solved:[],hints:{},shown:[]};
+const STKEY='md-speur';
+let sp=store.get(STKEY);
+if(!sp||!sp.cases){sp={cur:null,cases:{}};const old=store.get('md-story');if(old&&old.solved)sp.cases.veiling={view:old.view||0,solved:old.solved,hints:old.hints||{},shown:old.shown||[],notes:''};}
+const saveS=()=>store.set(STKEY,sp);
+const cstate=id=>(sp.cases[id]=sp.cases[id]||{view:0,solved:[],hints:{},shown:[],notes:''});
 let askReveal=false;
-const saveS=()=>store.set(STKEY,sg);
 const normA=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toUpperCase().replace(/[^A-Z0-9]/g,'');
-const firstOpen=()=>{for(let i=0;i<STORY.ch.length;i++)if(!sg.solved.includes(i))return i;return STORY.ch.length};
+const docOf=c=>typeof c.doc==='function'?c.doc():c.doc;
+function goSpeur(cur){if(cur==='boek'&&sp.cur!=='boek')sp.prev=sp.cur;sp.cur=cur;askReveal=false;saveS();renderStory();window.scrollTo({top:0})}
+
+function handbookHTML(){
+  const row=(arr)=>`<tr>${arr.map(x=>`<td>${x}</td>`).join('')}</tr>`;
+  return `<button class="btn small" id="spBack" type="button">← Terug</button>
+  <div class="storyhead"><span class="kicker">Voor speurneuzen</span><h3>Het Speurneus-handboek</h3></div>
+  <section class="hb">
+    <h4>Zo speel je</h4>
+    <ul>
+      <li>Een zaak bestaat uit hoofdstukken. In elk hoofdstuk lees je een stukje verhaal, met een bewijsstuk erbij: een brief, een kaart, een lijst.</li>
+      <li>Onder het bewijsstuk staat een vraag. Met het goede antwoord ga je door naar het volgende hoofdstuk.</li>
+      <li>Alles wat je nodig hebt, staat in de zaak zelf of in dit handboek. Je hoeft niets op te zoeken.</li>
+      <li>Kijk ook terug. Een detail uit een eerder hoofdstuk kan later belangrijk worden.</li>
+      <li>Per hoofdstuk heb je twee hints. De eerste geeft een duwtje, de tweede helpt je bijna naar het antwoord. Kom je er echt niet uit, bekijk dan de oplossing.</li>
+      <li>Gebruik het notitieblok onder elke zaak. Je aantekeningen blijven bewaard.</li>
+      <li>Je hoeft niet alles in één keer te doen. Je voortgang wordt onthouden, dus je kunt elk moment stoppen en later verder.</li>
+      <li>Hoofdletters, spaties en leestekens maken bij je antwoord niet uit.</li>
+    </ul>
+  </section>
+  <section class="hb">
+    <h4>Acrostichon</h4>
+    <p>Een verborgen woord in de eerste letters van elke regel. Lees ze van boven naar beneden.</p>
+  </section>
+  <section class="hb">
+    <h4>Verschuifcode (Caesar)</h4>
+    <p>Elke letter is een vast aantal plaatsen opgeschoven in het alfabet. Bij een verschuiving van 3 wordt A een D, en Z een C. Om te ontcijferen schuif je terug.</p>
+    <div class="abc"><table>${row([...ABC])}${row([...ABC].map((c,i)=>ABC[(i+3)%26]))}</table></div>
+    <p class="hint">Boven de gewone letter, onder dezelfde letter met 3 verschoven.</p>
+  </section>
+  <section class="hb">
+    <h4>Spiegelalfabet (Atbash)</h4>
+    <p>Het alfabet wordt omgedraaid: A wordt Z, B wordt Y, C wordt X. Ontcijferen gaat op dezelfde manier.</p>
+    <div class="abc"><table>${row([...ABC])}${row([...ABC].reverse())}</table></div>
+  </section>
+  <section class="hb">
+    <h4>Getallencode (A = 1)</h4>
+    <p>Elk getal staat voor de plaats van een letter in het alfabet.</p>
+    <div class="abc"><table>${row([...ABC])}${row([...ABC].map((c,i)=>i+1))}</table></div>
+  </section>
+  <section class="hb">
+    <h4>Morse</h4>
+    <p>Korte (·) en lange (−) signalen, met licht, geluid of op papier. Tussen twee letters zit een korte pauze, vaak geschreven als een schuine streep.</p>
+    <div class="morse">${[...ABC].map(c=>`<span><b>${c}</b> ${MORSE[c]}</span>`).join('')}</div>
+  </section>
+  <section class="hb">
+    <h4>Spiegelschrift</h4>
+    <p>Tekst die achterstevoren staat, alsof je hem in een spiegel ziet. Lees van rechts naar links, of houd je scherm voor een spiegel.</p>
+  </section>
+  <section class="hb">
+    <h4>Kaarten en tijden</h4>
+    <ul>
+      <li>Op een kaart met vakken staan de letters meestal voor kolommen (west naar oost) en de cijfers voor rijen (noord naar zuid). B3 is dus kolom B, rij 3.</li>
+      <li>Reken bij tijden altijd met de echte tijd. Een klok kan voor- of achterlopen.</li>
+      <li>Vergeet de terugweg niet. Wie ergens heen loopt, moet ook weer terug.</li>
+    </ul>
+  </section>
+  <button class="btn" id="spBack2" type="button">← Terug</button>`;
+}
+
 function renderStory(){
-  const N=STORY.ch.length,open=firstOpen(),v=Math.min(sg.view??open,open);
-  let dots='';for(let i=0;i<N;i++)dots+=`<button type="button" data-ch="${i}" class="${sg.solved.includes(i)?'done':''} ${i===v?'cur':''}" ${i>open?'disabled':''} aria-label="Hoofdstuk ${i+1}">${sg.solved.includes(i)?'✓':i+1}</button>`;
+  const P=$('pVerhaal');
+  if(!sp.cur){
+    P.innerHTML=`<h2 class="bigtitle">Speurneus</h2>${PENCIL}
+      <p class="lead">Moordzaken als verhaal, in hoofdstukken. Elk hoofdstuk heeft een puzzel, en elk antwoord brengt je dichter bij de dader.</p>
+      <button class="bookbtn" id="spBook" type="button"><b>Speurneus-handboek</b><span>Zo speel je, plus alle geheimschriften: morse, verschuifcode, spiegelalfabet en meer.</span></button>
+      <div class="caselist">${CASES.map(c=>{const s=cstate(c.id),n=c.ch.length,k=s.solved.length,done=k>=n;
+        return `<article class="casecard"><span class="kicker">${c.level} · ${n} hoofdstukken</span><h3>${c.title}</h3><p>${c.blurb}</p>
+        <div class="prog" aria-label="${k} van ${n} opgelost"><i style="width:${Math.round(k/n*100)}%"></i></div>
+        <div class="controls"><span class="hint">${done?'Opgelost':k?`${k} van ${n} opgelost`:'Nog niet begonnen'}</span><button class="btn ${done?'':'primary'} small" type="button" data-case="${c.id}">${done?'Teruglezen':k?'Verder':'Begin'}</button></div></article>`}).join('')}
+        <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Nieuwe zaak</h3><p>Er komen meer zaken bij. Vraag maar om een nieuwe.</p></article></div>`;
+    document.querySelectorAll('[data-case]').forEach(b=>b.onclick=()=>goSpeur(b.dataset.case));
+    $('spBook').onclick=()=>goSpeur('boek');
+    saveS();return;
+  }
+  if(sp.cur==='boek'){P.innerHTML=handbookHTML();$('spBack').onclick=$('spBack2').onclick=()=>goSpeur(sp.prev&&sp.prev!=='boek'?sp.prev:null);return}
+  const CS=CASES.find(c=>c.id===sp.cur);if(!CS){goSpeur(null);return}
+  const s=cstate(CS.id),N=CS.ch.length;
+  let open=N;for(let i=0;i<N;i++)if(!s.solved.includes(i)){open=i;break}
+  const v=Math.min(s.view??open,open);
+  let dots='';for(let i=0;i<N;i++)dots+=`<button type="button" data-ch="${i}" class="${s.solved.includes(i)?'done':''} ${i===v?'cur':''}" ${i>open?'disabled':''} aria-label="Hoofdstuk ${i+1}">${s.solved.includes(i)?'✓':i+1}</button>`;
   dots+=`<button type="button" data-ch="${N}" class="${open===N?'done':''} ${v===N?'cur':''}" ${open<N?'disabled':''} aria-label="Ontknoping">★</button>`;
   let body;
   if(v===N){
-    body=`<article class="chapter"><div class="kicker">Ontknoping</div><h3>Zaak gesloten</h3><p>${STORY.epilogue}</p>
-      <div class="verdict"><p>‘Het was <b>Notaris Brouwer</b> met de <b>veilinghamer</b> op de <b>zolder</b>!’</p></div>
-      <p class="hint">${sg.shown.length?`Opgelost met ${sg.shown.length} oplossing${sg.shown.length>1?'en':''} bekeken.`:''} Er komen later meer verhalen bij.</p>
-      <div class="controls"><button class="btn" id="stReset" type="button">Opnieuw spelen</button></div></article>`;
+    body=`<article class="chapter"><div class="kicker">Ontknoping</div><h3>Zaak gesloten</h3><p>${CS.epilogue}</p>
+      <div class="verdict"><p>${CS.culprit}</p></div>
+      ${s.shown.length?`<p class="hint">Opgelost met ${s.shown.length} bekeken oplossing${s.shown.length>1?'en':''}.</p>`:'<p class="hint">Helemaal zelf opgelost. Een echte speurneus!</p>'}
+      <div class="controls"><button class="btn primary" id="spList" type="button">Andere zaak kiezen</button><button class="btn" id="stReset" type="button">Opnieuw spelen</button></div></article>`;
   }else{
-    const c=STORY.ch[v],solved=sg.solved.includes(v),h=sg.hints[v]||0;
-    body=`<article class="chapter"><div class="kicker">Hoofdstuk ${v+1} van ${N}</div><h3>${c.t}</h3>${v===0?`<p>${STORY.intro}</p>`:''}<p>${c.story}</p>
-      <div class="doc">${c.doc}</div><p class="question">${c.q}</p>`;
+    const c=CS.ch[v],solved=s.solved.includes(v),h=s.hints[v]||0;
+    body=`<article class="chapter"><div class="kicker">Hoofdstuk ${v+1} van ${N}</div><h3>${c.t}</h3>${v===0?`<p>${CS.intro}</p>`:''}<p>${c.story}</p>
+      <div class="doc">${docOf(c)}</div><p class="question">${c.q}</p>`;
     if(solved){
-      body+=`<div class="verdict"><p><b>${sg.shown.includes(v)?'Oplossing':'Goed!'}</b> ${c.sol}</p></div>${c.after?`<p>${c.after}</p>`:''}
+      body+=`<div class="verdict"><p><b>${s.shown.includes(v)?'Oplossing':'Goed!'}</b> ${c.sol}</p></div>${c.after?`<p>${c.after}</p>`:''}
         <div class="controls"><button class="btn primary" id="stNext" type="button">${v===N-1?'Naar de ontknoping':'Volgende hoofdstuk'}</button></div>`;
     }else{
       body+=`<div class="answerrow"><input id="stIn" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Jouw antwoord" placeholder="Jouw antwoord"><button class="btn primary" id="stCheck" type="button">Controleer</button></div>
         <p class="msg" id="stMsg"></p>
         <div class="hintlist">${c.hints.slice(0,h).map((t,i)=>`<p><b>Hint ${i+1}:</b> ${t}</p>`).join('')}</div>
-        <div class="controls">${h<2?`<button class="btn small" id="stHint" type="button">Hint ${h+1}</button>`:''}<button class="btn small" id="stReveal" type="button">Toon oplossing</button></div>
+        <div class="controls">${h<2?`<button class="btn small" id="stHint" type="button">Hint ${h+1}</button>`:''}<button class="btn small" id="stReveal" type="button">Toon oplossing</button><button class="btn small" id="stBook" type="button">Handboek</button></div>
         ${askReveal?`<div class="spoiler"><p>Weet je het zeker? Je ziet dan het antwoord van dit hoofdstuk.</p><div class="controls" style="justify-content:center"><button class="btn primary" id="stYes" type="button">Ja, toon het</button><button class="btn" id="stNo" type="button">Nee, ik puzzel verder</button></div></div>`:''}`;
     }
     body+='</article>';
   }
-  $('pVerhaal').innerHTML=`<h2 class="bigtitle">Speurneus</h2>${PENCIL}<div class="storyhead"><span class="kicker">Verhaal · ${N} hoofdstukken</span><h3>${STORY.title}</h3></div><nav class="chapters" aria-label="Hoofdstukken">${dots}</nav>${body}`;
-  document.querySelectorAll('.chapters button').forEach(b=>b.onclick=()=>{sg.view=+b.dataset.ch;askReveal=false;saveS();renderStory()});
+  P.innerHTML=`<button class="btn small" id="spBack" type="button">← Alle zaken</button>
+    <div class="storyhead"><span class="kicker">Speurneus · ${CS.level}</span><h3>${CS.title}</h3></div>
+    <nav class="chapters" aria-label="Hoofdstukken">${dots}</nav>${body}
+    <section class="notes"><label for="spNotes"><b>Notitieblok</b> <span class="hint">wordt bewaard bij deze zaak</span></label><textarea id="spNotes" rows="4" placeholder="Schrijf hier je aantekeningen, verdenkingen en tussenstappen."></textarea></section>`;
+  $('spNotes').value=s.notes||'';
+  $('spNotes').oninput=e=>{s.notes=e.target.value;saveS()};
+  document.querySelectorAll('.chapters button').forEach(b=>b.onclick=()=>{s.view=+b.dataset.ch;askReveal=false;saveS();renderStory()});
   const on=(id,f)=>{const el=$(id);if(el)el.onclick=f};
-  const check=()=>{const v2=normA($('stIn').value);if(!v2)return;
-    if(STORY.ch[v].ans.some(a=>v2.includes(a))){sg.solved.push(v);saveS();renderStory()}
+  const check=()=>{const a=normA($('stIn').value);if(!a)return;
+    if(CS.ch[v].ans.some(x=>a.includes(x))){s.solved.push(v);saveS();renderStory()}
     else $('stMsg').textContent='Dat klopt niet. Probeer het nog eens of neem een hint.'};
   on('stCheck',check);
   const inp=$('stIn');if(inp)inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();check()}};
-  on('stHint',()=>{sg.hints[v]=(sg.hints[v]||0)+1;saveS();renderStory()});
+  on('stHint',()=>{s.hints[v]=(s.hints[v]||0)+1;saveS();renderStory()});
   on('stReveal',()=>{askReveal=true;renderStory()});
   on('stNo',()=>{askReveal=false;renderStory()});
-  on('stYes',()=>{askReveal=false;sg.shown.push(v);sg.solved.push(v);saveS();renderStory()});
-  on('stNext',()=>{sg.view=v+1;saveS();renderStory();$('pVerhaal').scrollIntoView({block:'start'})});
-  on('stReset',()=>{sg={view:0,solved:[],hints:{},shown:[]};saveS();renderStory()});
+  on('stYes',()=>{askReveal=false;s.shown.push(v);s.solved.push(v);saveS();renderStory()});
+  on('stNext',()=>{s.view=v+1;saveS();renderStory();$('pVerhaal').scrollIntoView({block:'start'})});
+  on('stReset',()=>{sp.cases[CS.id]={view:0,solved:[],hints:{},shown:[],notes:s.notes||''};saveS();renderStory()});
+  on('spBack',()=>goSpeur(null));on('spList',()=>goSpeur(null));on('stBook',()=>goSpeur('boek'));
 }
 
 function applySub(){
@@ -575,7 +748,7 @@ function renderPanes(){
   const t=st.tab||'zaak';
   const g=game,M=g==='murdle';
   $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=M;
-  document.querySelector('.tabs').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('stats').hidden=!M;
+  document.querySelector('.tabs').hidden=!M;document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('stats').hidden=!M;
   document.querySelectorAll('.games button').forEach(b=>b.setAttribute('aria-selected',b.dataset.g===g));
   if(!M&&!$('pVerhaal').innerHTML)renderStory();
   document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===t));

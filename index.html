@@ -123,6 +123,11 @@ td.e{border:0}
 .games button[aria-selected="true"] span{color:var(--band)}
 .games button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
 .lead{margin:0;font-size:17px;max-width:60ch}
+.recap{margin:0;font-style:italic;color:var(--muted);border-left:3px solid var(--rule);padding-left:12px;max-width:65ch}
+.recap b{font-style:normal;font:700 12px var(--slab);text-transform:uppercase;letter-spacing:.1em;color:var(--red)}
+.clock{display:flex;gap:14px;align-items:center;margin:0 0 14px}
+.clock svg{width:96px;height:96px;flex:none}
+.clock figcaption{font-size:15px;font-style:italic}
 #spBack,#spBack2{align-self:flex-start}
 .bookbtn{display:flex;flex-direction:column;gap:2px;text-align:left;border:2px dashed var(--ink);border-radius:16px;background:var(--card);color:var(--ink);padding:12px 16px;cursor:pointer;font:inherit}
 .bookbtn b{font:800 19px var(--cond);text-transform:uppercase;letter-spacing:.03em}
@@ -496,6 +501,7 @@ const kbRight=t=>t.replace(/[A-Z]/g,c=>{for(const r of KB){const i=r.indexOf(c);
 const PB='ABCDEFGHIKLMNOPQRSTUVWXYZ';
 const polybius=t=>[...t.replace(/J/g,'I')].map(c=>{const i=PB.indexOf(c);return `${Math.floor(i/5)+1}${i%5+1}`}).join(' ');
 const NATO={A:'Alfa',B:'Bravo',C:'Charlie',D:'Delta',E:'Echo',F:'Foxtrot',G:'Golf',H:'Hotel',I:'India',J:'Juliett',K:'Kilo',L:'Lima',M:'Mike',N:'November',O:'Oscar',P:'Papa',Q:'Quebec',R:'Romeo',S:'Sierra',T:'Tango',U:'Uniform',V:'Victor',W:'Whiskey',X:'X-ray',Y:'Yankee',Z:'Zulu'};
+const CLOCK=(()=>{const h=(9+23/60)*30*Math.PI/180,m=23*6*Math.PI/180;const pt=(a,r)=>`${(50+r*Math.sin(a)).toFixed(1)} ${(50-r*Math.cos(a)).toFixed(1)}`;let ticks='';for(let i=0;i<12;i++){const a=i*Math.PI/6;ticks+=`<path d="M${pt(a,40)} L${pt(a,i%3?36:31)}" stroke-width="${i%3?1.5:3}"/>`}return `<figure class="clock"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round" role="img" aria-label="Een klok die stilstaat op 23 minuten over 9"><circle cx="50" cy="50" r="45" stroke-width="3"/>${ticks}<path d="M50 50 L${pt(h,21)}" stroke-width="4.5"/><path d="M50 50 L${pt(m,33)}" stroke-width="2.5"/><circle cx="50" cy="50" r="3" fill="currentColor"/><path d="M20 28 L38 44 M62 18 L58 36 M70 72 L60 60" stroke-width="1" opacity=".45"/></svg><figcaption>De omgevallen klok. Het glas is gebarsten en de wijzers staan stil. Het was avond.</figcaption></figure>`})();
 const CASES=[
  {id:'veiling',title:'De laatste veiling',level:'Instap',blurb:'Tijdens een stormachtige tulpenveiling wordt de veilingmeester vermoord, en de zeldzaamste bol van het land is verdwenen.',
   intro:'Het stormt in Molenwijk. In het oude veilinghuis aan de gracht wordt vanavond de zeldzaamste tulpenbol van het land geveild: de Zwarte Parel. Inspecteur Mol is niet uitgenodigd, maar die ochtend lag er een vreemde brief op zijn deurmat.',
@@ -523,13 +529,13 @@ const CASES=[
      after:'Mol opent het glazen deurtje van de omgevallen klok. Achter de slinger zit een fluwelen zakje met de Zwarte Parel erin. Cornelis had haar daar zelf verstopt. De wijzers van de klok staan stil op 21:23, en het glas is gebarsten.'},
     {t:'Het logboek',
      story:'Er is maar één trap naar de zolder, en portier Gijs schrijft in zijn logboek precies op wie er naar boven en naar beneden gaat. Om 21:10 belde Cornelis nog naar beneden voor een fles wijn, dus toen leefde hij nog. De klok viel om tijdens een worsteling.',
-     doc:'<table><tr><th>Tijd</th><th>Wie</th><th>Richting</th></tr><tr><td>20:58</td><td>Baron van Kruidenier</td><td>↑ boven</td></tr><tr><td>21:08</td><td>Baron van Kruidenier</td><td>↓ beneden</td></tr><tr><td>21:12</td><td>Juffrouw Tulp</td><td>↑ boven</td></tr><tr><td>21:18</td><td>Juffrouw Tulp</td><td>↓ beneden</td></tr><tr><td>21:19</td><td>Kapitein Haring</td><td>↑ boven</td></tr><tr><td>21:26</td><td>Kapitein Haring</td><td>↓ beneden</td></tr><tr><td>21:27</td><td>Notaris Brouwer</td><td>↑ boven</td></tr><tr><td>21:33</td><td>Notaris Brouwer</td><td>↓ beneden</td></tr><tr><td>21:40</td><td>Inspecteur Mol</td><td>↑ boven</td></tr></table>',
+     doc:CLOCK+'<table><tr><th>Tijd</th><th>Wie</th><th>Richting</th></tr><tr><td>20:58</td><td>Baron van Kruidenier</td><td>↑ boven</td></tr><tr><td>21:08</td><td>Baron van Kruidenier</td><td>↓ beneden</td></tr><tr><td>21:12</td><td>Juffrouw Tulp</td><td>↑ boven</td></tr><tr><td>21:18</td><td>Juffrouw Tulp</td><td>↓ beneden</td></tr><tr><td>21:19</td><td>Kapitein Haring</td><td>↑ boven</td></tr><tr><td>21:26</td><td>Kapitein Haring</td><td>↓ beneden</td></tr><tr><td>21:27</td><td>Notaris Brouwer</td><td>↑ boven</td></tr><tr><td>21:33</td><td>Notaris Brouwer</td><td>↓ beneden</td></tr><tr><td>21:40</td><td>Inspecteur Mol</td><td>↑ boven</td></tr></table>',
      q:'Wie was er op de zolder op het tijdstip dat de klok aanwijst?',ans:['HARING'],
      hints:['De klok bleef staan toen hij omviel. Welke tijd wijst hij aan?','Om 21:23 was er maar één persoon boven. Wie ging om 21:19 naar boven?'],
      sol:'Volgens de klok was het 21:23. Toen was alleen Kapitein Haring boven (van 21:19 tot 21:26).',
      after:'Mol laat Kapitein Haring halen. De kapitein wordt rood als een kreeft. ‘Ja, ik was boven! Ik wilde Cornelis omkopen voor de Parel. Maar hij leefde nog toen ik wegging, dat zweer ik op mijn schip!’'},
     {t:'Een kwestie van tijd',
-     story:'‘En die klok bewijst niks,’ bromt de kapitein. ‘Iedereen in Molenwijk weet dat die ouwe klok van Cornelis net zo is als hij zelf: altijd te laat.’ Mol bladert terug in de catalogus. Achterin staat een notitie van Cornelis.',
+     story:'‘En die klok bewijst niks,’ bromt de kapitein. ‘Iedereen in Molenwijk weet dat die ouwe klok van Cornelis net zo is als hij zelf: altijd te laat.’ Mol bladert terug in de catalogus. Achterin staat een notitie van Cornelis. (Het logboek van de portier vind je terug in hoofdstuk 4.)',
      doc:'<p>Klok laten repareren!! Loopt achter.</p><p>Bij de opening van de veiling, om 20:00 precies (echte tijd), wees hij 19:53 aan.</p>',
      q:'Wie was er écht op de zolder toen de klok omviel?',ans:['BROUWER'],
      hints:['Hoeveel minuten loopt de klok achter? Hoe laat was het dan echt toen hij 21:23 aanwees?','De klok loopt 7 minuten achter, dus het was echt 21:30. Kijk in het logboek wie er toen boven was.'],
@@ -938,7 +944,7 @@ function renderStory(){
       <div class="controls"><button class="btn primary" id="spList" type="button">Andere zaak kiezen</button><button class="btn" id="stReset" type="button">Opnieuw spelen</button></div></article>`;
   }else{
     const c=CS.ch[v],solved=s.solved.includes(v),h=s.hints[v]||0;
-    body=`<article class="chapter"><div class="kicker">Hoofdstuk ${v+1} van ${N}</div><h3>${c.t}</h3>${v===0?`<p>${CS.intro}</p>`:''}<p>${c.story}</p>
+    body=`<article class="chapter"><div class="kicker">Hoofdstuk ${v+1} van ${N}</div><h3>${c.t}</h3>${v===0?`<p>${CS.intro}</p>`:(CS.ch[v-1].after?`<p class="recap"><b>Eerder:</b> ${CS.ch[v-1].after}</p>`:'')}<p>${c.story}</p>
       <div class="doc">${docOf(c)}</div><p class="question">${c.q}</p>`;
     if(solved){
       body+=`<div class="verdict"><p><b>${s.shown.includes(v)?'Oplossing':'Goed!'}</b> ${c.sol}</p></div>${c.after?`<p>${c.after}</p>`:''}

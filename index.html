@@ -110,6 +110,10 @@ td.e{border:0}
 .verdict{padding:14px;border-left:5px solid var(--ok);background:var(--card)}
 .verdict.bad{border-color:var(--red)}
 .verdict p{margin:0}
+.subtabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;background:var(--page);padding:4px;border-radius:999px;border:2px solid var(--ink)}
+.subtabs button{border:0;border-radius:999px;padding:8px 4px;background:transparent;color:var(--ink);font:800 clamp(12px,3.6vw,15px) var(--cond);text-transform:uppercase;letter-spacing:.03em;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.subtabs button[aria-selected="true"]{background:var(--ink);color:var(--page)}
+.subtabs button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
 .tabs{display:flex;gap:4px;border-bottom:2px solid var(--ink);overflow-x:auto}
 .tabs button{border:2px solid var(--ink);border-bottom:0;background:var(--band);color:var(--ink);font:800 16px var(--cond);text-transform:uppercase;letter-spacing:.08em;padding:8px 16px;border-radius:12px 12px 0 0;cursor:pointer;margin-bottom:-2px;white-space:nowrap}
 .tabs button[aria-selected="true"]{background:var(--page);padding-bottom:10px}
@@ -151,16 +155,15 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <div class="pane" id="pZaak">
   <header class="casehead" id="caseHead"></header>
 
-  <section class="band" aria-labelledby="hS">
-    <h2 id="hS">Verdachten</h2>
+  <section class="band" aria-label="Dossier">
+    <div class="subtabs" role="tablist" aria-label="Dossier">
+      <button role="tab" type="button" data-s="s">Verdachten</button>
+      <button role="tab" type="button" data-s="w">Wapens</button>
+      <button role="tab" type="button" data-s="l">Locaties</button>
+    </div>
     <div id="suspects" style="display:flex;flex-direction:column;gap:12px"></div>
-    <h2 id="hL">Locaties</h2>
-    <div class="tiles" id="locations"></div>
-  </section>
-
-  <section style="display:flex;flex-direction:column;gap:12px">
-    <h2>Wapens</h2>
-    <div class="tiles" id="weapons"></div>
+    <div class="tiles" id="weapons" hidden></div>
+    <div class="tiles" id="locations" hidden></div>
   </section>
 
   <section class="cluebox">
@@ -407,9 +410,15 @@ function render(){
   const opt=(arr,f)=>'<option value="">…</option>'+arr.map((x,i)=>`<option value="${i}">${f(x)}</option>`).join('');
   $('aS').innerHTML=opt(C.S,x=>x.name);$('aW').innerHTML=opt(C.W,x=>`${x.lid} ${x.name}`);$('aL').innerHTML=opt(C.L,x=>`${x.lid} ${x.name.toLowerCase()}`);
   $('verdict').innerHTML=st.done?verdictHTML(st.revealed):'';
+  applySub();
   renderPanes();
 }
 
+function applySub(){
+  const s=st.sub||'s';
+  $('suspects').hidden=s!=='s';$('weapons').hidden=s!=='w';$('locations').hidden=s!=='l';
+  document.querySelectorAll('.subtabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.s===s));
+}
 function tipText(){
   const s=C.S[C.tipS];let m,sub;
   if(C.tipKind==='loc'){const l=C.L[C.sol.loc[C.tipS]],p=`${l.lid} ${l.name.toLowerCase()}`;m=`${s.name} was in ${p}`;sub=`${s.name} in ${p} was`}
@@ -500,6 +509,7 @@ function wire(){
     }else{st.mistakes++;save();$('verdict').innerHTML=`<div class="verdict bad"><p>Mis. ${C.S[+s].name} kijkt je verontwaardigd aan. Bekijk de aanwijzingen nog eens.</p></div>`}};
   $('reveal').onclick=()=>setTab('opl');
   document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.t));
+  document.querySelectorAll('.subtabs button').forEach(b=>b.onclick=()=>{st.sub=b.dataset.s;save();applySub()});
 }
 
 function start(data){

@@ -115,7 +115,32 @@ td.e{border:0}
 .subtabs button[aria-selected="true"]{background:var(--ink);color:var(--page)}
 .subtabs button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
 .tabs{display:flex;gap:4px;border-bottom:2px solid var(--ink);overflow-x:auto}
-.tabs button{border:2px solid var(--ink);border-bottom:0;background:var(--band);color:var(--ink);font:800 16px var(--cond);text-transform:uppercase;letter-spacing:.08em;padding:8px 16px;border-radius:12px 12px 0 0;cursor:pointer;margin-bottom:-2px;white-space:nowrap}
+.kicker{font:700 13px var(--slab);text-transform:uppercase;letter-spacing:.12em;color:var(--red)}
+.storyhead{display:flex;flex-direction:column;gap:6px}
+.storyhead h3,.chapter h3{font:800 clamp(26px,7vw,34px)/1.05 var(--cond);text-transform:uppercase;margin:0;text-wrap:balance}
+.storyhead p,.chapter>p{margin:0;max-width:65ch;font-size:17px}
+.chapters{display:flex;gap:8px;flex-wrap:wrap}
+.chapters button{width:42px;height:42px;border-radius:50%;border:2px solid var(--ink);background:var(--card);color:var(--ink);font:800 17px var(--cond);cursor:pointer}
+.chapters button.done{background:var(--ink);color:var(--page)}
+.chapters button.cur{outline:3px solid var(--red);outline-offset:2px}
+.chapters button:disabled{opacity:.35;cursor:default}
+.chapter{display:flex;flex-direction:column;gap:14px}
+.doc{background:var(--card);border:1px solid var(--rule);box-shadow:0 2px 0 var(--rule),0 6px 18px rgba(0,0,0,.08);padding:18px 18px 16px;font:500 17px/1.6 var(--slab);transform:rotate(-.5deg);max-width:560px;overflow-x:auto}
+.doc p{margin:0 0 8px}.doc p:last-child{margin:0}
+.doc ul{margin:0;padding-left:20px}
+.doc .sign{font-style:italic;text-align:right}
+.doc .code{font:800 clamp(20px,6vw,28px) var(--cond);letter-spacing:.14em;color:var(--red)}
+.doc table{border-collapse:collapse;font:600 15px var(--cond);letter-spacing:.02em;min-width:260px}
+.doc th,.doc td{padding:4px 10px 4px 0;text-align:left;border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums}
+.doc th{font:700 12px var(--slab);text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.question{font-weight:600;font-size:18px;margin:0}
+.answerrow{display:flex;gap:8px;flex-wrap:wrap}
+.answerrow input{flex:1 1 180px;min-width:0;font:700 18px var(--cond);letter-spacing:.08em;text-transform:uppercase;padding:10px 12px;border:2px solid var(--ink);border-radius:10px;background:var(--card);color:var(--ink)}
+.answerrow input:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.hintlist{display:flex;flex-direction:column;gap:8px}
+.hintlist p{margin:0;padding:10px 14px;background:var(--band);border-radius:10px}
+.tabs button{border:2px solid var(--ink);border-bottom:0;background:var(--band);color:var(--ink);font:800 clamp(13px,3.9vw,16px) var(--cond);text-transform:uppercase;letter-spacing:.06em;padding:8px clamp(9px,2.8vw,16px);border-radius:12px 12px 0 0;cursor:pointer;margin-bottom:-2px;white-space:nowrap}
+.tabs button{flex:1 1 auto;padding-inline:clamp(4px,1.6vw,16px)!important;letter-spacing:.03em!important}
 .tabs button[aria-selected="true"]{background:var(--page);padding-bottom:10px}
 .tabs button:focus-visible{outline:3px solid var(--red);outline-offset:-3px}
 .pane{display:flex;flex-direction:column;gap:22px}
@@ -150,6 +175,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
     <button role="tab" type="button" data-t="zaak" id="tZaak">Zaak</button>
     <button role="tab" type="button" data-t="tips" id="tTips">Tips</button>
     <button role="tab" type="button" data-t="opl" id="tOpl">Oplossing</button>
+    <button role="tab" type="button" data-t="verhaal" id="tVerhaal">Verhaal</button>
   </nav>
 
   <div class="pane" id="pZaak">
@@ -199,6 +225,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   </div>
   <section class="pane" id="pTips" hidden></section>
   <section class="pane" id="pOpl" hidden></section>
+  <section class="pane" id="pVerhaal" hidden></section>
 
   <footer>Elke zaak wordt gegenereerd en heeft precies één oplossing.</footer>
 </div>
@@ -415,6 +442,110 @@ function render(){
   renderPanes();
 }
 
+// ---------- verhaalmodus ----------
+const STORY={
+  title:'De laatste veiling',
+  intro:'Het stormt in Molenwijk. In het oude veilinghuis aan de gracht wordt vanavond de zeldzaamste tulpenbol van het land geveild: de Zwarte Parel. Inspecteur Mol is niet uitgenodigd, maar die ochtend lag er een vreemde brief op zijn deurmat.',
+  ch:[
+    {t:'Een vreemde brief',
+     story:'De brief is met de hand geschreven, in keurige krulletters. Er staat geen afzender op.',
+     doc:'<p>Zeer geachte inspecteur,<br>Onze veiling van vanavond begint om acht uur.<br>Laat u niet afschrikken door de storm.<br>De bollen zijn dit jaar zeldzamer dan ooit.<br>Een van de gasten heeft kwade bedoelingen.<br>Raadt u waar ik op u wacht?</p><p class="sign">Een vriend</p>',
+     q:'Waar in het veilinghuis wacht de afzender op Inspecteur Mol?',
+     ans:['ZOLDER'],
+     hints:['Kijk niet naar wat er staat, maar naar hoe elke regel begint.','Lees de eerste letter van elke regel, van boven naar beneden.'],
+     sol:'De eerste letters van de regels vormen samen het woord ZOLDER.',
+     after:'Mol klimt de krakende trap op naar de zolder. Daar wacht niemand meer op hem. Veilingmeester Cornelis Bloemkamp ligt levenloos naast een omgevallen staande klok.'},
+    {t:'Op de zolder',
+     story:'Naast het lichaam staat een ijzeren kist met een cijferslot van vier cijfers. In de vuist van Cornelis zit een verfrommeld briefje in zijn eigen handschrift. Zo onthield hij blijkbaar zijn code.',
+     doc:'<p>Vier cijfers, en ik vergeet ze steeds. Dus:</p><ul><li>Het eerste cijfer is het dubbele van het laatste.</li><li>Het tweede cijfer is het eerste plus het laatste.</li><li>Het derde cijfer is één minder dan het tweede.</li><li>Alle vier samen zijn 26.</li></ul>',
+     q:'Wat is de code van de kist?',
+     ans:['6983'],
+     hints:['Noem het laatste cijfer x, en schrijf de andere drie cijfers ook met x.','Het eerste cijfer is 2x, het tweede 3x en het derde 3x − 1. Opgeteld met x is dat 9x − 1, en dat moet 26 zijn.'],
+     sol:'9x − 1 = 26, dus x = 3. Het eerste cijfer is 6, het tweede 9, het derde 8 en het laatste 3: de code is 6983.',
+     after:'Klik. Het slot springt open. In de kist ligt de veilingcatalogus, en tussen de bladzijden zit een kaartje met onbegrijpelijke letters.'},
+    {t:'Geheimschrift',
+     story:'Cornelis vertrouwde niemand, zelfs zijn eigen kist niet. Op het kaartje staat één regel. Op het deksel van de kist is iets gekrast.',
+     doc:'<p class="code">CRHN LQ GH NORN</p><p>Gekrast in het deksel: <b>III ←</b></p>',
+     q:'Waar moet Mol zoeken?',
+     ans:['KLOK'],
+     hints:['Drie streepjes en een pijl naar links. Wat zou je drie keer terug moeten doen?','Schuif elke letter drie plaatsen terug in het alfabet: D wordt A, C wordt Z.'],
+     sol:'Elke letter drie plaatsen terug geeft ZOEK IN DE KLOK.',
+     after:'Mol opent het glazen deurtje van de omgevallen klok. Achter de slinger zit een fluwelen zakje met de Zwarte Parel erin. Cornelis had haar daar zelf verstopt. De wijzers van de klok staan stil op 21:23, en het glas is gebarsten.'},
+    {t:'Het logboek',
+     story:'Er is maar één trap naar de zolder, en portier Gijs schrijft in zijn logboek precies op wie er naar boven en naar beneden gaat. Om 21:10 belde Cornelis nog naar beneden voor een fles wijn, dus toen leefde hij nog. De klok viel om tijdens een worsteling.',
+     doc:'<table><tr><th>Tijd</th><th>Wie</th><th>Richting</th></tr><tr><td>20:58</td><td>Baron van Kruidenier</td><td>↑ boven</td></tr><tr><td>21:08</td><td>Baron van Kruidenier</td><td>↓ beneden</td></tr><tr><td>21:12</td><td>Juffrouw Tulp</td><td>↑ boven</td></tr><tr><td>21:18</td><td>Juffrouw Tulp</td><td>↓ beneden</td></tr><tr><td>21:19</td><td>Kapitein Haring</td><td>↑ boven</td></tr><tr><td>21:26</td><td>Kapitein Haring</td><td>↓ beneden</td></tr><tr><td>21:27</td><td>Notaris Brouwer</td><td>↑ boven</td></tr><tr><td>21:33</td><td>Notaris Brouwer</td><td>↓ beneden</td></tr><tr><td>21:40</td><td>Inspecteur Mol</td><td>↑ boven</td></tr></table>',
+     q:'Wie was er op de zolder op het tijdstip dat de klok aanwijst?',
+     ans:['HARING'],
+     hints:['De klok bleef staan toen hij omviel. Welke tijd wijst hij aan?','Om 21:23 was er maar één persoon boven. Wie ging om 21:19 naar boven?'],
+     sol:'Volgens de klok was het 21:23. Toen was alleen Kapitein Haring boven (van 21:19 tot 21:26).',
+     after:'Mol laat Kapitein Haring halen. De kapitein wordt rood als een kreeft. ‘Ja, ik was boven! Ik wilde Cornelis omkopen voor de Parel. Maar hij leefde nog toen ik wegging, dat zweer ik op mijn schip!’'},
+    {t:'Een kwestie van tijd',
+     story:'‘En die klok bewijst niks,’ bromt de kapitein. ‘Iedereen in Molenwijk weet dat die ouwe klok van Cornelis net zo is als hij zelf: altijd te laat.’ Mol bladert terug in de catalogus. Achterin staat een notitie van Cornelis.',
+     doc:'<p>Klok laten repareren!! Loopt achter.</p><p>Bij de opening van de veiling, om 20:00 precies (echte tijd), wees hij 19:53 aan.</p>',
+     q:'Wie was er écht op de zolder toen de klok omviel?',
+     ans:['BROUWER'],
+     hints:['Hoeveel minuten loopt de klok achter? Hoe laat was het dan echt toen hij 21:23 aanwees?','De klok loopt 7 minuten achter, dus het was echt 21:30. Kijk in het logboek wie er toen boven was.'],
+     sol:'De klok loopt 7 minuten achter. Toen hij 21:23 aanwees, was het echt 21:30. Toen was alleen Notaris Brouwer boven (van 21:27 tot 21:33).',
+     after:'Notaris Brouwer poetst zijn bril. ‘Ik ben inderdaad even boven geweest, om het testament van Cornelis te bespreken. Een routinezaak.’ Maar zijn handen trillen.'},
+    {t:'Het wapen',
+     story:'Op de zolder liggen drie voorwerpen waarmee Cornelis neergeslagen kan zijn. Dan belt de patholoog met haar bevindingen.',
+     doc:'<ul><li>Een koperen kandelaar, op het bureau.</li><li>Een houten veilinghamer, naast de klok.</li><li>Een houten wandelstok, bij het open raam.</li></ul><p style="margin-top:10px">‘Het wapen was niet van metaal. En het lag niet bij het raam: daar is alles doorweekt van de regen, en op het wapen zat geen druppel.’</p>',
+     q:'Met welk wapen werd Cornelis gedood?',
+     ans:['VEILINGHAMER','HAMER'],
+     hints:['Streep eerst het voorwerp van metaal weg.','De kandelaar is van koper en de wandelstok lag bij het natte raam. Wat blijft er over?'],
+     sol:'De kandelaar is van metaal en de wandelstok lag bij het raam. Dan blijft alleen de veilinghamer over.',
+     after:''}
+  ],
+  epilogue:'‘Notaris Brouwer,’ zegt Inspecteur Mol, ‘u heeft het testament van Cornelis vervalst. In uw versie zou de Zwarte Parel na zijn dood naar ú gaan. Vanavond ontdekte Cornelis het bedrog. Er volgde een worsteling, de klok viel om, en u sloeg hem neer met zijn eigen veilinghamer. Daarna zocht u de Parel, maar die had Cornelis slim verstopt.’ Brouwer zakt in elkaar. ‘Die bol was meer waard dan dit hele veilinghuis…’ En de brief op Mols deurmat? Die bleek van Cornelis zelf. Hij voelde al dat er iets mis was. De Zwarte Parel gaat die avond alsnog onder de hamer. Een andere hamer, dit keer.'
+};
+const STKEY='md-story';
+let sg=store.get(STKEY)||{view:0,solved:[],hints:{},shown:[]};
+let askReveal=false;
+const saveS=()=>store.set(STKEY,sg);
+const normA=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+const firstOpen=()=>{for(let i=0;i<STORY.ch.length;i++)if(!sg.solved.includes(i))return i;return STORY.ch.length};
+function renderStory(){
+  const N=STORY.ch.length,open=firstOpen(),v=Math.min(sg.view??open,open);
+  let dots='';for(let i=0;i<N;i++)dots+=`<button type="button" data-ch="${i}" class="${sg.solved.includes(i)?'done':''} ${i===v?'cur':''}" ${i>open?'disabled':''} aria-label="Hoofdstuk ${i+1}">${sg.solved.includes(i)?'✓':i+1}</button>`;
+  dots+=`<button type="button" data-ch="${N}" class="${open===N?'done':''} ${v===N?'cur':''}" ${open<N?'disabled':''} aria-label="Ontknoping">★</button>`;
+  let body;
+  if(v===N){
+    body=`<article class="chapter"><div class="kicker">Ontknoping</div><h3>Zaak gesloten</h3><p>${STORY.epilogue}</p>
+      <div class="verdict"><p>‘Het was <b>Notaris Brouwer</b> met de <b>veilinghamer</b> op de <b>zolder</b>!’</p></div>
+      <p class="hint">${sg.shown.length?`Opgelost met ${sg.shown.length} oplossing${sg.shown.length>1?'en':''} bekeken.`:''} Er komen later meer verhalen bij.</p>
+      <div class="controls"><button class="btn" id="stReset" type="button">Opnieuw spelen</button></div></article>`;
+  }else{
+    const c=STORY.ch[v],solved=sg.solved.includes(v),h=sg.hints[v]||0;
+    body=`<article class="chapter"><div class="kicker">Hoofdstuk ${v+1} van ${N}</div><h3>${c.t}</h3>${v===0?`<p>${STORY.intro}</p>`:''}<p>${c.story}</p>
+      <div class="doc">${c.doc}</div><p class="question">${c.q}</p>`;
+    if(solved){
+      body+=`<div class="verdict"><p><b>${sg.shown.includes(v)?'Oplossing':'Goed!'}</b> ${c.sol}</p></div>${c.after?`<p>${c.after}</p>`:''}
+        <div class="controls"><button class="btn primary" id="stNext" type="button">${v===N-1?'Naar de ontknoping':'Volgende hoofdstuk'}</button></div>`;
+    }else{
+      body+=`<div class="answerrow"><input id="stIn" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Jouw antwoord" placeholder="Jouw antwoord"><button class="btn primary" id="stCheck" type="button">Controleer</button></div>
+        <p class="msg" id="stMsg"></p>
+        <div class="hintlist">${c.hints.slice(0,h).map((t,i)=>`<p><b>Hint ${i+1}:</b> ${t}</p>`).join('')}</div>
+        <div class="controls">${h<2?`<button class="btn small" id="stHint" type="button">Hint ${h+1}</button>`:''}<button class="btn small" id="stReveal" type="button">Toon oplossing</button></div>
+        ${askReveal?`<div class="spoiler"><p>Weet je het zeker? Je ziet dan het antwoord van dit hoofdstuk.</p><div class="controls" style="justify-content:center"><button class="btn primary" id="stYes" type="button">Ja, toon het</button><button class="btn" id="stNo" type="button">Nee, ik puzzel verder</button></div></div>`:''}`;
+    }
+    body+='</article>';
+  }
+  $('pVerhaal').innerHTML=`<h2 class="bigtitle">Verhaal</h2>${PENCIL}<div class="storyhead"><span class="kicker">Zaakdossier · ${N} hoofdstukken</span><h3>${STORY.title}</h3></div><nav class="chapters" aria-label="Hoofdstukken">${dots}</nav>${body}`;
+  document.querySelectorAll('.chapters button').forEach(b=>b.onclick=()=>{sg.view=+b.dataset.ch;askReveal=false;saveS();renderStory()});
+  const on=(id,f)=>{const el=$(id);if(el)el.onclick=f};
+  const check=()=>{const v2=normA($('stIn').value);if(!v2)return;
+    if(STORY.ch[v].ans.some(a=>v2.includes(a))){sg.solved.push(v);saveS();renderStory()}
+    else $('stMsg').textContent='Dat klopt niet. Probeer het nog eens of neem een hint.'};
+  on('stCheck',check);
+  const inp=$('stIn');if(inp)inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();check()}};
+  on('stHint',()=>{sg.hints[v]=(sg.hints[v]||0)+1;saveS();renderStory()});
+  on('stReveal',()=>{askReveal=true;renderStory()});
+  on('stNo',()=>{askReveal=false;renderStory()});
+  on('stYes',()=>{askReveal=false;sg.shown.push(v);sg.solved.push(v);saveS();renderStory()});
+  on('stNext',()=>{sg.view=v+1;saveS();renderStory();$('pVerhaal').scrollIntoView({block:'start'})});
+  on('stReset',()=>{sg={view:0,solved:[],hints:{},shown:[]};saveS();renderStory()});
+}
+
 function applySub(){
   const s=st.sub||'';
   $('subHint').hidden=!!s;
@@ -430,7 +561,9 @@ function tipText(){
 function setTab(t){st.tab=t;save();renderPanes();window.scrollTo({top:0})}
 function renderPanes(){
   const t=st.tab||'zaak';
-  $('pZaak').hidden=t!=='zaak';$('pTips').hidden=t!=='tips';$('pOpl').hidden=t!=='opl';
+  $('pZaak').hidden=t!=='zaak';$('pTips').hidden=t!=='tips';$('pOpl').hidden=t!=='opl';$('pVerhaal').hidden=t!=='verhaal';
+  document.querySelector('.top .controls').hidden=t==='verhaal';$('stats').hidden=t==='verhaal';
+  if(t==='verhaal'&&!$('pVerhaal').innerHTML)renderStory();
   document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===t));
   $('pTips').innerHTML=`<h2 class="bigtitle">Tips</h2>${PENCIL}<div class="cluebox tipcard">
     <h2>Zaak ${String(C.seed).padStart(4,'0')}: ${C.title}</h2>

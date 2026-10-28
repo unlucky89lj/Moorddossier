@@ -115,6 +115,13 @@ td.e{border:0}
 .subtabs button[aria-selected="true"]{background:var(--ink);color:var(--page)}
 .subtabs button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
 .tabs{display:flex;gap:4px;border-bottom:2px solid var(--ink);overflow-x:auto}
+.games{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.games button{display:flex;flex-direction:column;gap:2px;align-items:flex-start;text-align:left;border:2px solid var(--ink);border-radius:16px;background:var(--card);color:var(--ink);padding:10px 14px;cursor:pointer;min-width:0}
+.games button b{font:800 clamp(14px,4.2vw,22px)/1.1 var(--cond);max-width:100%;overflow-wrap:anywhere;text-transform:uppercase;letter-spacing:.02em}
+.games button span{font:500 13px/1.25 var(--cond);color:var(--muted);letter-spacing:.02em}
+.games button[aria-selected="true"]{background:var(--ink);color:var(--page)}
+.games button[aria-selected="true"] span{color:var(--band)}
+.games button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
 .kicker{font:700 13px var(--slab);text-transform:uppercase;letter-spacing:.12em;color:var(--red)}
 .storyhead{display:flex;flex-direction:column;gap:6px}
 .storyhead h3,.chapter h3{font:800 clamp(26px,7vw,34px)/1.05 var(--cond);text-transform:uppercase;margin:0;text-wrap:balance}
@@ -169,13 +176,16 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
       <button class="btn" id="newCase" type="button">Nieuwe zaak</button>
     </div>
   </div>
+  <div class="games" role="tablist" aria-label="Kies een spel">
+    <button role="tab" type="button" data-g="murdle"><b>Moorddossier</b><span>Logicapuzzels met een rooster</span></button>
+    <button role="tab" type="button" data-g="speur"><b>Speurneus</b><span>Verhaal in hoofdstukken</span></button>
+  </div>
   <div class="stats" id="stats"></div>
 
   <nav class="tabs" role="tablist" aria-label="Onderdelen">
     <button role="tab" type="button" data-t="zaak" id="tZaak">Zaak</button>
     <button role="tab" type="button" data-t="tips" id="tTips">Tips</button>
     <button role="tab" type="button" data-t="opl" id="tOpl">Oplossing</button>
-    <button role="tab" type="button" data-t="verhaal" id="tVerhaal">Verhaal</button>
   </nav>
 
   <div class="pane" id="pZaak">
@@ -499,6 +509,8 @@ const STORY={
   epilogue:'‘Notaris Brouwer,’ zegt Inspecteur Mol, ‘u heeft het testament van Cornelis vervalst. In uw versie zou de Zwarte Parel na zijn dood naar ú gaan. Vanavond ontdekte Cornelis het bedrog. Er volgde een worsteling, de klok viel om, en u sloeg hem neer met zijn eigen veilinghamer. Daarna zocht u de Parel, maar die had Cornelis slim verstopt.’ Brouwer zakt in elkaar. ‘Die bol was meer waard dan dit hele veilinghuis…’ En de brief op Mols deurmat? Die bleek van Cornelis zelf. Hij voelde al dat er iets mis was. De Zwarte Parel gaat die avond alsnog onder de hamer. Een andere hamer, dit keer.'
 };
 const STKEY='md-story';
+let game=store.get('md-game')||'murdle';
+function setGame(g){game=g;store.set('md-game',g);renderPanes();window.scrollTo({top:0})}
 let sg=store.get(STKEY)||{view:0,solved:[],hints:{},shown:[]};
 let askReveal=false;
 const saveS=()=>store.set(STKEY,sg);
@@ -530,7 +542,7 @@ function renderStory(){
     }
     body+='</article>';
   }
-  $('pVerhaal').innerHTML=`<h2 class="bigtitle">Verhaal</h2>${PENCIL}<div class="storyhead"><span class="kicker">Zaakdossier · ${N} hoofdstukken</span><h3>${STORY.title}</h3></div><nav class="chapters" aria-label="Hoofdstukken">${dots}</nav>${body}`;
+  $('pVerhaal').innerHTML=`<h2 class="bigtitle">Speurneus</h2>${PENCIL}<div class="storyhead"><span class="kicker">Verhaal · ${N} hoofdstukken</span><h3>${STORY.title}</h3></div><nav class="chapters" aria-label="Hoofdstukken">${dots}</nav>${body}`;
   document.querySelectorAll('.chapters button').forEach(b=>b.onclick=()=>{sg.view=+b.dataset.ch;askReveal=false;saveS();renderStory()});
   const on=(id,f)=>{const el=$(id);if(el)el.onclick=f};
   const check=()=>{const v2=normA($('stIn').value);if(!v2)return;
@@ -561,9 +573,11 @@ function tipText(){
 function setTab(t){st.tab=t;save();renderPanes();window.scrollTo({top:0})}
 function renderPanes(){
   const t=st.tab||'zaak';
-  $('pZaak').hidden=t!=='zaak';$('pTips').hidden=t!=='tips';$('pOpl').hidden=t!=='opl';$('pVerhaal').hidden=t!=='verhaal';
-  document.querySelector('.top .controls').hidden=t==='verhaal';$('stats').hidden=t==='verhaal';
-  if(t==='verhaal'&&!$('pVerhaal').innerHTML)renderStory();
+  const g=game,M=g==='murdle';
+  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=M;
+  document.querySelector('.tabs').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('stats').hidden=!M;
+  document.querySelectorAll('.games button').forEach(b=>b.setAttribute('aria-selected',b.dataset.g===g));
+  if(!M&&!$('pVerhaal').innerHTML)renderStory();
   document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===t));
   $('pTips').innerHTML=`<h2 class="bigtitle">Tips</h2>${PENCIL}<div class="cluebox tipcard">
     <h2>Zaak ${String(C.seed).padStart(4,'0')}: ${C.title}</h2>
@@ -644,12 +658,14 @@ function wire(){
     }else{st.mistakes++;save();$('verdict').innerHTML=`<div class="verdict bad"><p>Mis. ${C.S[+s].name} kijkt je verontwaardigd aan. Bekijk de aanwijzingen nog eens.</p></div>`}};
   $('reveal').onclick=()=>setTab('opl');
   document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.t));
+  document.querySelectorAll('.games button').forEach(b=>b.onclick=()=>setGame(b.dataset.g));
   document.querySelectorAll('.subtabs button').forEach(b=>b.onclick=()=>{st.sub=st.sub===b.dataset.s?'':b.dataset.s;save();applySub()});
 }
 
 function start(data){
   wire();
   const saved=(data&&data.st)||store.get(KEY);
+  if(saved&&saved.tab==='verhaal'){saved.tab='zaak';game='speur'}
   if(saved&&saved.seed&&(saved.n===3||saved.n===4)){C=genCase(saved.seed,saved.n);st=saved;render()}
   else newCase(Math.floor(Date.now()/864e5)%9999+1,3);
   window.claude?.hot?.snapshot?.(()=>({st}));

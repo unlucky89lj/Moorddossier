@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Moorddossier</title>
+<meta name="description" content="Logische moordpuzzels: lees de aanwijzingen, vul het rooster in en ontmasker de dader.">
+<meta name="theme-color" content="#C2321F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Moorddossier">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<style>html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;-webkit-text-size-adjust:100%}[hidden]{display:none!important}</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Zilla+Slab:wght@500;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* Layout: puzzelboekpagina — kop met verhaal, grijze band met kaarten, aanwijzingen, rooster naast Wie/Wat/Waar */
+:root{
+  --page:#EEEFEA; --band:#CDD0C8; --card:#FBFBF8; --ink:#1C1F22; --muted:#5E635F; --rule:#9EA39C; --red:#C2321F; --ok:#2E6A49;
+  --cond:"Barlow Condensed","Arial Narrow",sans-serif;
+  --slab:"Zilla Slab","Rockwell",Georgia,serif;
+  --serif:"Source Serif 4",Georgia,serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --page:#151716; --band:#252927; --card:#1D201F; --ink:#E6E8E3; --muted:#9BA19C; --rule:#4A504C; --red:#EC6A55; --ok:#6CC495; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --page:#151716; --band:#252927; --card:#1D201F; --ink:#E6E8E3; --muted:#9BA19C; --rule:#4A504C; --red:#EC6A55; --ok:#6CC495; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--page);color:var(--ink);font-family:var(--serif);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 48px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+button{font:inherit}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.logo{font:800 26px/1 var(--cond);letter-spacing:.02em;text-transform:uppercase;margin:0}
+.logo span{color:var(--red)}
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.seg{display:inline-flex;border:2px solid var(--ink);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:transparent;color:var(--ink);padding:6px 12px;font:700 14px var(--cond);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--page)}
+.btn{border:2px solid var(--ink);background:transparent;color:var(--ink);border-radius:999px;padding:6px 14px;font:700 14px var(--cond);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+.btn.small{padding:3px 10px;font-size:13px}
+.btn:focus-visible,.seg button:focus-visible,td.c:focus-visible,select:focus-visible,li.clue:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.stats{font:600 14px var(--cond);letter-spacing:.04em;color:var(--muted);text-transform:uppercase}
+
+.casehead h1{font:800 clamp(28px,7.5vw,42px)/1 var(--cond);text-transform:uppercase;margin:0 0 10px;text-wrap:balance;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.casehead h1 .nr{color:var(--red)}
+.casehead h1 svg{width:.75em;height:.75em;align-self:center}
+.casehead p{margin:0;font-weight:600;max-width:65ch}
+
+.band{background:var(--band);border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:12px}
+h2{font:800 17px var(--cond);text-transform:uppercase;letter-spacing:.08em;margin:0}
+.scard{display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;background:var(--card);border:2px solid var(--ink);border-radius:20px;padding:14px 16px;align-items:center}
+.who{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.who svg{width:60px;height:60px}
+.who b,.tile b{font:700 13px/1.3 var(--slab);letter-spacing:.12em;text-transform:uppercase}
+.scard p{margin:0 0 8px;font-size:15px}
+.statline{font:700 14px/1.3 var(--cond);text-transform:uppercase;letter-spacing:.02em}
+.tiles{display:grid;grid-template-columns:1fr;gap:12px}
+.tile{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:2px solid var(--ink);border-radius:20px;padding:14px 16px}
+.tile svg{width:46px;height:46px;flex:none}
+.tile .sub{display:block;font:700 13px var(--cond);text-transform:uppercase;color:var(--muted);letter-spacing:.06em}
+.tile p{margin:6px 0 0;font-size:15px}
+@media (min-width:640px){
+  .tiles{grid-template-columns:repeat(var(--n),minmax(0,1fr))}
+  .tile{flex-direction:column;align-items:center;text-align:center}
+  .tile p{text-align:left}
+}
+@media (max-width:420px){.scard{grid-template-columns:76px minmax(0,1fr);gap:10px;padding:12px}.who svg{width:50px;height:50px}.who b{font-size:11px}}
+
+.cluebox{background:var(--card);border-radius:20px;padding:16px;border:2px solid var(--rule);display:flex;flex-direction:column;gap:10px}
+ul.clues{margin:0;padding:0 0 0 0;list-style:none;display:flex;flex-direction:column;gap:6px}
+li.clue{position:relative;padding:4px 6px 4px 22px;cursor:pointer;border-radius:6px;font-size:16px}
+li.clue::before{content:"";position:absolute;left:6px;top:.85em;width:7px;height:7px;border-radius:50%;background:var(--ink)}
+li.clue.done{opacity:.4;text-decoration:line-through}
+li.clue.final{font-weight:600;cursor:default}
+li.clue .code{font:700 15px var(--cond);letter-spacing:.08em;word-break:break-word}
+.hint{font-size:13px;color:var(--muted);margin:0;font-family:var(--cond);letter-spacing:.03em}
+.exhibit{border:2px dashed var(--ink);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.exhibit h3{font:700 13px var(--slab);text-transform:uppercase;letter-spacing:.12em;margin:0}
+.abc{overflow-x:auto}
+.abc table{border-collapse:collapse;font:700 14px var(--cond);text-align:center}
+.abc td{width:22px;padding:2px 0;border-bottom:1px solid var(--rule)}
+.abc tr:last-child td{border:0;color:var(--red)}
+.decoded{font-size:15px;font-style:italic}
+
+.solve{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+.gridbox{overflow-x:auto;max-width:100%}
+table.g{border-collapse:collapse;--cell:min(46px,calc((100vw - 120px)/var(--cols)))}
+table.g th{padding:2px;font-weight:400}
+.glabel{font:700 13px var(--slab);text-transform:uppercase;letter-spacing:.12em;color:var(--muted);text-align:center;white-space:nowrap}
+.vlabel{writing-mode:vertical-rl;transform:rotate(180deg);font:700 13px var(--slab);text-transform:uppercase;letter-spacing:.12em;color:var(--muted);padding:0 4px!important}
+.hico svg{width:calc(var(--cell) - 8px);height:calc(var(--cell) - 8px);display:block;margin:0 auto}
+.rico svg{width:calc(var(--cell) - 10px);height:calc(var(--cell) - 10px);display:block}
+td.c{width:var(--cell);height:var(--cell);min-width:var(--cell);border:1.5px solid var(--ink);text-align:center;cursor:pointer;
+  font:700 calc(var(--cell)*.5)/1 var(--cond);user-select:none;-webkit-tap-highlight-color:transparent;background:var(--card)}
+td.c.x{color:var(--red)} td.c.v{color:var(--ok)}
+td.c.bl{border-left-width:3.5px} td.c.bt{border-top-width:3.5px}
+td.c.br{border-right-width:3.5px} td.c.bb{border-bottom-width:3.5px}
+td.e{border:0}
+.answers{flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:14px}
+.ans{display:flex;flex-direction:column;gap:2px}
+.ans select{font:600 16px var(--serif);border:0;border-bottom:2px solid var(--ink);background:transparent;color:var(--ink);padding:6px 2px;width:100%;border-radius:0}
+.ans label{font:800 20px var(--cond);text-transform:uppercase;letter-spacing:.04em;align-self:flex-end}
+.gtools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font:600 14px var(--cond);letter-spacing:.03em}
+.gtools label{display:flex;gap:6px;align-items:center;color:var(--muted)}
+.msg{font:500 15px var(--cond);letter-spacing:.02em;color:var(--muted);margin:0}
+.verdict{padding:14px;border-left:5px solid var(--ok);background:var(--card)}
+.verdict.bad{border-color:var(--red)}
+.verdict p{margin:0}
+.tabs{display:flex;gap:4px;border-bottom:2px solid var(--ink);overflow-x:auto}
+.tabs button{border:2px solid var(--ink);border-bottom:0;background:var(--band);color:var(--ink);font:800 16px var(--cond);text-transform:uppercase;letter-spacing:.08em;padding:8px 16px;border-radius:12px 12px 0 0;cursor:pointer;margin-bottom:-2px;white-space:nowrap}
+.tabs button[aria-selected="true"]{background:var(--page);padding-bottom:10px}
+.tabs button:focus-visible{outline:3px solid var(--red);outline-offset:-3px}
+.pane{display:flex;flex-direction:column;gap:22px}
+.bigtitle{font:800 clamp(44px,13vw,68px)/1 var(--cond);text-transform:uppercase;text-align:center;margin:6px 0 0;letter-spacing:.01em}
+.pencil{display:block;margin:0 auto;width:120px;height:24px;color:var(--ink)}
+.tipcard{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.tipcard p,.sol p{margin:0;max-width:65ch;font-size:17px}
+.sol{display:flex;flex-direction:column;gap:12px}
+.sol h3{font:700 20px/1.35 var(--slab);margin:0;text-wrap:balance}
+.others{background:var(--band);padding:12px 16px;display:flex;flex-direction:column;gap:4px;font-size:17px}
+.spoiler{border:2px dashed var(--rule);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center}
+.spoiler p{margin:0;max-width:44ch}
+footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <p class="logo">Moord<span>dossier</span></p>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Moeilijkheid">
+        <button id="d3" type="button" aria-pressed="true">Makkelijk</button>
+        <button id="d4" type="button" aria-pressed="false">Lastig</button>
+      </div>
+      <button class="btn" id="newCase" type="button">Nieuwe zaak</button>
+    </div>
+  </div>
+  <div class="stats" id="stats"></div>
+
+  <nav class="tabs" role="tablist" aria-label="Onderdelen">
+    <button role="tab" type="button" data-t="zaak" id="tZaak">Zaak</button>
+    <button role="tab" type="button" data-t="tips" id="tTips">Tips</button>
+    <button role="tab" type="button" data-t="opl" id="tOpl">Oplossing</button>
+  </nav>
+
+  <div class="pane" id="pZaak">
+  <header class="casehead" id="caseHead"></header>
+
+  <section class="band" aria-labelledby="hS">
+    <h2 id="hS">Verdachten</h2>
+    <div id="suspects" style="display:flex;flex-direction:column;gap:12px"></div>
+    <h2 id="hL">Locaties</h2>
+    <div class="tiles" id="locations"></div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:12px">
+    <h2>Wapens</h2>
+    <div class="tiles" id="weapons"></div>
+  </section>
+
+  <section class="cluebox">
+    <h2>Aanwijzingen &amp; bewijsmateriaal</h2>
+    <ul class="clues" id="clues"></ul>
+    <div id="exhibit"></div>
+    <p class="hint">Tik op een aanwijzing om hem af te strepen. Ieder persoon had precies één wapen en was op precies één locatie.</p>
+  </section>
+
+  <section class="solve">
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:100%">
+      <div class="gridbox"><table class="g" id="grid"></table></div>
+      <div class="gtools">
+        <label><input type="checkbox" id="auto" checked> Automatisch kruisjes bij ●</label>
+        <button class="btn small" id="check" type="button">Controleer</button>
+        <button class="btn small" id="clear" type="button">Wis</button>
+      </div>
+      <p class="msg" id="gridMsg">Tik één keer voor ✕, twee keer voor ●, drie keer om te wissen.</p>
+    </div>
+    <div class="answers">
+      <div class="ans"><select id="aS"></select><label for="aS">Wie?</label></div>
+      <div class="ans"><select id="aW"></select><label for="aW">Wat?</label></div>
+      <div class="ans"><select id="aL"></select><label for="aL">Waar?</label></div>
+      <div class="controls">
+        <button class="btn primary" id="accuseBtn" type="button">Beschuldig</button>
+        <button class="btn" id="reveal" type="button">Toon oplossing</button>
+      </div>
+      <div id="verdict"></div>
+    </div>
+  </section>
+
+  </div>
+  <section class="pane" id="pTips" hidden></section>
+  <section class="pane" id="pOpl" hidden></section>
+
+  <footer>Elke zaak wordt gegenereerd en heeft precies één oplossing.</footer>
+</div>
+
+<script>
+const POOL={
+  suspects:[
+    {name:'Baron van Kruidenier',mono:'BK',lengte:188,hand:'rechts',ogen:'blauwe',haar:'grijs',bio:'Erfde een specerijenfortuin en verloor het grootste deel bij de paardenraces. Draagt zijn monocle zelfs onder de douche.'},
+    {name:'Mevrouw Zilverschoon',mono:'MZ',lengte:162,hand:'links',ogen:'groene',haar:'blond',bio:'Poetst elke ochtend het familiezilver. Ze weet precies wie er ooit een lepeltje heeft meegenomen, en dat vergeeft ze nooit.'},
+    {name:'Kok Pieterse',mono:'KP',lengte:175,hand:'rechts',ogen:'bruine',haar:'rood',bio:'Kookte ooit voor de koning, zegt hij. Niemand heeft het durven navragen. Zijn erwtensoep is in elk geval moordend.'},
+    {name:'Dokter Ravensburg',mono:'DR',lengte:181,hand:'links',ogen:'grijze',haar:'zwart',bio:'Huisarts met een verzameling antieke scalpels en een opvallend korte patiëntenlijst.'},
+    {name:'Juffrouw Tulp',mono:'JT',lengte:158,hand:'rechts',ogen:'blauwe',haar:'bruin',bio:'Lerares aardrijkskunde die alle dijken van Nederland uit haar hoofd kent. Lief, maar spreek haar nooit tegen.'},
+    {name:'Kapitein Haring',mono:'KH',lengte:192,hand:'rechts',ogen:'bruine',haar:'grijs',bio:'Bevoer de zeven zeeën en mist er dagelijks nog minstens drie. Ruikt altijd een beetje naar de haven.'},
+    {name:'Notaris Brouwer',mono:'NB',lengte:170,hand:'links',ogen:'groene',haar:'bruin',bio:'Heeft elk testament in de stad gelezen. Hij weet dus ook precies wie er iets te winnen heeft.'},
+    {name:'Dominee Klaproos',mono:'DK',lengte:166,hand:'rechts',ogen:'grijze',haar:'blond',bio:'Preekt elke zondag over vergeving. Van maandag tot zaterdag houdt hij een lijstje bij van wie dat nodig heeft.'}],
+  weapons:[
+    {name:'kaasschaaf',lid:'de',mono:'KS',gewicht:'licht',mat:'metaal',bio:'Bedoeld voor flinterdunne plakjes oude kaas. Werkt helaas ook op andere dingen.'},
+    {name:'klomp',lid:'de',mono:'KL',gewicht:'middel',mat:'hout',bio:'Handgesneden uit populierenhout. Ideaal voor een natte wei, of voor een harde trap.'},
+    {name:'Delfts vaasje',lid:'het',mono:'DV',gewicht:'middel',mat:'aardewerk',bio:'Blauw-wit en peperduur. Het gaat maar één keer kapot, maar dat is genoeg.'},
+    {name:'bierpul',lid:'de',mono:'BP',gewicht:'zwaar',mat:'glas',bio:'Een liter inhoud en een kilo glas. Proost.'},
+    {name:'schaats',lid:'de',mono:'SC',gewicht:'middel',mat:'metaal',bio:'Een oude Friese doorloper met vlijmscherp geslepen ijzer. Niet alleen op het ijs gevaarlijk.'},
+    {name:'deegroller',lid:'de',mono:'RO',gewicht:'middel',mat:'hout',bio:'Rolt deeg plat. En soms ook iets anders.'},
+    {name:'stroopwafelijzer',lid:'het',mono:'SW',gewicht:'zwaar',mat:'metaal',bio:'Gietijzer met een ruitjespatroon. Laat een heel herkenbare afdruk achter.'},
+    {name:'giftige tulpenbol',lid:'de',mono:'TB',gewicht:'licht',mat:'plant',bio:'Lijkt op een ui en smaakt ook als een ui. Daarna smaakt niets meer.'}],
+  locations:[
+    {name:'Bibliotheek',lid:'de',mono:'BI',buiten:false,bio:'Hier geldt strenge stilte, zelfs tijdens een moord.'},
+    {name:'Kaaspakhuis',lid:'het',mono:'KA',buiten:false,bio:'Duizenden kazen liggen hier te rijpen. Door al die korsten hoort niemand je roepen.'},
+    {name:'Tulpenkas',lid:'de',mono:'TK',buiten:false,bio:'Warm, vochtig en vol bloemen. Er is genoeg aarde om iets in te begraven.'},
+    {name:'Grachtenpand',lid:'het',mono:'GP',buiten:false,bio:'Steile trappen, smalle gangen en een hijsbalk in de nok.'},
+    {name:'Windmolen',lid:'de',mono:'WM',buiten:false,bio:'De wieken draaien nog altijd. Kom er niet tussen.'},
+    {name:'IJsbaan',lid:'de',mono:'IJ',buiten:true,bio:'Glad ijs, koude handen en een koek-en-zopiekraam met warme chocomel.'},
+    {name:'Haven',lid:'de',mono:'HA',buiten:true,bio:'Meeuwen, natte touwen en diep, donker water.'},
+    {name:'Rozentuin',lid:'de',mono:'RT',buiten:true,bio:'De mooiste rozen van de stad. Pas op voor de doornen.'},
+    {name:'Dijk',lid:'de',mono:'DI',buiten:true,bio:'Houdt de zee tegen. Wat de dijk verder nog tegenhoudt, weet niemand.'}]
+};
+const VICTIMS=['de rijke tulpenhandelaar Joost Bollenkamp','kaasbaron Gerrit Goudsmit','schaatskampioene Anneke Snel','museumdirecteur Henk Verdonk','de excentrieke erfgename Lotte van Amstel','havenmeester Bram de Wit','de beroemde kunstvervalser Frans Hals-Kopie','burgemeester Wilma Wolkenkrabber'];
+const EVENTS=['het jaarlijkse Elfstedendiner','een veiling van zeldzame tulpenbollen','het verjaardagsfeest van de burgemeester','een stormachtige nacht aan de kust','de opening van het nieuwe kaasmuseum','een chique bal in een grachtenpand','een kampioenschap haringhappen','de eerste vorstnacht van het jaar'];
+const TITLES=['De natte voetstappen','Moord bij maanlicht','Het laatste diner','Een koude rekening','De stille getuige','Schaduw over de gracht','Het verdwenen testament','Gevaarlijk gouds','Een bittere bol','Te veel kaas'];
+const STORIES=[
+  (e,v)=>`Inspecteur Mol was uitgenodigd voor ${e}. Hij had zich verheugd op een rustige avond, tot ${v} dood werd aangetroffen.`,
+  (e,v)=>`Tijdens ${e} klonk er een gil. ${cap(v)} lag levenloos op de grond, en Inspecteur Mol wist meteen dat een van de gasten de dader was.`,
+  (e,v)=>`Inspecteur Mol kwam naar ${e} voor de bitterballen. Hij bleef voor de moord op ${v}.`,
+  (e,v)=>`Het had zo'n gezellige avond moeten worden: ${e}. Maar toen de koffie werd geschonken, was ${v} er niet meer bij. Voorgoed niet.`];
+// tips: (hoofdzin, bijzin) => tekst
+const TIPS=[
+  (m,s)=>`Terwijl Inspecteur Mol rondliep, ging zijn telefoon. Een zware stem zei: ‘Ik heb in de koffiedik gelezen dat ${s}.’ Voordat Mol kon vragen wie er belde, werd er alweer opgehangen.`,
+  (m,s)=>`Er dreef een fles voorbij in de gracht. Mol viste hem eruit en vond een briefje: ‘Mol, de sterren laten er geen twijfel over bestaan: ${m}.’`,
+  (m,s)=>`Een postduif landde op de schouder van Inspecteur Mol. Aan zijn pootje zat een opgerold briefje: ‘${cap(m)}. Groetjes, een vriend.’`,
+  (m,s)=>`De kaasboer op de hoek boog zich naar Mol toe en fluisterde: ‘Ik heb het met mijn eigen ogen gezien: ${m}.’`,
+  (m,s)=>`Mol vond een vreemde boodschap in zijn eigen jaszak: ‘Mol! Ik had een visioen waarin ${s}!’ Van wie kwamen al die tips toch?`,
+  (m,s)=>`Op het beslagen raam van de keuken had iemand met een vinger geschreven: ‘${cap(m)}.’ Toen Mol beter wilde kijken, was het al weggedampt.`];
+const CONFS=[
+  m=>`${m} hield eerst vol onschuldig te zijn, maar tegen de logica van Inspecteur Mol viel niets in te brengen. Toen de handboeien klikten, riep ${m}: ‘Ik had het bijna perfect gedaan!’`,
+  m=>`${m} keek nog even naar de deur, maar daar stonden al twee agenten. ‘Goed dan,’ zuchtte ${m}. ‘Het was het waard.’`,
+  m=>`${m} begon te sputteren, toen te mopperen en daarna te huilen. ‘Mijn advocaat hoort hiervan!’ Inspecteur Mol knikte: ‘Die mag u straks op het bureau bezoeken.’`,
+  m=>`‘Iedereen had het kunnen zijn,’ zei ${m} met een scheve glimlach. ‘Maar u heeft gelijk, inspecteur. Ik was het.’`,
+  m=>`${m} probeerde nog door het raam te ontsnappen, maar bleef hangen aan de vensterbank. ‘Dit is allemaal een groot misverstand!’ Dat was het niet.`];
+const PENCIL='<svg class="pencil" viewBox="0 0 120 24" aria-hidden="true"><rect x="2" y="4" width="12" height="16" rx="3" fill="var(--rule)"/><rect x="14" y="4" width="84" height="16" fill="currentColor"/><path d="M18 9h76M18 15h76" stroke="var(--page)" stroke-width="2"/><path d="M98 4l18 8-18 8z" fill="var(--rule)"/><path d="M110 9.3l6 2.7-6 2.7z" fill="currentColor"/></svg>';
+const MATP={hout:'hout',metaal:'metaal',glas:'glas',aardewerk:'aardewerk',plant:'plant'};
+const MATW={hout:'van hout',metaal:'van metaal',glas:'van glas',aardewerk:'van aardewerk',plant:'van plantaardig materiaal'};
+const GEWP={licht:'licht',middel:'middelzwaar',zwaar:'zwaar'};
+
+const H='<circle cx="16" cy="14" r="5.5"/><path d="M6 30c0-5.5 4.5-8.5 10-8.5s10 3 10 8.5"/>';
+const ICONS={
+ BK:H+'<rect x="11" y="2" width="10" height="6" fill="currentColor"/><path d="M7.5 8.5h17"/><circle cx="18.5" cy="14" r="2" stroke-width="1.5"/><path d="M20.3 15l1.5 4" stroke-width="1"/>',
+ MZ:H+'<circle cx="16" cy="5.5" r="2.6" fill="currentColor"/><path d="M10.5 13c0-4 2.5-5 5.5-5s5.5 1 5.5 5"/><circle cx="12" cy="25" r="1.1" fill="currentColor"/><circle cx="16" cy="26" r="1.1" fill="currentColor"/><circle cx="20" cy="25" r="1.1" fill="currentColor"/>',
+ KP:H+'<path d="M11 9.5V7c-2.5 0-3.5-4 0-4.5C12 .5 15 .5 16 2c1-1.5 4-1.5 5 .5 3.5.5 2.5 4.5 0 4.5v2.5z" fill="currentColor"/><path d="M12.5 16.5c1.5-1.2 2.8 0 3.5 0s2-1.2 3.5 0" stroke-width="1.5"/>',
+ DR:H+'<circle cx="16" cy="9.5" r="2.2" fill="currentColor"/><path d="M12.5 21.5c0 5 7 5 7 0M16 25.3v2.2" stroke-width="1.5"/><circle cx="16" cy="28.5" r="1.2" fill="currentColor"/>',
+ JT:H+'<circle cx="13.6" cy="14" r="1.8" stroke-width="1.4"/><circle cx="18.4" cy="14" r="1.8" stroke-width="1.4"/><path d="M16 8l-4-2.5v5zM16 8l4-2.5v5z" fill="currentColor"/>',
+ KH:H+'<path d="M10 9.5c0-4 2.5-6 6-6s6 2 6 6z" fill="currentColor"/><path d="M9 9.5h12.5l2 1.5"/><path d="M10.8 15.5c.5 4 2.5 5.5 5.2 5.5s4.7-1.5 5.2-5.5" fill="currentColor"/>',
+ NB:H+'<path d="M11 8.5c0-4 2-5.5 5-5.5s5 1.5 5 5.5z" fill="currentColor"/><path d="M8.5 8.5h15"/><path d="M16 24.5l-3.5-2v4zM16 24.5l3.5-2v4z" fill="currentColor"/>',
+ DK:H+'<path d="M6 8.5h20"/><path d="M11 8.5c0-3 2-4.5 5-4.5s5 1.5 5 4.5z" fill="currentColor"/><rect x="14.3" y="22" width="3.4" height="3" fill="currentColor"/>',
+ KS:'<path d="M5 5h13l2 7H8z"/><path d="M9 8.5h8" stroke-width="1.5"/><path d="M14 12l3 16" stroke-width="3"/>',
+ KL:'<path d="M3 23c0-2 1-3.5 3-3.5l7-1c2-4 6-7 11-7 3 0 5 2 5 5v7.5c0 1-.5 2-2 2H5.5C4 26 3 25 3 23z"/><path d="M18 13.5c2 1.5 5 1.5 7 0"/>',
+ DV:'<path d="M12 3h8M13 3v5c-4 2-6 6-6 11 0 5 4 9 9 9s9-4 9-9c0-5-2-9-6-11V3"/><path d="M12 19c2-3 6-3 8 0M14 23h4" stroke-width="1.5"/>',
+ BP:'<path d="M7 10h14v16a3 3 0 0 1-3 3h-8a3 3 0 0 1-3-3z"/><path d="M21 13h3a3 3 0 0 1 3 3v3a3 3 0 0 1-3 3h-3"/><path d="M6 10c0-3 3-4 5-3 1-2 5-2 6 0 2-1 5 0 5 3z" fill="currentColor"/><path d="M11.5 14v11M16.5 14v11" stroke-width="1.5"/>',
+ SC:'<path d="M9 4h6v9l7 2.5c2 .6 3 2 3 4V21H9z"/><path d="M4 25h22c2 0 3-1.3 3-3.5"/><path d="M11 21v4M22 21v4"/>',
+ RO:'<g transform="rotate(-35 16 16)"><rect x="8" y="12" width="16" height="8" rx="2"/><path d="M8 16H4M28 16h-4" stroke-width="2.5"/><path d="M12 12v8M16 12v8M20 12v8" stroke-width="1"/></g>',
+ SW:'<circle cx="12" cy="12" r="8.5"/><path d="M6 8l12 8M6 16l12-8M12 3.5v17" stroke-width="1.2"/><path d="M18 18l10 10M15.5 20l8.5 8.5" stroke-width="2.5"/>',
+ TB:'<path d="M16 8c-5 4-8 8-8 12a8 8 0 0 0 16 0c0-4-3-8-8-12z"/><path d="M16 8V2.5"/><path d="M16 8c1-3 3-4 5-4" stroke-width="1.5"/><path d="M13 19l2 2M15 19l-2 2M17 19l2 2M19 19l-2 2" stroke-width="1.3"/><path d="M13.5 24.5h5" stroke-width="1.3"/>',
+ BI:'<path d="M3 28h26"/><rect x="5" y="9" width="5" height="19"/><rect x="11" y="5" width="5" height="23"/><path d="M18 10.5l4.5-1.5 5.5 17.5-4.5 1.5z"/><path d="M5 13h5M11 9h5M5 24h5M11 24h5" stroke-width="1.2"/>',
+ KA:'<path d="M3 24L25 9l4 4v11z"/><path d="M3 24l26-11" stroke-width="1.3"/><circle cx="18" cy="20" r="1.8"/><circle cx="24.5" cy="19" r="1.2"/><circle cx="11" cy="22" r="1"/>',
+ TK:'<path d="M4 28V14L16 5l12 9v14z"/><path d="M4 18h24M10 9.5V28M22 9.5V28" stroke-width="1.2"/><path d="M16 28v-6" stroke-width="1.5"/><path d="M13.5 18.5c0 2.5 1 3.5 2.5 3.5s2.5-1 2.5-3.5l-1.3 1-1.2-1.5-1.2 1.5z" fill="currentColor" stroke-width="1"/>',
+ GP:'<path d="M8 29V12h2V9h3V5h6v4h3v3h2v17z"/><path d="M13.5 29v-6h5v6"/><path d="M11 15h3M18 15h3M11 19h3M18 19h3M15 9.5h2" stroke-width="1.5"/><path d="M3 29h26"/>',
+ WM:'<path d="M12 29l2-15h4l2 15z"/><path d="M16 13L6 3M16 13l10-10M16 13L6 23M16 13l10 10"/><circle cx="16" cy="13" r="1.6" fill="currentColor"/><path d="M3 29h26"/>',
+ IJ:'<path d="M16 3v26M4.7 9.5l22.6 13M4.7 22.5l22.6-13"/><path d="M13 5l3 3 3-3M13 27l3-3 3 3" stroke-width="1.5"/>',
+ HA:'<circle cx="16" cy="5.5" r="2.5"/><path d="M16 8V28M10.5 13h11M5 19c0 5 5 9 11 9s11-4 11-9M5 19l-2 2.5M27 19l2 2.5"/>',
+ RT:'<path d="M16 20v10"/><path d="M16 25.5c-3 0-5-1.5-6-4 3 0 5 1 6 4z" fill="currentColor" stroke-width="1"/><path d="M10 8c0 7 2.5 12 6 12s6-5 6-12c-2 0-4 1-6 3-2-2-4-3-6-3z"/><path d="M16 11v4" stroke-width="1.3"/>',
+ DI:'<path d="M2 27c2.5-2 5-2 7.5 0"/><path d="M8 22l6-8h7l8 8"/><path d="M2 22h28"/><path d="M17.5 14V9M15.5 10h4" stroke-width="1.5"/>',
+ LOEP:'<circle cx="13" cy="13" r="8"/><path d="M19 19l9 9" stroke-width="3.5"/>'
+};
+const svgOf=x=>`<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[typeof x==='string'?x:x.mono]||''}</svg>`;
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const range=n=>[...Array(n).keys()];
+
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function shuffle(arr,r){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function perms(n){const res=[];const rec=(a,u)=>{if(a.length===n){res.push(a.slice());return}for(let i=0;i<n;i++)if(!u[i]){u[i]=1;a.push(i);rec(a,u);a.pop();u[i]=0}};rec([],[]);return res}
+const pick=(arr,r)=>arr[Math.floor(r()*arr.length)];
+
+function genCase(seed,n){
+  const r=mulberry32(seed*7919+n*13);
+  const S=shuffle(POOL.suspects,r).slice(0,n);
+  let L;do{L=shuffle(POOL.locations,r).slice(0,n)}while(L.every(x=>x.buiten)||L.every(x=>!x.buiten));
+  const W=shuffle(POOL.weapons,r).slice(0,n);
+  const sol={loc:shuffle(range(n),r),wep:shuffle(range(n),r)};
+  const murderer=Math.floor(r()*n), body=sol.loc[murderer];
+  const P=perms(n),all=[];for(const p of P)for(const q of P)all.push({loc:p,wep:q});
+  const holder=(a,w)=>a.wep.indexOf(w);
+  const pool=[];
+  const add=(text,test,pen=0)=>{if(test(sol))pool.push({text,test,k:r()+pen})};
+  for(const s of range(n))for(const l of range(n)){
+    add(`[s${s}] was in [l${l}].`,a=>a.loc[s]===l,.55);
+    add(`[s${s}] was niet in [l${l}].`,a=>a.loc[s]!==l);}
+  for(const s of range(n))for(const w of range(n)){
+    add(`[s${s}] had [w${w}] bij zich.`,a=>a.wep[s]===w,.55);
+    add(`[s${s}] had [w${w}] niet bij zich.`,a=>a.wep[s]!==w);}
+  for(const w of range(n))for(const l of range(n)){
+    add(`[W${w}] lag in [l${l}].`,a=>a.loc[holder(a,w)]===l,.55);
+    add(`[W${w}] lag niet in [l${l}].`,a=>a.loc[holder(a,w)]!==l);}
+  const kinds=[['hand',v=>`iemand die ${v}handig is`,v=>`niemand die ${v}handig is`],
+               ['ogen',v=>`iemand met ${v} ogen`,v=>`niemand met ${v} ogen`],
+               ['haar',v=>`iemand met ${v} haar`,v=>`niemand met ${v} haar`]];
+  for(const [k,pos,neg] of kinds){
+    const vals=[...new Set(S.map(x=>x[k]))];if(vals.length<2)continue;
+    for(const v of vals){const who=range(n).filter(i=>S[i][k]===v);
+      for(const l of range(n)){
+        add(cap(`${pos(v)} was in [l${l}].`),a=>who.some(i=>a.loc[i]===l),.05);
+        add(cap(`${neg(v)} was in [l${l}].`),a=>!who.some(i=>a.loc[i]===l),.05);}
+      for(const w of range(n)){
+        add(cap(`${pos(v)} had [w${w}] bij zich.`),a=>who.some(i=>a.wep[i]===w),.05);
+        add(cap(`${neg(v)} had [w${w}] bij zich.`),a=>!who.some(i=>a.wep[i]===w),.05);}}}
+  for(const w of range(n)){
+    add(`[W${w}] lag op een buitenlocatie.`,a=>L[a.loc[holder(a,w)]].buiten,.1);
+    add(`[W${w}] lag binnen.`,a=>!L[a.loc[holder(a,w)]].buiten,.1);}
+  for(const s of range(n)){
+    add(`[s${s}] was buiten.`,a=>L[a.loc[s]].buiten,.1);
+    add(`[s${s}] was binnen.`,a=>!L[a.loc[s]].buiten,.1);}
+  for(const [k,ph] of [['gewicht',v=>`een ${GEWP[v]} wapen`],['mat',v=>`een wapen ${MATW[v]}`]]){
+    const vals=[...new Set(W.map(x=>x[k]))];if(vals.length<2)continue;
+    for(const v of vals){const ws=range(n).filter(i=>W[i][k]===v);
+      for(const s of range(n)){
+        add(`[s${s}] had ${ph(v)} bij zich.`,a=>ws.includes(a.wep[s]),.05);
+        add(`[s${s}] had geen ${ph(v).replace(/^een /,'')} bij zich.`,a=>!ws.includes(a.wep[s]),.05);}
+      for(const l of range(n)) add(`In [l${l}] lag ${ph(v)}.`,a=>ws.some(w=>a.loc[holder(a,w)]===l),.05);}}
+  const ord=range(n).sort((a,b)=>S[b].lengte-S[a].lengte),tall=ord[0],short=ord[n-1];
+  for(const [i,lbl] of [[tall,'De langste verdachte'],[short,'De kleinste verdachte']]){
+    for(const l of range(n)){add(`${lbl} was in [l${l}].`,a=>a.loc[i]===l,.35);add(`${lbl} was niet in [l${l}].`,a=>a.loc[i]!==l,.05)}
+    for(const w of range(n)){add(`${lbl} had [w${w}] bij zich.`,a=>a.wep[i]===w,.35);add(`${lbl} had [w${w}] niet bij zich.`,a=>a.wep[i]!==w,.05)}}
+  pool.sort((a,b)=>a.k-b.k);
+  let cands=all,chosen=[];
+  for(const c of pool){const f=cands.filter(c.test);if(f.length<cands.length){chosen.push(c);cands=f;if(f.length===1)break}}
+  const count=cs=>all.filter(a=>cs.every(c=>c.test(a))).length;
+  for(const c of shuffle(chosen,r)){const rest=chosen.filter(x=>x!==c);if(count(rest)===1)chosen=rest}
+  const clues=shuffle(chosen,r).map(c=>c.text);
+  // één aanwijzing in geheimschrift (de kortste helft, willekeurig)
+  const short2=clues.map((t,i)=>[i,t.length]).sort((a,b)=>a[1]-b[1]).slice(0,Math.max(1,Math.ceil(clues.length/2)));
+  const coded=pick(short2,r)[0];
+  const title=pick(TITLES,r),victim=pick(VICTIMS,r),event=pick(EVENTS,r),story=Math.floor(r()*STORIES.length);
+  const tipS=pick(range(n).filter(i=>i!==murderer),r),tipKind=r()<.5?'loc':'wep',tipT=Math.floor(r()*TIPS.length),conf=Math.floor(r()*CONFS.length);
+  return {seed,n,S,W,L,sol,murderer,body,clues,coded,title,victim,event,story,tipS,tipKind,tipT,conf};
+}
+
+// ---------- staat ----------
+let C=null, st=null;
+const KEY='md2-state',SKEY='md-stats';
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+function save(){store.set(KEY,st)}
+function stats(){return store.get(SKEY)||{solved:0,streak:0}}
+const $=id=>document.getElementById(id);
+
+function plainRef(t,i){
+  if(t==='s')return C.S[i].name;
+  const x=t==='l'?C.L[i]:C.W[i];return `${t==='W'?cap(x.lid):x.lid} ${t==='l'?x.name.toLowerCase():x.name}`;
+}
+function tok(text){
+  return text.replace(/\[([swWl])(\d)\]/g,(m,t,i)=>{i=+i;
+    if(t==='s')return `<b>${C.S[i].name}</b>`;
+    const x=t==='l'?C.L[i]:C.W[i];const lid=t==='W'?cap(x.lid):x.lid;
+    return `${lid} <b>${t==='l'?x.name.toLowerCase():x.name}</b>`;});
+}
+function plain(text){return text.replace(/\[([swWl])(\d)\]/g,(m,t,i)=>plainRef(t,+i))}
+function atbash(s){
+  return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toUpperCase().replace(/[^A-Z ]/g,'')
+    .replace(/[A-Z]/g,c=>String.fromCharCode(155-c.charCodeAt(0))).replace(/\s+/g,' ').trim();
+}
+
+function render(){
+  $('d3').setAttribute('aria-pressed',C.n===3);$('d4').setAttribute('aria-pressed',C.n===4);
+  const s=stats();$('stats').textContent=`Opgelost: ${s.solved} · Reeks: ${s.streak}`;
+  $('caseHead').innerHTML=`<h1><span class="nr">${String(C.seed).padStart(4,'0')}.</span> ${C.title} ${svgOf('LOEP')}</h1><p>${STORIES[C.story](C.event,C.victim)}</p>`;
+  document.querySelectorAll('.tiles').forEach(t=>t.style.setProperty('--n',C.n));
+  $('suspects').innerHTML=C.S.map(x=>`<article class="scard"><div class="who">${svgOf(x)}<b>${x.name}</b></div>
+    <div><p>${x.bio}</p><div class="statline">${x.lengte} cm • ${x.hand}handig • ${x.ogen} ogen • ${x.haar} haar</div></div></article>`).join('');
+  $('locations').innerHTML=C.L.map(x=>`<article class="tile">${svgOf(x)}<div><b>${x.lid==='het'?'Het ':'De '}${x.name}</b><span class="sub">${x.buiten?'buiten':'binnen'}</span><p>${x.bio}</p></div></article>`).join('');
+  $('weapons').innerHTML=C.W.map(x=>`<article class="tile">${svgOf(x)}<div><b>${x.lid==='het'?'Het ':'De '}${x.name}</b><span class="sub">${GEWP[x.gewicht]} · ${MATP[x.mat]}</span><p>${x.bio}</p></div></article>`).join('');
+  const items=C.clues.map((t,i)=>{
+    const done=st.struck.includes(i)?' done':'';
+    if(i===C.coded)return `<li class="clue${done}" tabindex="0" data-i="${i}">Inspecteur Mol vond een briefje in geheimschrift: <span class="code">${atbash(plain(t))}</span> (Zie bewijsstuk A.)</li>`;
+    return `<li class="clue${done}" tabindex="0" data-i="${i}">${tok(t)}</li>`;});
+  items.push(`<li class="clue final">Het lichaam van ${C.victim} werd gevonden in ${tok(`[l${C.body}]`)}.</li>`);
+  $('clues').innerHTML=items.join('');
+  const A='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $('exhibit').innerHTML=`<div class="exhibit"><h3>Bewijsstuk A · Geheimschrift</h3>
+    <div class="abc"><table><tr>${[...A].map(c=>`<td>${c}</td>`).join('')}</tr><tr>${[...A].reverse().map(c=>`<td>${c}</td>`).join('')}</tr></table></div>
+    <p class="hint">Elke letter in het briefje staat voor de letter die erboven of eronder staat.</p>
+    ${st.decoded?`<p class="decoded">${tok(C.clues[C.coded])}</p>`:'<div><button class="btn small" id="decode" type="button">Ontcijfer voor mij</button></div>'}</div>`;
+  const d=$('decode');if(d)d.onclick=()=>{st.decoded=true;save();render()};
+  renderGrid();
+  const opt=(arr,f)=>'<option value="">…</option>'+arr.map((x,i)=>`<option value="${i}">${f(x)}</option>`).join('');
+  $('aS').innerHTML=opt(C.S,x=>x.name);$('aW').innerHTML=opt(C.W,x=>`${x.lid} ${x.name}`);$('aL').innerHTML=opt(C.L,x=>`${x.lid} ${x.name.toLowerCase()}`);
+  $('verdict').innerHTML=st.done?verdictHTML(st.revealed):'';
+  renderPanes();
+}
+
+function tipText(){
+  const s=C.S[C.tipS];let m,sub;
+  if(C.tipKind==='loc'){const l=C.L[C.sol.loc[C.tipS]],p=`${l.lid} ${l.name.toLowerCase()}`;m=`${s.name} was in ${p}`;sub=`${s.name} in ${p} was`}
+  else{const w=C.W[C.sol.wep[C.tipS]],p=`${w.lid} ${w.name}`;m=`${s.name} had ${p} bij zich`;sub=`${s.name} ${p} bij zich had`}
+  return TIPS[C.tipT](m,sub);
+}
+function setTab(t){st.tab=t;save();renderPanes();window.scrollTo({top:0})}
+function renderPanes(){
+  const t=st.tab||'zaak';
+  $('pZaak').hidden=t!=='zaak';$('pTips').hidden=t!=='tips';$('pOpl').hidden=t!=='opl';
+  document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===t));
+  $('pTips').innerHTML=`<h2 class="bigtitle">Tips</h2>${PENCIL}<div class="cluebox tipcard">
+    <h2>Zaak ${String(C.seed).padStart(4,'0')}: ${C.title}</h2>
+    ${st.tipShown?`<p>${tipText()}</p><p class="hint">Deze tip gaat over een van de onschuldigen. Kun je de rest zelf bedenken?</p>`
+      :`<p>Kom je er niet uit? Een tip verraadt één feit over deze zaak. Daarna kun je gewoon verder puzzelen.</p><button class="btn primary" id="showTip" type="button">Toon de tip</button>`}
+    <button class="btn small" type="button" data-go="zaak">Terug naar de zaak</button></div>`;
+  const m=C.S[C.murderer],w=C.W[C.sol.wep[C.murderer]],l=C.L[C.body];
+  const others=range(C.n).filter(i=>i!==C.murderer).map(i=>{const ww=C.W[C.sol.wep[i]],ll=C.L[C.sol.loc[i]];return `<div>${C.S[i].name} – ${ww.lid} ${ww.name} – ${ll.lid} ${ll.name.toLowerCase()}</div>`}).join('');
+  $('pOpl').innerHTML=`<h2 class="bigtitle">Oplossing</h2>${PENCIL}`+(st.done
+    ?`<article class="sol"><h3>${String(C.seed).padStart(4,'0')}. ‘Het was ${m.name} met ${w.lid} ${w.name} in ${l.lid} ${l.name.toLowerCase()}!’</h3>
+      <p>${CONFS[C.conf](m.name)}</p><div class="others">${others}</div>
+      <div class="controls"><button class="btn primary" id="nextCase" type="button">Volgende zaak</button></div></article>`
+    :`<div class="spoiler"><p>De oplossing van deze zaak staat hier. Als je hem nu bekijkt, telt de zaak niet mee voor je reeks.</p>
+      <div class="controls" style="justify-content:center"><button class="btn primary" id="confirmReveal" type="button">Ja, toon de oplossing</button>
+      <button class="btn" type="button" data-go="zaak">Toch zelf puzzelen</button></div></div>`);
+  const tb=$('showTip');if(tb)tb.onclick=()=>{st.tipShown=true;save();renderPanes()};
+  const cr=$('confirmReveal');if(cr)cr.onclick=()=>{st.done=true;st.revealed=true;const x=stats();x.streak=0;store.set(SKEY,x);save();render()};
+  const nc=$('nextCase');if(nc)nc.onclick=()=>newCase(rnd(),C.n);
+  document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>setTab(b.dataset.go));
+}
+
+function renderGrid(){
+  const n=C.n,g=$('grid');g.style.setProperty('--cols',2*n+1);
+  const hi=x=>`<th class="hico" scope="col" title="${x.name}">${svgOf(x)}</th>`;
+  const ri=x=>`<th class="rico" scope="row" title="${x.name}">${svgOf(x)}</th>`;
+  let h=`<tr><th colspan="2"></th><th class="glabel" colspan="${n}">Verdachten</th><th class="glabel" colspan="${n}">Locaties</th></tr>`;
+  h+='<tr><th colspan="2"></th>'+C.S.map(hi).join('')+C.L.map(hi).join('')+'</tr>';
+  const cell=(key,cls)=>{const v=st.marks[key]||'';return `<td class="c ${v} ${cls}" tabindex="0" data-k="${key}">${v==='x'?'✕':v==='v'?'●':''}</td>`};
+  C.W.forEach((w,wi)=>{h+='<tr>'+(wi===0?`<th class="vlabel" rowspan="${n}">Wapens</th>`:'')+ri(w);
+    for(let s=0;s<n;s++)h+=cell(`ws:${wi}:${s}`,(wi===0?'bt ':'')+(s===0?'bl':''));
+    for(let l=0;l<n;l++)h+=cell(`wl:${wi}:${l}`,(wi===0?'bt ':'')+(l===0?'bl ':'')+(l===n-1?'br ':'')+(wi===n-1?'bb':''));h+='</tr>'});
+  C.L.forEach((L,li)=>{h+='<tr>'+(li===0?`<th class="vlabel" rowspan="${n}">Locaties</th>`:'')+ri(L);
+    for(let s=0;s<n;s++)h+=cell(`ls:${li}:${s}`,(li===0?'bt ':'')+(s===0?'bl ':'')+(s===n-1?'br ':'')+(li===n-1?'bb':''));
+    h+=`<td class="e" colspan="${n}"></td></tr>`});
+  g.innerHTML=h;
+}
+
+function truth(key){const [b,a,c]=key.split(':');const i=+a,j=+c,S=C.sol;
+  if(b==='ws')return S.wep[j]===i; if(b==='ls')return S.loc[j]===i;
+  const h=S.wep.indexOf(i);return S.loc[h]===j;}
+
+function tap(key){
+  const cur=st.marks[key]||'',next=cur===''?'x':cur==='x'?'v':'';
+  if(next)st.marks[key]=next;else delete st.marks[key];
+  if(next==='v'&&$('auto').checked){const [b,a,c]=key.split(':');
+    for(let k=0;k<C.n;k++){const r1=`${b}:${a}:${k}`,r2=`${b}:${k}:${c}`;
+      if(r1!==key&&!st.marks[r1])st.marks[r1]='x';if(r2!==key&&!st.marks[r2])st.marks[r2]='x';}}
+  save();renderGrid();$('gridMsg').textContent='Tik één keer voor ✕, twee keer voor ●, drie keer om te wissen.';
+}
+
+function verdictHTML(revealed){
+  const m=C.S[C.murderer],w=C.W[C.sol.wep[C.murderer]],l=C.L[C.body];
+  const line=`<b>${m.name}</b> deed het, met ${w.lid} ${w.name}, in ${l.lid} ${l.name.toLowerCase()}.`;
+  if(revealed)return `<div class="verdict bad"><p>Oplossing: ${line}</p></div>`;
+  return `<div class="verdict"><p>Inspecteur Mol knikt tevreden. ${line} Zaak gesloten${st.mistakes?` na ${st.mistakes} foute beschuldiging${st.mistakes>1?'en':''}`:' bij de eerste poging'}${st.tipShown?', met een tip':''}. Lees de ontknoping bij <b>Oplossing</b>.</p></div>`;
+}
+
+function newCase(seed,n){C=genCase(seed,n);st={seed,n,marks:{},struck:[],done:false,revealed:false,decoded:false,tipShown:false,tab:'zaak',mistakes:0};save();render();window.scrollTo({top:0})}
+const rnd=()=>1+Math.floor(Math.random()*9999);
+
+function wire(){
+  $('d3').onclick=()=>newCase(rnd(),3);
+  $('d4').onclick=()=>newCase(rnd(),4);
+  $('newCase').onclick=()=>newCase(rnd(),C.n);
+  $('clues').addEventListener('click',e=>{const li=e.target.closest('li[data-i]');if(!li)return;const i=+li.dataset.i;
+    st.struck=st.struck.includes(i)?st.struck.filter(x=>x!==i):[...st.struck,i];li.classList.toggle('done');save()});
+  $('clues').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('li[data-i]')){e.preventDefault();e.target.click()}});
+  $('grid').addEventListener('click',e=>{const td=e.target.closest('td.c');if(td)tap(td.dataset.k)});
+  $('grid').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('td.c')){e.preventDefault();const k=e.target.dataset.k;tap(k);document.querySelector(`td[data-k="${k}"]`)?.focus()}});
+  $('clear').onclick=()=>{st.marks={};save();renderGrid()};
+  $('check').onclick=()=>{let wrong=0,filled=0;for(const[k,v]of Object.entries(st.marks)){filled++;if((v==='v')!==truth(k))wrong++}
+    $('gridMsg').textContent=!filled?'Het rooster is nog leeg.':wrong?`${wrong} vakje${wrong>1?'s kloppen':' klopt'} niet.`:'Alles wat je hebt ingevuld klopt.'};
+  $('accuseBtn').onclick=()=>{
+    if(st.done)return;const s=$('aS').value,w=$('aW').value,l=$('aL').value;
+    if(s===''||w===''||l===''){$('verdict').innerHTML='<div class="verdict bad"><p>Vul wie, wat en waar in.</p></div>';return}
+    if(+s===C.murderer&&+w===C.sol.wep[C.murderer]&&+l===C.body){
+      st.done=true;const x=stats();x.solved++;x.streak=st.mistakes?0:x.streak+1;store.set(SKEY,x);save();render();
+    }else{st.mistakes++;save();$('verdict').innerHTML=`<div class="verdict bad"><p>Mis. ${C.S[+s].name} kijkt je verontwaardigd aan. Bekijk de aanwijzingen nog eens.</p></div>`}};
+  $('reveal').onclick=()=>setTab('opl');
+  document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.t));
+}
+
+function start(data){
+  wire();
+  const saved=(data&&data.st)||store.get(KEY);
+  if(saved&&saved.seed&&(saved.n===3||saved.n===4)){C=genCase(saved.seed,saved.n);st=saved;render()}
+  else newCase(Math.floor(Date.now()/864e5)%9999+1,3);
+  window.claude?.hot?.snapshot?.(()=>({st}));
+}
+window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
+</script>
+<script>
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
+</script>
+</body>
+</html>

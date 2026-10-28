@@ -161,7 +161,8 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
       <button role="tab" type="button" data-s="w">Wapens</button>
       <button role="tab" type="button" data-s="l">Locaties</button>
     </div>
-    <div id="suspects" style="display:flex;flex-direction:column;gap:12px"></div>
+    <p class="hint" id="subHint" style="text-align:center">Tik op een tabje om de kaarten te bekijken. Tik nog een keer om ze te sluiten.</p>
+    <div id="suspects" style="display:flex;flex-direction:column;gap:12px" hidden></div>
     <div class="tiles" id="weapons" hidden></div>
     <div class="tiles" id="locations" hidden></div>
   </section>
@@ -415,7 +416,8 @@ function render(){
 }
 
 function applySub(){
-  const s=st.sub||'s';
+  const s=st.sub||'';
+  $('subHint').hidden=!!s;
   $('suspects').hidden=s!=='s';$('weapons').hidden=s!=='w';$('locations').hidden=s!=='l';
   document.querySelectorAll('.subtabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.s===s));
 }
@@ -509,7 +511,7 @@ function wire(){
     }else{st.mistakes++;save();$('verdict').innerHTML=`<div class="verdict bad"><p>Mis. ${C.S[+s].name} kijkt je verontwaardigd aan. Bekijk de aanwijzingen nog eens.</p></div>`}};
   $('reveal').onclick=()=>setTab('opl');
   document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.t));
-  document.querySelectorAll('.subtabs button').forEach(b=>b.onclick=()=>{st.sub=b.dataset.s;save();applySub()});
+  document.querySelectorAll('.subtabs button').forEach(b=>b.onclick=()=>{st.sub=st.sub===b.dataset.s?'':b.dataset.s;save();applySub()});
 }
 
 function start(data){

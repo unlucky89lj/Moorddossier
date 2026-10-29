@@ -266,7 +266,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <div class="games" role="tablist" aria-label="Kies een spel">
     <button role="tab" type="button" data-g="murdle"><b>Moorddossier</b><span>Logicapuzzels met een rooster</span></button>
     <button role="tab" type="button" data-g="speur"><b>Speurneus</b><span>Verhaal in hoofdstukken</span></button>
-    <button role="tab" type="button" data-g="koud"><b>Koud archief</b><span>Politiedossiers zonder hints</span></button>
+    <button role="tab" type="button" data-g="koud"><b>Cold Case</b><span>Politiedossiers zonder hints</span></button>
   </div>
   <div class="stats" id="stats"></div>
 
@@ -1202,7 +1202,7 @@ function koudHandbook(){
 function renderKoud(){
   const P=$('pKoud');
   if(!kd.cur){
-    P.innerHTML=`<h2 class="bigtitle">Koud archief</h2>${PENCIL}
+    P.innerHTML=`<h2 class="bigtitle">Cold Case</h2>${PENCIL}
      <p class="lead">Onopgeloste moordzaken uit het politiearchief. Lees de verhoren, bekijk de plaats delict, vergelijk de bewijsstukken en wijs de dader aan. Geen hints, alleen het dossier.</p>
      <button class="bookbtn" id="kBook" type="button"><b>Rechercheurshandboek</b><span>Zo werkt een dossier, plus tips voor tijdlijnen, alibi’s en leugens.</span></button>
      <div class="caselist">${COLD.map(c=>{const s=kstate(c.id),ok=s.open&&s.acc&&s.acc.d===c.answer.dader;

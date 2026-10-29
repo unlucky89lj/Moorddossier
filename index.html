@@ -115,9 +115,9 @@ td.e{border:0}
 .subtabs button[aria-selected="true"]{background:var(--ink);color:var(--page)}
 .subtabs button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
 .tabs{display:flex;gap:4px;border-bottom:2px solid var(--ink);overflow-x:auto}
-.games{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.games{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
 .games button{display:flex;flex-direction:column;gap:2px;align-items:flex-start;text-align:left;border:2px solid var(--ink);border-radius:16px;background:var(--card);color:var(--ink);padding:10px 14px;cursor:pointer;min-width:0}
-.games button b{font:800 clamp(14px,4.2vw,22px)/1.1 var(--cond);max-width:100%;overflow-wrap:anywhere;text-transform:uppercase;letter-spacing:.02em}
+.games button b{font:800 clamp(12px,3.3vw,21px)/1.1 var(--cond);max-width:100%;letter-spacing:0!important;white-space:nowrap;text-transform:uppercase;letter-spacing:.02em}
 .games button span{font:500 13px/1.25 var(--cond);color:var(--muted);letter-spacing:.02em}
 .games button[aria-selected="true"]{background:var(--ink);color:var(--page)}
 .games button[aria-selected="true"] span{color:var(--band)}
@@ -157,6 +157,58 @@ td.e{border:0}
 .notes label .hint{text-transform:none;letter-spacing:.02em;font-weight:500}
 .notes textarea{font:500 16px/1.5 var(--slab);padding:12px;border:2px solid var(--rule);border-radius:12px;background:var(--card);color:var(--ink);resize:vertical;width:100%}
 .notes textarea:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.games button{padding:9px 10px!important}
+@media (max-width:440px){.games button span{font-size:11.5px!important}}
+.backbtn{align-self:flex-start}
+.ktabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+.ktabs button{flex:none;border:2px solid var(--ink);border-radius:999px;background:var(--card);color:var(--ink);padding:6px 12px;font:700 14px var(--cond);text-transform:uppercase;letter-spacing:.04em;cursor:pointer;white-space:nowrap}
+.ktabs button[aria-pressed="true"]{background:var(--ink);color:var(--page)}
+.ktabs button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.kbody{display:flex;flex-direction:column;gap:12px}
+.doc.report{transform:none;max-width:none;font-size:16px}
+.doc.report ul{margin:0 0 8px;padding-left:20px}
+.stamp-line{font:700 12px var(--slab)!important;text-transform:uppercase;letter-spacing:.12em;color:var(--red)}
+.note{font-style:italic;color:var(--muted);font-size:15px}
+.stmts{display:flex;flex-direction:column;gap:8px}
+.stmt{background:var(--card);border:2px solid var(--ink);border-radius:14px;overflow:hidden}
+.stmt summary{cursor:pointer;padding:12px 14px;display:flex;flex-direction:column;gap:2px;list-style:none}
+.stmt summary::-webkit-details-marker{display:none}
+.stmt summary b{font:800 18px var(--cond);text-transform:uppercase;letter-spacing:.03em}
+.stmt summary b::after{content:" +";color:var(--red)}
+.stmt[open] summary b::after{content:" −"}
+.stmt summary span{font-size:14px;color:var(--muted)}
+.stmt summary:focus-visible{outline:3px solid var(--red);outline-offset:-3px}
+.stmtbody{padding:0 14px 14px;font-size:16px}.stmtbody p{margin:0 0 8px}
+.stmt .doc{margin:0 10px 12px;transform:none}
+.plan{margin:0;background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:10px}
+.plan svg{width:100%;height:auto;display:block}
+.plan .room{fill:var(--card);stroke:var(--ink);stroke-width:2.5}
+.plan .obj{fill:var(--band);stroke:var(--ink);stroke-width:1.5}
+.plan .thin{fill:none;stroke:var(--muted);stroke-width:1}
+.plan .door{stroke:var(--red);stroke-width:5}
+.plan .water{fill:var(--band);opacity:.6}
+.plan .kade{fill:var(--rule);opacity:.5}
+.plan .x{stroke:var(--red);stroke-width:3;fill:none}
+.plan text{fill:var(--ink);font:600 12px var(--cond)}
+.plan text.sm{font-size:11px;fill:var(--muted)}
+.plan .mk circle{fill:var(--ink)}
+.plan .mk text{fill:var(--page);font:800 11px var(--cond)}
+.photos{margin:0;padding-left:24px;display:flex;flex-direction:column;gap:8px}
+.photos li{padding-left:4px}
+.photos li::marker{font:800 16px var(--cond);color:var(--red)}
+.accuse2{display:flex;flex-direction:column;gap:8px;background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:16px}
+.accuse2 p{margin:0}
+.accuse2 label{font:800 15px var(--cond);text-transform:uppercase;letter-spacing:.04em;margin-top:6px}
+.accuse2 select{font:500 16px var(--serif);padding:10px;border:2px solid var(--ink);border-radius:10px;background:var(--page);color:var(--ink);width:100%}
+.seal{display:flex;align-items:center;gap:12px;margin-top:8px}
+.seal span{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:var(--red);color:#fff;font:800 11px var(--cond);letter-spacing:.08em;transform:rotate(-12deg);box-shadow:0 0 0 3px var(--card),0 0 0 5px var(--red)}
+.accres{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.accres li{padding:8px 12px;border-radius:10px;background:var(--card);border-left:5px solid var(--ok)}
+.accres li.bad{border-left-color:var(--red)}
+.solh{font:800 22px var(--cond);text-transform:uppercase;margin:6px 0 0}
+.solsteps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:10px}
+.solsteps li::marker{font:800 16px var(--cond);color:var(--red)}
+.casecard.file{border-style:solid;box-shadow:4px 4px 0 var(--rule)}
 .kicker{font:700 13px var(--slab);text-transform:uppercase;letter-spacing:.12em;color:var(--red)}
 .storyhead{display:flex;flex-direction:column;gap:6px}
 .storyhead h3,.chapter h3{font:800 clamp(26px,7vw,34px)/1.05 var(--cond);text-transform:uppercase;margin:0;text-wrap:balance}
@@ -214,6 +266,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <div class="games" role="tablist" aria-label="Kies een spel">
     <button role="tab" type="button" data-g="murdle"><b>Moorddossier</b><span>Logicapuzzels met een rooster</span></button>
     <button role="tab" type="button" data-g="speur"><b>Speurneus</b><span>Verhaal in hoofdstukken</span></button>
+    <button role="tab" type="button" data-g="koud"><b>Koud archief</b><span>Politiedossiers zonder hints</span></button>
   </div>
   <div class="stats" id="stats"></div>
 
@@ -271,6 +324,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <section class="pane" id="pTips" hidden></section>
   <section class="pane" id="pOpl" hidden></section>
   <section class="pane" id="pVerhaal" hidden></section>
+  <section class="pane" id="pKoud" hidden></section>
 
   <footer>Elke zaak wordt gegenereerd en heeft precies één oplossing.</footer>
 </div>
@@ -980,6 +1034,233 @@ function renderStory(){
   on('spBack',()=>goSpeur(null));on('spList',()=>goSpeur(null));on('stBook',()=>goSpeur('boek'));
 }
 
+// ---------- koud archief ----------
+const tbl=(head,rows)=>`<table><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table>`;
+const mk=(x,y,n)=>`<g class="mk"><circle cx="${x}" cy="${y}" r="8"/><text x="${x}" y="${y+3.5}" text-anchor="middle">${n}</text></g>`;
+const COLD=[
+ {id:'sluis',nr:'001',title:'De laatste ronde',level:'Instap',time:'60–90 min',
+  blurb:'Een cafébazin ligt onder aan haar eigen keldertrap. In 2019 leek het een val. Maar haar kasstaat vertelt een ander verhaal.',
+  rapport:`<p class="stamp-line">Proces-verbaal van bevinding · Zaaknummer 2019-1215-VH</p>
+   <p><b>Datum:</b> zondag 15 december 2019, 07:52<br><b>Plaats:</b> Café De Sluis, Havenstraat 9, Veenhaven</p>
+   <p>Om 07:44 belde schoonmaakster Anouk Prins 112. Zij vond eigenaresse <b>Ria Hoogland (58)</b> onder aan de keldertrap van het café.</p>
+   <p><b>Bevindingen van agent R. de Graaf, als eerste ter plaatse om 07:52:</b></p>
+   <ul><li>De voordeur was dicht, maar niet op slot. Volgens mevrouw Prins zat hij om 07:38 ook al niet op slot.</li>
+   <li>Het slachtoffer lag op haar buik onder aan de keldertrap, met een wond op het achterhoofd. Geen polsslag.</li>
+   <li>Op de bar lagen een kasstaat, een rekenmachine en stapeltjes geld. In de kassalade zat € 1.140. Er leek niets gestolen.</li>
+   <li>De achterdeur zat op slot en was aangesloten op het alarm.</li>
+   <li>Het café sloot zaterdagnacht om 01:00. Volgens het rooster werkten die avond: Ria Hoogland (eigenaar), Lotte Hoogland (bar), Dennis Wolters (bar) en Samira El Idrissi (keuken, tot 22:00).</li></ul>
+   <p><b>Conclusie 2020:</b> waarschijnlijk een ongeluk, een val van de steile keldertrap. Geen verdachte. Dossier gesloten.</p>
+   <p><b>2026:</b> het dossier is heropend. Alle stukken van toen zitten in deze map. Sommige zijn destijds nooit naast elkaar gelegd.</p>`,
+  verhoren:[
+   {name:'Lotte Hoogland',role:'31, dochter, werkte achter de bar',text:'<p>‘Ik ben om ongeveer tien over één weggegaan. Mam stond de kas te tellen en Dennis was de glazen aan het spoelen. Ik heb een taxi genomen en ben meteen naar huis gegaan, naar mijn appartement hier om de hoek.</p><p>Mam en ik hadden het goed samen. Ze maakte zich de laatste tijd wel zorgen over de zaak. Ze zei dat er geld verdween, maar ze wilde niet zeggen bij wie.’</p>'},
+   {name:'Dennis Wolters',role:'27, barman',text:'<p>‘Na sluitingstijd heb ik de glazen gespoeld en de vloer gedaan. Lotte ging als eerste weg. Ik ben vlak daarna vertrokken, om kwart over één. Ria stond nog achter de bar de kas te tellen. Ze zei nog: “Tot dinsdag, jongen.”</p><p>Ik ben naar huis gefietst en lag om half twee in bed. Ruzie? Nee. Ria was een prima baas. Kastekorten? Daar weet ik niks van.’</p><p class="note">Opmerking verbalisant: de verdachte draagt tijdens het verhoor een zwarte pet. Volgens collega’s draagt hij die altijd.</p>'},
+   {name:'Samira El Idrissi',role:'38, kok',text:'<p>‘De keuken ging om tien uur dicht. Ik heb schoongemaakt en ben rond half elf naar huis gefietst. Om half twaalf lag ik in bed.</p><p>Ria en ik konden het prima met elkaar vinden, echt waar. Ik werk er al zes jaar. Wat er daarna in het café gebeurde, weet ik niet.’</p>'},
+   {name:'Kees Hoogland',role:'60, ex-man, mede-eigenaar van het pand',text:'<p>‘Ik woon al jaren in Deventer, veertig minuten rijden. Ria en ik hebben elkaar al maanden niet gesproken, alles gaat via de advocaat. Ja, ik wil het pand verkopen en zij niet. Maar daarvoor vermoord je toch niemand?</p><p>Zaterdagavond was ik thuis met mijn vriendin. We zijn rond middernacht gaan slapen.’</p>'},
+   {name:'Ferry Bakker',role:'45, vaste klant',text:'<p>‘Ik zit er bijna elke zaterdag. Ik ben om een uur of kwart voor één weggegaan, lopend naar huis. Dennis en Lotte stonden nog achter de bar, Ria zat aan de stamtafel met haar papieren.</p><p>Ik betaal altijd netjes. Ik heb geen cent schuld bij Ria.’</p>'},
+   {name:'Jan Brink',role:'66, buurman aan de overkant (Havenstraat 14)',text:'<p>‘Ik lag om elf uur in bed, zoals altijd. Ik heb niets gehoord en niets gezien.</p><p>Dat café maakt elke week herrie. Ik heb al drie keer geklaagd bij de gemeente. Maar ik bemoei me verder nergens mee. Camera’s? Nee, die heb ik niet.’</p>'}],
+  plan:`<svg viewBox="0 0 340 230" role="img" aria-label="Plattegrond van Café De Sluis">
+   <rect class="room" x="10" y="10" width="320" height="170" rx="4"/>
+   <rect class="obj" x="30" y="30" width="150" height="26"/><text x="105" y="47" text-anchor="middle">Bar</text>
+   <circle class="obj" cx="255" cy="60" r="20"/><text x="255" y="95" text-anchor="middle" class="sm">Stamtafel</text>
+   <circle class="obj" cx="90" cy="125" r="14"/><circle class="obj" cx="160" cy="125" r="14"/>
+   <rect class="obj" x="268" y="112" width="48" height="60"/>
+   <path class="thin" d="M268 124h48M268 136h48M268 148h48M268 160h48"/><text x="292" y="107" text-anchor="middle" class="sm">Keldertrap</text>
+   <path class="x" d="M285 164l10 10M295 164l-10 10"/>
+   <path class="door" d="M50 180h50"/><text x="75" y="197" text-anchor="middle" class="sm">Voordeur</text>
+   <path class="door" d="M330 30v36"/><text x="323" y="24" text-anchor="end" class="sm">Achterdeur (alarm)</text>
+   <text x="170" y="222" text-anchor="middle" class="sm">Havenstraat · aan de overkant nr. 14</text>
+   ${mk(150,43,1)}${mk(45,70,2)}${mk(300,190,3)}${mk(255,60,4)}${mk(30,160,5)}${mk(215,20,6)}
+  </svg>`,
+  photos:['De bar. Een kasstaat, een rekenmachine en stapeltjes geld. De pen ligt naast de kasstaat, zonder dop.',
+   'Achter de bar hangt een rij haakjes met labels: ‘sleutels kelder’, ‘zaklamp’ en ‘schorten’. Het haakje ‘zaklamp’ is leeg.',
+   'De steile stenen keldertrap. Het slachtoffer ligt onderaan, op haar buik.',
+   'De stamtafel bij het raam: een open schrift, een leesbril en een kop koude koffie.',
+   'De kapstok bij de voordeur. Er hangt één jas, de rode jas van het slachtoffer.',
+   'Uitzicht door het raam op de Havenstraat. Aan de overkant, bij nummer 14, hangt naast de voordeur een deurbel met een kleine camera.'],
+  sectie:`<p class="stamp-line">Sectierapport · R. Hoogland, 58 jaar</p>
+   <p><b>Doodsoorzaak:</b> schedelbreuk door een harde klap op het achterhoofd.</p>
+   <p>Het letsel past niet bij een val van de trap. De wond zit hoog op het achterhoofd, is rond en ongeveer 4 cm breed, met een fijn ribbelpatroon in de huid. Waarschijnlijk is zij geslagen met een rond, zwaar metalen voorwerp. De kneuzingen op armen en knieën ontstonden daarna, bij de val van de trap.</p>
+   <p><b>Tijdstip van overlijden:</b> tussen 01:30 en 02:30.</p>
+   <p><b>Overig:</b> in de maag alleen koffie. Geen alcohol in het bloed.</p>`,
+  bewijs:[
+   {t:'Kasstaat zaterdag 14 december (handschrift Ria)',d:`${tbl(['Post','Bedrag'],[['Contant in lade','€ 1.140'],['Pinbetalingen','€ 2.310'],['Volgens kassa','€ 3.650'],['Verschil','<b>− € 200</b>']])}<p style="margin-top:8px"><i>‘01:38 – weer € 200 tekort. Zelfde dagen als altijd. Ik weet nu wie.’</i></p>`},
+   {t:'Schrift van Ria, gevonden op de stamtafel',d:`<p><i>Tekorten in de kas:</i></p>${tbl(['Datum','Dag','Tekort'],[['21 nov','do','€ 150'],['23 nov','za','€ 200'],['28 nov','do','€ 180'],['30 nov','za','€ 200'],['5 dec','do','€ 200'],['7 dec','za','€ 150']])}`},
+   {t:'Personeelsrooster december',d:`${tbl(['Naam','Werkdagen'],[['Ria Hoogland','elke dag'],['Lotte Hoogland','vr, za, zo'],['Dennis Wolters','do, za'],['Samira El Idrissi','wo, vr, za (keuken, kassa niet)'],])}`},
+   {t:'Uitdraai deurbelcamera Havenstraat 14 (in 2020 opgevraagd, nooit vergeleken)',d:`${tbl(['Tijd','Wat de camera ziet bij de deur van het café'],[['22:41','Vrouw komt naar buiten, fietst weg'],['00:47','Man in lange jas komt naar buiten, loopt richting centrum'],['01:12','Vrouw in lichte jas komt naar buiten, stapt in een taxi'],['02:04','Man met pet komt naar buiten, fietst weg'],['07:38','Vrouw met emmer gaat naar binnen']])}<p style="margin-top:8px">Tussen 01:12 en 02:04 is er geen enkele beweging bij de deur van het café. Na 22:00 gaat er tot 07:38 niemand naar binnen.</p>`},
+   {t:'Alarmlog achterdeur',d:'<p>Achterdeur De Sluis: gesloten en bewaakt vanaf 22:00. Niet geopend tot de komst van de politie.</p>'},
+   {t:'Taxibon',d:'<p><b>Taxi Veenhaven</b><br>Instap 01:13, Havenstraat 9<br>Uitstap 01:35, Oudestraat, Kampen<br>Betaald met pas: L. Hoogland</p>'},
+   {t:'Belgegevens telefoon Ria',d:tbl(['Tijd','Richting','Nummer','Duur'],[['23:10','inkomend','K. Hoogland','6 min']])},
+   {t:'Bankafschrift Kees Hoogland',d:tbl(['Datum','Tijd','Omschrijving','Bedrag'],[['15-12','01:47','Cafetaria Het Zwaantje, Deventer','€ 7,50']])},
+   {t:'Brief van Samira aan Ria (9 december)',d:'<p><i>‘Ria, ik stop per 1 januari. Ik pik het niet langer dat ik de schuld krijg van elk tekort, terwijl ik niet eens aan de kassa kom. Samira.’</i></p>'},
+   {t:'Pof-schrift onder de bar',d:tbl(['Klant','Open sinds','Bedrag'],[['Ferry B.','oktober','€ 340']])},
+   {t:'Inventarislijst bar',d:'<p>Zaklamp Maglite, aluminium, doorsnee 4 cm, geribbeld handvat. Hangt achter de bar.<br><b>Vermist sinds 15-12-2019.</b></p>'}],
+  opts:{
+   dader:['Lotte Hoogland','Dennis Wolters','Samira El Idrissi','Kees Hoogland','Ferry Bakker','Jan Brink'],
+   bewijs:['De deurbelcamera: om 02:04 fietst er een man met pet weg','De taxirit van Lotte naar Kampen','Het telefoontje van Kees om 23:10','De openstaande rekening van Ferry','De brief van Samira','Het sectierapport: geen alcohol in het bloed'],
+   motief:['Ria had ontdekt wie er geld uit de kassa stal','Ruzie over de verkoop van het pand','Een openstaande rekening','Ruzie in de keuken en ontslag','Een erfenis','Geluidsoverlast']},
+  answer:{dader:1,bewijs:[0],motief:0},
+  solution:[
+   {t:'Ria leefde om 01:38 nog',p:'Op haar kasstaat schreef Ria om 01:38 nog een notitie. Volgens het sectierapport stierf ze tussen 01:30 en 02:30. Het was geen val: ze werd van achteren geslagen met een rond, geribbeld metalen voorwerp.'},
+   {t:'Niemand kon naar binnen of naar buiten zonder gezien te worden',p:'De achterdeur bleef dicht en bewaakt. De camera van de buurman ziet de voordeur. Samira vertrok om 22:41, Ferry om 00:47 en Lotte om 01:12. Daarna gaat de deur pas om 02:04 weer open. Wie om 02:04 naar buiten ging, was dus binnen toen Ria stierf.'},
+   {t:'De man met de pet',p:'Dennis zegt dat hij om kwart over één vertrok. Maar tussen 01:12 en 02:04 ging er niemand naar buiten. Om 02:04 fietst een man met pet weg, en Dennis draagt altijd een zwarte pet. Hij loog bijna een uur over zijn vertrek.'},
+   {t:'Het motief',p:'In Ria’s schrift staan tekorten op donderdag en zaterdag. Volgens het rooster werkt alleen Dennis op die twee dagen. Om 01:38 schreef Ria: ‘Ik weet nu wie.’'},
+   {t:'Het wapen',p:'De wond is rond, 4 cm breed en geribbeld. De Maglite-zaklamp achter de bar heeft precies die maat en dat handvat, en is sinds die nacht verdwenen. Het haakje hing binnen handbereik van de barman.'},
+   {t:'De andere leugens',p:'Lotte ging niet naar huis maar naar haar vriend in Kampen. Kees belde Ria wel degelijk, om 23:10, over de verkoop, en zat om 01:47 in Deventer. Samira had haar ontslag al ingediend. Ferry had wel schulden. En Jan had wel een camera, die hij liever geheim hield. Iedereen loog, maar alleen Dennis loog over de moord.'}],
+  verdict:'‘Het was <b>Dennis Wolters</b>, met de <b>zaklamp</b>, in <b>Café De Sluis</b>.’'},
+
+ {id:'reiger',nr:'002',title:'De woonboot',level:'Gemiddeld',time:'60–90 min',
+  blurb:'Een fotograaf drijft in zijn badjas in de gracht naast zijn woonboot. Een ongeluk na een glas whisky, dacht de politie. Zijn longen zeggen iets anders.',
+  rapport:`<p class="stamp-line">Proces-verbaal van bevinding · Zaaknummer 2017-0909-WS</p>
+   <p><b>Datum:</b> zaterdag 9 september 2017, 06:41<br><b>Plaats:</b> Zuiderkade, bij woonboot ‘De Reiger’, Weerdstad</p>
+   <p>Jogger Mark de Lange meldt een man in het water naast woonboot De Reiger. De brandweer haalt <b>Erik Zandbergen (44)</b>, fotograaf en bewoner van de boot, uit de gracht. Hij is overleden. Hij draagt een badjas.</p>
+   <ul><li>De deur van de woonboot is dicht, maar niet op slot. Binnen brandt geen licht.</li>
+   <li>Op het dek staat een half leeg glas whisky.</li>
+   <li>Het slachtoffer had geen zichtbare verwondingen aan het hoofd.</li></ul>
+   <p><b>Conclusie 2017:</b> ongeluk. Het slachtoffer is waarschijnlijk na het drinken over de reling gevallen. Dossier gesloten.</p>
+   <p><b>2026:</b> het dossier is heropend na een nieuwe blik op het sectierapport.</p>`,
+  verhoren:[
+   {name:'Nathalie Zandbergen',role:'41, echtgenote (woonde apart)',text:'<p>‘Erik en ik waren uit elkaar, maar nog getrouwd. Vrijdagavond was ik alleen thuis. Ik heb een film gekeken en ben vroeg gaan slapen.</p><p>Ik heb geen sleutel meer van de boot. Erik had geen vijanden. Alleen schulden.’</p>'},
+   {name:'Maurits Kooij',role:'47, zakenpartner in fotostudio Zandbergen & Kooij',text:'<p>‘Erik en ik hadden samen een fotostudio. Het ging goed met de zaak, heel goed zelfs.</p><p>Vrijdagavond heb ik gegeten met een klant in restaurant De Kroon, tot een uur of twaalf. Daarna ben ik direct naar huis gereden. Ik ben die avond niet bij de boot geweest. Ik heb wel een sleutel, want er liggen studiospullen aan boord.’</p>'},
+   {name:'Joke Smit',role:'52, buurvrouw op woonboot ‘Avondrood’',text:'<p>‘Ik lag om elf uur te slapen. Ik heb niets gehoord en niets gezien.</p><p>Erik was een aardige buurman. Al kreeg hij wel veel bezoek, op rare tijden.’</p>'},
+   {name:'Ingrid Zandbergen',role:'39, zus, verpleegkundige',text:'<p>‘Ik had nachtdienst in het ziekenhuis, van elf uur ’s avonds tot zeven uur ’s ochtends.</p><p>Erik en ik hadden een goede band. Geld lenen? Nee, ik heb nooit geld van hem geleend.’</p>'},
+   {name:'Tim Verhoef',role:'24, oud-assistent in de studio',text:'<p>‘In augustus ben ik zelf gestopt, ik wilde iets anders gaan doen. Ik heb geen sleutel meer.</p><p>Vrijdagnacht zat ik thuis te gamen, online met vrienden, tot een uur of drie.’</p>'},
+   {name:'Viktor Lanser',role:'50, handelaar in fotoapparatuur',text:'<p>‘Erik had nog een rekening bij mij openstaan: 25.000 euro voor apparatuur. Maar ik heb hem nooit bedreigd.</p><p>Vrijdag was ik in Antwerpen voor een beurs. Ik ben pas zaterdag teruggereden.’</p>'}],
+  plan:`<svg viewBox="0 0 340 230" role="img" aria-label="Plattegrond van woonboot De Reiger">
+   <rect class="water" x="0" y="0" width="340" height="150"/><text x="12" y="22" class="sm">Gracht</text>
+   <rect class="room" x="40" y="45" width="270" height="80" rx="24"/>
+   <path class="thin" d="M110 45v80M200 45v80M250 45v80"/>
+   <text x="75" y="90" text-anchor="middle" class="sm">Dek</text><text x="155" y="90" text-anchor="middle" class="sm">Woonkamer</text><text x="225" y="90" text-anchor="middle" class="sm">Bad</text><text x="282" y="90" text-anchor="middle" class="sm">Slaap</text>
+   <rect class="obj" x="78" y="125" width="18" height="40"/><text x="118" y="146" class="sm">Loopplank</text>
+   <rect class="kade" x="0" y="165" width="340" height="65"/><text x="12" y="222" class="sm">Zuiderkade</text>
+   <path class="thin" d="M150 180c30 4 60 4 90 0M150 190c30 4 60 4 90 0"/>
+   <path class="x" d="M20 52l10 10M30 52l-10 10"/><text x="25" y="44" text-anchor="middle" class="sm">vindplaats</text>
+   <text x="330" y="22" text-anchor="end" class="sm">→ ‘Avondrood’ (Joke)</text>
+   ${mk(62,62,1)}${mk(225,62,2)}${mk(155,62,3)}${mk(195,198,4)}${mk(282,62,5)}${mk(87,145,6)}
+  </svg>`,
+  photos:['Het dek: een glas whisky, half vol. Op de reling geen sporen.',
+   'De badkamer: het bad is leeg, maar nog nat. Op de rand staat een fles lavendelbadschuim. Op de vloer ligt een kletsnatte handdoek, en de badmat ligt scheef.',
+   'De woonkamer: op tafel twee koffiekopjes en een map met het opschrift ‘Zandbergen & Kooij – contracten’.',
+   'De kade: in de modder naast de loopplank verse bandensporen van een auto.',
+   'De slaapkamer: het bed is onbeslapen. Eriks telefoon ligt op het nachtkastje.',
+   'De loopplank en de deur: sleepsporen van de badkamer, over het dek, tot aan de rand van de boot.'],
+  sectie:`<p class="stamp-line">Sectierapport · E. Zandbergen, 44 jaar</p>
+   <p><b>Doodsoorzaak:</b> verdrinking.</p>
+   <p>Het water in de longen is zoet water met zeepresten en een lavendelgeur. Er zitten <b>geen</b> algen of slib in de longen. Die zitten wel in het grachtwater.</p>
+   <p>Blauwe plekken op beide schouders, alsof iemand hem met kracht naar beneden heeft geduwd.</p>
+   <p><b>Alcohol:</b> 0,2 promille, ongeveer één glas.</p>
+   <p><b>Tijdstip van overlijden:</b> tussen 23:00 en 01:00.</p>`,
+  bewijs:[
+   {t:'Bon restaurant De Kroon',d:'<p><b>Restaurant De Kroon</b><br>Tafel 4 · 2 personen<br>Betaald om <b>21:47</b> met pas M. Kooij</p>'},
+   {t:'Belgegevens telefoon Erik',d:tbl(['Tijd','Richting','Met','Duur'],[['22:15','uitgaand','Maurits Kooij','4 min']])},
+   {t:'Bericht op sociale media van Joke Smit',d:'<p>Geplaatst om <b>00:40</b>: ‘Volle maan boven de gracht. Kan weer eens niet slapen.’</p><p><b>Op de foto:</b> de maan boven het water. Links ligt De Reiger, met licht in het kleine raampje van de badkamer. Op de kade, bij de loopplank, staat een donkergroene stationwagen met een fietsendrager.</p>'},
+   {t:'Auto’s van de betrokkenen (kentekenregister)',d:tbl(['Naam','Auto'],[['Nathalie Zandbergen','rode Mini'],['Maurits Kooij','donkergroene Volvo stationwagen, met fietsendrager'],['Joke Smit','geen auto'],['Ingrid Zandbergen','witte Polo'],['Tim Verhoef','geen auto'],['Viktor Lanser','zilveren Mercedes']])},
+   {t:'Contract Zandbergen & Kooij, artikel 9',d:'<p><i>‘Overlijdt een van de vennoten, dan keert de verzekering € 500.000 uit aan de andere vennoot.’</i></p>'},
+   {t:'Brief van de bank aan M. Kooij (28 augustus 2017)',d:'<p><i>‘Uw hypotheekachterstand bedraagt € 38.400. Als wij vóór 1 oktober geen betaling ontvangen, volgt een gedwongen verkoop van uw woning.’</i></p>'},
+   {t:'Hotelrekening',d:'<p><b>Hotel De Wachter, Amersfoort</b><br>Kamer 12 · 2 personen<br>Ingecheckt vrijdag 21:40 · Uitgecheckt zaterdag 10:15<br>Op naam van N. Zandbergen</p>'},
+   {t:'Pasjeslog ziekenhuis',d:tbl(['Naam','In','Uit'],[['I. Zandbergen','22:52','07:06']])+'<p style="margin-top:8px">Afdeling Hartbewaking. Collega’s bevestigen dat zij de hele nacht op de afdeling was.</p>'},
+   {t:'Schuldbekentenis',d:'<p><i>‘Ik heb € 10.000 van Erik geleend en betaal dat in twee jaar terug. Ingrid Zandbergen, 2 maart 2017.’</i></p>'},
+   {t:'Ontslagbrief Tim Verhoef (31 juli 2017)',d:'<p><i>‘Hierbij word je op staande voet ontslagen wegens diefstal van een objectief uit de studio.’</i></p><p><b>Spelserver:</b> T. Verhoef online van 21:58 tot 03:12, zonder onderbreking.</p>'},
+   {t:'Sms van Viktor Lanser aan Erik (3 september)',d:'<p><i>‘Betaal vóór de 15e, of je krijgt spijt.’</i></p><p><b>Hotel Antwerpen:</b> V. Lanser ingecheckt vrijdag 18:30, uitgecheckt zaterdag 11:00. Om 23:40 nog een bon van de hotelbar.</p>'}],
+  opts:{
+   dader:['Nathalie Zandbergen','Maurits Kooij','Joke Smit','Ingrid Zandbergen','Tim Verhoef','Viktor Lanser'],
+   bewijs:['De maanfoto van Joke: een groene stationwagen op de kade om 00:40','De schuldbekentenis van Ingrid','De sms van Viktor','De hotelrekening van Nathalie','De ontslagbrief van Tim','De bandensporen alleen'],
+   motief:['De verzekering van € 500.000 en zijn eigen schulden','Een geleend bedrag dat terug moest','Een openstaande rekening voor apparatuur','Jaloezie in een stukgelopen huwelijk','Wraak voor een ontslag','Burenruzie']},
+  answer:{dader:1,bewijs:[0],motief:0},
+  solution:[
+   {t:'Geen ongeluk',p:'In Eriks longen zit zoet water met zeep en lavendel, en geen slib uit de gracht. Erik verdronk in zijn eigen bad, en de blauwe plekken op zijn schouders laten zien dat iemand hem onder water duwde. Daarna werd hij over het dek gesleept en in de gracht gegooid. Het glas whisky moest het op een ongeluk laten lijken.'},
+   {t:'Erik kende zijn bezoeker',p:'Er staan twee koffiekopjes op tafel. Om 22:15 belde Erik nog met Maurits Kooij. De dader was iemand die hij zelf binnenliet.'},
+   {t:'De alibi’s',p:'Nathalie zat in een hotel in Amersfoort, Ingrid werkte de hele nacht op de hartbewaking, Tim zat tot 03:12 online te gamen en Viktor zat om 23:40 aan de hotelbar in Antwerpen.'},
+   {t:'De leugen van Maurits',p:'Maurits zei dat hij tot middernacht in restaurant De Kroon zat. Maar de rekening werd om 21:47 betaald. En op de maanfoto van Joke, om 00:40, staat zijn donkergroene Volvo met fietsendrager bij de loopplank, terwijl het licht in de badkamer brandt. De verse bandensporen op de kade passen daarbij.'},
+   {t:'Het motief',p:'Maurits had een hypotheekachterstand van € 38.400 en moest vóór 1 oktober betalen. Volgens het contract kreeg hij € 500.000 als zijn zakenpartner overleed.'},
+   {t:'De andere leugens',p:'Nathalie was niet alleen thuis, Ingrid had wel geld geleend, Tim was ontslagen, Viktor had wel gedreigd en Joke sliep niet. Haar slapeloze nacht leverde het belangrijkste bewijs op.'}],
+  verdict:'‘Het was <b>Maurits Kooij</b>, in het <b>bad van De Reiger</b>, voor <b>€ 500.000</b>.’'}
+];
+const KKEY='md-koud';
+let kd=store.get(KKEY)||{cur:null,cases:{}};
+if(!kd.cases)kd={cur:null,cases:{}};
+const saveK=()=>store.set(KKEY,kd);
+const kstate=id=>(kd.cases[id]=kd.cases[id]||{tab:'rapport',notes:'',acc:null,open:false});
+let kConfirm=false;
+const KTABS=[['rapport','Rapport'],['verhoren','Verhoren'],['scene','Plaats delict'],['sectie','Sectie'],['bewijs','Bewijs'],['ontmasker','Ontmaskeren']];
+function goKoud(c){if(c==='boek'&&kd.cur!=='boek')kd.prev=kd.cur;kd.cur=c;kConfirm=false;saveK();renderKoud();window.scrollTo({top:0})}
+function koudHandbook(){
+  return `<button class="btn small backbtn" id="kBack" type="button">← Terug</button>
+  <div class="storyhead"><span class="kicker">Voor rechercheurs</span><h3>Het rechercheurshandboek</h3></div>
+  <section class="hb"><h4>Zo werkt een dossier</h4><ul>
+   <li>Elk dossier is een oude, onopgeloste zaak. Alles wat de politie toen had, heb jij nu ook: het proces-verbaal, zes verhoren, foto’s van de plaats delict, het sectierapport en de bewijsstukken.</li>
+   <li>Er zijn geen hints. Het antwoord staat in het dossier, je moet het alleen zien.</li>
+   <li>Ben je eruit? Wijs bij <b>Ontmaskeren</b> de dader aan, het bewijs dat de zaak openbreekt en het motief. Daarna verbreek je het zegel en lees je de oplossing, stap voor stap. Je kunt je antwoord dan niet meer veranderen.</li>
+   <li>Neem de tijd. Een dossier kost al gauw een uur. Je aantekeningen en voortgang worden bewaard.</li></ul></section>
+  <section class="hb"><h4>Iedereen liegt</h4><p>Elke verdachte liegt ergens over. Meestal over iets kleins en gênants: een geheime afspraak, een schuld, een ontslag. Jouw taak is de ene leugen te vinden die er echt toe doet: de leugen over waar iemand was toen het gebeurde.</p></section>
+  <section class="hb"><h4>Maak een tijdlijn</h4><p>Schrijf in je notitieblok elk tijdstip op dat je tegenkomt: in verhoren, bonnetjes, belgegevens, camera’s en het sectierapport. Zet ze op volgorde. Begin bij het tijdstip van overlijden, en kijk wie er toen kón zijn.</p></section>
+  <section class="hb"><h4>Toets elk alibi</h4><p>Leg elke verklaring naast de bewijsstukken. Klopt de tijd? Klopt de plek? Een bonnetje, een pasjeslog of een camera zegt vaak meer dan een getuige.</p></section>
+  <section class="hb"><h4>Lees het sectierapport twee keer</h4><p>Het sectierapport vertelt hoe en wanneer iemand stierf. Let op kleine tegenstrijdigheden: letsel dat niet past bij het verhaal, of iets in het lichaam dat er niet hoort.</p></section>
+  <section class="hb"><h4>Motief, middel, gelegenheid</h4><p>De dader heeft alle drie: een reden, een wapen of manier, en de kans. Wie maar één of twee van de drie heeft, is waarschijnlijk niet je dader.</p></section>
+  <section class="hb"><h4>Kijk goed naar de foto’s</h4><p>Het belangrijkste detail staat vaak gewoon in beeld, in een hoekje van de foto. De nummers op de plattegrond horen bij de foto’s eronder.</p></section>
+  <button class="btn backbtn" id="kBack2" type="button">← Terug</button>`;
+}
+function renderKoud(){
+  const P=$('pKoud');
+  if(!kd.cur){
+    P.innerHTML=`<h2 class="bigtitle">Koud archief</h2>${PENCIL}
+     <p class="lead">Onopgeloste moordzaken uit het politiearchief. Lees de verhoren, bekijk de plaats delict, vergelijk de bewijsstukken en wijs de dader aan. Geen hints, alleen het dossier.</p>
+     <button class="bookbtn" id="kBook" type="button"><b>Rechercheurshandboek</b><span>Zo werkt een dossier, plus tips voor tijdlijnen, alibi’s en leugens.</span></button>
+     <div class="caselist">${COLD.map(c=>{const s=kstate(c.id),ok=s.open&&s.acc&&s.acc.d===c.answer.dader;
+       return `<article class="casecard file"><span class="kicker">Dossier ${c.nr} · ${c.level} · ${c.time}</span><h3>${c.title}</h3><p>${c.blurb}</p>
+       <div class="controls"><span class="hint">${s.open?(ok?'Opgelost':'Gesloten, dader gemist'):'Open zaak'}</span><button class="btn ${s.open?'':'primary'} small" type="button" data-cold="${c.id}">${s.open?'Teruglezen':'Open dossier'}</button></div></article>`}).join('')}
+      <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Meer dossiers</h3><p>Er komen meer zaken bij. Vraag maar om een nieuw dossier.</p></article></div>`;
+    document.querySelectorAll('[data-cold]').forEach(b=>b.onclick=()=>goKoud(b.dataset.cold));
+    $('kBook').onclick=()=>goKoud('boek');saveK();return;
+  }
+  if(kd.cur==='boek'){P.innerHTML=koudHandbook();$('kBack').onclick=$('kBack2').onclick=()=>goKoud(kd.prev&&kd.prev!=='boek'?kd.prev:null);return}
+  const c=COLD.find(x=>x.id===kd.cur);if(!c){goKoud(null);return}
+  const s=kstate(c.id),t=s.tab||'rapport';
+  let body='';
+  if(t==='rapport')body=`<div class="doc report">${c.rapport}</div>`;
+  if(t==='verhoren')body=`<p class="hint">Tik op een naam om het verhoor te lezen.</p><div class="stmts">${c.verhoren.map((v,i)=>`<details class="stmt" id="kv${i}"><summary><b>${v.name}</b><span>${v.role}</span></summary><div class="stmtbody">${v.text}</div></details>`).join('')}</div>`;
+  if(t==='scene')body=`<figure class="plan">${c.plan}<figcaption class="hint">Plattegrond. De nummers horen bij de foto’s hieronder. Het kruis is de plek van het slachtoffer.</figcaption></figure><ol class="photos">${c.photos.map(p=>`<li>${p}</li>`).join('')}</ol>`;
+  if(t==='sectie')body=`<div class="doc report">${c.sectie}</div>`;
+  if(t==='bewijs')body=`<p class="hint">Tik op een bewijsstuk om het te bekijken.</p><div class="stmts">${c.bewijs.map((b,i)=>`<details class="stmt"><summary><b>Stuk ${String.fromCharCode(65+i)}</b><span>${b.t}</span></summary><div class="doc">${b.d}</div></details>`).join('')}</div>`;
+  if(t==='ontmasker'){
+    const sel=(id,arr,v)=>`<select id="${id}"><option value="">Kies…</option>${arr.map((o,i)=>`<option value="${i}" ${v===i?'selected':''}>${o}</option>`).join('')}</select>`;
+    if(!s.open){
+      const a=s.draft||{};
+      body=`<div class="accuse2"><p>Ben je eruit? Leg je beschuldiging vast. Pas daarna wordt het zegel van de oplossing verbroken.</p>
+       <label for="kD">Wie is de dader?</label>${sel('kD',c.opts.dader,a.d)}
+       <label for="kE">Welk bewijs breekt de zaak open?</label>${sel('kE',c.opts.bewijs,a.e)}
+       <label for="kM">Wat was het motief?</label>${sel('kM',c.opts.motief,a.m)}
+       <p class="msg" id="kMsg"></p>
+       ${kConfirm?`<div class="spoiler"><p>Weet je het zeker? Na het verbreken van het zegel kun je je antwoord niet meer veranderen.</p><div class="controls" style="justify-content:center"><button class="btn primary" id="kYes" type="button">Verbreek het zegel</button><button class="btn" id="kNo" type="button">Nog even nadenken</button></div></div>`
+        :`<div class="seal"><span>ZEGEL</span><button class="btn primary" id="kSeal" type="button">Leg beschuldiging vast</button></div>`}</div>`;
+    }else{
+      const A=s.acc,ok=k=>k==='e'?c.answer.bewijs.includes(A.e):A[k]===c.answer[k==='d'?'dader':'motief'];
+      const row=(lbl,k,arr)=>`<li class="${ok(k)?'good':'bad'}"><b>${ok(k)?'✓':'✗'} ${lbl}:</b> ${arr[A[k]]}</li>`;
+      const score=['d','e','m'].filter(ok).length;
+      body=`<div class="verdict ${A.d===c.answer.dader?'':'bad'}"><p>${A.d===c.answer.dader?`Goed gezien, rechercheur. ${score}/3 onderdelen juist.`:`De echte dader is ontsnapt. ${score}/3 onderdelen juist.`}</p></div>
+       <ul class="accres">${row('Dader','d',c.opts.dader)}${row('Bewijs','e',c.opts.bewijs)}${row('Motief','m',c.opts.motief)}</ul>
+       <h4 class="solh">De oplossing</h4><ol class="solsteps">${c.solution.map(x=>`<li><b>${x.t}.</b> ${x.p}</li>`).join('')}</ol>
+       <div class="verdict"><p>${c.verdict}</p></div>
+       <div class="controls"><button class="btn" id="kReset" type="button">Dossier opnieuw spelen</button></div>`;
+    }
+  }
+  P.innerHTML=`<button class="btn small backbtn" id="kList" type="button">← Alle dossiers</button>
+   <div class="storyhead"><span class="kicker">Dossier ${c.nr} · ${c.level}</span><h3>${c.title}</h3></div>
+   <nav class="ktabs" aria-label="Onderdelen van het dossier">${KTABS.map(([k,l])=>`<button type="button" data-kt="${k}" aria-pressed="${k===t}">${l}</button>`).join('')}</nav>
+   <div class="kbody">${body}</div>
+   <div class="controls"><button class="btn small" id="kHB" type="button">Rechercheurshandboek</button></div>
+   <section class="notes"><label for="kNotes"><b>Notitieblok</b> <span class="hint">tijdlijn, verdenkingen, leugens</span></label><textarea id="kNotes" rows="5" placeholder="Bijvoorbeeld: 01:12 Lotte weg (taxi). 01:38 Ria leeft nog…"></textarea></section>`;
+  $('kNotes').value=s.notes||'';$('kNotes').oninput=e=>{s.notes=e.target.value;saveK()};
+  document.querySelectorAll('[data-kt]').forEach(b=>b.onclick=()=>{s.tab=b.dataset.kt;kConfirm=false;saveK();renderKoud()});
+  const on=(id,f)=>{const el=$(id);if(el)el.onclick=f};
+  on('kList',()=>goKoud(null));on('kHB',()=>goKoud('boek'));
+  const grab=()=>({d:$('kD').value===''?null:+$('kD').value,e:$('kE').value===''?null:+$('kE').value,m:$('kM').value===''?null:+$('kM').value});
+  ['kD','kE','kM'].forEach(id=>{const el=$(id);if(el)el.onchange=()=>{s.draft=grab();saveK()}});
+  on('kSeal',()=>{const a=grab();if(a.d===null||a.e===null||a.m===null){$('kMsg').textContent='Kies eerst een dader, een bewijsstuk en een motief.';return}s.draft=a;kConfirm=true;saveK();renderKoud()});
+  on('kNo',()=>{kConfirm=false;renderKoud()});
+  on('kYes',()=>{s.acc=s.draft;s.open=true;kConfirm=false;saveK();renderKoud()});
+  on('kReset',()=>{kd.cases[c.id]={tab:'rapport',notes:s.notes||'',acc:null,open:false};saveK();renderKoud()});
+}
+
 function applySub(){
   const s=st.sub||'';
   $('subHint').hidden=!!s;
@@ -996,10 +1277,10 @@ function setTab(t){st.tab=t;save();renderPanes();window.scrollTo({top:0})}
 function renderPanes(){
   const t=st.tab||'zaak';
   const g=game,M=g==='murdle';
-  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=M;
+  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';
   document.querySelector('.tabs').hidden=!M;document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('stats').hidden=!M;
   document.querySelectorAll('.games button').forEach(b=>b.setAttribute('aria-selected',b.dataset.g===g));
-  if(!M&&!$('pVerhaal').innerHTML)renderStory();
+  if(g==='speur'&&!$('pVerhaal').innerHTML)renderStory();if(g==='koud'&&!$('pKoud').innerHTML)renderKoud();
   document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===t));
   $('pTips').innerHTML=`<h2 class="bigtitle">Tips</h2>${PENCIL}<div class="cluebox tipcard">
     <h2>Zaak ${String(C.seed).padStart(4,'0')}: ${C.title}</h2>

@@ -157,6 +157,15 @@ td.e{border:0}
 .hb h4{font:800 19px var(--cond);text-transform:uppercase;letter-spacing:.04em;margin:0}
 .hb p,.hb ul{margin:0;max-width:65ch}
 .hb ul{padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.hbd{padding:0;gap:0}
+.hbd summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px;font:800 19px var(--cond);text-transform:uppercase;letter-spacing:.04em}
+.hbd summary::-webkit-details-marker{display:none}
+.hbd summary::after{content:"+";font:800 26px/1 var(--cond);color:var(--red)}
+.hbd[open] summary::after{content:"−"}
+.hbd summary:focus-visible{outline:3px solid var(--red);outline-offset:-3px;border-radius:14px}
+.hbd-body{display:flex;flex-direction:column;gap:8px;padding:0 16px 16px;min-width:0;overflow-x:auto}
+.hbd-back{align-self:flex-start;margin-top:4px}
+#spBack,#kBack{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:5;background:var(--page);align-self:flex-start}
 .morse{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:4px 12px;font:600 16px var(--cond);letter-spacing:.06em}
 .morse b{display:inline-block;width:1.2em;color:var(--red)}
 .notes{display:flex;flex-direction:column;gap:6px}
@@ -1320,6 +1329,13 @@ const normA=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toUpperCase().replace(/
 const docOf=c=>typeof c.doc==='function'?c.doc():c.doc;
 function goSpeur(cur){if(cur==='boek'&&sp.cur!=='boek')sp.prev=sp.cur;sp.cur=cur;askReveal=false;saveS();renderStory();window.scrollTo({top:0})}
 
+// Handboeken: elk onderdeel inklapbaar, met onderaan een knop terug naar het spel
+function foldHB(root,back){root.querySelectorAll('section.hb').forEach(sec=>{const h=sec.querySelector('h4');if(!h)return;
+  const d=document.createElement('details');d.className='hb hbd';const sm=document.createElement('summary');sm.innerHTML=h.innerHTML;h.remove();
+  const body=document.createElement('div');body.className='hbd-body';while(sec.firstChild)body.appendChild(sec.firstChild);
+  const b=document.createElement('button');b.type='button';b.className='btn small hbd-back';b.textContent='← Terug naar het spel';b.onclick=back;body.appendChild(b);
+  d.append(sm,body);sec.replaceWith(d)});
+  const hint=document.createElement('p');hint.className='hint';hint.textContent='Tik op een onderdeel om het open te klappen.';const first=root.querySelector('details.hbd');if(first)first.before(hint)}
 function handbookHTML(){
   const row=(arr)=>`<tr>${arr.map(x=>`<td>${x}</td>`).join('')}</tr>`;
   return `<button class="btn small" id="spBack" type="button">← Terug</button>
@@ -1430,7 +1446,7 @@ function renderStory(){
     $('spBook').onclick=()=>goSpeur('boek');
     saveS();return;
   }
-  if(sp.cur==='boek'){P.innerHTML=handbookHTML();$('spBack').onclick=$('spBack2').onclick=()=>goSpeur(sp.prev&&sp.prev!=='boek'?sp.prev:null);return}
+  if(sp.cur==='boek'){P.innerHTML=handbookHTML();const bk=()=>goSpeur(sp.prev&&sp.prev!=='boek'?sp.prev:null);$('spBack').onclick=$('spBack2').onclick=bk;foldHB(P,bk);return}
   const CS=CASES.find(c=>c.id===sp.cur);if(!CS){goSpeur(null);return}
   const s=cstate(CS.id),N=CS.ch.length;
   let open=N;for(let i=0;i<N;i++)if(!s.solved.includes(i)){open=i;break}
@@ -1855,7 +1871,7 @@ function renderKoud(){
     document.querySelectorAll('[data-cold]').forEach(b=>b.onclick=()=>goKoud(b.dataset.cold));
     $('kBook').onclick=()=>goKoud('boek');saveK();return;
   }
-  if(kd.cur==='boek'){P.innerHTML=koudHandbook();$('kBack').onclick=$('kBack2').onclick=()=>goKoud(kd.prev&&kd.prev!=='boek'?kd.prev:null);return}
+  if(kd.cur==='boek'){P.innerHTML=koudHandbook();const bk=()=>goKoud(kd.prev&&kd.prev!=='boek'?kd.prev:null);$('kBack').onclick=$('kBack2').onclick=bk;foldHB(P,bk);return}
   const c=COLD.find(x=>x.id===kd.cur);if(!c){goKoud(null);return}
   const s=kstate(c.id),t=s.tab||'rapport';
   let body='';
@@ -2983,7 +2999,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261029224847';
+const APPV='20261029225216';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

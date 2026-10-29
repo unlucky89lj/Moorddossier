@@ -305,6 +305,65 @@ td.e{border:0}
 .nb.off{text-decoration:line-through;opacity:.4}
 .notebook .nbg:last-child .nb{padding-left:10px}
 .mz:focus-visible,.ws:focus-visible,.rm:focus-visible,.sd:focus-visible,.chipb:focus-visible,.nb:focus-visible{outline:3px solid var(--red);outline-offset:1px}
+.phone{--ph-bg:#0e0f12;--ph-fg:#f2f2f4;--ph-mut:#9a9ca4;--ph-card:#1d1f25;--ph-line:#2c2f37;--ph-me:#2f6fe4;--ph-acc:#ff5a4a;position:relative;max-width:360px;width:100%;margin:0 auto;border:11px solid #08090b;border-radius:44px;background:var(--ph-bg);color:var(--ph-fg);box-shadow:0 0 0 2px #2a2b30,0 18px 40px rgba(0,0,0,.35);overflow:hidden;font-family:-apple-system,system-ui,"Segoe UI",Roboto,sans-serif}
+.ph-notch{position:absolute;top:8px;left:50%;width:96px;height:24px;margin-left:-48px;background:#000;border-radius:14px;z-index:2}
+.ph-screen{min-height:620px;display:flex;flex-direction:column}
+.ph-lock{flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;padding:48px 18px 22px;background:linear-gradient(180deg,#1b2333,#0e0f12)}
+.ph-time{font:300 64px/1 -apple-system,system-ui,sans-serif;letter-spacing:-1px}
+.ph-time.sm{font-size:15px;font-weight:600;text-align:center;padding-top:14px}
+.ph-date{font-size:16px;color:#d6d8e0}
+.ph-notifs{width:100%;display:flex;flex-direction:column;gap:6px;margin:6px 0}
+.ph-notif{background:rgba(255,255,255,.12);border-radius:14px;padding:9px 12px;font-size:14px}
+.ph-code{text-align:center}.ph-code p{margin:4px 0;font-size:14px;color:#d6d8e0}
+.ph-err{color:var(--ph-acc)!important;min-height:1.2em}
+.ph-dots{display:flex;gap:12px;justify-content:center}
+.ph-dots i{width:13px;height:13px;border-radius:50%;border:1.5px solid #fff}
+.ph-dots i.on{background:#fff}
+.ph-keys{display:grid;grid-template-columns:repeat(3,64px);gap:12px 22px}
+.ph-keys button{width:64px;height:64px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;font:400 26px -apple-system,system-ui,sans-serif;cursor:pointer}
+.ph-home{flex:1;padding:30px 14px 20px;background:linear-gradient(180deg,#243049,#121620)}
+.ph-apps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 8px;margin-top:22px}
+.ph-app{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;color:#fff;font:500 11.5px -apple-system,system-ui,sans-serif;cursor:pointer;padding:0}
+.ph-ic{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;color:#fff}
+.ph-ic svg{width:30px;height:30px}
+.ic-berichten{background:#34c759}.ic-bellen{background:#30b955}.ic-fotos{background:#f2f2f2;color:#e8572c}.ic-fotoboek{background:#c13584}.ic-mail{background:#1e88e5}.ic-notities{background:#f7c948;color:#5a4300}.ic-agenda{background:#fff;color:#e53935}.ic-locatie{background:#5a63e8}
+.ph-app-view{flex:1;display:flex;flex-direction:column;padding-top:38px}
+.ph-bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:6px 10px;border-bottom:1px solid var(--ph-line)}
+.ph-bar b{font-size:16px}
+.ph-back{justify-self:start;background:none;border:0;color:#4a90ff;font:500 16px -apple-system,system-ui,sans-serif;cursor:pointer;padding:6px 4px}
+.ph-scroll{padding:8px 10px 18px;display:flex;flex-direction:column;gap:10px;font-size:15px;line-height:1.4}
+.ph-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.ph-list li{border-bottom:1px solid var(--ph-line)}
+.ph-list li>button,.ph-list li.ph-call,.ph-list li:not(:has(button)){display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 8px;width:100%;text-align:left;background:none;border:0;color:var(--ph-fg);padding:10px 4px;font:inherit;cursor:pointer}
+.ph-list b{font-size:15px;grid-column:1}.ph-list span{grid-column:1;color:var(--ph-mut);font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ph-list em{grid-column:2;grid-row:1;font-style:normal;color:var(--ph-mut);font-size:13px}
+.ph-call.miss b{color:var(--ph-acc)}
+.ph-chatname{text-align:center;font-weight:600;padding:2px 0 6px}.ph-chatname span{display:block;font-weight:400;font-size:12.5px;color:var(--ph-mut)}
+.ph-day{text-align:center;font-size:12px;color:var(--ph-mut);margin:6px 0 2px}
+.ph-msg{max-width:80%;align-self:flex-start;background:var(--ph-card);border-radius:18px 18px 18px 6px;padding:8px 12px;display:flex;flex-direction:column;gap:4px}
+.ph-msg.me{align-self:flex-end;background:var(--ph-me);border-radius:18px 18px 6px 18px}
+.ph-chat{display:flex;flex-direction:column;gap:6px}
+.ph-msg b{font-size:12.5px;color:#ffb05a}
+.ph-msg em{font-style:normal;font-size:11px;color:rgba(255,255,255,.6);align-self:flex-end}
+.bpic{display:block;border-radius:10px;overflow:hidden;position:relative}
+.bpic svg{display:block;width:100%;height:auto}
+.ph-vm{background:var(--ph-card);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:6px}
+.ph-vm span{color:var(--ph-mut);font-size:13px}
+.ph-vm .btn{border-color:#fff;color:#fff}
+.ph-trans{margin:0;font-style:italic}
+.ph-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}
+.ph-grid button{padding:0;border:0;background:none;cursor:pointer}
+.ph-grid .bpic{border-radius:0;aspect-ratio:1}.ph-grid .bpic svg{height:100%;width:auto;margin-left:-25%}
+.bpic.big{border-radius:6px}
+.ph-meta{display:flex;flex-direction:column;gap:2px}.ph-meta span{color:var(--ph-mut);font-size:14px}
+.ph-post{background:var(--ph-card);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:6px}
+.ph-post>span,.ph-post em{color:var(--ph-mut);font-size:12.5px;font-style:normal}
+.ph-post p{margin:0}.ph-cm{color:var(--ph-mut);font-size:13.5px}
+.ph-mail{display:flex;flex-direction:column;gap:6px}.ph-mail span{color:var(--ph-mut);font-size:13px}.ph-mail p{margin:6px 0 0}.ph-att{color:#4a90ff!important}
+.ph-note{background:#2a2410;border-radius:12px;padding:10px 12px}.ph-note p{margin:4px 0 0}
+.ph-tl{list-style:none;margin:0;padding:0 0 0 14px;border-left:2px solid #5a63e8;display:flex;flex-direction:column;gap:12px}
+.ph-tl li{display:flex;flex-direction:column}.ph-tl em{font-style:normal;color:#8f96ff;font-size:13px}.ph-tl span{color:var(--ph-mut);font-size:13px}
+.phone button:focus-visible{outline:3px solid #4a90ff;outline-offset:2px}
 .kicker{font:700 13px var(--slab);text-transform:uppercase;letter-spacing:.12em;color:var(--red)}
 .storyhead{display:flex;flex-direction:column;gap:6px}
 .storyhead h3,.chapter h3{font:800 clamp(26px,7vw,34px)/1.05 var(--cond);text-transform:uppercase;margin:0;text-wrap:balance}
@@ -367,6 +426,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
     <button role="tab" type="button" data-g="kamer"><b>Kamermoord</b><span>Puzzel op een plattegrond</span></button>
     <button role="tab" type="button" data-g="landhuis"><b>Het Landhuis</b><span>Zeven puzzels, één moord</span></button>
     <button role="tab" type="button" data-g="spion"><b>Spionage</b><span>Ontmasker de spion</span></button>
+    <button role="tab" type="button" data-g="bericht"><b>Laatste Bericht</b><span>Onderzoek de telefoon</span></button>
   </div>
   <div class="stats" id="stats"></div>
 
@@ -428,6 +488,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <section class="pane" id="pKamer" hidden></section>
   <section class="pane" id="pLandhuis" hidden></section>
   <section class="pane" id="pSpion" hidden></section>
+  <section class="pane" id="pBericht" hidden></section>
   <section class="pane" id="pUitleg" hidden></section>
 
   <footer>Elke zaak wordt gegenereerd en heeft precies één oplossing.</footer>
@@ -2210,6 +2271,123 @@ function renderSpy(){const G=SG,n=G.n,P=$('pSpion'),st=store.get(SPSKEY)||{solve
   $('spRev').onclick=()=>{if(sps.done)return;sps.done=true;sps.revealed=true;const x=store.get(SPSKEY)||{solved:0,streak:0};x.streak=0;store.set(SPSKEY,x);saveSp();renderSpy()};
 }
 
+// ---------- laatste bericht ----------
+Object.assign(PP,{
+ tower:()=>`<path d="M-34 0L-14 -150M34 0L14 -150" stroke="${PK.K}" stroke-width="5" fill="none"/><path d="M-30 -20L28 -55M30 -20L-28 -55M-24 -60L22 -95M24 -60L-22 -95M-19 -100L17 -135M19 -100L-17 -135" stroke="${PK.D}" stroke-width="3"/>${R(-24,-158,48,8,PK.K)}<path d="M-26 -158L0 -176L26 -158Z" fill="${PK.K}"/>${R(-22,-168,2,10,PK.K)}${R(20,-168,2,10,PK.K)}`,
+ scooter:()=>`<circle cx="-30" cy="-12" r="12" fill="${PK.K}"/><circle cx="32" cy="-12" r="12" fill="${PK.K}"/><path d="M-30 -14H18L28 -40H36" stroke="${PK.D}" stroke-width="6" fill="none"/>${R(-44,-58,40,30,PK.P)}<text x="-24" y="-39" text-anchor="middle" font-size="9" font-family="Arial" font-weight="700" fill="${PK.K}">DE KADE</text>${R(-10,-30,26,8,PK.D)}`,
+ dog:()=>`<ellipse cx="0" cy="-34" rx="34" ry="16" fill="${PK.D}"/><circle cx="34" cy="-52" r="13" fill="${PK.D}"/><ellipse cx="25" cy="-50" rx="6" ry="12" fill="${PK.K}" transform="rotate(15 25 -50)"/><ellipse cx="44" cy="-50" rx="5" ry="10" fill="${PK.K}" transform="rotate(-15 44 -50)"/><path d="M-24 -22v22M-12 -22v22M14 -22v22M24 -22v22" stroke="${PK.D}" stroke-width="6"/><path d="M-34 -40q-16 -10 -10 -26" stroke="${PK.D}" stroke-width="5" fill="none"/><circle cx="38" cy="-54" r="2" fill="${PK.W}"/>`,
+ person:()=>`<circle cy="-112" r="15" fill="${PK.K}"/><path d="M-28 0V-70Q-28 -94 0 -94Q28 -94 28 -70V0Z" fill="${PK.K}"/>`,
+ sofa:()=>`${R(-70,-50,140,30,PK.M,'rx="8"')}${R(-76,-40,16,40,PK.D,'rx="6"')}${R(60,-40,16,40,PK.D,'rx="6"')}${R(-64,-24,128,18,PK.D)}`
+});
+const BCASES=[{id:'mila',title:'Laatst online',level:'Gemiddeld',time:'45–60 min',victim:'Mila Jansen',code:'1407',
+ blurb:'Een studente ligt onder aan de uitkijktoren in het stadspark. De politie dacht aan een ongeluk. Haar telefoon is nooit bekeken. Tot nu.',
+ report:`<p class="stamp-line">Proces-verbaal van bevinding</p><p><b>Datum:</b> zondag 18 oktober, 07:20<br><b>Plaats:</b> Uitkijktoren, Stadspark Veldwijk</p>
+  <p>Een hondenuitlater vindt <b>Mila Jansen (24)</b> onder aan de uitkijktoren. Volgens het sectierapport overleed ze tussen 23:00 en 01:00 aan een val van grote hoogte. De toren is ’s nachts gesloten, maar het hek is makkelijk over te klimmen.</p>
+  <p>Mila werkte als barista bij Café De Kade, 15 minuten fietsen van het park. Haar telefoon zat in haar jaszak. Hij zat op slot en is destijds niet onderzocht.</p>
+  <p><b>Conclusie toen:</b> een ongeluk. <b>Nu:</b> haar telefoon ligt voor je. Zoek uit wat er echt gebeurde.</p>`,
+ extra:[{t:'Verklaring van Eva, de zus van Mila',d:'<p>‘Mila’s telefoon zit op slot. Haar code is altijd de verjaardag van Bobbie, haar hond. Dag en maand, vier cijfers.’</p>'},
+  {t:'Uitdraai van Mila’s openbare Fotoboek-profiel',d:'<p><b>@milajansen</b> · 14 juli</p><p>‘Hoera, Bobbie wordt vandaag 3! Beste hond van de wereld.’</p>',img:['wall',['sofa',150,170,1],['dog',150,130,1]]}],
+ notifs:['<b>Thijs</b> · ??? Ik heb niks afgesproken.','<b>Sanne</b> · Mila?? Waar ben je?','<b>Bellen</b> · 1 nieuwe voicemail'],
+ chats:[
+  {name:'06-41 22 08 75',sub:'onbekend nummer',msgs:[['d','zaterdag 17 oktober'],['t','21:52','Hé Mila, Thijs hier. Nieuw nummer, mijn oude telefoon is kapot.'],['t','21:53','Kunnen we vanavond praten? 23:00 bij de toren. Net als vroeger.'],['m','21:58','Oké. Maar alleen praten.'],['m','23:03','Ik sta er. Waar ben je?'],['t','23:05','Kom naar de achterkant, bij het trappetje.'],['m','23:31','Wie ben jij echt?']]},
+  {name:'Thijs',sub:'ex-vriend',msgs:[['d','maandag 12 oktober'],['t','22:14','Ik mis je.'],['m','22:30','Thijs, het is over. Echt.'],['d','zaterdag 17 oktober'],['m','23:08','Ik sta bij de toren. Waar blijf je? Waarom heb je een nieuw nummer?'],['t','23:12','??? Ik heb niks afgesproken. Ik zit in Utrecht bij Joris. Mijn nummer is gewoon hetzelfde.'],['t','23:13','Wie stuurt je dat? Ga naar huis, Mila.']]},
+  {name:'Sanne',sub:'beste vriendin, collega',msgs:[['d','zaterdag 17 oktober'],['m','17:40','Ik heb iets ontdekt over K. Iets groots. Morgen gaat het naar Erik van de krant.'],['t','17:42','Wat?? Vertel!'],['m','17:43','Morgen. Zeg het tegen niemand, oké?'],['t','17:45','Beloofd.'],['d','zondag 18 oktober'],['t','00:34','Mila?? Waar ben je? Je reageert niet.']]},
+  {name:'Team De Kade',sub:'Kevin, Sanne, Lotte, Bas, jij',group:true,msgs:[['d','zaterdag 3 oktober'],['m','16:02','Mijn favoriete plek in de stad. Hier kuste Thijs me voor het eerst, haha.',['dusk',['tower',150,172,1.05]]],['Bas','16:05','Romantisch hoor'],['d','zaterdag 17 oktober'],['Kevin','17:20','Mila, wat deed jij vanmiddag bij de achteringang?'],['Kevin','22:35','Ik moet even weg. Sanne, sluit jij af?'],['Sanne','22:36','Doe ik!'],['Lotte','23:10','Bar is schoon!',['wall',['bar',150,178,.9]]],['Bas','23:24','Keuken ook. Wie neemt de vuilniszakken?'],['Sanne','23:26','Ik. Zie jullie morgen.'],['Bas','23:40','Lotte en ik zitten nog even in café De Zon. Wie komt er nog?',['dark',['table',150,150,1.3],['glass',120,90,1],['glass',180,90,1]]],['Kevin','23:58','Sorry, mijn telefoon lag in de auto. Alles goed afgesloten?']]},
+  {name:'Mam',sub:'',msgs:[['d','zaterdag 17 oktober'],['t','20:15','Kom je zondag eten? Papa maakt stamppot.'],['m','20:21','Ja! Om 6 uur?'],['t','20:22','Top. Liefs, mam']]}],
+ calls:[['23:31','uit','06-41 22 08 75','niet opgenomen'],['23:15','gemist','Thijs','voicemail'],['17:46','uit','Erik (Dagblad)','4 min'],['14:02','in','Kevin (De Kade)','1 min']],
+ voicemail:{from:'Thijs',time:'23:15',text:'Mila, met Thijs. Ik weet niet wie je die berichten stuurt, maar ik ben het niet. Ik zit in Utrecht bij Joris. Hoor maar. ... (op de achtergrond: ‘Hoi Mila!’) ... Ga alsjeblieft naar huis. Bel me terug.'},
+ photos:[{img:['wall',['door',150,150,1.2],['person',92,150,1.05],['person',212,150,1.12],['envelope',152,96,.32]],t:'za 17 okt · 15:12',p:'Achteringang Café De Kade'},
+  {img:['desk',['envelope',150,140,1.3],['money',150,186,1.5]],t:'za 17 okt · 15:13',p:'Achteringang Café De Kade'},
+  {img:['wall',['sofa',150,172,1],['dog',150,132,1]],t:'za 17 okt · 21:40',p:'Thuis, Kanaalstraat'},
+  {img:['night',['tower',178,172,1],['scooter',70,184,.95],['moon',255,34,.6]],t:'za 17 okt · 23:04',p:'Uitkijktoren, Stadspark Veldwijk',note:'Selfie. Mila staat links in beeld, half in het donker.'},
+  {img:['dusk',['tower',150,172,1.05]],t:'za 3 okt · 16:01',p:'Uitkijktoren, Stadspark Veldwijk'}],
+ feed:[{who:'Hans de Groot',sub:'Wethouder Veldwijk',t:'za 23:20',text:'Mooie avond op het najaarsgala van de gemeente! Zo meteen mijn toespraak.',img:['dark',['stage',150,168,1]],cm:'Erna: Prachtige speech, Hans! (23:51)'},
+  {who:'Thijs Kramer',sub:'',t:'za 22:55',text:'Avondje FIFA bij Joris in Utrecht. Hij gaat weer verliezen.',img:['night',['house',150,168,1.2]]},
+  {who:'Sanne Vos',sub:'',t:'za 23:52',text:'Eindelijk klaar. Laatste vuilniszak weg, De Kade is dicht. Welterusten!',img:['wall',['bar',150,178,.9]]},
+  {who:'Mila Jansen',sub:'',t:'14 juli',text:'Hoera, Bobbie wordt vandaag 3! Beste hond van de wereld.',img:['wall',['sofa',150,170,1],['dog',150,130,1]]}],
+ mail:[{box:'Concepten',from:'Aan: erik@dagbladveldwijk.nl',t:'za 17:50',s:'Wethouder en De Kade',b:'Hoi Erik, zoals besproken aan de telefoon: in de bijlage twee foto’s van vanmiddag. Mijn baas Kevin Smit geeft wethouder De Groot een envelop met geld, één dag nadat de gemeente zijn nieuwe terras heeft goedgekeurd. Morgen om 10 uur kom ik langs met alles. Mila',att:'Bijlagen: IMG_0412.jpg, IMG_0413.jpg'},
+  {box:'Inbox',from:'Gemeente Veldwijk',t:'vr 16:00',s:'Nieuwsbrief: terrasvergunning De Kade verleend',b:'De gemeente heeft de vergunning voor het nieuwe terras van Café De Kade aan het water goedgekeurd. Wethouder De Groot: ‘Een mooie aanwinst voor de stad.’'},
+  {box:'Inbox',from:'Kevin Smit',t:'ma 09:12',s:'Rooster week 42',b:'Mila: za 10:00–18:00. Sanne: za 16:00–sluit. Lotte en Bas: za 17:00–sluit. Ik ben er de hele dag.'}],
+ notes:[{t:'za 17 okt',b:'15:12 foto’s achteringang. K + De Groot. Envelop met geld!! Terras = omkoping? Erik bellen. Zondag 10:00 naar de krant.'},{t:'boodschappen',b:'hondenvoer, melk, cadeautje voor mam'}],
+ agenda:[['zo 18 okt','10:00','Erik, Dagblad Veldwijk'],['zo 18 okt','18:00','Eten bij mam en pap'],['ma 19 okt','14:00','Werken, De Kade']],
+ loc:[['14:00–18:05','Café De Kade','dienst'],['18:20–22:40','Thuis, Kanaalstraat 8',''],['22:41–23:01','Lopend onderweg','2,1 km'],['23:02–23:47','Stadspark Veldwijk, bij de uitkijktoren',''],['23:47','Laatste signaal','']],
+ opts:{dader:['Thijs Kramer','Sanne Vos','Kevin Smit','Lotte Bakker','Bas Willems','Hans de Groot'],
+  bewijs:['De bezorgscooter van De Kade op haar selfie van 23:04','De voicemail van Thijs uit Utrecht','De foto van Lotte in de bar','De galafoto van wethouder De Groot','Het bericht van Sanne om 00:34','De afspraak met Erik in de agenda'],
+  motief:['Mila zou de omkoping morgen aan de krant geven','Jaloezie na de breuk','Een verraden geheim tussen vriendinnen','Ruzie over het rooster','Geld uit de kassa','Burenruzie']},
+ answer:{dader:2,bewijs:[0],motief:0},
+ solution:[{t:'Iemand deed zich voor als Thijs',p:'Om 21:52 kreeg Mila berichten van een onbekend nummer dat zei dat het Thijs was. Maar de echte Thijs zat in Utrecht bij Joris: dat blijkt uit zijn voicemail, zijn bericht van 23:12 en zijn Fotoboek-post van 22:55.'},
+  {t:'Wie wist van de toren?',p:'De afspraak ‘23:00 bij de toren, net als vroeger’ klopt alleen als je wist dat Thijs en Mila daar vroeger afspraken. Dat vertelde Mila op 3 oktober in de groepsapp van Team De Kade. Alleen haar collega’s wisten het.'},
+  {t:'De alibi’s van de collega’s',p:'Lotte en Bas zaten om 23:40 samen in café De Zon. Sanne zette om 23:52 nog een foto online uit De Kade, 15 minuten fietsen van het park. Mila leefde om 23:31 nog en haar telefoon viel om 23:47 uit. Wethouder De Groot stond om 23:45 te speechen op het gala.'},
+  {t:'Kevin was weg',p:'Kevin schreef om 22:35 ‘Ik moet even weg’ en reageerde pas om 23:58 weer, met het excuus dat zijn telefoon in de auto lag. Op Mila’s selfie van 23:04 staat bij de toren de bezorgscooter van De Kade.'},
+  {t:'Het motief',p:'Om 15:12 fotografeerde Mila hoe Kevin een envelop met geld gaf aan wethouder De Groot, een dag na de goedkeuring van zijn terras. Om 17:20 vroeg Kevin in de groepsapp wat ze bij de achteringang deed. Zondag om 10:00 zou ze alles aan Erik van de krant geven.'},
+  {t:'Wat er gebeurde',p:'Kevin lokte Mila met een tweede telefoon naar de toren, onder de naam van Thijs. Toen ze om 23:31 doorhad dat het niet klopte, was het te laat.'}],
+ verdict:'‘Het was <b>Kevin Smit</b>, bij de <b>uitkijktoren</b>, om de <b>omkoping</b> geheim te houden.’'}];
+const BKEY='md-bericht';
+let bd=store.get(BKEY)||{cur:null,cases:{}};if(!bd.cases)bd={cur:null,cases:{}};
+const saveB=()=>store.set(BKEY,bd);
+const bstate=id=>(bd.cases[id]=bd.cases[id]||{unlocked:false,app:null,sub:null,entry:'',notes:'',acc:null,open:false,draft:null});
+let bAsk=false;
+const BAPPS=[['berichten','Berichten','<path d="M4 6h16v10H9l-5 4z" fill="currentColor"/>'],['bellen','Bellen','<path d="M6 3l4 1 1 5-2 1a12 12 0 0 0 5 5l1-2 5 1 1 4c-9 1-16-6-15-15z" fill="currentColor"/>'],['fotos','Foto’s','<rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 17l5-6 4 4 2-2 3 4z" fill="currentColor"/><circle cx="16" cy="9" r="1.6" fill="currentColor"/>'],['fotoboek','Fotoboek','<rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="7" r="1.2" fill="currentColor"/>'],['mail','Mail','<rect x="3" y="6" width="18" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/>'],['notities','Notities','<rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="2"/>'],['agenda','Agenda','<rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 9h16M8 3v4M16 3v4" stroke="currentColor" stroke-width="2"/>'],['locatie','Locatie','<path d="M12 21s-6-6-6-11a6 6 0 0 1 12 0c0 5-6 11-6 11z" fill="currentColor"/><circle cx="12" cy="10" r="2.2" fill="var(--ph-bg)"/>']];
+const pic=(spec,cls='')=>`<span class="bpic ${cls}"><svg viewBox="0 0 300 200" aria-hidden="true">${drawScene(spec)}</svg></span>`;
+function bGo(c){bd.cur=c;bAsk=false;saveB();renderBericht();window.scrollTo({top:0})}
+function bSpeak(text){try{const u=new SpeechSynthesisUtterance(text.replace(/\(.*?\)|\.\.\./g,' '));u.lang='nl-NL';u.rate=.95;speechSynthesis.cancel();speechSynthesis.speak(u);return true}catch(e){return false}}
+function phoneBody(C,s){
+  if(!s.unlocked){const dots=[0,1,2,3].map(i=>`<i class="${i<s.entry.length?'on':''}"></i>`).join('');
+    return `<div class="ph-lock"><div class="ph-time">07:20</div><div class="ph-date">zondag 18 oktober</div>
+     <div class="ph-notifs">${C.notifs.map(n=>`<div class="ph-notif">${n}</div>`).join('')}</div>
+     <div class="ph-code"><p>Voer toegangscode in</p><div class="ph-dots">${dots}</div><p class="ph-err" id="bErr"></p></div>
+     <div class="ph-keys">${[1,2,3,4,5,6,7,8,9,'',0,'⌫'].map(k=>k===''?'<span></span>':`<button type="button" data-key="${k}">${k}</button>`).join('')}</div></div>`}
+  const back=`<button type="button" class="ph-back" id="bBack">‹ ${s.sub!==null&&s.sub!==undefined?'Terug':'Start'}</button>`;
+  if(!s.app)return `<div class="ph-home"><div class="ph-time sm">07:20</div><div class="ph-apps">${BAPPS.map(([k,l,ic])=>`<button type="button" class="ph-app" data-app="${k}"><span class="ph-ic ic-${k}"><svg viewBox="0 0 24 24" aria-hidden="true">${ic}</svg></span>${l}</button>`).join('')}</div></div>`;
+  const title=BAPPS.find(a=>a[0]===s.app)[1];let h='';
+  if(s.app==='berichten'){if(s.sub===null||s.sub===undefined)h=`<ul class="ph-list">${C.chats.map((c,i)=>{const last=[...c.msgs].reverse().find(m=>m[0]!=='d');return `<li><button type="button" data-sub="${i}"><b>${c.name}</b><span>${c.sub?c.sub+' · ':''}${last[2]}</span><em>${last[1]}</em></button></li>`}).join('')}</ul>`;
+    else{const c=C.chats[s.sub];h=`<div class="ph-chat"><div class="ph-chatname">${c.name}<span>${c.sub}</span></div>${c.msgs.map(m=>m[0]==='d'?`<div class="ph-day">${m[1]}</div>`:`<div class="ph-msg ${m[0]==='m'?'me':''}">${c.group&&m[0]!=='m'?`<b>${m[0]}</b>`:''}${m[3]?pic(m[3]):''}<span>${m[2]}</span><em>${m[1]}</em></div>`).join('')}</div>`}}
+  if(s.app==='bellen'){h=`<ul class="ph-list">${C.calls.map(([t,d,w,x])=>`<li class="ph-call ${d==='gemist'?'miss':''}"><b>${w}</b><span>${d==='uit'?'Uitgaand':d==='in'?'Inkomend':'Gemist'} · ${x}</span><em>${t}</em></li>`).join('')}</ul>
+    <div class="ph-vm"><b>Voicemail van ${C.voicemail.from}</b><span>za ${C.voicemail.time}</span><div class="controls"><button type="button" class="btn small" id="bPlay">▶ Afspelen</button><button type="button" class="btn small" id="bTrans">Uitschrift</button></div>${s.trans?`<p class="ph-trans">‘${C.voicemail.text}’</p>`:''}</div>`}
+  if(s.app==='fotos'){if(s.sub===null||s.sub===undefined)h=`<div class="ph-grid">${C.photos.map((p,i)=>`<button type="button" data-sub="${i}">${pic(p.img)}</button>`).join('')}</div>`;
+    else{const p=C.photos[s.sub];h=`${pic(p.img,'big')}<div class="ph-meta"><b>${p.t}</b><span>${p.p}</span>${p.note?`<span>${p.note}</span>`:''}</div>`}}
+  if(s.app==='fotoboek')h=C.feed.map(f=>`<article class="ph-post"><b>${f.who}</b>${f.sub?`<span>${f.sub}</span>`:''}${pic(f.img)}<p>${f.text}</p><em>${f.t}</em>${f.cm?`<p class="ph-cm">${f.cm}</p>`:''}</article>`).join('');
+  if(s.app==='mail'){if(s.sub===null||s.sub===undefined)h=`<ul class="ph-list">${C.mail.map((m,i)=>`<li><button type="button" data-sub="${i}"><b>${m.s}</b><span>${m.box} · ${m.from}</span><em>${m.t}</em></button></li>`).join('')}</ul>`;
+    else{const m=C.mail[s.sub];h=`<div class="ph-mail"><span>${m.box} · ${m.t}</span><b>${m.s}</b><span>${m.from}</span><p>${m.b}</p>${m.att?`<p class="ph-att">${m.att}</p>`:''}</div>`}}
+  if(s.app==='notities')h=C.notes.map(n=>`<article class="ph-note"><b>${n.t}</b><p>${n.b}</p></article>`).join('');
+  if(s.app==='agenda')h=`<ul class="ph-list">${C.agenda.map(([d,t,w])=>`<li><b>${w}</b><span>${d}</span><em>${t}</em></li>`).join('')}</ul>`;
+  if(s.app==='locatie')h=`<ol class="ph-tl">${C.loc.map(([t,w,x])=>`<li><em>${t}</em><b>${w}</b>${x?`<span>${x}</span>`:''}</li>`).join('')}</ol>`;
+  return `<div class="ph-app-view"><div class="ph-bar">${back}<b>${title}</b><span></span></div><div class="ph-scroll">${h}</div></div>`}
+function renderBericht(){const P=$('pBericht');
+  if(!bd.cur){P.innerHTML=`<h2 class="bigtitle">Laatste Bericht</h2>${PENCIL}<p class="lead">In elke zaak krijg je de telefoon van het slachtoffer. Ontgrendel hem, lees de chats, luister de voicemail af, bekijk foto’s, mails en locaties, en ontdek wie het deed.</p>
+    <div class="caselist">${BCASES.map(c=>{const s=bstate(c.id);return `<article class="casecard file"><span class="kicker">${c.level} · ${c.time}</span><h3>${c.title}</h3><p>${c.blurb}</p><div class="controls"><span class="hint">${s.open?(s.acc&&s.acc.d===c.answer.dader?'Opgelost':'Gesloten, dader gemist'):s.unlocked?'Telefoon ontgrendeld':'Open zaak'}</span><button class="btn ${s.open?'':'primary'} small" type="button" data-bcase="${c.id}">${s.open?'Teruglezen':'Open zaak'}</button></div></article>`}).join('')}
+    <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Meer telefoons</h3><p>Er komen meer zaken bij. Vraag maar om een nieuwe.</p></article></div>`;
+    P.querySelectorAll('[data-bcase]').forEach(b=>b.onclick=()=>bGo(b.dataset.bcase));saveB();return}
+  const C=BCASES.find(c=>c.id===bd.cur);if(!C)return bGo(null);const s=bstate(C.id);
+  const sel=(id,arr,v)=>`<select id="${id}"><option value="">Kies…</option>${arr.map((o,i)=>`<option value="${i}" ${v===i?'selected':''}>${o}</option>`).join('')}</select>`;
+  let concl;
+  if(!s.open){const a=s.draft||{};concl=`<div class="accuse2"><p>Klaar met je onderzoek? Leg je conclusie vast. Daarna lees je de oplossing.</p><label for="bD">Wie deed het?</label>${sel('bD',C.opts.dader,a.d)}<label for="bE">Welk bewijs is doorslaggevend?</label>${sel('bE',C.opts.bewijs,a.e)}<label for="bM">Wat was het motief?</label>${sel('bM',C.opts.motief,a.m)}<p class="msg" id="bMsg"></p>
+    ${bAsk?`<div class="spoiler"><p>Weet je het zeker? Daarna kun je je antwoord niet meer veranderen.</p><div class="controls" style="justify-content:center"><button class="btn primary" id="bYes" type="button">Toon de oplossing</button><button class="btn" id="bNo" type="button">Nog even zoeken</button></div></div>`:`<div class="seal"><span>ZEGEL</span><button class="btn primary" id="bSeal" type="button">Leg conclusie vast</button></div>`}</div>`}
+  else{const A=s.acc,ok=k=>k==='e'?C.answer.bewijs.includes(A.e):A[k]===C.answer[k==='d'?'dader':'motief'];const row=(l,k,arr)=>`<li class="${ok(k)?'good':'bad'}"><b>${ok(k)?'✓':'✗'} ${l}:</b> ${arr[A[k]]}</li>`;
+    concl=`<div class="verdict ${A.d===C.answer.dader?'':'bad'}"><p>${A.d===C.answer.dader?'Goed gezien!':'De dader is ontsnapt.'} ${['d','e','m'].filter(ok).length}/3 onderdelen juist.</p></div><ul class="accres">${row('Dader','d',C.opts.dader)}${row('Bewijs','e',C.opts.bewijs)}${row('Motief','m',C.opts.motief)}</ul><h4 class="solh">De oplossing</h4><ol class="solsteps">${C.solution.map(x=>`<li><b>${x.t}.</b> ${x.p}</li>`).join('')}</ol><div class="verdict"><p>${C.verdict}</p></div><div class="controls"><button class="btn" id="bReset" type="button">Zaak opnieuw spelen</button></div>`}
+  P.innerHTML=`<button class="btn small backbtn" id="bList" type="button">← Alle zaken</button><div class="storyhead"><span class="kicker">${C.level} · ${C.time}</span><h3>${C.title}</h3></div>
+   <div class="doc report">${C.report}</div>
+   <div class="stmts">${C.extra.map(x=>`<details class="stmt"><summary><b>Bewijsstuk</b><span>${x.t}</span></summary><div class="doc">${x.img?pic(x.img):''}${x.d}</div></details>`).join('')}</div>
+   <div class="phone" role="region" aria-label="Telefoon van ${C.victim}"><div class="ph-notch"></div><div class="ph-screen">${phoneBody(C,s)}</div></div>
+   <section class="notes"><label for="bNotes"><b>Notitieblok</b> <span class="hint">tijden, namen, verdenkingen</span></label><textarea id="bNotes" rows="5" placeholder="Bijvoorbeeld: 21:52 onbekend nummer zegt Thijs te zijn…"></textarea></section>
+   <h2>Conclusie</h2>${concl}`;
+  const on=(id,f)=>{const el=$(id);if(el)el.onclick=f};
+  $('bNotes').value=s.notes||'';$('bNotes').oninput=e=>{s.notes=e.target.value;saveB()};
+  on('bList',()=>bGo(null));
+  P.querySelectorAll('[data-key]').forEach(b=>b.onclick=()=>{const k=b.dataset.key;if(k==='⌫')s.entry=s.entry.slice(0,-1);else if(s.entry.length<4)s.entry+=k;
+    if(s.entry.length===4){if(s.entry===C.code){s.unlocked=true;s.entry=''}else{s.entry='';saveB();renderBericht();$('bErr').textContent='Onjuiste code. Probeer het opnieuw.';return}}saveB();renderBericht()});
+  P.querySelectorAll('[data-app]').forEach(b=>b.onclick=()=>{s.app=b.dataset.app;s.sub=null;saveB();renderBericht()});
+  P.querySelectorAll('[data-sub]').forEach(b=>b.onclick=()=>{s.sub=+b.dataset.sub;saveB();renderBericht()});
+  on('bBack',()=>{if(s.sub!==null&&s.sub!==undefined)s.sub=null;else s.app=null;saveB();renderBericht()});
+  on('bPlay',()=>{if(!bSpeak(C.voicemail.text)){s.trans=true;saveB();renderBericht()}});
+  on('bTrans',()=>{s.trans=!s.trans;saveB();renderBericht()});
+  const grab=()=>({d:$('bD').value===''?null:+$('bD').value,e:$('bE').value===''?null:+$('bE').value,m:$('bM').value===''?null:+$('bM').value});
+  ['bD','bE','bM'].forEach(id=>{const el=$(id);if(el)el.onchange=()=>{s.draft=grab();saveB()}});
+  on('bSeal',()=>{const a=grab();if(a.d===null||a.e===null||a.m===null)return $('bMsg').textContent='Kies eerst een dader, een bewijsstuk en een motief.';s.draft=a;bAsk=true;saveB();renderBericht()});
+  on('bNo',()=>{bAsk=false;renderBericht()});on('bYes',()=>{s.acc=s.draft;s.open=true;bAsk=false;saveB();renderBericht()});
+  on('bReset',()=>{bd.cases[C.id]={unlocked:true,app:null,sub:null,entry:'',notes:s.notes||'',acc:null,open:false,draft:null};saveB();renderBericht()});
+}
+
 // ---------- uitleg ----------
 // Elk spel heeft hier één blok. Een nieuw spel krijgt een nieuw blok in deze lijst.
 const HELP=[
@@ -2270,7 +2448,16 @@ const HELP=[
    'Vul het rooster in: tik één keer voor ✕, twee keer voor ●.',
    'De laatste aanwijzing vertelt waar de overdracht was. Wie daar was, is de spion. Kies je antwoord en tik op <b>Ontmasker</b>.'],
   tips:['Elk tijdperk heeft een eigen geheimschrift: verschuifcode, spiegelalfabet, getallen, morse of het vierkant van Polybius.','Ontcijfer het onderschepte bericht eerst. Het bevat vaak een belangrijke aanwijzing.','Iedereen had precies één geheim en was op precies één plek.'],
-  extra:()=>`${ERAS.length} tijdperken en duizenden zaken.`}
+  extra:()=>`${ERAS.length} tijdperken en duizenden zaken.`},
+ {g:'bericht',name:'Laatste Bericht',insp:'Telefoononderzoek · in de stijl van de Moordspoor-spellen',
+  what:'Je krijgt de telefoon van het slachtoffer. Ontgrendel hem en onderzoek alles wat erop staat: chats, gesprekken, een voicemail, foto’s, social media, mails, notities, agenda en locatiegeschiedenis. Daarna wijs je de dader aan.',
+  steps:['Open een zaak en lees eerst het proces-verbaal en de bewijsstukken. Daar vind je hoe je de telefoon ontgrendelt.',
+   'Typ de code op het slotscherm. De meldingen op het slotscherm zijn ook al aanwijzingen.',
+   'Open de apps één voor één. Bij <b>Bellen</b> kun je de voicemail afspelen of het uitschrift lezen.',
+   'Houd een tijdlijn bij in het notitieblok. Tijden in chats, foto’s en posts vertellen wie waar was.',
+   'Bij <b>Conclusie</b> kies je de dader, het doorslaggevende bewijs en het motief. Daarna lees je de oplossing.'],
+  tips:['Kijk goed naar de achtergrond van foto’s.','Iemand kan zich voordoen als iemand anders. Controleer dat met andere bronnen.','Een foto op social media heeft een tijd: dat is soms een alibi.'],
+  extra:()=>`${BCASES.length} zaak, ongeveer 45 tot 60 minuten per zaak.`}
 ];
 function renderUitleg(){
   $('pUitleg').innerHTML=`<h2 class="bigtitle">Uitleg</h2>${PENCIL}
@@ -2305,7 +2492,7 @@ function setTab(t){st.tab=t;save();renderPanes();window.scrollTo({top:0})}
 function renderPanes(){
   const t=st.tab||'zaak';
   const g=game,M=g==='murdle';
-  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
+  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';$('pBericht').hidden=g!=='bericht';if(g==='bericht'&&!$('pBericht').innerHTML)renderBericht();if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
   document.querySelector('.tabs').hidden=!M;document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('stats').hidden=!M;
   document.querySelectorAll('.games button').forEach(b=>b.setAttribute('aria-selected',b.dataset.g===g));
   if(g==='speur'&&!$('pVerhaal').innerHTML)renderStory();if(g==='koud'&&!$('pKoud').innerHTML)renderKoud();

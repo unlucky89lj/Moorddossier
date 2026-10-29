@@ -115,7 +115,8 @@ td.e{border:0}
 .subtabs button[aria-selected="true"]{background:var(--ink);color:var(--page)}
 .subtabs button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
 .tabs{display:flex;gap:4px;border-bottom:2px solid var(--ink);overflow-x:auto}
-.games{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.games{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+@media (min-width:640px){.games{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .games button{display:flex;flex-direction:column;gap:2px;align-items:flex-start;text-align:left;border:2px solid var(--ink);border-radius:16px;background:var(--card);color:var(--ink);padding:10px 14px;cursor:pointer;min-width:0}
 .games button b{font:800 clamp(12px,3.3vw,21px)/1.1 var(--cond);max-width:100%;letter-spacing:0!important;white-space:nowrap;text-transform:uppercase;letter-spacing:.02em}
 .games button span{font:500 13px/1.25 var(--cond);color:var(--muted);letter-spacing:.02em}
@@ -233,6 +234,34 @@ td.e{border:0}
 .polaroid.mini{width:100%;padding:6px 6px 24px;margin:4px 0}
 .polaroid.mini figcaption{font-size:16px;bottom:4px;left:8px}
 .polaroid.mini .tape{width:44px;height:14px;margin-left:-22px;top:-6px}
+.kpal{display:flex;flex-wrap:wrap;gap:6px}
+#pKamer .accuse select{width:100%;font:500 16px var(--serif);padding:10px;border:2px solid var(--ink);border-radius:10px;background:var(--page);color:var(--ink)}
+#pKamer .accuse h2{font-size:18px}
+.kp{display:flex;align-items:center;gap:6px;border:2px solid var(--rule);border-radius:999px;background:var(--card);color:var(--ink);padding:3px 10px 3px 3px;font:700 13px var(--cond);letter-spacing:.02em;cursor:pointer}
+.kp .tok{width:28px;height:28px}
+.kp.on{border-color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+.kp.placed{opacity:.55}
+.kp.on.placed{opacity:1}
+.kp:focus-visible,.kcell:focus-visible{outline:3px solid var(--red);outline-offset:1px}
+.tok{display:grid;place-items:center;border-radius:50%;background:var(--ink);color:var(--page);flex:none}
+.tok svg{width:76%;height:76%}
+.tok.v{background:var(--red);color:#fff}
+.tok.xx{background:transparent;color:var(--red);font:800 18px var(--cond);border:2px dashed var(--red)}
+.kboard{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));width:100%;max-width:440px;margin:0 auto;border:3px solid var(--ink);background:var(--card)}
+.kcell{aspect-ratio:1;position:relative;border:0 solid var(--ink);border-color:var(--ink);display:grid;place-items:center;cursor:pointer;padding:0;min-width:0;color:var(--ink);-webkit-tap-highlight-color:transparent}
+.kcell .f{position:absolute;inset:20%;opacity:.42;display:grid;place-items:center}
+.kcell .f svg{width:100%;height:100%}
+.kcell.blk .f{opacity:.7}
+.kcell .tok{width:80%;height:80%;position:relative;z-index:1;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.kcell.x::after{content:"✕";position:absolute;inset:0;display:grid;place-items:center;color:var(--red);font:800 clamp(18px,6vw,28px) var(--cond)}
+.klegend{display:flex;flex-wrap:wrap;gap:6px 12px;font:600 14px var(--cond);letter-spacing:.02em}
+.klegend .chip{display:inline-flex;align-items:center;gap:6px}
+.klegend i{display:inline-block;width:16px;height:16px;border:1.5px solid var(--ink);border-radius:3px}
+.klegend .fi{display:inline-grid;width:18px;height:18px;opacity:.7}
+.klegend .fi svg{width:100%;height:100%}
+:root{--r0:#EADFC9;--r1:#D3E2D0;--r2:#E8D1CE;--r3:#D2DCEA;--r4:#E9E2C2;--r5:#DED2E9;--r6:#CDE3E1}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--r0:#3d3628;--r1:#29382a;--r2:#3f2b29;--r3:#283244;--r4:#3b3820;--r5:#352a41;--r6:#203837}}
+:root[data-theme="dark"]{--r0:#3d3628;--r1:#29382a;--r2:#3f2b29;--r3:#283244;--r4:#3b3820;--r5:#352a41;--r6:#203837}
 .kicker{font:700 13px var(--slab);text-transform:uppercase;letter-spacing:.12em;color:var(--red)}
 .storyhead{display:flex;flex-direction:column;gap:6px}
 .storyhead h3,.chapter h3{font:800 clamp(26px,7vw,34px)/1.05 var(--cond);text-transform:uppercase;margin:0;text-wrap:balance}
@@ -292,6 +321,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
     <button role="tab" type="button" data-g="murdle"><b>Moorddossier</b><span>Logicapuzzels met een rooster</span></button>
     <button role="tab" type="button" data-g="speur"><b>Speurneus</b><span>Verhaal in hoofdstukken</span></button>
     <button role="tab" type="button" data-g="koud"><b>Cold Case</b><span>Politiedossiers zonder hints</span></button>
+    <button role="tab" type="button" data-g="kamer"><b>Kamermoord</b><span>Puzzel op een plattegrond</span></button>
   </div>
   <div class="stats" id="stats"></div>
 
@@ -350,6 +380,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <section class="pane" id="pOpl" hidden></section>
   <section class="pane" id="pVerhaal" hidden></section>
   <section class="pane" id="pKoud" hidden></section>
+  <section class="pane" id="pKamer" hidden></section>
   <section class="pane" id="pUitleg" hidden></section>
 
   <footer>Elke zaak wordt gegenereerd en heeft precies één oplossing.</footer>
@@ -1683,6 +1714,162 @@ function renderKoud(){
   on('kReset',()=>{kd.cases[c.id]={tab:'rapport',notes:s.notes||'',acc:null,open:false};saveK();renderKoud()});
 }
 
+// ---------- kamermoord ----------
+// Plattegronden: kamers (letters) en meubels. Op . c s r kun je staan; t p b k blokkeren.
+const KL=[
+ {name:'Het landhuis',n:6,rooms:['WWWKKK','WWWKKK','WWBBKK','TTBBEE','TTBBEE','TTGGEE'],
+  names:{W:'de woonkamer',K:'de keuken',B:'de bibliotheek',T:'de tuin',E:'de eetkamer',G:'de garage'},
+  furn:['c.t.p.','s..t.c','.b.r.t','p.rc..','..b.tc','.p..t.']},
+ {name:'Café De Hoek',n:6,rooms:['TTTBBB','TTTBBB','KKTTBB','KKSSSW','KKSSSW','OOOSSW'],
+  names:{T:'het terras',B:'de bar',K:'de keuken',S:'de zaal',W:'de wc',O:'de opslag'},
+  furn:['c.tc.p','.t..c.','t.c.k.','.p.c.c','c..t..','.k.cr.']},
+ {name:'Museum Van Dalen',n:6,rooms:['AAAHHH','AABBHH','CCBBDD','CCBBDD','CCEEDD','FFEEEE'],
+  names:{A:'het atelier',H:'de entreehal',B:'de beeldenzaal',C:'het museumcafé',D:'het depot',E:'de schilderijenzaal',F:'de kassa'},
+  furn:['.t.c.p','c...r.','.p.k.k','t.c..c','..rp..','c.t..c']},
+ {name:'Hotel Duinzicht',n:7,rooms:['LLLRRRR','LLLRRRR','LLGGGKK','BBGGGKK','BBGGGKK','BBZZWWK','BBZZWWW'],
+  names:{L:'de lobby',R:'het restaurant',G:'de balzaal',K:'de keuken',B:'de bibliotheek',Z:'het zwembad',W:'de wellness'},
+  furn:['c.p.t.c','.r..c.t','t.c.p..','.b..r.c','c..t..p','.p.c.k.','r..t.c.']},
+ {name:'Slot Ravensteyn',n:7,rooms:['TTTTZZZ','TTTTZZZ','KKHHHZZ','KKHHHBB','KKHHHBB','SSSCCBB','SSSCCCC'],
+  names:{T:'de ridderzaal',Z:'de torenkamer',K:'de keuken',H:'de hal',B:'de bibliotheek',S:'de slaapkamer',C:'de kapel'},
+  furn:['.t.c.p.','c..r.t.','.p.c..c','t..b.r.','.c..t.p','k.r.c..','.c.p..c']}
+];
+const FNAME={t:'een tafel',p:'een plant',b:'een boekenkast',k:'een kast'};
+const STAND='.crs';
+function kLayout(L){const n=L.n,cells=[];for(let y=0;y<n;y++)for(let x=0;x<n;x++){const f=L.furn[y][x];cells.push({x,y,i:y*n+x,room:L.rooms[y][x],f,stand:STAND.includes(f)})}
+  const roomList=[...new Set(L.rooms.join(''))];return {cells,roomList}}
+function kSolve(n,cells,np,clues,limit=2){
+  const un=[...Array(np)].map(()=>[]),bin=[],alone=[];
+  for(const c of clues){if(c.u)un[c.p].push(c.u);else if(c.b)bin.push(c);else if(c.alone!==undefined)alone.push(c.alone)}
+  const dom=[...Array(np)].map((_,p)=>cells.filter(c=>c.stand&&un[p].every(f=>f(c))).map(c=>c.i));
+  const order=[...Array(np).keys()].sort((a,b)=>dom[a].length-dom[b].length);
+  const pos=Array(np).fill(-1),rU=Array(n).fill(0),cU=Array(n).fill(0);let count=0,first=null;
+  const rec=k=>{if(count>=limit)return;
+    if(k===np){for(const a of alone){const ra=cells[pos[a]].room;for(let q=0;q<np;q++)if(q!==a&&cells[pos[q]].room===ra)return}
+      count++;if(!first)first=pos.slice();return}
+    const p=order[k];
+    for(const ci of dom[p]){const c=cells[ci];if(rU[c.y]||cU[c.x])continue;pos[p]=ci;
+      let ok=true;for(const b of bin){if((b.a===p||b.c===p)&&pos[b.a]>=0&&pos[b.c]>=0&&!b.b(cells[pos[b.a]],cells[pos[b.c]])){ok=false;break}}
+      if(ok){rU[c.y]=1;cU[c.x]=1;rec(k+1);rU[c.y]=0;cU[c.x]=0}pos[p]=-1;if(count>=limit)return}};
+  rec(0);return {count,first};
+}
+function kGen(seed,n){
+  const r=mulberry32(seed*104729+n*7919);
+  for(let attempt=0;attempt<60;attempt++){
+    const Ls=KL.filter(l=>l.n===n),L=Ls[Math.floor(r()*Ls.length)],{cells,roomList}=kLayout(L);
+    // willekeurige plaatsing: één persoon per rij en per kolom, alleen op vakjes waar je kunt staan
+    const colOf=Array(n).fill(-1),used=Array(n).fill(false);
+    const place=y=>{if(y===n)return true;for(const x of shuffle(range(n),r)){if(used[x]||!cells[y*n+x].stand)continue;used[x]=true;colOf[y]=x;if(place(y+1))return true;used[x]=false}return false};
+    if(!place(0))continue;
+    const rowsOfPerson=shuffle(range(n),r),pos=rowsOfPerson.map(y=>y*n+colOf[y]);
+    const vRoom=cells[pos[0]].room,withV=range(n).filter(p=>p>0&&cells[pos[p]].room===vRoom);
+    if(withV.length!==1)continue;
+    const murderer=withV[0];
+    const sus=shuffle(POOL.suspects,r).slice(0,n-1);
+    const people=[{name:'Het slachtoffer',victim:true},...sus.map(s=>({name:s.name,mono:s.mono}))];
+    const who=p=>p===0?'Het slachtoffer':people[p].name;
+    const verb=p=>p===0?'lag':'stond';
+    const RN=k=>L.names[k];
+    const adj=(c,t)=>[[1,0],[-1,0],[0,1],[0,-1]].some(([dx,dy])=>{const x=c.x+dx,y=c.y+dy;return x>=0&&y>=0&&x<n&&y<n&&cells[y*n+x].f===t});
+    const border=c=>c.x===0||c.y===0||c.x===n-1||c.y===n-1;
+    const pool=[];const add=(text,clue,w=0)=>pool.push({text,clue,k:r()+w});
+    for(let p=0;p<n;p++){const c=cells[pos[p]];
+      add(p===0?`Het slachtoffer werd gevonden in ${RN(c.room)}.`:`${who(p)} was in ${RN(c.room)}.`,{p,u:x=>x.room===c.room},p===murderer?.6:0);
+      for(const o of shuffle(roomList.filter(k=>k!==c.room),r).slice(0,2))add(`${who(p)} was niet in ${RN(o)}.`,{p,u:x=>x.room!==o},.25);
+      if(c.f==='c')add(`${who(p)} zat op een stoel.`,{p,u:x=>x.f==='c'});
+      if(c.f==='s')add(`${who(p)} zat op de bank.`,{p,u:x=>x.f==='s'});
+      if(c.f==='r')add(`${who(p)} ${verb(p)} op het tapijt.`,{p,u:x=>x.f==='r'});
+      if(c.f==='.')add(`${who(p)} ${verb(p)} niet op een stoel, bank of tapijt.`,{p,u:x=>x.f==='.'},.3);
+      for(const t of ['t','p','b','k']){if(adj(c,t))add(`${who(p)} ${verb(p)} naast ${FNAME[t]}.`,{p,u:x=>adj(x,t)},.05)}
+      if(!adj(c,'p'))add(`${who(p)} ${verb(p)} niet naast een plant.`,{p,u:x=>!adj(x,'p')},.35);
+      add(border(c)?`${who(p)} ${verb(p)} tegen de buitenmuur.`:`${who(p)} ${verb(p)} niet tegen de buitenmuur.`,{p,u:x=>border(x)===border(c)},.2);
+      if(p>0&&p!==murderer&&!range(n).some(q=>q!==p&&cells[pos[q]].room===c.room))add(`${who(p)} was alleen in de kamer.`,{alone:p},.15);
+    }
+    for(let a=1;a<n;a++)for(let b=a+1;b<n;b++){const ca=cells[pos[a]],cb=cells[pos[b]];
+      if(ca.room===cb.room)add(`${who(a)} en ${who(b)} waren in dezelfde kamer.`,{a,c:b,b:(x,y)=>x.room===y.room},.1);
+      if(r()<.35){const [hi,lo]=ca.y<cb.y?[a,b]:[b,a];add(`${who(hi)} stond hoger op de plattegrond dan ${who(lo)}.`,{a:hi,c:lo,b:(x,y)=>x.y<y.y},.4)}
+      if(r()<.35){const [le,ri]=ca.x<cb.x?[a,b]:[b,a];add(`${who(le)} stond verder naar links dan ${who(ri)}.`,{a:le,c:ri,b:(x,y)=>x.x<y.x},.4)}}
+    pool.sort((a,b)=>a.k-b.k);
+    let chosen=[];
+    for(const c of pool){chosen.push(c);if(kSolve(n,cells,n,chosen.map(x=>x.clue)).count===1)break}
+    if(kSolve(n,cells,n,chosen.map(x=>x.clue)).count!==1)continue;
+    for(const c of shuffle(chosen,r)){const rest=chosen.filter(x=>x!==c);if(kSolve(n,cells,n,rest.map(x=>x.clue)).count===1)chosen=rest}
+    if(n===6){for(const c of pool.filter(c=>/ was in /.test(c.text)&&!chosen.includes(c)).slice(0,2))chosen.push(c)}
+    return {seed,n,name:L.name,L,cells,roomList,people,pos,murderer,clues:shuffle(chosen,r).map(c=>c.text)};
+  }
+  return null;
+}
+const FIC={
+ c:'<path d="M7 21v-8h10v8M7 13V4M7 9h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+ s:'<path d="M3 18v-6a2 2 0 0 1 4 0v2h10v-2a2 2 0 0 1 4 0v6zM6 18v2M18 18v2M7 12V8h10v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>',
+ r:'<rect x="3" y="6" width="18" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 10h10M7 14h10" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>',
+ t:'<rect x="3" y="8" width="18" height="4" fill="currentColor"/><path d="M6 12v8M18 12v8" stroke="currentColor" stroke-width="2.5"/>',
+ p:'<path d="M8 15h8l-1 6H9z" fill="currentColor"/><path d="M12 15V9M12 11c-4 0-5-4-5-6 3 0 5 2 5 6zM12 9c0-4 2-6 5-6 0 3-1 6-5 6z" fill="currentColor"/>',
+ b:'<rect x="4" y="3" width="16" height="18" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 9h16M4 15h16M7 3v6M10 3v6M14 9v6M8 15v6M16 15v6" stroke="currentColor" stroke-width="1.6"/>',
+ k:'<rect x="4" y="3" width="16" height="18" fill="currentColor"/><path d="M12 4v16" stroke="var(--card)" stroke-width="1.5"/><circle cx="10" cy="12" r="1" fill="var(--card)"/><circle cx="14" cy="12" r="1" fill="var(--card)"/>'};
+const FLAB={c:'stoel',s:'bank',r:'tapijt',t:'tafel',p:'plant',b:'boekenkast',k:'kast'};
+const fsvg=f=>FIC[f]?`<svg viewBox="0 0 24 24" aria-hidden="true">${FIC[f]}</svg>`:'';
+const victimIcon=`<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 2.5" aria-hidden="true"><circle cx="16" cy="13" r="6"/><path d="M5 30c0-6 5-9 11-9s11 3 11 9"/></svg>`;
+const KMKEY='md-kamer',KMSKEY='md-kamer-stats';
+let KM=null,ks=null,ktool=0,kAskReveal=false;
+const saveKm=()=>store.set(KMKEY,ks);
+const kmStats=()=>store.get(KMSKEY)||{solved:0,streak:0};
+function kmStart(){const sv=store.get(KMKEY);if(sv&&sv.seed&&(sv.n===6||sv.n===7)){KM=kGen(sv.seed,sv.n);if(KM){ks=sv;renderKamer();return}}kmNew(Math.floor(Date.now()/864e5)%9999+1,6)}
+function kmNew(seed,n){KM=kGen(seed,n);let s=seed;while(!KM){s++;KM=kGen(s,n)}ks={seed:KM.seed,n,place:{},marks:[],struck:[],done:false,revealed:false,mistakes:0};ktool=0;kAskReveal=false;saveKm();renderKamer();window.scrollTo({top:0})}
+const ptoken=p=>`<span class="tok ${p===0?'v':''}">${p===0?victimIcon:svgOf(KM.people[p])}</span>`;
+function renderKamer(){
+  const P=$('pKamer'),n=KM.n,cells=KM.cells,occ={};
+  for(const [p,ci] of Object.entries(ks.place))occ[ci]=+p;
+  const ridx=Object.fromEntries(KM.roomList.map((k,i)=>[k,i]));
+  const st=kmStats();
+  const board=cells.map(c=>{const nb=(dx,dy)=>{const x=c.x+dx,y=c.y+dy;return x<0||y<0||x>=n||y>=n||cells[y*n+x].room!==c.room};
+    const bs=`border-top-width:${nb(0,-1)?3:1}px;border-left-width:${nb(-1,0)?3:1}px;border-right-width:${nb(1,0)?3:1}px;border-bottom-width:${nb(0,1)?3:1}px;background:var(--r${ridx[c.room]})`;
+    const o=occ[c.i];const mark=ks.marks.includes(c.i);
+    return `<button type="button" class="kcell ${c.stand?'':'blk'} ${mark?'x':''}" data-ci="${c.i}" style="${bs}" aria-label="${KM.L.names[c.room]}${c.f!=='.'?', '+FLAB[c.f]:''}${o!==undefined?', '+KM.people[o].name:''}">${c.f!=='.'?`<span class="f">${fsvg(c.f)}</span>`:''}${o!==undefined?ptoken(o):''}</button>`}).join('');
+  const pal=KM.people.map((p,i)=>`<button type="button" class="kp ${ktool===i?'on':''} ${ks.place[i]!==undefined?'placed':''}" data-tool="${i}">${ptoken(i)}<span>${p.name}</span></button>`).join('')+`<button type="button" class="kp ${ktool==='x'?'on':''}" data-tool="x"><span class="tok xx">✕</span><span>Kan niet</span></button>`;
+  const legend=KM.roomList.map((k,i)=>`<span class="chip"><i style="background:var(--r${i})"></i>${cap(KM.L.names[k].replace(/^(de|het) /,''))}</span>`).join('')+
+    [...new Set(cells.map(c=>c.f).filter(f=>f!=='.'))].map(f=>`<span class="chip"><span class="fi">${fsvg(f)}</span>${FLAB[f]}${STAND.includes(f)?'':' (bezet)'}</span>`).join('');
+  const clues=KM.clues.map((t,i)=>`<li class="clue${ks.struck.includes(i)?' done':''}" tabindex="0" data-kc="${i}">${t}</li>`).join('');
+  const m=KM.people[KM.murderer].name;
+  P.innerHTML=`<div class="controls"><div class="seg" role="group" aria-label="Grootte"><button id="km6" type="button" aria-pressed="${n===6}">Makkelijk 6×6</button><button id="km7" type="button" aria-pressed="${n===7}">Lastig 7×7</button></div><button class="btn" id="kmNew" type="button">Nieuwe puzzel</button></div>
+   <div class="stats">Opgelost: ${st.solved} · Reeks: ${st.streak}</div>
+   <div class="storyhead"><span class="kicker">Puzzel ${String(KM.seed).padStart(4,'0')} · ${n} personen</span><h3>${KM.name}</h3></div>
+   <p class="lead" style="font-size:16px">In ${KM.name} is iemand vermoord. Zet iedereen op de plattegrond: in elke rij en elke kolom staat precies één persoon, en niemand staat op een tafel, plant of kast. Wie alleen met het slachtoffer in een kamer was, is de dader.</p>
+   <div class="kpal" role="toolbar" aria-label="Kies wie je wilt neerzetten">${pal}</div>
+   <p class="msg" id="kmMsg">${ktool==='x'?'Tik op een vakje om een ✕ te zetten.':`Tik op een vakje om <b>${KM.people[ktool].name}</b> neer te zetten.`}</p>
+   <div class="kboard" style="--n:${n}">${board}</div>
+   <div class="klegend">${legend}</div>
+   <section class="cluebox"><h2>Aanwijzingen</h2><ul class="clues">${clues}</ul><p class="hint">Tik op een aanwijzing om hem af te strepen. ‘Naast’ betekent direct links, rechts, boven of onder.</p></section>
+   <div class="controls"><button class="btn small" id="kmCheck" type="button">Controleer</button><button class="btn small" id="kmClear" type="button">Wis plattegrond</button></div>
+   <section class="accuse"><h2 style="margin:0">Wie was alleen met het slachtoffer?</h2>
+    <select id="kmAcc" aria-label="Kies de dader"><option value="">Kies…</option>${KM.people.slice(1).map((p,i)=>`<option value="${i+1}">${p.name}</option>`).join('')}</select>
+    <div class="controls"><button class="btn primary" id="kmAccBtn" type="button">Beschuldig</button><button class="btn" id="kmReveal" type="button">Toon oplossing</button></div>
+    ${kAskReveal?`<div class="spoiler"><p>Weet je het zeker? De puzzel telt dan niet mee voor je reeks.</p><div class="controls" style="justify-content:center"><button class="btn primary" id="kmYes" type="button">Ja, toon de oplossing</button><button class="btn" id="kmNo" type="button">Nee, verder puzzelen</button></div></div>`:''}
+    <div id="kmVerdict">${ks.done?(ks.revealed?`<div class="verdict bad"><p>Oplossing: <b>${m}</b> was alleen met het slachtoffer in ${KM.L.names[KM.cells[KM.pos[0]].room]}.</p></div>`:`<div class="verdict"><p>Goed gezien! <b>${m}</b> was alleen met het slachtoffer in ${KM.L.names[KM.cells[KM.pos[0]].room]}${ks.mistakes?`, na ${ks.mistakes} foute beschuldiging${ks.mistakes>1?'en':''}`:''}.</p></div>`):''}</div></section>`;
+  const msg=t=>{$('kmMsg').innerHTML=t};
+  P.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>{ktool=b.dataset.tool==='x'?'x':+b.dataset.tool;renderKamer()});
+  P.querySelectorAll('.kcell').forEach(b=>b.onclick=()=>{const ci=+b.dataset.ci,c=cells[ci];
+    if(ktool==='x'){if(occ[ci]!==undefined)return msg('Hier staat al iemand. Haal die persoon eerst weg.');ks.marks=ks.marks.includes(ci)?ks.marks.filter(x=>x!==ci):[...ks.marks,ci];saveKm();return renderKamer()}
+    if(!c.stand)return msg(`Daar kan niemand staan: daar staat ${FNAME[c.f]}.`);
+    if(ks.place[ktool]===ci){delete ks.place[ktool]}else{if(occ[ci]!==undefined)delete ks.place[occ[ci]];ks.place[ktool]=ci;ks.marks=ks.marks.filter(x=>x!==ci);
+      const next=KM.people.findIndex((_,i)=>ks.place[i]===undefined);if(next>=0)ktool=next}
+    saveKm();renderKamer()});
+  P.querySelectorAll('[data-kc]').forEach(li=>{li.onclick=()=>{const i=+li.dataset.kc;ks.struck=ks.struck.includes(i)?ks.struck.filter(x=>x!==i):[...ks.struck,i];li.classList.toggle('done');saveKm()};li.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();li.click()}}});
+  $('km6').onclick=()=>kmNew(1+Math.floor(Math.random()*9999),6);$('km7').onclick=()=>kmNew(1+Math.floor(Math.random()*9999),7);
+  $('kmNew').onclick=()=>kmNew(1+Math.floor(Math.random()*9999),n);
+  $('kmClear').onclick=()=>{ks.place={};ks.marks=[];saveKm();renderKamer()};
+  $('kmCheck').onclick=()=>{const placed=Object.entries(ks.place);if(!placed.length)return msg('Er staat nog niemand op de plattegrond.');
+    const rows={},cols={};let clash=0;for(const [,ci] of placed){const c=cells[ci];rows[c.y]=(rows[c.y]||0)+1;cols[c.x]=(cols[c.x]||0)+1}
+    clash=Object.values(rows).filter(v=>v>1).length+Object.values(cols).filter(v=>v>1).length;
+    const wrong=placed.filter(([p,ci])=>KM.pos[+p]!==ci).length;
+    msg(clash?`Let op: ${clash} rij${clash>1?'en of kolommen hebben':' of kolom heeft'} meer dan één persoon.`:wrong?`${wrong} van de ${placed.length} personen ${wrong>1?'staan':'staat'} nog niet goed.`:`Alle ${placed.length} geplaatste personen staan goed.`)};
+  $('kmAccBtn').onclick=()=>{if(ks.done)return;const v=$('kmAcc').value;if(!v)return;
+    if(+v===KM.murderer){ks.done=true;const x=kmStats();x.solved++;x.streak=ks.mistakes?0:x.streak+1;store.set(KMSKEY,x);ks.place=Object.fromEntries(KM.pos.map((ci,p)=>[p,ci]));saveKm();renderKamer()}
+    else{ks.mistakes++;saveKm();$('kmVerdict').innerHTML=`<div class="verdict bad"><p>Mis. ${KM.people[+v].name} was niet alleen met het slachtoffer. Kijk nog eens naar de plattegrond.</p></div>`}};
+  $('kmReveal').onclick=()=>{if(ks.done)return;kAskReveal=true;renderKamer()};
+  const no=$('kmNo');if(no)no.onclick=()=>{kAskReveal=false;renderKamer()};
+  const yes=$('kmYes');if(yes)yes.onclick=()=>{kAskReveal=false;ks.done=true;ks.revealed=true;ks.place=Object.fromEntries(KM.pos.map((ci,p)=>[p,ci]));const x=kmStats();x.streak=0;store.set(KMSKEY,x);saveKm();renderKamer()};
+}
+
 // ---------- uitleg ----------
 // Elk spel heeft hier één blok. Een nieuw spel krijgt een nieuw blok in deze lijst.
 const HELP=[
@@ -1715,7 +1902,17 @@ const HELP=[
    'Vergelijk alles met het <b>Bewijs</b>: bonnetjes, belgegevens, camerabeelden en brieven.',
    'Kies bij <b>Ontmaskeren</b> de dader, het bewijs en het motief. Pas daarna verbreek je het zegel en zie je je score en de oplossing.'],
   tips:['Maak een tijdlijn in het notitieblok. Begin bij het tijdstip van overlijden.','De dader heeft een motief, een middel en de gelegenheid.','Het belangrijkste detail staat soms gewoon op een foto.','Het rechercheurshandboek helpt bij je eerste dossier.'],
-  extra:()=>`${COLD.length} dossiers, elk ongeveer een uur speeltijd.`}
+  extra:()=>`${COLD.length} dossiers, elk ongeveer een uur speeltijd.`},
+ {g:'kamer',name:'Kamermoord',insp:'Puzzel op een plattegrond · in de stijl van het puzzelboek Murdoku',
+  what:'Een plattegrond met kamers en meubels. Er is iemand vermoord. Zet alle verdachten en het slachtoffer op de juiste plek. Wie als enige met het slachtoffer in dezelfde kamer was, is de dader.',
+  steps:['Kies <b>Makkelijk 6×6</b> of <b>Lastig 7×7</b>. Met <b>Nieuwe puzzel</b> krijg je een andere.',
+   'In elke rij en in elke kolom staat precies één persoon, net als bij sudoku.',
+   'Op een stoel, een bank of een tapijt kun je gewoon staan. Op een tafel, een plant, een boekenkast of een kast niet.',
+   'Kies bovenaan een persoon en tik op een vakje om hem neer te zetten. Tik nog een keer om hem weg te halen. Met <b>Kan niet</b> zet je een ✕ op vakjes die afvallen.',
+   'Gebruik de aanwijzingen. ‘Naast’ betekent direct links, rechts, boven of onder. Met <b>Controleer</b> zie je hoeveel personen al goed staan.',
+   'Weet je wie alleen was met het slachtoffer? Kies die persoon en tik op <b>Beschuldig</b>.'],
+  tips:['Begin met aanwijzingen die een persoon in één kamer of op één soort meubel zetten.','Zet ✕’en in rijen en kolommen die al bezet zijn. Dan zie je snel wat er overblijft.','Een rij of kolom met maar één vrij vakje? Daar moet iemand staan.','‘Was alleen in de kamer’ betekent dat niemand anders in die hele kamer stond.'],
+  extra:()=>'Duizenden puzzels op vijf plattegronden: een landhuis, een café, een museum, een hotel en een kasteel.'}
 ];
 function renderUitleg(){
   $('pUitleg').innerHTML=`<h2 class="bigtitle">Uitleg</h2>${PENCIL}
@@ -1750,7 +1947,7 @@ function setTab(t){st.tab=t;save();renderPanes();window.scrollTo({top:0})}
 function renderPanes(){
   const t=st.tab||'zaak';
   const g=game,M=g==='murdle';
-  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
+  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
   document.querySelector('.tabs').hidden=!M;document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('stats').hidden=!M;
   document.querySelectorAll('.games button').forEach(b=>b.setAttribute('aria-selected',b.dataset.g===g));
   if(g==='speur'&&!$('pVerhaal').innerHTML)renderStory();if(g==='koud'&&!$('pKoud').innerHTML)renderKoud();

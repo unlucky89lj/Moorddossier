@@ -116,7 +116,8 @@ td.e{border:0}
 .subtabs button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
 .tabs{display:flex;gap:4px;border-bottom:2px solid var(--ink);overflow-x:auto}
 .games{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
-@media (min-width:640px){.games{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:640px){.games{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:639px){.games button:last-child:nth-child(odd){grid-column:1/-1}}
 .games button{display:flex;flex-direction:column;gap:2px;align-items:flex-start;text-align:left;border:2px solid var(--ink);border-radius:16px;background:var(--card);color:var(--ink);padding:10px 14px;cursor:pointer;min-width:0}
 .games button b{font:800 clamp(12px,3.3vw,21px)/1.1 var(--cond);max-width:100%;letter-spacing:0!important;white-space:nowrap;text-transform:uppercase;letter-spacing:.02em}
 .games button span{font:500 13px/1.25 var(--cond);color:var(--muted);letter-spacing:.02em}
@@ -262,6 +263,46 @@ td.e{border:0}
 :root{--r0:#EADFC9;--r1:#D3E2D0;--r2:#E8D1CE;--r3:#D2DCEA;--r4:#E9E2C2;--r5:#DED2E9;--r6:#CDE3E1}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--r0:#3d3628;--r1:#29382a;--r2:#3f2b29;--r3:#283244;--r4:#3b3820;--r5:#352a41;--r6:#203837}}
 :root[data-theme="dark"]{--r0:#3d3628;--r1:#29382a;--r2:#3f2b29;--r3:#283244;--r4:#3b3820;--r5:#352a41;--r6:#203837}
+#pLandhuis .chapter .code{font:800 clamp(16px,4.8vw,22px)/1.35 var(--cond);letter-spacing:.1em;color:var(--red);margin:0;word-break:break-word;background:var(--card);border:1px solid var(--rule);padding:12px 14px;border-radius:8px}
+.lhmaze,.lhws{display:grid;grid-template-columns:repeat(var(--w),minmax(0,1fr));width:100%;max-width:380px;margin:0 auto;background:var(--card)}
+.lhmaze{border:3px solid var(--ink)}
+.mz{aspect-ratio:1;border:0 solid var(--ink);background:var(--card);color:var(--red);font:800 15px var(--cond);padding:0;cursor:pointer;min-width:0}
+.mz.on{background:var(--band)}
+.mz.head{background:var(--red);color:#fff}
+.lhws{border:2px solid var(--ink)}
+.ws{aspect-ratio:1;border:1px solid var(--rule);background:var(--card);color:var(--ink);font:700 clamp(13px,4vw,18px) var(--cond);padding:0;cursor:pointer;min-width:0}
+.ws.on{background:var(--ok);color:#fff}
+.ws.sel{background:var(--red);color:#fff}
+.wslist{display:flex;flex-wrap:wrap;gap:6px 14px;font:700 15px var(--cond);letter-spacing:.06em}
+.wslist .got{text-decoration:line-through;color:var(--muted)}
+.lhmap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;border:3px solid var(--ink);padding:4px;background:var(--ink);max-width:380px;margin:0 auto;width:100%}
+.rm{position:relative;aspect-ratio:1.25;border:0;background:var(--card);color:var(--ink);font:700 clamp(12px,3.6vw,15px) var(--cond);text-transform:uppercase;letter-spacing:.03em;cursor:pointer;padding:4px;min-width:0;overflow-wrap:anywhere}
+.rm.on{background:var(--band)}
+.rm b{position:absolute;top:4px;right:6px;width:20px;height:20px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-size:12px}
+.lhsud{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;max-width:300px;margin:0 auto;border:3px solid var(--ink)}
+.sd{position:relative;aspect-ratio:1;border:0 solid var(--ink);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--card);display:grid;place-items:center;cursor:pointer;padding:0;color:var(--ink)}
+.sd.giv{background:var(--band);cursor:default}
+.sd .tok{width:70%;height:70%}
+.sd.mk::before{content:"";position:absolute;top:4px;left:4px;width:14px;height:14px;border:2.5px solid var(--red);border-radius:50%;box-shadow:5px 5px 0 -3.5px var(--red)}
+.wheel{display:flex;align-items:center;gap:8px}
+.wheel .abc{flex:1;min-width:0}
+.wheel .abc tr:first-child td{color:var(--red)}
+.wheel .abc tr:last-child td{color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chipb{border:2px solid var(--ink);border-radius:999px;background:var(--card);color:var(--ink);padding:6px 12px;font:700 14px var(--cond);letter-spacing:.03em;cursor:pointer}
+.chipb.on{background:var(--ink);color:var(--page)}
+.safeclues{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.dials{display:flex;gap:14px;justify-content:center}
+.dial{display:flex;flex-direction:column;align-items:center;gap:6px}
+.dial span{display:grid;place-items:center;width:56px;height:64px;border:3px solid var(--ink);border-radius:10px;background:var(--card);font:800 34px var(--cond);font-variant-numeric:tabular-nums}
+.notebook{background:var(--card);border:2px solid var(--rule);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.nbg h4{font:800 15px var(--cond);text-transform:uppercase;letter-spacing:.06em;margin:0 0 6px}
+.nbi{display:flex;flex-wrap:wrap;gap:6px}
+.nb{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--rule);border-radius:999px;background:var(--page);color:var(--ink);padding:3px 10px 3px 4px;font:600 13px var(--cond);cursor:pointer}
+.nb .tok{width:22px;height:22px}
+.nb.off{text-decoration:line-through;opacity:.4}
+.notebook .nbg:last-child .nb{padding-left:10px}
+.mz:focus-visible,.ws:focus-visible,.rm:focus-visible,.sd:focus-visible,.chipb:focus-visible,.nb:focus-visible{outline:3px solid var(--red);outline-offset:1px}
 .kicker{font:700 13px var(--slab);text-transform:uppercase;letter-spacing:.12em;color:var(--red)}
 .storyhead{display:flex;flex-direction:column;gap:6px}
 .storyhead h3,.chapter h3{font:800 clamp(26px,7vw,34px)/1.05 var(--cond);text-transform:uppercase;margin:0;text-wrap:balance}
@@ -322,6 +363,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
     <button role="tab" type="button" data-g="speur"><b>Speurneus</b><span>Verhaal in hoofdstukken</span></button>
     <button role="tab" type="button" data-g="koud"><b>Cold Case</b><span>Politiedossiers zonder hints</span></button>
     <button role="tab" type="button" data-g="kamer"><b>Kamermoord</b><span>Puzzel op een plattegrond</span></button>
+    <button role="tab" type="button" data-g="landhuis"><b>Het Landhuis</b><span>Zeven puzzels, één moord</span></button>
   </div>
   <div class="stats" id="stats"></div>
 
@@ -381,6 +423,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <section class="pane" id="pVerhaal" hidden></section>
   <section class="pane" id="pKoud" hidden></section>
   <section class="pane" id="pKamer" hidden></section>
+  <section class="pane" id="pLandhuis" hidden></section>
   <section class="pane" id="pUitleg" hidden></section>
 
   <footer>Elke zaak wordt gegenereerd en heeft precies één oplossing.</footer>
@@ -1870,6 +1913,168 @@ function renderKamer(){
   const yes=$('kmYes');if(yes)yes.onclick=()=>{kAskReveal=false;ks.done=true;ks.revealed=true;ks.place=Object.fromEntries(KM.pos.map((ci,p)=>[p,ci]));const x=kmStats();x.streak=0;store.set(KMSKEY,x);saveKm();renderKamer()};
 }
 
+// ---------- het landhuis ----------
+const LHR=[['TORENKAMER','de torenkamer'],['BIBLIOTHEEK','de bibliotheek'],['SERRE','de serre'],['MUZIEKKAMER','de muziekkamer'],['HAL','de hal'],['EETZAAL','de eetzaal'],['STUDEERKAMER','de studeerkamer'],['WIJNKELDER','de wijnkelder'],['KEUKEN','de keuken']];
+const LHW=[{name:'de klomp',w:'KLOMP',mono:'KL'},{name:'de bierpul',w:'BIERPUL',mono:'BP'},{name:'de schaats',w:'SCHAATS',mono:'SC'},{name:'het vaasje',w:'VAASJE',mono:'DV'},{name:'de deegroller',w:'DEEGROLLER',mono:'RO'},{name:'de kaasschaaf',w:'KAASSCHAAF',mono:'KS'}];
+const LHV=['oom Bertus Lindenhof','tante Agatha Lindenhof','jonkheer Godfried Lindenhof','de oude butler Hendrik','barones Wilhelmina Lindenhof','neef Constantijn Lindenhof'];
+const LHE=['een stormachtige verjaardag','het jaarlijkse kerstdiner','de voorlezing van het testament','een chique tuinfeest','een avond vol bridge','het eerste sneeuwweekend van het jaar'];
+const LHP=[['doolhof','De geheime gang'],['woord','De wapenkamer'],['route','Voetsporen'],['sudoku','De speeltafel'],['cijfer','Een gecodeerd briefje'],['anagram','Een verscheurde envelop'],['kluis','De kluis']];
+function lhMaze(r,W,H){const cells=Array(W*H).fill(0),seen=Array(W*H).fill(false),st=[0];seen[0]=true;const D=[[0,-1,1,4],[1,0,2,8],[0,1,4,1],[-1,0,8,2]];
+  while(st.length){const c=st[st.length-1],x=c%W,y=Math.floor(c/W);const nb=shuffle(D,r).filter(([dx,dy])=>{const nx=x+dx,ny=y+dy;return nx>=0&&ny>=0&&nx<W&&ny<H&&!seen[ny*W+nx]});
+    if(!nb.length){st.pop();continue}const [dx,dy,b,ob]=nb[0],n=(y+dy)*W+x+dx;cells[c]|=b;cells[n]|=ob;seen[n]=true;st.push(n)}return cells}
+function lhWords(r,words,N){for(let tries=0;tries<200;tries++){const g=Array(N*N).fill(''),pl=[];let ok=true;
+  for(const w of words){let placed=false;for(let t=0;t<150&&!placed;t++){const [dx,dy]=pick([[1,0],[0,1],[1,1],[1,-1]],r);const L=w.length;
+    const x0=Math.floor(r()*N),y0=Math.floor(r()*N),x1=x0+dx*(L-1),y1=y0+dy*(L-1);if(x1<0||x1>=N||y1<0||y1>=N)continue;
+    let fit=true;for(let i=0;i<L;i++){const c=g[(y0+dy*i)*N+x0+dx*i];if(c&&c!==w[i]){fit=false;break}}if(!fit)continue;
+    const cells=[];for(let i=0;i<L;i++){const k=(y0+dy*i)*N+x0+dx*i;g[k]=w[i];cells.push(k)}pl.push({w,cells});placed=true}
+    if(!placed){ok=false;break}}
+  if(!ok)continue;const AB='AEIOUNRSTLKDMBGPHVJWZ';for(let i=0;i<g.length;i++)if(!g[i])g[i]=AB[Math.floor(r()*AB.length)];return {g,pl}}return null}
+function lhSudoku(r){const base=[[0,1,2,3],[2,3,0,1],[1,0,3,2],[3,2,1,0]];const sym=shuffle(range(4),r);
+  let rows=[...(r()<.5?[0,1]:[1,0]),...(r()<.5?[2,3]:[3,2])];if(r()<.5)rows=[rows[2],rows[3],rows[0],rows[1]];
+  let cols=[...(r()<.5?[0,1]:[1,0]),...(r()<.5?[2,3]:[3,2])];if(r()<.5)cols=[cols[2],cols[3],cols[0],cols[1]];
+  const sol=[];for(let y=0;y<4;y++)for(let x=0;x<4;x++)sol.push(sym[base[rows[y]][cols[x]]]);
+  const ok=(g,i,v)=>{const x=i%4,y=Math.floor(i/4);for(let k=0;k<4;k++){if(g[y*4+k]===v||g[k*4+x]===v)return false}const bx=x-x%2,by=y-y%2;for(let a=0;a<2;a++)for(let b=0;b<2;b++)if(g[(by+a)*4+bx+b]===v)return false;return true};
+  const count=g=>{const i=g.indexOf(-1);if(i<0)return 1;let n=0;for(let v=0;v<4;v++)if(ok(g,i,v)){g[i]=v;n+=count(g);g[i]=-1;if(n>1)break}return n};
+  let puz=sol.slice();for(const i of shuffle(range(16),r)){const k=puz[i];puz[i]=-1;if(count(puz.slice())!==1)puz[i]=k}return {sol,puz}}
+function lhSafe(r){const all=[];for(let a=1;a<10;a++)for(let b=1;b<10;b++)for(let c=1;c<10;c++)all.push([a,b,c]);
+  for(let t=0;t<200;t++){const d=pick(all,r);if(new Set(d).size<3)continue;const [a,b,c]=d;const pool=[];
+    pool.push([`Alle drie de cijfers samen zijn ${a+b+c}.`,x=>x[0]+x[1]+x[2]===a+b+c]);
+    pool.push([`Geen enkel cijfer komt twee keer voor.`,x=>new Set(x).size===3]);
+    if(a>c)pool.push([`Het eerste cijfer is ${a-c} groter dan het laatste.`,x=>x[0]-x[2]===a-c]);else pool.push([`Het laatste cijfer is ${c-a} groter dan het eerste.`,x=>x[2]-x[0]===c-a]);
+    if(b===2*a)pool.push([`Het middelste cijfer is het dubbele van het eerste.`,x=>x[1]===2*x[0]]);
+    if(b===a+c)pool.push([`Het middelste cijfer is het eerste plus het laatste.`,x=>x[1]===x[0]+x[2]]);
+    if(b>a&&b>c)pool.push([`Het middelste cijfer is het grootste.`,x=>x[1]>x[0]&&x[1]>x[2]]);
+    if(b<a&&b<c)pool.push([`Het middelste cijfer is het kleinste.`,x=>x[1]<x[0]&&x[1]<x[2]]);
+    pool.push([`Het eerste en het laatste cijfer vermenigvuldigd geven ${a*c}.`,x=>x[0]*x[2]===a*c]);
+    pool.push([b%2?`Het middelste cijfer is oneven.`:`Het middelste cijfer is even.`,x=>x[1]%2===b%2]);
+    const ch=[];let cand=all;for(const c2 of shuffle(pool,r)){const f=cand.filter(c2[1]);if(f.length<cand.length){ch.push(c2[0]);cand=f}if(cand.length===1)break}
+    if(cand.length===1&&ch.length<=4)return {code:d,clues:ch}}return {code:[1,2,3],clues:['Het eerste cijfer is 1.','Het tweede cijfer is 2.','Het derde cijfer is 3.']}}
+function lhGen(seed){const r=mulberry32(seed*6151+17);
+  const S=shuffle(POOL.suspects,r).slice(0,6),W=LHW.slice();
+  const sol={s:Math.floor(r()*6),w:Math.floor(r()*6)};
+  // route van 3 aangrenzende kamers, niet de plaats van de moord
+  let route=null,room=0;while(!route){room=Math.floor(r()*9);const start=Math.floor(r()*9);if(start===room)continue;const seq=[start];
+    for(let k=0;k<2;k++){const c=seq[seq.length-1],x=c%3,y=Math.floor(c/3);const nb=[[1,0],[-1,0],[0,1],[0,-1]].map(([dx,dy])=>[x+dx,y+dy]).filter(([a,b])=>a>=0&&b>=0&&a<3&&b<3).map(([a,b])=>b*3+a).filter(n=>n!==room&&!seq.includes(n));if(!nb.length)break;seq.push(pick(nb,r))}
+    if(seq.length===3)route=seq}
+  sol.r=room;
+  const iS=shuffle(range(6).filter(i=>i!==sol.s),r),iW=shuffle(range(6).filter(i=>i!==sol.w),r),iR=shuffle(range(9).filter(i=>i!==sol.r&&!route.includes(i)),r);
+  const maze=lhMaze(r,7,7);
+  const words=lhWords(r,iW.slice(0,4).map(i=>W[i].w),10);
+  let sud,markA,markB;do{sud=lhSudoku(r);markA=sud.sol.findIndex((v,i)=>v===0&&sud.puz[i]===-1);markB=sud.sol.findIndex((v,i)=>v===1&&sud.puz[i]===-1)}while(markA<0||markB<0);
+  const sudSyms=[iS[0],iS[1],...shuffle([iS[2],iS[3],iS[4]],r).slice(0,2)];
+  const shift=2+Math.floor(r()*7);const msg=`NIET IN DE ${LHR[iR[0]][0]} EN NIET IN DE ${LHR[iR[1]][0]}`;
+  const scram=nm=>{const L=[...nm.toUpperCase().replace(/[^A-Z]/g,'')];let s;do{s=shuffle(L,r).join('')}while(s===L.join(''));return s};
+  const safe=lhSafe(r);
+  return {seed,S,W,sol,route,maze,words,sud,sudSyms,marks:[markA,markB],shift,cipher:caesar(msg,shift),msg,cipRooms:[iR[0],iR[1]],mazeRooms:iR.slice(2,5),
+    anaS:[iS[3],iS[4]],ana:[scram(S[iS[3]].name),scram(S[iS[4]].name)],safe,safeW:iW[4],safeS:iS[2],
+    victim:pick(LHV,r),event:pick(LHE,r),wsW:iW.slice(0,4),sudS:[iS[0],iS[1]]};
+}
+function lhReward(G,k){const R=i=>LHR[i][1],Sn=i=>G.S[i].name,Wn=i=>G.W[i].name;
+  return {doolhof:`Aan het eind van de geheime gang hangt een lijstje van de butler: ‘Doorzocht en in orde: ${R(G.mazeRooms[0])}, ${R(G.mazeRooms[1])} en ${R(G.mazeRooms[2])}.’ Daar is het dus niet gebeurd.`,
+   woord:`Deze wapens hingen de hele avond netjes in de wapenkamer: ${G.wsW.map(Wn).join(', ')}. Daarmee is het niet gebeurd.`,
+   route:`De voetsporen van de tuinman lopen door ${R(G.route[0])}, ${R(G.route[1])} en ${R(G.route[2])}. Daar heeft hij de hele avond gewerkt, en niets gezien. Daar is het niet gebeurd.`,
+   sudoku:`In de vakjes met het vergrootglas staan ${Sn(G.sudS[0])} en ${Sn(G.sudS[1])}. Zij zaten de hele avond samen aan de speeltafel. Zij waren het niet.`,
+   cijfer:`Ontcijferd staat er: ‘${G.msg}.’ Dus niet in ${R(G.cipRooms[0])} en niet in ${R(G.cipRooms[1])}.`,
+   anagram:`Het zijn de namen van ${Sn(G.anaS[0])} en ${Sn(G.anaS[1])}. Volgens de chauffeur zaten zij samen in de auto naar het dorp. Zij waren het niet.`,
+   kluis:`In de kluis ligt een briefje: ‘${cap(Wn(G.safeW))} heb ik zelf opgeborgen, en ${Sn(G.safeS)} was de hele avond bij mij.’ Dus niet met ${Wn(G.safeW)}, en ${Sn(G.safeS)} was het niet.`}[k]}
+
+const LHKEY='md-landhuis',LHSKEY='md-landhuis-stats';
+let LG=null,lst=null,lhAsk=false;
+const saveLh=()=>store.set(LHKEY,lst);
+function lhStart(){const sv=store.get(LHKEY);if(sv&&sv.seed){LG=lhGen(sv.seed);lst=sv;renderLH();return}lhNew(Math.floor(Date.now()/864e5)%9999+1)}
+function lhNew(seed){LG=lhGen(seed);lst={seed,view:0,solved:[],skipped:[],path:[0],found:[],sel:null,sud:LG.sud.puz.slice(),k:0,cip:[],ana:[],safe:[1,1,1],seq:[],note:{s:[],w:[],r:[]},done:false,acc:null};lhAsk=false;saveLh();renderLH();window.scrollTo({top:0})}
+function lhSolve(i){if(!lst.solved.includes(i))lst.solved.push(i);saveLh();renderLH()}
+function lhPuzzle(i){const G=LG,[k,title]=LHP[i],solved=lst.solved.includes(i);let h='';
+  if(k==='doolhof'){const W=7,last=lst.path[lst.path.length-1];
+    h=`<p>Achter de boekenkast begint een geheime gang. Vind de weg van de <b>start</b> (linksboven) naar de <b>deur</b> (rechtsonder). Tik steeds op het vakje waar je naartoe wilt.</p>
+     <div class="lhmaze" style="--w:${W}">${G.maze.map((m,c)=>`<button type="button" class="mz ${lst.path.includes(c)?'on':''} ${c===last?'head':''}" data-mz="${c}" style="border-top-width:${m&1?0:3}px;border-right-width:${m&2?0:3}px;border-bottom-width:${m&4?0:3}px;border-left-width:${m&8?0:3}px" aria-label="vak ${c+1}">${c===0?'S':c===W*W-1?'D':''}</button>`).join('')}</div>`}
+  if(k==='woord'){const N=10;
+    h=`<p>In de wapenkamer hangt een bord vol letters. Vier van deze wapens staan erin: van links naar rechts, van boven naar beneden of schuin. Tik op de eerste en de laatste letter van een woord.</p>
+     <div class="lhws" style="--w:${N}">${G.words.g.map((ch,c)=>`<button type="button" class="ws ${lst.found.some(f=>G.words.pl[f].cells.includes(c))?'on':''} ${lst.sel===c?'sel':''}" data-ws="${c}">${ch}</button>`).join('')}</div>
+     <p class="wslist">${G.W.map(w=>`<span class="${lst.found.some(f=>G.words.pl[f].w===w.w)?'got':''}">${w.w}</span>`).join('')}</p>`}
+  if(k==='route'){const names=['links','rechts','omhoog','omlaag'];const dir=(a,b)=>{const dx=b%3-a%3,dy=Math.floor(b/3)-Math.floor(a/3);return dx===1?'één kamer naar rechts':dx===-1?'één kamer naar links':dy===1?'één kamer naar beneden':'één kamer naar boven'};
+    h=`<p>Op de vloer staan modderige voetsporen van de tuinman. Ze beginnen in ${LHR[G.route[0]][1]}, gaan dan ${dir(G.route[0],G.route[1])} en daarna ${dir(G.route[1],G.route[2])}. Tik de kamers aan in de volgorde van de voetsporen.</p>
+     <div class="lhmap">${LHR.map(([u,nm],c)=>`<button type="button" class="rm ${lst.seq.includes(c)?'on':''}" data-rm="${c}">${cap(nm.replace(/^de /,''))}${lst.seq.includes(c)?`<b>${lst.seq.indexOf(c)+1}</b>`:''}</button>`).join('')}</div>`}
+  if(k==='sudoku'){const sy=G.sudSyms;
+    h=`<p>Op de speeltafel ligt een half ingevuld puzzelbord. In elke rij, elke kolom en elk vak van 2×2 staat iedere verdachte precies één keer. Tik op een leeg vakje om een verdachte te kiezen.</p>
+     <div class="lhsud">${lst.sud.map((v,c)=>{const given=G.sud.puz[c]>=0,x=c%4,y=Math.floor(c/4);return `<button type="button" class="sd ${given?'giv':''} ${G.marks.includes(c)?'mk':''}" data-sd="${c}" style="border-right-width:${x===1?3:1}px;border-bottom-width:${y===1?3:1}px" ${given?'disabled':''}>${v>=0?`<span class="tok">${svgOf(G.S[sy[v]])}</span>`:''}</button>`}).join('')}</div>
+     <p class="hint">${sy.map(i=>G.S[i].name).join(' · ')}. Het vergrootglas wijst twee vakjes aan.</p>`}
+  if(k==='cijfer'){const sh=lst.k;
+    h=`<p>In de prullenbak vindt de inspecteur een briefje in geheimschrift. Draai aan het codewiel tot het bericht leesbaar wordt. Welke twee kamers staan erin?</p>
+     <p class="code" style="font-size:clamp(15px,4.4vw,20px)">${G.cipher}</p>
+     <div class="wheel"><button type="button" class="btn small" id="whm">−</button><div class="abc"><table><tr>${[...ABC].map(c=>`<td>${caesar(c,sh)}</td>`).join('')}</tr><tr>${[...ABC].map(c=>`<td>${c}</td>`).join('')}</tr></table></div><button type="button" class="btn small" id="whp">+</button></div>
+     <p class="hint">Bovenste rij: de letter op het briefje. Onderste rij: wat er eigenlijk staat. Verschuiving: ${sh}.</p>
+     <div class="chips">${LHR.map(([u,nm],c)=>`<button type="button" class="chipb ${lst.cip.includes(c)?'on':''}" data-cp="${c}">${cap(nm.replace(/^de /,''))}</button>`).join('')}</div>`}
+  if(k==='anagram'){h=`<p>Tussen de post zit een verscheurde envelop. Er staan twee namen op, maar de letters zijn door elkaar gehusseld. Welke twee verdachten zijn het?</p>
+     ${G.ana.map(a=>`<p class="code" style="font-size:clamp(14px,4.2vw,20px);letter-spacing:.12em">${a}</p>`).join('')}
+     <div class="chips">${G.S.map((s,c)=>`<button type="button" class="chipb ${lst.ana.includes(c)?'on':''}" data-an="${c}">${s.name}</button>`).join('')}</div>`}
+  if(k==='kluis'){h=`<p>In de studeerkamer staat een kluis met een cijferslot van drie cijfers (1 tot en met 9). Op de binnenkant van het bureaula staat:</p>
+     <ul class="safeclues">${G.safe.clues.map(c=>`<li>${c}</li>`).join('')}</ul>
+     <div class="dials">${lst.safe.map((d,j)=>`<div class="dial"><button type="button" class="btn small" data-du="${j}">▲</button><span>${d}</span><button type="button" class="btn small" data-dd="${j}">▼</button></div>`).join('')}</div>`}
+  const actions=solved?`<div class="verdict"><p><b>${lst.skipped.includes(i)?'Overgeslagen.':'Opgelost!'}</b> ${lhReward(G,k)}</p></div><div class="controls"><button class="btn primary" id="lhNext" type="button">${i===LHP.length-1?'Naar de beschuldiging':'Volgende puzzel'}</button></div>`
+    :`<div class="controls">${['cijfer','anagram','kluis'].includes(k)?`<button class="btn primary small" id="lhCheck" type="button">${k==='kluis'?'Open de kluis':'Controleer'}</button>`:''}<button class="btn small" id="lhSkip" type="button">Sla over</button></div>
+     ${lhAsk?`<div class="spoiler"><p>Overslaan? Je krijgt de aanwijzing dan zonder de puzzel op te lossen.</p><div class="controls" style="justify-content:center"><button class="btn primary" id="lhYes" type="button">Ja, sla over</button><button class="btn" id="lhNo" type="button">Nee</button></div></div>`:''}<p class="msg" id="lhMsg"></p>`;
+  return `<article class="chapter"><div class="kicker">Puzzel ${i+1} van ${LHP.length}</div><h3>${title}</h3>${h}${actions}</article>`}
+function lhNotebook(){const G=LG,n=lst.note;
+  const grp=(key,items,lab)=>`<div class="nbg"><h4>${lab}</h4><div class="nbi">${items.map((t,i)=>`<button type="button" class="nb ${n[key].includes(i)?'off':''}" data-nb="${key}${i}">${t}</button>`).join('')}</div></div>`;
+  return `<section class="notebook"><h2>Notitieblok</h2><p class="hint">Tik om weg te strepen.</p>
+   ${grp('s',G.S.map(s=>`<span class="tok">${svgOf(s)}</span>${s.name}`),'Wie')}${grp('w',G.W.map(w=>`<span class="tok">${svgOf(w)}</span>${cap(w.name)}`),'Waarmee')}${grp('r',LHR.map(r=>cap(r[1].replace(/^de /,''))),'Waar')}</section>`}
+function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let i=0;i<N;i++)if(!lst.solved.includes(i)){open=i;break}
+  const v=Math.min(lst.view??open,open),st=store.get(LHSKEY)||{solved:0,streak:0};
+  let dots='';for(let i=0;i<N;i++)dots+=`<button type="button" data-lp="${i}" class="${lst.solved.includes(i)?'done':''} ${i===v?'cur':''}" ${i>open?'disabled':''} aria-label="Puzzel ${i+1}">${lst.solved.includes(i)?'✓':i+1}</button>`;
+  dots+=`<button type="button" data-lp="${N}" class="${v===N?'cur':''}" aria-label="Beschuldiging">★</button>`;
+  let body;
+  if(v===N){const sel=(id,arr,lab)=>`<label for="${id}">${lab}</label><select id="${id}"><option value="">Kies…</option>${arr.map((o,i)=>`<option value="${i}">${o}</option>`).join('')}</select>`;
+    const ok=lst.acc&&lst.acc.s===G.sol.s&&lst.acc.w===G.sol.w&&lst.acc.r===G.sol.r;
+    body=`<article class="chapter"><div class="kicker">Beschuldiging</div><h3>Wie, waarmee en waar?</h3>
+     ${lst.solved.length<N?`<p class="hint">Je hebt nog niet alle puzzels opgelost. Je mag het toch proberen.</p>`:''}
+     ${lst.done?`<div class="verdict ${ok?'':'bad'}"><p>${ok?'Goed gezien!':'Helaas, mis.'} Het was <b>${G.S[G.sol.s].name}</b>, met <b>${G.W[G.sol.w].name}</b>, in <b>${LHR[G.sol.r][1]}</b>.${ok&&lst.skipped.length?` Je sloeg ${lst.skipped.length} puzzel${lst.skipped.length>1?'s':''} over.`:''}</p></div><div class="controls"><button class="btn primary" id="lhAgain" type="button">Nieuwe zaak</button></div>`
+     :`<div class="accuse2">${sel('lhS',G.S.map(s=>s.name),'Wie?')}${sel('lhW',G.W.map(w=>cap(w.name)),'Waarmee?')}${sel('lhR',LHR.map(r=>cap(r[1].replace(/^de /,''))),'Waar?')}<p class="msg" id="lhMsg"></p><div class="controls"><button class="btn primary" id="lhAcc" type="button">Beschuldig</button></div></div>`}</article>`;
+  }else body=lhPuzzle(v);
+  P.innerHTML=`<div class="controls"><button class="btn" id="lhNew" type="button">Nieuwe zaak</button></div><div class="stats">Opgelost: ${st.solved} · Reeks: ${st.streak}</div>
+   <div class="storyhead"><span class="kicker">Zaak ${String(G.seed).padStart(4,'0')} · Landhuis Lindenhof</span><h3>Moord in het landhuis</h3></div>
+   <p class="lead" style="font-size:16px">Tijdens ${G.event} wordt ${G.victim} dood gevonden. Zes gasten, zes mogelijke wapens, negen kamers. Los de puzzels op: elke puzzel streept iets weg. Wat overblijft, is de waarheid.</p>
+   <nav class="chapters" aria-label="Puzzels">${dots}</nav>${body}${lhNotebook()}`;
+  const on=(id,f)=>{const el=$(id);if(el)el.onclick=f};const msg=t=>{const m=$('lhMsg');if(m)m.textContent=t};
+  P.querySelectorAll('[data-lp]').forEach(b=>b.onclick=()=>{lst.view=+b.dataset.lp;lhAsk=false;saveLh();renderLH()});
+  P.querySelectorAll('[data-nb]').forEach(b=>b.onclick=()=>{const key=b.dataset.nb[0],i=+b.dataset.nb.slice(1);lst.note[key]=lst.note[key].includes(i)?lst.note[key].filter(x=>x!==i):[...lst.note[key],i];saveLh();b.classList.toggle('off')});
+  on('lhNew',()=>lhNew(1+Math.floor(Math.random()*9999)));on('lhAgain',()=>lhNew(1+Math.floor(Math.random()*9999)));
+  on('lhNext',()=>{lst.view=v+1;saveLh();renderLH()});
+  on('lhSkip',()=>{lhAsk=true;renderLH()});on('lhNo',()=>{lhAsk=false;renderLH()});
+  on('lhYes',()=>{lhAsk=false;lst.skipped.push(v);lhSolve(v)});
+  // doolhof
+  P.querySelectorAll('[data-mz]').forEach(b=>b.onclick=()=>{const c=+b.dataset.mz,W=7,path=lst.path,head=path[path.length-1];
+    if(path.includes(c)){lst.path=path.slice(0,path.indexOf(c)+1);saveLh();return renderLH()}
+    const m=G.maze[head],dx=c%W-head%W,dy=Math.floor(c/W)-Math.floor(head/W);
+    const open=(dx===1&&m&2)||(dx===-1&&m&8)||(dy===1&&m&4)||(dy===-1&&m&1);
+    if(Math.abs(dx)+Math.abs(dy)!==1||!open)return msg('Daar zit een muur. Je kunt alleen naar een aangrenzend vakje zonder muur.');
+    path.push(c);saveLh();if(c===W*W-1)return lhSolve(v);renderLH()});
+  // woordzoeker
+  P.querySelectorAll('[data-ws]').forEach(b=>b.onclick=()=>{const c=+b.dataset.ws;if(lst.sel===null){lst.sel=c;saveLh();return renderLH()}
+    const a=lst.sel;lst.sel=null;const hit=G.words.pl.findIndex(p=>(p.cells[0]===a&&p.cells[p.cells.length-1]===c)||(p.cells[0]===c&&p.cells[p.cells.length-1]===a));
+    if(hit>=0&&!lst.found.includes(hit)){lst.found.push(hit);saveLh();if(lst.found.length===G.words.pl.length)return lhSolve(v)}else{saveLh();renderLH();return msg('Daar staat geen wapen. Tik op de eerste en de laatste letter.')}
+    renderLH()});
+  // route
+  P.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{const c=+b.dataset.rm,exp=G.route[lst.seq.length];
+    if(c===exp){lst.seq.push(c);saveLh();if(lst.seq.length===3)return lhSolve(v);return renderLH()}
+    lst.seq=[];saveLh();renderLH();msg('Dat klopt niet met de voetsporen. Begin opnieuw bij de eerste kamer.')});
+  // sudoku
+  P.querySelectorAll('[data-sd]').forEach(b=>b.onclick=()=>{const c=+b.dataset.sd;lst.sud[c]=lst.sud[c]>=3?-1:lst.sud[c]+1;saveLh();
+    if(lst.sud.every(x=>x>=0)){if(lst.sud.every((x,i)=>x===G.sud.sol[i]))return lhSolve(v);renderLH();return msg('Het bord is vol, maar er staat iets dubbel. Kijk nog eens naar de rijen, kolommen en vakken.')}renderLH()});
+  // codewiel
+  on('whm',()=>{lst.k=(lst.k+25)%26;saveLh();renderLH()});on('whp',()=>{lst.k=(lst.k+1)%26;saveLh();renderLH()});
+  P.querySelectorAll('[data-cp]').forEach(b=>b.onclick=()=>{const c=+b.dataset.cp;lst.cip=lst.cip.includes(c)?lst.cip.filter(x=>x!==c):[...lst.cip,c].slice(-2);saveLh();renderLH()});
+  P.querySelectorAll('[data-an]').forEach(b=>b.onclick=()=>{const c=+b.dataset.an;lst.ana=lst.ana.includes(c)?lst.ana.filter(x=>x!==c):[...lst.ana,c].slice(-2);saveLh();renderLH()});
+  P.querySelectorAll('[data-du]').forEach(b=>b.onclick=()=>{const j=+b.dataset.du;lst.safe[j]=lst.safe[j]%9+1;saveLh();renderLH()});
+  P.querySelectorAll('[data-dd]').forEach(b=>b.onclick=()=>{const j=+b.dataset.dd;lst.safe[j]=(lst.safe[j]+7)%9+1;saveLh();renderLH()});
+  on('lhCheck',()=>{const k=LHP[v][0];const same=(a,b)=>a.length===b.length&&a.every(x=>b.includes(x));
+    if(k==='cijfer'){if(same(lst.cip,G.cipRooms))return lhSolve(v);return msg(lst.cip.length<2?'Kies twee kamers.':'Dat zijn niet de kamers uit het bericht. Draai verder aan het wiel.')}
+    if(k==='anagram'){if(same(lst.ana,G.anaS))return lhSolve(v);return msg(lst.ana.length<2?'Kies twee verdachten.':'Dat klopt niet. Tel de letters van de namen eens na.')}
+    if(k==='kluis'){if(lst.safe.every((d,j)=>d===G.safe.code[j]))return lhSolve(v);return msg('De kluis blijft dicht. Probeer het nog eens.')}});
+  on('lhAcc',()=>{const g=id=>$(id).value===''?null:+$(id).value;const a={s:g('lhS'),w:g('lhW'),r:g('lhR')};if(a.s===null||a.w===null||a.r===null)return msg('Kies wie, waarmee en waar.');
+    lst.acc=a;lst.done=true;const ok=a.s===G.sol.s&&a.w===G.sol.w&&a.r===G.sol.r;const x=store.get(LHSKEY)||{solved:0,streak:0};if(ok){x.solved++;x.streak++}else x.streak=0;store.set(LHSKEY,x);saveLh();renderLH()});
+}
+
 // ---------- uitleg ----------
 // Elk spel heeft hier één blok. Een nieuw spel krijgt een nieuw blok in deze lijst.
 const HELP=[
@@ -1912,7 +2117,16 @@ const HELP=[
    'Gebruik de aanwijzingen. ‘Naast’ betekent direct links, rechts, boven of onder. Met <b>Controleer</b> zie je hoeveel personen al goed staan.',
    'Weet je wie alleen was met het slachtoffer? Kies die persoon en tik op <b>Beschuldig</b>.'],
   tips:['Begin met aanwijzingen die een persoon in één kamer of op één soort meubel zetten.','Zet ✕’en in rijen en kolommen die al bezet zijn. Dan zie je snel wat er overblijft.','Een rij of kolom met maar één vrij vakje? Daar moet iemand staan.','‘Was alleen in de kamer’ betekent dat niemand anders in die hele kamer stond.'],
-  extra:()=>'Duizenden puzzels op vijf plattegronden: een landhuis, een café, een museum, een hotel en een kasteel.'}
+  extra:()=>'Duizenden puzzels op vijf plattegronden: een landhuis, een café, een museum, een hotel en een kasteel.'},
+ {g:'landhuis',name:'Het Landhuis',insp:'Puzzelmix · in de stijl van een moordmysterie-puzzelboek',
+  what:'In Landhuis Lindenhof is iemand vermoord. Er zijn zes verdachten, zes mogelijke wapens en negen kamers. Elke zaak heeft zeven verschillende puzzels. Elke opgeloste puzzel streept verdachten, wapens of kamers weg, tot er van elk precies één overblijft.',
+  steps:['Los de puzzels één voor één op: een doolhof, een woordzoeker, voetsporen, een sudoku met verdachten, een codewiel, anagrammen en een kluis.',
+   'Na elke puzzel krijg je een aanwijzing, zoals ‘niet in de serre’ of ‘deze twee zaten samen in de auto’.',
+   'Streep in het <b>notitieblok</b> onderaan weg wat afvalt.',
+   'Vast? Met <b>Sla over</b> krijg je de aanwijzing zonder de puzzel op te lossen.',
+   'Bij de ster (★) kies je wie, waarmee en waar, en tik je op <b>Beschuldig</b>.'],
+  tips:['Doolhof: tik op een vakje dat je al hebt bezocht om terug te gaan.','Woordzoeker: tik eerst op de eerste letter, dan op de laatste.','Codewiel: draai tot er Nederlandse woorden verschijnen.','Kluis: begin met de aanwijzing die de minste mogelijkheden overlaat.'],
+  extra:()=>'Elke zaak is anders: duizenden combinaties van daders, wapens, kamers en puzzels.'}
 ];
 function renderUitleg(){
   $('pUitleg').innerHTML=`<h2 class="bigtitle">Uitleg</h2>${PENCIL}
@@ -1947,7 +2161,7 @@ function setTab(t){st.tab=t;save();renderPanes();window.scrollTo({top:0})}
 function renderPanes(){
   const t=st.tab||'zaak';
   const g=game,M=g==='murdle';
-  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
+  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
   document.querySelector('.tabs').hidden=!M;document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('stats').hidden=!M;
   document.querySelectorAll('.games button').forEach(b=>b.setAttribute('aria-selected',b.dataset.g===g));
   if(g==='speur'&&!$('pVerhaal').innerHTML)renderStory();if(g==='koud'&&!$('pKoud').innerHTML)renderKoud();

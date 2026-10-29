@@ -119,10 +119,15 @@ td.e{border:0}
 @media (min-width:640px){.games{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:639px){.games button:last-child:nth-child(odd){grid-column:1/-1}}
 .games button{display:flex;flex-direction:column;gap:2px;align-items:flex-start;text-align:left;border:2px solid var(--ink);border-radius:16px;background:var(--card);color:var(--ink);padding:10px 14px;cursor:pointer;min-width:0}
-.games button b{font:800 clamp(12px,3.3vw,21px)/1.1 var(--cond);max-width:100%;letter-spacing:0!important;white-space:nowrap;text-transform:uppercase;letter-spacing:.02em}
+.games button b{font:800 clamp(12px,3.3vw,19px)/1.1 var(--cond);max-width:100%;letter-spacing:0!important;white-space:nowrap;text-transform:uppercase;letter-spacing:.02em}
 .games button span{font:500 13px/1.25 var(--cond);color:var(--muted);letter-spacing:.02em}
 .games button[aria-selected="true"]{background:var(--ink);color:var(--page)}
 .games button[aria-selected="true"] span{color:var(--band)}
+.games button b{display:flex;align-items:center;gap:6px}
+.games .gi{width:1.6em;height:1.6em;flex:none;color:var(--red)}
+@media (max-width:360px){.games button{padding:8px 9px}.games button b{gap:4px;font-size:11px}}
+.games button[aria-selected="true"] .gi [fill="var(--card)"]{fill:var(--ink)}
+.games button[aria-selected="true"] .gi [stroke="var(--card)"]{stroke:var(--ink)}
 .games button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
 .lead{margin:0;font-size:17px;max-width:60ch}
 .recap{margin:0;font-style:italic;color:var(--muted);border-left:3px solid var(--rule);padding-left:12px;max-width:65ch}
@@ -482,14 +487,14 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
     <button class="btn helpbtn" id="helpBtn" type="button" aria-pressed="false">? Uitleg</button>
   </div>
   <div class="games" role="tablist" aria-label="Kies een spel">
-    <button role="tab" type="button" data-g="murdle"><b>Moorddossier</b><span>Logicapuzzels met een rooster</span></button>
-    <button role="tab" type="button" data-g="speur"><b>Speurneus</b><span>Verhaal in hoofdstukken</span></button>
-    <button role="tab" type="button" data-g="koud"><b>Cold Case</b><span>Politiedossiers zonder hints</span></button>
-    <button role="tab" type="button" data-g="kamer"><b>Kamermoord</b><span>Puzzel op een plattegrond</span></button>
-    <button role="tab" type="button" data-g="landhuis"><b>Het Landhuis</b><span>Zeven puzzels, één moord</span></button>
-    <button role="tab" type="button" data-g="spion"><b>Spionage</b><span>Ontmasker de spion</span></button>
-    <button role="tab" type="button" data-g="bericht"><b>Laatste Bericht</b><span>Onderzoek de telefoon</span></button>
-    <button role="tab" type="button" data-g="dossier"><b>Dossiermap</b><span>Enveloppen vol bewijs</span></button>
+    <button role="tab" type="button" data-g="murdle"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 4.5l3 3M7.5 4.5l-3 3" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="12" r="1.8" fill="currentColor"/></svg>Moorddossier</b><span>Logicapuzzels met een rooster</span></button>
+    <button role="tab" type="button" data-g="speur"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M14.5 14.5L21 21" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>Speurneus</b><span>Verhaal in hoofdstukken</span></button>
+    <button role="tab" type="button" data-g="koud"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6a1 1 0 0 1 1-1h6l2 2h10a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" fill="currentColor"/><path d="M12 10l1 2.2 2.4.3-1.8 1.6.5 2.4-2.1-1.2-2.1 1.2.5-2.4-1.8-1.6 2.4-.3z" fill="var(--card)"/></svg>Cold Case</b><span>Politiedossiers zonder hints</span></button>
+    <button role="tab" type="button" data-g="kamer"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3v7M12 14v7M3 12h5M16 12h5" stroke="currentColor" stroke-width="2"/><path d="M15 6l3 3M18 6l-3 3" stroke="currentColor" stroke-width="1.8"/></svg>Kamermoord</b><span>Puzzel op een plattegrond</span></button>
+    <button role="tab" type="button" data-g="landhuis"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 11L12 3l10 8v10H2z" fill="currentColor"/><rect x="10" y="14" width="4" height="7" fill="var(--card)"/><rect x="5" y="12" width="3" height="3" fill="var(--card)"/><rect x="16" y="12" width="3" height="3" fill="var(--card)"/></svg>Het Landhuis</b><span>Zeven puzzels, één moord</span></button>
+    <button role="tab" type="button" data-g="spion"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11h18M6 11l1.5-6h9L18 11" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7.5" cy="16.5" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16.5" cy="16.5" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 16.5h3" stroke="currentColor" stroke-width="2"/></svg>Spionage</b><span>Ontmasker de spion</span></button>
+    <button role="tab" type="button" data-g="bericht"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 7h6v4h-3l-2 2v-2H9z" fill="currentColor"/><circle cx="12" cy="18.5" r="1.1" fill="currentColor"/></svg>Laatste Bericht</b><span>Onderzoek de telefoon</span></button>
+    <button role="tab" type="button" data-g="dossier"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="1.5" fill="currentColor"/><path d="M2.5 6.5L12 14l9.5-7.5" fill="none" stroke="var(--card)" stroke-width="1.6"/><circle cx="12" cy="14" r="2.6" fill="var(--red)" stroke="var(--card)" stroke-width="1"/></svg>Dossiermap</b><span>Enveloppen vol bewijs</span></button>
   </div>
   <div class="stats" id="stats"></div>
 

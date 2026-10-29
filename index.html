@@ -209,6 +209,16 @@ td.e{border:0}
 .solsteps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:10px}
 .solsteps li::marker{font:800 16px var(--cond);color:var(--red)}
 .casecard.file{border-style:solid;box-shadow:4px 4px 0 var(--rule)}
+.helpbtn{border-style:dashed;order:2;margin-left:auto}
+.top .logo{order:1}
+.top .controls{order:3;flex-basis:100%}
+.helpbtn[aria-pressed="true"]{background:var(--ink);color:var(--page);border-style:solid}
+.helpcard{background:var(--card);border:2px solid var(--ink);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.helpcard h3{font:800 26px/1.05 var(--cond);text-transform:uppercase;margin:0}
+.helpcard h4{font:800 16px var(--cond);text-transform:uppercase;letter-spacing:.05em;margin:6px 0 0}
+.helpcard p{margin:0;max-width:65ch}
+.helpcard ol,.helpcard ul{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;max-width:65ch}
+.helpcard ol li::marker{font:800 15px var(--cond);color:var(--red)}
 .kicker{font:700 13px var(--slab);text-transform:uppercase;letter-spacing:.12em;color:var(--red)}
 .storyhead{display:flex;flex-direction:column;gap:6px}
 .storyhead h3,.chapter h3{font:800 clamp(26px,7vw,34px)/1.05 var(--cond);text-transform:uppercase;margin:0;text-wrap:balance}
@@ -262,6 +272,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
       </div>
       <button class="btn" id="newCase" type="button">Nieuwe zaak</button>
     </div>
+    <button class="btn helpbtn" id="helpBtn" type="button" aria-pressed="false">? Uitleg</button>
   </div>
   <div class="games" role="tablist" aria-label="Kies een spel">
     <button role="tab" type="button" data-g="murdle"><b>Moorddossier</b><span>Logicapuzzels met een rooster</span></button>
@@ -325,6 +336,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <section class="pane" id="pOpl" hidden></section>
   <section class="pane" id="pVerhaal" hidden></section>
   <section class="pane" id="pKoud" hidden></section>
+  <section class="pane" id="pUitleg" hidden></section>
 
   <footer>Elke zaak wordt gegenereerd en heeft precies één oplossing.</footer>
 </div>
@@ -1261,6 +1273,57 @@ function renderKoud(){
   on('kReset',()=>{kd.cases[c.id]={tab:'rapport',notes:s.notes||'',acc:null,open:false};saveK();renderKoud()});
 }
 
+// ---------- uitleg ----------
+// Elk spel heeft hier één blok. Een nieuw spel krijgt een nieuw blok in deze lijst.
+const HELP=[
+ {g:'murdle',name:'Moorddossier',insp:'Logicapuzzel · in de stijl van het puzzelboek Murdle',
+  what:'Er is een moord gepleegd. Eén van de verdachten deed het, met één wapen, op één locatie. Met de aanwijzingen en een deductierooster ontdek je wie, waarmee en waar.',
+  steps:['Kies <b>Makkelijk</b> (3 verdachten) of <b>Lastig</b> (4 verdachten). Met <b>Nieuwe zaak</b> krijg je een andere puzzel.',
+   'Tik op <b>Verdachten</b>, <b>Wapens</b> of <b>Locaties</b> om de kaarten te bekijken. Daar staan kenmerken zoals lengte, links- of rechtshandig, oog- en haarkleur, gewicht en binnen of buiten.',
+   'Lees de aanwijzingen. Tik op een aanwijzing om hem af te strepen als je hem hebt gebruikt. Eén aanwijzing staat in geheimschrift: de sleutel staat bij Bewijsstuk A.',
+   'Vul het rooster in. Tik één keer voor ✕ (kan niet), twee keer voor ● (zeker) en drie keer om te wissen. Met <b>Controleer</b> zie je of wat je hebt ingevuld klopt.',
+   'Kies bij <b>Wie? Wat? Waar?</b> je antwoord en tik op <b>Beschuldig</b>.',
+   'Vast? Het tabblad <b>Tips</b> verraadt één feit. Bij <b>Oplossing</b> lees je de ontknoping, maar dan telt de zaak niet mee voor je reeks.'],
+  tips:['Begin met aanwijzingen die direct iets zeggen, zoals ‘X was in de bibliotheek’.','Iedereen had precies één wapen en was op precies één plek. Een ● in een rij betekent ✕ voor de rest van die rij en kolom.','De laatste aanwijzing vertelt waar het lichaam lag. Daar was de moordenaar.','Aanwijzingen over ‘iemand met blauwe ogen’ of ‘de langste verdachte’ los je op met de kaarten.'],
+  extra:()=>'Bijna 20.000 verschillende zaken. Je score en reeks worden bijgehouden.'},
+ {g:'speur',name:'Speurneus',insp:'Verhaal in hoofdstukken · in de stijl van de Cluehound-puzzelboeken',
+  what:'Een moordzaak als verhaal. Elk hoofdstuk heeft een bewijsstuk en een puzzel: een geheimschrift, een raadsel, een tijdlijn. Met het goede antwoord ga je verder, tot je de dader ontmaskert.',
+  steps:['Kies een zaak. Je ziet het niveau en hoeveel hoofdstukken hij heeft.',
+   'Lees het hoofdstuk en het bewijsstuk, en beantwoord de vraag. Hoofdletters, spaties en leestekens maken niet uit.',
+   'Per hoofdstuk heb je twee hints. Kom je er echt niet uit, dan kun je de oplossing bekijken.',
+   'Bovenaan elk hoofdstuk staat onder <b>Eerder</b> wat er net gebeurde. Met de bolletjes blader je terug naar eerdere hoofdstukken.',
+   'Het <b>Speurneus-handboek</b> legt alle geheimschriften uit: morse, verschuifcode, spiegelalfabet, Romeinse cijfers en meer.',
+   'Na het laatste hoofdstuk volgt de ontknoping.'],
+  tips:['Lees de tekst aan het eind van elk hoofdstuk goed. Daar staat vaak informatie die je later nodig hebt.','Soms moet je terugbladeren naar een detail uit een eerder hoofdstuk.','Gebruik het notitieblok voor tijden en namen.'],
+  extra:()=>`${CASES.length} zaken met samen ${CASES.reduce((n,c)=>n+c.ch.length,0)} hoofdstukken.`},
+ {g:'koud',name:'Cold Case',insp:'Politiedossiers · in de stijl van De Cold Case Dossiers',
+  what:'Een oude moordzaak die nooit is opgelost. Je krijgt het hele politiedossier en zoekt zelf uit wie het deed. Er zijn geen hints: alleen het dossier.',
+  steps:['Open een dossier en lees het <b>Rapport</b> van toen.',
+   'Lees de zes <b>Verhoren</b>. Iedereen liegt ergens over. Zoek de leugen die ertoe doet.',
+   'Bekijk de <b>Plaats delict</b>: een plattegrond met genummerde foto’s.',
+   'Lees de <b>Sectie</b>: hoe en wanneer stierf het slachtoffer?',
+   'Vergelijk alles met het <b>Bewijs</b>: bonnetjes, belgegevens, camerabeelden en brieven.',
+   'Kies bij <b>Ontmaskeren</b> de dader, het bewijs en het motief. Pas daarna verbreek je het zegel en zie je je score en de oplossing.'],
+  tips:['Maak een tijdlijn in het notitieblok. Begin bij het tijdstip van overlijden.','De dader heeft een motief, een middel en de gelegenheid.','Het belangrijkste detail staat soms gewoon op een foto.','Het rechercheurshandboek helpt bij je eerste dossier.'],
+  extra:()=>`${COLD.length} dossiers, elk ongeveer een uur speeltijd.`}
+];
+function renderUitleg(){
+  $('pUitleg').innerHTML=`<h2 class="bigtitle">Uitleg</h2>${PENCIL}
+   <p class="lead">In deze app zitten ${HELP.length} spellen. Hier lees je hoe ze werken. Komt er een nieuw spel bij, dan staat de uitleg hier ook.</p>
+   <section class="hb"><h4>Goed om te weten</h4><ul>
+    <li>Je voortgang, scores en notities worden bewaard op dit toestel. Je hebt geen account nodig.</li>
+    <li>Na de eerste keer werkt de app ook zonder internet.</li>
+    <li>Nieuwe versies komen er vanzelf in. Open de app een of twee keer opnieuw om ze te zien.</li>
+    <li>Met <b>? Uitleg</b> bovenaan kom je hier terug. Tik er nog een keer op om terug te gaan naar je spel.</li></ul></section>
+   ${HELP.map(h=>`<article class="helpcard"><span class="kicker">${h.insp}</span><h3>${h.name}</h3><p>${h.what}</p>
+     <h4>Zo speel je</h4><ol>${h.steps.map(x=>`<li>${x}</li>`).join('')}</ol>
+     <h4>Tips</h4><ul>${h.tips.map(x=>`<li>${x}</li>`).join('')}</ul>
+     <p class="hint">${h.extra()}</p>
+     <div class="controls"><button class="btn primary small" type="button" data-play="${h.g}">Speel ${h.name}</button></div></article>`).join('')}
+   <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Nieuwe spellen</h3><p>Er komen nog meer spellen en zaken bij. Elk nieuw spel krijgt hier zijn eigen uitleg. Heb je een idee voor een spel? Laat het weten.</p></article>`;
+  document.querySelectorAll('[data-play]').forEach(b=>b.onclick=()=>setGame(b.dataset.play));
+}
+
 function applySub(){
   const s=st.sub||'';
   $('subHint').hidden=!!s;
@@ -1277,7 +1340,7 @@ function setTab(t){st.tab=t;save();renderPanes();window.scrollTo({top:0})}
 function renderPanes(){
   const t=st.tab||'zaak';
   const g=game,M=g==='murdle';
-  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';
+  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
   document.querySelector('.tabs').hidden=!M;document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('stats').hidden=!M;
   document.querySelectorAll('.games button').forEach(b=>b.setAttribute('aria-selected',b.dataset.g===g));
   if(g==='speur'&&!$('pVerhaal').innerHTML)renderStory();if(g==='koud'&&!$('pKoud').innerHTML)renderKoud();
@@ -1362,6 +1425,7 @@ function wire(){
   $('reveal').onclick=()=>setTab('opl');
   document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.t));
   document.querySelectorAll('.games button').forEach(b=>b.onclick=()=>setGame(b.dataset.g));
+  $('helpBtn').onclick=()=>{if(game==='uitleg')setGame(store.get('md-lastgame')||'murdle');else{store.set('md-lastgame',game);setGame('uitleg')}};
   document.querySelectorAll('.subtabs button').forEach(b=>b.onclick=()=>{st.sub=st.sub===b.dataset.s?'':b.dataset.s;save();applySub()});
 }
 

@@ -1345,7 +1345,7 @@ function renderStory(){
         return `<article class="casecard">${polaroid(SIMG[c.id]&&SIMG[c.id].cover,c.title,'cover')}<span class="kicker">${c.level} · ${n} hoofdstukken</span><h3>${c.title}</h3><p>${c.blurb}</p>
         <div class="prog" aria-label="${k} van ${n} opgelost"><i style="width:${Math.round(k/n*100)}%"></i></div>
         <div class="controls"><span class="hint">${done?'Opgelost':k?`${k} van ${n} opgelost`:'Nog niet begonnen'}</span><button class="btn ${done?'':'primary'} small" type="button" data-case="${c.id}">${done?'Teruglezen':k?'Verder':'Begin'}</button></div></article>`}).join('')}
-        <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Nieuwe zaak</h3><p>Er komen meer zaken bij. Vraag maar om een nieuwe.</p></article></div>`;
+        <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Elke maandag nieuw</h3><p>Elke maandag komen er drie nieuwe zaken bij. Open de app daarna één of twee keer opnieuw om ze te zien.</p></article></div>`;
     document.querySelectorAll('[data-case]').forEach(b=>b.onclick=()=>goSpeur(b.dataset.case));
     $('spBook').onclick=()=>goSpeur('boek');
     saveS();return;
@@ -1771,7 +1771,7 @@ function renderKoud(){
      <div class="caselist">${COLD.map(c=>{const s=kstate(c.id),ok=s.open&&s.acc&&s.acc.d===c.answer.dader;
        return `<article class="casecard file">${polaroid(CIMG[c.id]&&CIMG[c.id].cover,`Dossier ${c.nr}`,'cover')}<span class="kicker">Dossier ${c.nr} · ${c.level} · ${c.time}</span><h3>${c.title}</h3><p>${c.blurb}</p>
        <div class="controls"><span class="hint">${s.open?(ok?'Opgelost':'Gesloten, dader gemist'):'Open zaak'}</span><button class="btn ${s.open?'':'primary'} small" type="button" data-cold="${c.id}">${s.open?'Teruglezen':'Open dossier'}</button></div></article>`}).join('')}
-      <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Meer dossiers</h3><p>Er komen meer zaken bij. Vraag maar om een nieuw dossier.</p></article></div>`;
+      <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Elke maandag nieuw</h3><p>Elke maandag komen er drie nieuwe dossiers bij. Open de app daarna één of twee keer opnieuw om ze te zien.</p></article></div>`;
     document.querySelectorAll('[data-cold]').forEach(b=>b.onclick=()=>goKoud(b.dataset.cold));
     $('kBook').onclick=()=>goKoud('boek');saveK();return;
   }
@@ -2449,7 +2449,7 @@ function phoneBody(C,s){
 function renderBericht(){const P=$('pBericht');
   if(!bd.cur){P.innerHTML=`<h2 class="bigtitle">Laatste Bericht</h2>${PENCIL}<p class="lead">In elke zaak krijg je de telefoon van het slachtoffer. Ontgrendel hem, lees de chats, luister de voicemail af, bekijk foto’s, mails en locaties, en ontdek wie het deed.</p>
     <div class="caselist">${BCASES.map(c=>{const s=bstate(c.id);return `<article class="casecard file"><span class="kicker">${c.level} · ${c.time}</span><h3>${c.title}</h3><p>${c.blurb}</p><div class="controls"><span class="hint">${s.open?(s.acc&&s.acc.d===c.answer.dader?'Opgelost':'Gesloten, dader gemist'):s.unlocked?'Telefoon ontgrendeld':'Open zaak'}</span><button class="btn ${s.open?'':'primary'} small" type="button" data-bcase="${c.id}">${s.open?'Teruglezen':'Open zaak'}</button></div></article>`}).join('')}
-    <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Meer telefoons</h3><p>Er komen meer zaken bij. Vraag maar om een nieuwe.</p></article></div>`;
+    <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Elke maandag nieuw</h3><p>Elke maandag komen er drie nieuwe telefoons bij. Open de app daarna één of twee keer opnieuw om ze te zien.</p></article></div>`;
     P.querySelectorAll('[data-bcase]').forEach(b=>b.onclick=()=>bGo(b.dataset.bcase));saveB();return}
   const C=BCASES.find(c=>c.id===bd.cur);if(!C)return bGo(null);const s=bstate(C.id);
   const sel=(id,arr,v)=>`<select id="${id}"><option value="">Kies…</option>${arr.map((o,i)=>`<option value="${i}" ${v===i?'selected':''}>${o}</option>`).join('')}</select>`;

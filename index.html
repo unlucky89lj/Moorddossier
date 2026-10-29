@@ -2698,7 +2698,7 @@ function renderDossier(){const P=$('pDossier');
      <div class="caselist">${DOSSIERS.map(c=>{const s=dstate(c.id),sc=s.done?c.qs.filter((q,i)=>s.ans[i]===q.a).length:0;
        return `<article class="casecard dm-card"><span class="dm-stamp">Vertrouwelijk</span>${polaroid(c.cover,`Dossier ${c.nr}`,'cover')}<span class="kicker">Dossier ${c.nr} · ${c.level} · ${c.time}</span><h3>${c.title}</h3><p>${c.blurb}</p>
        <div class="controls"><span class="hint">${s.done?`Gesloten · ${sc}/5 goed`:s.start?`${s.read.length}/${c.docs.length} stukken gelezen`:'Nog dicht'}</span><button class="btn ${s.done?'':'primary'} small" type="button" data-dcase="${c.id}">${s.done?'Teruglezen':s.start?'Verder':'Open map'}</button></div></article>`}).join('')}
-      <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Elke maandag nieuw</h3><p>Elke maandag komen er nieuwe dossiers bij. Open de app daarna één of twee keer opnieuw om ze te zien.</p></article></div>`;
+      <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Elke maandag nieuw</h3><p>Elke maandag komen er twee nieuwe dossiers bij. Open de app daarna één of twee keer opnieuw om ze te zien.</p></article></div>`;
     P.querySelectorAll('[data-dcase]').forEach(b=>b.onclick=()=>dGo(b.dataset.dcase));saveD();return}
   const C=DOSSIERS.find(c=>c.id===dd.cur);if(!C)return dGo(null);const s=dstate(C.id);
   const head=`<button class="btn small backbtn" id="dList" type="button">← Alle dossiers</button><div class="storyhead"><span class="kicker">Dossier ${C.nr} · ${C.level} · ${C.time}</span><h3>${C.title}</h3></div>`;

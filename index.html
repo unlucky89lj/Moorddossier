@@ -2856,7 +2856,7 @@ function renderUitleg(){
     <li>Je voortgang, scores en notities worden bewaard op dit toestel. Je hebt geen account nodig.</li>
     <li>Na de eerste keer werkt de app ook zonder internet.</li>
     <li>Nieuwe versies komen er vanzelf in. De app ververst zichzelf als je hem opent.</li>
-    <li>Met <b>? Uitleg</b> bovenaan kom je hier terug. Tik er nog een keer op om terug te gaan naar je spel.</li></ul></div></details>
+    <li>Met <b>? Uitleg</b> bovenaan kom je hier. Met <b>← Terug</b> ga je weer naar je spel.</li></ul></div></details>
    ${HELP.map(h=>{const ic=document.querySelector(`.games [data-g="${h.g}"] .gi`);return `<details class="helpcard hd"><summary><span class="hs-ic">${ic?ic.outerHTML:''}</span><span class="hs-t"><h3>${h.name}</h3><span class="kicker">${h.insp}</span></span></summary><div class="hd-body"><p>${h.what}</p>
      <h4>Zo speel je</h4><ol>${h.steps.map(x=>`<li>${x}</li>`).join('')}</ol>
      <h4>Tips</h4><ul>${h.tips.map(x=>`<li>${x}</li>`).join('')}</ul>
@@ -2883,7 +2883,7 @@ function renderPanes(){
   const t=st.tab||'zaak';
   const g=game,M=g==='murdle';
   $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';$('pBericht').hidden=g!=='bericht';$('pDossier').hidden=g!=='dossier';if(g==='dossier'&&!$('pDossier').innerHTML)renderDossier();if(g==='bericht'&&!$('pBericht').innerHTML)renderBericht();if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
-  document.querySelector('.tabs').hidden=!M;document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('stats').hidden=!M;
+  document.querySelector('.tabs').hidden=!M;document.querySelector('.games').hidden=g==='uitleg';$('helpBtn').textContent=g==='uitleg'?'← Terug':'? Uitleg';document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('stats').hidden=!M;
   document.querySelectorAll('.games button').forEach(b=>b.setAttribute('aria-selected',b.dataset.g===g));
   if(g==='speur'&&!$('pVerhaal').innerHTML)renderStory();if(g==='koud'&&!$('pKoud').innerHTML)renderKoud();
   document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===t));
@@ -2983,7 +2983,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261029224523';
+const APPV='20261029224847';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

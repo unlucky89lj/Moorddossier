@@ -406,6 +406,66 @@ td.e{border:0}
 .spoiler p{margin:0;max-width:44ch}
 footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Dossiermap */
+:root{--kraft:#C9A56E;--kraft-d:#A8844E;--paper:#FFFDF6;--paper-ink:#24221E}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--kraft:#8A6D43;--kraft-d:#6B5432;--paper:#E9E4D6;--paper-ink:#1E1C18}}
+:root[data-theme="dark"]{--kraft:#8A6D43;--kraft-d:#6B5432;--paper:#E9E4D6;--paper-ink:#1E1C18}
+.dm-card{position:relative;overflow:hidden}
+.dm-stamp{position:absolute;top:18px;right:-34px;transform:rotate(30deg);background:var(--red);color:#fff;font:800 12px var(--cond);letter-spacing:.12em;text-transform:uppercase;padding:3px 40px;z-index:2}
+.dm-envs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.dm-env{position:relative;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;min-height:120px;border:0;border-radius:6px;background:var(--kraft);color:#2a2116;padding:14px;overflow:hidden;font:inherit;text-align:left;box-shadow:0 2px 0 var(--kraft-d),0 6px 14px rgba(0,0,0,.18)}
+.dm-env.big{grid-column:1/-1;min-height:190px;cursor:pointer}
+.dm-env.wide{width:100%;min-height:170px}
+.dm-env.shut{opacity:.75}
+.dm-env:not(.big) .dm-label{font-size:clamp(18px,5.6vw,28px)}
+.dm-flap{position:absolute;inset:0 0 auto 0;height:58%;background:var(--kraft-d);clip-path:polygon(0 0,100% 0,50% 100%);opacity:.55}
+.dm-label{position:relative;font:800 clamp(24px,7vw,34px)/1 var(--cond);letter-spacing:.06em}
+.dm-label small{display:block;font:700 13px var(--cond);letter-spacing:.1em;text-transform:uppercase;opacity:.75;margin-bottom:2px}
+.dm-seal{position:absolute;top:calc(58% - 28px);left:50%;margin-left:-28px;width:56px;height:56px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font:800 13px var(--cond);text-transform:uppercase;letter-spacing:.06em;box-shadow:0 2px 4px rgba(0,0,0,.3)}
+.dm-env:focus-visible,.dm-thumb:focus-visible,.dm-hbtn:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.sheet{background:var(--paper);color:var(--paper-ink);border-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,.2),0 8px 20px rgba(0,0,0,.14);padding:0 0 6px;scroll-margin-top:12px}
+.sheet header{display:flex;flex-direction:column;gap:2px;padding:12px 16px;border-bottom:2px solid var(--paper-ink)}
+.sheet header span{font:700 12px var(--cond);letter-spacing:.12em;text-transform:uppercase;color:#8A2A1A}
+.sheet header b{font:700 20px/1.15 var(--slab)}
+.sheet-body{padding:10px 16px;font-size:15.5px;overflow-wrap:anywhere}
+.sheet-body p{margin:0 0 10px}.sheet-body ul{margin:0 0 10px;padding-left:20px}.sheet-body li{margin-bottom:4px}
+.sheet .mono{font:600 13px/1.4 ui-monospace,"Courier New",monospace;letter-spacing:.04em}
+.sheet .hand{font:600 22px/1.2 "Caveat","Segoe Print",cursive;color:#1D3F8C}
+.sheet .hand.note{transform:rotate(-2deg);margin-top:8px}
+.sheet .qa{border-left:3px solid #CFC8B4;padding-left:10px}
+.dm-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:10px}
+.dm-table th{text-align:left;font:700 12px var(--cond);text-transform:uppercase;letter-spacing:.08em;border-bottom:2px solid var(--paper-ink);padding:4px 6px}
+.dm-table th,.dm-table td:first-child,.dm-table td:last-child{white-space:nowrap}
+.dm-table td{border-bottom:1px solid #D8D2C0;padding:5px 6px;vertical-align:top}
+.dm-table td.hand{font-size:18px;padding:2px 6px}
+.dm-table tr.circ td{background:rgba(194,50,31,.08);outline:2px solid rgba(194,50,31,.55);outline-offset:-2px}
+.dm-bon{font:600 14px/1.45 ui-monospace,"Courier New",monospace;background:#fff;color:#222;max-width:260px;margin:4px auto 10px;padding:14px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+.dm-agenda p{display:grid;grid-template-columns:86px minmax(0,1fr);gap:8px;border-bottom:1px solid #D8D2C0;padding:6px 0;margin:0}
+.dm-agenda b{font:700 13px var(--cond);text-transform:uppercase;letter-spacing:.06em;padding-top:4px}
+.dm-photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;padding:12px 16px 0}
+.dm-nav{display:grid;grid-template-columns:auto auto auto auto;justify-content:space-between;gap:6px}
+.dm-nav .btn[disabled]{opacity:.35;cursor:default}
+.dm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:640px){.dm-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.dm-thumb{position:relative;display:flex;flex-direction:column;gap:2px;align-items:flex-start;text-align:left;background:var(--paper);color:var(--paper-ink);border:0;border-radius:4px;padding:12px 12px 26px;min-height:104px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.2),0 4px 10px rgba(0,0,0,.12);font:inherit;min-width:0}
+.dm-thumb small{font:700 11px var(--cond);text-transform:uppercase;letter-spacing:.1em;color:#8A2A1A}
+.dm-thumb b{font:600 14px/1.25 var(--slab);overflow-wrap:anywhere}
+.dm-thumb .dm-nr{position:absolute;top:8px;right:10px;font:800 18px var(--cond);opacity:.35}
+.dm-thumb em{position:absolute;left:12px;bottom:6px;font:700 14px var(--cond);font-style:normal;color:var(--ok)}
+.dm-thumb.read{opacity:.82}
+.dm-thumb.cur{outline:3px solid var(--red);outline-offset:2px}
+.dm-q{background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.dm-q h4{margin:0;font:700 17px/1.3 var(--slab);display:flex;gap:10px}
+.dm-q h4 span{flex:none;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--page);display:grid;place-items:center;font:800 15px var(--cond)}
+.dm-q p{margin:0}
+.dm-q select{font:500 16px var(--serif);padding:10px;border:2px solid var(--ink);border-radius:10px;background:var(--page);color:var(--ink);width:100%}
+.dm-hint{background:var(--kraft);color:#2a2116;border-radius:6px;padding:10px 12px;font-size:15px}
+.dm-hint b{display:block;font:800 13px var(--cond);text-transform:uppercase;letter-spacing:.1em}
+.dm-hbtn{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;border:2px dashed var(--kraft-d);background:transparent;color:var(--ink);border-radius:8px;padding:6px 12px;font:700 14px var(--cond);text-transform:uppercase;letter-spacing:.05em;cursor:pointer}
+.dm-mini{width:22px;height:15px;background:var(--kraft);border-radius:2px;position:relative;overflow:hidden}
+.dm-mini::after{content:"";position:absolute;inset:0 0 40% 0;background:var(--kraft-d);clip-path:polygon(0 0,100% 0,50% 100%)}
+.solsteps li.good b{color:var(--ok)}.solsteps li.bad b{color:var(--red)}
 </style>
 </head>
 <body>
@@ -429,6 +489,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
     <button role="tab" type="button" data-g="landhuis"><b>Het Landhuis</b><span>Zeven puzzels, één moord</span></button>
     <button role="tab" type="button" data-g="spion"><b>Spionage</b><span>Ontmasker de spion</span></button>
     <button role="tab" type="button" data-g="bericht"><b>Laatste Bericht</b><span>Onderzoek de telefoon</span></button>
+    <button role="tab" type="button" data-g="dossier"><b>Dossiermap</b><span>Enveloppen vol bewijs</span></button>
   </div>
   <div class="stats" id="stats"></div>
 
@@ -491,6 +552,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <section class="pane" id="pLandhuis" hidden></section>
   <section class="pane" id="pSpion" hidden></section>
   <section class="pane" id="pBericht" hidden></section>
+  <section class="pane" id="pDossier" hidden></section>
   <section class="pane" id="pUitleg" hidden></section>
 
   <footer>Elke zaak wordt gegenereerd en heeft precies één oplossing.</footer>
@@ -2481,6 +2543,213 @@ function renderBericht(){const P=$('pBericht');
   on('bReset',()=>{bd.cases[C.id]={unlocked:true,app:null,sub:null,entry:'',notes:s.notes||'',acc:null,open:false,draft:null};saveB();renderBericht()});
 }
 
+
+// ---------- Dossiermap: dossier in enveloppen (start, stukken, vragen, hints, oplossing) ----------
+// Nieuwe dossiers achteraan toevoegen. Ids nooit wijzigen: de voortgang hangt eraan.
+PP.ring=d=>`<ellipse rx="${d||22}" ry="${(d||22)*.45}" fill="none" stroke="${PK.W}" stroke-width="2.5" stroke-dasharray="5 3"/>`;
+const DOSSIERS=[
+{id:'drukkerij',nr:'01',title:'Dood in de drukkerij',level:'Gemiddeld',time:'60 tot 90 minuten',
+ blurb:'Een drukker ligt onder aan zijn eigen trap. Iedereen denkt aan een val. De patholoog niet.',
+ cover:['wall',['stairs',150,150,1.2],['marker',200,182,1,1]],
+ start:`<p><b>Aan:</b> rechercheur van dienst<br><b>Van:</b> hoofdinspecteur M. Brandsma<br><b>Betreft:</b> overlijden A. Verhoeven, Lijnbaanstraat 14, Zwolle</p>
+  <p>Beste collega,</p>
+  <p>Maandagochtend 3 november is <b>Arnold Verhoeven</b> (61), eigenaar van Drukkerij Verhoeven, dood gevonden onder aan de ijzeren trap tussen de drukkerij en zijn kantoor. De eerste agenten dachten aan een ongeluk. De patholoog denkt daar anders over.</p>
+  <p>In deze map zit alles wat we tot nu toe hebben: het proces-verbaal, foto’s, het sectierapport, logboeken, verhoren en een paar stukken die we bij de verdachten hebben opgevraagd. Lees alles goed. Niet elk stuk is belangrijk, maar elk belangrijk stuk heb je nodig.</p>
+  <p>Ik wil vóór vrijdag antwoord op de <b>vijf vragen</b> op het antwoordformulier. Kom je vast te zitten, open dan een hint-envelop. Pas als alle vragen zijn beantwoord, mag de envelop met de oplossing open.</p>
+  <p class="hand">Succes. M.B.</p>`,
+ docs:[
+  {t:'Proces-verbaal',n:'Bevindingen op de plaats delict',h:`<p class="mono">PROCES-VERBAAL VAN BEVINDING · maandag 3 november</p>
+   <p>Om 06:52 uur kregen wij een melding van <b>Ruud Bakker</b>, chef drukker. Wij kwamen om 07:04 uur aan.</p>
+   <ul><li>Het slachtoffer lag op zijn buik onder aan de ijzeren trap van de drukkerij naar het kantoor op de eerste verdieping.</li>
+   <li>De voordeur was op slot. De achterdeur naar de steeg was dicht, maar niet op het nachtslot gedraaid.</li>
+   <li>Het alarm stond uit toen Bakker binnenkwam.</li>
+   <li>In het kantoor brandde de bureaulamp. Op het bureau stonden een <b>groene thermosfles</b> (halfvol, koffie met suiker) en een mok met koffieresten.</li>
+   <li>De koffieautomaat in de gang stond uit. De lekbak was droog.</li>
+   <li>Naast de lamp zat een <b>ronde, stofvrije plek</b> van ongeveer 7 cm doorsnee. Volgens Bakker stond daar altijd ‘het loodje’: een rond gietijzeren presse-papier uit 1925, het jaar dat de drukkerij werd geopend. Het loodje is nergens in het pand gevonden.</li>
+   <li>De bureau-agenda lag open op zondag 2 november (zie het stuk ‘Agenda’).</li>
+   <li>In de steeg achter de drukkerij zagen wij verse bandensporen van een auto met smalle banden.</li></ul>`},
+  {t:'Foto’s',n:'Plaats delict',photos:[
+   [['wall',['stairs',150,150,1.2],['marker',205,182,1,1]],'1 · onder aan de trap'],
+   [['desk',['thermos',105,160,1.2],['mug',165,165,1],['ring',225,150,1,20],['marker',225,186,1,2]],'2 · het bureau'],
+   [['mud',['tracks',150,150,1],['marker',235,178,1,3]],'3 · steeg achter de deur']],
+   h:`<p>Foto 1: het slachtoffer is weggehaald. Marker 1 is de plek van het hoofd, vlak naast de onderste traptrede.</p><p>Foto 2: de groene thermos, de mok en (marker 2) de stofvrije ronde plek.</p><p>Foto 3: verse bandensporen in de modder van de steeg, vlak bij de achterdeur.</p>`},
+  {t:'Sectierapport',n:'Uitwendige schouw en sectie',h:`<p class="mono">NEDERLANDS FORENSISCH LAB · SECTIE NR. 2611</p>
+   <p><b>Overledene:</b> A. Verhoeven, 61 jaar.</p>
+   <p><b>Doodsoorzaak:</b> schedel- en hersenletsel.</p>
+   <ul><li>Aan het <b>achterhoofd</b> twee verwondingen dicht bij elkaar, allebei <b>rond, ongeveer 7 cm doorsnee</b>. Het patroon past bij twee slagen met een zwaar, rond en plat voorwerp.</li>
+   <li>Het letsel past <b>niet</b> bij een val van de trap. De treden hebben scherpe ijzeren randen; die geven rechte wonden. Bij een val verwachten we ook letsel aan voorhoofd, handen of knieën. Dat ontbreekt.</li>
+   <li>Geen afweerletsel.</li>
+   <li>In het bloed een hoge concentratie <b>temazepam</b> (een slaapmiddel), ingenomen 30 tot 60 minuten voor het overlijden. Het slachtoffer was waarschijnlijk erg suf. Geen alcohol.</li>
+   <li>Maaginhoud: koffie met suiker. Geen voedsel van na ongeveer 18:00 uur.</li></ul>
+   <p><b>Tijdstip van overlijden:</b> zondag 2 november tussen 21:15 en 22:30 uur.</p>`},
+  {t:'Logboek',n:'Alarm en deuren, Drukkerij Verhoeven',h:`<table class="dm-table"><thead><tr><th>Tijd</th><th>Gebeurtenis</th></tr></thead><tbody>
+   <tr><td colspan="2"><b>Zondag 2 november</b></td></tr>
+   <tr><td>20:47</td><td>Alarm uitgeschakeld · code 03 · voordeur</td></tr>
+   <tr><td>20:48</td><td>Voordeur dicht</td></tr>
+   <tr><td>21:16</td><td>Achterdeur open</td></tr>
+   <tr><td>21:17</td><td>Achterdeur dicht</td></tr>
+   <tr><td>22:03</td><td>Achterdeur open</td></tr>
+   <tr><td>22:04</td><td>Achterdeur dicht</td></tr>
+   <tr><td colspan="2"><b>Maandag 3 november</b></td></tr>
+   <tr><td>06:49</td><td>Voordeur open (sleutel) · alarm stond uit</td></tr></tbody></table>
+   <p><b>Codes:</b> 01 S. Verhoeven · 02 R. Bakker · 03 A. Verhoeven · 04 I. de Wit · 05 schoonmaakbedrijf.</p>
+   <p>De achterdeur heeft geen code. Van buiten gaat hij alleen open met een sleutel, of als iemand binnen opendoet. Sleutels van de achterdeur: A. Verhoeven, S. Verhoeven en R. Bakker.</p>`},
+  {t:'Belgegevens',n:'Telefoon van Arnold Verhoeven, zondag',h:`<table class="dm-table"><thead><tr><th>Tijd</th><th>Richting</th><th>Nummer</th><th>Duur</th></tr></thead><tbody>
+   <tr><td>19:32</td><td>uit</td><td>Sanne (dochter)</td><td>geen gehoor</td></tr>
+   <tr><td>20:10</td><td>in</td><td>I. de Wit</td><td>1:48</td></tr>
+   <tr><td>21:05</td><td>in</td><td>Sanne (dochter)</td><td>4:12</td></tr>
+   <tr><td>21:51</td><td>in</td><td>Sanne (dochter)</td><td>gemist</td></tr></tbody></table>
+   <p>De telefoon lag in het kantoor op het bureau. Na 21:51 geen activiteit meer.</p>`},
+  {t:'Verhoor',n:'Sanne Verhoeven (34), dochter en mede-eigenaar',h:`<p class="qa"><b>V:</b> Waar was u zondagavond?<br><b>A:</b> Thuis in Kampen, met mijn vriend Ivo van Dam. We keken voetbal. Om tien uur hebben we pizza besteld.</p>
+   <p class="qa"><b>V:</b> Had u contact met uw vader?<br><b>A:</b> Ik belde hem om een paar minuten over negen. Hij zat op de zaak. Hij zei dat hij nog iemand verwachtte ‘voor iets wat niet kon wachten’. Wie, dat wilde hij niet zeggen. Hij klonk normaal, wel moe. Om tien voor tien belde ik nog een keer, want ik had er een raar gevoel over. Toen nam hij niet op.</p>
+   <p class="qa"><b>V:</b> Er ligt een bod op de drukkerij.<br><b>A:</b> Ja. Ik wil verkopen, hij niet. Daar hadden we ruzie over, dat weet iedereen. Maar ik zou hem nooit iets aandoen.</p>
+   <p class="qa"><b>V:</b> Op zijn bureau stond een groene thermosfles.<br><b>A:</b> Van hem? Nee. Pa dronk koffie uit de automaat, altijd uit dezelfde mok. Een thermos had hij niet.</p>
+   <p class="qa"><b>V:</b> Wat voor auto rijdt u?<br><b>A:</b> Een grijze Volvo.</p>`},
+  {t:'Bod',n:'Brief van Drukwerkgroep Noord',h:`<p class="mono">DRUKWERKGROEP NOORD B.V.</p><p>Geachte heer en mevrouw Verhoeven,</p>
+   <p>Graag bevestigen wij ons bod van <b>€ 1.200.000</b> voor de overname van Drukkerij Verhoeven, inclusief pand en machines. Het bod is geldig tot 15 november en kan alleen worden aanvaard met de handtekening van <b>beide eigenaren</b>.</p><p>Met vriendelijke groet,<br>J. Hofstede, directeur</p>
+   <p class="hand note">Nooit. A.V.</p>`},
+  {t:'Bon',n:'Pinbon bezorging, Kampen',h:`<div class="dm-bon"><b>PIZZERIA IL PONTE</b><br>Oudestraat · Kampen<br>Bezorging<br>----------------<br>2 × pizza · 1 × cola<br>Totaal € 31,50<br>----------------<br>Betaald aan de deur<br>mobiele betaalautomaat<br>zo 02-11 · <b>22:14</b><br>pas ****4471<br>S. VERHOEVEN<br>locatie: KAMPEN</div>`},
+  {t:'Verhoor',n:'Ruud Bakker (52), chef drukker',h:`<p class="qa"><b>V:</b> U vond het slachtoffer.<br><b>A:</b> Om tien voor zeven. Het alarm stond uit, dat was al raar. Toen zag ik hem liggen.</p>
+   <p class="qa"><b>V:</b> Waar was u zondagavond?<br><b>A:</b> Darten bij café De Pijl in Zwolle-Zuid. Competitie. Van acht uur tot na elven. Vraag het maar na.</p>
+   <p class="qa"><b>V:</b> U heeft een sleutel van de achterdeur.<br><b>A:</b> Al dertig jaar. Ik werk hier al dertig jaar.</p>
+   <p class="qa"><b>V:</b> Arnold wilde de oude pers wegdoen, hoorden we.<br><b>A:</b> Ja. En als Sanne verkoopt, ben ik mijn baan kwijt. Ik was kwaad, dat geef ik toe. Maar Arnold stond juist aan mijn kant.</p>
+   <p class="qa"><b>V:</b> Was er nog iets bijzonders de laatste tijd?<br><b>A:</b> Hij zat steeds in de boeken. Vorige week zei hij: ‘Ruud, er klopt iets niet met de cijfers.’ Meer wilde hij niet zeggen.</p>
+   <p class="qa"><b>V:</b> Kent u die groene thermos?<br><b>A:</b> Die is van Ilse, de boekhouder. Die sjouwt ze overal mee naartoe. Ze slaapt slecht sinds haar scheiding, zegt ze, en ze slikt er pillen voor.</p>
+   <p class="qa"><b>V:</b> Uw auto?<br><b>A:</b> De witte bus van de zaak.</p>`},
+  {t:'Formulier',n:'Wedstrijdformulier dartsclub De Pijl',h:`<p class="mono">COMPETITIE · DE PIJL – DE ROOS · zo 2 november</p>
+   <table class="dm-table"><thead><tr><th>Tijd</th><th>Partij</th><th>Paraaf</th></tr></thead><tbody>
+   <tr><td>20:05–20:30</td><td>P. Smit – K. Hoek</td><td class="hand">PS / KH</td></tr>
+   <tr><td>20:35–21:05</td><td>R. Bakker – T. Vos</td><td class="hand">RB / TV</td></tr>
+   <tr><td>21:10–21:40</td><td>J. Meijer – R. Bakker</td><td class="hand">JM / RB</td></tr>
+   <tr><td>21:45–22:10</td><td>Koppels: Bakker/Smit – Vos/Dijk</td><td class="hand">RB / TV</td></tr>
+   <tr><td>22:15–22:45</td><td>R. Bakker – E. Dijk</td><td class="hand">RB / ED</td></tr>
+   <tr><td>22:50–23:10</td><td>K. Hoek – J. Meijer</td><td class="hand">KH / JM</td></tr></tbody></table>
+   <p class="hand note">Alle spelers aanwezig tot de prijsuitreiking, 23:15. — wedstrijdleider H. Kok</p>`},
+  {t:'Verhoor',n:'Ilse de Wit (45), boekhouder',h:`<p class="qa"><b>V:</b> Sinds wanneer werkt u voor de drukkerij?<br><b>A:</b> Sinds 2019. Drie dagen per week. Ik doe de hele administratie.</p>
+   <p class="qa"><b>V:</b> Waar was u zondagavond?<br><b>A:</b> Thuis in Dalfsen. Alleen. Om tien uur lag ik in bed.</p>
+   <p class="qa"><b>V:</b> Had u dit weekend contact met Arnold?<br><b>A:</b> Nee. Ik heb hem sinds vrijdag niet gesproken.</p>
+   <p class="qa"><b>V:</b> Heeft u een groene thermosfles?<br><b>A:</b> Ik heb er wel een, ja. Die ligt thuis. Zulke flessen zijn er duizenden.</p>
+   <p class="qa"><b>V:</b> Gebruikt u medicijnen?<br><b>A:</b> Iets om te slapen. Wat heeft dat hiermee te maken?</p>
+   <p class="qa"><b>V:</b> Wat is IdW Advies?<br><b>A:</b> Mijn eigen bureautje. Ik doe ook werk voor andere klanten. Arnold wist daarvan.</p>
+   <p class="qa"><b>V:</b> Wat voor auto rijdt u?<br><b>A:</b> Een rode Fiat 500.</p>`},
+  {t:'Verhoor',n:'Marco Jansen (38), buurman aan de steeg',h:`<p class="qa"><b>V:</b> U woont boven de fietsenwinkel aan de steeg.<br><b>A:</b> Pal tegenover de achterdeur van de drukkerij. Die persen maken al jaren een herrie van jewelste. Ik heb vaak geklaagd.</p>
+   <p class="qa"><b>V:</b> In september zou u hebben gedreigd.<br><b>A:</b> Ik heb geroepen dat ik zijn pers nog eens in de gracht zou gooien. Dat was boosheid. Ik ben geen moordenaar.</p>
+   <p class="qa"><b>V:</b> Wat zag u zondagavond?<br><b>A:</b> Rond kwart over negen parkeerde een klein <b>rood</b> autootje in de steeg, vlak bij de achterdeur. Een vrouw stapte uit, denk ik. Donkere jas, iets in haar hand. Een fles of zo. Het kenteken zag ik niet.</p>
+   <p class="qa"><b>V:</b> Hoorde u iets?<br><b>A:</b> Rond kwart voor tien <b>twee doffe klappen</b>, vlak na elkaar. Ik dacht dat er weer een pers aanstond. Rond vijf over tien hoorde ik een auto starten. Toen ik later de vuilniszak buiten zette, was dat rode autootje weg.</p>
+   <p class="qa"><b>V:</b> Heeft u een auto?<br><b>A:</b> Nee. Ik doe alles op de fiets.</p>`},
+  {t:'Register',n:'Voertuigregister, opgevraagde kentekens',h:`<table class="dm-table"><thead><tr><th>Naam</th><th>Voertuig</th><th>Kleur</th></tr></thead><tbody>
+   <tr><td>A. Verhoeven</td><td>Mercedes E-klasse</td><td>zwart</td></tr>
+   <tr><td>S. Verhoeven</td><td>Volvo V60</td><td>grijs</td></tr>
+   <tr><td>I. van Dam</td><td>geen voertuig</td><td>–</td></tr>
+   <tr><td>R. Bakker</td><td>Ford Transit (bedrijfsbus)</td><td>wit</td></tr>
+   <tr><td>I. de Wit</td><td>Fiat 500</td><td>rood</td></tr>
+   <tr><td>M. Jansen</td><td>geen voertuig</td><td>–</td></tr></tbody></table>
+   <p>De zwarte Mercedes van het slachtoffer stond zondagavond voor de voordeur.</p>`},
+  {t:'Bankafschrift',n:'Zakelijke rekening, selectie juli tot oktober',h:`<table class="dm-table"><thead><tr><th>Datum</th><th>Omschrijving</th><th>€</th></tr></thead><tbody>
+   <tr><td>01-07</td><td>Papierhandel Oost · factuur 7712</td><td>−3.420</td></tr>
+   <tr class="circ"><td>05-07</td><td>IdW Advies · advieswerk · akkoord I. de Wit</td><td>−4.850</td></tr>
+   <tr><td>12-07</td><td>Energie Zwolle</td><td>−1.188</td></tr>
+   <tr class="circ"><td>05-08</td><td>IdW Advies · advieswerk · akkoord I. de Wit</td><td>−4.850</td></tr>
+   <tr><td>19-08</td><td>Inktcentrale · factuur 0931</td><td>−2.260</td></tr>
+   <tr class="circ"><td>05-09</td><td>IdW Advies · advieswerk · akkoord I. de Wit</td><td>−4.850</td></tr>
+   <tr><td>22-09</td><td>Gemeente Zwolle · aanslag</td><td>−940</td></tr>
+   <tr class="circ"><td>06-10</td><td>IdW Advies · advieswerk · akkoord I. de Wit</td><td>−4.850</td></tr></tbody></table>
+   <p class="hand note">Al 14 maanden zo?! Wie is IdW? NOOIT opdracht gegeven. A.V.</p>`},
+  {t:'Agenda',n:'Bureau-agenda van Arnold, week 44',h:`<div class="dm-agenda"><p><b>do 30 okt</b><span class="hand">accountant Hendriks bellen: IdW??</span></p>
+   <p><b>vr 31 okt</b><span class="hand">Ruud: pers 2 nakijken</span></p>
+   <p><b>za 1 nov</b><span class="hand">—</span></p>
+   <p><b>zo 2 nov</b><span class="hand">Sanne bellen i.v.m. bod<br>21u — I. — boeken!!</span></p>
+   <p><b>ma 3 nov</b><span class="hand">bank 10:00</span></p></div>
+   <p>Let op: Sannes vriend heet Ivo van Dam.</p>`},
+  {t:'Medisch',n:'Medische gegevens (op vordering opgevraagd)',h:`<p><b>Huisarts van A. Verhoeven:</b> gebruikt amlodipine 5 mg tegen hoge bloeddruk. Er is hem <b>nooit</b> een slaapmiddel voorgeschreven.</p>
+   <p><b>Apotheek Dalfsen, gegevens I. de Wit:</b> temazepam 20 mg, laatst afgeleverd op 24 oktober (30 tabletten).</p>
+   <p><b>Apotheek Kampen, gegevens S. Verhoeven:</b> geen medicijnen afgeleverd in de afgelopen twaalf maanden.</p>`}],
+ qs:[
+  {q:'Wie heeft Arnold Verhoeven vermoord?',o:['Sanne Verhoeven','Ivo van Dam','Ruud Bakker','Ilse de Wit','Marco Jansen'],a:3,
+   h:['Arnold verwachtte die avond bezoek. Wie had een afspraak met hem, en wie liegt over contact met hem? Leg de belgegevens naast de verhoren.','Ilse zegt dat ze Arnold dit weekend niet sprak, maar om 20:10 belde ze hem bijna twee minuten. Marco zag om kwart over negen een klein rood autootje. Kijk in het voertuigregister.'],
+   x:'Ilse de Wit. Zij loog over het telefoontje van 20:10, haar rode Fiat 500 stond in de steeg, de groene thermos is van haar en zij krijgt temazepam. De anderen hebben een alibi: Sanne betaalde om 22:14 aan de deur in Kampen, Ivo was bij haar, Ruud speelde om het half uur een partij darts, en Marco heeft geen auto.'},
+  {q:'Waarom moest Arnold dood?',o:['Hij weigerde de drukkerij te verkopen','Hij wilde Ruud ontslaan','Hij had ontdekt dat er geld verdween','Ruzie met de buurman over lawaai'],a:2,
+   h:['Ruud zegt dat Arnold de laatste weken ‘in de boeken zat’. Wat vond hij daar?','Kijk naar het bankafschrift: elke maand € 4.850 naar IdW Advies, steeds met akkoord van I. de Wit. Arnold schreef erbij dat hij nooit opdracht gaf.'],
+   x:'Arnold had ontdekt dat Ilse al 14 maanden € 4.850 per maand naar haar eigen bureau IdW Advies overmaakte. Op maandag om 10:00 had hij een afspraak bij de bank. Zondagavond om 21:00 stond ‘I. — boeken!!’ in zijn agenda: dat was het gesprek met Ilse.'},
+  {q:'Hoe werd Arnold eerst bedwelmd?',o:['Pillen in zijn eigen mok koffie uit de automaat','Slaapmiddel in koffie uit de groene thermosfles','Alcohol','Hij werd niet bedwelmd'],a:1,
+   h:['Het sectierapport vindt temazepam en koffie met suiker. Maar stond de koffieautomaat aan?','De automaat stond uit en de lekbak was droog. Arnold had geen thermos (Sanne). De groene thermos is van Ilse (Ruud), en de apotheek leverde haar temazepam.'],
+   x:'Ilse nam koffie mee in haar groene thermosfles, met temazepam erin. Ze schonk de koffie in Arnolds eigen mok. De koffieautomaat stond die avond uit, dus de koffie kwam niet daarvandaan.'},
+  {q:'Waarmee werd hij geslagen?',o:['Hij sloeg met zijn hoofd op de ijzeren traptrede','Met een hamer uit de drukkerij','Met het ronde gietijzeren presse-papier','Met de thermosfles'],a:2,
+   h:['De patholoog vond twee ronde wonden van ongeveer 7 cm. Wat in het kantoor was rond en 7 cm?','Het proces-verbaal en foto 2 tonen een stofvrije ronde plek van 7 cm op het bureau. Het ‘loodje’ is verdwenen.'],
+   x:'Met het loodje, het ronde gietijzeren presse-papier van 7 cm. De twee ronde wonden passen precies. De traptreden hebben scherpe randen en zouden rechte wonden geven. Ilse nam het loodje mee toen ze vertrok.'},
+  {q:'Hoe laat verliet de dader de drukkerij?',o:['20:48','21:17','21:45','22:03','06:49'],a:3,
+   h:['In het logboek gaat de achterdeur twee keer open. Bij de eerste keer kwam de bezoeker binnen.','21:16: Arnold laat zijn bezoek binnen (alleen hij kon van binnen opendoen). Rond 21:45 hoort Marco twee klappen. Om 22:03 gaat de achterdeur weer open, rond 22:05 start een auto.'],
+   x:'Om 22:03. Om 21:16 liet Arnold Ilse binnen via de achterdeur, want zij had daar geen sleutel van. Rond 21:45 sloeg ze toe (de twee klappen die Marco hoorde). Om 22:03 ging ze via de achterdeur weg en rond 22:05 reed haar rode Fiat de steeg uit.'}],
+ story:`Ilse de Wit sluisde al 14 maanden geld weg via haar eigen bureau IdW Advies. Arnold kwam erachter en vroeg haar zondagavond om negen uur naar de zaak te komen, een dag voor zijn afspraak bij de bank. Ilse belde hem om 20:10 om de afspraak te bevestigen. Ze nam haar groene thermos mee, met koffie en temazepam. Arnold liet haar om 21:16 binnen via de achterdeur. Toen hij suf werd, sloeg ze hem twee keer met het loodje van zijn bureau. Ze sleepte hem naar de trap zodat het op een val leek, en vertrok om 22:03 met het loodje. Maar de thermos bleef staan.`}
+];
+const DKEY='md-dossier';
+let dd=store.get(DKEY)||{cur:null,cases:{}};if(!dd.cases)dd={cur:null,cases:{}};
+const saveD=()=>store.set(DKEY,dd);
+const dstate=id=>(dd.cases[id]=dd.cases[id]||{start:false,tab:'stukken',doc:null,read:[],star:[],ans:{},hints:{},done:false,notes:''});
+let dAsk=false;
+const DRANK=[[5,'Hoofdinspecteur','Foutloos. Brandsma wil je in haar team.'],[4,'Rechercheur','Bijna perfect. Eén detail glipte erdoor.'],[3,'Agent','De grote lijn klopt, maar er ontbreken stukken.'],[0,'Stagiair','Lees het dossier nog eens rustig door.']];
+function dGo(c){dd.cur=c;dAsk=false;saveD();renderDossier();window.scrollTo({top:0})}
+function dDoc(C,i){const d=C.docs[i];
+  return `<article class="sheet" id="dSheet"><header><span>Stuk ${i+1} · ${d.t}</span><b>${d.n}</b></header>
+   ${d.photos?`<div class="dm-photos">${d.photos.map(([sp,l])=>polaroid(sp,l,'mini')).join('')}</div>`:''}<div class="sheet-body">${d.h}</div></article>`}
+function renderDossier(){const P=$('pDossier');
+  if(!dd.cur){
+    P.innerHTML=`<h2 class="bigtitle">Dossiermap</h2>${PENCIL}<p class="lead">Elk dossier is een map met enveloppen. Open de envelop <b>Start</b>, bestudeer alle stukken en beantwoord vijf vragen. Vast? Open een hint-envelop. Pas daarna mag de envelop met de oplossing open. Reken op een tot anderhalf uur per dossier.</p>
+     <div class="caselist">${DOSSIERS.map(c=>{const s=dstate(c.id),sc=s.done?c.qs.filter((q,i)=>s.ans[i]===q.a).length:0;
+       return `<article class="casecard dm-card"><span class="dm-stamp">Vertrouwelijk</span>${polaroid(c.cover,`Dossier ${c.nr}`,'cover')}<span class="kicker">Dossier ${c.nr} · ${c.level} · ${c.time}</span><h3>${c.title}</h3><p>${c.blurb}</p>
+       <div class="controls"><span class="hint">${s.done?`Gesloten · ${sc}/5 goed`:s.start?`${s.read.length}/${c.docs.length} stukken gelezen`:'Nog dicht'}</span><button class="btn ${s.done?'':'primary'} small" type="button" data-dcase="${c.id}">${s.done?'Teruglezen':s.start?'Verder':'Open map'}</button></div></article>`}).join('')}
+      <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Elke maandag nieuw</h3><p>Elke maandag komen er nieuwe dossiers bij. Open de app daarna één of twee keer opnieuw om ze te zien.</p></article></div>`;
+    P.querySelectorAll('[data-dcase]').forEach(b=>b.onclick=()=>dGo(b.dataset.dcase));saveD();return}
+  const C=DOSSIERS.find(c=>c.id===dd.cur);if(!C)return dGo(null);const s=dstate(C.id);
+  const head=`<button class="btn small backbtn" id="dList" type="button">← Alle dossiers</button><div class="storyhead"><span class="kicker">Dossier ${C.nr} · ${C.level} · ${C.time}</span><h3>${C.title}</h3></div>`;
+  if(!s.start){
+    P.innerHTML=`${head}<div class="dm-envs">
+     <button type="button" class="dm-env big" id="dOpen"><span class="dm-flap"></span><span class="dm-label"><small>Envelop 1</small>START</span><span class="dm-seal">Open</span></button>
+     <div class="dm-env shut"><span class="dm-flap"></span><span class="dm-label"><small>Envelop 2</small>HINTS</span></div>
+     <div class="dm-env shut"><span class="dm-flap"></span><span class="dm-label"><small>Envelop 3</small>OPLOSSING</span></div></div>
+     <p class="hint">Open eerst de envelop Start. De andere enveloppen blijven dicht tot je ze nodig hebt.</p>`;
+    $('dList').onclick=()=>dGo(null);$('dOpen').onclick=()=>{s.start=true;s.tab='brief';saveD();renderDossier()};return}
+  const t=s.tab||'stukken',answered=C.qs.filter((q,i)=>s.ans[i]!==undefined&&s.ans[i]!==null).length,hintsUsed=Object.values(s.hints).reduce((a,b)=>a+b,0);
+  const TABS=[['brief','Startbrief'],['stukken',`Stukken ${s.read.length}/${C.docs.length}`],['vragen',`Vragen ${answered}/5`],['oplossing',s.done?'Oplossing':'🔒 Oplossing']];
+  let body='';
+  if(t==='brief')body=`<article class="sheet letter"><header><span>Envelop 1 · Start</span><b>Opdracht</b></header><div class="sheet-body">${C.start}</div></article><div class="controls"><button class="btn primary" type="button" data-dtab="stukken">Naar de stukken →</button></div>`;
+  if(t==='stukken'){
+    body=(s.doc!==null&&s.doc!==undefined?`${dDoc(C,s.doc)}<div class="controls dm-nav"><button class="btn small" id="dPrev" type="button" ${s.doc===0?'disabled':''}>‹ Vorige</button><button class="btn small" id="dStar" type="button" aria-pressed="${s.star.includes(s.doc)}" aria-label="Markeer als belangrijk">${s.star.includes(s.doc)?'★':'☆'}</button><button class="btn small" id="dClose" type="button">Sluit</button><button class="btn small" id="dNext" type="button" ${s.doc===C.docs.length-1?'disabled':''}>Volgende ›</button></div>`:`<p class="hint">Tik op een stuk om het te lezen. Met ☆ markeer je stukken die je belangrijk vindt.</p>`)+
+     `<div class="dm-grid">${C.docs.map((d,i)=>`<button type="button" class="dm-thumb ${s.read.includes(i)?'read':''} ${s.doc===i?'cur':''}" data-doc="${i}"><span class="dm-nr">${i+1}</span><small>${d.t}</small><b>${d.n}</b><em>${s.star.includes(i)?'★':''}${s.read.includes(i)?' ✓':''}</em></button>`).join('')}</div>`}
+  if(t==='vragen'){
+    body=`<p class="hint">Je antwoorden worden meteen bewaard. Je kunt ze veranderen tot je de oplossing opent.</p>${C.qs.map((q,i)=>{const n=s.hints[i]||0;
+      return `<section class="dm-q"><h4><span>${i+1}</span>${q.q}</h4>${s.done?`<p><b>Jouw antwoord:</b> ${q.o[s.ans[i]]}</p>`:`<select data-q="${i}" aria-label="Antwoord op vraag ${i+1}"><option value="">Kies…</option>${q.o.map((o,k)=>`<option value="${k}" ${s.ans[i]===k?'selected':''}>${o}</option>`).join('')}</select>`}
+       ${q.h.slice(0,n).map((h,k)=>`<p class="dm-hint"><b>Hint ${k+1}</b> ${h}</p>`).join('')}
+       ${!s.done&&n<q.h.length?`<button type="button" class="dm-hbtn" data-hint="${i}"><span class="dm-mini"></span>Open hint-envelop ${i+1}${n?'B':'A'}</button>`:''}</section>`}).join('')}
+     <div class="controls"><button class="btn primary" type="button" data-dtab="oplossing">Naar de oplossing →</button></div>`}
+  if(t==='oplossing'){
+    if(!s.done){body=answered<5?`<div class="dm-env shut wide"><span class="dm-flap"></span><span class="dm-label"><small>Envelop 3</small>OPLOSSING</span></div><p class="msg">Beantwoord eerst alle vijf vragen. Nog ${5-answered} te gaan.</p><div class="controls"><button class="btn" type="button" data-dtab="vragen">Naar de vragen</button></div>`
+      :dAsk?`<div class="spoiler"><p>Weet je het zeker? Na het openen kun je je antwoorden niet meer veranderen.</p><div class="controls" style="justify-content:center"><button class="btn primary" id="dYes" type="button">Open de envelop</button><button class="btn" id="dNo" type="button">Nog even nadenken</button></div></div>`
+      :`<button type="button" class="dm-env big wide" id="dSeal"><span class="dm-flap"></span><span class="dm-label"><small>Envelop 3</small>OPLOSSING</span><span class="dm-seal">Open</span></button><p class="hint">Alle vragen zijn beantwoord. Je hebt ${hintsUsed} ${hintsUsed===1?'hint':'hints'} gebruikt.</p>`}
+    else{const sc=C.qs.filter((q,i)=>s.ans[i]===q.a).length,R=DRANK.find(r=>sc>=r[0]);
+      body=`<div class="verdict ${sc>=3?'':'bad'}"><p><b>${sc}/5 goed · ${R[1]}.</b> ${R[2]} Je gebruikte ${hintsUsed} ${hintsUsed===1?'hint':'hints'}.</p></div>
+       <ol class="solsteps">${C.qs.map((q,i)=>`<li class="${s.ans[i]===q.a?'good':'bad'}"><b>${s.ans[i]===q.a?'✓':'✗'} ${q.q}</b><br>Jij: ${q.o[s.ans[i]]}${s.ans[i]===q.a?'':` · Juist: ${q.o[q.a]}`}<br>${q.x}</li>`).join('')}</ol>
+       <h4 class="solh">Wat er gebeurde</h4><div class="verdict"><p>${C.story}</p></div>
+       <div class="controls"><button class="btn" id="dReset" type="button">Dossier opnieuw spelen</button></div>`}}
+  P.innerHTML=`${head}<nav class="ktabs" aria-label="Onderdelen van de map">${TABS.map(([k,l])=>`<button type="button" data-dtab="${k}" aria-pressed="${k===t}">${l}</button>`).join('')}</nav>
+   <div class="kbody">${body}</div>
+   <section class="notes"><label for="dNotes"><b>Notitieblok</b> <span class="hint">tijdlijn, alibi’s, leugens</span></label><textarea id="dNotes" rows="5" placeholder="Bijvoorbeeld: 21:16 achterdeur open, wie liet wie binnen?"></textarea></section>`;
+  const on=(id,f)=>{const el=$(id);if(el)el.onclick=f};
+  $('dNotes').value=s.notes||'';$('dNotes').oninput=e=>{s.notes=e.target.value;saveD()};
+  on('dList',()=>dGo(null));
+  P.querySelectorAll('[data-dtab]').forEach(b=>b.onclick=()=>{s.tab=b.dataset.dtab;dAsk=false;saveD();renderDossier();window.scrollTo({top:0})});
+  const openDoc=i=>{s.doc=i;if(!s.read.includes(i))s.read.push(i);saveD();renderDossier();const el=$('dSheet');if(el)el.scrollIntoView({block:'start'})};
+  P.querySelectorAll('[data-doc]').forEach(b=>b.onclick=()=>openDoc(+b.dataset.doc));
+  on('dPrev',()=>openDoc(s.doc-1));on('dNext',()=>openDoc(s.doc+1));on('dClose',()=>{s.doc=null;saveD();renderDossier()});
+  on('dStar',()=>{const i=s.doc;s.star=s.star.includes(i)?s.star.filter(x=>x!==i):[...s.star,i];saveD();renderDossier()});
+  P.querySelectorAll('[data-q]').forEach(el=>el.onchange=()=>{s.ans[el.dataset.q]=el.value===''?null:+el.value;saveD();
+    const n=C.qs.filter((q,i)=>s.ans[i]!==undefined&&s.ans[i]!==null).length,tb=P.querySelector('[data-dtab="vragen"]');if(tb)tb.textContent=`Vragen ${n}/5`});
+  P.querySelectorAll('[data-hint]').forEach(b=>b.onclick=()=>{const i=b.dataset.hint;s.hints[i]=(s.hints[i]||0)+1;saveD();renderDossier()});
+  on('dSeal',()=>{dAsk=true;renderDossier()});on('dNo',()=>{dAsk=false;renderDossier()});
+  on('dYes',()=>{s.done=true;dAsk=false;saveD();renderDossier()});
+  on('dReset',()=>{dd.cases[C.id]={start:true,tab:'stukken',doc:null,read:[],star:[],ans:{},hints:{},done:false,notes:s.notes||''};saveD();renderDossier()});
+}
+
 // ---------- uitleg ----------
 // Elk spel heeft hier één blok. Een nieuw spel krijgt een nieuw blok in deze lijst.
 const HELP=[
@@ -2550,7 +2819,16 @@ const HELP=[
    'Houd een tijdlijn bij in het notitieblok. Tijden in chats, foto’s en posts vertellen wie waar was.',
    'Bij <b>Conclusie</b> kies je de dader, het doorslaggevende bewijs en het motief. Daarna lees je de oplossing.'],
   tips:['Kijk goed naar de achtergrond van foto’s.','Iemand kan zich voordoen als iemand anders. Controleer dat met andere bronnen.','Een foto op social media heeft een tijd: dat is soms een alibi.'],
-  extra:()=>`${BCASES.length} zaken, elk ongeveer 45 tot 60 minuten.`}
+  extra:()=>`${BCASES.length} zaken, elk ongeveer 45 tot 60 minuten.`},
+ {g:'dossier',name:'Dossiermap',insp:'Dossier in enveloppen · in de stijl van de detectivedossiers die je thuis op tafel uitspreidt',
+  what:'Een complete politiemap met losse stukken: een proces-verbaal, foto’s, het sectierapport, logboeken, verhoren, bonnetjes en bankafschriften. Je beantwoordt vijf vragen over de zaak en controleert ze daarna met de envelop Oplossing.',
+  steps:['Open een dossier en daarna de envelop <b>Start</b>. Lees de startbrief van de hoofdinspecteur.',
+   'Bij <b>Stukken</b> tik je op een stuk om het te lezen. Met ‹ en › blader je verder. Met ☆ markeer je wat belangrijk is.',
+   'Bij <b>Vragen</b> kies je bij elke vraag een antwoord. Je antwoorden worden meteen bewaard.',
+   'Vast? Elke vraag heeft een hint-envelop A en B. B zegt meer dan A.',
+   'Zijn alle vijf vragen beantwoord, dan mag de envelop <b>Oplossing</b> open. Je ziet je score, wat je goed had en wat er echt gebeurde.'],
+  tips:['Maak in het notitieblok een tijdlijn. Logboeken, belgegevens en bonnetjes hebben allemaal tijden.','Zoek de leugen: zegt iemand iets wat een ander stuk tegenspreekt?','Niet elk stuk is belangrijk. Sommige verdachten blijken een stevig alibi te hebben.'],
+  extra:()=>`${DOSSIERS.length} ${DOSSIERS.length===1?'dossier':'dossiers'}, elk ongeveer een tot anderhalf uur.`}
 ];
 function renderUitleg(){
   $('pUitleg').innerHTML=`<h2 class="bigtitle">Uitleg</h2>${PENCIL}
@@ -2585,7 +2863,7 @@ function setTab(t){st.tab=t;save();renderPanes();window.scrollTo({top:0})}
 function renderPanes(){
   const t=st.tab||'zaak';
   const g=game,M=g==='murdle';
-  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';$('pBericht').hidden=g!=='bericht';if(g==='bericht'&&!$('pBericht').innerHTML)renderBericht();if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
+  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';$('pBericht').hidden=g!=='bericht';$('pDossier').hidden=g!=='dossier';if(g==='dossier'&&!$('pDossier').innerHTML)renderDossier();if(g==='bericht'&&!$('pBericht').innerHTML)renderBericht();if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
   document.querySelector('.tabs').hidden=!M;document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('stats').hidden=!M;
   document.querySelectorAll('.games button').forEach(b=>b.setAttribute('aria-selected',b.dataset.g===g));
   if(g==='speur'&&!$('pVerhaal').innerHTML)renderStory();if(g==='koud'&&!$('pKoud').innerHTML)renderKoud();

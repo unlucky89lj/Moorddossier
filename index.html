@@ -361,6 +361,8 @@ td.e{border:0}
 .ph-post p{margin:0}.ph-cm{color:var(--ph-mut);font-size:13.5px}
 .ph-mail{display:flex;flex-direction:column;gap:6px}.ph-mail span{color:var(--ph-mut);font-size:13px}.ph-mail p{margin:6px 0 0}.ph-att{color:#4a90ff!important}
 .ph-note{background:#2a2410;border-radius:12px;padding:10px 12px}.ph-note p{margin:4px 0 0}
+.ph-h{margin:8px 0 0;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--ph-mut)}
+.ic-erfcam{background:#2b2d33}.ic-gezond{background:#fff;color:#ff375f}.ic-bank{background:#0a7d5a}.ic-slot{background:#ff9f0a}
 .ph-tl{list-style:none;margin:0;padding:0 0 0 14px;border-left:2px solid #5a63e8;display:flex;flex-direction:column;gap:12px}
 .ph-tl li{display:flex;flex-direction:column}.ph-tl em{font-style:normal;color:#8f96ff;font-size:13px}.ph-tl span{color:var(--ph-mut);font-size:13px}
 .phone button:focus-visible{outline:3px solid #4a90ff;outline-offset:2px}
@@ -2277,6 +2279,10 @@ Object.assign(PP,{
  scooter:()=>`<circle cx="-30" cy="-12" r="12" fill="${PK.K}"/><circle cx="32" cy="-12" r="12" fill="${PK.K}"/><path d="M-30 -14H18L28 -40H36" stroke="${PK.D}" stroke-width="6" fill="none"/>${R(-44,-58,40,30,PK.P)}<text x="-24" y="-39" text-anchor="middle" font-size="9" font-family="Arial" font-weight="700" fill="${PK.K}">DE KADE</text>${R(-10,-30,26,8,PK.D)}`,
  dog:()=>`<ellipse cx="0" cy="-34" rx="34" ry="16" fill="${PK.D}"/><circle cx="34" cy="-52" r="13" fill="${PK.D}"/><ellipse cx="25" cy="-50" rx="6" ry="12" fill="${PK.K}" transform="rotate(15 25 -50)"/><ellipse cx="44" cy="-50" rx="5" ry="10" fill="${PK.K}" transform="rotate(-15 44 -50)"/><path d="M-24 -22v22M-12 -22v22M14 -22v22M24 -22v22" stroke="${PK.D}" stroke-width="6"/><path d="M-34 -40q-16 -10 -10 -26" stroke="${PK.D}" stroke-width="5" fill="none"/><circle cx="38" cy="-54" r="2" fill="${PK.W}"/>`,
  person:()=>`<circle cy="-112" r="15" fill="${PK.K}"/><path d="M-28 0V-70Q-28 -94 0 -94Q28 -94 28 -70V0Z" fill="${PK.K}"/>`,
+ horse:()=>`<path d="M-60 -50Q-40 -70 20 -66L50 -96Q62 -100 66 -90L72 -66Q60 -60 52 -64L44 -52Q40 -30 30 -30H-50Q-64 -34 -60 -50Z" fill="${PK.D}"/><path d="M-50 -32V0M-36 -32V0M18 -32V0M30 -32V0" stroke="${PK.D}" stroke-width="7"/><path d="M-60 -52Q-80 -40 -76 -16" stroke="${PK.K}" stroke-width="6" fill="none"/><path d="M44 -90Q36 -76 30 -66" stroke="${PK.K}" stroke-width="5"/>`,
+ syringe:()=>`<g transform="rotate(-15)">${R(-40,-10,56,10,PK.W,'opacity=".9"')}${R(16,-8,18,6,PK.P)}${R(-48,-12,8,14,PK.L)}<path d="M34 -5h22" stroke="${PK.W}" stroke-width="1.5"/></g>`,
+ trophy:()=>`${R(-30,-10,60,10,PK.D)}${R(-8,-40,16,30,PK.P)}<path d="M-30 -110H30Q30 -50 0 -42Q-30 -50 -30 -110Z" fill="${PK.P}"/><path d="M-30 -100q-20 0 -16 20q4 14 18 12M30 -100q20 0 16 20q-4 14 -18 12" stroke="${PK.P}" stroke-width="5" fill="none"/>${R(-22,-8,44,6,PK.W)}`,
+ goldbar:()=>`<path d="M-40 0L-30 -20H30L40 0Z" fill="${PK.P}"/><path d="M-30 -20L-24 -30H24L30 -20Z" fill="${PK.W}"/><path d="M-40 0L-30 -20H30L40 0Z" fill="none" stroke="${PK.L}" stroke-width="1.5"/>`,
  sofa:()=>`${R(-70,-50,140,30,PK.M,'rx="8"')}${R(-76,-40,16,40,PK.D,'rx="6"')}${R(60,-40,16,40,PK.D,'rx="6"')}${R(-64,-24,128,18,PK.D)}`
 });
 const BCASES=[{id:'mila',title:'Laatst online',level:'Gemiddeld',time:'45–60 min',victim:'Mila Jansen',code:'1407',
@@ -2321,27 +2327,110 @@ const BCASES=[{id:'mila',title:'Laatst online',level:'Gemiddeld',time:'45–60 m
   {t:'Kevin was weg',p:'Kevin schreef om 22:35 ‘Ik moet even weg’ en reageerde pas om 23:58 weer, met het excuus dat zijn telefoon in de auto lag. Op Mila’s selfie van 23:04 staat bij de toren de bezorgscooter van De Kade.'},
   {t:'Het motief',p:'Om 15:12 fotografeerde Mila hoe Kevin een envelop met geld gaf aan wethouder De Groot, een dag na de goedkeuring van zijn terras. Om 17:20 vroeg Kevin in de groepsapp wat ze bij de achteringang deed. Zondag om 10:00 zou ze alles aan Erik van de krant geven.'},
   {t:'Wat er gebeurde',p:'Kevin lokte Mila met een tweede telefoon naar de toren, onder de naam van Thijs. Toen ze om 23:31 doorhad dat het niet klopte, was het te laat.'}],
- verdict:'‘Het was <b>Kevin Smit</b>, bij de <b>uitkijktoren</b>, om de <b>omkoping</b> geheim te houden.’'}];
+ verdict:'‘Het was <b>Kevin Smit</b>, bij de <b>uitkijktoren</b>, om de <b>omkoping</b> geheim te houden.’'},
+{id:'manege',title:'Stille nacht',level:'Gemiddeld',time:'45–60 min',victim:'Iris Bakker',code:'2009',lock:{t:'07:05',d:'zaterdag 12 december'},
+ apps:['berichten','bellen','fotos','fotoboek','mail','notities','erfcam','gezond'],
+ blurb:'De eigenares van een manege ligt onder aan de ladder naar de hooizolder. Een val in het donker, dacht iedereen. Maar waarom was ze midden in de nacht in de stal?',
+ report:`<p class="stamp-line">Proces-verbaal van bevinding</p><p><b>Datum:</b> zaterdag 12 december, 06:50<br><b>Plaats:</b> Manege De Hoefslag, Lindenhorst</p>
+  <p>Staljongen Jesse Mulder vindt eigenaresse <b>Iris Bakker (41)</b> onder aan de ladder naar de hooizolder. Ze heeft hoofdletsel en is overleden. Volgens de arts tussen 01:00 en 04:00.</p>
+  <p>In de box ernaast staat Duchess, het dure dressuurpaard van klant Charlotte van Loon. Het paard is ziek en zweet hevig. Iris’ telefoon lag in de zadelkamer, op slot.</p>
+  <p><b>Conclusie toen:</b> Iris is ’s nachts naar het zieke paard gaan kijken en van de ladder gevallen. <b>Nu:</b> haar telefoon ligt voor je.</p>`,
+ extra:[{t:'Verklaring van Jesse Mulder, staljongen',d:'<p>‘Iris’ code? Daar maakte ze altijd een grapje over: “Het jaar van onze eerste prijs.” Die beker staat in het kantoor.’</p>'},
+  {t:'Foto van de beker in het kantoor',d:'<p>Op het bordje staat: <b>1e prijs dressuur · Regiokampioenschap 2009 · Manege De Hoefslag</b></p>',img:['wall',['trophy',150,150,1.4]]}],
+ notifs:['<b>Dierenarts Joost</b> · Sorry, mijn telefoon stond op stil. Wat is er?','<b>Marco</b> · Pauze. Slaap je?','<b>Erfcamera</b> · 2 bewegingen vannacht'],
+ chats:[
+  {name:'Dierenarts Joost',sub:'dierenarts',msgs:[['d','zaterdag 12 december'],['m','02:16','Joost, kun je meteen komen? Iemand heeft iets bij Duchess gedaan. Er ligt een spuit bij haar box.'],['m','02:17','Bel me!!'],['t','06:45','Sorry, mijn telefoon stond op stil. Wat is er?']]},
+  {name:'Charlotte van Loon',sub:'eigenaar van Duchess',msgs:[['d','vrijdag 11 december'],['t','18:30','Ik ben dit weekend in Antwerpen. Wil jij Duchess vanavond nog wat extra hooi geven?'],['m','18:34','Komt goed. Ze at vanmiddag wel slecht trouwens.'],['t','18:35','Ach, dat gaat wel over. Geen dierenarts nodig hoor, ze is een beetje dramatisch.'],['d','zaterdag 12 december'],['m','02:20','Charlotte?? Ik zie jouw auto op het erf. Wat doe jij hier midden in de nacht?','','gelezen 02:20']]},
+  {name:'Marco',sub:'echtgenoot',msgs:[['d','vrijdag 11 december'],['t','22:50','Ik ben op het werk. Lange nacht, tot 6 uur.',['dark',['tubes',150,182,1.3]]],['m','22:52','Succes. Morgen praten we over de verkoop. Ik teken niet.'],['t','22:53','Iris, die ontwikkelaar biedt een fortuin…'],['m','22:54','Nee.'],['d','zaterdag 12 december'],['t','03:10','Pauze. Slaap je?']]},
+  {name:'Henk',sub:'buurman',msgs:[['d','vrijdag 11 december'],['t','21:38','Je paarden stonden wéér op mijn land. Laatste keer.'],['m','21:45','Sorry Henk, het hek was kapot. Jesse maakt het morgen.']]},
+  {name:'Jesse',sub:'staljongen',msgs:[['d','vrijdag 11 december'],['t','23:40','Ben op het feest in de stad. Morgen ben ik er om half 7!'],['m','23:41','Veel plezier. Niet te laat worden.']]}],
+ calls:[['02:18','uit','Dierenarts Joost','niet opgenomen'],['21:40','gemist','Henk (buurman)','voicemail'],['18:31','in','Charlotte van Loon','2 min']],
+ voicemail:{from:'Henk',time:'21:40',text:'Iris, met Henk. Je paarden staan alwéér in mijn weiland. Als dat nog één keer gebeurt, bel ik de politie. Goedenavond.'},
+ photos:[{img:['dark',['door',150,150,1.2],['syringe',196,172,1]],t:'za 12 dec · 02:14',p:'Stal, box van Duchess',note:'Voor de box ligt een lege injectiespuit. Duchess staat te zweten.'},
+  {img:['dusk',['car',150,178,1.7],['moon',252,30,.6]],t:'za 12 dec · 02:15',p:'Erf, Manege De Hoefslag',note:'Een grote witte terreinwagen op het erf, met de lichten uit.'},
+  {img:['day',['horse',150,170,1.15]],t:'vr 11 dec · 15:20',p:'Wei',note:'Duchess in de wei.'},
+  {img:['wall',['trophy',150,150,1.4]],t:'ma 7 dec · 10:02',p:'Kantoor'}],
+ feed:[{who:'Charlotte van Loon',sub:'',t:'vr 21:30',text:'Gezellig avondje thuis bij de open haard.',img:['wall',['fireplace',150,150,1]]},
+  {who:'Jesse Mulder',sub:'',t:'za 01:30',text:'Feestje in café De Zon! Tot de ochtend!',img:['dark',['table',150,150,1.3],['glass',120,90,1],['glass',180,90,1]],cm:'Kim: Jij gaat nergens heen, het is pas half 3! (02:31)'},
+  {who:'Henk Bos',sub:'',t:'za 01:45',text:'Nachtje op de spoedeisende hulp. Gerda is gevallen, gelukkig niks gebroken.',img:['wall',['chair',110,150,1.3],['chair',190,150,1.3]]},
+  {who:'Charlotte van Loon',sub:'',t:'wo 9 dec',text:'Mijn nieuwe witte bolide!',img:['day',['car',150,175,1.7]]}],
+ mail:[{box:'Inbox',from:'Hippo Verzekeringen',t:'di 8 dec',s:'Verhoging verzekerde waarde Duchess',b:'Geachte mevrouw Bakker, als stalhouder ontvangt u een kopie. Op verzoek van eigenaar mevrouw C. van Loon is de verzekerde waarde van het paard Duchess verhoogd naar € 400.000. Bij overlijden door ziekte keren wij dit bedrag volledig uit aan de eigenaar.'},
+  {box:'Inbox',from:'Projectbureau Groenveld',t:'ma 7 dec',s:'Bod op Manege De Hoefslag',b:'Beste Iris en Marco, zoals besproken doen wij een bod van € 1,2 miljoen op de grond van uw manege. Wij horen graag uw beslissing.'}],
+ notes:[{t:'dinsdag',b:'Duchess eet slecht sinds dinsdag. Charlotte wil geen dierenarts?? Raar. Ze is anders zo bezorgd.'},{t:'klusjes',b:'Hek bij Henk maken! Hooi bestellen. Kerstversiering stal.'}],
+ erfcam:[['01:58','Voertuig rijdt het erf op',['dusk',['car',150,178,1.7]]],['02:31','Voertuig rijdt het erf af',['dusk',['car',190,178,1.4]]]],erfnote:'Verder geen bewegingen tussen 20:00 en 06:30.',
+ gezond:{steps:[['01:00–02:05','0 stappen','slaap'],['02:06–02:13','412 stappen','van huis naar de stal'],['02:14–02:22','96 stappen','']],heart:[['02:05','58'],['02:12','96'],['02:21','142'],['02:24','geen meting meer']]},
+ opts:{dader:['Charlotte van Loon','Marco Bakker','Jesse Mulder','Henk Bos','Dierenarts Joost Brouwer','Projectbureau Groenveld'],
+  bewijs:['De foto van 02:15 en de erfcamera: Charlottes witte terreinwagen op het erf','De voicemail van Henk','De post van Jesse uit café De Zon','Het bericht van Marco om 03:10','Het bod van het projectbureau','Het bericht van de dierenarts om 06:45'],
+  motief:['Iris betrapte haar terwijl ze Duchess iets inspoot, voor de verzekering','Ruzie over de verkoop van de manege','Paarden op andermans land','Een onbetaalde rekening','Jaloezie','Een ontslag']},
+ answer:{dader:0,bewijs:[0],motief:0},
+ solution:[{t:'Iris was om 02:24 nog niet gevallen',p:'Haar gezondheidsapp laat zien dat ze om 02:06 opstond en naar de stal liep. Om 02:14 fotografeerde ze een lege spuit bij de box van Duchess. Om 02:16 en 02:17 vroeg ze de dierenarts om hulp. Om 02:21 schoot haar hartslag omhoog naar 142, om 02:24 stopte de meting.'},
+  {t:'Eén auto op het erf',p:'De erfcamera zag om 01:58 één voertuig het erf oprijden en om 02:31 weer wegrijden, verder niemand. Om 02:15 fotografeerde Iris een grote witte terreinwagen. Op 9 december liet Charlotte op Fotoboek haar nieuwe witte bolide zien. Om 02:20 stuurde Iris haar: ‘Ik zie jouw auto op het erf.’ Het bericht werd meteen gelezen.'},
+  {t:'Charlotte loog over Antwerpen',p:'Charlotte zei dat ze het hele weekend in Antwerpen was, maar om 21:30 zat ze volgens haar eigen post thuis bij de open haard.'},
+  {t:'De anderen',p:'Marco werkte de nachtploeg, Jesse zat om 02:31 nog op het feest in De Zon, Henk zat met zijn vrouw op de spoedeisende hulp en de dierenarts sliep met zijn telefoon op stil. Geen van hen kwam met een auto het erf op.'},
+  {t:'Het motief',p:'Twee weken eerder liet Charlotte de verzekerde waarde van Duchess verhogen naar € 400.000, uit te keren bij overlijden door ziekte. Ze wilde geen dierenarts. Iris betrapte haar terwijl ze het paard iets inspoot.'}],
+ verdict:'‘Het was <b>Charlotte van Loon</b>, in de <b>stal van De Hoefslag</b>, voor <b>€ 400.000 verzekeringsgeld</b>.’'},
+{id:'kluis',title:'Opgesloten',level:'Moeilijk',time:'60 min',victim:'Jeroen Smit',code:'0104',lock:{t:'09:20',d:'maandag 8 maart'},
+ apps:['berichten','bellen','fotos','fotoboek','mail','notities','agenda','bank','slot'],
+ blurb:'De eigenaar van een escaperoom ligt dood in zijn eigen kamer. De deur zat van buitenaf op slot. Zijn telefoon weet wie de code had.',
+ report:`<p class="stamp-line">Proces-verbaal van bevinding</p><p><b>Datum:</b> maandag 8 maart, 09:20<br><b>Plaats:</b> Escaperoom De Kluis, Lindenhorst</p>
+  <p>Gamemaster Tim Kok vindt eigenaar <b>Jeroen Smit (45)</b> in de kamer ‘Het Laboratorium’. De deur zat op slot met het elektronische slot. Jeroen heeft hoofdletsel. Naast hem ligt een zware nep-goudstaaf uit de kamer ‘De Bankkluis’. Hij overleed zondag tussen 22:00 en 00:00.</p>
+  <p>Het slot van elke kamer gaat open met een persoonlijke code, of met de mastercode. Jeroens telefoon zat in zijn jaszak, op slot.</p>
+  <p><b>Conclusie toen:</b> Jeroen viel tijdens het ombouwen met zijn hoofd op de goudstaaf, en de deur viel vanzelf in het slot. <b>Nu:</b> kijk zelf.</p>`,
+ extra:[{t:'Verklaring van Lisa de Vries, compagnon',d:'<p>‘Jeroen gebruikte voor alles dezelfde code: de dag dat De Kluis openging. Dag en maand.’</p><p>‘Zondagavond? Ik was gewoon thuis. Ik ben niet bij De Kluis geweest.’</p>'},
+  {t:'Flyer op de balie',d:'<p><b>Escaperoom De Kluis</b> · Ontsnap jij binnen 60 minuten?<br>Open sinds 1 april 2019!</p>'}],
+ notifs:['<b>Slimme deur</b> · Laboratorium vergrendeld (zo 22:58)','<b>Lisa</b> · Waarom neem je niet op?','<b>Bank</b> · Nieuwe betaling met zakelijke pas'],
+ chats:[
+  {name:'Lisa',sub:'compagnon',msgs:[['d','zondag 7 maart'],['m','19:02','Lisa, ik heb de afschriften gezien. € 38.000 opgenomen van de zakelijke rekening. Morgen om 10 uur bij de notaris: ik stop met de samenwerking.'],['t','19:10','Jeroen, ik kan het uitleggen. Laten we eerst praten.'],['m','19:11','Morgen. Bij de notaris.'],['t','21:55','Ben je in De Kluis? Ik wil echt even praten.'],['m','21:57','Ja, ik bouw het Laboratorium om. Maar we praten morgen, Lisa.'],['d','maandag 8 maart'],['t','08:30','Waarom neem je niet op?']]},
+  {name:'Tim',sub:'gamemaster',msgs:[['d','vrijdag 5 maart'],['m','17:00','Tim, dit was de laatste keer te laat. Je bent ontslagen.'],['t','17:05','Dat meen je niet. Na alles wat ik voor die tent gedaan heb!'],['d','zondag 7 maart'],['t','22:40','Ik kom morgen om 9 uur mijn spullen halen.']]},
+  {name:'Bas (Escape Noord)',sub:'concurrent',msgs:[['d','zondag 7 maart'],['t','20:12','Die nepreviews over mijn escaperoom komen van jou. Dat weet iedereen. Wacht maar.']]},
+  {name:'Sandra',sub:'ex-vrouw',msgs:[['d','zondag 7 maart'],['t','18:00','De kinderen willen je zaterdag zien.'],['m','18:20','Leuk! Ik haal ze om 10 uur op.']]}],
+ calls:[['22:44','gemist','Lisa','geen voicemail'],['20:15','gemist','Bas (Escape Noord)','voicemail'],['16:30','uit','Notaris Verbeek','3 min']],
+ voicemail:{from:'Bas',time:'20:15',text:'Jeroen, met Bas. Die nepreviews, daar ga je spijt van krijgen. Ik zie je in de rechtbank.'},
+ photos:[{img:['dark',['table',150,150,1.4],['bottle',115,87,.8],['bottle',150,87,.9],['bottle',185,87,.7]],t:'zo 7 mrt · 22:20',p:'De Kluis, Het Laboratorium',note:'Halverwege het ombouwen. De deur staat op een kier.'},
+  {img:['dark',['table',150,150,1.3],['goldbar',150,92,1.3]],t:'zo 7 mrt · 22:22',p:'De Kluis, De Bankkluis',note:'De nep-goudstaven. Bijschrift in de app: ‘Zwaarder dan ze lijken!’'},
+  {img:['wall',['keycab',150,150,1.1]],t:'ma 1 mrt · 11:40',p:'De Kluis, balie',note:'Het nieuwe bedieningspaneel van de sloten.'}],
+ feed:[{who:'Escape Noord',sub:'Bas Hendriks',t:'zo 22:15',text:'Weer een team ontsnapt! Nieuw record: 41 minuten.',img:['dark',['table',150,150,1.3],['mug',120,90,1],['mug',180,90,1]],cm:'Bas: En om 23:20 nog een groep. Wat een zondag! (23:24)'},
+  {who:'Tim Kok',sub:'',t:'zo 22:30',text:'Bowlen met de jongens. Even alles vergeten.',img:['dark',['tubes',150,182,1.1]],cm:'Rick: Tim gooit drie strikes op rij om kwart over elf! (23:16)'},
+  {who:'Lisa de Vries',sub:'',t:'zo 21:00',text:'Rustig avondje thuis met een goed boek.',img:['wall',['books',150,150,1.3]]},
+  {who:'Sandra Smit',sub:'',t:'zo 22:45',text:'De kinderen eindelijk in bed. Tijd voor een film.',img:['wall',['sofa',150,170,1]]}],
+ mail:[{box:'Inbox',from:'Accountant Koster',t:'za 6 mrt',s:'Opvallende opnames',b:'Jeroen, bij de controle zie ik in drie maanden € 38.000 aan contante opnames met de pas van L. de Vries. Er zijn geen bonnen. Ik raad je aan dit met haar te bespreken.'},
+  {box:'Inbox',from:'Notaris Verbeek',t:'vr 5 mrt',s:'Bevestiging afspraak',b:'Hierbij bevestigen wij uw afspraak op maandag 8 maart om 10:00 over de ontbinding van de vennootschap Smit & De Vries.'},
+  {box:'Inbox',from:'Veilig BV',t:'ma 1 mrt',s:'Nieuwe mastercode ingesteld',b:'Op uw verzoek is de mastercode van alle sloten gewijzigd. Wij bewaren de code niet. Deel hem alleen met mensen die u volledig vertrouwt.'}],
+ notes:[{t:'sloten',b:'Nieuwe mastercode sinds 1 maart: 7319. Alleen Lisa en ik kennen hem.\nPersoonlijke codes: Jeroen = code 1, Lisa = code 2, Tim = code 3 (nog verwijderen!).'},{t:'ombouw',b:'Laboratorium: nieuwe flesjes, raadsel met de kleuren. Zondagavond doen.'}],
+ agenda:[['ma 8 mrt','10:00','Notaris Verbeek, ontbinding'],['za 13 mrt','10:00','Kinderen ophalen']],
+ bank:[['zo 7 mrt 22:35','Snackbar De Hoek, Lindenhorst (naast De Kluis)','− € 6,50','pas L. de Vries'],['zo 7 mrt 12:10','Bouwmarkt Lindenhorst','− € 84,20','pas J. Smit'],['vr 5 mrt 16:02','Geldautomaat Centrum','− € 2.000,00','pas L. de Vries'],['ma 1 mrt 11:15','Veilig BV, sloten','− € 145,00','pas J. Smit']],
+ slot:[['zo 22:10','Laboratorium ontgrendeld','code 1 (Jeroen)'],['zo 22:41','Laboratorium ontgrendeld','mastercode'],['zo 22:58','Laboratorium vergrendeld van buitenaf','mastercode'],['ma 09:14','Laboratorium ontgrendeld','code 3 (Tim)']],
+ opts:{dader:['Lisa de Vries','Tim Kok','Bas Hendriks','Sandra Smit','Notaris Verbeek','Monteur van Veilig BV'],
+  bewijs:['Het slot: om 22:41 en 22:58 werd de mastercode gebruikt','De voicemail van Bas','Het ontslag van Tim','De post van Sandra over de film','De afspraak bij de notaris','De foto van de goudstaven'],
+  motief:['Jeroen zou de samenwerking beëindigen na haar opnames van € 38.000','Wraak voor een ontslag','Ruzie over nepreviews','Een ruzie over de kinderen','Een fout in een contract','Een kapot slot']},
+ answer:{dader:0,bewijs:[0],motief:0},
+ solution:[{t:'Geen ongeluk',p:'De deur viel niet vanzelf in het slot. Volgens de slot-app werd het Laboratorium om 22:58 van buitenaf vergrendeld, met de mastercode. Om 22:41 ging de deur al met de mastercode open. Iemand kwam dus binnen en sloot Jeroen daarna op.'},
+  {t:'Wie kende de mastercode?',p:'De mastercode is op 1 maart veranderd. Veilig BV bewaart hem niet. In Jeroens notities staat: ‘Alleen Lisa en ik kennen hem.’ Tim had alleen code 3, en die werd pas maandag om 09:14 gebruikt, toen hij Jeroen vond.'},
+  {t:'Lisa loog',p:'Lisa zei dat ze zondagavond thuis was. Maar om 21:55 vroeg ze of Jeroen in De Kluis was, en om 22:35 betaalde ze met haar pas bij de snackbar naast De Kluis, zes minuten voordat de mastercode werd gebruikt.'},
+  {t:'De anderen',p:'Bas had om 22:15 en 23:20 groepen in zijn eigen escaperoom, Tim gooide om 23:15 strikes bij het bowlen en Sandra zat thuis met de kinderen.'},
+  {t:'Het motief',p:'De accountant ontdekte € 38.000 aan opnames met Lisa’s pas. Maandag om 10:00 zou Jeroen bij de notaris de samenwerking beëindigen. Lisa sloeg hem neer met een nep-goudstaaf en sloot de deur met de mastercode.'}],
+ verdict:'‘Het was <b>Lisa de Vries</b>, met de <b>goudstaaf</b>, in <b>het Laboratorium</b>.’'}
+];
 const BKEY='md-bericht';
 let bd=store.get(BKEY)||{cur:null,cases:{}};if(!bd.cases)bd={cur:null,cases:{}};
 const saveB=()=>store.set(BKEY,bd);
 const bstate=id=>(bd.cases[id]=bd.cases[id]||{unlocked:false,app:null,sub:null,entry:'',notes:'',acc:null,open:false,draft:null});
 let bAsk=false;
-const BAPPS=[['berichten','Berichten','<path d="M4 6h16v10H9l-5 4z" fill="currentColor"/>'],['bellen','Bellen','<path d="M6 3l4 1 1 5-2 1a12 12 0 0 0 5 5l1-2 5 1 1 4c-9 1-16-6-15-15z" fill="currentColor"/>'],['fotos','Foto’s','<rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 17l5-6 4 4 2-2 3 4z" fill="currentColor"/><circle cx="16" cy="9" r="1.6" fill="currentColor"/>'],['fotoboek','Fotoboek','<rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="7" r="1.2" fill="currentColor"/>'],['mail','Mail','<rect x="3" y="6" width="18" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/>'],['notities','Notities','<rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="2"/>'],['agenda','Agenda','<rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 9h16M8 3v4M16 3v4" stroke="currentColor" stroke-width="2"/>'],['locatie','Locatie','<path d="M12 21s-6-6-6-11a6 6 0 0 1 12 0c0 5-6 11-6 11z" fill="currentColor"/><circle cx="12" cy="10" r="2.2" fill="var(--ph-bg)"/>']];
+const BAPPS=[['berichten','Berichten','<path d="M4 6h16v10H9l-5 4z" fill="currentColor"/>'],['bellen','Bellen','<path d="M6 3l4 1 1 5-2 1a12 12 0 0 0 5 5l1-2 5 1 1 4c-9 1-16-6-15-15z" fill="currentColor"/>'],['fotos','Foto’s','<rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 17l5-6 4 4 2-2 3 4z" fill="currentColor"/><circle cx="16" cy="9" r="1.6" fill="currentColor"/>'],['fotoboek','Fotoboek','<rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="7" r="1.2" fill="currentColor"/>'],['mail','Mail','<rect x="3" y="6" width="18" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/>'],['notities','Notities','<rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="2"/>'],['agenda','Agenda','<rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 9h16M8 3v4M16 3v4" stroke="currentColor" stroke-width="2"/>'],['locatie','Locatie','<path d="M12 21s-6-6-6-11a6 6 0 0 1 12 0c0 5-6 11-6 11z" fill="currentColor"/><circle cx="12" cy="10" r="2.2" fill="var(--ph-bg)"/>'],['erfcam','Erfcamera','<rect x="3" y="7" width="13" height="10" rx="2" fill="currentColor"/><path d="M16 10l5-3v10l-5-3z" fill="currentColor"/>'],['gezond','Gezondheid','<path d="M12 20s-8-5-8-11a4 4 0 0 1 8-1 4 4 0 0 1 8 1c0 6-8 11-8 11z" fill="currentColor"/>'],['bank','Bank','<path d="M3 9l9-5 9 5zM5 10h14v2H5zM6 13h2v5H6zM11 13h2v5h-2zM16 13h2v5h-2zM4 19h16v2H4z" fill="currentColor"/>'],['slot','Slimme deur','<rect x="5" y="10" width="14" height="11" rx="2" fill="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/>']];
 const pic=(spec,cls='')=>`<span class="bpic ${cls}"><svg viewBox="0 0 300 200" aria-hidden="true">${drawScene(spec)}</svg></span>`;
 function bGo(c){bd.cur=c;bAsk=false;saveB();renderBericht();window.scrollTo({top:0})}
 function bSpeak(text){try{const u=new SpeechSynthesisUtterance(text.replace(/\(.*?\)|\.\.\./g,' '));u.lang='nl-NL';u.rate=.95;speechSynthesis.cancel();speechSynthesis.speak(u);return true}catch(e){return false}}
 function phoneBody(C,s){
   if(!s.unlocked){const dots=[0,1,2,3].map(i=>`<i class="${i<s.entry.length?'on':''}"></i>`).join('');
-    return `<div class="ph-lock"><div class="ph-time">07:20</div><div class="ph-date">zondag 18 oktober</div>
+    return `<div class="ph-lock"><div class="ph-time">${(C.lock||{}).t||'07:20'}</div><div class="ph-date">${(C.lock||{}).d||'zondag 18 oktober'}</div>
      <div class="ph-notifs">${C.notifs.map(n=>`<div class="ph-notif">${n}</div>`).join('')}</div>
      <div class="ph-code"><p>Voer toegangscode in</p><div class="ph-dots">${dots}</div><p class="ph-err" id="bErr"></p></div>
      <div class="ph-keys">${[1,2,3,4,5,6,7,8,9,'',0,'⌫'].map(k=>k===''?'<span></span>':`<button type="button" data-key="${k}">${k}</button>`).join('')}</div></div>`}
   const back=`<button type="button" class="ph-back" id="bBack">‹ ${s.sub!==null&&s.sub!==undefined?'Terug':'Start'}</button>`;
-  if(!s.app)return `<div class="ph-home"><div class="ph-time sm">07:20</div><div class="ph-apps">${BAPPS.map(([k,l,ic])=>`<button type="button" class="ph-app" data-app="${k}"><span class="ph-ic ic-${k}"><svg viewBox="0 0 24 24" aria-hidden="true">${ic}</svg></span>${l}</button>`).join('')}</div></div>`;
+  if(!s.app)return `<div class="ph-home"><div class="ph-time sm">${(C.lock||{}).t||'07:20'}</div><div class="ph-apps">${BAPPS.filter(a=>(C.apps||['berichten','bellen','fotos','fotoboek','mail','notities','agenda','locatie']).includes(a[0])).map(([k,l,ic])=>`<button type="button" class="ph-app" data-app="${k}"><span class="ph-ic ic-${k}"><svg viewBox="0 0 24 24" aria-hidden="true">${ic}</svg></span>${l}</button>`).join('')}</div></div>`;
   const title=BAPPS.find(a=>a[0]===s.app)[1];let h='';
   if(s.app==='berichten'){if(s.sub===null||s.sub===undefined)h=`<ul class="ph-list">${C.chats.map((c,i)=>{const last=[...c.msgs].reverse().find(m=>m[0]!=='d');return `<li><button type="button" data-sub="${i}"><b>${c.name}</b><span>${c.sub?c.sub+' · ':''}${last[2]}</span><em>${last[1]}</em></button></li>`}).join('')}</ul>`;
-    else{const c=C.chats[s.sub];h=`<div class="ph-chat"><div class="ph-chatname">${c.name}<span>${c.sub}</span></div>${c.msgs.map(m=>m[0]==='d'?`<div class="ph-day">${m[1]}</div>`:`<div class="ph-msg ${m[0]==='m'?'me':''}">${c.group&&m[0]!=='m'?`<b>${m[0]}</b>`:''}${m[3]?pic(m[3]):''}<span>${m[2]}</span><em>${m[1]}</em></div>`).join('')}</div>`}}
+    else{const c=C.chats[s.sub];h=`<div class="ph-chat"><div class="ph-chatname">${c.name}<span>${c.sub}</span></div>${c.msgs.map(m=>m[0]==='d'?`<div class="ph-day">${m[1]}</div>`:`<div class="ph-msg ${m[0]==='m'?'me':''}">${c.group&&m[0]!=='m'?`<b>${m[0]}</b>`:''}${m[3]?pic(m[3]):''}<span>${m[2]}</span><em>${m[1]}${m[4]?' · '+m[4]:''}</em></div>`).join('')}</div>`}}
   if(s.app==='bellen'){h=`<ul class="ph-list">${C.calls.map(([t,d,w,x])=>`<li class="ph-call ${d==='gemist'?'miss':''}"><b>${w}</b><span>${d==='uit'?'Uitgaand':d==='in'?'Inkomend':'Gemist'} · ${x}</span><em>${t}</em></li>`).join('')}</ul>
     <div class="ph-vm"><b>Voicemail van ${C.voicemail.from}</b><span>za ${C.voicemail.time}</span><div class="controls"><button type="button" class="btn small" id="bPlay">▶ Afspelen</button><button type="button" class="btn small" id="bTrans">Uitschrift</button></div>${s.trans?`<p class="ph-trans">‘${C.voicemail.text}’</p>`:''}</div>`}
   if(s.app==='fotos'){if(s.sub===null||s.sub===undefined)h=`<div class="ph-grid">${C.photos.map((p,i)=>`<button type="button" data-sub="${i}">${pic(p.img)}</button>`).join('')}</div>`;
@@ -2349,7 +2438,11 @@ function phoneBody(C,s){
   if(s.app==='fotoboek')h=C.feed.map(f=>`<article class="ph-post"><b>${f.who}</b>${f.sub?`<span>${f.sub}</span>`:''}${pic(f.img)}<p>${f.text}</p><em>${f.t}</em>${f.cm?`<p class="ph-cm">${f.cm}</p>`:''}</article>`).join('');
   if(s.app==='mail'){if(s.sub===null||s.sub===undefined)h=`<ul class="ph-list">${C.mail.map((m,i)=>`<li><button type="button" data-sub="${i}"><b>${m.s}</b><span>${m.box} · ${m.from}</span><em>${m.t}</em></button></li>`).join('')}</ul>`;
     else{const m=C.mail[s.sub];h=`<div class="ph-mail"><span>${m.box} · ${m.t}</span><b>${m.s}</b><span>${m.from}</span><p>${m.b}</p>${m.att?`<p class="ph-att">${m.att}</p>`:''}</div>`}}
-  if(s.app==='notities')h=C.notes.map(n=>`<article class="ph-note"><b>${n.t}</b><p>${n.b}</p></article>`).join('');
+  if(s.app==='notities')h=C.notes.map(n=>`<article class="ph-note"><b>${n.t}</b><p>${n.b.replace(/\n/g,'<br>')}</p></article>`).join('');
+  if(s.app==='erfcam')h=`${C.erfcam.map(([t,w,img])=>`<article class="ph-post">${pic(img)}<b>${w}</b><em>vannacht · ${t}</em></article>`).join('')}<p class="ph-trans">${C.erfnote||''}</p>`;
+  if(s.app==='gezond')h=`<h4 class="ph-h">Stappen</h4><ul class="ph-list">${C.gezond.steps.map(([t,v,x])=>`<li><b>${v}</b><span>${x||'&nbsp;'}</span><em>${t}</em></li>`).join('')}</ul><h4 class="ph-h">Hartslag (horloge)</h4><ul class="ph-list">${C.gezond.heart.map(([t,v])=>`<li><b>${v}${/^\d+$/.test(v)?' slagen per minuut':''}</b><em>${t}</em></li>`).join('')}</ul>`;
+  if(s.app==='bank')h=`<p class="ph-trans">Zakelijke rekening De Kluis</p><ul class="ph-list">${C.bank.map(([t,w,a,c])=>`<li><b>${w}</b><span>${c} · ${t}</span><em>${a}</em></li>`).join('')}</ul>`;
+  if(s.app==='slot')h=`<p class="ph-trans">Logboek elektronische sloten</p><ul class="ph-list">${C.slot.map(([t,w,c])=>`<li><b>${w}</b><span>${c}</span><em>${t}</em></li>`).join('')}</ul>`;
   if(s.app==='agenda')h=`<ul class="ph-list">${C.agenda.map(([d,t,w])=>`<li><b>${w}</b><span>${d}</span><em>${t}</em></li>`).join('')}</ul>`;
   if(s.app==='locatie')h=`<ol class="ph-tl">${C.loc.map(([t,w,x])=>`<li><em>${t}</em><b>${w}</b>${x?`<span>${x}</span>`:''}</li>`).join('')}</ol>`;
   return `<div class="ph-app-view"><div class="ph-bar">${back}<b>${title}</b><span></span></div><div class="ph-scroll">${h}</div></div>`}
@@ -2457,7 +2550,7 @@ const HELP=[
    'Houd een tijdlijn bij in het notitieblok. Tijden in chats, foto’s en posts vertellen wie waar was.',
    'Bij <b>Conclusie</b> kies je de dader, het doorslaggevende bewijs en het motief. Daarna lees je de oplossing.'],
   tips:['Kijk goed naar de achtergrond van foto’s.','Iemand kan zich voordoen als iemand anders. Controleer dat met andere bronnen.','Een foto op social media heeft een tijd: dat is soms een alibi.'],
-  extra:()=>`${BCASES.length} zaak, ongeveer 45 tot 60 minuten per zaak.`}
+  extra:()=>`${BCASES.length} zaken, elk ongeveer 45 tot 60 minuten.`}
 ];
 function renderUitleg(){
   $('pUitleg').innerHTML=`<h2 class="bigtitle">Uitleg</h2>${PENCIL}

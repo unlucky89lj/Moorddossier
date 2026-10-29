@@ -226,6 +226,19 @@ td.e{border:0}
 .helpcard p{margin:0;max-width:65ch}
 .helpcard ol,.helpcard ul{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;max-width:65ch}
 .helpcard ol li::marker{font:800 15px var(--cond);color:var(--red)}
+.helpcard.hd{padding:0;gap:0}
+.hd summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:36px minmax(0,1fr) 20px;gap:12px;align-items:center;padding:14px 16px}
+.hd summary::-webkit-details-marker{display:none}
+.hd summary::after{content:"+";font:800 26px/1 var(--cond);color:var(--red);text-align:center}
+.hd[open] summary::after{content:"−"}
+.hd summary:focus-visible{outline:3px solid var(--red);outline-offset:-3px;border-radius:18px}
+.hs-ic{width:36px;height:36px;border-radius:50%;background:var(--band);display:grid;place-items:center;font:800 20px var(--slab);color:var(--red)}
+.hs-ic .gi{width:22px;height:22px;color:var(--red)}
+.hs-t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.hd summary h3{font-size:22px}
+.hd summary .kicker{font-size:11px;line-height:1.3}
+.hd-body{display:flex;flex-direction:column;gap:8px;padding:0 16px 16px}
+.hs-ic .gi [fill="var(--card)"]{fill:var(--band)}.hs-ic .gi [stroke="var(--card)"]{stroke:var(--band)}
 .polaroid{position:relative;display:block;margin:6px auto 4px;background:#fdfdfa;padding:10px 10px 36px;box-shadow:0 2px 3px rgba(0,0,0,.18),0 8px 18px rgba(0,0,0,.22);transform:rotate(var(--rot,0deg));width:88%;max-width:340px}
 .polaroid .ph{display:block;position:relative;overflow:hidden;background:#555}
 .polaroid svg{display:block;width:100%;height:auto;filter:contrast(1.05)}
@@ -2838,16 +2851,17 @@ const HELP=[
 function renderUitleg(){
   $('pUitleg').innerHTML=`<h2 class="bigtitle">Uitleg</h2>${PENCIL}
    <p class="lead">In deze app zitten ${HELP.length} spellen. Hier lees je hoe ze werken. Komt er een nieuw spel bij, dan staat de uitleg hier ook.</p>
-   <section class="hb"><h4>Goed om te weten</h4><ul>
+   <p class="hint">Tik op een onderdeel om het open te klappen.</p>
+   <details class="helpcard hd"><summary><span class="hs-ic">i</span><span class="hs-t"><h3>Goed om te weten</h3><span class="kicker">Voortgang, offline, updates</span></span></summary><div class="hd-body"><ul>
     <li>Je voortgang, scores en notities worden bewaard op dit toestel. Je hebt geen account nodig.</li>
     <li>Na de eerste keer werkt de app ook zonder internet.</li>
-    <li>Nieuwe versies komen er vanzelf in. Open de app een of twee keer opnieuw om ze te zien.</li>
-    <li>Met <b>? Uitleg</b> bovenaan kom je hier terug. Tik er nog een keer op om terug te gaan naar je spel.</li></ul></section>
-   ${HELP.map(h=>`<article class="helpcard"><span class="kicker">${h.insp}</span><h3>${h.name}</h3><p>${h.what}</p>
+    <li>Nieuwe versies komen er vanzelf in. De app ververst zichzelf als je hem opent.</li>
+    <li>Met <b>? Uitleg</b> bovenaan kom je hier terug. Tik er nog een keer op om terug te gaan naar je spel.</li></ul></div></details>
+   ${HELP.map(h=>{const ic=document.querySelector(`.games [data-g="${h.g}"] .gi`);return `<details class="helpcard hd"><summary><span class="hs-ic">${ic?ic.outerHTML:''}</span><span class="hs-t"><h3>${h.name}</h3><span class="kicker">${h.insp}</span></span></summary><div class="hd-body"><p>${h.what}</p>
      <h4>Zo speel je</h4><ol>${h.steps.map(x=>`<li>${x}</li>`).join('')}</ol>
      <h4>Tips</h4><ul>${h.tips.map(x=>`<li>${x}</li>`).join('')}</ul>
      <p class="hint">${h.extra()}</p>
-     <div class="controls"><button class="btn primary small" type="button" data-play="${h.g}">Speel ${h.name}</button></div></article>`).join('')}
+     <div class="controls"><button class="btn primary small" type="button" data-play="${h.g}">Speel ${h.name}</button></div></div></details>`}).join('')}
    <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Nieuwe spellen</h3><p>Er komen nog meer spellen en zaken bij. Elk nieuw spel krijgt hier zijn eigen uitleg. Heb je een idee voor een spel? Laat het weten.</p></article>`;
   document.querySelectorAll('[data-play]').forEach(b=>b.onclick=()=>setGame(b.dataset.play));
 }
@@ -2969,7 +2983,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261029181015';
+const APPV='20261029224523';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

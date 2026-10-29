@@ -236,6 +236,8 @@ td.e{border:0}
 .polaroid.mini figcaption{font-size:16px;bottom:4px;left:8px}
 .polaroid.mini .tape{width:44px;height:14px;margin-left:-22px;top:-6px}
 .kpal{display:flex;flex-wrap:wrap;gap:6px}
+#pSpion .who b{font-size:11px;letter-spacing:.06em;overflow-wrap:anywhere}
+#pSpion .scard{grid-template-columns:100px minmax(0,1fr)}
 #pKamer .accuse select{width:100%;font:500 16px var(--serif);padding:10px;border:2px solid var(--ink);border-radius:10px;background:var(--page);color:var(--ink)}
 #pKamer .accuse h2{font-size:18px}
 .kp{display:flex;align-items:center;gap:6px;border:2px solid var(--rule);border-radius:999px;background:var(--card);color:var(--ink);padding:3px 10px 3px 3px;font:700 13px var(--cond);letter-spacing:.02em;cursor:pointer}
@@ -364,6 +366,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
     <button role="tab" type="button" data-g="koud"><b>Cold Case</b><span>Politiedossiers zonder hints</span></button>
     <button role="tab" type="button" data-g="kamer"><b>Kamermoord</b><span>Puzzel op een plattegrond</span></button>
     <button role="tab" type="button" data-g="landhuis"><b>Het Landhuis</b><span>Zeven puzzels, één moord</span></button>
+    <button role="tab" type="button" data-g="spion"><b>Spionage</b><span>Ontmasker de spion</span></button>
   </div>
   <div class="stats" id="stats"></div>
 
@@ -424,6 +427,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <section class="pane" id="pKoud" hidden></section>
   <section class="pane" id="pKamer" hidden></section>
   <section class="pane" id="pLandhuis" hidden></section>
+  <section class="pane" id="pSpion" hidden></section>
   <section class="pane" id="pUitleg" hidden></section>
 
   <footer>Elke zaak wordt gegenereerd en heeft precies één oplossing.</footer>
@@ -2075,6 +2079,137 @@ function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let 
     lst.acc=a;lst.done=true;const ok=a.s===G.sol.s&&a.w===G.sol.w&&a.r===G.sol.r;const x=store.get(LHSKEY)||{solved:0,streak:0};if(ok){x.solved++;x.streak++}else x.streak=0;store.set(LHSKEY,x);saveLh();renderLH()});
 }
 
+// ---------- spionage ----------
+Object.assign(ICONS,{
+ XB:'<rect x="4" y="8" width="24" height="16" rx="1"/><path d="M4 9l12 9 12-9"/><circle cx="22" cy="20" r="3" fill="currentColor"/>',
+ XK:'<path d="M4 7l8-3 8 3 8-3v21l-8 3-8-3-8 3z"/><path d="M12 4v21M20 7v21"/><path d="M7 14l3 2M15 18l3-3" stroke-width="1.5"/>',
+ XF:'<circle cx="13" cy="15" r="9"/><circle cx="13" cy="15" r="2.5"/><circle cx="13" cy="9" r="1.6" fill="currentColor"/><circle cx="19" cy="15" r="1.6" fill="currentColor"/><circle cx="7" cy="15" r="1.6" fill="currentColor"/><circle cx="13" cy="21" r="1.6" fill="currentColor"/><path d="M13 24h15"/>',
+ XC:'<path d="M6 4h17a2 2 0 0 1 2 2v22H8a2 2 0 0 1-2-2z"/><path d="M6 24a2 2 0 0 1 2-2h17"/><path d="M11 10h9M11 14h6" stroke-width="1.5"/>',
+ XS:'<circle cx="10" cy="16" r="6"/><circle cx="10" cy="16" r="2"/><path d="M16 16h12M24 16v5M28 16v4"/>',
+ XR:'<rect x="4" y="12" width="24" height="16" rx="2"/><path d="M8 12L22 4"/><circle cx="11" cy="20" r="4"/><path d="M19 17h5M19 21h5M19 25h5" stroke-width="1.5"/>',
+ XP:'<rect x="4" y="5" width="24" height="22"/><path d="M9 21V11h7v6h5v4z" stroke-width="1.5"/><path d="M4 9h3M4 13h3M4 17h3" stroke-width="1.2"/>',
+ XI:'<path d="M12 4h8M13 4v6l-5 6v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V16l-5-6V4"/><path d="M9 20h14" stroke-width="1.5"/>',
+ XKE:'<path d="M16 3v6M13 6h6M10 29V15l6-6 6 6v14z"/><path d="M4 29V20l6-5M28 29V20l-6-5"/><path d="M14 29v-6h4v6"/><path d="M3 29h26"/>',
+ XST:'<rect x="5" y="6" width="22" height="18" rx="4"/><path d="M5 15h22"/><rect x="9" y="9" width="5" height="4"/><rect x="18" y="9" width="5" height="4"/><circle cx="10" cy="20" r="1.5" fill="currentColor"/><circle cx="22" cy="20" r="1.5" fill="currentColor"/><path d="M9 24l-3 5M23 24l3 5M3 29h26"/>',
+ XBR:'<path d="M2 14h28M2 14v14M30 14v14"/><path d="M6 28a10 10 0 0 1 20 0"/><path d="M8 14V9M16 14V9M24 14V9M4 9h24"/>',
+ XPA:'<circle cx="11" cy="12" r="6"/><path d="M11 18v10"/><circle cx="23" cy="16" r="4"/><path d="M23 20v8M3 28h26"/><path d="M14 23h6" stroke-width="1.5"/>'});
+const ERAS=[
+ {id:'1672',title:'Het Rampjaar',year:1672,cipher:'caesar',
+  intro:'Het is 1672. De Republiek wordt tegelijk aangevallen door Frankrijk, Engeland, Munster en Keulen. In de steden heerst angst, en overal zitten spionnen die geheimen verkopen aan de vijand.',
+  spies:[{name:'Kapitein Jacob de Raaf',mono:'KH',lengte:186,hand:'rechts',ogen:'grijze',haar:'zwart'},{name:'Juffrouw Margaretha Pels',mono:'MZ',lengte:160,hand:'links',ogen:'blauwe',haar:'blond'},{name:'Dominee Abraham Kist',mono:'DK',lengte:172,hand:'rechts',ogen:'bruine',haar:'grijs'},{name:'Koopman Hendrick Vos',mono:'BK',lengte:180,hand:'links',ogen:'blauwe',haar:'rood'},{name:'Chirurgijn Willem Quack',mono:'DR',lengte:168,hand:'rechts',ogen:'groene',haar:'bruin'}],
+  secrets:[{name:'vlootkaart',lid:'de',mono:'XK',gewicht:'licht',mat:'papier'},{name:'verzegelde brief',lid:'de',mono:'XB',gewicht:'licht',mat:'papier'},{name:'sleutel van de stadspoort',lid:'de',mono:'XS',gewicht:'middel',mat:'metaal'},{name:'codeboek',lid:'het',mono:'XC',gewicht:'middel',mat:'leer'},{name:'plan van de schansen',lid:'het',mono:'XP',gewicht:'licht',mat:'papier'}],
+  places:[{name:'Waag',lid:'de',mono:'KA',buiten:false},{name:'Haven',lid:'de',mono:'HA',buiten:true},{name:'Stadswal',lid:'de',mono:'DI',buiten:true},{name:'Kerk',lid:'de',mono:'XKE',buiten:false},{name:'Molen',lid:'de',mono:'WM',buiten:false}]},
+ {id:'1811',title:'De Franse tijd',year:1811,cipher:'atbash',
+  intro:'Het is 1811. Nederland is ingelijfd bij het Franse keizerrijk van Napoleon. Franse ambtenaren houden alles in de gaten, en in het geheim smeden mensen plannen voor de dag dat de Fransen vertrekken.',
+  spies:[{name:'Majoor Pierre Lefèvre',mono:'KH',lengte:184,hand:'rechts',ogen:'bruine',haar:'zwart'},{name:'Juffrouw Anna Bosch',mono:'JT',lengte:158,hand:'links',ogen:'blauwe',haar:'blond'},{name:'Notaris Gerrit van Leeuwen',mono:'NB',lengte:171,hand:'rechts',ogen:'grijze',haar:'grijs'},{name:'Kok Jean Moreau',mono:'KP',lengte:176,hand:'links',ogen:'bruine',haar:'rood'},{name:'Barones Sophie van Hal',mono:'MZ',lengte:165,hand:'rechts',ogen:'groene',haar:'bruin'}],
+  secrets:[{name:'troepenlijst',lid:'de',mono:'XB',gewicht:'licht',mat:'papier'},{name:'kaart van de Waterlinie',lid:'de',mono:'XK',gewicht:'licht',mat:'papier'},{name:'zegelring',lid:'de',mono:'XS',gewicht:'licht',mat:'metaal'},{name:'codeboek',lid:'het',mono:'XC',gewicht:'middel',mat:'leer'},{name:'flesje onzichtbare inkt',lid:'het',mono:'XI',gewicht:'licht',mat:'glas'}],
+  places:[{name:'Stadhuis',lid:'het',mono:'GP',buiten:false},{name:'Haven',lid:'de',mono:'HA',buiten:true},{name:'Kerk',lid:'de',mono:'XKE',buiten:false},{name:'Bibliotheek',lid:'de',mono:'BI',buiten:false},{name:'Dijk',lid:'de',mono:'DI',buiten:true}]},
+ {id:'1916',title:'Neutraal Nederland',year:1916,cipher:'getal',
+  intro:'Het is 1916. In Europa woedt de Eerste Wereldoorlog, maar Nederland is neutraal. Juist daarom krioelt het in Den Haag en Rotterdam van de spionnen: Duitsers, Britten en Fransen houden elkaar hier in de gaten.',
+  spies:[{name:'Danseres Lola Fontaine',mono:'MZ',lengte:167,hand:'links',ogen:'bruine',haar:'zwart'},{name:'Kapitein Henry Blake',mono:'KH',lengte:189,hand:'rechts',ogen:'blauwe',haar:'blond'},{name:'Professor Otto Brandt',mono:'DR',lengte:174,hand:'rechts',ogen:'grijze',haar:'grijs'},{name:'Juffrouw Marie Jansen',mono:'JT',lengte:159,hand:'links',ogen:'groene',haar:'rood'},{name:'Kelner Piet Smit',mono:'KP',lengte:178,hand:'rechts',ogen:'bruine',haar:'bruin'}],
+  secrets:[{name:'foto’s van de haven',lid:'de',mono:'XF',gewicht:'licht',mat:'film'},{name:'geheime telegram',lid:'het',mono:'XB',gewicht:'licht',mat:'papier'},{name:'kaart van de mijnenvelden',lid:'de',mono:'XK',gewicht:'licht',mat:'papier'},{name:'zendertje',lid:'het',mono:'XR',gewicht:'zwaar',mat:'metaal'},{name:'flesje onzichtbare inkt',lid:'het',mono:'XI',gewicht:'licht',mat:'glas'}],
+  places:[{name:'Station',lid:'het',mono:'XST',buiten:false},{name:'Hotel',lid:'het',mono:'GP',buiten:false},{name:'Haven',lid:'de',mono:'HA',buiten:true},{name:'Brug',lid:'de',mono:'XBR',buiten:true},{name:'Pakhuis',lid:'het',mono:'KA',buiten:false}]},
+ {id:'1943',title:'Bezet Nederland',year:1943,cipher:'morse',
+  intro:'Het is 1943. Nederland is bezet. Het verzet werkt met geheime zenders, valse papieren en onderduikadressen. Maar er zit een verrader in de groep, en de Duitsers weten steeds meer.',
+  spies:[{name:'Bakker Jan de Wit',mono:'KP',lengte:177,hand:'rechts',ogen:'blauwe',haar:'blond'},{name:'Juffrouw Lies Visser',mono:'JT',lengte:162,hand:'links',ogen:'groene',haar:'bruin'},{name:'Dokter Karel Mulder',mono:'DR',lengte:181,hand:'links',ogen:'grijze',haar:'zwart'},{name:'Agent Hein Bakker',mono:'NB',lengte:186,hand:'rechts',ogen:'bruine',haar:'rood'},{name:'Dominee Gerrit Hoek',mono:'DK',lengte:169,hand:'rechts',ogen:'blauwe',haar:'grijs'}],
+  secrets:[{name:'radiozender',lid:'de',mono:'XR',gewicht:'zwaar',mat:'metaal'},{name:'valse persoonsbewijzen',lid:'de',mono:'XB',gewicht:'licht',mat:'papier'},{name:'lijst met onderduikadressen',lid:'de',mono:'XP',gewicht:'licht',mat:'papier'},{name:'microfilm',lid:'de',mono:'XF',gewicht:'licht',mat:'film'},{name:'kaart met droppingsplaatsen',lid:'de',mono:'XK',gewicht:'licht',mat:'papier'}],
+  places:[{name:'Kerk',lid:'de',mono:'XKE',buiten:false},{name:'Station',lid:'het',mono:'XST',buiten:false},{name:'Molen',lid:'de',mono:'WM',buiten:false},{name:'Bibliotheek',lid:'de',mono:'BI',buiten:false},{name:'Polder',lid:'de',mono:'DI',buiten:true}]},
+ {id:'1962',title:'De Koude Oorlog',year:1962,cipher:'polybius',
+  intro:'Het is 1962, het jaar van de Cubacrisis. Oost en West staan tegenover elkaar, en in Den Haag proberen spionnen van beide kanten elkaars geheimen te stelen.',
+  spies:[{name:'Diplomaat Viktor Orlov',mono:'BK',lengte:183,hand:'rechts',ogen:'grijze',haar:'grijs'},{name:'Secretaresse Ingrid Holm',mono:'MZ',lengte:166,hand:'links',ogen:'blauwe',haar:'blond'},{name:'Ingenieur Kees Brand',mono:'NB',lengte:179,hand:'rechts',ogen:'bruine',haar:'bruin'},{name:'Journalist Frank Dekker',mono:'KH',lengte:174,hand:'links',ogen:'groene',haar:'rood'},{name:'Professor Anna Weiss',mono:'JT',lengte:161,hand:'rechts',ogen:'bruine',haar:'zwart'}],
+  secrets:[{name:'microfilm',lid:'de',mono:'XF',gewicht:'licht',mat:'film'},{name:'bouwtekening van de radar',lid:'de',mono:'XP',gewicht:'licht',mat:'papier'},{name:'codesleutel',lid:'de',mono:'XS',gewicht:'licht',mat:'metaal'},{name:'afluisterapparaatje',lid:'het',mono:'XR',gewicht:'middel',mat:'metaal'},{name:'envelop met dollars',lid:'de',mono:'XB',gewicht:'middel',mat:'papier'}],
+  places:[{name:'IJsbaan',lid:'de',mono:'IJ',buiten:true},{name:'Park',lid:'het',mono:'XPA',buiten:true},{name:'Station',lid:'het',mono:'XST',buiten:false},{name:'Brug',lid:'de',mono:'XBR',buiten:true},{name:'Bibliotheek',lid:'de',mono:'BI',buiten:false}]}
+];
+const SPMAT={papier:'van papier',metaal:'van metaal',film:'van film',glas:'van glas',leer:'met een leren kaft'};
+const CIPH={caesar:{name:'Verschuifcode (3 plaatsen)',enc:t=>caesar(t,3)},atbash:{name:'Spiegelalfabet (A↔Z)',enc:t=>atbashS(t)},
+ getal:{name:'Getallencode (A = 1)',enc:t=>t.split(' ').map(w=>[...w].map(c=>ABC.indexOf(c)+1).join('-')).join(' / ')},
+ morse:{name:'Morse',enc:t=>t.split(' ').map(w=>[...w].map(c=>MORSE[c]).join(' ')).join(' / ')},
+ polybius:{name:'Vierkant van Polybius',enc:t=>t.split(' ').map(w=>polybius(w)).join(' / ')}};
+function spGen(seed,n){
+  const r=mulberry32(seed*48271+n*31);const E=ERAS[Math.floor(r()*ERAS.length)];
+  const S=shuffle(E.spies,r).slice(0,n),W=shuffle(E.secrets,r).slice(0,n);let L;do{L=shuffle(E.places,r).slice(0,n)}while(L.every(x=>x.buiten)||L.every(x=>!x.buiten));
+  const sol={loc:shuffle(range(n),r),wep:shuffle(range(n),r)},spy=Math.floor(r()*n),meet=sol.loc[spy];
+  const P=perms(n),all=[];for(const p of P)for(const q of P)all.push({loc:p,wep:q});const holder=(a,w)=>a.wep.indexOf(w);
+  const pool=[];const add=(text,test,pen=0)=>{if(test(sol))pool.push({text,test,k:r()+pen})};
+  for(const s of range(n))for(const l of range(n)){add(`[s${s}] was in [l${l}].`,a=>a.loc[s]===l,.55);add(`[s${s}] was niet in [l${l}].`,a=>a.loc[s]!==l)}
+  for(const s of range(n))for(const w of range(n)){add(`[s${s}] had [w${w}].`,a=>a.wep[s]===w,.55);add(`[s${s}] had [w${w}] niet.`,a=>a.wep[s]!==w)}
+  for(const w of range(n))for(const l of range(n)){add(`[W${w}] lag in [l${l}].`,a=>a.loc[holder(a,w)]===l,.55);add(`[W${w}] lag niet in [l${l}].`,a=>a.loc[holder(a,w)]!==l)}
+  for(const [k,pos,neg] of [['hand',v=>`iemand die ${v}handig is`,v=>`niemand die ${v}handig is`],['ogen',v=>`iemand met ${v} ogen`,v=>`niemand met ${v} ogen`],['haar',v=>`iemand met ${v} haar`,v=>`niemand met ${v} haar`]]){
+    const vals=[...new Set(S.map(x=>x[k]))];if(vals.length<2)continue;
+    for(const v of vals){const who=range(n).filter(i=>S[i][k]===v);
+      for(const l of range(n)){add(cap(`${pos(v)} was in [l${l}].`),a=>who.some(i=>a.loc[i]===l),.05);add(cap(`${neg(v)} was in [l${l}].`),a=>!who.some(i=>a.loc[i]===l),.05)}
+      for(const w of range(n)){add(cap(`${pos(v)} had [w${w}].`),a=>who.some(i=>a.wep[i]===w),.05);add(cap(`${neg(v)} had [w${w}].`),a=>!who.some(i=>a.wep[i]===w),.05)}}}
+  for(const w of range(n)){add(`[W${w}] lag buiten.`,a=>L[a.loc[holder(a,w)]].buiten,.1);add(`[W${w}] lag binnen.`,a=>!L[a.loc[holder(a,w)]].buiten,.1)}
+  for(const s of range(n)){add(`[s${s}] was buiten.`,a=>L[a.loc[s]].buiten,.1);add(`[s${s}] was binnen.`,a=>!L[a.loc[s]].buiten,.1)}
+  {const vals=[...new Set(W.map(x=>x.mat))];if(vals.length>1)for(const v of vals){const ws=range(n).filter(i=>W[i].mat===v);
+    for(const s of range(n)){add(`[s${s}] had iets ${SPMAT[v]}.`,a=>ws.includes(a.wep[s]),.05);add(`[s${s}] had niets ${SPMAT[v]}.`,a=>!ws.includes(a.wep[s]),.05)}}}
+  const ord=range(n).sort((a,b)=>S[b].lengte-S[a].lengte);
+  for(const [i,lbl] of [[ord[0],'De langste verdachte'],[ord[n-1],'De kleinste verdachte']]){for(const l of range(n)){add(`${lbl} was in [l${l}].`,a=>a.loc[i]===l,.35);add(`${lbl} was niet in [l${l}].`,a=>a.loc[i]!==l,.05)}}
+  pool.sort((a,b)=>a.k-b.k);let cands=all,chosen=[];
+  for(const c of pool){const f=cands.filter(c.test);if(f.length<cands.length){chosen.push(c);cands=f;if(f.length===1)break}}
+  const count=cs=>all.filter(a=>cs.every(c=>c.test(a))).length;
+  for(const c of shuffle(chosen,r)){const rest=chosen.filter(x=>x!==c);if(count(rest)===1)chosen=rest}
+  const clues=shuffle(chosen,r).map(c=>c.text);
+  const coded=clues.map((t,i)=>[i,t.length]).sort((a,b)=>a[1]-b[1])[0][0];
+  return {seed,n,E,S,W,L,sol,spy,meet,clues,coded};
+}
+const SPKEY='md-spion',SPSKEY='md-spion-stats';
+let SG=null,sps=null;
+const saveSp=()=>store.set(SPKEY,sps);
+function spStart(){const sv=store.get(SPKEY);if(sv&&sv.seed&&(sv.n===3||sv.n===4)){SG=spGen(sv.seed,sv.n);sps=sv;renderSpy();return}spNew(Math.floor(Date.now()/864e5)%9999+1,3)}
+function spNew(seed,n){SG=spGen(seed,n);sps={seed,n,marks:{},struck:[],sub:'',done:false,revealed:false,mistakes:0,decoded:false};saveSp();renderSpy();window.scrollTo({top:0})}
+function spRef(t,i,plain){const G=SG;if(t==='s')return plain?G.S[i].name:`<b>${G.S[i].name}</b>`;const x=t==='l'?G.L[i]:G.W[i];const lid=t==='W'?cap(x.lid):x.lid;const nm=t==='l'?x.name.toLowerCase():x.name;return plain?`${lid} ${nm}`:`${lid} <b>${nm}</b>`}
+const spTok=(t,plain)=>t.replace(/\[([swWl])(\d)\]/g,(m,a,i)=>spRef(a,+i,plain));
+function renderSpy(){const G=SG,n=G.n,P=$('pSpion'),st=store.get(SPSKEY)||{solved:0,streak:0};
+  const card=(x,sub)=>`<article class="scard"><div class="who">${svgOf(x)}<b>${x.name}</b></div><div><div class="statline">${sub}</div></div></article>`;
+  const tile=(x,sub)=>`<article class="tile">${svgOf(x)}<div><b>${x.lid==='het'?'Het ':'De '}${x.name}</b><span class="sub">${sub}</span></div></article>`;
+  const ci=CIPH[G.E.cipher],plainCoded=spTok(G.clues[G.coded],true).normalize('NFD').replace(/[̀-ͯ]/g,'').toUpperCase().replace(/[^A-Z ]/g,'').replace(/\s+/g,' ').trim();
+  const items=G.clues.map((t,i)=>{const d=sps.struck.includes(i)?' done':'';return i===G.coded?`<li class="clue${d}" tabindex="0" data-sc="${i}">Onderschept bericht: <span class="code">${ci.enc(plainCoded)}</span></li>`:`<li class="clue${d}" tabindex="0" data-sc="${i}">${spTok(t)}</li>`});
+  items.push(`<li class="clue final">De geheime overdracht vond plaats in ${spRef('l',G.meet)}.</li>`);
+  const codebook={caesar:`<div class="abc"><table><tr>${[...ABC].map(c=>`<td>${caesar(c,3)}</td>`).join('')}</tr><tr>${[...ABC].map(c=>`<td>${c}</td>`).join('')}</tr></table></div><p class="hint">Boven: de letter in het bericht. Onder: wat er eigenlijk staat.</p>`,
+    atbash:`<div class="abc"><table><tr>${[...ABC].map(c=>`<td>${c}</td>`).join('')}</tr><tr>${[...ABC].reverse().map(c=>`<td>${c}</td>`).join('')}</tr></table></div>`,
+    getal:`<div class="abc"><table><tr>${[...ABC].map((c,i)=>`<td>${i+1}</td>`).join('')}</tr><tr>${[...ABC].map(c=>`<td>${c}</td>`).join('')}</tr></table></div><p class="hint">Een streepje scheidt letters, een schuine streep scheidt woorden.</p>`,
+    morse:`<div class="morse">${[...ABC].map(c=>`<span><b>${c}</b> ${MORSE[c]}</span>`).join('')}</div><p class="hint">Een spatie scheidt letters, een schuine streep scheidt woorden.</p>`,
+    polybius:`<div class="abc"><table><tr><td></td>${[1,2,3,4,5].map(k=>`<td><b>${k}</b></td>`).join('')}</tr>${[0,1,2,3,4].map(rw=>`<tr><td><b>${rw+1}</b></td>${[...PB.slice(rw*5,rw*5+5)].map(c=>`<td>${c==='I'?'I/J':c}</td>`).join('')}</tr>`).join('')}</table></div><p class="hint">Eerste cijfer: de rij. Tweede cijfer: de kolom.</p>`}[G.E.cipher];
+  const sub=sps.sub||'';
+  const grid=(()=>{const hi=x=>`<th class="hico" scope="col" title="${x.name}">${svgOf(x)}</th>`,ri=x=>`<th class="rico" scope="row" title="${x.name}">${svgOf(x)}</th>`;
+    let h=`<tr><th colspan="2"></th><th class="glabel" colspan="${n}">Verdachten</th><th class="glabel" colspan="${n}">Plekken</th></tr><tr><th colspan="2"></th>${G.S.map(hi).join('')}${G.L.map(hi).join('')}</tr>`;
+    const cell=(k,cls)=>{const v=sps.marks[k]||'';return `<td class="c ${v} ${cls}" tabindex="0" data-sk="${k}">${v==='x'?'✕':v==='v'?'●':''}</td>`};
+    G.W.forEach((w,wi)=>{h+='<tr>'+(wi===0?`<th class="vlabel" rowspan="${n}">Geheimen</th>`:'')+ri(w);for(let s=0;s<n;s++)h+=cell(`ws:${wi}:${s}`,(wi===0?'bt ':'')+(s===0?'bl':''));for(let l=0;l<n;l++)h+=cell(`wl:${wi}:${l}`,(wi===0?'bt ':'')+(l===0?'bl ':'')+(l===n-1?'br ':'')+(wi===n-1?'bb':''));h+='</tr>'});
+    G.L.forEach((L,li)=>{h+='<tr>'+(li===0?`<th class="vlabel" rowspan="${n}">Plekken</th>`:'')+ri(L);for(let s=0;s<n;s++)h+=cell(`ls:${li}:${s}`,(li===0?'bt ':'')+(s===0?'bl ':'')+(s===n-1?'br ':'')+(li===n-1?'bb':''));h+=`<td class="e" colspan="${n}"></td></tr>`});return h})();
+  const opt=(arr,f)=>'<option value="">…</option>'+arr.map((x,i)=>`<option value="${i}">${f(x)}</option>`).join('');
+  const m=G.S[G.spy],w=G.W[G.sol.wep[G.spy]],l=G.L[G.meet];
+  P.innerHTML=`<div class="controls"><div class="seg" role="group" aria-label="Moeilijkheid"><button id="sp3" type="button" aria-pressed="${n===3}">Makkelijk</button><button id="sp4" type="button" aria-pressed="${n===4}">Lastig</button></div><button class="btn" id="spNewB" type="button">Nieuwe zaak</button></div>
+   <div class="stats">Ontmaskerd: ${st.solved} · Reeks: ${st.streak}</div>
+   <header class="casehead"><span class="kicker">Jaar ${G.E.year} · zaak nr. ${String(G.seed).padStart(4,'0')}</span><h1 style="margin-top:4px">${G.E.title}</h1><p>${G.E.intro} Eén van deze ${n} mensen is een spion. Wie is het, welk geheim had hij of zij bij zich, en waar vond de overdracht plaats?</p></header>
+   <section class="band"><div class="subtabs" role="tablist"><button role="tab" type="button" data-ss="s" aria-selected="${sub==='s'}">Verdachten</button><button role="tab" type="button" data-ss="w" aria-selected="${sub==='w'}">Geheimen</button><button role="tab" type="button" data-ss="l" aria-selected="${sub==='l'}">Plekken</button></div>
+    ${sub===''?'<p class="hint" style="text-align:center">Tik op een tabje om de kaarten te bekijken.</p>':''}
+    ${sub==='s'?`<div style="display:flex;flex-direction:column;gap:12px">${G.S.map(x=>card(x,`${x.lengte} cm • ${x.hand}handig • ${x.ogen} ogen • ${x.haar} haar`)).join('')}</div>`:''}
+    ${sub==='w'?`<div class="tiles" style="--n:${n}">${G.W.map(x=>tile(x,`${GEWP[x.gewicht]} · ${SPMAT[x.mat]}`)).join('')}</div>`:''}
+    ${sub==='l'?`<div class="tiles" style="--n:${n}">${G.L.map(x=>tile(x,x.buiten?'buiten':'binnen')).join('')}</div>`:''}</section>
+   <section class="cluebox"><h2>Aanwijzingen &amp; onderschepte berichten</h2><ul class="clues">${items.join('')}</ul>
+    <details class="stmt"><summary><b>Codeboek</b><span>${ci.name}</span></summary><div class="stmtbody">${codebook}${sps.decoded?`<p class="decoded">${spTok(G.clues[G.coded])}</p>`:'<div class="controls"><button class="btn small" id="spDec" type="button">Ontcijfer voor mij</button></div>'}</div></details></section>
+   <section class="solve"><div style="display:flex;flex-direction:column;gap:10px;max-width:100%"><div class="gridbox"><table class="g" id="spGrid" style="--cols:${2*n+1}">${grid}</table></div>
+    <div class="gtools"><button class="btn small" id="spCheck" type="button">Controleer</button><button class="btn small" id="spClear" type="button">Wis</button></div><p class="msg" id="spMsg">Tik één keer voor ✕, twee keer voor ●, drie keer om te wissen.</p></div>
+    <div class="answers"><div class="ans"><select id="spS">${opt(G.S,x=>x.name)}</select><label for="spS">Spion?</label></div><div class="ans"><select id="spW">${opt(G.W,x=>`${x.lid} ${x.name}`)}</select><label for="spW">Geheim?</label></div><div class="ans"><select id="spL">${opt(G.L,x=>`${x.lid} ${x.name.toLowerCase()}`)}</select><label for="spL">Waar?</label></div>
+     <div class="controls"><button class="btn primary" id="spAcc" type="button">Ontmasker</button><button class="btn" id="spRev" type="button">Toon oplossing</button></div>
+     <div id="spVerdict">${sps.done?`<div class="verdict ${sps.revealed?'bad':''}"><p>${sps.revealed?'Oplossing:':'Ontmaskerd!'} <b>${m.name}</b> gaf ${w.lid} ${w.name} door, in ${l.lid} ${l.name.toLowerCase()}.</p></div>`:''}</div></div></section>`;
+  P.querySelectorAll('[data-ss]').forEach(b=>b.onclick=()=>{sps.sub=sps.sub===b.dataset.ss?'':b.dataset.ss;saveSp();renderSpy()});
+  P.querySelectorAll('[data-sc]').forEach(li=>{li.onclick=()=>{const i=+li.dataset.sc;sps.struck=sps.struck.includes(i)?sps.struck.filter(x=>x!==i):[...sps.struck,i];li.classList.toggle('done');saveSp()};li.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();li.click()}}});
+  const truthS=k=>{const [b,a,c]=k.split(':'),i=+a,j=+c;if(b==='ws')return G.sol.wep[j]===i;if(b==='ls')return G.sol.loc[j]===i;return G.sol.loc[G.sol.wep.indexOf(i)]===j};
+  P.querySelectorAll('[data-sk]').forEach(td=>{const tap=()=>{const k=td.dataset.sk,cur=sps.marks[k]||'',nx=cur===''?'x':cur==='x'?'v':'';if(nx)sps.marks[k]=nx;else delete sps.marks[k];
+    if(nx==='v'){const [b,a,c]=k.split(':');for(let q=0;q<n;q++){const r1=`${b}:${a}:${q}`,r2=`${b}:${q}:${c}`;if(r1!==k&&!sps.marks[r1])sps.marks[r1]='x';if(r2!==k&&!sps.marks[r2])sps.marks[r2]='x'}}saveSp();renderSpy()};
+    td.onclick=tap;td.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tap()}}});
+  $('sp3').onclick=()=>spNew(1+Math.floor(Math.random()*9999),3);$('sp4').onclick=()=>spNew(1+Math.floor(Math.random()*9999),4);$('spNewB').onclick=()=>spNew(1+Math.floor(Math.random()*9999),n);
+  $('spClear').onclick=()=>{sps.marks={};saveSp();renderSpy()};
+  $('spCheck').onclick=()=>{let wrong=0,f=0;for(const [k,v] of Object.entries(sps.marks)){f++;if((v==='v')!==truthS(k))wrong++}$('spMsg').textContent=!f?'Het rooster is nog leeg.':wrong?`${wrong} vakje${wrong>1?'s kloppen':' klopt'} niet.`:'Alles wat je hebt ingevuld klopt.'};
+  const dec=$('spDec');if(dec)dec.onclick=()=>{sps.decoded=true;saveSp();renderSpy()};
+  $('spAcc').onclick=()=>{if(sps.done)return;const s=$('spS').value,w2=$('spW').value,l2=$('spL').value;if(s===''||w2===''||l2==='')return $('spVerdict').innerHTML='<div class="verdict bad"><p>Kies een verdachte, een geheim en een plek.</p></div>';
+    if(+s===G.spy&&+w2===G.sol.wep[G.spy]&&+l2===G.meet){sps.done=true;const x=store.get(SPSKEY)||{solved:0,streak:0};x.solved++;x.streak=sps.mistakes?0:x.streak+1;store.set(SPSKEY,x);saveSp();renderSpy()}
+    else{sps.mistakes++;saveSp();$('spVerdict').innerHTML=`<div class="verdict bad"><p>Mis. Bekijk de aanwijzingen en het onderschepte bericht nog eens.</p></div>`}};
+  $('spRev').onclick=()=>{if(sps.done)return;sps.done=true;sps.revealed=true;const x=store.get(SPSKEY)||{solved:0,streak:0};x.streak=0;store.set(SPSKEY,x);saveSp();renderSpy()};
+}
+
 // ---------- uitleg ----------
 // Elk spel heeft hier één blok. Een nieuw spel krijgt een nieuw blok in deze lijst.
 const HELP=[
@@ -2126,7 +2261,16 @@ const HELP=[
    'Vast? Met <b>Sla over</b> krijg je de aanwijzing zonder de puzzel op te lossen.',
    'Bij de ster (★) kies je wie, waarmee en waar, en tik je op <b>Beschuldig</b>.'],
   tips:['Doolhof: tik op een vakje dat je al hebt bezocht om terug te gaan.','Woordzoeker: tik eerst op de eerste letter, dan op de laatste.','Codewiel: draai tot er Nederlandse woorden verschijnen.','Kluis: begin met de aanwijzing die de minste mogelijkheden overlaat.'],
-  extra:()=>'Elke zaak is anders: duizenden combinaties van daders, wapens, kamers en puzzels.'}
+  extra:()=>'Elke zaak is anders: duizenden combinaties van daders, wapens, kamers en puzzels.'},
+ {g:'spion',name:'Spionage',insp:'Spionagepuzzels uit de geschiedenis · in de stijl van het puzzelboek Spydle',
+  what:'Spionnen in de Nederlandse geschiedenis: van het Rampjaar 1672 tot de Koude Oorlog. Eén van de verdachten is een spion. Ontdek wie het is, welk geheim hij of zij doorgaf, en waar de overdracht plaatsvond.',
+  steps:['Kies <b>Makkelijk</b> (3 verdachten) of <b>Lastig</b> (4). Elke zaak speelt in een ander tijdperk.',
+   'Bekijk de kaarten bij <b>Verdachten</b>, <b>Geheimen</b> en <b>Plekken</b>.',
+   'Lees de aanwijzingen. Eén aanwijzing is een <b>onderschept bericht</b> in de geheimtaal van dat tijdperk. Het <b>codeboek</b> helpt je bij het ontcijferen.',
+   'Vul het rooster in: tik één keer voor ✕, twee keer voor ●.',
+   'De laatste aanwijzing vertelt waar de overdracht was. Wie daar was, is de spion. Kies je antwoord en tik op <b>Ontmasker</b>.'],
+  tips:['Elk tijdperk heeft een eigen geheimschrift: verschuifcode, spiegelalfabet, getallen, morse of het vierkant van Polybius.','Ontcijfer het onderschepte bericht eerst. Het bevat vaak een belangrijke aanwijzing.','Iedereen had precies één geheim en was op precies één plek.'],
+  extra:()=>`${ERAS.length} tijdperken en duizenden zaken.`}
 ];
 function renderUitleg(){
   $('pUitleg').innerHTML=`<h2 class="bigtitle">Uitleg</h2>${PENCIL}
@@ -2161,7 +2305,7 @@ function setTab(t){st.tab=t;save();renderPanes();window.scrollTo({top:0})}
 function renderPanes(){
   const t=st.tab||'zaak';
   const g=game,M=g==='murdle';
-  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
+  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
   document.querySelector('.tabs').hidden=!M;document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('stats').hidden=!M;
   document.querySelectorAll('.games button').forEach(b=>b.setAttribute('aria-selected',b.dataset.g===g));
   if(g==='speur'&&!$('pVerhaal').innerHTML)renderStory();if(g==='koud'&&!$('pKoud').innerHTML)renderKoud();

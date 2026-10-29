@@ -1860,8 +1860,8 @@ const KMKEY='md-kamer',KMSKEY='md-kamer-stats';
 let KM=null,ks=null,ktool=0,kAskReveal=false;
 const saveKm=()=>store.set(KMKEY,ks);
 const kmStats=()=>store.get(KMSKEY)||{solved:0,streak:0};
-function kmStart(){const sv=store.get(KMKEY);if(sv&&sv.seed&&(sv.n===6||sv.n===7)){KM=kGen(sv.seed,sv.n);if(KM){ks=sv;renderKamer();return}}kmNew(Math.floor(Date.now()/864e5)%9999+1,6)}
-function kmNew(seed,n){KM=kGen(seed,n);let s=seed;while(!KM){s++;KM=kGen(s,n)}ks={seed:KM.seed,n,place:{},marks:[],struck:[],done:false,revealed:false,mistakes:0};ktool=0;kAskReveal=false;saveKm();renderKamer();window.scrollTo({top:0})}
+function kmStart(){const sv=store.get(KMKEY);if(sv&&sv.seed&&(sv.n===6||sv.n===7)){try{KM=sv.case&&sv.case.cells?sv.case:kGen(sv.seed,sv.n);if(KM){ks=sv;if(!ks.case){ks.case=KM;saveKm()}renderKamer();return}}catch(e){}}kmNew(Math.floor(Date.now()/864e5)%9999+1,6)}
+function kmNew(seed,n){KM=kGen(seed,n);let s=seed;while(!KM){s++;KM=kGen(s,n)}ks={seed:KM.seed,n,case:KM,place:{},marks:[],struck:[],done:false,revealed:false,mistakes:0};ktool=0;kAskReveal=false;saveKm();renderKamer();window.scrollTo({top:0})}
 const ptoken=p=>`<span class="tok ${p===0?'v':''}">${p===0?victimIcon:svgOf(KM.people[p])}</span>`;
 function renderKamer(){
   const P=$('pKamer'),n=KM.n,cells=KM.cells,occ={};
@@ -1985,8 +1985,8 @@ function lhReward(G,k){const R=i=>LHR[i][1],Sn=i=>G.S[i].name,Wn=i=>G.W[i].name;
 const LHKEY='md-landhuis',LHSKEY='md-landhuis-stats';
 let LG=null,lst=null,lhAsk=false;
 const saveLh=()=>store.set(LHKEY,lst);
-function lhStart(){const sv=store.get(LHKEY);if(sv&&sv.seed){LG=lhGen(sv.seed);lst=sv;renderLH();return}lhNew(Math.floor(Date.now()/864e5)%9999+1)}
-function lhNew(seed){LG=lhGen(seed);lst={seed,view:0,solved:[],skipped:[],path:[0],found:[],sel:null,sud:LG.sud.puz.slice(),k:0,cip:[],ana:[],safe:[1,1,1],seq:[],note:{s:[],w:[],r:[]},done:false,acc:null};lhAsk=false;saveLh();renderLH();window.scrollTo({top:0})}
+function lhStart(){const sv=store.get(LHKEY);if(sv&&sv.seed){try{LG=sv.case&&sv.case.maze?sv.case:lhGen(sv.seed);lst=sv;if(!lst.case){lst.case=LG;saveLh()}renderLH();return}catch(e){}}lhNew(Math.floor(Date.now()/864e5)%9999+1)}
+function lhNew(seed){LG=lhGen(seed);lst={seed,case:LG,view:0,solved:[],skipped:[],path:[0],found:[],sel:null,sud:LG.sud.puz.slice(),k:0,cip:[],ana:[],safe:[1,1,1],seq:[],note:{s:[],w:[],r:[]},done:false,acc:null};lhAsk=false;saveLh();renderLH();window.scrollTo({top:0})}
 function lhSolve(i){if(!lst.solved.includes(i))lst.solved.push(i);saveLh();renderLH()}
 function lhPuzzle(i){const G=LG,[k,title]=LHP[i],solved=lst.solved.includes(i);let h='';
   if(k==='doolhof'){const W=7,last=lst.path[lst.path.length-1];
@@ -2156,8 +2156,8 @@ function spGen(seed,n){
 const SPKEY='md-spion',SPSKEY='md-spion-stats';
 let SG=null,sps=null;
 const saveSp=()=>store.set(SPKEY,sps);
-function spStart(){const sv=store.get(SPKEY);if(sv&&sv.seed&&(sv.n===3||sv.n===4)){SG=spGen(sv.seed,sv.n);sps=sv;renderSpy();return}spNew(Math.floor(Date.now()/864e5)%9999+1,3)}
-function spNew(seed,n){SG=spGen(seed,n);sps={seed,n,marks:{},struck:[],sub:'',done:false,revealed:false,mistakes:0,decoded:false};saveSp();renderSpy();window.scrollTo({top:0})}
+function spStart(){const sv=store.get(SPKEY);if(sv&&sv.seed&&(sv.n===3||sv.n===4)){try{SG=sv.case&&sv.case.clues?sv.case:spGen(sv.seed,sv.n);sps=sv;if(!sps.case){sps.case=SG;saveSp()}renderSpy();return}catch(e){}}spNew(Math.floor(Date.now()/864e5)%9999+1,3)}
+function spNew(seed,n){SG=spGen(seed,n);sps={seed,n,case:SG,marks:{},struck:[],sub:'',done:false,revealed:false,mistakes:0,decoded:false};saveSp();renderSpy();window.scrollTo({top:0})}
 function spRef(t,i,plain){const G=SG;if(t==='s')return plain?G.S[i].name:`<b>${G.S[i].name}</b>`;const x=t==='l'?G.L[i]:G.W[i];const lid=t==='W'?cap(x.lid):x.lid;const nm=t==='l'?x.name.toLowerCase():x.name;return plain?`${lid} ${nm}`:`${lid} <b>${nm}</b>`}
 const spTok=(t,plain)=>t.replace(/\[([swWl])(\d)\]/g,(m,a,i)=>spRef(a,+i,plain));
 function renderSpy(){const G=SG,n=G.n,P=$('pSpion'),st=store.get(SPSKEY)||{solved:0,streak:0};
@@ -2366,7 +2366,7 @@ function verdictHTML(revealed){
   return `<div class="verdict"><p>Inspecteur Mol knikt tevreden. ${line} Zaak gesloten${st.mistakes?` na ${st.mistakes} foute beschuldiging${st.mistakes>1?'en':''}`:' bij de eerste poging'}${st.tipShown?', met een tip':''}. Lees de ontknoping bij <b>Oplossing</b>.</p></div>`;
 }
 
-function newCase(seed,n){C=genCase(seed,n);st={seed,n,marks:{},struck:[],done:false,revealed:false,decoded:false,tipShown:false,tab:'zaak',mistakes:0};save();render();window.scrollTo({top:0})}
+function newCase(seed,n){C=genCase(seed,n);st={seed,n,case:C,marks:{},struck:[],done:false,revealed:false,decoded:false,tipShown:false,tab:'zaak',mistakes:0};save();render();window.scrollTo({top:0})}
 const rnd=()=>1+Math.floor(Math.random()*9999);
 
 function wire(){
@@ -2395,10 +2395,11 @@ function wire(){
 }
 
 function start(data){
+  try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist().catch(()=>{})}catch(e){}
   wire();
   const saved=(data&&data.st)||store.get(KEY);
   if(saved&&saved.tab==='verhaal'){saved.tab='zaak';game='speur'}
-  if(saved&&saved.seed&&(saved.n===3||saved.n===4)){C=genCase(saved.seed,saved.n);st=saved;render()}
+  if(saved&&saved.seed&&(saved.n===3||saved.n===4)){try{C=saved.case&&saved.case.clues?saved.case:genCase(saved.seed,saved.n);st=saved;if(!st.case){st.case=C;save()}render()}catch(e){newCase(saved.seed,saved.n)}}
   else newCase(Math.floor(Date.now()/864e5)%9999+1,3);
   window.claude?.hot?.snapshot?.(()=>({st}));
 }

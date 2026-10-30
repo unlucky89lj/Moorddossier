@@ -651,6 +651,15 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .flm-endrow{position:absolute;left:0;right:0;top:560px}
 .flm-endk{position:absolute;left:0;right:0;top:120px;text-align:center;font:700 22px var(--cond);letter-spacing:.2em;text-transform:uppercase;color:#E2614B}
 .flm-stamp{position:absolute;left:50%;top:765px;border:5px solid #fff;color:#fff;font:800 46px var(--cond);text-transform:uppercase;letter-spacing:.06em;padding:4px 18px;white-space:nowrap}
+.lvwrap{display:flex;flex-direction:column;gap:6px}
+.lvwrap .lvline{margin:0}
+.lvtoast{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 14px);transform:translateX(-50%);z-index:90;background:var(--ink);color:var(--page);border-radius:16px;padding:12px 18px;display:flex;flex-direction:column;align-items:center;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.35);animation:lvPop .5s cubic-bezier(.3,1.5,.5,1);width:min(92vw,360px)}
+.lvtoast span{font:800 13px var(--cond);letter-spacing:.2em;text-transform:uppercase;color:var(--red)}.lvtoast b{font:800 24px var(--cond);text-transform:uppercase}.lvtoast i{font:500 14px var(--cond);font-style:normal}
+.lvtoast.out{opacity:0;transition:opacity .4s}
+.lhmaze[style*="--w:11"] .mz,.lhmaze[style*="--w:13"] .mz{font-size:11px}
+.flm-tiles{position:absolute;left:24px;right:24px;top:560px;display:flex;gap:10px;justify-content:center}
+.flm-tiles>div{flex:1;background:#f3f1ea;color:#1c1f22;border-radius:8px;padding:10px 8px;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,.5)}
+.flm-tiles span{display:block;font:700 13px var(--cond);letter-spacing:.14em;text-transform:uppercase;color:#8A2A1A}.flm-tiles b{display:block;font:800 20px/1.1 var(--cond);text-transform:uppercase;margin-top:4px}
 </style>
 </head>
 <body>
@@ -844,6 +853,16 @@ const LVKEY='md-niveau';
 function lvMax(solved){return Math.min(LVLS.length,1+Math.floor(solved/10))}
 function lvGet(game,solved){const all=store.get(LVKEY)||{},m=lvMax(solved);let c=all[game];if(!c||c>m)c=m;return c}
 function lvSet(game,v){const all=store.get(LVKEY)||{};all[game]=v;store.set(LVKEY,all)}
+const LVDESC={kamer:['6×6 met extra hulp','6×6','7×7','7×7 met minder hulp','7×7, bijna geen directe aanwijzingen'],
+  spion:['3 verdachten','4 verdachten','4 verdachten, minder directe aanwijzingen','5 verdachten','5 verdachten, bijna geen directe aanwijzingen'],
+  landhuis:['doolhof 7×7','doolhof 9×9','doolhof 9×9, woorden ook achterstevoren','doolhof 11×11, grotere woordzoeker','doolhof 13×13, grootste woordzoeker']};
+function lvBar(game,solved,cur){const m=lvMax(solved),next=m<LVLS.length?10*m-solved:0;
+  return `<div class="lvwrap"><div class="seg lvseg" role="group" aria-label="Niveau">${LVLS.map((L,i)=>`<button type="button" data-lvg="${game}:${i+1}" aria-pressed="${cur===i+1}" ${i+1>m?'disabled':''} aria-label="Niveau ${i+1}: ${L.name}${i+1>m?' (nog op slot)':''}">${i+1>m?'🔒':i+1}</button>`).join('')}</div>
+   <p class="lvline"><b>Niveau ${cur} · ${LVLS[cur-1].name}</b> · ${LVDESC[game][cur-1]}${next>0?` <span>· nog ${next} ${next===1?'zaak':'zaken'} tot niveau ${m+1}</span>`:' <span>· hoogste niveau</span>'}</p></div>`}
+function lvAfter(game,before,after){if(after>before){lvSet(game,after);lvToast(after)}}
+function lvToast(lv){const t=document.createElement('div');t.className='lvtoast';t.setAttribute('role','status');t.innerHTML=`<span>Nieuw niveau!</span><b>Niveau ${lv} · ${LVLS[lv-1].name}</b><i>De volgende zaak wordt een stapje moeilijker.</i>`;document.body.appendChild(t);setTimeout(()=>t.classList.add('out'),4200);setTimeout(()=>t.remove(),4700)}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-lvg]');if(!b||b.disabled)return;const [g,v]=b.dataset.lvg.split(':');lvSet(g,+v);const R=()=>1+Math.floor(Math.random()*9999);
+  if(g==='kamer')kmNew(R(),0,+v);if(g==='spion')spNew(R(),0,+v);if(g==='landhuis')lhNew(R(),+v)});
 function genCase(seed,n,lv){
   const r=mulberry32(seed*7919+n*13+(lv?lv*101:0));const DP=lv?LVLS[lv-1].d:.55;
   const S=shuffle(POOL.suspects,r).slice(0,n);
@@ -1638,7 +1657,7 @@ function renderStory(){
     body+='</article>';
   }
   P.innerHTML=`<button class="btn small" id="spBack" type="button">← Alle zaken</button>
-    <div class="storyhead"><span class="kicker">Speurneus · ${CS.level}</span><h3>${CS.title}</h3>${filmBtn('speur',CS.id)}</div>
+    <div class="storyhead"><span class="kicker">Speurneus · ${CS.level}</span><h3>${CS.title}</h3>${filmBtn('speur',CS.id)}${cstate(CS.id).solved.length>=CS.ch.length?endBtn('speur',CS.id):''}</div>
     <nav class="chapters" aria-label="Hoofdstukken">${dots}</nav>${body}
     <section class="notes"><label for="spNotes"><b>Notitieblok</b> <span class="hint">wordt bewaard bij deze zaak</span></label><textarea id="spNotes" rows="4" placeholder="Schrijf hier je aantekeningen, verdenkingen en tussenstappen."></textarea></section>`;
   $('spNotes').value=s.notes||'';
@@ -1646,7 +1665,7 @@ function renderStory(){
   document.querySelectorAll('.chapters button').forEach(b=>b.onclick=()=>{s.view=+b.dataset.ch;askReveal=false;saveS();renderStory()});
   const on=(id,f)=>{const el=$(id);if(el)el.onclick=f};
   const check=()=>{const a=normA($('stIn').value);if(!a)return;
-    if(CS.ch[v].ans.some(x=>a.includes(x))){s.solved.push(v);saveS();renderStory()}
+    if(CS.ch[v].ans.some(x=>a.includes(x))){s.solved.push(v);saveS();renderStory();if(s.solved.length>=CS.ch.length)setTimeout(()=>endFilm('speur',CS.id),700)}
     else $('stMsg').textContent='Dat klopt niet. Probeer het nog eens of neem een hint.'};
   on('stCheck',check);
   const inp=$('stIn');if(inp)inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();check()}};
@@ -2065,7 +2084,7 @@ function renderKoud(){
     }
   }
   P.innerHTML=`<button class="btn small backbtn" id="kList" type="button">← Alle dossiers</button>
-   <div class="storyhead"><span class="kicker">Dossier ${c.nr} · ${c.level}</span><h3>${c.title}</h3>${filmBtn('koud',c.id)}</div>
+   <div class="storyhead"><span class="kicker">Dossier ${c.nr} · ${c.level}</span><h3>${c.title}</h3>${filmBtn('koud',c.id)}${kstate(c.id).open?endBtn('koud',c.id):''}</div>
    <nav class="ktabs" aria-label="Onderdelen van het dossier">${KTABS.map(([k,l])=>`<button type="button" data-kt="${k}" aria-pressed="${k===t}">${l}</button>`).join('')}</nav>
    <div class="kbody">${body}</div>
    <div class="controls"><button class="btn small" id="kHB" type="button">Rechercheurshandboek</button></div>
@@ -2078,7 +2097,7 @@ function renderKoud(){
   ['kD','kE','kM'].forEach(id=>{const el=$(id);if(el)el.onchange=()=>{s.draft=grab();saveK()}});
   on('kSeal',()=>{const a=grab();if(a.d===null||a.e===null||a.m===null){$('kMsg').textContent='Kies eerst een dader, een bewijsstuk en een motief.';return}s.draft=a;kConfirm=true;saveK();renderKoud()});
   on('kNo',()=>{kConfirm=false;renderKoud()});
-  on('kYes',()=>{s.acc=s.draft;s.open=true;kConfirm=false;saveK();renderKoud()});
+  on('kYes',()=>{s.acc=s.draft;s.open=true;kConfirm=false;saveK();renderKoud();setTimeout(()=>endFilm('koud',c.id),500)});
   on('kReset',()=>{kd.cases[c.id]={tab:'rapport',notes:s.notes||'',acc:null,open:false};saveK();renderKoud()});
 }
 
@@ -2120,8 +2139,9 @@ function kSolve(n,cells,np,clues,limit=2){
       if(ok){rU[c.y]=1;cU[c.x]=1;rec(k+1);rU[c.y]=0;cU[c.x]=0}pos[p]=-1;if(count>=limit)return}};
   rec(0);return {count,first};
 }
-function kGen(seed,n){
-  const r=mulberry32(seed*104729+n*7919);
+const LV_KM=[{n:6,ex:3},{n:6,ex:1},{n:7,ex:1},{n:7,ex:0},{n:7,ex:0,hard:1}];
+function kGen(seed,n,lv){
+  const r=mulberry32(seed*104729+n*7919+(lv?lv*13:0));const HARD=lv&&LV_KM[lv-1].hard;
   for(let attempt=0;attempt<60;attempt++){
     const Ls=KL.filter(l=>l.n===n),L=Ls[Math.floor(r()*Ls.length)],{cells,roomList}=kLayout(L);
     // willekeurige plaatsing: één persoon per rij en per kolom, alleen op vakjes waar je kunt staan
@@ -2141,7 +2161,7 @@ function kGen(seed,n){
     const border=c=>c.x===0||c.y===0||c.x===n-1||c.y===n-1;
     const pool=[];const add=(text,clue,w=0)=>pool.push({text,clue,k:r()+w});
     for(let p=0;p<n;p++){const c=cells[pos[p]];
-      add(p===0?`Het slachtoffer werd gevonden in ${RN(c.room)}.`:`${who(p)} was in ${RN(c.room)}.`,{p,u:x=>x.room===c.room},p===murderer?.6:0);
+      add(p===0?`Het slachtoffer werd gevonden in ${RN(c.room)}.`:`${who(p)} was in ${RN(c.room)}.`,{p,u:x=>x.room===c.room},p===murderer?.6:(HARD?.5:0));
       for(const o of shuffle(roomList.filter(k=>k!==c.room),r).slice(0,2))add(`${who(p)} was niet in ${RN(o)}.`,{p,u:x=>x.room!==o},.25);
       if(c.f==='c')add(`${who(p)} zat op een stoel.`,{p,u:x=>x.f==='c'});
       if(c.f==='s')add(`${who(p)} zat op de bank.`,{p,u:x=>x.f==='s'});
@@ -2161,8 +2181,8 @@ function kGen(seed,n){
     for(const c of pool){chosen.push(c);if(kSolve(n,cells,n,chosen.map(x=>x.clue)).count===1)break}
     if(kSolve(n,cells,n,chosen.map(x=>x.clue)).count!==1)continue;
     for(const c of shuffle(chosen,r)){const rest=chosen.filter(x=>x!==c);if(kSolve(n,cells,n,rest.map(x=>x.clue)).count===1)chosen=rest}
-    if(n===6){for(const c of pool.filter(c=>/ was in /.test(c.text)&&!chosen.includes(c)).slice(0,2))chosen.push(c)}
-    return {seed,n,name:L.name,L,cells,roomList,people,pos,murderer,clues:shuffle(chosen,r).map(c=>c.text)};
+    {const ex=lv?LV_KM[lv-1].ex:(n===6?2:0);for(const c of pool.filter(c=>/ was in /.test(c.text)&&!chosen.includes(c)).slice(0,ex))chosen.push(c)}
+    return {seed,n,lv,name:L.name,L,cells,roomList,people,pos,murderer,clues:shuffle(chosen,r).map(c=>c.text)};
   }
   return null;
 }
@@ -2181,8 +2201,8 @@ const KMKEY='md-kamer',KMSKEY='md-kamer-stats';
 let KM=null,ks=null,ktool=0,kAskReveal=false;
 const saveKm=()=>store.set(KMKEY,ks);
 const kmStats=()=>store.get(KMSKEY)||{solved:0,streak:0};
-function kmStart(){const sv=store.get(KMKEY);if(sv&&sv.seed&&(sv.n===6||sv.n===7)){try{KM=sv.case&&sv.case.cells?sv.case:kGen(sv.seed,sv.n);if(KM){ks=sv;if(!ks.case){ks.case=KM;saveKm()}renderKamer();return}}catch(e){}}kmNew(Math.floor(Date.now()/864e5)%9999+1,6)}
-function kmNew(seed,n){KM=kGen(seed,n);let s=seed;while(!KM){s++;KM=kGen(s,n)}ks={seed:KM.seed,n,case:KM,place:{},marks:[],struck:[],done:false,revealed:false,mistakes:0};ktool=0;kAskReveal=false;saveKm();renderKamer();window.scrollTo({top:0})}
+function kmStart(){const sv=store.get(KMKEY);if(sv&&sv.seed&&(sv.n===6||sv.n===7)){try{KM=sv.case&&sv.case.cells?sv.case:kGen(sv.seed,sv.n);if(KM){ks=sv;if(!ks.case){ks.case=KM;saveKm()}renderKamer();return}}catch(e){}}kmNew(Math.floor(Date.now()/864e5)%9999+1)}
+function kmNew(seed,n,lv){if(!lv)lv=lvGet('kamer',kmStats().solved);n=LV_KM[lv-1].n;KM=kGen(seed,n,lv);let s=seed;while(!KM){s++;KM=kGen(s,n,lv)}ks={seed:KM.seed,n,lv,case:KM,place:{},marks:[],struck:[],done:false,revealed:false,mistakes:0};ktool=0;kAskReveal=false;saveKm();renderKamer();window.scrollTo({top:0})}
 const ptoken=p=>`<span class="tok ${p===0?'v':''}">${p===0?victimIcon:svgOf(KM.people[p])}</span>`;
 function renderKamer(){
   const P=$('pKamer'),n=KM.n,cells=KM.cells,occ={};
@@ -2198,7 +2218,7 @@ function renderKamer(){
     [...new Set(cells.map(c=>c.f).filter(f=>f!=='.'))].map(f=>`<span class="chip"><span class="fi">${fsvg(f)}</span>${FLAB[f]}${STAND.includes(f)?'':' (bezet)'}</span>`).join('');
   const clues=KM.clues.map((t,i)=>`<li class="clue${ks.struck.includes(i)?' done':''}" tabindex="0" data-kc="${i}">${t}</li>`).join('');
   const m=KM.people[KM.murderer].name;
-  P.innerHTML=`<div class="controls"><div class="seg" role="group" aria-label="Grootte"><button id="km6" type="button" aria-pressed="${n===6}">Makkelijk 6×6</button><button id="km7" type="button" aria-pressed="${n===7}">Lastig 7×7</button></div><button class="btn" id="kmNew" type="button">Nieuwe puzzel</button></div>
+  P.innerHTML=`<div class="controls"><button class="btn" id="kmNew" type="button">Nieuwe puzzel</button></div>${lvBar('kamer',kmStats().solved,KM.lv||ks.lv||(n===6?2:3))}
    <div class="stats">Opgelost: ${st.solved} · Reeks: ${st.streak}</div>
    <div class="storyhead"><span class="kicker">Puzzel ${String(KM.seed).padStart(4,'0')} · ${n} personen</span><h3>${KM.name}</h3></div>
    <p class="lead" style="font-size:16px">In ${KM.name} is iemand vermoord. Zet iedereen op de plattegrond: in elke rij en elke kolom staat precies één persoon, en niemand staat op een tafel, plant of kast. Wie alleen met het slachtoffer in een kamer was, is de dader.</p>
@@ -2222,8 +2242,7 @@ function renderKamer(){
       const next=KM.people.findIndex((_,i)=>ks.place[i]===undefined);if(next>=0)ktool=next}
     saveKm();renderKamer()});
   P.querySelectorAll('[data-kc]').forEach(li=>{li.onclick=()=>{const i=+li.dataset.kc;ks.struck=ks.struck.includes(i)?ks.struck.filter(x=>x!==i):[...ks.struck,i];li.classList.toggle('done');saveKm()};li.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();li.click()}}});
-  $('km6').onclick=()=>kmNew(1+Math.floor(Math.random()*9999),6);$('km7').onclick=()=>kmNew(1+Math.floor(Math.random()*9999),7);
-  $('kmNew').onclick=()=>kmNew(1+Math.floor(Math.random()*9999),n);
+  $('kmNew').onclick=()=>kmNew(1+Math.floor(Math.random()*9999));
   $('kmClear').onclick=()=>{ks.place={};ks.marks=[];saveKm();renderKamer()};
   $('kmCheck').onclick=()=>{const placed=Object.entries(ks.place);if(!placed.length)return msg('Er staat nog niemand op de plattegrond.');
     const rows={},cols={};let clash=0;for(const [,ci] of placed){const c=cells[ci];rows[c.y]=(rows[c.y]||0)+1;cols[c.x]=(cols[c.x]||0)+1}
@@ -2231,7 +2250,7 @@ function renderKamer(){
     const wrong=placed.filter(([p,ci])=>KM.pos[+p]!==ci).length;
     msg(clash?`Let op: ${clash} rij${clash>1?'en of kolommen hebben':' of kolom heeft'} meer dan één persoon.`:wrong?`${wrong} van de ${placed.length} personen ${wrong>1?'staan':'staat'} nog niet goed.`:`Alle ${placed.length} geplaatste personen staan goed.`)};
   $('kmAccBtn').onclick=()=>{if(ks.done)return;const v=$('kmAcc').value;if(!v)return;
-    if(+v===KM.murderer){ks.done=true;const x=kmStats();x.solved++;x.streak=ks.mistakes?0:x.streak+1;store.set(KMSKEY,x);ks.place=Object.fromEntries(KM.pos.map((ci,p)=>[p,ci]));saveKm();renderKamer();setTimeout(()=>fmPlay(kamerFilm(),{label:'Zo is het gebeurd',end:'Terug naar de plattegrond'}),400)}
+    if(+v===KM.murderer){ks.done=true;const x=kmStats();const lb=lvMax(x.solved);x.solved++;setTimeout(()=>lvAfter('kamer',lb,lvMax(x.solved)),300);x.streak=ks.mistakes?0:x.streak+1;store.set(KMSKEY,x);ks.place=Object.fromEntries(KM.pos.map((ci,p)=>[p,ci]));saveKm();renderKamer();setTimeout(()=>fmPlay(kamerFilm(),{label:'Zo is het gebeurd',end:'Terug naar de plattegrond'}),400)}
     else{ks.mistakes++;saveKm();$('kmVerdict').innerHTML=`<div class="verdict bad"><p>Mis. ${KM.people[+v].name} was niet alleen met het slachtoffer. Kijk nog eens naar de plattegrond.</p></div>`}};
   $('kmReveal').onclick=()=>{if(ks.done)return;kAskReveal=true;renderKamer()};
   const no=$('kmNo');if(no)no.onclick=()=>{kAskReveal=false;renderKamer()};
@@ -2247,8 +2266,8 @@ const LHP=[['doolhof','De geheime gang'],['woord','De wapenkamer'],['route','Voe
 function lhMaze(r,W,H){const cells=Array(W*H).fill(0),seen=Array(W*H).fill(false),st=[0];seen[0]=true;const D=[[0,-1,1,4],[1,0,2,8],[0,1,4,1],[-1,0,8,2]];
   while(st.length){const c=st[st.length-1],x=c%W,y=Math.floor(c/W);const nb=shuffle(D,r).filter(([dx,dy])=>{const nx=x+dx,ny=y+dy;return nx>=0&&ny>=0&&nx<W&&ny<H&&!seen[ny*W+nx]});
     if(!nb.length){st.pop();continue}const [dx,dy,b,ob]=nb[0],n=(y+dy)*W+x+dx;cells[c]|=b;cells[n]|=ob;seen[n]=true;st.push(n)}return cells}
-function lhWords(r,words,N){for(let tries=0;tries<200;tries++){const g=Array(N*N).fill(''),pl=[];let ok=true;
-  for(const w of words){let placed=false;for(let t=0;t<150&&!placed;t++){const [dx,dy]=pick([[1,0],[0,1],[1,1],[1,-1]],r);const L=w.length;
+function lhWords(r,words,N,rev){for(let tries=0;tries<200;tries++){const g=Array(N*N).fill(''),pl=[];let ok=true;
+  for(const w of words){let placed=false;for(let t=0;t<150&&!placed;t++){const [dx,dy]=pick(rev?[[1,0],[0,1],[1,1],[1,-1],[-1,0],[0,-1],[-1,-1],[-1,1]]:[[1,0],[0,1],[1,1],[1,-1]],r);const L=w.length;
     const x0=Math.floor(r()*N),y0=Math.floor(r()*N),x1=x0+dx*(L-1),y1=y0+dy*(L-1);if(x1<0||x1>=N||y1<0||y1>=N)continue;
     let fit=true;for(let i=0;i<L;i++){const c=g[(y0+dy*i)*N+x0+dx*i];if(c&&c!==w[i]){fit=false;break}}if(!fit)continue;
     const cells=[];for(let i=0;i<L;i++){const k=(y0+dy*i)*N+x0+dx*i;g[k]=w[i];cells.push(k)}pl.push({w,cells});placed=true}
@@ -2274,7 +2293,8 @@ function lhSafe(r){const all=[];for(let a=1;a<10;a++)for(let b=1;b<10;b++)for(le
     pool.push([b%2?`Het middelste cijfer is oneven.`:`Het middelste cijfer is even.`,x=>x[1]%2===b%2]);
     const ch=[];let cand=all;for(const c2 of shuffle(pool,r)){const f=cand.filter(c2[1]);if(f.length<cand.length){ch.push(c2[0]);cand=f}if(cand.length===1)break}
     if(cand.length===1&&ch.length<=4)return {code:d,clues:ch}}return {code:[1,2,3],clues:['Het eerste cijfer is 1.','Het tweede cijfer is 2.','Het derde cijfer is 3.']}}
-function lhGen(seed){const r=mulberry32(seed*6151+17);
+const LV_LH=[{m:7,N:10},{m:9,N:10},{m:9,N:10,rev:1},{m:11,N:11,rev:1},{m:13,N:12,rev:1}];
+function lhGen(seed,lv){const r=mulberry32(seed*6151+17+(lv?lv*19:0));const LL=LV_LH[(lv||1)-1];
   const S=shuffle(POOL.suspects,r).slice(0,6),W=LHW.slice();
   const sol={s:Math.floor(r()*6),w:Math.floor(r()*6)};
   // route van 3 aangrenzende kamers, niet de plaats van de moord
@@ -2283,14 +2303,14 @@ function lhGen(seed){const r=mulberry32(seed*6151+17);
     if(seq.length===3)route=seq}
   sol.r=room;
   const iS=shuffle(range(6).filter(i=>i!==sol.s),r),iW=shuffle(range(6).filter(i=>i!==sol.w),r),iR=shuffle(range(9).filter(i=>i!==sol.r&&!route.includes(i)),r);
-  const maze=lhMaze(r,7,7);
-  const words=lhWords(r,iW.slice(0,4).map(i=>W[i].w),10);
+  const maze=lhMaze(r,LL.m,LL.m);
+  const words=lhWords(r,iW.slice(0,4).map(i=>W[i].w),LL.N,LL.rev);
   let sud,markA,markB;do{sud=lhSudoku(r);markA=sud.sol.findIndex((v,i)=>v===0&&sud.puz[i]===-1);markB=sud.sol.findIndex((v,i)=>v===1&&sud.puz[i]===-1)}while(markA<0||markB<0);
   const sudSyms=[iS[0],iS[1],...shuffle([iS[2],iS[3],iS[4]],r).slice(0,2)];
   const shift=2+Math.floor(r()*7);const msg=`NIET IN DE ${LHR[iR[0]][0]} EN NIET IN DE ${LHR[iR[1]][0]}`;
   const scram=nm=>{const L=[...nm.toUpperCase().replace(/[^A-Z]/g,'')];let s;do{s=shuffle(L,r).join('')}while(s===L.join(''));return s};
   const safe=lhSafe(r);
-  return {seed,S,W,sol,route,maze,words,sud,sudSyms,marks:[markA,markB],shift,cipher:caesar(msg,shift),msg,cipRooms:[iR[0],iR[1]],mazeRooms:iR.slice(2,5),
+  return {seed,lv:lv||1,mz:LL.m,wsN:LL.N,S,W,sol,route,maze,words,sud,sudSyms,marks:[markA,markB],shift,cipher:caesar(msg,shift),msg,cipRooms:[iR[0],iR[1]],mazeRooms:iR.slice(2,5),
     anaS:[iS[3],iS[4]],ana:[scram(S[iS[3]].name),scram(S[iS[4]].name)],safe,safeW:iW[4],safeS:iS[2],
     victim:pick(LHV,r),event:pick(LHE,r),wsW:iW.slice(0,4),sudS:[iS[0],iS[1]]};
 }
@@ -2307,13 +2327,13 @@ const LHKEY='md-landhuis',LHSKEY='md-landhuis-stats';
 let LG=null,lst=null,lhAsk=false;
 const saveLh=()=>store.set(LHKEY,lst);
 function lhStart(){const sv=store.get(LHKEY);if(sv&&sv.seed){try{LG=sv.case&&sv.case.maze?sv.case:lhGen(sv.seed);lst=sv;if(!lst.case){lst.case=LG;saveLh()}renderLH();return}catch(e){}}lhNew(Math.floor(Date.now()/864e5)%9999+1)}
-function lhNew(seed){LG=lhGen(seed);lst={seed,case:LG,view:0,chk:[],guess:{},solved:[],skipped:[],path:[0],found:[],sel:null,sud:LG.sud.puz.slice(),k:0,cip:[],ana:[],safe:[1,1,1],seq:[],note:{s:[],w:[],r:[]},done:false,acc:null};lhAsk=false;saveLh();renderLH();window.scrollTo({top:0})}
+function lhNew(seed,lv){if(!lv)lv=lvGet('landhuis',(store.get(LHSKEY)||{solved:0}).solved);LG=lhGen(seed,lv);lst={seed,case:LG,view:0,chk:[],guess:{},solved:[],skipped:[],path:[0],found:[],sel:null,sud:LG.sud.puz.slice(),k:0,cip:[],ana:[],safe:[1,1,1],seq:[],note:{s:[],w:[],r:[]},done:false,acc:null};lhAsk=false;saveLh();renderLH();window.scrollTo({top:0})}
 function lhSolve(i){lhChk();const fresh=!lst.solved.includes(i);if(fresh)lst.solved.push(i);saveLh();renderLH();if(fresh)lhGuess(i)}
 function lhPuzzle(i){const G=LG,[k,title]=LHP[i],solved=lst.solved.includes(i);let h='';
-  if(k==='doolhof'){const W=7,last=lst.path[lst.path.length-1];
+  if(k==='doolhof'){const W=G.mz||7,last=lst.path[lst.path.length-1];
     h=`<p>Achter de boekenkast begint een geheime gang. Vind de weg van de <b>start</b> (linksboven) naar de <b>deur</b> (rechtsonder). Houd je vinger of muis op de S en sleep door de gang naar de D. Tikken op het volgende vakje kan ook.</p>
      <div class="lhmaze" style="--w:${W}">${G.maze.map((m,c)=>`<button type="button" class="mz ${lst.path.includes(c)?'on':''} ${c===last?'head':''}" data-mz="${c}" style="border-top-width:${m&1?0:3}px;border-right-width:${m&2?0:3}px;border-bottom-width:${m&4?0:3}px;border-left-width:${m&8?0:3}px" aria-label="vak ${c+1}">${c===0?'S':c===W*W-1?'D':''}</button>`).join('')}</div>`}
-  if(k==='woord'){const N=10;
+  if(k==='woord'){const N=G.wsN||10;
     h=`<p>In de wapenkamer hangt een bord vol letters. Vier van deze wapens staan erin: van links naar rechts, van boven naar beneden of schuin. Sleep met je vinger of muis over een woord, van de eerste tot de laatste letter. Tikken op de eerste en de laatste letter kan ook.</p>
      <div class="lhws" style="--w:${N}">${G.words.g.map((ch,c)=>`<button type="button" class="ws ${lst.found.some(f=>G.words.pl[f].cells.includes(c))?'on':''} ${lst.sel===c?'sel':''}" data-ws="${c}">${ch}</button>`).join('')}</div>
      <p class="wslist">${G.W.map(w=>`<span class="${lst.found.some(f=>G.words.pl[f].w===w.w)?'got':''}">${w.w}</span>`).join('')}</p>`}
@@ -2407,7 +2427,7 @@ function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let 
      ${lst.done?`<div class="verdict ${ok?'':'bad'}"><p>${ok?'Goed gezien!':'Helaas, mis.'} Het was <b>${G.S[G.sol.s].name}</b>, met <b>${G.W[G.sol.w].name}</b>, in <b>${LHR[G.sol.r][1]}</b>.${ok&&lst.skipped.length?` Je sloeg ${lst.skipped.length} puzzel${lst.skipped.length>1?'s':''} over.`:''}</p></div><div class="controls"><button class="btn" id="lhFilm" type="button">▶ Zo is het gebeurd</button><button class="btn primary" id="lhAgain" type="button">Nieuwe zaak</button></div>`
      :`<div class="accuse2">${sel('lhS',G.S.map(s=>s.name),'Wie?')}${sel('lhW',G.W.map(w=>cap(w.name)),'Waarmee?')}${sel('lhR',LHR.map(r=>cap(r[1].replace(/^de /,''))),'Waar?')}<p class="msg" id="lhMsg"></p><div class="controls"><button class="btn primary" id="lhAcc" type="button">Beschuldig</button></div></div>`}</article>`;
   }else body=lhPuzzle(v);
-  P.innerHTML=`<div class="controls"><button class="btn" id="lhNew" type="button">Nieuwe zaak</button></div><div class="stats">Opgelost: ${st.solved} · Reeks: ${st.streak}</div>
+  P.innerHTML=`<div class="controls"><button class="btn" id="lhNew" type="button">Nieuwe zaak</button></div>${lvBar('landhuis',st.solved,G.lv||1)}<div class="stats">Opgelost: ${st.solved} · Reeks: ${st.streak}</div>
    <div class="storyhead"><span class="kicker">Zaak ${String(G.seed).padStart(4,'0')} · Landhuis Lindenhof</span><h3>Moord in het landhuis</h3></div>
    <p class="lead" style="font-size:16px">Tijdens ${G.event} wordt ${G.victim} dood gevonden. Zes gasten, zes mogelijke wapens, negen kamers. Los de puzzels op: elke puzzel streept iets weg. Wat overblijft, is de waarheid.</p>
    <nav class="chapters" aria-label="Puzzels">${dots}</nav>${body}${lhBoard()}`;
@@ -2421,7 +2441,7 @@ function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let 
   on('lhYes',()=>{lhAsk=false;lst.skipped.push(v);lhSolve(v)});
   // doolhof
   const mzEl=P.querySelector('.lhmaze');let mzDragged=false;
-  if(mzEl){let drag=false,moved=false;const W=7;
+  if(mzEl){let drag=false,moved=false;const W=G.mz||7;
     const paint=()=>{const hd=lst.path[lst.path.length-1];mzEl.querySelectorAll('[data-mz]').forEach(b=>{const c=+b.dataset.mz;b.classList.toggle('on',lst.path.includes(c));b.classList.toggle('head',c===hd)})};
     const can=(a,c)=>{const m=G.maze[a],dx=c%W-a%W,dy=Math.floor(c/W)-Math.floor(a/W);return Math.abs(dx)+Math.abs(dy)===1&&!!((dx===1&&m&2)||(dx===-1&&m&8)||(dy===1&&m&4)||(dy===-1&&m&1))};
     const step=c=>{const path=lst.path,head=path[path.length-1];if(c===head)return;
@@ -2433,7 +2453,7 @@ function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let 
       if(b&&mzEl.contains(b)){const c=+b.dataset.mz;if(c!==lst.path[lst.path.length-1]){moved=true;step(c)}}});
     const end=()=>{if(!drag)return;drag=false;saveLh();if(moved){mzDragged=true;setTimeout(()=>mzDragged=false,50)}};
     mzEl.addEventListener('pointerup',end);mzEl.addEventListener('pointercancel',end)}
-  P.querySelectorAll('[data-mz]').forEach(b=>b.onclick=()=>{if(mzDragged)return;const c=+b.dataset.mz,W=7,path=lst.path,head=path[path.length-1];
+  P.querySelectorAll('[data-mz]').forEach(b=>b.onclick=()=>{if(mzDragged)return;const c=+b.dataset.mz,W=G.mz||7,path=lst.path,head=path[path.length-1];
     if(path.includes(c)){lst.path=path.slice(0,path.indexOf(c)+1);saveLh();return renderLH()}
     const m=G.maze[head],dx=c%W-head%W,dy=Math.floor(c/W)-Math.floor(head/W);
     const open=(dx===1&&m&2)||(dx===-1&&m&8)||(dy===1&&m&4)||(dy===-1&&m&1);
@@ -2441,7 +2461,7 @@ function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let 
     path.push(c);saveLh();if(c===W*W-1)return lhSolve(v);renderLH()});
   // woordzoeker: slepen over de letters, of tik eerste en laatste letter
   const wsEl=P.querySelector('.lhws');let wsDragged=false;
-  if(wsEl){const N=10;let a=null,cur=[],moved=false;
+  if(wsEl){const N=G.wsN||10;let a=null,cur=[],moved=false;
     const line=(s,e)=>{let dx=e%N-s%N,dy=Math.floor(e/N)-Math.floor(s/N);const len=Math.max(Math.abs(dx),Math.abs(dy));if(!len)return [s];
       const ang=Math.atan2(dy,dx),k=Math.round(ang/(Math.PI/4)),ux=Math.round(Math.cos(k*Math.PI/4)),uy=Math.round(Math.sin(k*Math.PI/4)),out=[];
       for(let i=0;i<=len;i++){const x=s%N+ux*i,y=Math.floor(s/N)+uy*i;if(x<0||y<0||x>=N||y>=N)break;out.push(y*N+x)}return out};
@@ -2479,7 +2499,7 @@ function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let 
     if(k==='anagram'){if(same(lst.ana,G.anaS))return lhSolve(v);return msg(lst.ana.length<2?'Kies twee verdachten.':'Dat klopt niet. Tel de letters van de namen eens na.')}
     if(k==='kluis'){if(lst.safe.every((d,j)=>d===G.safe.code[j]))return lhSolve(v);return msg('De kluis blijft dicht. Probeer het nog eens.')}});
   on('lhAcc',()=>{const g=id=>$(id).value===''?null:+$(id).value;const a={s:g('lhS'),w:g('lhW'),r:g('lhR')};if(a.s===null||a.w===null||a.r===null)return msg('Kies wie, waarmee en waar.');
-    lst.acc=a;lst.done=true;const ok=a.s===G.sol.s&&a.w===G.sol.w&&a.r===G.sol.r;const x=store.get(LHSKEY)||{solved:0,streak:0};if(ok){x.solved++;x.streak++}else x.streak=0;store.set(LHSKEY,x);saveLh();renderLH();lhFilmPlay()});
+    lst.acc=a;lst.done=true;const ok=a.s===G.sol.s&&a.w===G.sol.w&&a.r===G.sol.r;const x=store.get(LHSKEY)||{solved:0,streak:0};const lb=lvMax(x.solved);if(ok){x.solved++;x.streak++}else x.streak=0;setTimeout(()=>lvAfter('landhuis',lb,lvMax(x.solved)),300);store.set(LHSKEY,x);saveLh();renderLH();lhFilmPlay()});
   on('lhFilm',lhFilmPlay);
 }
 
@@ -2529,15 +2549,15 @@ const CIPH={caesar:{name:'Verschuifcode (3 plaatsen)',enc:t=>caesar(t,3)},atbash
  getal:{name:'Getallencode (A = 1)',enc:t=>t.split(' ').map(w=>[...w].map(c=>ABC.indexOf(c)+1).join('-')).join(' / ')},
  morse:{name:'Morse',enc:t=>t.split(' ').map(w=>[...w].map(c=>MORSE[c]).join(' ')).join(' / ')},
  polybius:{name:'Vierkant van Polybius',enc:t=>t.split(' ').map(w=>polybius(w)).join(' / ')}};
-function spGen(seed,n){
-  const r=mulberry32(seed*48271+n*31);const E=ERAS[Math.floor(r()*ERAS.length)];
+function spGen(seed,n,lv){
+  const r=mulberry32(seed*48271+n*31+(lv?lv*17:0));const DP=lv?LVLS[lv-1].d:.55;const E=ERAS[Math.floor(r()*ERAS.length)];
   const S=shuffle(E.spies,r).slice(0,n),W=shuffle(E.secrets,r).slice(0,n);let L;do{L=shuffle(E.places,r).slice(0,n)}while(L.every(x=>x.buiten)||L.every(x=>!x.buiten));
   const sol={loc:shuffle(range(n),r),wep:shuffle(range(n),r)},spy=Math.floor(r()*n),meet=sol.loc[spy];
   const P=perms(n),all=[];for(const p of P)for(const q of P)all.push({loc:p,wep:q});const holder=(a,w)=>a.wep.indexOf(w);
   const pool=[];const add=(text,test,pen=0)=>{if(test(sol))pool.push({text,test,k:r()+pen})};
-  for(const s of range(n))for(const l of range(n)){add(`[s${s}] was in [l${l}].`,a=>a.loc[s]===l,.55);add(`[s${s}] was niet in [l${l}].`,a=>a.loc[s]!==l)}
-  for(const s of range(n))for(const w of range(n)){add(`[s${s}] had [w${w}].`,a=>a.wep[s]===w,.55);add(`[s${s}] had [w${w}] niet.`,a=>a.wep[s]!==w)}
-  for(const w of range(n))for(const l of range(n)){add(`[W${w}] lag in [l${l}].`,a=>a.loc[holder(a,w)]===l,.55);add(`[W${w}] lag niet in [l${l}].`,a=>a.loc[holder(a,w)]!==l)}
+  for(const s of range(n))for(const l of range(n)){add(`[s${s}] was in [l${l}].`,a=>a.loc[s]===l,DP);add(`[s${s}] was niet in [l${l}].`,a=>a.loc[s]!==l)}
+  for(const s of range(n))for(const w of range(n)){add(`[s${s}] had [w${w}].`,a=>a.wep[s]===w,DP);add(`[s${s}] had [w${w}] niet.`,a=>a.wep[s]!==w)}
+  for(const w of range(n))for(const l of range(n)){add(`[W${w}] lag in [l${l}].`,a=>a.loc[holder(a,w)]===l,DP);add(`[W${w}] lag niet in [l${l}].`,a=>a.loc[holder(a,w)]!==l)}
   for(const [k,pos,neg] of [['hand',v=>`iemand die ${v}handig is`,v=>`niemand die ${v}handig is`],['ogen',v=>`iemand met ${v} ogen`,v=>`niemand met ${v} ogen`],['haar',v=>`iemand met ${v} haar`,v=>`niemand met ${v} haar`]]){
     const vals=[...new Set(S.map(x=>x[k]))];if(vals.length<2)continue;
     for(const v of vals){const who=range(n).filter(i=>S[i][k]===v);
@@ -2555,13 +2575,13 @@ function spGen(seed,n){
   for(const c of shuffle(chosen,r)){const rest=chosen.filter(x=>x!==c);if(count(rest)===1)chosen=rest}
   const clues=shuffle(chosen,r).map(c=>c.text);
   const coded=clues.map((t,i)=>[i,t.length]).sort((a,b)=>a[1]-b[1])[0][0];
-  return {seed,n,E,S,W,L,sol,spy,meet,clues,coded};
+  return {seed,n,lv,E,S,W,L,sol,spy,meet,clues,coded};
 }
 const SPKEY='md-spion',SPSKEY='md-spion-stats';
 let SG=null,sps=null;
 const saveSp=()=>store.set(SPKEY,sps);
-function spStart(){const sv=store.get(SPKEY);if(sv&&sv.seed&&(sv.n===3||sv.n===4)){try{SG=sv.case&&sv.case.clues?sv.case:spGen(sv.seed,sv.n);sps=sv;if(!sps.case){sps.case=SG;saveSp()}renderSpy();return}catch(e){}}spNew(Math.floor(Date.now()/864e5)%9999+1,3)}
-function spNew(seed,n){SG=spGen(seed,n);sps={seed,n,case:SG,marks:{},struck:[],sub:'',done:false,revealed:false,mistakes:0,decoded:false};saveSp();renderSpy();window.scrollTo({top:0})}
+function spStart(){const sv=store.get(SPKEY);if(sv&&sv.seed&&[3,4,5].includes(sv.n)){try{SG=sv.case&&sv.case.clues?sv.case:spGen(sv.seed,sv.n);sps=sv;if(!sps.case){sps.case=SG;saveSp()}renderSpy();return}catch(e){}}spNew(Math.floor(Date.now()/864e5)%9999+1)}
+function spNew(seed,n,lv){if(!lv)lv=lvGet('spion',(store.get(SPSKEY)||{solved:0}).solved);n=LVLS[lv-1].n;SG=spGen(seed,n,lv);sps={seed,n,lv,case:SG,marks:{},struck:[],sub:'',done:false,revealed:false,mistakes:0,decoded:false};saveSp();renderSpy();window.scrollTo({top:0})}
 function spRef(t,i,plain){const G=SG;if(t==='s')return plain?G.S[i].name:`<b>${G.S[i].name}</b>`;const x=t==='l'?G.L[i]:G.W[i];const lid=t==='W'?cap(x.lid):x.lid;const nm=t==='l'?x.name.toLowerCase():x.name;return plain?`${lid} ${nm}`:`${lid} <b>${nm}</b>`}
 const spTok=(t,plain)=>t.replace(/\[([swWl])(\d)\]/g,(m,a,i)=>spRef(a,+i,plain));
 function renderSpy(){const G=SG,n=G.n,P=$('pSpion'),st=store.get(SPSKEY)||{solved:0,streak:0};
@@ -2583,7 +2603,7 @@ function renderSpy(){const G=SG,n=G.n,P=$('pSpion'),st=store.get(SPSKEY)||{solve
     G.L.forEach((L,li)=>{h+='<tr>'+(li===0?`<th class="vlabel" rowspan="${n}">Plekken</th>`:'')+ri(L);for(let s=0;s<n;s++)h+=cell(`ls:${li}:${s}`,(li===0?'bt ':'')+(s===0?'bl ':'')+(s===n-1?'br ':'')+(li===n-1?'bb':''));h+=`<td class="e" colspan="${n}"></td></tr>`});return h})();
   const opt=(arr,f)=>'<option value="">…</option>'+arr.map((x,i)=>`<option value="${i}">${f(x)}</option>`).join('');
   const m=G.S[G.spy],w=G.W[G.sol.wep[G.spy]],l=G.L[G.meet];
-  P.innerHTML=`<div class="controls"><div class="seg" role="group" aria-label="Moeilijkheid"><button id="sp3" type="button" aria-pressed="${n===3}">Makkelijk</button><button id="sp4" type="button" aria-pressed="${n===4}">Lastig</button></div><button class="btn" id="spNewB" type="button">Nieuwe zaak</button></div>
+  P.innerHTML=`<div class="controls"><button class="btn" id="spNewB" type="button">Nieuwe zaak</button></div>${lvBar('spion',(store.get(SPSKEY)||{solved:0}).solved,SG.lv||sps.lv||(n===3?1:2))}
    <div class="stats">Ontmaskerd: ${st.solved} · Reeks: ${st.streak}</div>
    <header class="casehead"><span class="kicker">Jaar ${G.E.year} · zaak nr. ${String(G.seed).padStart(4,'0')}</span><h1 style="margin-top:4px">${G.E.title}</h1><p>${G.E.intro} Eén van deze ${n} mensen is een spion. Wie is het, welk geheim had hij of zij bij zich, en waar vond de overdracht plaats?</p></header>
    <section class="band"><div class="subtabs" role="tablist"><button role="tab" type="button" data-ss="s" aria-selected="${sub==='s'}">Verdachten</button><button role="tab" type="button" data-ss="w" aria-selected="${sub==='w'}">Geheimen</button><button role="tab" type="button" data-ss="l" aria-selected="${sub==='l'}">Plekken</button></div>
@@ -2604,12 +2624,12 @@ function renderSpy(){const G=SG,n=G.n,P=$('pSpion'),st=store.get(SPSKEY)||{solve
   P.querySelectorAll('[data-sk]').forEach(td=>{const tap=()=>{const k=td.dataset.sk,cur=sps.marks[k]||'',nx=cur===''?'x':cur==='x'?'v':'';if(nx)sps.marks[k]=nx;else delete sps.marks[k];
     if(nx==='v'){const [b,a,c]=k.split(':');for(let q=0;q<n;q++){const r1=`${b}:${a}:${q}`,r2=`${b}:${q}:${c}`;if(r1!==k&&!sps.marks[r1])sps.marks[r1]='x';if(r2!==k&&!sps.marks[r2])sps.marks[r2]='x'}}saveSp();renderSpy()};
     td.onclick=tap;td.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tap()}}});
-  $('sp3').onclick=()=>spNew(1+Math.floor(Math.random()*9999),3);$('sp4').onclick=()=>spNew(1+Math.floor(Math.random()*9999),4);$('spNewB').onclick=()=>spNew(1+Math.floor(Math.random()*9999),n);
+  $('spNewB').onclick=()=>spNew(1+Math.floor(Math.random()*9999));
   $('spClear').onclick=()=>{sps.marks={};saveSp();renderSpy()};
   $('spCheck').onclick=()=>{let wrong=0,f=0;for(const [k,v] of Object.entries(sps.marks)){f++;if((v==='v')!==truthS(k))wrong++}$('spMsg').textContent=!f?'Het rooster is nog leeg.':wrong?`${wrong} vakje${wrong>1?'s kloppen':' klopt'} niet.`:'Alles wat je hebt ingevuld klopt.'};
   const dec=$('spDec');if(dec)dec.onclick=()=>{sps.decoded=true;saveSp();renderSpy()};
   $('spAcc').onclick=()=>{if(sps.done)return;const s=$('spS').value,w2=$('spW').value,l2=$('spL').value;if(s===''||w2===''||l2==='')return $('spVerdict').innerHTML='<div class="verdict bad"><p>Kies een verdachte, een geheim en een plek.</p></div>';
-    if(+s===G.spy&&+w2===G.sol.wep[G.spy]&&+l2===G.meet){sps.done=true;const x=store.get(SPSKEY)||{solved:0,streak:0};x.solved++;x.streak=sps.mistakes?0:x.streak+1;store.set(SPSKEY,x);saveSp();renderSpy();setTimeout(()=>fmPlay(spyFilm(),{label:'Zo is het gebeurd',end:'Terug naar het dossier'}),400)}
+    if(+s===G.spy&&+w2===G.sol.wep[G.spy]&&+l2===G.meet){sps.done=true;const x=store.get(SPSKEY)||{solved:0,streak:0};const lb=lvMax(x.solved);x.solved++;setTimeout(()=>lvAfter('spion',lb,lvMax(x.solved)),300);x.streak=sps.mistakes?0:x.streak+1;store.set(SPSKEY,x);saveSp();renderSpy();setTimeout(()=>fmPlay(spyFilm(),{label:'Zo is het gebeurd',end:'Terug naar het dossier'}),400)}
     else{sps.mistakes++;saveSp();$('spVerdict').innerHTML=`<div class="verdict bad"><p>Mis. Bekijk de aanwijzingen en het onderschepte bericht nog eens.</p></div>`}};
   $('spRev').onclick=()=>{if(sps.done)return;sps.done=true;sps.revealed=true;const x=store.get(SPSKEY)||{solved:0,streak:0};x.streak=0;store.set(SPSKEY,x);saveSp();renderSpy()};
 }
@@ -2799,7 +2819,7 @@ function renderBericht(){const P=$('pBericht');
     ${bAsk?`<div class="spoiler"><p>Weet je het zeker? Daarna kun je je antwoord niet meer veranderen.</p><div class="controls" style="justify-content:center"><button class="btn primary" id="bYes" type="button">Toon de oplossing</button><button class="btn" id="bNo" type="button">Nog even zoeken</button></div></div>`:`<div class="seal"><span>ZEGEL</span><button class="btn primary" id="bSeal" type="button">Leg conclusie vast</button></div>`}</div>`}
   else{const A=s.acc,ok=k=>k==='e'?C.answer.bewijs.includes(A.e):A[k]===C.answer[k==='d'?'dader':'motief'];const row=(l,k,arr)=>`<li class="${ok(k)?'good':'bad'}"><b>${ok(k)?'✓':'✗'} ${l}:</b> ${arr[A[k]]}</li>`;
     concl=`<div class="verdict ${A.d===C.answer.dader?'':'bad'}"><p>${A.d===C.answer.dader?'Goed gezien!':'De dader is ontsnapt.'} ${['d','e','m'].filter(ok).length}/3 onderdelen juist.</p></div><ul class="accres">${row('Dader','d',C.opts.dader)}${row('Bewijs','e',C.opts.bewijs)}${row('Motief','m',C.opts.motief)}</ul><h4 class="solh">De oplossing</h4><ol class="solsteps">${C.solution.map(x=>`<li><b>${x.t}.</b> ${x.p}</li>`).join('')}</ol><div class="verdict"><p>${C.verdict}</p></div><div class="controls"><button class="btn" id="bReset" type="button">Zaak opnieuw spelen</button></div>`}
-  P.innerHTML=`<button class="btn small backbtn" id="bList" type="button">← Alle zaken</button><div class="storyhead"><span class="kicker">${C.level} · ${C.time}</span><h3>${C.title}</h3>${filmBtn('bericht',C.id)}</div>
+  P.innerHTML=`<button class="btn small backbtn" id="bList" type="button">← Alle zaken</button><div class="storyhead"><span class="kicker">${C.level} · ${C.time}</span><h3>${C.title}</h3>${filmBtn('bericht',C.id)}${bstate(C.id).open?endBtn('bericht',C.id):''}</div>
    <div class="doc report">${C.report}</div>
    <div class="stmts">${C.extra.map(x=>`<details class="stmt"><summary><b>Bewijsstuk</b><span>${x.t}</span></summary><div class="doc">${x.img?pic(x.img):''}${x.d}</div></details>`).join('')}</div>
    <div class="phone" role="region" aria-label="Telefoon van ${C.victim}"><div class="ph-notch"></div><div class="ph-screen">${phoneBody(C,s)}</div></div>
@@ -2818,7 +2838,7 @@ function renderBericht(){const P=$('pBericht');
   const grab=()=>({d:$('bD').value===''?null:+$('bD').value,e:$('bE').value===''?null:+$('bE').value,m:$('bM').value===''?null:+$('bM').value});
   ['bD','bE','bM'].forEach(id=>{const el=$(id);if(el)el.onchange=()=>{s.draft=grab();saveB()}});
   on('bSeal',()=>{const a=grab();if(a.d===null||a.e===null||a.m===null)return $('bMsg').textContent='Kies eerst een dader, een bewijsstuk en een motief.';s.draft=a;bAsk=true;saveB();renderBericht()});
-  on('bNo',()=>{bAsk=false;renderBericht()});on('bYes',()=>{s.acc=s.draft;s.open=true;bAsk=false;saveB();renderBericht()});
+  on('bNo',()=>{bAsk=false;renderBericht()});on('bYes',()=>{s.acc=s.draft;s.open=true;bAsk=false;saveB();renderBericht();setTimeout(()=>endFilm('bericht',C.id),500)});
   on('bReset',()=>{bd.cases[C.id]={unlocked:true,app:null,sub:null,entry:'',notes:s.notes||'',acc:null,open:false,draft:null};saveB();renderBericht()});
 }
 
@@ -2980,7 +3000,7 @@ function renderDossier(){const P=$('pDossier');
       <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Elke maandag nieuw</h3><p>Elke maandag komen er twee nieuwe dossiers bij. Open de app daarna één of twee keer opnieuw om ze te zien.</p></article></div>`;
     P.querySelectorAll('[data-dcase]').forEach(b=>b.onclick=()=>dGo(b.dataset.dcase));saveD();return}
   const C=DOSSIERS.find(c=>c.id===dd.cur);if(!C)return dGo(null);const s=dstate(C.id);
-  const head=`<button class="btn small backbtn" id="dList" type="button">← Alle dossiers</button><div class="storyhead"><span class="kicker">Dossier ${C.nr} · ${C.level} · ${C.time}</span><h3>${C.title}</h3>${filmBtn('dossier',C.id)}</div>`;
+  const head=`<button class="btn small backbtn" id="dList" type="button">← Alle dossiers</button><div class="storyhead"><span class="kicker">Dossier ${C.nr} · ${C.level} · ${C.time}</span><h3>${C.title}</h3>${filmBtn('dossier',C.id)}${dstate(C.id).done?endBtn('dossier',C.id):''}</div>`;
   if(!s.start){
     P.innerHTML=`${head}<div class="dm-envs">
      <button type="button" class="dm-env big" id="dOpen"><span class="dm-flap"></span><span class="dm-label"><small>Envelop 1</small>START</span><span class="dm-seal">Open</span></button>
@@ -3025,7 +3045,7 @@ function renderDossier(){const P=$('pDossier');
     const n=C.qs.filter((q,i)=>s.ans[i]!==undefined&&s.ans[i]!==null).length,tb=P.querySelector('[data-dtab="vragen"]');if(tb)tb.textContent=`Vragen ${n}/5`});
   P.querySelectorAll('[data-hint]').forEach(b=>b.onclick=()=>{const i=b.dataset.hint;s.hints[i]=(s.hints[i]||0)+1;saveD();renderDossier()});
   on('dSeal',()=>{dAsk=true;renderDossier()});on('dNo',()=>{dAsk=false;renderDossier()});
-  on('dYes',()=>{s.done=true;dAsk=false;saveD();renderDossier()});
+  on('dYes',()=>{s.done=true;dAsk=false;saveD();renderDossier();setTimeout(()=>endFilm('dossier',C.id),500)});
   on('dReset',()=>{dd.cases[C.id]={start:true,tab:'stukken',doc:null,read:[],star:[],ans:{},hints:{},done:false,notes:s.notes||''};saveD();renderDossier()});
 }
 
@@ -3089,10 +3109,35 @@ function fmPlay(scenes,opts={}){if(fmRun)fmRun.close();const total=scenes.reduce
   fmRun={close,draw:t=>{frozen=true;cancelAnimationFrame(raf);draw(t)},total};return fmRun}
 
 // ---- Het Landhuis: zo is het gebeurd ----
-const LHROOM=[['night',['window',150,110,1.3],['moon',150,62,.5],['stairs',62,150,.8]],['wall',['shelf',150,150,1.15],['armchair',62,172,.8]],
- ['day',['pot',50,150,1],['tulip',110,150,1.2],['tulip',140,150,1],['window',225,115,1.1]],['wall',['gclock',225,150,1],['armchair',85,172,.9],['candle',150,150,.9]],
- ['wall',['door',150,150,1],['coat',60,150,1],['hooks',235,130,.6]],['wall',['table',150,150,1.3],['candle',150,92,.8]],
- ['desk',['typewriter',150,140,1.3],['books',245,170,.8]],['dark',['shelf',150,150,1],['bottle',60,170,1],['glass',90,172,1]],['wall',['table',150,150,1.2],['teapot',130,92,.8],['plate',180,96,.8]]];
+// extra meubels voor de kamers van het landhuis
+Object.assign(PP,{
+ piano:()=>`${R(-60,-92,120,92,PK.K,'rx="3"')}${R(-56,-88,112,30,PK.D)}${R(-64,-50,128,10,PK.D)}${R(-62,-40,124,9,PK.W)}${[...Array(12)].map((_,i)=>i%7===2||i%7===6?'':R(-58+i*10,-40,5,6,PK.K)).join('')}${R(-56,-31,6,31,PK.K)}${R(50,-31,6,31,PK.K)}${R(-22,-80,44,16,PK.W,'opacity=".85"')}<path d="M-18 -74h36M-18 -69h36" stroke="${PK.M}" stroke-width="1"/>`,
+ stool:()=>`<ellipse cy="-30" rx="16" ry="5" fill="${PK.D}"/>${R(-3,-30,6,30,PK.K)}${R(-12,-3,24,3,PK.K)}`,
+ chandelier:()=>`<path d="M0 0V24" stroke="${PK.K}" stroke-width="2"/><path d="M-36 34Q0 54 36 34" stroke="${PK.K}" stroke-width="3" fill="none"/>${[-36,-12,12,36].map(x=>`${R(x-2,22+(Math.abs(x)<20?14:0)-10,4,10,PK.W)}<circle cx="${x}" cy="${20+(Math.abs(x)<20?14:0)-12}" r="3" fill="${PK.P}" opacity=".9"/>`).join('')}`,
+ ladder:()=>`<g transform="rotate(12)"><path d="M-14 0V-130M14 0V-130" stroke="${PK.D}" stroke-width="5"/>${[...Array(6)].map((_,i)=>`<path d="M-14 ${-12-i*22}H14" stroke="${PK.D}" stroke-width="4"/>`).join('')}</g>`,
+ telescope:()=>`<path d="M0 -50L-22 0M0 -50L22 0M0 -50V0" stroke="${PK.K}" stroke-width="3"/><g transform="translate(0 -52) rotate(-28)">${R(-40,-8,70,16,PK.D,'rx="3"')}${R(28,-10,14,20,PK.K,'rx="2"')}${R(-48,-5,10,10,PK.K)}</g>`,
+ palm:()=>`<path d="M-16 0L-20 -30H20L16 0Z" fill="${PK.D}"/>${[[-50,-70],[-30,-95],[0,-105],[30,-95],[50,-70],[-40,-50],[42,-48]].map(([x,y])=>`<path d="M0 -30Q${x*.4} ${y*.7} ${x} ${y}Q${x*.6} ${y*.6} 0 -30Z" fill="${PK.K}" opacity=".9"/>`).join('')}`,
+ glasswall:()=>`${R(-150,-150,300,150,PK.W,'opacity=".25"')}${[...Array(7)].map((_,i)=>R(-150+i*50,-150,4,150,PK.K)).join('')}${R(-150,-78,300,4,PK.K)}<path d="M-150 -150L0 -190L150 -150" stroke="${PK.K}" stroke-width="4" fill="none"/>`,
+ bigstairs:()=>`<path d="M-80 0L60 -120H90V0Z" fill="${PK.M}"/>${[...Array(10)].map((_,i)=>`<path d="M${-80+i*14} ${-i*12}h14v-12" stroke="${PK.D}" stroke-width="2" fill="none"/>`).join('')}<path d="M-84 -40L60 -160" stroke="${PK.K}" stroke-width="5"/>${[...Array(9)].map((_,i)=>`<path d="M${-76+i*16} ${-44-i*13.3}V${-8-i*13.3}" stroke="${PK.K}" stroke-width="2.5"/>`).join('')}`,
+ rug:()=>`<ellipse rx="70" ry="10" fill="${PK.D}" opacity=".8"/><ellipse rx="56" ry="7" fill="none" stroke="${PK.P}" stroke-width="1.5" opacity=".6"/>`,
+ longtable:()=>`${R(-110,-46,220,8,PK.D)}${R(-104,-38,6,38,PK.K)}${R(98,-38,6,38,PK.K)}${[-80,-40,0,40,80].map(x=>`${R(x-8,-80,16,40,PK.K,'rx="3"')}`).join('')}${[-60,0,60].map(x=>`${R(x-12,-54,24,8,PK.W)}<ellipse cx="${x}" cy="-54" rx="12" ry="3" fill="${PK.P}"/>`).join('')}`,
+ bureau:()=>`${R(-70,-50,140,8,PK.D)}${R(-66,-42,40,42,PK.K)}${R(30,-42,36,42,PK.K)}${[0,1,2].map(i=>R(-62,-38+i*13,32,10,PK.D)).join('')}<path d="M40 -50V-90L60 -96" stroke="${PK.K}" stroke-width="3" fill="none"/><path d="M50 -100L74 -92L64 -82Z" fill="${PK.K}"/><circle cx="64" cy="-84" r="10" fill="${PK.W}" opacity=".25"/>${R(-20,-66,40,16,PK.K,'rx="2"')}${R(-14,-80,28,16,PK.W)}`,
+ globe:()=>`<circle cy="-62" r="26" fill="${PK.P}"/><path d="M-20 -72q14 6 8 18q10 4 18 -6M4 -84q10 4 14 14" stroke="${PK.M}" stroke-width="3" fill="none"/><path d="M-30 -62a30 30 0 0 0 30 30" stroke="${PK.K}" stroke-width="3" fill="none"/>${R(-3,-32,6,26,PK.K)}${R(-18,-6,36,6,PK.K)}`,
+ barrel:()=>`<ellipse cx="0" cy="-30" rx="34" ry="30" fill="${PK.D}"/><ellipse cx="0" cy="-30" rx="14" ry="30" fill="none" stroke="${PK.K}" stroke-width="2"/><path d="M-28 -46Q0 -40 28 -46M-28 -14Q0 -20 28 -14" stroke="${PK.K}" stroke-width="4" fill="none"/><ellipse cx="0" cy="-30" rx="5" ry="5" fill="${PK.K}"/>`,
+ arch:()=>`<path d="M-120 0V-90Q-120 -160 0 -160Q120 -160 120 -90V0" fill="none" stroke="${PK.L}" stroke-width="18"/>${[...Array(9)].map((_,i)=>{const a=Math.PI*(i/8),x=-120*Math.cos(a),y=-90-70*Math.sin(a);return `<path d="M${x*0.93} ${y*0.97}L${x*1.07} ${y*1.04}" stroke="${PK.K}" stroke-width="2"/>`}).join('')}`,
+ stove:()=>`${R(-56,-70,112,70,PK.K,'rx="3"')}${R(-48,-56,44,40,PK.D)}${R(4,-56,44,40,PK.D)}<circle cx="-26" cy="-36" r="4" fill="${PK.P}"/><circle cx="26" cy="-36" r="4" fill="${PK.P}"/>${R(-60,-76,120,8,PK.D)}${R(30,-150,14,74,PK.K)}<path d="M-34 -76q0 -18 22 -18q22 0 22 18z" fill="${PK.M}"/>${R(-40,-100,4,8,PK.W,'opacity=".5"')}`,
+ pans:()=>`${R(-70,0,140,5,PK.K)}${[-50,-15,20,52].map((x,i)=>`<path d="M${x} 5v10" stroke="${PK.K}" stroke-width="2"/><circle cx="${x}" cy="${30+i%2*6}" r="${12+i%2*5}" fill="${PK.D}"/>${R(x-2,12,4,8+i%2*4,PK.K)}`).join('')}`
+});
+const LHROOM=[
+ ['night',['window',150,98,1.4],['moon',150,52,.45],['telescope',230,168,1.1],['stairs',58,168,.7],['rug',150,170,1]],
+ ['wall',['shelf',75,150,1.15],['shelf',225,150,1.15],['ladder',262,150,.9],['armchair',150,165,.75],['rug',150,160,1]],
+ ['day',['glasswall',150,150,1],['palm',55,150,1],['palm',250,150,.75],['tulip',195,150,1.1],['tulip',212,150,.9]],
+ ['wall',['chandelier',150,0,1],['piano',115,150,1],['stool',115,160,.9],['gclock',255,150,.85]],
+ ['wall',['chandelier',120,0,.9],['bigstairs',210,150,1],['door',55,150,1],['rug',120,165,1]],
+ ['wall',['chandelier',150,0,1.1],['longtable',150,155,1]],
+ ['wall',['shelf',45,150,.95],['bureau',165,150,1],['globe',265,150,.85]],
+ ['dark',['arch',150,150,1],['barrel',72,150,1],['barrel',228,150,1],['bottle',150,150,.9],['bottle',165,150,.75]],
+ ['wall',['pans',150,8,1],['stove',95,150,1],['table',225,150,.8],['teapot',215,104,.6]]];
 function lhFilmPlay(){if(!LG||!lst||!lst.done)return;fmPlay(lhFilm(LG,lst.acc),{label:'Zo is het gebeurd',end:'Terug naar het landhuis'})}
 
 
@@ -3161,10 +3206,11 @@ function spyFilm(){const G=SG,S=G.S[G.spy],W=G.W[G.sol.wep[G.spy]],L=G.L[G.meet]
 // scènes: ['t',titel,rood woord,ondertitel] · ['s',kop,spec,tekst,{rain,zoom,steps,move:[index,dx]}] · ['p',kop,spec,label,tekst] · ['l',kop,[[naam,rol],…],tekst] · ['e',vraag,knoptekst]
 function fmStory(script){return script.map(sc=>{const k=sc[0];
   if(k==='t'){const [,t,hi,sub]=sc,a=t.replace(hi,''),d=Math.max(4.5,1.5+t.length/12);return {d,f:u=>({title:`<h1>${FM.type(a,u,.4,14).replace('▌','')}<span>${u>.4+a.length/14?FM.type(hi,u,.4+a.length/14,10).replace('▌',''):''}</span></h1><p style="opacity:${FM.seg(u,d-2,d-1.4)}">${sub||''}</p>`})}}
-  if(k==='s'){const [,chap,spec,txt,fx={}]=sc,d=Math.max(6,1.6+txt.length/24);return {d,rain:!!fx.rain,f:u=>{const z=fx.zoom===false?1:1+FM.ease(FM.seg(u,0,d))*.14;let sp=spec;
+  if(k==='x'){const [,who,how,where,mono]=sc;return fmFinale({who,how,where,mono})}
+  if(k==='s'){const [,chap,spec,txt,fx={}]=sc,d=Math.max(6,1.6+txt.length/24)+(fx.hit?1:0);return {d,rain:!!fx.rain,sfx:fx.hit?[[2.2,'hit',fx.hit===true?'hout':fx.hit==='duw'?'plant':fx.hit]]:[],f:u=>{const z=fx.zoom===false?1:1+FM.ease(FM.seg(u,0,d))*.14;let sp=spec;
       if(fx.move){const [i,dx]=fx.move;sp=spec.map((it,j)=>j===i?[it[0],it[1]+dx*FM.seg(u,0,d),...it.slice(2)]:it)}
       let fp='';if(fx.steps)for(let i=0;i<7;i++){const a=.6+i*.45;if(u>a){const x=30+i*28,y=i%2?182:176;fp+=`<ellipse cx="${x}" cy="${y}" rx="5" ry="10" fill="${PK.K}" opacity="${.75*FM.seg(u,a,a+.3)}" transform="rotate(80 ${x} ${y})"/>`}}
-      return {chap,stage:FM.svg(FM.G(150,100,z,FM.G(-150,-100,1,drawScene(sp)+fp+(fx.rain?FM.rain(u):'')+(fx.snow?FM.rain(u*.25,.5):'')))),cap:FM.type(txt,u,.7)}}}}
+      return {chap,stage:FM.svg(FM.G(150,100,z,FM.G(-150,-100,1,drawScene(sp)+fp+(fx.hit&&fx.hit!=='duw'&&u>2.2?fmBlood(u-2.2,150,105):'')+(fx.rain?FM.rain(u):'')+(fx.snow?FM.rain(u*.25,.5):'')))),red:fx.hit&&u>2.2?Math.max(0,.5-FM.seg(u,2.2,3)*.5):0,cap:FM.type(txt,u,.7)}}}}
   if(k==='p'){const [,chap,spec,label,txt]=sc,d=Math.max(6.5,3+txt.length/24);return {d,sfx:[[.4,'click'],[1.1,'click']],f:u=>{const drop=FM.ease(FM.seg(u,1.2,2.1)),y=-420+drop*(250+420),rot=-14+drop*10;
       return {chap,flash:Math.max(u>.4?1-FM.seg(u,.4,.75):0,u>1.1?1-FM.seg(u,1.1,1.45):0),extra:`<div class="flm-pol" style="top:${y}px;transform:rotate(${rot}deg)">${FM.svg(drawScene(spec))}<b>${label}</b></div>`,cap:FM.type(txt,u,2.2)}}}}
   if(k==='l'){const [,chap,ppl,txt]=sc,n=ppl.length,per=n>3?3:n,d=Math.max(7,1.2+n*.9+txt.length/24);return {d,f:u=>{const W=150,H=n>3?104:170;
@@ -3241,6 +3287,103 @@ const SCR={
    ['p','Het bureau',['desk',['thermos',105,160,1.2],['mug',165,165,1],['ring',225,150,1,20]],'Boven aan de trap','Onder aan de ijzeren trap ligt Arnold Verhoeven. Een val, denken de agenten. De patholoog denkt daar anders over.'],
    ['l','De verdachten',[['Sanne','dochter'],['Ruud','chef drukker'],['Ilse','boekhouder'],['Marco','buurman']],'Vier mensen. Allemaal hadden ze een reden.'],
    ['e','Hoofdinspecteur Brandsma wil vóór vrijdag antwoord.','Open de envelop']]}};
+
+// ---- slotfilmpjes bij de verhaalspellen: zo is het gebeurd ----
+// extra scènetypes: ['s',…,{hit:true}] = klap met rode flits en spatjes, {hit:'duw'} = alleen flits · ['x',dader,waarmee,waar] = vergrootglas en bloed dat naar beneden loopt
+function fmFinale(o){return {d:9,f:u=>{const sw=FM.ease(FM.seg(u,0,1.6)),lx=-160+sw*430,ly=330,R=150+FM.ease(FM.seg(u,1.8,2.6))*20;
+    const red=FM.seg(u,3,8.4),wy=-60+Math.pow(red,1.35)*1060;let blood=`M-20 -20 L560 -20 L560 ${wy.toFixed(1)}`;for(let i=27;i>=0;i--){const x=i*20;blood+=` L${x} ${(wy+Math.sin(i*1.3)*9+Math.sin(i*.5+1)*7).toFixed(1)}`}blood+=` L-20 ${wy.toFixed(1)}Z`;
+    let drips='';for(let i=0;i<16;i++){const x=12+i*34+FM.rnd(i)*16,w=7+FM.rnd(i+5)*12,start=3+FM.rnd(i+11)*1.4,len=Math.max(0,(u-start))*(60+FM.rnd(i+7)*120);if(len<=0)continue;
+      drips+=`<rect x="${(x-w/2).toFixed(1)}" y="${(wy-5).toFixed(1)}" width="${w.toFixed(1)}" height="${len.toFixed(1)}" rx="${(w/2).toFixed(1)}"/><circle cx="${x.toFixed(1)}" cy="${(wy+len-2).toFixed(1)}" r="${(w*.62).toFixed(1)}"/>`}
+    const face=o.mono&&ICONS[o.mono]?fmFace(o.mono):'';
+    const lens=`<svg class="flm-full" viewBox="0 0 540 960" aria-hidden="true"><defs><clipPath id="lensF"><circle cx="${lx}" cy="${ly}" r="${R-8}"/></clipPath></defs><rect width="540" height="960" fill="#0b0c0b"/>
+      <g clip-path="url(#lensF)"><rect width="540" height="960" fill="#efece4"/>${FM.G(lx-6,ly+128,2.1,PP.person()+face)}</g>
+      <circle cx="${lx}" cy="${ly}" r="${R-4}" fill="none" stroke="#2a2b2a" stroke-width="14"/><circle cx="${lx}" cy="${ly}" r="${R-4}" fill="none" stroke="#6b6b66" stroke-width="3"/>
+      <path d="M${lx+R*.72} ${ly+R*.72}l80 80" stroke="#2a2b2a" stroke-width="30" stroke-linecap="round"/><g fill="#9E1F15" opacity="${u<3?0:.93}"><path d="${blood}"/>${drips}</g></svg>`;
+    const tiles=[['Wie',o.who],['Waarmee',o.how],['Waar',o.where]].filter(t=>t[1]);
+    return {fade:u<.4?1-u/.4:0,extra:lens+`<div class="flm-endk" style="opacity:${FM.seg(u,1.6,2.2)}">${o.k||'De dader'}</div><div class="flm-tiles" style="opacity:${FM.seg(u,2.2,3)}">${tiles.map(([a,b])=>`<div><span>${a}</span><b>${b}</b></div>`).join('')}</div>
+      <div class="flm-stamp" style="opacity:${FM.seg(u,5,5.3)};transform:translateX(-50%) rotate(-8deg) scale(${1.6-.6*FM.ease(FM.seg(u,5,5.4))})">Zaak gesloten</div>`}}}}
+const SCREND={
+ speur:{
+  veiling:[['t','Zo is het gebeurd','gebeurd','De laatste veiling'],
+   ['s','Het testament',['desk',['letter',150,175,1.5]],'Notaris Brouwer had het testament van Cornelis vervalst. In zijn versie ging de Zwarte Parel naar hem.'],
+   ['s','Op de zolder',SIMG.veiling.ch[1],'Die avond ontdekte Cornelis het bedrog. Er volgde een worsteling, de klok viel om, en Brouwer sloeg toe met de veilinghamer.',{hit:true}],
+   ['s','De Zwarte Parel',SIMG.veiling.ch[4],'Daarna zocht Brouwer de Parel. Maar Cornelis had haar slim verstopt, achter de slinger van de klok.'],
+   ['x','Notaris Brouwer','de veilinghamer','de zolder']],
+  wadoog:[['t','Zo is het gebeurd','gebeurd','Storm op Wadoog'],
+   ['s','Hotel De Duinroos · 23:05',['wall',['bar',150,175,.8],['receipt',150,125,.65]],'Om vijf over elf tekende Maarten Duin bon 43. Daarna pakte hij een stormlantaarn uit de hal.'],
+   ['s','De vuurtoren',SIMG.wadoog.cover,'Door de regen liep hij naar de vuurtoren. Jelle zag hem aankomen en seinde GEVAAR. Alleen Inspecteur Mol zag het.',{rain:true}],
+   ['s','Op de trap',SIMG.wadoog.ch[7],'Op de trap kregen ze ruzie. Eén duw.',{hit:'duw'}],
+   ['s','23:55',['wall',['bar',150,175,.8]],'Om vijf voor twaalf stond Maarten weer achter de bar, alsof er niets gebeurd was.'],
+   ['x','Maarten Duin','een duw','de vuurtorentrap']],
+  ravensteyn:[['t','Zo is het gebeurd','gebeurd','Het spookslot van Ravensteyn'],
+   ['s','Het familiezilver',SIMG.ravensteyn.ch[9],'Dokter Holtkamp verving al maanden het familiezilver door namaak, en verkocht het echte.'],
+   ['s','21:12 · De geheime gang',['dark',['door',150,150,1],['candle',230,160,.8]],'Hij kwam niet om vijf voor tien, maar om twaalf over negen. Door de geheime gang sloop hij naar de bibliotheek.'],
+   ['s','De bibliotheek',SIMG.ravensteyn.ch[7],'Daar verwisselde hij de hartpillen van de jonkheer voor tabletten die vijf keer zo sterk waren.'],
+   ['s','22:00',SIMG.ravensteyn.ch[2],'Om tien uur nam Willem zoals altijd zijn pil, met een glas port. De dokter hoefde alleen maar te wachten.'],
+   ['x','Dokter Holtkamp','verwisselde hartpillen','de bibliotheek']],
+  elfsteden:[['t','Zo is het gebeurd','gebeurd','Dood op de Elfstedentocht'],
+   ['s','De weddenschap',SIMG.elfsteden.ch[9],'Trainer Wiebe Zijlstra zette 4.000 euro in op een ander. Als Sietse verloor, kreeg hij 20.000 euro.'],
+   ['s','Dokkum · 12:20',SIMG.elfsteden.ch[6],'Na zijn eerste radiogesprek liep Wiebe met zijn rode thermosfles over het ijs naar de stempeltent.',{snow:true}],
+   ['s','Achter de tent',SIMG.elfsteden.ch[12],'Daar kregen ze ruzie, en Wiebe sloeg toe.',{hit:'metaal',snow:true}],
+   ['s','12:31',SIMG.elfsteden.ch[7],'Om 12:31 zat hij weer in zijn bus, precies op tijd voor het tweede gesprek. De fles liet hij in de sneeuw vallen.'],
+   ['x','Wiebe Zijlstra','de rode thermosfles','de stempeltent']]},
+ koud:{
+  sluis:[['t','Zo is het gebeurd','gebeurd','Dossier 001 · De laatste ronde'],
+   ['s','De kasstaat',CIMG.sluis.photos[0],'Ria had ontdekt wie er geld uit de kassa stal. Op donderdag en zaterdag werkte alleen Dennis. Om 01:38 schreef ze: ‘Ik weet nu wie.’'],
+   ['s','Na sluitingstijd',CIMG.sluis.cover,'Dennis zei dat hij om kwart over één vertrok. Maar hij was er nog.',{rain:true}],
+   ['s','De keldertrap',['dark',['stairs',150,150,1.1],['flashlight',235,180,.9]],'Hij sloeg Ria van achteren met de zware zaklamp. Daarna leek het een val van de keldertrap.',{hit:'metaal'}],
+   ['s','02:04',['night',['bike',150,185,1.4]],'Om 02:04 fietste een man met een zwarte pet weg. De camera van de buurman zag hem.',{rain:true}],
+   ['x','Dennis Wolters','de zaklamp','Café De Sluis']],
+  reiger:[['t','Zo is het gebeurd','gebeurd','Dossier 002 · De woonboot'],
+   ['s','22:15',['desk',['phone',150,160,1.4]],'Erik belde nog met zijn zakenpartner Maurits Kooij. Daarna liet hij hem zelf binnen. Twee kopjes koffie.'],
+   ['s','De badkamer',['wall',['bath',150,175,1.1]],'In Eriks eigen bad duwde Maurits hem onder water. Voor € 500.000 van de verzekering.',{hit:'duw'}],
+   ['s','00:40',CIMG.reiger.cover,'Hij sleepte Erik over het dek naar de gracht en zette een glas whisky neer. Maar op de maanfoto van de buurvrouw staat zijn Volvo.'],
+   ['x','Maurits Kooij','het bad','woonboot De Reiger']],
+  kade:[['t','Zo is het gebeurd','gebeurd','Dossier 003 · De achtste verdieping'],
+   ['s','23:41',CIMG.kade.cover,'Hoofdredacteur Rob Hartman stond in appartement 8C. Sophie had ontdekt dat hij geld kreeg om artikelen tegen te houden.',{rain:true}],
+   ['s','Het balkon',['night',['railing',150,195,1],['moon',245,40,.6]],'Er werd geschreeuwd en gevochten. Om 23:44 viel Sophie van het balkon.',{hit:'duw',rain:true}],
+   ['s','23:52',['desk',['laptop',150,175,1.3]],'Acht minuten later typte Hartman op haar laptop een afscheidsmail. Zijn natte rode paraplu liet hij in de hal staan.'],
+   ['x','Rob Hartman','zijn handen','het balkon van 8C']],
+  vuurwerk:[['t','Zo is het gebeurd','gebeurd','Dossier 004 · Vuurwerk boven Ommerdijk'],
+   ['s','23:01',CIMG.vuurwerk.cover,'Iedereen keek naar het vuurwerk. Gert belde naar huis. Hij wist dat er € 12.000 uit de feestkas verdwenen was.'],
+   ['s','Achter de feesttent',['night',['generator',150,185,1],['toolbox',55,190,.7]],'Penningmeester Wim Dekker pakte de rubberen moker uit de kist van de tentbouwer.'],
+   ['s','23:04',['night',['generator',150,185,1],['fireworks',150,90,1]],'Een klap. De telefoon viel stil.',{hit:true}],
+   ['s','Het gat in het filmpje',['desk',['phone',150,165,1.4]],'In Wims filmpjes zat een gat van vijf en een halve minuut. Genoeg om heen en terug te lopen.'],
+   ['x','Wim Dekker','de rubberen moker','achter de feesttent']],
+  tuin:[['t','Zo is het gebeurd','gebeurd','Dossier 005 · Tuin 17'],
+   ['s','Het testament',['desk',['letter',150,175,1.5]],'Herman wilde zijn testament veranderen. Zijn neef Ruud zou niets meer krijgen.'],
+   ['s','Zaterdag 19:45',CIMG.tuin.cover,'Ruud was niet bij de wedstrijd in Groningen. Om 19:45 stapte hij al uit de trein in Lindenhorst.'],
+   ['s','Het tuinhuisje',['wall',['workbench',150,180,1],['toolrack',240,150,.6]],'Met de spade sloeg hij Herman. Daarna smeerde hij bloed op de hoek van de werkbank.',{hit:'metaal'}],
+   ['s','Zondag 19:40',['wall',['keycab',150,170,1.1]],'Een dag later haalde hij de reservesleutel uit het clubhuis, zette Herman in zijn stoel en deed de deur op slot.'],
+   ['x','Ruud Brands','de spade','tuin 17']]},
+ bericht:{
+  mila:[['t','Zo is het gebeurd','gebeurd','Laatst online'],
+   ['s','21:52',['desk',['phone',150,160,1.5]],'Een onbekend nummer deed zich voor als Thijs: ‘23:00 bij de toren, net als vroeger.’ Alleen haar collega’s kenden dat verhaal.'],
+   ['s','De uitkijktoren · 23:04',['night',['tower',150,195,1.1],['scooter',60,195,.7]],'Kevin Smit kwam op de bezorgscooter van De Kade. Mila wilde de omkoping de volgende dag aan de krant geven.'],
+   ['s','23:47',['night',['tower',150,195,1.1],['moon',245,40,.6]],'Boven op de toren. Eén duw. Haar telefoon viel uit.',{hit:'duw'}],
+   ['x','Kevin Smit','een duw','de uitkijktoren']],
+  manege:[['t','Zo is het gebeurd','gebeurd','Stille nacht'],
+   ['s','02:14 · De stal',['dark',['horse',150,190,1.1],['syringe',235,165,.8]],'Iris betrapte Charlotte van Loon met een spuit bij Duchess. Het paard moest geld opleveren van de verzekering.'],
+   ['s','02:20',['night',['car',150,185,1.3]],'Iris appte: ‘Ik zie jouw auto op het erf.’ Het bericht werd meteen gelezen.'],
+   ['s','De ladder',['dark',['shed',150,180,1]],'Om 02:21 schoot de hartslag van Iris omhoog. Bij de ladder naar de hooizolder kreeg ze een duw.',{hit:'duw'}],
+   ['x','Charlotte van Loon','een duw','de stal']],
+  kluis:[['t','Zo is het gebeurd','gebeurd','Opgesloten'],
+   ['s','22:35',['wall',['register',150,175,1]],'Lisa de Vries betaalde bij de snackbar naast De Kluis. Jeroen wilde stoppen met hun samenwerking, om de € 38.000 die zij had opgenomen.'],
+   ['s','22:41',['dark',['lock',150,175,1.4]],'Met de mastercode, die alleen zij en Jeroen kenden, ging ze naar binnen.'],
+   ['s','Het Laboratorium',['dark',['goldbar',150,175,1.6]],'Ze sloeg Jeroen met de zware nep-goudstaaf.',{hit:'metaal'}],
+   ['s','22:58',['dark',['door',150,170,1],['lock',235,170,.7]],'Om 22:58 deed ze de deur van buitenaf op slot.'],
+   ['x','Lisa de Vries','de goudstaaf','het Laboratorium']]},
+ dossier:{
+  drukkerij:[['t','Zo is het gebeurd','gebeurd','Dood in de drukkerij'],
+   ['s','De boeken',['desk',['money',150,175,1.4]],'Ilse de Wit sluisde al 14 maanden geld weg via haar eigen bureau IdW Advies. Arnold kwam erachter.'],
+   ['s','21:16',['wall',['door',150,150,1],['thermos',235,175,.9]],'Ze kwam met haar groene thermos, met koffie en een slaapmiddel. Arnold liet haar binnen via de achterdeur.'],
+   ['s','21:45',['desk',['ring',150,150,1,26]],'Toen hij suf werd, sloeg ze hem twee keer met het loodje van zijn bureau.',{hit:'metaal'}],
+   ['s','22:03',['wall',['stairs',150,150,1.2]],'Ze legde hem onder aan de trap, zodat het op een val leek. Maar de thermos bleef staan.'],
+   ['x','Ilse de Wit','het loodje','de drukkerij']]}};
+function endFilm(game,id){const s=(SCREND[game]||{})[id];if(!s)return;fmPlay(fmStory(s),{label:'Zo is het gebeurd',end:'Terug naar de zaak'})}
+const endBtn=(game,id)=>(SCREND[game]||{})[id]?`<button class="btn small filmbtn" type="button" data-endfilm="${game}:${id}">▶ Zo is het gebeurd</button>`:'';
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-endfilm]');if(!b)return;const [g,id]=b.dataset.endfilm.split(':');endFilm(g,id)});
+
 const FWKEY='md-films';
 function storyFilm(game,id,done){const s=(SCR[game]||{})[id];if(!s){done&&done();return}const seen=store.get(FWKEY)||{};seen[game+':'+id]=1;store.set(FWKEY,seen);
   fmPlay(fmStory(s),{label:'Openingsfilmpje',end:s[s.length-1][2],done})}
@@ -3527,7 +3670,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261030110335';
+const APPV='20261030115105';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

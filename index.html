@@ -558,9 +558,9 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .flm-title h1 span{color:#E2614B}
 .flm-title p{margin:0;font:italic 26px var(--serif);color:#bdbab0}
 .flm-title .flm-k{font:700 20px var(--cond);font-style:normal;letter-spacing:.2em;text-transform:uppercase;color:#E2614B}
-.flm-card{position:absolute;left:50%;top:430px;width:300px;background:#f3f1ea;color:#1c1f22;border-radius:6px;padding:22px 18px 18px;text-align:center;box-shadow:0 14px 40px rgba(0,0,0,.6)}
-.flm-card .flm-ic{width:150px;height:150px;margin:0 auto 10px}
-.flm-card b{display:block;font:800 34px/1.05 var(--cond);text-transform:uppercase}
+.flm-card{position:absolute;left:50%;top:430px;width:210px;background:#f3f1ea;color:#1c1f22;border-radius:6px;padding:16px 14px 14px;text-align:center;box-shadow:0 14px 40px rgba(0,0,0,.6)}
+.flm-card .flm-ic{width:96px;height:96px;margin:0 auto 8px}
+.flm-card b{display:block;font:800 26px/1.05 var(--cond);text-transform:uppercase}
 .flm-card i{display:block;font:italic 22px var(--serif);color:#5e635f}
 .flm-ic{display:grid;place-items:center;border-radius:50%;background:#1c1f22;color:#f3f1ea}
 .flm-ic svg{width:62%;height:62%}
@@ -3206,7 +3206,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261030085926';
+const APPV='20261030092205';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

@@ -294,7 +294,7 @@ td.e{border:0}
 :root[data-theme="dark"]{--r0:#3d3628;--r1:#29382a;--r2:#3f2b29;--r3:#283244;--r4:#3b3820;--r5:#352a41;--r6:#203837}
 #pLandhuis .chapter .code{font:800 clamp(16px,4.8vw,22px)/1.35 var(--cond);letter-spacing:.1em;color:var(--red);margin:0;word-break:break-word;background:var(--card);border:1px solid var(--rule);padding:12px 14px;border-radius:8px}
 .lhmaze,.lhws{display:grid;grid-template-columns:repeat(var(--w),minmax(0,1fr));width:100%;max-width:380px;margin:0 auto;background:var(--card)}
-.lhmaze{border:3px solid var(--ink)}
+.lhmaze{border:3px solid var(--ink);touch-action:none;user-select:none;-webkit-user-select:none}
 .mz{aspect-ratio:1;border:0 solid var(--ink);background:var(--card);color:var(--red);font:800 15px var(--cond);padding:0;cursor:pointer;min-width:0}
 .mz.on{background:var(--band)}
 .mz.head{background:var(--red);color:#fff}
@@ -2302,7 +2302,7 @@ function lhNew(seed){LG=lhGen(seed);lst={seed,case:LG,view:0,chk:[],guess:{},sol
 function lhSolve(i){lhChk();const fresh=!lst.solved.includes(i);if(fresh)lst.solved.push(i);saveLh();renderLH();if(fresh)lhGuess(i)}
 function lhPuzzle(i){const G=LG,[k,title]=LHP[i],solved=lst.solved.includes(i);let h='';
   if(k==='doolhof'){const W=7,last=lst.path[lst.path.length-1];
-    h=`<p>Achter de boekenkast begint een geheime gang. Vind de weg van de <b>start</b> (linksboven) naar de <b>deur</b> (rechtsonder). Tik steeds op het vakje waar je naartoe wilt.</p>
+    h=`<p>Achter de boekenkast begint een geheime gang. Vind de weg van de <b>start</b> (linksboven) naar de <b>deur</b> (rechtsonder). Houd je vinger of muis op de S en sleep door de gang naar de D. Tikken op het volgende vakje kan ook.</p>
      <div class="lhmaze" style="--w:${W}">${G.maze.map((m,c)=>`<button type="button" class="mz ${lst.path.includes(c)?'on':''} ${c===last?'head':''}" data-mz="${c}" style="border-top-width:${m&1?0:3}px;border-right-width:${m&2?0:3}px;border-bottom-width:${m&4?0:3}px;border-left-width:${m&8?0:3}px" aria-label="vak ${c+1}">${c===0?'S':c===W*W-1?'D':''}</button>`).join('')}</div>`}
   if(k==='woord'){const N=10;
     h=`<p>In de wapenkamer hangt een bord vol letters. Vier van deze wapens staan erin: van links naar rechts, van boven naar beneden of schuin. Tik op de eerste en de laatste letter van een woord.</p>
@@ -2411,7 +2411,20 @@ function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let 
   on('lhSkip',()=>{lhAsk=true;renderLH()});on('lhNo',()=>{lhAsk=false;renderLH()});
   on('lhYes',()=>{lhAsk=false;lst.skipped.push(v);lhSolve(v)});
   // doolhof
-  P.querySelectorAll('[data-mz]').forEach(b=>b.onclick=()=>{const c=+b.dataset.mz,W=7,path=lst.path,head=path[path.length-1];
+  const mzEl=P.querySelector('.lhmaze');let mzDragged=false;
+  if(mzEl){let drag=false,moved=false;const W=7;
+    const paint=()=>{const hd=lst.path[lst.path.length-1];mzEl.querySelectorAll('[data-mz]').forEach(b=>{const c=+b.dataset.mz;b.classList.toggle('on',lst.path.includes(c));b.classList.toggle('head',c===hd)})};
+    const can=(a,c)=>{const m=G.maze[a],dx=c%W-a%W,dy=Math.floor(c/W)-Math.floor(a/W);return Math.abs(dx)+Math.abs(dy)===1&&!!((dx===1&&m&2)||(dx===-1&&m&8)||(dy===1&&m&4)||(dy===-1&&m&1))};
+    const step=c=>{const path=lst.path,head=path[path.length-1];if(c===head)return;
+      if(path.includes(c)){lst.path=path.slice(0,path.indexOf(c)+1);paint();return}
+      if(can(head,c)){path.push(c);paint();if(c===W*W-1){drag=false;saveLh();lhSolve(v)}}};
+    mzEl.addEventListener('pointerdown',e=>{const b=e.target.closest('[data-mz]');if(!b)return;const c=+b.dataset.mz;if(!lst.path.includes(c))return;
+      drag=true;moved=false;try{mzEl.setPointerCapture(e.pointerId)}catch(x){}step(c);e.preventDefault()});
+    mzEl.addEventListener('pointermove',e=>{if(!drag)return;const el=document.elementFromPoint(e.clientX,e.clientY),b=el&&el.closest&&el.closest('[data-mz]');
+      if(b&&mzEl.contains(b)){const c=+b.dataset.mz;if(c!==lst.path[lst.path.length-1]){moved=true;step(c)}}});
+    const end=()=>{if(!drag)return;drag=false;saveLh();if(moved){mzDragged=true;setTimeout(()=>mzDragged=false,50)}};
+    mzEl.addEventListener('pointerup',end);mzEl.addEventListener('pointercancel',end)}
+  P.querySelectorAll('[data-mz]').forEach(b=>b.onclick=()=>{if(mzDragged)return;const c=+b.dataset.mz,W=7,path=lst.path,head=path[path.length-1];
     if(path.includes(c)){lst.path=path.slice(0,path.indexOf(c)+1);saveLh();return renderLH()}
     const m=G.maze[head],dx=c%W-head%W,dy=Math.floor(c/W)-Math.floor(head/W);
     const open=(dx===1&&m&2)||(dx===-1&&m&8)||(dy===1&&m&4)||(dy===-1&&m&1);
@@ -3463,7 +3476,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261030100044';
+const APPV='20261030102259';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

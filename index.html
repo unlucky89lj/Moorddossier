@@ -649,7 +649,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .flm-mini .flm-ic{width:48px;height:48px;flex:none}.flm-mini b{font:800 17px/1.05 var(--cond);text-transform:uppercase}
 .flm-full{position:absolute;inset:0;width:540px;height:960px}
 .flm-endrow{position:absolute;left:0;right:0;top:560px}
-.flm-endk{position:absolute;left:0;right:0;top:120px;text-align:center;font:700 22px var(--cond);letter-spacing:.2em;text-transform:uppercase;color:#E2614B}
+.flm-endk{position:absolute;left:0;right:0;top:120px;text-align:center;font:700 22px var(--cond);letter-spacing:.2em;text-transform:uppercase;color:#f3f1ea;text-shadow:0 2px 6px rgba(0,0,0,.6)}
 .flm-stamp{position:absolute;left:50%;top:765px;border:5px solid #fff;color:#fff;font:800 46px var(--cond);text-transform:uppercase;letter-spacing:.06em;padding:4px 18px;white-space:nowrap}
 .lvwrap{display:flex;flex-direction:column;gap:6px}
 .lvwrap .lvline{margin:0}
@@ -660,6 +660,10 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .flm-tiles{position:absolute;left:24px;right:24px;top:560px;display:flex;gap:10px;justify-content:center}
 .flm-tiles>div{flex:1;background:#f3f1ea;color:#1c1f22;border-radius:8px;padding:10px 8px;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,.5)}
 .flm-tiles span{display:block;font:700 13px var(--cond);letter-spacing:.14em;text-transform:uppercase;color:#8A2A1A}.flm-tiles b{display:block;font:800 20px/1.1 var(--cond);text-transform:uppercase;margin-top:4px}
+.flm-stamp.fail{font-size:36px;border-color:#fff;background:rgba(0,0,0,.25)}
+.retry{background:var(--card);border-left:5px solid #D9822B;padding:10px 12px;border-radius:6px;font-size:16px}
+.fbmark{font:700 12px var(--cond);letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;margin-left:6px;white-space:nowrap}
+.fbmark.ok{background:var(--ok);color:#fff}.fbmark.no{background:var(--red);color:#fff}
 </style>
 </head>
 <body>
@@ -2815,8 +2819,10 @@ function renderBericht(){const P=$('pBericht');
   const C=BCASES.find(c=>c.id===bd.cur);if(!C)return bGo(null);const s=bstate(C.id);
   const sel=(id,arr,v)=>`<select id="${id}"><option value="">Kies…</option>${arr.map((o,i)=>`<option value="${i}" ${v===i?'selected':''}>${o}</option>`).join('')}</select>`;
   let concl;
-  if(!s.open){const a=s.draft||{};concl=`<div class="accuse2"><p>Klaar met je onderzoek? Leg je conclusie vast. Daarna lees je de oplossing.</p><label for="bD">Wie deed het?</label>${sel('bD',C.opts.dader,a.d)}<label for="bE">Welk bewijs is doorslaggevend?</label>${sel('bE',C.opts.bewijs,a.e)}<label for="bM">Wat was het motief?</label>${sel('bM',C.opts.motief,a.m)}<p class="msg" id="bMsg"></p>
-    ${bAsk?`<div class="spoiler"><p>Weet je het zeker? Daarna kun je je antwoord niet meer veranderen.</p><div class="controls" style="justify-content:center"><button class="btn primary" id="bYes" type="button">Toon de oplossing</button><button class="btn" id="bNo" type="button">Nog even zoeken</button></div></div>`:`<div class="seal"><span>ZEGEL</span><button class="btn primary" id="bSeal" type="button">Leg conclusie vast</button></div>`}</div>`}
+  if(!s.open){const a=s.draft||{};const fb=s.fb,mk=k=>fb?`<span class="fbmark ${fb[k]?'ok':'no'}">${fb[k]?'✓ klopt':'✗ klopt niet'}</span>`:'';
+    concl=`<div class="accuse2">${fb?`<div class="retry"><b>Nog niet opgelost.</b> ${cap(['d','e','m'].filter(k=>!fb[k]).map(k=>({d:'de dader',e:'het bewijs',m:'het motief'})[k]).join(', ').replace(/, ([^,]*)$/,' en $1'))} ${['d','e','m'].filter(k=>!fb[k]).length>1?'kloppen':'klopt'} nog niet. Je hebt nog <b>1 herkansing</b>.</div>`:'<p>Klaar met je onderzoek? Leg je conclusie vast. Daarna lees je de oplossing.</p>'}
+    <label for="bD">Wie deed het? ${mk('d')}</label>${sel('bD',C.opts.dader,a.d)}<label for="bE">Welk bewijs is doorslaggevend? ${mk('e')}</label>${sel('bE',C.opts.bewijs,a.e)}<label for="bM">Wat was het motief? ${mk('m')}</label>${sel('bM',C.opts.motief,a.m)}<p class="msg" id="bMsg"></p>
+    ${bAsk?`<div class="spoiler"><p>${s.tries?'Dit is je laatste poging. Weet je het zeker?':'Weet je het zeker? Klopt er iets niet, dan krijg je nog één herkansing.'}</p><div class="controls" style="justify-content:center"><button class="btn primary" id="bYes" type="button">${s.tries?'Laatste poging':'Controleer'}</button><button class="btn" id="bNo" type="button">Nog even zoeken</button></div></div>`:`<div class="seal"><span>ZEGEL</span><button class="btn primary" id="bSeal" type="button">${s.tries?'Leg conclusie opnieuw vast':'Leg conclusie vast'}</button></div>`}</div>`}
   else{const A=s.acc,ok=k=>k==='e'?C.answer.bewijs.includes(A.e):A[k]===C.answer[k==='d'?'dader':'motief'];const row=(l,k,arr)=>`<li class="${ok(k)?'good':'bad'}"><b>${ok(k)?'✓':'✗'} ${l}:</b> ${arr[A[k]]}</li>`;
     concl=`<div class="verdict ${A.d===C.answer.dader?'':'bad'}"><p>${A.d===C.answer.dader?'Goed gezien!':'De dader is ontsnapt.'} ${['d','e','m'].filter(ok).length}/3 onderdelen juist.</p></div><ul class="accres">${row('Dader','d',C.opts.dader)}${row('Bewijs','e',C.opts.bewijs)}${row('Motief','m',C.opts.motief)}</ul><h4 class="solh">De oplossing</h4><ol class="solsteps">${C.solution.map(x=>`<li><b>${x.t}.</b> ${x.p}</li>`).join('')}</ol><div class="verdict"><p>${C.verdict}</p></div><div class="controls"><button class="btn" id="bReset" type="button">Zaak opnieuw spelen</button></div>`}
   P.innerHTML=`<button class="btn small backbtn" id="bList" type="button">← Alle zaken</button><div class="storyhead"><span class="kicker">${C.level} · ${C.time}</span><h3>${C.title}</h3>${filmBtn('bericht',C.id)}${bstate(C.id).open?endBtn('bericht',C.id):''}</div>
@@ -2838,7 +2844,9 @@ function renderBericht(){const P=$('pBericht');
   const grab=()=>({d:$('bD').value===''?null:+$('bD').value,e:$('bE').value===''?null:+$('bE').value,m:$('bM').value===''?null:+$('bM').value});
   ['bD','bE','bM'].forEach(id=>{const el=$(id);if(el)el.onchange=()=>{s.draft=grab();saveB()}});
   on('bSeal',()=>{const a=grab();if(a.d===null||a.e===null||a.m===null)return $('bMsg').textContent='Kies eerst een dader, een bewijsstuk en een motief.';s.draft=a;bAsk=true;saveB();renderBericht()});
-  on('bNo',()=>{bAsk=false;renderBericht()});on('bYes',()=>{s.acc=s.draft;s.open=true;bAsk=false;saveB();renderBericht();setTimeout(()=>endFilm('bericht',C.id),500)});
+  on('bNo',()=>{bAsk=false;renderBericht()});on('bYes',()=>{const a=s.draft,f={d:a.d===C.answer.dader,e:C.answer.bewijs.includes(a.e),m:a.m===C.answer.motief};bAsk=false;
+    if((f.d&&f.e&&f.m)||s.tries){s.acc=a;s.open=true;delete s.fb;saveB();renderBericht();setTimeout(()=>endFilm('bericht',C.id),500)}
+    else{s.tries=1;s.fb=f;saveB();renderBericht();const r=document.querySelector('#pBericht .retry');if(r)r.scrollIntoView({block:'center',behavior:'smooth'})}});
   on('bReset',()=>{bd.cases[C.id]={unlocked:true,app:null,sub:null,entry:'',notes:s.notes||'',acc:null,open:false,draft:null};saveB();renderBericht()});
 }
 
@@ -3204,9 +3212,9 @@ function spyFilm(){const G=SG,S=G.S[G.spy],W=G.W[G.sol.wep[G.spy]],L=G.L[G.meet]
 
 // ---- openingsfilmpjes bij de verhaalspellen ----
 // scènes: ['t',titel,rood woord,ondertitel] · ['s',kop,spec,tekst,{rain,zoom,steps,move:[index,dx]}] · ['p',kop,spec,label,tekst] · ['l',kop,[[naam,rol],…],tekst] · ['e',vraag,knoptekst]
-function fmStory(script){return script.map(sc=>{const k=sc[0];
-  if(k==='t'){const [,t,hi,sub]=sc,a=t.replace(hi,''),d=Math.max(4.5,1.5+t.length/12);return {d,f:u=>({title:`<h1>${FM.type(a,u,.4,14).replace('▌','')}<span>${u>.4+a.length/14?FM.type(hi,u,.4+a.length/14,10).replace('▌',''):''}</span></h1><p style="opacity:${FM.seg(u,d-2,d-1.4)}">${sub||''}</p>`})}}
-  if(k==='x'){const [,who,how,where,mono]=sc;return fmFinale({who,how,where,mono})}
+function fmStory(script,ok=true){return script.map(sc=>{const k=sc[0];
+  if(k==='t'){const [,t0,hi,sub]=sc,t=!ok&&t0==='Zo is het gebeurd'?'Dit is er echt gebeurd':t0,a=t.replace(hi,''),d=Math.max(4.5,1.5+t.length/12);return {d,f:u=>({title:`<h1>${FM.type(a,u,.4,14).replace('▌','')}<span>${u>.4+a.length/14?FM.type(hi,u,.4+a.length/14,10).replace('▌',''):''}</span></h1><p style="opacity:${FM.seg(u,d-2,d-1.4)}">${sub||''}</p>`})}}
+  if(k==='x'){const [,who,how,where,mono]=sc;return fmFinale({who,how,where,mono,ok})}
   if(k==='s'){const [,chap,spec,txt,fx={}]=sc,d=Math.max(6,1.6+txt.length/24)+(fx.hit?1:0);return {d,rain:!!fx.rain,sfx:fx.hit?[[2.2,'hit',fx.hit===true?'hout':fx.hit==='duw'?'plant':fx.hit]]:[],f:u=>{const z=fx.zoom===false?1:1+FM.ease(FM.seg(u,0,d))*.14;let sp=spec;
       if(fx.move){const [i,dx]=fx.move;sp=spec.map((it,j)=>j===i?[it[0],it[1]+dx*FM.seg(u,0,d),...it.slice(2)]:it)}
       let fp='';if(fx.steps)for(let i=0;i<7;i++){const a=.6+i*.45;if(u>a){const x=30+i*28,y=i%2?182:176;fp+=`<ellipse cx="${x}" cy="${y}" rx="5" ry="10" fill="${PK.K}" opacity="${.75*FM.seg(u,a,a+.3)}" transform="rotate(80 ${x} ${y})"/>`}}
@@ -3300,8 +3308,8 @@ function fmFinale(o){return {d:9,f:u=>{const sw=FM.ease(FM.seg(u,0,1.6)),lx=-160
       <circle cx="${lx}" cy="${ly}" r="${R-4}" fill="none" stroke="#2a2b2a" stroke-width="14"/><circle cx="${lx}" cy="${ly}" r="${R-4}" fill="none" stroke="#6b6b66" stroke-width="3"/>
       <path d="M${lx+R*.72} ${ly+R*.72}l80 80" stroke="#2a2b2a" stroke-width="30" stroke-linecap="round"/><g fill="#9E1F15" opacity="${u<3?0:.93}"><path d="${blood}"/>${drips}</g></svg>`;
     const tiles=[['Wie',o.who],['Waarmee',o.how],['Waar',o.where]].filter(t=>t[1]);
-    return {fade:u<.4?1-u/.4:0,extra:lens+`<div class="flm-endk" style="opacity:${FM.seg(u,1.6,2.2)}">${o.k||'De dader'}</div><div class="flm-tiles" style="opacity:${FM.seg(u,2.2,3)}">${tiles.map(([a,b])=>`<div><span>${a}</span><b>${b}</b></div>`).join('')}</div>
-      <div class="flm-stamp" style="opacity:${FM.seg(u,5,5.3)};transform:translateX(-50%) rotate(-8deg) scale(${1.6-.6*FM.ease(FM.seg(u,5,5.4))})">Zaak gesloten</div>`}}}}
+    return {fade:u<.4?1-u/.4:0,extra:lens+`<div class="flm-endk" style="opacity:${FM.seg(u,1.6,2.2)}">${o.ok===false?'Je had het mis · de echte dader':'De dader'}</div><div class="flm-tiles" style="opacity:${FM.seg(u,2.2,3)}">${tiles.map(([a,b])=>`<div><span>${a}</span><b>${b}</b></div>`).join('')}</div>
+      <div class="flm-stamp ${o.ok===false?'fail':''}" style="opacity:${FM.seg(u,5,5.3)};transform:translateX(-50%) rotate(-8deg) scale(${1.6-.6*FM.ease(FM.seg(u,5,5.4))})">${o.ok===false?'Zaak niet opgelost':'Zaak gesloten'}</div>`}}}}
 const SCREND={
  speur:{
   veiling:[['t','Zo is het gebeurd','gebeurd','De laatste veiling'],
@@ -3380,7 +3388,10 @@ const SCREND={
    ['s','21:45',['desk',['ring',150,150,1,26]],'Toen hij suf werd, sloeg ze hem twee keer met het loodje van zijn bureau.',{hit:'metaal'}],
    ['s','22:03',['wall',['stairs',150,150,1.2]],'Ze legde hem onder aan de trap, zodat het op een val leek. Maar de thermos bleef staan.'],
    ['x','Ilse de Wit','het loodje','de drukkerij']]}};
-function endFilm(game,id){const s=(SCREND[game]||{})[id];if(!s)return;fmPlay(fmStory(s),{label:'Zo is het gebeurd',end:'Terug naar de zaak'})}
+function endOk(game,id){try{if(game==='koud'){const c=COLD.find(x=>x.id===id),s=kd.cases[id];return !s||!s.acc||s.acc.d===c.answer.dader}
+  if(game==='bericht'){const c=BCASES.find(x=>x.id===id),s=bd.cases[id];return !s||!s.acc||s.acc.d===c.answer.dader}
+  if(game==='dossier'){const c=DOSSIERS.find(x=>x.id===id),s=dd.cases[id];return !s||s.ans[0]===c.qs[0].a}}catch(e){}return true}
+function endFilm(game,id){const s=(SCREND[game]||{})[id];if(!s)return;fmPlay(fmStory(s,endOk(game,id)),{label:'Zo is het gebeurd',end:'Terug naar de zaak'})}
 const endBtn=(game,id)=>(SCREND[game]||{})[id]?`<button class="btn small filmbtn" type="button" data-endfilm="${game}:${id}">▶ Zo is het gebeurd</button>`:'';
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-endfilm]');if(!b)return;const [g,id]=b.dataset.endfilm.split(':');endFilm(g,id)});
 
@@ -3670,7 +3681,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261030115105';
+const APPV='20261030141018';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

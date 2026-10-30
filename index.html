@@ -324,6 +324,57 @@ td.e{border:0}
 .dials{display:flex;gap:14px;justify-content:center}
 .dial{display:flex;flex-direction:column;align-items:center;gap:6px}
 .dial span{display:grid;place-items:center;width:56px;height:64px;border:3px solid var(--ink);border-radius:10px;background:var(--card);font:800 34px var(--cond);font-variant-numeric:tabular-nums}
+.lhboard{background:var(--card);border:2px solid var(--ink);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:8px;scroll-margin-top:12px}
+.lhboard h4{font:800 15px var(--cond);text-transform:uppercase;letter-spacing:.06em;margin:6px 0 0}
+.lhb-sum{margin:0;font:600 16px var(--cond);letter-spacing:.02em}.lhb-sum b{color:var(--red);font-size:20px}
+.lhb-plan{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:3px solid var(--ink);border-radius:6px;overflow:hidden;background:var(--page)}
+.lhb-room{position:relative;min-height:72px;border:0;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);background:transparent;color:var(--ink);display:flex;align-items:flex-end;justify-content:flex-start;padding:6px;cursor:pointer;text-align:left;font:inherit}
+.lhb-room:nth-child(3n){border-right:0}.lhb-room:nth-child(n+7){border-bottom:0}
+.lhb-room b{font:700 clamp(10px,3vw,14px)/1.1 var(--cond);text-transform:uppercase;letter-spacing:0;word-break:keep-all;overflow-wrap:normal;padding-right:18px}
+.lhb-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.lhb-tok{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;border:1.5px solid var(--rule);border-radius:12px;background:var(--page);color:var(--ink);padding:8px 4px;cursor:pointer;font:inherit;min-width:0}
+.lhb-tok .tok{width:38px;height:38px}
+.lhb-nm{font:600 12.5px/1.15 var(--cond);text-align:center;overflow-wrap:anywhere}
+.lhb-room.off,.lhb-tok.off{cursor:default;background:repeating-linear-gradient(135deg,transparent 0 7px,rgba(194,50,31,.09) 7px 9px)}
+.lhb-room.off b,.lhb-tok.off .lhb-nm{text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px;opacity:.55}
+.lhb-tok.off .tok{opacity:.35}
+.lhb-x{position:absolute;left:16%;top:12%;width:68%;height:76%;pointer-events:none;overflow:visible;z-index:1}
+.lhb-x path{fill:none;stroke:var(--red);stroke-width:3.5px;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:.85}
+.lhb-room.strike,.lhb-tok.strike{cursor:default}
+.strike .lhb-x path{stroke-dasharray:100;stroke-dashoffset:100;animation:lhDraw .32s ease-in forwards;animation-delay:var(--d)}
+.strike .lhb-x path+path{animation-delay:calc(var(--d) + .3s)}
+.strike .lhb-tag{transform:scale(0);animation:lhPop .35s cubic-bezier(.3,1.6,.5,1) forwards;animation-delay:calc(var(--d) + .55s)}
+.strike{animation:lhFocus .9s ease-out both;animation-delay:calc(var(--d) - .25s)}
+.strike.done{background:repeating-linear-gradient(135deg,transparent 0 7px,rgba(194,50,31,.09) 7px 9px)}
+.strike.done b,.strike.done .lhb-nm{text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px;opacity:.55;transition:opacity .3s}
+.strike.done .tok{opacity:.35;transition:opacity .3s}
+@keyframes lhDraw{to{stroke-dashoffset:0}}
+@keyframes lhPop{to{transform:scale(1)}}
+@keyframes lhFocus{0%{box-shadow:inset 0 0 0 0 transparent}30%{box-shadow:inset 0 0 0 3px var(--red);transform:scale(1.04)}100%{box-shadow:inset 0 0 0 0 transparent;transform:scale(1)}}
+.lhb-sum b{display:inline-block}.lhb-sum b.bump{animation:lhBump .45s ease-out}
+@keyframes lhBump{40%{transform:scale(1.5)}}
+.lhov{position:fixed;inset:0;z-index:50;background:rgba(10,12,11,.55);display:flex;align-items:flex-end;justify-content:center;padding:max(12px,env(safe-area-inset-top)) 0 0;animation:lhFade .25s ease-out}
+.lhov.out{animation:lhFade .25s ease-in reverse forwards}
+.lhov-card{background:var(--page);width:100%;max-width:560px;max-height:100%;overflow-y:auto;border-radius:22px 22px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:12px;animation:lhUp .4s cubic-bezier(.2,.9,.3,1)}
+.lhov-head h3{font:800 26px/1.05 var(--cond);text-transform:uppercase;margin:2px 0 0}
+.lhov .lhboard{border-width:2px}
+.lhov-step{margin:0;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
+.lhov.end .lhov-step{opacity:1;transform:none}
+.lhov-ctl{justify-content:space-between;position:sticky;bottom:calc(-18px - env(safe-area-inset-bottom));background:var(--page);padding:10px 0 4px;margin-bottom:-4px;z-index:3}
+.lhov.end #lhOvSkip{visibility:hidden}
+@keyframes lhFade{from{opacity:0}}
+@keyframes lhUp{from{transform:translateY(60%)}}
+@media (prefers-reduced-motion:reduce){.lhov,.lhov-card,.strike,.strike .lhb-x path,.strike .lhb-tag{animation:none!important}.strike .lhb-x path{stroke-dashoffset:0}.strike .lhb-tag{transform:none}}
+.lhb-tag{position:absolute;top:5px;right:5px;min-width:20px;height:20px;border-radius:10px;background:var(--red);color:#fff;font:800 12px/20px var(--cond);text-align:center;padding:0 5px;z-index:1}
+.lhb-room.pen b,.lhb-tok.pen .lhb-nm{text-decoration:line-through;text-decoration-style:wavy;text-decoration-color:var(--muted);opacity:.6}
+.lhb-tok.pen .tok{opacity:.5}
+.lhb-steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.lhb-steps li::marker{font:800 15px var(--cond);color:var(--red)}
+.lhb-steps li b{display:block;font:700 15px var(--cond);text-transform:uppercase;letter-spacing:.03em}
+.lhb-steps li span{font-size:15px}
+.lhb-steps li.new b::after{content:" · nieuw";color:var(--red)}
+.lhb-gone{margin:8px 0 0}
+.lhb-room:focus-visible,.lhb-tok:focus-visible{outline:3px solid var(--red);outline-offset:-3px}
 .notebook{background:var(--card);border:2px solid var(--rule);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px}
 .nbg h4{font:800 15px var(--cond);text-transform:uppercase;letter-spacing:.06em;margin:0 0 6px}
 .nbi{display:flex;flex-wrap:wrap;gap:6px}
@@ -2146,7 +2197,7 @@ let LG=null,lst=null,lhAsk=false;
 const saveLh=()=>store.set(LHKEY,lst);
 function lhStart(){const sv=store.get(LHKEY);if(sv&&sv.seed){try{LG=sv.case&&sv.case.maze?sv.case:lhGen(sv.seed);lst=sv;if(!lst.case){lst.case=LG;saveLh()}renderLH();return}catch(e){}}lhNew(Math.floor(Date.now()/864e5)%9999+1)}
 function lhNew(seed){LG=lhGen(seed);lst={seed,case:LG,view:0,solved:[],skipped:[],path:[0],found:[],sel:null,sud:LG.sud.puz.slice(),k:0,cip:[],ana:[],safe:[1,1,1],seq:[],note:{s:[],w:[],r:[]},done:false,acc:null};lhAsk=false;saveLh();renderLH();window.scrollTo({top:0})}
-function lhSolve(i){if(!lst.solved.includes(i))lst.solved.push(i);saveLh();renderLH()}
+function lhSolve(i){const fresh=!lst.solved.includes(i);if(fresh)lst.solved.push(i);saveLh();renderLH();if(fresh)lhPlay(i)}
 function lhPuzzle(i){const G=LG,[k,title]=LHP[i],solved=lst.solved.includes(i);let h='';
   if(k==='doolhof'){const W=7,last=lst.path[lst.path.length-1];
     h=`<p>Achter de boekenkast begint een geheime gang. Vind de weg van de <b>start</b> (linksboven) naar de <b>deur</b> (rechtsonder). Tik steeds op het vakje waar je naartoe wilt.</p>
@@ -2174,10 +2225,53 @@ function lhPuzzle(i){const G=LG,[k,title]=LHP[i],solved=lst.solved.includes(i);l
   if(k==='kluis'){h=`<p>In de studeerkamer staat een kluis met een cijferslot van drie cijfers (1 tot en met 9). Op de binnenkant van het bureaula staat:</p>
      <ul class="safeclues">${G.safe.clues.map(c=>`<li>${c}</li>`).join('')}</ul>
      <div class="dials">${lst.safe.map((d,j)=>`<div class="dial"><button type="button" class="btn small" data-du="${j}">▲</button><span>${d}</span><button type="button" class="btn small" data-dd="${j}">▼</button></div>`).join('')}</div>`}
-  const actions=solved?`<div class="verdict"><p><b>${lst.skipped.includes(i)?'Overgeslagen.':'Opgelost!'}</b> ${lhReward(G,k)}</p></div><div class="controls"><button class="btn primary" id="lhNext" type="button">${i===LHP.length-1?'Naar de beschuldiging':'Volgende puzzel'}</button></div>`
+  const actions=solved?`<div class="verdict"><p><b>${lst.skipped.includes(i)?'Overgeslagen.':'Opgelost!'}</b> ${lhReward(G,k)}</p><p class="lhb-gone">Op het speelbord weggestreept: <b>${lhGone(i)}</b></p></div><div class="controls"><button class="btn" id="lhToBoard" type="button">Bekijk speelbord ↓</button><button class="btn primary" id="lhNext" type="button">${i===LHP.length-1?'Naar de beschuldiging':'Volgende puzzel'}</button></div>`
     :`<div class="controls">${['cijfer','anagram','kluis'].includes(k)?`<button class="btn primary small" id="lhCheck" type="button">${k==='kluis'?'Open de kluis':'Controleer'}</button>`:''}<button class="btn small" id="lhSkip" type="button">Sla over</button></div>
      ${lhAsk?`<div class="spoiler"><p>Overslaan? Je krijgt de aanwijzing dan zonder de puzzel op te lossen.</p><div class="controls" style="justify-content:center"><button class="btn primary" id="lhYes" type="button">Ja, sla over</button><button class="btn" id="lhNo" type="button">Nee</button></div></div>`:''}<p class="msg" id="lhMsg"></p>`;
   return `<article class="chapter"><div class="kicker">Puzzel ${i+1} van ${LHP.length}</div><h3>${title}</h3>${h}${actions}</article>`}
+// Speelbord: wat elke opgeloste puzzel wegstreept, op een plattegrond met alle gasten en wapens
+const LHX={doolhof:G=>({r:G.mazeRooms}),woord:G=>({w:G.wsW}),route:G=>({r:G.route}),sudoku:G=>({s:G.sudS}),cijfer:G=>({r:G.cipRooms}),anagram:G=>({s:G.anaS}),kluis:G=>({w:[G.safeW],s:[G.safeS]})};
+function lhElim(){const G=LG,E={s:{},w:{},r:{}};lst.solved.forEach(i=>{const x=LHX[LHP[i][0]](G);['s','w','r'].forEach(t=>(x[t]||[]).forEach(j=>{if(E[t][j]===undefined)E[t][j]=i}))});return E}
+function lhGone(i){const x=LHX[LHP[i][0]](LG),R=j=>cap(LHR[j][1].replace(/^de /,'')),parts=[];
+  if(x.s)parts.push(x.s.map(j=>LG.S[j].name).join(' en '));if(x.w)parts.push(x.w.map(j=>LG.W[j].name).join(', '));if(x.r)parts.push(x.r.map(R).join(', '));return parts.join(' · ')}
+const LHXSVG='<svg class="lhb-x" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path pathLength="100" d="M10 10L90 90"/><path pathLength="100" d="M90 10L10 90"/></svg>';
+// A = index van de puzzel die nu net is opgelost: die onderdelen worden live doorgestreept (animatie)
+function lhBoard(A=null,id='lhBoard'){const G=LG,E=lhElim(),n=lst.note,last=lst.solved[lst.solved.length-1];
+  let order=0;const seq={};
+  const isA=(t,j)=>A!==null&&E[t][j]===A;
+  const left=t=>({s:6,w:6,r:9}[t]-Object.keys(E[t]).filter(j=>E[t][j]!==A||A===null).length);
+  const attrs=(t,j)=>{if(isA(t,j)){const k=order++;return `style="--d:${(0.9+k*0.75).toFixed(2)}s" data-k="${k}" data-t="${t}"`}return ''};
+  const cls=(t,j)=>isA(t,j)?'strike':E[t][j]!==undefined?'off':(n[t].includes(j)?'pen':'');
+  const tag=(t,j)=>E[t][j]!==undefined?`<span class="lhb-tag">${E[t][j]+1}</span>`:'';
+  const xs=(t,j)=>E[t][j]!==undefined?LHXSVG:'';
+  const room=j=>{const a=attrs('r',j);return `<button type="button" class="lhb-room ${cls('r',j)}" data-nb="r${j}" ${a} ${E.r[j]!==undefined?'disabled':''}>${xs('r',j)}<b>${cap(LHR[j][1].replace(/^de /,''))}</b>${tag('r',j)}</button>`};
+  const tok=(t,j,svg,name)=>{const a=attrs(t,j);return `<button type="button" class="lhb-tok ${cls(t,j)}" data-nb="${t}${j}" ${a} ${E[t][j]!==undefined?'disabled':''}>${xs(t,j)}<span class="tok">${svg}</span><span class="lhb-nm">${name}</span>${tag(t,j)}</button>`};
+  const plan=range(9).map(room).join(''),gs=G.S.map((x,j)=>tok('s',j,svgOf(x),x.name)).join(''),ws=G.W.map((x,j)=>tok('w',j,svgOf(x),cap(x.name))).join('');
+  const steps=lst.solved.map(i=>`<li value="${i+1}" class="${i===last?'new':''}"><b>${LHP[i][1]}${lst.skipped.includes(i)?' (overgeslagen)':''}</b><span>Weg: ${lhGone(i)}</span></li>`).join('');
+  const cnt=t=>`<b data-left="${t}">${left(t)}</b>`;
+  const word=(t,a,b)=>`<span data-word="${t}" data-a="${a}" data-b="${b}">${left(t)===1?a:b}</span>`;
+  return `<section class="lhboard ${A!==null?'anim':''}" id="${id}"><h2>Speelbord</h2>
+   <p class="lhb-sum">Nog verdacht: ${cnt('s')} ${word('s','gast','gasten')} · ${cnt('w')} ${word('w','wapen','wapens')} · ${cnt('r')} ${word('r','kamer','kamers')}</p>
+   <h4>Het landhuis</h4><div class="lhb-plan">${plan}</div>
+   <h4>Gasten</h4><div class="lhb-row">${gs}</div>
+   <h4>Wapens</h4><div class="lhb-row">${ws}</div>
+   ${A===null?`<p class="hint">Rood doorgestreept = weggestreept door een puzzel (het nummer zegt welke). Tik zelf op iets om het met potlood af te strepen.</p>
+   <h4>Stappen</h4>${steps?`<ol class="lhb-steps">${steps}</ol>`:'<p class="hint">Nog geen puzzels opgelost. Elke opgeloste puzzel streept hier iets weg.</p>'}`:''}</section>`}
+// Animatie na het oplossen: het speelbord schuift in beeld en de rode pen streept één voor één weg
+let lhAnim=null;
+function lhPlay(i){const ov=document.createElement('div');ov.className='lhov';ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Speelbord bijgewerkt');
+  ov.innerHTML=`<div class="lhov-card"><div class="lhov-head"><span class="kicker">Puzzel ${i+1} opgelost</span><h3>${LHP[i][1]}</h3></div>${lhBoard(i,'lhBoardAnim')}
+   <p class="lhov-step"><b>Weg:</b> ${lhGone(i)}</p><div class="controls lhov-ctl"><button class="btn small" type="button" id="lhOvSkip">Sla over</button><button class="btn primary" type="button" id="lhOvGo">Verder</button></div></div>`;
+  document.body.appendChild(ov);document.body.style.overflow='hidden';
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;const items=[...ov.querySelectorAll('.strike')];const timers=[];
+  const tick=el=>{const t=el.dataset.t,b=ov.querySelector(`[data-left="${t}"]`),w=ov.querySelector(`[data-word="${t}"]`);if(!b)return;const v=Math.max(0,+b.textContent-1);b.textContent=v;b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');if(w)w.textContent=v===1?w.dataset.a:w.dataset.b;
+    el.scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'})};
+  const finish=()=>{timers.forEach(clearTimeout);items.forEach(el=>{if(!el.classList.contains('done')){el.classList.add('done');tick(el)}});ov.classList.add('end')};
+  if(reduce)finish();else{items.forEach(el=>timers.push(setTimeout(()=>{el.classList.add('done');tick(el)},parseFloat(el.style.getPropertyValue('--d'))*1000+350)));
+    const endT=items.length?parseFloat(items[items.length-1].style.getPropertyValue('--d'))*1000+900:600;timers.push(setTimeout(()=>ov.classList.add('end'),endT))}
+  const close=()=>{timers.forEach(clearTimeout);ov.classList.add('out');document.body.style.overflow='';setTimeout(()=>ov.remove(),250)};
+  ov.querySelector('#lhOvSkip').onclick=()=>{finish()};ov.querySelector('#lhOvGo').onclick=close;
+  ov.addEventListener('keydown',e=>{if(e.key==='Escape')close()});setTimeout(()=>ov.querySelector('#lhOvGo').focus({preventScroll:true}),50)}
 function lhNotebook(){const G=LG,n=lst.note;
   const grp=(key,items,lab)=>`<div class="nbg"><h4>${lab}</h4><div class="nbi">${items.map((t,i)=>`<button type="button" class="nb ${n[key].includes(i)?'off':''}" data-nb="${key}${i}">${t}</button>`).join('')}</div></div>`;
   return `<section class="notebook"><h2>Notitieblok</h2><p class="hint">Tik om weg te strepen.</p>
@@ -2197,10 +2291,11 @@ function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let 
   P.innerHTML=`<div class="controls"><button class="btn" id="lhNew" type="button">Nieuwe zaak</button></div><div class="stats">Opgelost: ${st.solved} · Reeks: ${st.streak}</div>
    <div class="storyhead"><span class="kicker">Zaak ${String(G.seed).padStart(4,'0')} · Landhuis Lindenhof</span><h3>Moord in het landhuis</h3></div>
    <p class="lead" style="font-size:16px">Tijdens ${G.event} wordt ${G.victim} dood gevonden. Zes gasten, zes mogelijke wapens, negen kamers. Los de puzzels op: elke puzzel streept iets weg. Wat overblijft, is de waarheid.</p>
-   <nav class="chapters" aria-label="Puzzels">${dots}</nav>${body}${lhNotebook()}`;
+   <nav class="chapters" aria-label="Puzzels">${dots}</nav>${body}${lhBoard()}`;
   const on=(id,f)=>{const el=$(id);if(el)el.onclick=f};const msg=t=>{const m=$('lhMsg');if(m)m.textContent=t};
   P.querySelectorAll('[data-lp]').forEach(b=>b.onclick=()=>{lst.view=+b.dataset.lp;lhAsk=false;saveLh();renderLH()});
-  P.querySelectorAll('[data-nb]').forEach(b=>b.onclick=()=>{const key=b.dataset.nb[0],i=+b.dataset.nb.slice(1);lst.note[key]=lst.note[key].includes(i)?lst.note[key].filter(x=>x!==i):[...lst.note[key],i];saveLh();b.classList.toggle('off')});
+  P.querySelectorAll('[data-nb]').forEach(b=>b.onclick=()=>{const key=b.dataset.nb[0],i=+b.dataset.nb.slice(1);lst.note[key]=lst.note[key].includes(i)?lst.note[key].filter(x=>x!==i):[...lst.note[key],i];saveLh();b.classList.toggle('pen')});
+  on('lhToBoard',()=>$('lhBoard').scrollIntoView({behavior:'smooth',block:'start'}));
   on('lhNew',()=>lhNew(1+Math.floor(Math.random()*9999)));on('lhAgain',()=>lhNew(1+Math.floor(Math.random()*9999)));
   on('lhNext',()=>{lst.view=v+1;saveLh();renderLH()});
   on('lhSkip',()=>{lhAsk=true;renderLH()});on('lhNo',()=>{lhAsk=false;renderLH()});
@@ -2999,7 +3094,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261029225216';
+const APPV='20261030083752';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

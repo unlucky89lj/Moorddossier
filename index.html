@@ -33,7 +33,7 @@ body{background:var(--page);color:var(--ink);font-family:var(--serif);font-size:
 .wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
 button{font:inherit}
 .top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-.logo{font:800 26px/1 var(--cond);letter-spacing:.02em;text-transform:uppercase;margin:0}
+.logo{font:800 clamp(21px,6vw,26px)/1 var(--cond);letter-spacing:.02em;text-transform:uppercase;margin:0}
 .logo span{color:var(--red)}
 .controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .seg{display:inline-flex;border:2px solid var(--ink);border-radius:999px;overflow:hidden}
@@ -596,6 +596,52 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .flm.done .flm-end{opacity:1;pointer-events:auto}
 .flm-end .btn{color:#fff;border-color:#fff;background:rgba(0,0,0,.4)}.flm-end .btn.primary{background:#C2321F;border-color:#C2321F}
 .flm.paused .flm-v::before{content:"❚❚  gepauzeerd · tik om verder te gaan";display:flex;align-items:center;justify-content:center;font:700 16px var(--cond);letter-spacing:.1em;text-transform:uppercase;color:#e4e1d6}
+.lvseg button{min-width:36px;padding:6px 10px}
+.lvseg button[disabled]{opacity:.45;cursor:default;font-size:12px}
+.lvline{margin:-12px 0 0;font:600 14px var(--cond);letter-spacing:.03em;color:var(--muted)}
+.lvline b{color:var(--ink);text-transform:uppercase;letter-spacing:.05em}
+.lvup{display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center;background:var(--ink);color:var(--page);border-radius:18px;padding:18px 16px;margin-bottom:10px;animation:lvPop .6s cubic-bezier(.3,1.5,.5,1)}
+.lvup span{font:800 14px var(--cond);letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
+.lvup b{font:800 28px var(--cond);text-transform:uppercase}
+.lvup p{margin:0;font-size:15px;max-width:40ch}
+@keyframes lvPop{from{transform:scale(.8);opacity:0}}
+@media (prefers-reduced-motion:reduce){.lvup{animation:none}}
+
+.topbtns{display:flex;gap:6px;order:2;margin-left:auto}
+.topbtns .helpbtn{margin-left:0}
+.top .helpbtn{padding:4px 10px;font-size:13px}
+.flm-sign{position:absolute;right:30px;top:268px;display:flex;align-items:center;gap:10px;background:#f3f1ea;color:#1c1f22;border-radius:6px;padding:8px 14px 8px 8px;box-shadow:0 8px 20px rgba(0,0,0,.5)}
+.flm-sign .flm-ic{width:52px;height:52px}.flm-sign b{font:800 24px var(--cond);text-transform:uppercase}
+.flm-pol{position:absolute;left:108px;width:324px;background:#f3f1ea;padding:12px 12px 46px;box-shadow:0 10px 30px rgba(0,0,0,.6)}
+.flm-pol svg{width:100%;display:block;filter:grayscale(1) contrast(1.1)}
+.flm-pol b{position:absolute;left:14px;bottom:10px;font:600 26px "Caveat",cursive;color:#222}
+.flm-sus{position:absolute;width:150px;text-align:center}
+.flm-sus svg{width:150px;height:auto;display:block}
+.flm-sus b{display:block;font:800 22px var(--cond);text-transform:uppercase;color:#e4e1d6;margin-top:6px}
+.flm-sus i{display:block;font:italic 18px var(--serif);color:#bdbab0}
+.filmbtn{align-self:flex-start;margin-top:4px}
+.pas{background:linear-gradient(135deg,#efe7d2,#e2d6b8);color:#1c1f22;border-radius:18px;padding:16px;box-shadow:0 8px 24px rgba(0,0,0,.18);display:flex;flex-direction:column;gap:10px;border:2px solid #1c1f22}
+.pas-top{display:flex;justify-content:space-between;font:800 13px var(--cond);letter-spacing:.14em;text-transform:uppercase;color:#8A2A1A;border-bottom:2px solid #1c1f22;padding-bottom:8px}
+.pas-body{display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;align-items:start}
+.pas-foto{width:96px;height:116px;border-radius:8px;background:#1c1f22;color:#efe7d2;display:grid;place-items:center}.pas-foto svg{width:56px;height:56px}
+.pas-info{display:flex;flex-direction:column;gap:2px;min-width:0}
+.pas-info label,.pas-k{font:700 11px var(--cond);letter-spacing:.12em;text-transform:uppercase;color:#5e635f}
+.pas-info input{font:600 22px "Caveat",cursive;border:0;border-bottom:1.5px dashed #5e635f;background:transparent;color:#1d3f8c;padding:0 0 2px;margin-bottom:4px;width:100%}
+.pas-info b{font:800 22px/1.1 var(--cond);text-transform:uppercase;margin-bottom:4px}.pas-rank{color:#8A2A1A;font-size:26px!important}
+.pas-bar{height:10px;border-radius:5px;background:rgba(28,31,34,.15);overflow:hidden}.pas-bar i{display:block;height:100%;background:#C2321F}
+.pas-next{margin:0;font:600 14px var(--cond);letter-spacing:.02em}
+.pas-games{list-style:none;padding:0!important;gap:4px!important}
+.pas-games li{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
+.pas-gi .gi{width:22px;height:22px;color:var(--red)}.pas-games b{font:700 16px var(--cond);text-transform:uppercase}.pas-games em{font:800 18px var(--cond);font-style:normal}
+.pas-badges{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (min-width:640px){.pas-badges{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.badge{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;border:1.5px solid var(--rule);border-radius:14px;padding:10px 8px;background:var(--page);opacity:.6}
+.badge.on{opacity:1;border-color:var(--ink)}
+.medal{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--band);font-size:18px;margin-bottom:4px}
+.badge.on .medal{background:#C9A54B;color:#fff;font-size:24px;box-shadow:inset 0 0 0 3px #a8862f}
+.badge b{font:800 14px var(--cond);text-transform:uppercase}.badge i{font:500 12px/1.25 var(--cond);font-style:normal;color:var(--muted)}.badge em{font:700 12px var(--cond);font-style:normal;color:var(--red)}
+.bk-more summary{cursor:pointer;font:700 14px var(--cond);text-transform:uppercase;letter-spacing:.05em;margin:6px 0}
+.bk-more textarea{width:100%;font:500 13px ui-monospace,monospace;border:1.5px solid var(--rule);border-radius:10px;background:var(--card);color:var(--ink);padding:8px;margin-top:6px}
 </style>
 </head>
 <body>
@@ -603,14 +649,12 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <div class="top">
     <p class="logo">Moord<span>dossier</span></p>
     <div class="controls">
-      <div class="seg" role="group" aria-label="Moeilijkheid">
-        <button id="d3" type="button" aria-pressed="true">Makkelijk</button>
-        <button id="d4" type="button" aria-pressed="false">Lastig</button>
-      </div>
+      <div class="seg lvseg" id="lvSeg" role="group" aria-label="Niveau"></div>
       <button class="btn" id="newCase" type="button">Nieuwe zaak</button>
     </div>
-    <button class="btn helpbtn" id="helpBtn" type="button" aria-pressed="false">? Uitleg</button>
+    <div class="topbtns"><button class="btn helpbtn" id="pasBtn" type="button" aria-pressed="false">Pas</button><button class="btn helpbtn" id="helpBtn" type="button" aria-pressed="false">? Uitleg</button></div>
   </div>
+  <p class="lvline" id="lvLine"></p>
   <div class="games" role="tablist" aria-label="Kies een spel">
     <button role="tab" type="button" data-g="murdle"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 4.5l3 3M7.5 4.5l-3 3" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="12" r="1.8" fill="currentColor"/></svg>Moorddossier</b><span>Logicapuzzels met een rooster</span></button>
     <button role="tab" type="button" data-g="speur"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M14.5 14.5L21 21" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>Speurneus</b><span>Verhaal in hoofdstukken</span></button>
@@ -684,6 +728,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <section class="pane" id="pBericht" hidden></section>
   <section class="pane" id="pDossier" hidden></section>
   <section class="pane" id="pUitleg" hidden></section>
+  <section class="pane" id="pPas" hidden></section>
 
   <footer>Elke zaak wordt gegenereerd en heeft precies één oplossing.</footer>
 </div>
@@ -784,8 +829,14 @@ function shuffle(arr,r){const a=arr.slice();for(let i=a.length-1;i>0;i--){const 
 function perms(n){const res=[];const rec=(a,u)=>{if(a.length===n){res.push(a.slice());return}for(let i=0;i<n;i++)if(!u[i]){u[i]=1;a.push(i);rec(a,u);a.pop();u[i]=0}};rec([],[]);return res}
 const pick=(arr,r)=>arr[Math.floor(r()*arr.length)];
 
-function genCase(seed,n){
-  const r=mulberry32(seed*7919+n*13);
+// Niveaus: na elke 10 opgeloste zaken een stapje moeilijker
+const LVLS=[{n:3,d:-.2,name:'Makkelijk'},{n:4,d:.55,name:'Gemiddeld'},{n:4,d:1.6,name:'Moeilijk'},{n:5,d:1.6,name:'Expert'},{n:5,d:3,name:'Meester',noTips:true}];
+const LVKEY='md-niveau';
+function lvMax(solved){return Math.min(LVLS.length,1+Math.floor(solved/10))}
+function lvGet(game,solved){const all=store.get(LVKEY)||{},m=lvMax(solved);let c=all[game];if(!c||c>m)c=m;return c}
+function lvSet(game,v){const all=store.get(LVKEY)||{};all[game]=v;store.set(LVKEY,all)}
+function genCase(seed,n,lv){
+  const r=mulberry32(seed*7919+n*13+(lv?lv*101:0));const DP=lv?LVLS[lv-1].d:.55;
   const S=shuffle(POOL.suspects,r).slice(0,n);
   let L;do{L=shuffle(POOL.locations,r).slice(0,n)}while(L.every(x=>x.buiten)||L.every(x=>!x.buiten));
   const W=shuffle(POOL.weapons,r).slice(0,n);
@@ -796,13 +847,13 @@ function genCase(seed,n){
   const pool=[];
   const add=(text,test,pen=0)=>{if(test(sol))pool.push({text,test,k:r()+pen})};
   for(const s of range(n))for(const l of range(n)){
-    add(`[s${s}] was in [l${l}].`,a=>a.loc[s]===l,.55);
+    add(`[s${s}] was in [l${l}].`,a=>a.loc[s]===l,DP);
     add(`[s${s}] was niet in [l${l}].`,a=>a.loc[s]!==l);}
   for(const s of range(n))for(const w of range(n)){
-    add(`[s${s}] had [w${w}] bij zich.`,a=>a.wep[s]===w,.55);
+    add(`[s${s}] had [w${w}] bij zich.`,a=>a.wep[s]===w,DP);
     add(`[s${s}] had [w${w}] niet bij zich.`,a=>a.wep[s]!==w);}
   for(const w of range(n))for(const l of range(n)){
-    add(`[W${w}] lag in [l${l}].`,a=>a.loc[holder(a,w)]===l,.55);
+    add(`[W${w}] lag in [l${l}].`,a=>a.loc[holder(a,w)]===l,DP);
     add(`[W${w}] lag niet in [l${l}].`,a=>a.loc[holder(a,w)]!==l);}
   const kinds=[['hand',v=>`iemand die ${v}handig is`,v=>`niemand die ${v}handig is`],
                ['ogen',v=>`iemand met ${v} ogen`,v=>`niemand met ${v} ogen`],
@@ -831,8 +882,8 @@ function genCase(seed,n){
       for(const l of range(n)) add(`In [l${l}] lag ${ph(v)}.`,a=>ws.some(w=>a.loc[holder(a,w)]===l),.05);}}
   const ord=range(n).sort((a,b)=>S[b].lengte-S[a].lengte),tall=ord[0],short=ord[n-1];
   for(const [i,lbl] of [[tall,'De langste verdachte'],[short,'De kleinste verdachte']]){
-    for(const l of range(n)){add(`${lbl} was in [l${l}].`,a=>a.loc[i]===l,.35);add(`${lbl} was niet in [l${l}].`,a=>a.loc[i]!==l,.05)}
-    for(const w of range(n)){add(`${lbl} had [w${w}] bij zich.`,a=>a.wep[i]===w,.35);add(`${lbl} had [w${w}] niet bij zich.`,a=>a.wep[i]!==w,.05)}}
+    for(const l of range(n)){add(`${lbl} was in [l${l}].`,a=>a.loc[i]===l,DP-.2);add(`${lbl} was niet in [l${l}].`,a=>a.loc[i]!==l,.05)}
+    for(const w of range(n)){add(`${lbl} had [w${w}] bij zich.`,a=>a.wep[i]===w,DP-.2);add(`${lbl} had [w${w}] niet bij zich.`,a=>a.wep[i]!==w,.05)}}
   pool.sort((a,b)=>a.k-b.k);
   let cands=all,chosen=[];
   for(const c of pool){const f=cands.filter(c.test);if(f.length<cands.length){chosen.push(c);cands=f;if(f.length===1)break}}
@@ -844,7 +895,7 @@ function genCase(seed,n){
   const coded=pick(short2,r)[0];
   const title=pick(TITLES,r),victim=pick(VICTIMS,r),event=pick(EVENTS,r),story=Math.floor(r()*STORIES.length);
   const tipS=pick(range(n).filter(i=>i!==murderer),r),tipKind=r()<.5?'loc':'wep',tipT=Math.floor(r()*TIPS.length),conf=Math.floor(r()*CONFS.length);
-  return {seed,n,S,W,L,sol,murderer,body,clues,coded,title,victim,event,story,tipS,tipKind,tipT,conf};
+  return {seed,n,lv:lv||(n===3?1:2),S,W,L,sol,murderer,body,clues,coded,title,victim,event,story,tipS,tipKind,tipT,conf};
 }
 
 // ---------- staat ----------
@@ -872,8 +923,7 @@ function atbash(s){
 }
 
 function render(){
-  $('d3').setAttribute('aria-pressed',C.n===3);$('d4').setAttribute('aria-pressed',C.n===4);
-  const s=stats();$('stats').textContent=`Opgelost: ${s.solved} · Reeks: ${s.streak}`;
+  const s=stats();$('stats').textContent=`Opgelost: ${s.solved} · Reeks: ${s.streak}`;lvRender();
   $('caseHead').innerHTML=`<h1><span class="nr">${String(C.seed).padStart(4,'0')}.</span> ${C.title} ${svgOf('LOEP')}</h1><p>${STORIES[C.story](C.event,C.victim)}</p>`;
   document.querySelectorAll('.tiles').forEach(t=>t.style.setProperty('--n',C.n));
   $('suspects').innerHTML=C.S.map(x=>`<article class="scard"><div class="who">${svgOf(x)}<b>${x.name}</b></div>
@@ -1430,7 +1480,7 @@ const cstate=id=>(sp.cases[id]=sp.cases[id]||{view:0,solved:[],hints:{},shown:[]
 let askReveal=false;
 const normA=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toUpperCase().replace(/[^A-Z0-9]/g,'');
 const docOf=c=>typeof c.doc==='function'?c.doc():c.doc;
-function goSpeur(cur){if(cur==='boek'&&sp.cur!=='boek')sp.prev=sp.cur;sp.cur=cur;askReveal=false;saveS();renderStory();window.scrollTo({top:0})}
+function goSpeur(cur){if(cur==='boek'&&sp.cur!=='boek')sp.prev=sp.cur;sp.cur=cur;askReveal=false;saveS();renderStory();window.scrollTo({top:0});if(cur&&cur!=='boek'&&!filmSeen('speur',cur))setTimeout(()=>storyFilm('speur',cur),250)}
 
 // Handboeken: elk onderdeel inklapbaar, met onderaan een knop terug naar het spel
 function foldHB(root,back){root.querySelectorAll('section.hb').forEach(sec=>{const h=sec.querySelector('h4');if(!h)return;
@@ -1579,7 +1629,7 @@ function renderStory(){
     body+='</article>';
   }
   P.innerHTML=`<button class="btn small" id="spBack" type="button">← Alle zaken</button>
-    <div class="storyhead"><span class="kicker">Speurneus · ${CS.level}</span><h3>${CS.title}</h3></div>
+    <div class="storyhead"><span class="kicker">Speurneus · ${CS.level}</span><h3>${CS.title}</h3>${filmBtn('speur',CS.id)}</div>
     <nav class="chapters" aria-label="Hoofdstukken">${dots}</nav>${body}
     <section class="notes"><label for="spNotes"><b>Notitieblok</b> <span class="hint">wordt bewaard bij deze zaak</span></label><textarea id="spNotes" rows="4" placeholder="Schrijf hier je aantekeningen, verdenkingen en tussenstappen."></textarea></section>`;
   $('spNotes').value=s.notes||'';
@@ -1944,7 +1994,7 @@ const saveK=()=>store.set(KKEY,kd);
 const kstate=id=>(kd.cases[id]=kd.cases[id]||{tab:'rapport',notes:'',acc:null,open:false});
 let kConfirm=false;
 const KTABS=[['rapport','Rapport'],['verhoren','Verhoren'],['scene','Plaats delict'],['sectie','Sectie'],['bewijs','Bewijs'],['ontmasker','Ontmaskeren']];
-function goKoud(c){if(c==='boek'&&kd.cur!=='boek')kd.prev=kd.cur;kd.cur=c;kConfirm=false;saveK();renderKoud();window.scrollTo({top:0})}
+function goKoud(c){if(c==='boek'&&kd.cur!=='boek')kd.prev=kd.cur;kd.cur=c;kConfirm=false;saveK();renderKoud();window.scrollTo({top:0});if(c&&c!=='boek'&&!filmSeen('koud',c))setTimeout(()=>storyFilm('koud',c),250)}
 function koudHandbook(){
   return `<button class="btn small backbtn" id="kBack" type="button">← Terug</button>
   <div class="storyhead"><span class="kicker">Voor rechercheurs</span><h3>Het rechercheurshandboek</h3></div>
@@ -2006,7 +2056,7 @@ function renderKoud(){
     }
   }
   P.innerHTML=`<button class="btn small backbtn" id="kList" type="button">← Alle dossiers</button>
-   <div class="storyhead"><span class="kicker">Dossier ${c.nr} · ${c.level}</span><h3>${c.title}</h3></div>
+   <div class="storyhead"><span class="kicker">Dossier ${c.nr} · ${c.level}</span><h3>${c.title}</h3>${filmBtn('koud',c.id)}</div>
    <nav class="ktabs" aria-label="Onderdelen van het dossier">${KTABS.map(([k,l])=>`<button type="button" data-kt="${k}" aria-pressed="${k===t}">${l}</button>`).join('')}</nav>
    <div class="kbody">${body}</div>
    <div class="controls"><button class="btn small" id="kHB" type="button">Rechercheurshandboek</button></div>
@@ -2153,7 +2203,7 @@ function renderKamer(){
     <select id="kmAcc" aria-label="Kies de dader"><option value="">Kies…</option>${KM.people.slice(1).map((p,i)=>`<option value="${i+1}">${p.name}</option>`).join('')}</select>
     <div class="controls"><button class="btn primary" id="kmAccBtn" type="button">Beschuldig</button><button class="btn" id="kmReveal" type="button">Toon oplossing</button></div>
     ${kAskReveal?`<div class="spoiler"><p>Weet je het zeker? De puzzel telt dan niet mee voor je reeks.</p><div class="controls" style="justify-content:center"><button class="btn primary" id="kmYes" type="button">Ja, toon de oplossing</button><button class="btn" id="kmNo" type="button">Nee, verder puzzelen</button></div></div>`:''}
-    <div id="kmVerdict">${ks.done?(ks.revealed?`<div class="verdict bad"><p>Oplossing: <b>${m}</b> was alleen met het slachtoffer in ${KM.L.names[KM.cells[KM.pos[0]].room]}.</p></div>`:`<div class="verdict"><p>Goed gezien! <b>${m}</b> was alleen met het slachtoffer in ${KM.L.names[KM.cells[KM.pos[0]].room]}${ks.mistakes?`, na ${ks.mistakes} foute beschuldiging${ks.mistakes>1?'en':''}`:''}.</p></div>`):''}</div></section>`;
+    <div id="kmVerdict">${ks.done?(ks.revealed?`<div class="verdict bad"><p>Oplossing: <b>${m}</b> was alleen met het slachtoffer in ${KM.L.names[KM.cells[KM.pos[0]].room]}.</p></div>`:`<div class="verdict"><p>Goed gezien! <b>${m}</b> was alleen met het slachtoffer in ${KM.L.names[KM.cells[KM.pos[0]].room]}${ks.mistakes?`, na ${ks.mistakes} foute beschuldiging${ks.mistakes>1?'en':''}`:''}.</p></div>`)+'<div class="controls"><button class="btn small" type="button" data-reveal="kamer">▶ Zo is het gebeurd</button></div>':''}</div></section>`;
   const msg=t=>{$('kmMsg').innerHTML=t};
   P.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>{ktool=b.dataset.tool==='x'?'x':+b.dataset.tool;renderKamer()});
   P.querySelectorAll('.kcell').forEach(b=>b.onclick=()=>{const ci=+b.dataset.ci,c=cells[ci];
@@ -2172,7 +2222,7 @@ function renderKamer(){
     const wrong=placed.filter(([p,ci])=>KM.pos[+p]!==ci).length;
     msg(clash?`Let op: ${clash} rij${clash>1?'en of kolommen hebben':' of kolom heeft'} meer dan één persoon.`:wrong?`${wrong} van de ${placed.length} personen ${wrong>1?'staan':'staat'} nog niet goed.`:`Alle ${placed.length} geplaatste personen staan goed.`)};
   $('kmAccBtn').onclick=()=>{if(ks.done)return;const v=$('kmAcc').value;if(!v)return;
-    if(+v===KM.murderer){ks.done=true;const x=kmStats();x.solved++;x.streak=ks.mistakes?0:x.streak+1;store.set(KMSKEY,x);ks.place=Object.fromEntries(KM.pos.map((ci,p)=>[p,ci]));saveKm();renderKamer()}
+    if(+v===KM.murderer){ks.done=true;const x=kmStats();x.solved++;x.streak=ks.mistakes?0:x.streak+1;store.set(KMSKEY,x);ks.place=Object.fromEntries(KM.pos.map((ci,p)=>[p,ci]));saveKm();renderKamer();setTimeout(()=>fmPlay(kamerFilm(),{label:'Zo is het gebeurd',end:'Terug naar de plattegrond'}),400)}
     else{ks.mistakes++;saveKm();$('kmVerdict').innerHTML=`<div class="verdict bad"><p>Mis. ${KM.people[+v].name} was niet alleen met het slachtoffer. Kijk nog eens naar de plattegrond.</p></div>`}};
   $('kmReveal').onclick=()=>{if(ks.done)return;kAskReveal=true;renderKamer()};
   const no=$('kmNo');if(no)no.onclick=()=>{kAskReveal=false;renderKamer()};
@@ -2508,7 +2558,7 @@ function renderSpy(){const G=SG,n=G.n,P=$('pSpion'),st=store.get(SPSKEY)||{solve
     <div class="gtools"><button class="btn small" id="spCheck" type="button">Controleer</button><button class="btn small" id="spClear" type="button">Wis</button></div><p class="msg" id="spMsg">Tik één keer voor ✕, twee keer voor ●, drie keer om te wissen.</p></div>
     <div class="answers"><div class="ans"><select id="spS">${opt(G.S,x=>x.name)}</select><label for="spS">Spion?</label></div><div class="ans"><select id="spW">${opt(G.W,x=>`${x.lid} ${x.name}`)}</select><label for="spW">Geheim?</label></div><div class="ans"><select id="spL">${opt(G.L,x=>`${x.lid} ${x.name.toLowerCase()}`)}</select><label for="spL">Waar?</label></div>
      <div class="controls"><button class="btn primary" id="spAcc" type="button">Ontmasker</button><button class="btn" id="spRev" type="button">Toon oplossing</button></div>
-     <div id="spVerdict">${sps.done?`<div class="verdict ${sps.revealed?'bad':''}"><p>${sps.revealed?'Oplossing:':'Ontmaskerd!'} <b>${m.name}</b> gaf ${w.lid} ${w.name} door, in ${l.lid} ${l.name.toLowerCase()}.</p></div>`:''}</div></div></section>`;
+     <div id="spVerdict">${sps.done?`<div class="verdict ${sps.revealed?'bad':''}"><p>${sps.revealed?'Oplossing:':'Ontmaskerd!'} <b>${m.name}</b> gaf ${w.lid} ${w.name} door, in ${l.lid} ${l.name.toLowerCase()}.</p></div><div class="controls"><button class="btn small" type="button" data-reveal="spion">▶ Zo is het gebeurd</button></div>`:''}</div></div></section>`;
   P.querySelectorAll('[data-ss]').forEach(b=>b.onclick=()=>{sps.sub=sps.sub===b.dataset.ss?'':b.dataset.ss;saveSp();renderSpy()});
   P.querySelectorAll('[data-sc]').forEach(li=>{li.onclick=()=>{const i=+li.dataset.sc;sps.struck=sps.struck.includes(i)?sps.struck.filter(x=>x!==i):[...sps.struck,i];li.classList.toggle('done');saveSp()};li.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();li.click()}}});
   const truthS=k=>{const [b,a,c]=k.split(':'),i=+a,j=+c;if(b==='ws')return G.sol.wep[j]===i;if(b==='ls')return G.sol.loc[j]===i;return G.sol.loc[G.sol.wep.indexOf(i)]===j};
@@ -2520,7 +2570,7 @@ function renderSpy(){const G=SG,n=G.n,P=$('pSpion'),st=store.get(SPSKEY)||{solve
   $('spCheck').onclick=()=>{let wrong=0,f=0;for(const [k,v] of Object.entries(sps.marks)){f++;if((v==='v')!==truthS(k))wrong++}$('spMsg').textContent=!f?'Het rooster is nog leeg.':wrong?`${wrong} vakje${wrong>1?'s kloppen':' klopt'} niet.`:'Alles wat je hebt ingevuld klopt.'};
   const dec=$('spDec');if(dec)dec.onclick=()=>{sps.decoded=true;saveSp();renderSpy()};
   $('spAcc').onclick=()=>{if(sps.done)return;const s=$('spS').value,w2=$('spW').value,l2=$('spL').value;if(s===''||w2===''||l2==='')return $('spVerdict').innerHTML='<div class="verdict bad"><p>Kies een verdachte, een geheim en een plek.</p></div>';
-    if(+s===G.spy&&+w2===G.sol.wep[G.spy]&&+l2===G.meet){sps.done=true;const x=store.get(SPSKEY)||{solved:0,streak:0};x.solved++;x.streak=sps.mistakes?0:x.streak+1;store.set(SPSKEY,x);saveSp();renderSpy()}
+    if(+s===G.spy&&+w2===G.sol.wep[G.spy]&&+l2===G.meet){sps.done=true;const x=store.get(SPSKEY)||{solved:0,streak:0};x.solved++;x.streak=sps.mistakes?0:x.streak+1;store.set(SPSKEY,x);saveSp();renderSpy();setTimeout(()=>fmPlay(spyFilm(),{label:'Zo is het gebeurd',end:'Terug naar het dossier'}),400)}
     else{sps.mistakes++;saveSp();$('spVerdict').innerHTML=`<div class="verdict bad"><p>Mis. Bekijk de aanwijzingen en het onderschepte bericht nog eens.</p></div>`}};
   $('spRev').onclick=()=>{if(sps.done)return;sps.done=true;sps.revealed=true;const x=store.get(SPSKEY)||{solved:0,streak:0};x.streak=0;store.set(SPSKEY,x);saveSp();renderSpy()};
 }
@@ -2670,7 +2720,7 @@ const bstate=id=>(bd.cases[id]=bd.cases[id]||{unlocked:false,app:null,sub:null,e
 let bAsk=false;
 const BAPPS=[['berichten','Berichten','<path d="M4 6h16v10H9l-5 4z" fill="currentColor"/>'],['bellen','Bellen','<path d="M6 3l4 1 1 5-2 1a12 12 0 0 0 5 5l1-2 5 1 1 4c-9 1-16-6-15-15z" fill="currentColor"/>'],['fotos','Foto’s','<rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 17l5-6 4 4 2-2 3 4z" fill="currentColor"/><circle cx="16" cy="9" r="1.6" fill="currentColor"/>'],['fotoboek','Fotoboek','<rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="7" r="1.2" fill="currentColor"/>'],['mail','Mail','<rect x="3" y="6" width="18" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/>'],['notities','Notities','<rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="2"/>'],['agenda','Agenda','<rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 9h16M8 3v4M16 3v4" stroke="currentColor" stroke-width="2"/>'],['locatie','Locatie','<path d="M12 21s-6-6-6-11a6 6 0 0 1 12 0c0 5-6 11-6 11z" fill="currentColor"/><circle cx="12" cy="10" r="2.2" fill="var(--ph-bg)"/>'],['erfcam','Erfcamera','<rect x="3" y="7" width="13" height="10" rx="2" fill="currentColor"/><path d="M16 10l5-3v10l-5-3z" fill="currentColor"/>'],['gezond','Gezondheid','<path d="M12 20s-8-5-8-11a4 4 0 0 1 8-1 4 4 0 0 1 8 1c0 6-8 11-8 11z" fill="currentColor"/>'],['bank','Bank','<path d="M3 9l9-5 9 5zM5 10h14v2H5zM6 13h2v5H6zM11 13h2v5h-2zM16 13h2v5h-2zM4 19h16v2H4z" fill="currentColor"/>'],['slot','Slimme deur','<rect x="5" y="10" width="14" height="11" rx="2" fill="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/>']];
 const pic=(spec,cls='')=>`<span class="bpic ${cls}"><svg viewBox="0 0 300 200" aria-hidden="true">${drawScene(spec)}</svg></span>`;
-function bGo(c){bd.cur=c;bAsk=false;saveB();renderBericht();window.scrollTo({top:0})}
+function bGo(c){bd.cur=c;bAsk=false;saveB();renderBericht();window.scrollTo({top:0});if(c&&!filmSeen('bericht',c))setTimeout(()=>storyFilm('bericht',c),250)}
 function bSpeak(text){try{const u=new SpeechSynthesisUtterance(text.replace(/\(.*?\)|\.\.\./g,' '));u.lang='nl-NL';u.rate=.95;speechSynthesis.cancel();speechSynthesis.speak(u);return true}catch(e){return false}}
 function phoneBody(C,s){
   if(!s.unlocked){const dots=[0,1,2,3].map(i=>`<i class="${i<s.entry.length?'on':''}"></i>`).join('');
@@ -2710,7 +2760,7 @@ function renderBericht(){const P=$('pBericht');
     ${bAsk?`<div class="spoiler"><p>Weet je het zeker? Daarna kun je je antwoord niet meer veranderen.</p><div class="controls" style="justify-content:center"><button class="btn primary" id="bYes" type="button">Toon de oplossing</button><button class="btn" id="bNo" type="button">Nog even zoeken</button></div></div>`:`<div class="seal"><span>ZEGEL</span><button class="btn primary" id="bSeal" type="button">Leg conclusie vast</button></div>`}</div>`}
   else{const A=s.acc,ok=k=>k==='e'?C.answer.bewijs.includes(A.e):A[k]===C.answer[k==='d'?'dader':'motief'];const row=(l,k,arr)=>`<li class="${ok(k)?'good':'bad'}"><b>${ok(k)?'✓':'✗'} ${l}:</b> ${arr[A[k]]}</li>`;
     concl=`<div class="verdict ${A.d===C.answer.dader?'':'bad'}"><p>${A.d===C.answer.dader?'Goed gezien!':'De dader is ontsnapt.'} ${['d','e','m'].filter(ok).length}/3 onderdelen juist.</p></div><ul class="accres">${row('Dader','d',C.opts.dader)}${row('Bewijs','e',C.opts.bewijs)}${row('Motief','m',C.opts.motief)}</ul><h4 class="solh">De oplossing</h4><ol class="solsteps">${C.solution.map(x=>`<li><b>${x.t}.</b> ${x.p}</li>`).join('')}</ol><div class="verdict"><p>${C.verdict}</p></div><div class="controls"><button class="btn" id="bReset" type="button">Zaak opnieuw spelen</button></div>`}
-  P.innerHTML=`<button class="btn small backbtn" id="bList" type="button">← Alle zaken</button><div class="storyhead"><span class="kicker">${C.level} · ${C.time}</span><h3>${C.title}</h3></div>
+  P.innerHTML=`<button class="btn small backbtn" id="bList" type="button">← Alle zaken</button><div class="storyhead"><span class="kicker">${C.level} · ${C.time}</span><h3>${C.title}</h3>${filmBtn('bericht',C.id)}</div>
    <div class="doc report">${C.report}</div>
    <div class="stmts">${C.extra.map(x=>`<details class="stmt"><summary><b>Bewijsstuk</b><span>${x.t}</span></summary><div class="doc">${x.img?pic(x.img):''}${x.d}</div></details>`).join('')}</div>
    <div class="phone" role="region" aria-label="Telefoon van ${C.victim}"><div class="ph-notch"></div><div class="ph-screen">${phoneBody(C,s)}</div></div>
@@ -2891,14 +2941,14 @@ function renderDossier(){const P=$('pDossier');
       <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Elke maandag nieuw</h3><p>Elke maandag komen er twee nieuwe dossiers bij. Open de app daarna één of twee keer opnieuw om ze te zien.</p></article></div>`;
     P.querySelectorAll('[data-dcase]').forEach(b=>b.onclick=()=>dGo(b.dataset.dcase));saveD();return}
   const C=DOSSIERS.find(c=>c.id===dd.cur);if(!C)return dGo(null);const s=dstate(C.id);
-  const head=`<button class="btn small backbtn" id="dList" type="button">← Alle dossiers</button><div class="storyhead"><span class="kicker">Dossier ${C.nr} · ${C.level} · ${C.time}</span><h3>${C.title}</h3></div>`;
+  const head=`<button class="btn small backbtn" id="dList" type="button">← Alle dossiers</button><div class="storyhead"><span class="kicker">Dossier ${C.nr} · ${C.level} · ${C.time}</span><h3>${C.title}</h3>${filmBtn('dossier',C.id)}</div>`;
   if(!s.start){
     P.innerHTML=`${head}<div class="dm-envs">
      <button type="button" class="dm-env big" id="dOpen"><span class="dm-flap"></span><span class="dm-label"><small>Envelop 1</small>START</span><span class="dm-seal">Open</span></button>
      <div class="dm-env shut"><span class="dm-flap"></span><span class="dm-label"><small>Envelop 2</small>HINTS</span></div>
      <div class="dm-env shut"><span class="dm-flap"></span><span class="dm-label"><small>Envelop 3</small>OPLOSSING</span></div></div>
      <p class="hint">Open eerst de envelop Start. De andere enveloppen blijven dicht tot je ze nodig hebt.</p>`;
-    $('dList').onclick=()=>dGo(null);$('dOpen').onclick=()=>{s.start=true;s.tab='brief';saveD();renderDossier()};return}
+    $('dList').onclick=()=>dGo(null);$('dOpen').onclick=()=>{const go=()=>{s.start=true;s.tab='brief';saveD();renderDossier()};if(!filmSeen('dossier',C.id))storyFilm('dossier',C.id,go);else go()};return}
   const t=s.tab||'stukken',answered=C.qs.filter((q,i)=>s.ans[i]!==undefined&&s.ans[i]!==null).length,hintsUsed=Object.values(s.hints).reduce((a,b)=>a+b,0);
   const TABS=[['brief','Startbrief'],['stukken',`Stukken ${s.read.length}/${C.docs.length}`],['vragen',`Vragen ${answered}/5`],['oplossing',s.done?'Oplossing':'🔒 Oplossing']];
   let body='';
@@ -2978,7 +3028,7 @@ function fmPlay(scenes,opts={}){if(fmRun)fmRun.close();const total=scenes.reduce
     q('fade').style.opacity=r.fade??FM.fadeOf(u,sc.d);q('flash').style.opacity=r.flash||0;q('red').style.opacity=r.red||0;
     if(snd){if(k!==lastScene)snd.rain(sc.rain?.5:0);(sc.sfx||[]).forEach(([at,kind],i)=>{const key=k+':'+i;if(u>=at&&!fired.has(key)){fired.add(key);snd[kind]&&snd[kind]()}})}
     lastScene=k;q('bar').firstChild.style.width=(t/total*100).toFixed(1)+'%'};
-  const loop=now=>{const t=paused?pt:(now-t0)/1000;if(t>=total){draw(total-.001);if(!ended){ended=true;ov.classList.add('done')}return}draw(t);raf=requestAnimationFrame(loop)};
+  let frozen=false;const loop=now=>{if(frozen)return;const t=paused?pt:(now-t0)/1000;if(t>=total){draw(total-.001);if(!ended){ended=true;ov.classList.add('done')}return}draw(t);raf=requestAnimationFrame(loop)};
   const close=()=>{cancelAnimationFrame(raf);removeEventListener('resize',fit);if(snd)snd.stop();ov.classList.add('out');document.body.style.overflow='';setTimeout(()=>ov.remove(),250);fmRun=null};
   const restart=()=>{ended=false;ov.classList.remove('done');fired.clear();t0=performance.now();paused=false;raf=requestAnimationFrame(loop)};
   ov.querySelector('[data-f="x"]').onclick=()=>{close();opts.done&&opts.done()};
@@ -2989,7 +3039,7 @@ function fmPlay(scenes,opts={}){if(fmRun)fmRun.close();const total=scenes.reduce
   ov.addEventListener('keydown',e=>{if(e.key==='Escape'){close();opts.done&&opts.done()}});
   if(reduce){draw(total-.001);ended=true;ov.classList.add('done')}else if(opts.manual)draw(0);else raf=requestAnimationFrame(loop);
   setTimeout(()=>ov.querySelector('[data-f="x"]').focus({preventScroll:true}),50);
-  fmRun={close,draw,total};return fmRun}
+  fmRun={close,draw:t=>{frozen=true;cancelAnimationFrame(raf);draw(t)},total};return fmRun}
 
 // ---- Het Landhuis: zo is het gebeurd ----
 const LHROOM=[['night',['window',150,110,1.3],['moon',150,62,.5],['stairs',62,150,.8]],['wall',['shelf',150,150,1.15],['armchair',62,172,.8]],
@@ -3014,12 +3064,189 @@ function lhFilm(G,acc){const S=G.S[G.sol.s],W=G.W[G.sol.w],room=LHR[G.sol.r][1],
      return {title:`<p class="flm-k">${ok?'Goed gezien, rechercheur':'Dit was de oplossing'}</p><div class="flm-row">${row.map(([ic,l],i)=>`<div style="opacity:${FM.seg(u,.3+i*.6,.8+i*.6)}"><span class="flm-ic">${ic}</span><b>${l}</b></div>`).join('')}</div><h1 style="font-size:40px;opacity:${FM.seg(u,2.4,3)}"><span>Zaak gesloten</span></h1>`}}}]}
 function lhFilmPlay(){if(!LG||!lst||!lst.done)return;fmPlay(lhFilm(LG,lst.acc),{label:'Zo is het gebeurd',end:'Terug naar het landhuis'})}
 
+
+// ---- algemene onthulling: wie, waarmee en waar (Moorddossier, Kamermoord, Spionage) ----
+// o = {kicker, sub, ok, place:{name, svg, buiten}, victim, culprit:{name, svg}, weapon:{name, svg}|null, spy:true voor een overdracht in plaats van een moord, closing}
+function fmReveal(o){const P=o.place,bg=P.buiten?['dusk',['moon',250,38,.6]]:['wall',['window',225,118,1],['door',70,150,.9]];
+  const scene=(extra='')=>drawScene(bg)+extra,person=(x,y,s,op=1,rot=0)=>FM.G(x,y,s,`<g transform="rotate(${rot})">${PP.person()}</g>`,`opacity="${op}"`);
+  const card=(svgx,lab,k,top=430)=>`<div class="flm-card" style="top:${top}px;opacity:${k};transform:translate(-50%,-50%) scale(${.6+.4*k}) rotate(${(1-k)*-8}deg)"><span class="flm-ic">${svgx}</span><b>${lab}</b></div>`;
+  const sign=k=>`<div class="flm-sign" style="opacity:${k}"><span class="flm-ic">${P.svg}</span><b>${P.name}</b></div>`;
+  const sc=[{d:4.5,f:u=>({title:`<p class="flm-k">${o.ok?(o.spy?'Spion ontmaskerd':'Zaak opgelost'):'De waarheid'}</p><h1>${FM.type('Zo is het ',u,.3,14).replace('▌','')}<span>${u>1.3?FM.type('gebeurd',u,1.3,12):''}</span></h1><p style="opacity:${FM.seg(u,2.4,3)}">${o.sub||''}</p>`})},
+   {d:6.5,rain:!!P.buiten,f:u=>({chap:P.name,stage:FM.svg(scene(o.victim?person(205,190,.8):'')+(P.buiten?FM.rain(u,.15):'')),extra:sign(FM.ease(FM.seg(u,.3,1))),
+     cap:FM.type(o.spy?`${o.victim}. Iemand heeft hier een afspraak.`:`${o.victim} is alleen in ${P.lid||''}${P.lid?' ':''}${P.name.toLowerCase()}.`,u,.9)})},
+   {d:7,sfx:[[0.5,'click']],f:u=>{const k=FM.ease(FM.seg(u,.4,1.6)),x=-40+k*130;return {chap:P.name,stage:FM.svg(scene((o.victim?person(205,190,.8):'')+person(x,190,.82,.95))),
+     extra:u>2.2?card(o.culprit.svg,o.culprit.name,FM.ease(FM.seg(u,2.2,2.9))):'',cap:FM.type(o.spy?`Dan verschijnt ${o.culprit.name}.`:`Dan gaat de deur open. Het is ${o.culprit.name}.`,u,1.1)}}}];
+  if(o.weapon)sc.push({d:6,f:u=>({chap:o.spy?'Het geheim':'Het wapen',stage:FM.svg(scene((o.victim?person(205,190,.8):'')+person(90,190,.82,.95))),extra:card(o.weapon.svg,cap(o.weapon.name),FM.ease(FM.seg(u,.3,1.1))),
+     cap:FM.type(o.spy?`Onder de jas: ${o.weapon.name}.`:`In de hand: ${o.weapon.name}.`,u,1)})});
+  if(o.spy)sc.push({d:6,f:u=>{const k=FM.ease(FM.seg(u,.8,2.6)),x=100+k*80;return {chap:P.name,stage:FM.svg(scene(person(90,190,.82,.95)+person(230,190,.8,.9)+FM.G(x,150,.7,PP.envelope(),`opacity="${1-FM.seg(u,2.6,3)}"`))),
+     cap:u>.6?FM.type('Een snelle overdracht. Niemand ziet het. Behalve jij.',u,.6):''}}});
+  else sc.push({d:6,sfx:[[1.4,'thud']],f:u=>{const hit=u>1.4,fall=FM.ease(FM.seg(u,1.5,2.4));return {chap:P.name,stage:FM.svg(scene(person(118,190,.82,.95)+person(205+fall*30,190-fall*8,.8,1,fall*84))),
+     red:hit?Math.max(0,.55-FM.seg(u,1.4,2.2)*.55):0,cap:u>2.6?FM.type(o.after||'Een klap. Daarna is het stil.',u,2.6):''}}});
+  const row=[[o.culprit.svg,o.culprit.name]];if(o.weapon)row.push([o.weapon.svg,cap(o.weapon.name)]);row.push([P.svg,P.name]);
+  sc.push({d:7,f:u=>({title:`<p class="flm-k">${o.ok?'Goed gezien, rechercheur':'Dit was de oplossing'}</p><div class="flm-row">${row.map(([ic,l],i)=>`<div style="opacity:${FM.seg(u,.3+i*.6,.8+i*.6)}"><span class="flm-ic">${ic}</span><b>${l}</b></div>`).join('')}</div><h1 style="font-size:40px;opacity:${FM.seg(u,2.4,3)}"><span>${o.closing||'Zaak gesloten'}</span></h1>`})});
+  return sc}
+const lidOf=x=>x.lid==='het'?'het':'de';
+function murdleFilm(){const ok=!st.revealed;const S=C.S[C.murderer],W=C.W[C.sol.wep[C.murderer]],L=C.L[C.body];
+  return fmReveal({ok,sub:C.title,victim:cap(C.victim),place:{name:cap(L.name),lid:lidOf(L),svg:svgOf(L),buiten:L.buiten},culprit:{name:S.name,svg:svgOf(S)},weapon:{name:`${lidOf(W)} ${W.name}`,svg:svgOf(W)}})}
+function kamerFilm(){const p=KM.people[KM.murderer],c=KM.cells[KM.pos[KM.murderer]],room=KM.L.names[c.room];
+  return fmReveal({ok:!ks.revealed,sub:KM.name,victim:'Het slachtoffer',place:{name:cap(room.replace(/^(de|het) /,'')),lid:(room.match(/^(de|het) /)||['',''])[1],svg:svgOf('TK'),buiten:false},culprit:{name:p.name,svg:svgOf(p)},weapon:null,after:'Er was maar één ander in de kamer. Daarna was het stil.'})}
+function spyFilm(){const G=SG,S=G.S[G.spy],W=G.W[G.sol.wep[G.spy]],L=G.L[G.meet];
+  return fmReveal({ok:!sps.revealed,spy:true,sub:`${G.E.title} · ${G.E.year}`,victim:`${G.E.year}`,place:{name:cap(L.name),lid:L.lid,svg:svgOf(L),buiten:L.buiten},culprit:{name:S.name,svg:svgOf(S)},weapon:{name:`${W.lid} ${W.name}`,svg:svgOf(W)},closing:'Spion ontmaskerd'})}
+
+// ---- openingsfilmpjes bij de verhaalspellen ----
+// scènes: ['t',titel,rood woord,ondertitel] · ['s',kop,spec,tekst,{rain,zoom,steps,move:[index,dx]}] · ['p',kop,spec,label,tekst] · ['l',kop,[[naam,rol],…],tekst] · ['e',vraag,knoptekst]
+function fmStory(script){return script.map(sc=>{const k=sc[0];
+  if(k==='t'){const [,t,hi,sub]=sc,a=t.replace(hi,''),d=Math.max(4.5,1.5+t.length/12);return {d,f:u=>({title:`<h1>${FM.type(a,u,.4,14).replace('▌','')}<span>${u>.4+a.length/14?FM.type(hi,u,.4+a.length/14,10).replace('▌',''):''}</span></h1><p style="opacity:${FM.seg(u,d-2,d-1.4)}">${sub||''}</p>`})}}
+  if(k==='s'){const [,chap,spec,txt,fx={}]=sc,d=Math.max(6,1.6+txt.length/24);return {d,rain:!!fx.rain,f:u=>{const z=fx.zoom===false?1:1+FM.ease(FM.seg(u,0,d))*.14;let sp=spec;
+      if(fx.move){const [i,dx]=fx.move;sp=spec.map((it,j)=>j===i?[it[0],it[1]+dx*FM.seg(u,0,d),...it.slice(2)]:it)}
+      let fp='';if(fx.steps)for(let i=0;i<7;i++){const a=.6+i*.45;if(u>a){const x=30+i*28,y=i%2?182:176;fp+=`<ellipse cx="${x}" cy="${y}" rx="5" ry="10" fill="${PK.K}" opacity="${.75*FM.seg(u,a,a+.3)}" transform="rotate(80 ${x} ${y})"/>`}}
+      return {chap,stage:FM.svg(FM.G(150,100,z,FM.G(-150,-100,1,drawScene(sp)+fp+(fx.rain?FM.rain(u):'')+(fx.snow?FM.rain(u*.25,.5):'')))),cap:FM.type(txt,u,.7)}}}}
+  if(k==='p'){const [,chap,spec,label,txt]=sc,d=Math.max(6.5,3+txt.length/24);return {d,sfx:[[.4,'click'],[1.1,'click']],f:u=>{const drop=FM.ease(FM.seg(u,1.2,2.1)),y=-420+drop*(250+420),rot=-14+drop*10;
+      return {chap,flash:Math.max(u>.4?1-FM.seg(u,.4,.75):0,u>1.1?1-FM.seg(u,1.1,1.45):0),extra:`<div class="flm-pol" style="top:${y}px;transform:rotate(${rot}deg)">${FM.svg(drawScene(spec))}<b>${label}</b></div>`,cap:FM.type(txt,u,2.2)}}}}
+  if(k==='l'){const [,chap,ppl,txt]=sc,n=ppl.length,per=n>3?3:n,d=Math.max(7,1.2+n*.9+txt.length/24);return {d,f:u=>{const W=150,H=n>3?104:170;
+      const cells=ppl.map(([nm,role],i)=>{const a=.4+i*.7,kk=FM.ease(FM.seg(u,a,a+.6)),row=Math.floor(i/per),col=i%per,rowN=Math.min(per,n-row*per),x=270-rowN*80+col*160,y=240+row*(H+72);
+        return `<div class="flm-sus" style="left:${x+(1-kk)*50}px;top:${y}px;opacity:${kk}">${FM.svg(`<rect width="${W}" height="${H}" fill="${PK.L}"/>`+[.25,.5,.75].map(f=>`<path d="M0 ${H*f}h${W}" stroke="${PK.M}" stroke-width="1.5"/>`).join('')+FM.G(W/2,H,H/140,PP.person())+`<rect x="${W/2-20}" y="${H*.72}" width="40" height="18" fill="${PK.W}"/><text x="${W/2}" y="${H*.72+14}" text-anchor="middle" font-size="13" font-family="Arial" font-weight="700" fill="${PK.K}">${i+1}</text>`,`0 0 ${W} ${H}`)}<b>${nm}</b><i>${role}</i></div>`}).join('');
+      return {chap,extra:cells,cap:FM.type(txt,u,1+n*.7)}}}}
+  if(k==='e'){const [,q,cta]=sc;return {d:5.5,f:u=>({title:`<p style="font-size:30px;color:#e4e1d6;opacity:${FM.seg(u,.4,1)}">${q}</p><h1 style="font-size:40px;opacity:${FM.seg(u,1.8,2.4)}"><span>${cta}</span></h1>`})}}
+  return {d:1,f:()=>({})}})}
+const SCR={
+ speur:{
+  veiling:[['t','De laatste veiling','veiling','Een zaak voor Inspecteur Mol'],
+   ['s','Molenwijk · storm',SIMG.veiling.cover,'Het stormt in Molenwijk. In het oude veilinghuis aan de gracht gaat vanavond de zeldzaamste tulpenbol van het land onder de hamer: de Zwarte Parel.',{rain:true}],
+   ['s','Die ochtend',SIMG.veiling.ch[0],'Inspecteur Mol is niet uitgenodigd. Maar die ochtend lag er een vreemde brief op zijn deurmat.'],
+   ['p','Het slachtoffer',SIMG.veiling.ch[1],'De veilingmeester','Nog voor de laatste bieding ligt de veilingmeester dood op de zolder. En de Zwarte Parel is verdwenen.'],
+   ['e','Wie wilde de Zwarte Parel zo graag hebben?','Begin met hoofdstuk 1']],
+  wadoog:[['t','Storm op Wadoog','Wadoog','Een zaak voor Inspecteur Mol'],
+   ['s','Wadoog · tweede avond',SIMG.wadoog.cover,'Inspecteur Mol is op vakantie op Wadoog. Er steekt een storm op. De veerboot vaart niet meer: niemand kan het eiland af.',{rain:true}],
+   ['s','Hotel De Duinroos · 23:20',SIMG.wadoog.ch[0],'Om tien voor half twaalf ziet Mol de lamp van de vuurtoren vreemd knipperen. Hij schrijft het patroon op een servetje.',{rain:true}],
+   ['p','De volgende ochtend',SIMG.wadoog.ch[1],'De vuurtorenwachter','De volgende ochtend ligt de vuurtorenwachter onder aan zijn eigen trap.'],
+   ['e','Wie was er die nacht in de vuurtoren?','Begin met hoofdstuk 1']],
+  ravensteyn:[['t','Het spookslot van Ravensteyn','Ravensteyn','Een zaak voor Inspecteur Mol'],
+   ['s','27 oktober · avond',SIMG.ravensteyn.cover,'Jonkheer Willem van Ravensteyn houdt elk jaar een spookweekend op zijn slot. Dit jaar nodigt hij ook Inspecteur Mol uit.',{rain:true}],
+   ['s','De uitnodiging',['desk',['letter',150,175,1.5]],'‘Er spookt hier iets,’ schrijft de jonkheer, ‘en het is geen geest.’'],
+   ['s','Het hek',SIMG.ravensteyn.ch[0],'Mol staat voor het grote smeedijzeren hek. Het zit op slot.'],
+   ['p','Die nacht',SIMG.ravensteyn.ch[2],'Jonkheer Willem, 78','Die nacht zit de jonkheer dood in zijn leunstoel. En in de muren klinken voetstappen.'],
+   ['e','Wie spookt er echt op Ravensteyn?','Begin met hoofdstuk 1']],
+  elfsteden:[['t','Dood op de Elfstedentocht','Elfstedentocht','Een zaak voor Inspecteur Mol'],
+   ['s','Leeuwarden · 05:30',SIMG.elfsteden.cover,'Het heeft weken gevroren. Om half zes starten duizenden schaatsers aan de Elfstedentocht: 200 kilometer langs elf Friese steden.',{snow:true}],
+   ['s','Rond het middaguur',SIMG.elfsteden.ch[0],'Inspecteur Mol staat met een thermoskan koffie langs de kant. Dan kraakt zijn portofoon. Iemand spelt een plaatsnaam, letter voor letter.'],
+   ['p','Stempelpost Dokkum',SIMG.elfsteden.ch[2],'De grote favoriet','Bij de stempelpost in Dokkum ligt de grote favoriet op het ijs. En zijn stempelkaart klopt niet.'],
+   ['e','Wie wilde niet dat hij de finish haalde?','Begin met hoofdstuk 1']]},
+ koud:{
+  sluis:[['t','De laatste ronde','ronde','Dossier 001 · Veenhaven, 2019'],
+   ['s','15 december 2019 · 07:44',CIMG.sluis.cover,'Schoonmaakster Anouk Prins vindt cafébazin Ria Hoogland onder aan de keldertrap van Café De Sluis.',{rain:true}],
+   ['p','Het slachtoffer',CIMG.sluis.photos[0],'Ria Hoogland, 58','Het leek een val. Maar op de bar ligt haar kasstaat, en die vertelt een ander verhaal.'],
+   ['l','Zes verhoren',[['Lotte','dochter'],['Dennis','barman'],['Samira','kok'],['Kees','ex-man'],['Ferry','vaste klant'],['Jan','buurman']],'Zes mensen. Allemaal liegen ze ergens over.'],
+   ['e','Het dossier lag jaren in het archief. Tot nu.','Open het dossier']],
+  reiger:[['t','De woonboot','woonboot','Dossier 002 · Weerdstad, 2017'],
+   ['s','9 september 2017 · 06:41',CIMG.reiger.cover,'Een jogger ziet een man in het water naast woonboot De Reiger.'],
+   ['p','Het slachtoffer',CIMG.reiger.photos[0],'Erik Zandbergen, 44','Fotograaf Erik Zandbergen drijft in zijn badjas in de gracht. Op het dek staat een half leeg glas whisky. Een ongeluk, dacht de politie.'],
+   ['l','Zes verhoren',[['Nathalie','echtgenote'],['Maurits','zakenpartner'],['Joke','buurvrouw'],['Ingrid','zus'],['Tim','oud-assistent'],['Viktor','handelaar']],'Zes mensen kenden Erik goed. Te goed, misschien.'],
+   ['e','Maar zijn longen zeggen iets anders.','Open het dossier']],
+  kade:[['t','De achtste verdieping','achtste','Dossier 003 · Maasdam, 2018'],
+   ['s','16 november 2018 · 23:52',CIMG.kade.cover,'Het regent in Maasdam. Op de achtste verdieping verstuurt een laptop een afscheidsmail: ‘Het spijt me, Eef.’',{rain:true}],
+   ['p','Het slachtoffer',CIMG.kade.photos[0],'Sophie Verbeek, 35','Maar onderzoeksjournaliste Sophie Verbeek ligt dan al acht minuten beneden op het plein.'],
+   ['l','Zes verhoren',[['Rob','hoofdredacteur'],['Jasper','ex-vriend'],['Nina','collega'],['Eva','zus'],['Henk','buurman'],['Frank','projectontwikkelaar']],'Zes mensen. Eén van hen typte die mail.'],
+   ['e','Hoe kan een dode een mail versturen?','Open het dossier']],
+  vuurwerk:[['t','Vuurwerk boven Ommerdijk','Ommerdijk','Dossier 004 · Ommerdijk, 2013'],
+   ['s','24 augustus 2013 · 23:00',CIMG.vuurwerk.cover,'Het hele dorp kijkt naar het vuurwerk boven het voetbalveld. Twaalf minuten lang kijkt niemand achterom.'],
+   ['p','Het slachtoffer',CIMG.vuurwerk.photos[0],'Gert Lammers, 52','Om 23:20 ligt de voorzitter van de feestcommissie achter de feesttent, naast het aggregaat.'],
+   ['l','Zes verhoren',[['Margriet','echtgenote'],['Wim','penningmeester'],['Ben','vuurwerkmeester'],['Lisa','zangeres'],['Harrie','tapper'],['Sanne','vond hem']],'Zes mensen. Wie keek er níet naar het vuurwerk?'],
+   ['e','Het komt op minuten aan.','Open het dossier']],
+  tuin:[['t','Tuin 17','17','Dossier 005 · Lindenhorst, 2015'],
+   ['s','7 september 2015 · 08:40',CIMG.tuin.cover,'Op volkstuin De Groene Vinger kijkt Truus van Dam door het raam van tuin 17. Haar buurman zit roerloos in zijn stoel.'],
+   ['p','Het slachtoffer',CIMG.tuin.photos[0],'Herman Brands, 74','De deur zit op slot. De sleutel zit in zijn jaszak. Het raam kan niet open. Toch was Herman niet alleen.'],
+   ['l','Zes verhoren',[['Ruud','neef'],['Truus','buurvrouw'],['Karel','voorzitter'],['Marja','huishoudster'],['Dirk','buurjongen'],['Joop','schaakmaat']],'Zes mensen kwamen die week bij tuin 17.'],
+   ['e','Hoe kwam de dader eruit?','Open het dossier']]},
+ bericht:{
+  mila:[['t','Laatst online','online','Een telefoon vol geheimen'],
+   ['s','Stadspark Veldwijk · zondag 07:20',['dusk',['tower',150,195,1.1],['dog',60,195,.6]],'Een hondenuitlater vindt Mila Jansen onder aan de uitkijktoren. Ze is 24.'],
+   ['p','Haar telefoon',['desk',['phone',150,160,1.6]],'Mila’s telefoon','Een ongeluk, zei de politie. Haar telefoon is nooit bekeken. Hij zit nog op slot.'],
+   ['e','Wat staat er op Mila’s telefoon?','Pak de telefoon']],
+  manege:[['t','Stille nacht','nacht','Een telefoon vol geheimen'],
+   ['s','Manege De Hoefslag · 06:50',['night',['shed',150,180,1],['moon',245,40,.6]],'Staljongen Jesse vindt eigenaresse Iris Bakker onder aan de ladder naar de hooizolder.'],
+   ['p','In de box ernaast',['dark',['horse',150,190,1.1]],'Duchess','Het dure dressuurpaard Duchess is ziek en zweet hevig. Waarom was Iris midden in de nacht in de stal?'],
+   ['e','Iris’ telefoon lag in de zadelkamer. Op slot.','Pak de telefoon']],
+  kluis:[['t','Opgesloten','Opgesloten','Een telefoon vol geheimen'],
+   ['s','Escaperoom De Kluis · maandag 09:20',['dark',['lock',150,175,1.4]],'Gamemaster Tim vindt eigenaar Jeroen Smit in de kamer ‘Het Laboratorium’. De deur zat van buitenaf op slot.'],
+   ['p','Naast het slachtoffer',['dark',['goldbar',150,175,1.6],['marker',235,190,1,1]],'Een nep-goudstaaf','Naast hem ligt een zware nep-goudstaaf uit de kamer ‘De Bankkluis’.'],
+   ['e','Wie had de code van de deur?','Pak de telefoon']]},
+ dossier:{
+  drukkerij:[['t','Dood in de drukkerij','drukkerij','Dossier 01 · Zwolle'],
+   ['s','Maandag · 06:49',['wall',['stairs',150,150,1.2]],'Chef drukker Ruud Bakker opent de drukkerij. Het alarm staat uit. Dan ziet hij zijn baas liggen.',{steps:true}],
+   ['p','Het bureau',['desk',['thermos',105,160,1.2],['mug',165,165,1],['ring',225,150,1,20]],'Boven aan de trap','Onder aan de ijzeren trap ligt Arnold Verhoeven. Een val, denken de agenten. De patholoog denkt daar anders over.'],
+   ['l','De verdachten',[['Sanne','dochter'],['Ruud','chef drukker'],['Ilse','boekhouder'],['Marco','buurman']],'Vier mensen. Allemaal hadden ze een reden.'],
+   ['e','Hoofdinspecteur Brandsma wil vóór vrijdag antwoord.','Open de envelop']]}};
+const FWKEY='md-films';
+function storyFilm(game,id,done){const s=(SCR[game]||{})[id];if(!s){done&&done();return}const seen=store.get(FWKEY)||{};seen[game+':'+id]=1;store.set(FWKEY,seen);
+  fmPlay(fmStory(s),{label:'Openingsfilmpje',end:s[s.length-1][2],done})}
+const filmSeen=(game,id)=>!!(store.get(FWKEY)||{})[game+':'+id];
+const filmBtn=(game,id)=>(SCR[game]||{})[id]?`<button class="btn small filmbtn" type="button" data-film="${game}:${id}">▶ Filmpje</button>`:'';
+document.addEventListener('click',e=>{const r=e.target.closest&&e.target.closest('[data-reveal]');if(r){const f={murdle:murdleFilm,kamer:kamerFilm,spion:spyFilm}[r.dataset.reveal];if(f)fmPlay(f(),{label:'Zo is het gebeurd',end:'Terug'});return}});
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-film]');if(!b)return;const [g,id]=b.dataset.film.split(':');storyFilm(g,id)});
+
+
+// ---------- Rechercheurspas: rang en badges over alle spellen ----------
+const PASKEY='md-pas';
+const RANKS=[[0,'Aspirant'],[5,'Agent'],[15,'Brigadier'],[30,'Rechercheur'],[60,'Inspecteur'],[100,'Hoofdinspecteur'],[160,'Commissaris']];
+function pasData(){const sx=k=>store.get(k)||{solved:0,streak:0},m=sx('md-stats'),km=sx('md-kamer-stats'),lh=sx('md-landhuis-stats'),spn=sx('md-spion-stats');
+  const speur=CASES.filter(c=>{const s=sp.cases[c.id];return s&&s.solved&&s.solved.length>=c.ch.length}).length;
+  const koud=COLD.filter(c=>{const s=kd.cases[c.id];return s&&s.open&&s.acc&&s.acc.d===c.answer.dader}).length;
+  const ber=BCASES.filter(c=>{const s=bd.cases[c.id];return s&&s.open&&s.acc&&s.acc.d===c.answer.dader}).length;
+  const dos=DOSSIERS.filter(c=>{const s=dd.cases[c.id];return s&&s.done}).length;
+  const dosPerfect=DOSSIERS.some(c=>{const s=dd.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)&&!Object.values(s.hints||{}).some(v=>v>0)});
+  const lhPerfect=lst&&lst.guess&&LHP.every((p,i)=>lst.guess[i]&&!lst.guess[i].m&&!lst.guess[i].w);
+  const rows=[['murdle','Moorddossier',m.solved,null],['speur','Speurneus',speur,CASES.length],['koud','Cold Case',koud,COLD.length],['kamer','Kamermoord',km.solved,null],
+   ['landhuis','Het Landhuis',lh.solved,null],['spion','Spionage',spn.solved,null],['bericht','Laatste Bericht',ber,BCASES.length],['dossier','Dossiermap',dos,DOSSIERS.length]];
+  const total=rows.reduce((a,r)=>a+r[2],0),streak=Math.max(m.streak||0,km.streak||0,lh.streak||0,spn.streak||0);
+  const B=[['eerste','Eerste zaak','Los je eerste zaak op.',total,1],['tien','Volhouder','Los 10 zaken op.',total,10],['vijftig','Veteraan','Los 50 zaken op.',total,50],['honderd','Legende','Los 100 zaken op.',total,100],
+   ['logicus','Logicus','10 keer Moorddossier opgelost.',m.solved,10],['meester','Meesterbrein','Niveau 5 vrijgespeeld in Moorddossier.',m.solved,40],
+   ['plattegrond','Plattegrondkenner','10 keer Kamermoord opgelost.',km.solved,10],['landheer','Landheer','10 keer Het Landhuis opgelost.',lh.solved,10],['codekraker','Codekraker','10 keer Spionage opgelost.',spn.solved,10],
+   ['speurneus','Speurneus','Alle Speurneus-zaken opgelost.',speur,CASES.length],['archivaris','Archivaris','Alle Cold Cases opgelost.',koud,COLD.length],['hacker','Telefoonhacker','Alle Laatste Bericht-zaken opgelost.',ber,BCASES.length],
+   ['envelop','Envelopmeester','Een dossier 5 van 5, zonder hints.',dosPerfect?1:0,1],['scherpoog','Scherp oog','Een hele Landhuis-zaak foutloos weggestreept.',lhPerfect?1:0,1],
+   ['reeks','Op dreef','Een reeks van 5 op rij in één spel.',streak,5],['alleskunner','Alleskunner','In elk spel minstens één zaak opgelost.',rows.filter(r=>r[2]>0).length,rows.length]];
+  const ps=store.get(PASKEY)||{earned:{}};let changed=false;B.forEach(b=>{if(b[3]>=b[4]&&!ps.earned[b[0]]){ps.earned[b[0]]=Date.now();changed=true}});if(changed)store.set(PASKEY,ps);
+  let ri=0;RANKS.forEach((r,i)=>{if(total>=r[0])ri=i});return {rows,total,B,ps,ri}}
+function giOf(g){const ic=document.querySelector(`.games [data-g="${g}"] .gi`);return ic?ic.outerHTML:''}
+function renderPas(){const D=pasData(),R=RANKS[D.ri],N=RANKS[D.ri+1],ps=D.ps,got=D.B.filter(b=>ps.earned[b[0]]).length;
+  const pct=N?Math.round((D.total-R[0])/(N[0]-R[0])*100):100;
+  $('pPas').innerHTML=`<h2 class="bigtitle" style="font-size:clamp(28px,8vw,64px);overflow-wrap:anywhere">Rechercheurspas</h2>${PENCIL}
+   <article class="pas"><div class="pas-top"><span>Politie · Recherche</span><span>Nr. ${String(D.total).padStart(4,'0')}</span></div>
+    <div class="pas-body"><div class="pas-foto">${svgOf('LOEP')}</div><div class="pas-info"><label for="pasName">Naam</label><input id="pasName" type="text" maxlength="28" placeholder="Jouw naam" value="${(ps.name||'').replace(/"/g,'&quot;')}">
+     <span class="pas-k">Rang</span><b class="pas-rank">${R[1]}</b><span class="pas-k">Opgeloste zaken</span><b>${D.total}</b></div></div>
+    <div class="pas-bar"><i style="width:${pct}%"></i></div><p class="pas-next">${N?`Nog ${N[0]-D.total} ${N[0]-D.total===1?'zaak':'zaken'} tot <b>${N[1]}</b>`:'Hoogste rang bereikt. Petje af, commissaris.'}</p></article>
+   <section class="hb"><h4>Per spel</h4><ul class="pas-games">${D.rows.map(([g,n,v,t])=>`<li><span class="pas-gi">${giOf(g)}</span><b>${n}</b><em>${v}${t?` / ${t}`:''}</em></li>`).join('')}</ul></section>
+   <section class="hb"><h4>Badges · ${got} van ${D.B.length}</h4><div class="pas-badges">${D.B.map(([id,n,dsc,v,need])=>{const on=!!ps.earned[id];return `<div class="badge ${on?'on':''}"><span class="medal">${on?'★':'🔒'}</span><b>${n}</b><i>${dsc}</i>${on?'':`<em>${Math.min(v,need)} / ${need}</em>`}</div>`}).join('')}</div></section>
+   <section class="hb" id="backup"><h4>Back-up van je voortgang</h4><p>Je voortgang staat alleen op dit toestel. Maak af en toe een back-up, bijvoorbeeld voordat je een nieuwe telefoon neemt. Met de back-up zet je alles terug, ook op een ander toestel.</p>
+    <div class="controls"><button class="btn primary small" id="bkSave" type="button">Back-up opslaan</button><button class="btn small" id="bkLoad" type="button">Back-up terugzetten</button><input type="file" id="bkFile" accept=".json,application/json,text/plain" hidden></div>
+    <details class="bk-more"><summary>Via tekst (kopiëren en plakken)</summary><p class="hint">Handig als bestanden niet lukken: kopieer de code, stuur hem naar jezelf en plak hem op het andere toestel.</p>
+     <div class="controls"><button class="btn small" id="bkCopy" type="button">Kopieer code</button><button class="btn small" id="bkPaste" type="button">Plak code en zet terug</button></div><textarea id="bkText" rows="3" placeholder="Plak hier je back-upcode" aria-label="Back-upcode"></textarea></details>
+    <p class="msg" id="bkMsg"></p></section>`;
+  $('pasName').oninput=e=>{const p=store.get(PASKEY)||{earned:{}};p.name=e.target.value;store.set(PASKEY,p)};
+  const msg=t=>$('bkMsg').textContent=t;
+  $('bkSave').onclick=async()=>{const json=bkMake(),name=`moorddossier-backup-${new Date().toISOString().slice(0,10)}.json`;
+    try{const f=new File([json],name,{type:'application/json'});if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'Moorddossier back-up'});msg('Back-up gedeeld. Bewaar hem in Bestanden of stuur hem naar jezelf.');return}}catch(e){if(e&&e.name==='AbortError')return}
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([json],{type:'application/json'}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);msg('Back-up opgeslagen als '+name+'.')};
+  $('bkLoad').onclick=()=>$('bkFile').click();
+  $('bkFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>bkRestore(rd.result,msg);rd.readAsText(f)};
+  $('bkCopy').onclick=async()=>{const code=btoa(unescape(encodeURIComponent(bkMake())));try{await navigator.clipboard.writeText(code);msg('Code gekopieerd. Plak hem in een berichtje of notitie aan jezelf.')}catch(e){$('bkText').value=code;$('bkText').select();msg('Kopiëren lukte niet automatisch. De code staat in het vak: selecteer en kopieer hem zelf.')}};
+  $('bkPaste').onclick=async()=>{let t=$('bkText').value.trim();if(!t){try{t=(await navigator.clipboard.readText()).trim()}catch(e){}}if(!t)return msg('Plak eerst je code in het vak.');
+    let json=t;if(!t.startsWith('{')){try{json=decodeURIComponent(escape(atob(t)))}catch(e){return msg('Dit is geen geldige back-upcode.')}}bkRestore(json,msg)};
+}
+function bkMake(){const data={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^md/.test(k))data[k]=localStorage.getItem(k)}return JSON.stringify({app:'moorddossier',v:1,date:new Date().toISOString(),data})}
+function bkRestore(text,msg){let o;try{o=JSON.parse(text)}catch(e){return msg('Dit bestand kan ik niet lezen.')}
+  if(!o||o.app!=='moorddossier'||!o.data)return msg('Dit is geen back-up van Moorddossier.');
+  if(!confirmBox('Je huidige voortgang op dit toestel wordt vervangen door de back-up van '+new Date(o.date).toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})+'.',()=>{
+    try{Object.keys(localStorage).filter(k=>/^md/.test(k)).forEach(k=>localStorage.removeItem(k));Object.entries(o.data).forEach(([k,v])=>{if(/^md/.test(k)&&typeof v==='string')localStorage.setItem(k,v)});store.set('md-game','pas');location.reload()}catch(e){msg('Terugzetten lukte niet.')}}))return}
+function confirmBox(text,yes){const box=document.createElement('div');box.className='spoiler bk-ask';box.innerHTML=`<p>${text} Doorgaan?</p><div class="controls" style="justify-content:center"><button class="btn primary" type="button">Ja, zet terug</button><button class="btn" type="button">Annuleer</button></div>`;
+  const host=$('backup');host.querySelectorAll('.bk-ask').forEach(x=>x.remove());host.appendChild(box);const [a,b]=box.querySelectorAll('button');a.onclick=()=>{box.remove();yes()};b.onclick=()=>box.remove();a.focus();return true}
+
 // ---------- uitleg ----------
 // Elk spel heeft hier één blok. Een nieuw spel krijgt een nieuw blok in deze lijst.
 const HELP=[
  {g:'murdle',name:'Moorddossier',insp:'Logicapuzzel · in de stijl van het puzzelboek Murdle',
   what:'Er is een moord gepleegd. Eén van de verdachten deed het, met één wapen, op één locatie. Met de aanwijzingen en een deductierooster ontdek je wie, waarmee en waar.',
-  steps:['Kies <b>Makkelijk</b> (3 verdachten) of <b>Lastig</b> (4 verdachten). Met <b>Nieuwe zaak</b> krijg je een andere puzzel.',
+  steps:['Kies een <b>niveau</b> van 1 tot 5. Na elke 10 opgeloste zaken speel je een niveau vrij: meer verdachten, minder directe aanwijzingen, en op niveau 5 geen tips. Met <b>Nieuwe zaak</b> krijg je een andere puzzel.',
    'Tik op <b>Verdachten</b>, <b>Wapens</b> of <b>Locaties</b> om de kaarten te bekijken. Daar staan kenmerken zoals lengte, links- of rechtshandig, oog- en haarkleur, gewicht en binnen of buiten.',
    'Lees de aanwijzingen. Tik op een aanwijzing om hem af te strepen als je hem hebt gebruikt. Eén aanwijzing staat in geheimschrift: de sleutel staat bij Bewijsstuk A.',
    'Vul het rooster in. Tik één keer voor ✕ (kan niet), twee keer voor ● (zeker) en drie keer om te wissen. Met <b>Controleer</b> zie je of wat je hebt ingevuld klopt.',
@@ -3100,6 +3327,8 @@ function renderUitleg(){
    <p class="hint">Tik op een onderdeel om het open te klappen.</p>
    <details class="helpcard hd"><summary><span class="hs-ic">i</span><span class="hs-t"><h3>Goed om te weten</h3><span class="kicker">Voortgang, offline, updates</span></span></summary><div class="hd-body"><ul>
     <li>Je voortgang, scores en notities worden bewaard op dit toestel. Je hebt geen account nodig.</li>
+    <li>Bij <b>Pas</b> bovenaan zie je je rang, je badges en hoeveel zaken je per spel hebt opgelost. Daar maak je ook een <b>back-up</b> van je voortgang.</li>
+    <li>Na een opgeloste zaak zie je een filmpje van hoe het gebeurde. Bij een nieuwe verhaalzaak begint het met een openingsfilmpje. Met ▶ kijk je het opnieuw.</li>
     <li>Na de eerste keer werkt de app ook zonder internet.</li>
     <li>Nieuwe versies komen er vanzelf in. De app ververst zichzelf als je hem opent.</li>
     <li>Met <b>? Uitleg</b> bovenaan kom je hier. Met <b>← Terug</b> ga je weer naar je spel.</li></ul></div></details>
@@ -3129,10 +3358,11 @@ function renderPanes(){
   const t=st.tab||'zaak';
   const g=game,M=g==='murdle';
   $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';$('pBericht').hidden=g!=='bericht';$('pDossier').hidden=g!=='dossier';if(g==='dossier'&&!$('pDossier').innerHTML)renderDossier();if(g==='bericht'&&!$('pBericht').innerHTML)renderBericht();if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
-  document.querySelector('.tabs').hidden=!M;document.querySelector('.games').hidden=g==='uitleg';$('helpBtn').textContent=g==='uitleg'?'← Terug':'? Uitleg';document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('stats').hidden=!M;
+  document.querySelector('.tabs').hidden=!M;document.querySelector('.games').hidden=g==='uitleg'||g==='pas';$('helpBtn').textContent=g==='uitleg'?'← Terug':'? Uitleg';$('pasBtn').textContent=g==='pas'?'← Terug':'Pas';$('pPas').hidden=g!=='pas';if(g==='pas')renderPas();document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('lvLine').hidden=!M;$('stats').hidden=!M;
   document.querySelectorAll('.games button').forEach(b=>b.setAttribute('aria-selected',b.dataset.g===g));
   if(g==='speur'&&!$('pVerhaal').innerHTML)renderStory();if(g==='koud'&&!$('pKoud').innerHTML)renderKoud();
   document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===t));
+  if(LVLS[(C.lv||1)-1].noTips){$('pTips').innerHTML=`<h2 class="bigtitle">Tips</h2>${PENCIL}<div class="cluebox tipcard"><p>Op niveau ${C.lv} · ${LVLS[C.lv-1].name} zijn er geen tips. Je staat er alleen voor, rechercheur.</p></div>`}else
   $('pTips').innerHTML=`<h2 class="bigtitle">Tips</h2>${PENCIL}<div class="cluebox tipcard">
     <h2>Zaak ${String(C.seed).padStart(4,'0')}: ${C.title}</h2>
     ${st.tipShown?`<p>${tipText()}</p><p class="hint">Deze tip gaat over een van de onschuldigen. Kun je de rest zelf bedenken?</p>`
@@ -3149,7 +3379,7 @@ function renderPanes(){
       <button class="btn" type="button" data-go="zaak">Toch zelf puzzelen</button></div></div>`);
   const tb=$('showTip');if(tb)tb.onclick=()=>{st.tipShown=true;save();renderPanes()};
   const cr=$('confirmReveal');if(cr)cr.onclick=()=>{st.done=true;st.revealed=true;const x=stats();x.streak=0;store.set(SKEY,x);save();render()};
-  const nc=$('nextCase');if(nc)nc.onclick=()=>newCase(rnd(),C.n);
+  const nc=$('nextCase');if(nc)nc.onclick=()=>newCase(rnd());
   document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>setTab(b.dataset.go));
 }
 
@@ -3186,16 +3416,19 @@ function verdictHTML(revealed){
   const m=C.S[C.murderer],w=C.W[C.sol.wep[C.murderer]],l=C.L[C.body];
   const line=`<b>${m.name}</b> deed het, met ${w.lid} ${w.name}, in ${l.lid} ${l.name.toLowerCase()}.`;
   if(revealed)return `<div class="verdict bad"><p>Oplossing: ${line}</p></div>`;
-  return `<div class="verdict"><p>Inspecteur Mol knikt tevreden. ${line} Zaak gesloten${st.mistakes?` na ${st.mistakes} foute beschuldiging${st.mistakes>1?'en':''}`:' bij de eerste poging'}${st.tipShown?', met een tip':''}. Lees de ontknoping bij <b>Oplossing</b>.</p></div>`;
+  return `${st.lvUp?`<div class="lvup"><span>Nieuw niveau!</span><b>Niveau ${st.lvUp} · ${LVLS[st.lvUp-1].name}</b><p>Je hebt ${10*(st.lvUp-1)} zaken opgelost. De volgende zaak wordt een stapje moeilijker${LVLS[st.lvUp-1].n>LVLS[st.lvUp-2].n?`: ${LVLS[st.lvUp-1].n} verdachten`:''}${LVLS[st.lvUp-1].noTips?', en zonder tips':''}.</p></div>`:''}<div class="verdict"><p>Inspecteur Mol knikt tevreden. ${line} Zaak gesloten${st.mistakes?` na ${st.mistakes} foute beschuldiging${st.mistakes>1?'en':''}`:' bij de eerste poging'}${st.tipShown?', met een tip':''}. Lees de ontknoping bij <b>Oplossing</b>.</p></div><div class="controls"><button class="btn small" type="button" data-reveal="murdle">▶ Zo is het gebeurd</button></div>`;
 }
 
-function newCase(seed,n){C=genCase(seed,n);st={seed,n,case:C,marks:{},struck:[],done:false,revealed:false,decoded:false,tipShown:false,tab:'zaak',mistakes:0};save();render();window.scrollTo({top:0})}
+function lvRender(){const s=stats(),m=lvMax(s.solved),cur=C.lv||lvGet('murdle',s.solved);
+  $('lvSeg').innerHTML=LVLS.map((L,i)=>`<button type="button" data-lv="${i+1}" aria-pressed="${cur===i+1}" ${i+1>m?'disabled':''} aria-label="Niveau ${i+1}: ${L.name}${i+1>m?' (nog op slot)':''}">${i+1>m?'🔒':i+1}</button>`).join('');
+  const L=LVLS[cur-1],next=m<LVLS.length?10*m-s.solved:0;
+  $('lvLine').innerHTML=`<b>Niveau ${cur} · ${L.name}</b> · ${L.n} verdachten${L.noTips?' · geen tips':''}${next>0?` <span>· nog ${next} ${next===1?'zaak':'zaken'} tot niveau ${m+1}</span>`:m===LVLS.length?' <span>· hoogste niveau</span>':''}`;
+  $('lvSeg').querySelectorAll('[data-lv]').forEach(b=>b.onclick=()=>{const v=+b.dataset.lv;lvSet('murdle',v);newCase(rnd(),LVLS[v-1].n,v)})}
+function newCase(seed,n,lv){if(!lv){lv=lvGet('murdle',stats().solved);n=LVLS[lv-1].n}C=genCase(seed,n,lv);st={seed,n,lv,case:C,marks:{},struck:[],done:false,revealed:false,decoded:false,tipShown:false,tab:'zaak',mistakes:0};save();render();window.scrollTo({top:0})}
 const rnd=()=>1+Math.floor(Math.random()*9999);
 
 function wire(){
-  $('d3').onclick=()=>newCase(rnd(),3);
-  $('d4').onclick=()=>newCase(rnd(),4);
-  $('newCase').onclick=()=>newCase(rnd(),C.n);
+  $('newCase').onclick=()=>newCase(rnd());
   $('clues').addEventListener('click',e=>{const li=e.target.closest('li[data-i]');if(!li)return;const i=+li.dataset.i;
     st.struck=st.struck.includes(i)?st.struck.filter(x=>x!==i):[...st.struck,i];li.classList.toggle('done');save()});
   $('clues').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('li[data-i]')){e.preventDefault();e.target.click()}});
@@ -3208,12 +3441,13 @@ function wire(){
     if(st.done)return;const s=$('aS').value,w=$('aW').value,l=$('aL').value;
     if(s===''||w===''||l===''){$('verdict').innerHTML='<div class="verdict bad"><p>Vul wie, wat en waar in.</p></div>';return}
     if(+s===C.murderer&&+w===C.sol.wep[C.murderer]&&+l===C.body){
-      st.done=true;const x=stats();x.solved++;x.streak=st.mistakes?0:x.streak+1;store.set(SKEY,x);save();render();
+      st.done=true;const x=stats();const before=lvMax(x.solved);x.solved++;x.streak=st.mistakes?0:x.streak+1;store.set(SKEY,x);const after=lvMax(x.solved);if(after>before){lvSet('murdle',after);st.lvUp=after}save();render();setTimeout(()=>fmPlay(murdleFilm(),{label:'Zo is het gebeurd',end:'Terug naar de zaak'}),400);
     }else{st.mistakes++;save();$('verdict').innerHTML=`<div class="verdict bad"><p>Mis. ${C.S[+s].name} kijkt je verontwaardigd aan. Bekijk de aanwijzingen nog eens.</p></div>`}};
   $('reveal').onclick=()=>setTab('opl');
   document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.t));
   document.querySelectorAll('.games button').forEach(b=>b.onclick=()=>setGame(b.dataset.g));
-  $('helpBtn').onclick=()=>{if(game==='uitleg')setGame(store.get('md-lastgame')||'murdle');else{store.set('md-lastgame',game);setGame('uitleg')}};
+  $('helpBtn').onclick=()=>{if(game==='uitleg')setGame(store.get('md-lastgame')||'murdle');else{if(game!=='pas')store.set('md-lastgame',game);setGame('uitleg')}};
+  $('pasBtn').onclick=()=>{if(game==='pas')setGame(store.get('md-lastgame')||'murdle');else{if(game!=='uitleg')store.set('md-lastgame',game);setGame('pas')}};
   document.querySelectorAll('.subtabs button').forEach(b=>b.onclick=()=>{st.sub=st.sub===b.dataset.s?'':b.dataset.s;save();applySub()});
 }
 
@@ -3222,14 +3456,14 @@ function start(data){
   wire();
   const saved=(data&&data.st)||store.get(KEY);
   if(saved&&saved.tab==='verhaal'){saved.tab='zaak';game='speur'}
-  if(saved&&saved.seed&&(saved.n===3||saved.n===4)){try{C=saved.case&&saved.case.clues?saved.case:genCase(saved.seed,saved.n);st=saved;if(!st.case){st.case=C;save()}render()}catch(e){newCase(saved.seed,saved.n)}}
-  else newCase(Math.floor(Date.now()/864e5)%9999+1,3);
+  if(saved&&saved.seed&&[3,4,5].includes(saved.n)){try{C=saved.case&&saved.case.clues?saved.case:genCase(saved.seed,saved.n);st=saved;if(!st.case){st.case=C;save()}render()}catch(e){newCase(saved.seed,saved.n)}}
+  else newCase(Math.floor(Date.now()/864e5)%9999+1);
   window.claude?.hot?.snapshot?.(()=>({st}));
 }
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261030092931';
+const APPV='20261030100044';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

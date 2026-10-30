@@ -373,7 +373,22 @@ td.e{border:0}
 .lhb-steps li b{display:block;font:700 15px var(--cond);text-transform:uppercase;letter-spacing:.03em}
 .lhb-steps li span{font-size:15px}
 .lhb-steps li.new b::after{content:" · nieuw";color:var(--red)}
-.lhb-gone{margin:8px 0 0}
+.lhov-clue{background:var(--card);border-left:5px solid var(--ok);padding:12px 14px;font-size:16px}
+.lhov-ask{margin:0;font:600 17px/1.35 var(--cond);letter-spacing:.02em}
+.lhb-room.pick,.lhb-tok.pick{background:var(--band)}
+.pick .lhb-x path{stroke:var(--muted);stroke-dasharray:6 5;opacity:.9}
+.pick b,.pick .lhb-nm{opacity:.6}
+.lhb-tag.miss{background:#D9822B}.lhb-tag.wrong{background:var(--ink);color:var(--page)}
+.strike.miss{animation:lhMiss 1.1s ease-out both;animation-delay:calc(var(--d) - .3s)}
+.strike.miss .lhb-x path{stroke:#D9822B}
+@keyframes lhMiss{0%,100%{box-shadow:inset 0 0 0 0 transparent}20%,60%{box-shadow:inset 0 0 0 4px #D9822B}40%,80%{box-shadow:inset 0 0 0 0 transparent}}
+.wrong .lhb-x path{stroke:var(--muted);stroke-dasharray:6 5}
+.wrong.done .lhb-x{opacity:0;transition:opacity .5s}
+.wrong .lhb-tag{transform:scale(0);animation:lhPop .35s cubic-bezier(.3,1.6,.5,1) forwards;animation-delay:calc(var(--d) + .4s)}
+.wrong{animation:lhFocus .9s ease-out both;animation-delay:calc(var(--d) - .25s)}
+.lhb-steps em{font-style:normal;color:#D9822B;font-weight:600}.lhb-steps em.ok{color:var(--ok)}
+@media (prefers-reduced-motion:reduce){.strike.miss,.wrong,.wrong .lhb-tag{animation:none!important}.wrong .lhb-tag{transform:none}}
+
 .lhb-room:focus-visible,.lhb-tok:focus-visible{outline:3px solid var(--red);outline-offset:-3px}
 .notebook{background:var(--card);border:2px solid var(--rule);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px}
 .nbg h4{font:800 15px var(--cond);text-transform:uppercase;letter-spacing:.06em;margin:0 0 6px}
@@ -2221,20 +2236,20 @@ function lhGen(seed){const r=mulberry32(seed*6151+17);
     victim:pick(LHV,r),event:pick(LHE,r),wsW:iW.slice(0,4),sudS:[iS[0],iS[1]]};
 }
 function lhReward(G,k){const R=i=>LHR[i][1],Sn=i=>G.S[i].name,Wn=i=>G.W[i].name;
-  return {doolhof:`Aan het eind van de geheime gang hangt een lijstje van de butler: ‘Doorzocht en in orde: ${R(G.mazeRooms[0])}, ${R(G.mazeRooms[1])} en ${R(G.mazeRooms[2])}.’ Daar is het dus niet gebeurd.`,
-   woord:`Deze wapens hingen de hele avond netjes in de wapenkamer: ${G.wsW.map(Wn).join(', ')}. Daarmee is het niet gebeurd.`,
-   route:`De voetsporen van de tuinman lopen door ${R(G.route[0])}, ${R(G.route[1])} en ${R(G.route[2])}. Daar heeft hij de hele avond gewerkt, en niets gezien. Daar is het niet gebeurd.`,
-   sudoku:`In de vakjes met het vergrootglas staan ${Sn(G.sudS[0])} en ${Sn(G.sudS[1])}. Zij zaten de hele avond samen aan de speeltafel. Zij waren het niet.`,
-   cijfer:`Ontcijferd staat er: ‘${G.msg}.’ Dus niet in ${R(G.cipRooms[0])} en niet in ${R(G.cipRooms[1])}.`,
-   anagram:`Het zijn de namen van ${Sn(G.anaS[0])} en ${Sn(G.anaS[1])}. Volgens de chauffeur zaten zij samen in de auto naar het dorp. Zij waren het niet.`,
-   kluis:`In de kluis ligt een briefje: ‘${cap(Wn(G.safeW))} heb ik zelf opgeborgen, en ${Sn(G.safeS)} was de hele avond bij mij.’ Dus niet met ${Wn(G.safeW)}, en ${Sn(G.safeS)} was het niet.`}[k]}
+  return {doolhof:`Aan het eind van de geheime gang hangt een lijstje van de butler: ‘Doorzocht en in orde: ${R(G.mazeRooms[0])}, ${R(G.mazeRooms[1])} en ${R(G.mazeRooms[2])}.’`,
+   woord:`Deze wapens hingen de hele avond netjes in de wapenkamer: ${G.wsW.map(Wn).join(', ')}.`,
+   route:`De voetsporen van de tuinman lopen door ${R(G.route[0])}, ${R(G.route[1])} en ${R(G.route[2])}. Daar heeft hij de hele avond gewerkt, en niets gezien.`,
+   sudoku:`In de vakjes met het vergrootglas staan ${Sn(G.sudS[0])} en ${Sn(G.sudS[1])}. Zij zaten de hele avond samen aan de speeltafel.`,
+   cijfer:`Ontcijferd staat er: ‘${G.msg}.’`,
+   anagram:`Het zijn de namen van ${Sn(G.anaS[0])} en ${Sn(G.anaS[1])}. Volgens de chauffeur zaten zij samen in de auto naar het dorp.`,
+   kluis:`In de kluis ligt een briefje: ‘${cap(Wn(G.safeW))} heb ik zelf opgeborgen, en ${Sn(G.safeS)} was de hele avond bij mij.’`}[k]}
 
 const LHKEY='md-landhuis',LHSKEY='md-landhuis-stats';
 let LG=null,lst=null,lhAsk=false;
 const saveLh=()=>store.set(LHKEY,lst);
 function lhStart(){const sv=store.get(LHKEY);if(sv&&sv.seed){try{LG=sv.case&&sv.case.maze?sv.case:lhGen(sv.seed);lst=sv;if(!lst.case){lst.case=LG;saveLh()}renderLH();return}catch(e){}}lhNew(Math.floor(Date.now()/864e5)%9999+1)}
-function lhNew(seed){LG=lhGen(seed);lst={seed,case:LG,view:0,solved:[],skipped:[],path:[0],found:[],sel:null,sud:LG.sud.puz.slice(),k:0,cip:[],ana:[],safe:[1,1,1],seq:[],note:{s:[],w:[],r:[]},done:false,acc:null};lhAsk=false;saveLh();renderLH();window.scrollTo({top:0})}
-function lhSolve(i){const fresh=!lst.solved.includes(i);if(fresh)lst.solved.push(i);saveLh();renderLH();if(fresh)lhPlay(i)}
+function lhNew(seed){LG=lhGen(seed);lst={seed,case:LG,view:0,chk:[],guess:{},solved:[],skipped:[],path:[0],found:[],sel:null,sud:LG.sud.puz.slice(),k:0,cip:[],ana:[],safe:[1,1,1],seq:[],note:{s:[],w:[],r:[]},done:false,acc:null};lhAsk=false;saveLh();renderLH();window.scrollTo({top:0})}
+function lhSolve(i){lhChk();const fresh=!lst.solved.includes(i);if(fresh)lst.solved.push(i);saveLh();renderLH();if(fresh)lhGuess(i)}
 function lhPuzzle(i){const G=LG,[k,title]=LHP[i],solved=lst.solved.includes(i);let h='';
   if(k==='doolhof'){const W=7,last=lst.path[lst.path.length-1];
     h=`<p>Achter de boekenkast begint een geheime gang. Vind de weg van de <b>start</b> (linksboven) naar de <b>deur</b> (rechtsonder). Tik steeds op het vakje waar je naartoe wilt.</p>
@@ -2262,53 +2277,61 @@ function lhPuzzle(i){const G=LG,[k,title]=LHP[i],solved=lst.solved.includes(i);l
   if(k==='kluis'){h=`<p>In de studeerkamer staat een kluis met een cijferslot van drie cijfers (1 tot en met 9). Op de binnenkant van het bureaula staat:</p>
      <ul class="safeclues">${G.safe.clues.map(c=>`<li>${c}</li>`).join('')}</ul>
      <div class="dials">${lst.safe.map((d,j)=>`<div class="dial"><button type="button" class="btn small" data-du="${j}">▲</button><span>${d}</span><button type="button" class="btn small" data-dd="${j}">▼</button></div>`).join('')}</div>`}
-  const actions=solved?`<div class="verdict"><p><b>${lst.skipped.includes(i)?'Overgeslagen.':'Opgelost!'}</b> ${lhReward(G,k)}</p><p class="lhb-gone">Op het speelbord weggestreept: <b>${lhGone(i)}</b></p></div><div class="controls"><button class="btn" id="lhToBoard" type="button">Bekijk speelbord ↓</button><button class="btn primary" id="lhNext" type="button">${i===LHP.length-1?'Naar de beschuldiging':'Volgende puzzel'}</button></div>`
+  const actions=solved?`<div class="verdict"><p><b>${lst.skipped.includes(i)?'Overgeslagen.':'Opgelost!'}</b> ${lhReward(G,k)}</p></div><div class="controls">${lhChk().includes(i)?'<button class="btn" id="lhToBoard" type="button">Bekijk speelbord ↓</button>':'<button class="btn primary" id="lhGuessBtn" type="button">Streep weg op het speelbord</button>'}<button class="btn primary" id="lhNext" type="button">${i===LHP.length-1?'Naar de beschuldiging':'Volgende puzzel'}</button></div>`
     :`<div class="controls">${['cijfer','anagram','kluis'].includes(k)?`<button class="btn primary small" id="lhCheck" type="button">${k==='kluis'?'Open de kluis':'Controleer'}</button>`:''}<button class="btn small" id="lhSkip" type="button">Sla over</button></div>
      ${lhAsk?`<div class="spoiler"><p>Overslaan? Je krijgt de aanwijzing dan zonder de puzzel op te lossen.</p><div class="controls" style="justify-content:center"><button class="btn primary" id="lhYes" type="button">Ja, sla over</button><button class="btn" id="lhNo" type="button">Nee</button></div></div>`:''}<p class="msg" id="lhMsg"></p>`;
   return `<article class="chapter"><div class="kicker">Puzzel ${i+1} van ${LHP.length}</div><h3>${title}</h3>${h}${actions}</article>`}
 // Speelbord: wat elke opgeloste puzzel wegstreept, op een plattegrond met alle gasten en wapens
 const LHX={doolhof:G=>({r:G.mazeRooms}),woord:G=>({w:G.wsW}),route:G=>({r:G.route}),sudoku:G=>({s:G.sudS}),cijfer:G=>({r:G.cipRooms}),anagram:G=>({s:G.anaS}),kluis:G=>({w:[G.safeW],s:[G.safeS]})};
-function lhElim(){const G=LG,E={s:{},w:{},r:{}};lst.solved.forEach(i=>{const x=LHX[LHP[i][0]](G);['s','w','r'].forEach(t=>(x[t]||[]).forEach(j=>{if(E[t][j]===undefined)E[t][j]=i}))});return E}
+const lhChk=()=>{if(!lst.chk)lst.chk=lst.solved.slice();return lst.chk};
+function lhElim(){const G=LG,E={s:{},w:{},r:{}};lhChk().forEach(i=>{const x=LHX[LHP[i][0]](G);['s','w','r'].forEach(t=>(x[t]||[]).forEach(j=>{if(E[t][j]===undefined)E[t][j]=i}))});return E}
 function lhGone(i){const x=LHX[LHP[i][0]](LG),R=j=>cap(LHR[j][1].replace(/^de /,'')),parts=[];
   if(x.s)parts.push(x.s.map(j=>LG.S[j].name).join(' en '));if(x.w)parts.push(x.w.map(j=>LG.W[j].name).join(', '));if(x.r)parts.push(x.r.map(R).join(', '));return parts.join(' · ')}
 const LHXSVG='<svg class="lhb-x" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path pathLength="100" d="M10 10L90 90"/><path pathLength="100" d="M90 10L10 90"/></svg>';
-// A = index van de puzzel die nu net is opgelost: die onderdelen worden live doorgestreept (animatie)
-function lhBoard(A=null,id='lhBoard'){const G=LG,E=lhElim(),n=lst.note,last=lst.solved[lst.solved.length-1];
-  let order=0;const seq={};
-  const isA=(t,j)=>A!==null&&E[t][j]===A;
-  const left=t=>({s:6,w:6,r:9}[t]-Object.keys(E[t]).filter(j=>E[t][j]!==A||A===null).length);
-  const attrs=(t,j)=>{if(isA(t,j)){const k=order++;return `style="--d:${(0.9+k*0.75).toFixed(2)}s" data-k="${k}" data-t="${t}"`}return ''};
-  const cls=(t,j)=>isA(t,j)?'strike':E[t][j]!==undefined?'off':(n[t].includes(j)?'pen':'');
-  const tag=(t,j)=>E[t][j]!==undefined?`<span class="lhb-tag">${E[t][j]+1}</span>`:'';
-  const xs=(t,j)=>E[t][j]!==undefined?LHXSVG:'';
-  const room=j=>{const a=attrs('r',j);return `<button type="button" class="lhb-room ${cls('r',j)}" data-nb="r${j}" ${a} ${E.r[j]!==undefined?'disabled':''}>${xs('r',j)}<b>${cap(LHR[j][1].replace(/^de /,''))}</b>${tag('r',j)}</button>`};
-  const tok=(t,j,svg,name)=>{const a=attrs(t,j);return `<button type="button" class="lhb-tok ${cls(t,j)}" data-nb="${t}${j}" ${a} ${E[t][j]!==undefined?'disabled':''}>${xs(t,j)}<span class="tok">${svg}</span><span class="lhb-nm">${name}</span>${tag(t,j)}</button>`};
-  const plan=range(9).map(room).join(''),gs=G.S.map((x,j)=>tok('s',j,svgOf(x),x.name)).join(''),ws=G.W.map((x,j)=>tok('w',j,svgOf(x),cap(x.name))).join('');
-  const steps=lst.solved.map(i=>`<li value="${i+1}" class="${i===last?'new':''}"><b>${LHP[i][1]}${lst.skipped.includes(i)?' (overgeslagen)':''}</b><span>Weg: ${lhGone(i)}</span></li>`).join('');
-  const cnt=t=>`<b data-left="${t}">${left(t)}</b>`;
+// M: null = gewoon bord · {pick:Set} = zelf aantikken · {res:{key:{k,o}},A} = uitslag met animatie (k = hit/miss/wrong)
+function lhBoard(M=null,id='lhBoard'){const G=LG,E=lhElim(),n=lst.note,chk=lhChk(),last=chk[chk.length-1];
+  const st=(t,j)=>{const r=M&&M.res&&M.res[t+j];if(r)return r.k;if(E[t][j]!==undefined)return 'off';if(M&&M.pick)return M.pick.has(t+j)?'pick':'';return n[t].includes(j)?'pen':''};
+  const left=t=>({s:6,w:6,r:9}[t]-Object.keys(E[t]).length);
+  const one=(t,j,inner)=>{const k=st(t,j),r=M&&M.res&&M.res[t+j],d=r?` style="--d:${(0.6+r.o*0.7).toFixed(2)}s" data-t="${t}" data-k="${k}"`:'';
+    const cls=k==='off'?'off':k==='hit'||k==='miss'?`strike ${k}`:k==='wrong'?'wrong':k;
+    const x=(k==='off'||k==='hit'||k==='miss'||k==='pick'||k==='wrong')?LHXSVG:'';
+    const tag=k==='off'?`<span class="lhb-tag">${E[t][j]+1}</span>`:k==='hit'?`<span class="lhb-tag">✓</span>`:k==='miss'?`<span class="lhb-tag miss">!</span>`:k==='wrong'?`<span class="lhb-tag wrong">?</span>`:'';
+    const dis=k==='off'||(M&&M.res)?'disabled':'';
+    return [cls,d,x,tag,dis,inner]};
+  const room=j=>{const [c,d,x,tag,dis]=one('r',j);return `<button type="button" class="lhb-room ${c}" data-nb="r${j}"${d} ${dis}>${x}<b>${cap(LHR[j][1].replace(/^de /,''))}</b>${tag}</button>`};
+  const tok=(t,j,svg,name)=>{const [c,d,x,tag,dis]=one(t,j);return `<button type="button" class="lhb-tok ${c}" data-nb="${t}${j}"${d} ${dis}>${x}<span class="tok">${svg}</span><span class="lhb-nm">${name}</span>${tag}</button>`};
+  const steps=chk.map(i=>{const g=(lst.guess||{})[i];return `<li value="${i+1}" class="${i===last?'new':''}"><b>${LHP[i][1]}${lst.skipped.includes(i)?' (overgeslagen)':''}</b><span>Weg: ${lhGone(i)}${g?` · <em class="${g.m||g.w?'':'ok'}">jij: ${g.h} van ${g.h+g.m} goed${g.w?`, ${g.w} te veel`:''}</em>`:''}</span></li>`}).join('');
   const word=(t,a,b)=>`<span data-word="${t}" data-a="${a}" data-b="${b}">${left(t)===1?a:b}</span>`;
-  return `<section class="lhboard ${A!==null?'anim':''}" id="${id}"><h2>Speelbord</h2>
-   <p class="lhb-sum">Nog verdacht: ${cnt('s')} ${word('s','gast','gasten')} · ${cnt('w')} ${word('w','wapen','wapens')} · ${cnt('r')} ${word('r','kamer','kamers')}</p>
-   <h4>Het landhuis</h4><div class="lhb-plan">${plan}</div>
-   <h4>Gasten</h4><div class="lhb-row">${gs}</div>
-   <h4>Wapens</h4><div class="lhb-row">${ws}</div>
-   ${A===null?`<p class="hint">Rood doorgestreept = weggestreept door een puzzel (het nummer zegt welke). Tik zelf op iets om het met potlood af te strepen.</p>
-   <h4>Stappen</h4>${steps?`<ol class="lhb-steps">${steps}</ol>`:'<p class="hint">Nog geen puzzels opgelost. Elke opgeloste puzzel streept hier iets weg.</p>'}`:''}</section>`}
-// Animatie na het oplossen: het speelbord schuift in beeld en de rode pen streept één voor één weg
-let lhAnim=null;
-function lhPlay(i){const ov=document.createElement('div');ov.className='lhov';ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Speelbord bijgewerkt');
-  ov.innerHTML=`<div class="lhov-card"><div class="lhov-head"><span class="kicker">Puzzel ${i+1} opgelost</span><h3>${LHP[i][1]}</h3></div>${lhBoard(i,'lhBoardAnim')}
-   <p class="lhov-step"><b>Weg:</b> ${lhGone(i)}</p><div class="controls lhov-ctl"><button class="btn small" type="button" id="lhOvSkip">Sla over</button><button class="btn primary" type="button" id="lhOvGo">Verder</button></div></div>`;
+  return `<section class="lhboard ${M?'anim':''}" id="${id}">${M?'':'<h2>Speelbord</h2>'}
+   <p class="lhb-sum">Nog verdacht: <b data-left="s">${left('s')}</b> ${word('s','gast','gasten')} · <b data-left="w">${left('w')}</b> ${word('w','wapen','wapens')} · <b data-left="r">${left('r')}</b> ${word('r','kamer','kamers')}</p>
+   <h4>Het landhuis</h4><div class="lhb-plan">${range(9).map(room).join('')}</div>
+   <h4>Gasten</h4><div class="lhb-row">${G.S.map((x,j)=>tok('s',j,svgOf(x),x.name)).join('')}</div>
+   <h4>Wapens</h4><div class="lhb-row">${G.W.map((x,j)=>tok('w',j,svgOf(x),cap(x.name))).join('')}</div>
+   ${M?'':`<p class="hint">Rood doorgestreept = zeker weg (het nummer zegt door welke puzzel). Tik zelf op iets om het met potlood af te strepen.</p>
+   <h4>Stappen</h4>${steps?`<ol class="lhb-steps">${steps}</ol>`:'<p class="hint">Nog niets weggestreept. Na elke puzzel streep je zelf weg wat afvalt.</p>'}`}</section>`}
+// Na een opgeloste puzzel: eerst zelf wegstrepen, dan controleert de rode pen
+function lhGuess(i){if(document.querySelector('.lhov'))return;const truth=new Set(),x=LHX[LHP[i][0]](LG);['s','w','r'].forEach(t=>(x[t]||[]).forEach(j=>truth.add(t+j)));
+  const picks=new Set(),ov=document.createElement('div');ov.className='lhov';ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Streep weg op het speelbord');
+  ov.innerHTML=`<div class="lhov-card"><div class="lhov-head"><span class="kicker">Puzzel ${i+1} opgelost</span><h3>${LHP[i][1]}</h3></div>
+   <div class="lhov-clue">${lhReward(LG,LHP[i][0])}</div><p class="lhov-ask" id="lhAsk">Wat valt er nu af? Tik aan wie, wat of welke kamer volgens jou <b>niet meer verdacht</b> is.</p>
+   <div id="lhGB">${lhBoard({pick:picks},'lhBoardAnim')}</div><p class="lhov-step" id="lhRes"></p>
+   <div class="controls lhov-ctl"><button class="btn small" type="button" id="lhOvLater">Later</button><button class="btn primary" type="button" id="lhOvCheck">Controleer</button></div></div>`;
   document.body.appendChild(ov);document.body.style.overflow='hidden';
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;const items=[...ov.querySelectorAll('.strike')];const timers=[];
-  const tick=el=>{const t=el.dataset.t,b=ov.querySelector(`[data-left="${t}"]`),w=ov.querySelector(`[data-word="${t}"]`);if(!b)return;const v=Math.max(0,+b.textContent-1);b.textContent=v;b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');if(w)w.textContent=v===1?w.dataset.a:w.dataset.b;
-    el.scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'})};
-  const finish=()=>{timers.forEach(clearTimeout);items.forEach(el=>{if(!el.classList.contains('done')){el.classList.add('done');tick(el)}});ov.classList.add('end')};
-  if(reduce)finish();else{items.forEach(el=>timers.push(setTimeout(()=>{el.classList.add('done');tick(el)},parseFloat(el.style.getPropertyValue('--d'))*1000+350)));
-    const endT=items.length?parseFloat(items[items.length-1].style.getPropertyValue('--d'))*1000+900:600;timers.push(setTimeout(()=>ov.classList.add('end'),endT))}
-  const close=()=>{timers.forEach(clearTimeout);ov.classList.add('out');document.body.style.overflow='';setTimeout(()=>ov.remove(),250)};
-  ov.querySelector('#lhOvSkip').onclick=()=>{finish()};ov.querySelector('#lhOvGo').onclick=close;
-  ov.addEventListener('keydown',e=>{if(e.key==='Escape')close()});setTimeout(()=>ov.querySelector('#lhOvGo').focus({preventScroll:true}),50)}
+  const GB=ov.querySelector('#lhGB'),bind=()=>GB.querySelectorAll('[data-nb]:not([disabled])').forEach(b=>b.onclick=()=>{const k=b.dataset.nb;picks.has(k)?picks.delete(k):picks.add(k);GB.innerHTML=lhBoard({pick:picks},'lhBoardAnim');bind();
+    ov.querySelector('#lhOvCheck').textContent=picks.size?'Controleer':'Ik weet het niet'});bind();ov.querySelector('#lhOvCheck').textContent='Ik weet het niet';
+  const close=()=>{ov.classList.add('out');document.body.style.overflow='';setTimeout(()=>ov.remove(),250);renderLH()};
+  ov.querySelector('#lhOvLater').onclick=close;ov.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+  ov.querySelector('#lhOvCheck').onclick=()=>{const hit=[...truth].filter(k=>picks.has(k)),miss=[...truth].filter(k=>!picks.has(k)),wrong=[...picks].filter(k=>!truth.has(k));
+    const res={};let o=0;hit.forEach(k=>res[k]={k:'hit',o:o++});miss.forEach(k=>res[k]={k:'miss',o:o++});wrong.forEach(k=>res[k]={k:'wrong',o:o++});
+    GB.innerHTML=lhBoard({res},'lhBoardAnim');lst.guess=lst.guess||{};lst.guess[i]={h:hit.length,m:miss.length,w:wrong.length};if(!lhChk().includes(i))lst.chk.push(i);saveLh();
+    ov.querySelector('#lhAsk').innerHTML='De rode pen controleert…';ov.querySelector('.lhov-ctl').innerHTML=`<button class="btn small" type="button" id="lhOvSkip">Sla over</button><button class="btn primary" type="button" id="lhOvGo">Verder</button>`;
+    const items=[...GB.querySelectorAll('[data-k]')].sort((a,b)=>parseFloat(a.style.getPropertyValue('--d'))-parseFloat(b.style.getPropertyValue('--d'))),timers=[],reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const tick=el=>{el.classList.add('done');if(el.dataset.k==='wrong')return;const t=el.dataset.t,b=GB.querySelector(`[data-left="${t}"]`),w=GB.querySelector(`[data-word="${t}"]`);const v=Math.max(0,+b.textContent-1);b.textContent=v;b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');if(w)w.textContent=v===1?w.dataset.a:w.dataset.b;el.scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'})};
+    const n=truth.size,txt=wrong.length===0&&miss.length===0?`Perfect! Je had alle ${n} goed.`:`Je had ${hit.length} van de ${n} goed.${miss.length?` ${miss.length} vergeten (oranje).`:''}${wrong.length?` ${wrong.length} ten onrechte weggestreept (vraagteken): die zijn nog verdacht.`:''}`;
+    const finish=()=>{timers.forEach(clearTimeout);items.forEach(el=>{if(!el.classList.contains('done'))tick(el)});ov.classList.add('end');ov.querySelector('#lhRes').innerHTML=`<b>${txt}</b><br>Weg: ${lhGone(i)}`;ov.querySelector('#lhAsk').textContent='Gecontroleerd.'};
+    if(reduce)finish();else{items.forEach(el=>timers.push(setTimeout(()=>tick(el),parseFloat(el.style.getPropertyValue('--d'))*1000+(el.dataset.k==='wrong'?500:350))));timers.push(setTimeout(finish,(items.length?parseFloat(items[items.length-1].style.getPropertyValue('--d'))*1000:0)+1000))}
+    ov.querySelector('#lhOvSkip').onclick=finish;ov.querySelector('#lhOvGo').onclick=()=>{timers.forEach(clearTimeout);close()}};
+  setTimeout(()=>ov.querySelector('#lhOvCheck').focus({preventScroll:true}),50)}
 function lhNotebook(){const G=LG,n=lst.note;
   const grp=(key,items,lab)=>`<div class="nbg"><h4>${lab}</h4><div class="nbi">${items.map((t,i)=>`<button type="button" class="nb ${n[key].includes(i)?'off':''}" data-nb="${key}${i}">${t}</button>`).join('')}</div></div>`;
   return `<section class="notebook"><h2>Notitieblok</h2><p class="hint">Tik om weg te strepen.</p>
@@ -2332,7 +2355,7 @@ function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let 
   const on=(id,f)=>{const el=$(id);if(el)el.onclick=f};const msg=t=>{const m=$('lhMsg');if(m)m.textContent=t};
   P.querySelectorAll('[data-lp]').forEach(b=>b.onclick=()=>{lst.view=+b.dataset.lp;lhAsk=false;saveLh();renderLH()});
   P.querySelectorAll('[data-nb]').forEach(b=>b.onclick=()=>{const key=b.dataset.nb[0],i=+b.dataset.nb.slice(1);lst.note[key]=lst.note[key].includes(i)?lst.note[key].filter(x=>x!==i):[...lst.note[key],i];saveLh();b.classList.toggle('pen')});
-  on('lhToBoard',()=>$('lhBoard').scrollIntoView({behavior:'smooth',block:'start'}));
+  on('lhToBoard',()=>$('lhBoard').scrollIntoView({behavior:'smooth',block:'start'}));on('lhGuessBtn',()=>lhGuess(v));
   on('lhNew',()=>lhNew(1+Math.floor(Math.random()*9999)));on('lhAgain',()=>lhNew(1+Math.floor(Math.random()*9999)));
   on('lhNext',()=>{lst.view=v+1;saveLh();renderLH()});
   on('lhSkip',()=>{lhAsk=true;renderLH()});on('lhNo',()=>{lhAsk=false;renderLH()});
@@ -3206,7 +3229,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261030092205';
+const APPV='20261030092931';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

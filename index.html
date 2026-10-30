@@ -302,6 +302,9 @@ td.e{border:0}
 .ws{aspect-ratio:1;border:1px solid var(--rule);background:var(--card);color:var(--ink);font:700 clamp(13px,4vw,18px) var(--cond);padding:0;cursor:pointer;min-width:0}
 .ws.on{background:var(--ok);color:#fff}
 .ws.sel{background:var(--red);color:#fff}
+.ws.drag{background:var(--red);color:#fff}
+.ws.miss{background:var(--muted);color:#fff;transition:background .4s}
+.lhws{touch-action:none;user-select:none;-webkit-user-select:none}
 .wslist{display:flex;flex-wrap:wrap;gap:6px 14px;font:700 15px var(--cond);letter-spacing:.06em}
 .wslist .got{text-decoration:line-through;color:var(--muted)}
 .lhmap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;border:3px solid var(--ink);padding:4px;background:var(--ink);max-width:380px;margin:0 auto;width:100%}
@@ -2305,7 +2308,7 @@ function lhPuzzle(i){const G=LG,[k,title]=LHP[i],solved=lst.solved.includes(i);l
     h=`<p>Achter de boekenkast begint een geheime gang. Vind de weg van de <b>start</b> (linksboven) naar de <b>deur</b> (rechtsonder). Houd je vinger of muis op de S en sleep door de gang naar de D. Tikken op het volgende vakje kan ook.</p>
      <div class="lhmaze" style="--w:${W}">${G.maze.map((m,c)=>`<button type="button" class="mz ${lst.path.includes(c)?'on':''} ${c===last?'head':''}" data-mz="${c}" style="border-top-width:${m&1?0:3}px;border-right-width:${m&2?0:3}px;border-bottom-width:${m&4?0:3}px;border-left-width:${m&8?0:3}px" aria-label="vak ${c+1}">${c===0?'S':c===W*W-1?'D':''}</button>`).join('')}</div>`}
   if(k==='woord'){const N=10;
-    h=`<p>In de wapenkamer hangt een bord vol letters. Vier van deze wapens staan erin: van links naar rechts, van boven naar beneden of schuin. Tik op de eerste en de laatste letter van een woord.</p>
+    h=`<p>In de wapenkamer hangt een bord vol letters. Vier van deze wapens staan erin: van links naar rechts, van boven naar beneden of schuin. Sleep met je vinger of muis over een woord, van de eerste tot de laatste letter. Tikken op de eerste en de laatste letter kan ook.</p>
      <div class="lhws" style="--w:${N}">${G.words.g.map((ch,c)=>`<button type="button" class="ws ${lst.found.some(f=>G.words.pl[f].cells.includes(c))?'on':''} ${lst.sel===c?'sel':''}" data-ws="${c}">${ch}</button>`).join('')}</div>
      <p class="wslist">${G.W.map(w=>`<span class="${lst.found.some(f=>G.words.pl[f].w===w.w)?'got':''}">${w.w}</span>`).join('')}</p>`}
   if(k==='route'){const names=['links','rechts','omhoog','omlaag'];const dir=(a,b)=>{const dx=b%3-a%3,dy=Math.floor(b/3)-Math.floor(a/3);return dx===1?'één kamer naar rechts':dx===-1?'één kamer naar links':dy===1?'één kamer naar beneden':'één kamer naar boven'};
@@ -2430,8 +2433,25 @@ function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let 
     const open=(dx===1&&m&2)||(dx===-1&&m&8)||(dy===1&&m&4)||(dy===-1&&m&1);
     if(Math.abs(dx)+Math.abs(dy)!==1||!open)return msg('Daar zit een muur. Je kunt alleen naar een aangrenzend vakje zonder muur.');
     path.push(c);saveLh();if(c===W*W-1)return lhSolve(v);renderLH()});
-  // woordzoeker
-  P.querySelectorAll('[data-ws]').forEach(b=>b.onclick=()=>{const c=+b.dataset.ws;if(lst.sel===null){lst.sel=c;saveLh();return renderLH()}
+  // woordzoeker: slepen over de letters, of tik eerste en laatste letter
+  const wsEl=P.querySelector('.lhws');let wsDragged=false;
+  if(wsEl){const N=10;let a=null,cur=[],moved=false;
+    const line=(s,e)=>{let dx=e%N-s%N,dy=Math.floor(e/N)-Math.floor(s/N);const len=Math.max(Math.abs(dx),Math.abs(dy));if(!len)return [s];
+      const ang=Math.atan2(dy,dx),k=Math.round(ang/(Math.PI/4)),ux=Math.round(Math.cos(k*Math.PI/4)),uy=Math.round(Math.sin(k*Math.PI/4)),out=[];
+      for(let i=0;i<=len;i++){const x=s%N+ux*i,y=Math.floor(s/N)+uy*i;if(x<0||y<0||x>=N||y>=N)break;out.push(y*N+x)}return out};
+    const show=()=>wsEl.querySelectorAll('[data-ws]').forEach(b=>b.classList.toggle('drag',cur.includes(+b.dataset.ws)));
+    wsEl.addEventListener('pointerdown',e=>{const b=e.target.closest('[data-ws]');if(!b)return;a=+b.dataset.ws;cur=[a];moved=false;try{wsEl.setPointerCapture(e.pointerId)}catch(x){}show();e.preventDefault()});
+    wsEl.addEventListener('pointermove',e=>{if(a===null)return;const el=document.elementFromPoint(e.clientX,e.clientY),b=el&&el.closest&&el.closest('[data-ws]');if(!b||!wsEl.contains(b))return;
+      const c=+b.dataset.ws;if(c!==a)moved=true;cur=line(a,c);show()});
+    const end=()=>{if(a===null)return;const s0=cur[0],e0=cur[cur.length-1];a=null;
+      if(!moved||cur.length<2){cur=[];show();return}
+      wsDragged=true;setTimeout(()=>wsDragged=false,50);
+      const hit=G.words.pl.findIndex(p=>(p.cells[0]===s0&&p.cells[p.cells.length-1]===e0)||(p.cells[0]===e0&&p.cells[p.cells.length-1]===s0));
+      if(hit>=0&&!lst.found.includes(hit)){lst.found.push(hit);lst.sel=null;saveLh();if(lst.found.length===G.words.pl.length)return lhSolve(v);return renderLH()}
+      wsEl.querySelectorAll('.drag').forEach(b=>{b.classList.remove('drag');b.classList.add('miss')});setTimeout(()=>wsEl.querySelectorAll('.miss').forEach(b=>b.classList.remove('miss')),500);cur=[];
+      msg(hit>=0?'Dat woord had je al gevonden.':'Daar staat geen wapen. Probeer het nog eens.')};
+    wsEl.addEventListener('pointerup',end);wsEl.addEventListener('pointercancel',end)}
+  P.querySelectorAll('[data-ws]').forEach(b=>b.onclick=()=>{if(wsDragged)return;const c=+b.dataset.ws;if(lst.sel===null){lst.sel=c;saveLh();return renderLH()}
     const a=lst.sel;lst.sel=null;const hit=G.words.pl.findIndex(p=>(p.cells[0]===a&&p.cells[p.cells.length-1]===c)||(p.cells[0]===c&&p.cells[p.cells.length-1]===a));
     if(hit>=0&&!lst.found.includes(hit)){lst.found.push(hit);saveLh();if(lst.found.length===G.words.pl.length)return lhSolve(v)}else{saveLh();renderLH();return msg('Daar staat geen wapen. Tik op de eerste en de laatste letter.')}
     renderLH()});
@@ -3476,7 +3496,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261030102259';
+const APPV='20261030102622';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

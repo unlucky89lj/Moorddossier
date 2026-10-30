@@ -544,6 +544,43 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .dm-mini{width:22px;height:15px;background:var(--kraft);border-radius:2px;position:relative;overflow:hidden}
 .dm-mini::after{content:"";position:absolute;inset:0 0 40% 0;background:var(--kraft-d);clip-path:polygon(0 0,100% 0,50% 100%)}
 .solsteps li.good b{color:var(--ok)}.solsteps li.bad b{color:var(--red)}
+
+/* filmpjes */
+.flm{position:fixed;inset:0;z-index:80;background:#050605;animation:lhFade .25s ease-out}
+.flm.out{animation:lhFade .25s ease-in reverse forwards}
+.flm-v{position:absolute;left:50%;top:50%;width:540px;height:960px;overflow:hidden;background:#0b0c0b;color:#e4e1d6;transform-origin:center;cursor:pointer}
+.flm-stage{position:absolute;left:0;top:250px;width:540px;height:360px}
+.flm-stage svg{width:100%;height:100%;display:block;filter:grayscale(.15)}
+.flm-chap{position:absolute;left:36px;top:190px;font:700 20px var(--cond);letter-spacing:.18em;text-transform:uppercase;color:#E2614B}
+.flm-cap{position:absolute;left:36px;right:36px;top:650px;font:400 27px/1.45 ui-monospace,"Courier New",monospace;color:#e4e1d6}
+.flm-title{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding:0 30px}
+.flm-title h1{margin:0;font:800 66px/1 var(--cond);letter-spacing:.03em;text-transform:uppercase;color:#e4e1d6}
+.flm-title h1 span{color:#E2614B}
+.flm-title p{margin:0;font:italic 26px var(--serif);color:#bdbab0}
+.flm-title .flm-k{font:700 20px var(--cond);font-style:normal;letter-spacing:.2em;text-transform:uppercase;color:#E2614B}
+.flm-card{position:absolute;left:50%;top:430px;width:300px;background:#f3f1ea;color:#1c1f22;border-radius:6px;padding:22px 18px 18px;text-align:center;box-shadow:0 14px 40px rgba(0,0,0,.6)}
+.flm-card .flm-ic{width:150px;height:150px;margin:0 auto 10px}
+.flm-card b{display:block;font:800 34px/1.05 var(--cond);text-transform:uppercase}
+.flm-card i{display:block;font:italic 22px var(--serif);color:#5e635f}
+.flm-ic{display:grid;place-items:center;border-radius:50%;background:#1c1f22;color:#f3f1ea}
+.flm-ic svg{width:62%;height:62%}
+.flm-row{display:flex;gap:18px;justify-content:center}
+.flm-row>div{display:flex;flex-direction:column;align-items:center;gap:10px;width:140px}
+.flm-row .flm-ic{width:110px;height:110px;background:#e4e1d6;color:#1c1f22}
+.flm-row b{font:800 24px/1.1 var(--cond);text-transform:uppercase}
+.flm-vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 45%,rgba(0,0,0,.75) 100%)}
+.flm-flash,.flm-red,.flm-fade{position:absolute;inset:0;pointer-events:none;opacity:0}
+.flm-flash{background:#fff}.flm-red{background:#8f1d10;mix-blend-mode:multiply}.flm-fade{background:#000}
+.flm-v::before,.flm-v::after{content:"";position:absolute;left:0;right:0;height:70px;background:#000;z-index:2}
+.flm-v::before{top:0}.flm-v::after{bottom:0}
+.flm-ui{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px;z-index:3}
+.flm-b{width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font:600 18px var(--cond);cursor:pointer}
+.flm-b:focus-visible,.flm-end .btn:focus-visible{outline:3px solid #E2614B;outline-offset:2px}
+.flm-bar{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.18);overflow:hidden}.flm-bar i{display:block;height:100%;width:0;background:#E2614B}
+.flm-end{position:absolute;left:0;right:0;bottom:0;display:flex;gap:10px;justify-content:center;padding:14px 14px calc(env(safe-area-inset-bottom,0px) + 22px);z-index:3;opacity:0;pointer-events:none;transition:opacity .3s}
+.flm.done .flm-end{opacity:1;pointer-events:auto}
+.flm-end .btn{color:#fff;border-color:#fff;background:rgba(0,0,0,.4)}.flm-end .btn.primary{background:#C2321F;border-color:#C2321F}
+.flm.paused .flm-v::before{content:"❚❚  gepauzeerd · tik om verder te gaan";display:flex;align-items:center;justify-content:center;font:700 16px var(--cond);letter-spacing:.1em;text-transform:uppercase;color:#e4e1d6}
 </style>
 </head>
 <body>
@@ -2285,7 +2322,7 @@ function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let 
     const ok=lst.acc&&lst.acc.s===G.sol.s&&lst.acc.w===G.sol.w&&lst.acc.r===G.sol.r;
     body=`<article class="chapter"><div class="kicker">Beschuldiging</div><h3>Wie, waarmee en waar?</h3>
      ${lst.solved.length<N?`<p class="hint">Je hebt nog niet alle puzzels opgelost. Je mag het toch proberen.</p>`:''}
-     ${lst.done?`<div class="verdict ${ok?'':'bad'}"><p>${ok?'Goed gezien!':'Helaas, mis.'} Het was <b>${G.S[G.sol.s].name}</b>, met <b>${G.W[G.sol.w].name}</b>, in <b>${LHR[G.sol.r][1]}</b>.${ok&&lst.skipped.length?` Je sloeg ${lst.skipped.length} puzzel${lst.skipped.length>1?'s':''} over.`:''}</p></div><div class="controls"><button class="btn primary" id="lhAgain" type="button">Nieuwe zaak</button></div>`
+     ${lst.done?`<div class="verdict ${ok?'':'bad'}"><p>${ok?'Goed gezien!':'Helaas, mis.'} Het was <b>${G.S[G.sol.s].name}</b>, met <b>${G.W[G.sol.w].name}</b>, in <b>${LHR[G.sol.r][1]}</b>.${ok&&lst.skipped.length?` Je sloeg ${lst.skipped.length} puzzel${lst.skipped.length>1?'s':''} over.`:''}</p></div><div class="controls"><button class="btn" id="lhFilm" type="button">▶ Zo is het gebeurd</button><button class="btn primary" id="lhAgain" type="button">Nieuwe zaak</button></div>`
      :`<div class="accuse2">${sel('lhS',G.S.map(s=>s.name),'Wie?')}${sel('lhW',G.W.map(w=>cap(w.name)),'Waarmee?')}${sel('lhR',LHR.map(r=>cap(r[1].replace(/^de /,''))),'Waar?')}<p class="msg" id="lhMsg"></p><div class="controls"><button class="btn primary" id="lhAcc" type="button">Beschuldig</button></div></div>`}</article>`;
   }else body=lhPuzzle(v);
   P.innerHTML=`<div class="controls"><button class="btn" id="lhNew" type="button">Nieuwe zaak</button></div><div class="stats">Opgelost: ${st.solved} · Reeks: ${st.streak}</div>
@@ -2330,7 +2367,8 @@ function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let 
     if(k==='anagram'){if(same(lst.ana,G.anaS))return lhSolve(v);return msg(lst.ana.length<2?'Kies twee verdachten.':'Dat klopt niet. Tel de letters van de namen eens na.')}
     if(k==='kluis'){if(lst.safe.every((d,j)=>d===G.safe.code[j]))return lhSolve(v);return msg('De kluis blijft dicht. Probeer het nog eens.')}});
   on('lhAcc',()=>{const g=id=>$(id).value===''?null:+$(id).value;const a={s:g('lhS'),w:g('lhW'),r:g('lhR')};if(a.s===null||a.w===null||a.r===null)return msg('Kies wie, waarmee en waar.');
-    lst.acc=a;lst.done=true;const ok=a.s===G.sol.s&&a.w===G.sol.w&&a.r===G.sol.r;const x=store.get(LHSKEY)||{solved:0,streak:0};if(ok){x.solved++;x.streak++}else x.streak=0;store.set(LHSKEY,x);saveLh();renderLH()});
+    lst.acc=a;lst.done=true;const ok=a.s===G.sol.s&&a.w===G.sol.w&&a.r===G.sol.r;const x=store.get(LHSKEY)||{solved:0,streak:0};if(ok){x.solved++;x.streak++}else x.streak=0;store.set(LHSKEY,x);saveLh();renderLH();lhFilmPlay()});
+  on('lhFilm',lhFilmPlay);
 }
 
 // ---------- spionage ----------
@@ -2879,6 +2917,80 @@ function renderDossier(){const P=$('pDossier');
   on('dReset',()=>{dd.cases[C.id]={start:true,tab:'stukken',doc:null,read:[],star:[],ans:{},hints:{},done:false,notes:s.notes||''};saveD();renderDossier()});
 }
 
+
+// ---------- filmpjes: animaties in de tekenstijl van de app ----------
+// Een film is een lijst scènes {d: duur in seconden, f(u): tekent de scène op tijdstip u}. f geeft {stage, chap, cap, title, extra, flash, red} terug.
+const FM={clamp:(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),ease:x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2,
+  seg(t,a,b){return FM.clamp((t-a)/(b-a))},
+  type(txt,t,a,cps=26){const n=Math.floor(Math.max(0,t-a)*cps);return txt.slice(0,n)+(n<txt.length&&n>0?'▌':'')},
+  rnd(i){const x=Math.sin(i*127.1)*43758.5453;return x-Math.floor(x)},
+  svg:(inner,vb='0 0 300 200')=>`<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${inner}</svg>`,
+  G:(x,y,s,inner,extra='')=>`<g transform="translate(${x} ${y}) scale(${s})" ${extra}>${inner}</g>`,
+  rain(t,op=.35){let h='';for(let i=0;i<60;i++){const x=(FM.rnd(i)*340-20+t*30)%320-10,y=((FM.rnd(i+50)*220)+t*260+i*13)%230-20;h+=`<path d="M${x} ${y}l-5 13" stroke="${PK.W}" stroke-width="1" opacity="${op}"/>`}return h},
+  glow(t,x,y,r){const fl=.75+.25*Math.sin(t*23)*Math.sin(t*7.3);return `<circle cx="${x}" cy="${y}" r="${r}" fill="${PK.W}" opacity="${.12*fl}"/><circle cx="${x}" cy="${y}" r="${r*.5}" fill="${PK.W}" opacity="${.14*fl}"/>`},
+  fadeOf(u,d,a=.5,b=.5){return u<a?1-u/a:u>d-b?FM.seg(u,d-b,d):0}};
+let fmRun=null;
+function fmAudio(){try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;const ac=new AC(),out=ac.createGain();out.gain.value=0;out.connect(ac.destination);
+  const len=ac.sampleRate*2,buf=ac.createBuffer(1,len,ac.sampleRate),d=buf.getChannelData(0);let b0=0,b1=0,b2=0;for(let i=0;i<len;i++){const w=Math.random()*2-1;b0=.99765*b0+w*.099;b1=.963*b1+w*.2965;b2=.57*b2+w*1.0526;d[i]=(b0+b1+b2+w*.1848)*.12}
+  const ns=ac.createBufferSource();ns.buffer=buf;ns.loop=true;const hp=ac.createBiquadFilter();hp.type='highpass';hp.frequency.value=500;const rg=ac.createGain();rg.gain.value=0;ns.connect(hp);hp.connect(rg);rg.connect(out);ns.start();
+  const dg=ac.createGain();dg.gain.value=.05;dg.connect(out);[55,82.4].forEach(f=>{const o=ac.createOscillator();o.frequency.value=f;o.connect(dg);o.start()});
+  out.gain.linearRampToValueAtTime(.9,ac.currentTime+1);
+  return {ac,out,rain:v=>rg.gain.setTargetAtTime(v,ac.currentTime,.3),
+    click(){const s=ac.createBufferSource();s.buffer=buf;const g=ac.createGain();g.gain.setValueAtTime(.8,ac.currentTime);g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+.12);s.connect(g);g.connect(out);s.start();s.stop(ac.currentTime+.15)},
+    thud(){const o=ac.createOscillator(),g=ac.createGain();o.frequency.setValueAtTime(120,ac.currentTime);o.frequency.exponentialRampToValueAtTime(40,ac.currentTime+.4);g.gain.setValueAtTime(.7,ac.currentTime);g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+.5);o.connect(g);g.connect(out);o.start();o.stop(ac.currentTime+.55)},
+    mute(m){out.gain.setTargetAtTime(m?0:.9,ac.currentTime,.1)},stop(){try{out.gain.setTargetAtTime(0,ac.currentTime,.1);setTimeout(()=>ac.close(),400)}catch(e){}}}}catch(e){return null}}
+// Speel een film af. opts: {done(), end: tekst van de knop aan het eind}
+function fmPlay(scenes,opts={}){if(fmRun)fmRun.close();const total=scenes.reduce((a,s)=>a+s.d,0);
+  const ov=document.createElement('div');ov.className='flm';ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label',opts.label||'Filmpje');
+  ov.innerHTML=`<div class="flm-v"><div class="flm-stage"></div><div class="flm-chap"></div><div class="flm-cap"></div><div class="flm-title"></div><div class="flm-extra"></div><div class="flm-vig"></div><div class="flm-flash"></div><div class="flm-red"></div><div class="flm-fade"></div></div>
+   <div class="flm-ui"><button type="button" class="flm-b" data-f="snd" aria-label="Geluid aan of uit">🔊</button><div class="flm-bar"><i></i></div><button type="button" class="flm-b" data-f="x" aria-label="Sluit het filmpje">✕</button></div>
+   <div class="flm-end"><button type="button" class="btn" data-f="again">↺ Nog een keer</button><button type="button" class="btn primary" data-f="go">${opts.end||'Verder'}</button></div>`;
+  document.body.appendChild(ov);document.body.style.overflow='hidden';
+  const V=ov.querySelector('.flm-v'),q=c=>ov.querySelector('.flm-'+c),fit=()=>{const s=Math.min(innerWidth/540,innerHeight/960);V.style.transform=`translate(-50%,-50%) scale(${s})`};fit();addEventListener('resize',fit);
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let snd=null;try{if(store.get('md-film-snd')!==false)snd=fmAudio()}catch(e){}
+  ov.querySelector('[data-f="snd"]').textContent=snd?'🔊':'🔇';
+  let t0=performance.now(),paused=false,pt=0,raf=0,lastScene=-1,ended=false;const fired=new Set();
+  const draw=t=>{let a=0,k=0;while(k<scenes.length-1&&t>=a+scenes[k].d){a+=scenes[k].d;k++}const u=t-a,sc=scenes[k],r=sc.f(u)||{};
+    q('stage').innerHTML=r.stage||'';q('chap').textContent=r.chap||'';q('cap').textContent=r.cap||'';q('title').innerHTML=r.title||'';q('extra').innerHTML=r.extra||'';
+    q('fade').style.opacity=r.fade??FM.fadeOf(u,sc.d);q('flash').style.opacity=r.flash||0;q('red').style.opacity=r.red||0;
+    if(snd){if(k!==lastScene)snd.rain(sc.rain?.5:0);(sc.sfx||[]).forEach(([at,kind],i)=>{const key=k+':'+i;if(u>=at&&!fired.has(key)){fired.add(key);snd[kind]&&snd[kind]()}})}
+    lastScene=k;q('bar').firstChild.style.width=(t/total*100).toFixed(1)+'%'};
+  const loop=now=>{const t=paused?pt:(now-t0)/1000;if(t>=total){draw(total-.001);if(!ended){ended=true;ov.classList.add('done')}return}draw(t);raf=requestAnimationFrame(loop)};
+  const close=()=>{cancelAnimationFrame(raf);removeEventListener('resize',fit);if(snd)snd.stop();ov.classList.add('out');document.body.style.overflow='';setTimeout(()=>ov.remove(),250);fmRun=null};
+  const restart=()=>{ended=false;ov.classList.remove('done');fired.clear();t0=performance.now();paused=false;raf=requestAnimationFrame(loop)};
+  ov.querySelector('[data-f="x"]').onclick=()=>{close();opts.done&&opts.done()};
+  ov.querySelector('[data-f="go"]').onclick=()=>{close();opts.done&&opts.done()};
+  ov.querySelector('[data-f="again"]').onclick=restart;
+  ov.querySelector('[data-f="snd"]').onclick=e=>{e.stopPropagation();if(snd){snd.stop();snd=null;try{store.set('md-film-snd',false)}catch(x){}}else{snd=fmAudio();try{store.set('md-film-snd',true)}catch(x){}}e.currentTarget.textContent=snd?'🔊':'🔇'};
+  V.onclick=()=>{if(ended)return;if(paused){t0=performance.now()-pt*1000;paused=false;ov.classList.remove('paused');raf=requestAnimationFrame(loop)}else{pt=(performance.now()-t0)/1000;paused=true;ov.classList.add('paused')}};
+  ov.addEventListener('keydown',e=>{if(e.key==='Escape'){close();opts.done&&opts.done()}});
+  if(reduce){draw(total-.001);ended=true;ov.classList.add('done')}else if(opts.manual)draw(0);else raf=requestAnimationFrame(loop);
+  setTimeout(()=>ov.querySelector('[data-f="x"]').focus({preventScroll:true}),50);
+  fmRun={close,draw,total};return fmRun}
+
+// ---- Het Landhuis: zo is het gebeurd ----
+const LHROOM=[['night',['window',150,110,1.3],['moon',150,62,.5],['stairs',62,150,.8]],['wall',['shelf',150,150,1.15],['armchair',62,172,.8]],
+ ['day',['pot',50,150,1],['tulip',110,150,1.2],['tulip',140,150,1],['window',225,115,1.1]],['wall',['gclock',225,150,1],['armchair',85,172,.9],['candle',150,150,.9]],
+ ['wall',['door',150,150,1],['coat',60,150,1],['hooks',235,130,.6]],['wall',['table',150,150,1.3],['candle',150,92,.8]],
+ ['desk',['typewriter',150,140,1.3],['books',245,170,.8]],['dark',['shelf',150,150,1],['bottle',60,170,1],['glass',90,172,1]],['wall',['table',150,150,1.2],['teapot',130,92,.8],['plate',180,96,.8]]];
+function lhFilm(G,acc){const S=G.S[G.sol.s],W=G.W[G.sol.w],room=LHR[G.sol.r][1],Room=cap(room),ok=acc&&acc.s===G.sol.s&&acc.w===G.sol.w&&acc.r===G.sol.r;
+  const roomSc=(extra='')=>drawScene(LHROOM[G.sol.r])+extra;
+  const person=(x,y,s,op=1,rot=0)=>FM.G(x,y,s,`<g transform="rotate(${rot})">${PP.person()}</g>`,`opacity="${op}"`);
+  const big=(svgx,lab,sub,k)=>`<div class="flm-card" style="opacity:${k};transform:translate(-50%,-50%) scale(${.6+.4*k}) rotate(${(1-k)*-8}deg)"><span class="flm-ic">${svgx}</span><b>${lab}</b>${sub?`<i>${sub}</i>`:''}</div>`;
+  return [
+   {d:4.5,f:u=>({title:`<p class="flm-k">${ok?'Zaak opgelost':'De waarheid'}</p><h1>${FM.type('Zo is het ',u,.3,14).replace('▌','')}<span>${u>1.3?FM.type('gebeurd',u,1.3,12):''}</span></h1><p style="opacity:${FM.seg(u,2.4,3)}">Landhuis Lindenhof · ${G.event}</p>`})},
+   {d:7,rain:true,f:u=>{const z=1+u*.012;return {chap:Room,stage:FM.svg(FM.G(150,100,z,FM.G(-150,-100,1,roomSc(person(205,190,.8))+FM.rain(u,.12)))),
+     cap:FM.type(`Tijdens ${G.event} is ${G.victim} even alleen in ${room}.`,u,.6)}}},
+   {d:7.5,sfx:[[0.6,'click']],f:u=>{const k=FM.ease(FM.seg(u,.4,1.6)),x=-40+k*130;return {chap:Room,stage:FM.svg(roomSc(person(205,190,.8)+person(x,190,.82,.95))),
+     extra:u>2.2?big(svgOf(S),S.name,'',FM.ease(FM.seg(u,2.2,2.9))):'',cap:FM.type(`Dan gaat de deur open. Het is ${S.name}.`,u,1.2)}}},
+   {d:6.5,f:u=>({chap:'Het wapen',stage:FM.svg(roomSc(person(205,190,.8)+person(90,190,.82,.95))),extra:big(svgOf(W),cap(W.name),'',FM.ease(FM.seg(u,.3,1.1))),
+     cap:FM.type(`In de hand: ${W.name}.`,u,1)})},
+   {d:6,sfx:[[1.4,'thud']],f:u=>{const hit=u>1.4,fall=FM.ease(FM.seg(u,1.5,2.4));return {chap:Room,stage:FM.svg(roomSc(person(118,190,.82,.95)+person(205+fall*30,190-fall*8,.8,1,fall*84))),
+     red:hit?Math.max(0,.55-FM.seg(u,1.4,2.2)*.55):0,flash:0,cap:u>2.6?FM.type('Een klap. Daarna is het stil in het landhuis.',u,2.6):''}}},
+   {d:7,f:u=>{const row=[[svgOf(S),S.name],[svgOf(W),cap(W.name)],[`<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M16 5v9M5 16h8M19 16h8" stroke="currentColor" stroke-width="2.5"/></svg>`,Room]];
+     return {title:`<p class="flm-k">${ok?'Goed gezien, rechercheur':'Dit was de oplossing'}</p><div class="flm-row">${row.map(([ic,l],i)=>`<div style="opacity:${FM.seg(u,.3+i*.6,.8+i*.6)}"><span class="flm-ic">${ic}</span><b>${l}</b></div>`).join('')}</div><h1 style="font-size:40px;opacity:${FM.seg(u,2.4,3)}"><span>Zaak gesloten</span></h1>`}}}]}
+function lhFilmPlay(){if(!LG||!lst||!lst.done)return;fmPlay(lhFilm(LG,lst.acc),{label:'Zo is het gebeurd',end:'Terug naar het landhuis'})}
+
 // ---------- uitleg ----------
 // Elk spel heeft hier één blok. Een nieuw spel krijgt een nieuw blok in deze lijst.
 const HELP=[
@@ -3094,7 +3206,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261030083752';
+const APPV='20261030085926';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

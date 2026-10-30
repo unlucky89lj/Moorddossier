@@ -645,6 +645,12 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .badge b{font:800 14px var(--cond);text-transform:uppercase}.badge i{font:500 12px/1.25 var(--cond);font-style:normal;color:var(--muted)}.badge em{font:700 12px var(--cond);font-style:normal;color:var(--red)}
 .bk-more summary{cursor:pointer;font:700 14px var(--cond);text-transform:uppercase;letter-spacing:.05em;margin:6px 0}
 .bk-more textarea{width:100%;font:500 13px ui-monospace,monospace;border:1.5px solid var(--rule);border-radius:10px;background:var(--card);color:var(--ink);padding:8px;margin-top:6px}
+.flm-mini{position:absolute;left:18px;display:flex;align-items:center;gap:8px;width:170px;background:#f3f1ea;color:#1c1f22;border-radius:6px;padding:6px 10px 6px 6px;box-shadow:0 6px 16px rgba(0,0,0,.5)}
+.flm-mini .flm-ic{width:48px;height:48px;flex:none}.flm-mini b{font:800 17px/1.05 var(--cond);text-transform:uppercase}
+.flm-full{position:absolute;inset:0;width:540px;height:960px}
+.flm-endrow{position:absolute;left:0;right:0;top:560px}
+.flm-endk{position:absolute;left:0;right:0;top:120px;text-align:center;font:700 22px var(--cond);letter-spacing:.2em;text-transform:uppercase;color:#E2614B}
+.flm-stamp{position:absolute;left:50%;top:765px;border:5px solid #fff;color:#fff;font:800 46px var(--cond);text-transform:uppercase;letter-spacing:.06em;padding:4px 18px;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -2357,9 +2363,9 @@ function lhBoard(M=null,id='lhBoard'){const G=LG,E=lhElim(),n=lst.note,chk=lhChk
   const word=(t,a,b)=>`<span data-word="${t}" data-a="${a}" data-b="${b}">${left(t)===1?a:b}</span>`;
   return `<section class="lhboard ${M?'anim':''}" id="${id}">${M?'':'<h2>Speelbord</h2>'}
    <p class="lhb-sum">Nog verdacht: <b data-left="s">${left('s')}</b> ${word('s','gast','gasten')} · <b data-left="w">${left('w')}</b> ${word('w','wapen','wapens')} · <b data-left="r">${left('r')}</b> ${word('r','kamer','kamers')}</p>
-   <h4>Het landhuis</h4><div class="lhb-plan">${range(9).map(room).join('')}</div>
-   <h4>Gasten</h4><div class="lhb-row">${G.S.map((x,j)=>tok('s',j,svgOf(x),x.name)).join('')}</div>
-   <h4>Wapens</h4><div class="lhb-row">${G.W.map((x,j)=>tok('w',j,svgOf(x),cap(x.name))).join('')}</div>
+   <h4>Wie? · Gasten</h4><div class="lhb-row">${G.S.map((x,j)=>tok('s',j,svgOf(x),x.name)).join('')}</div>
+   <h4>Waarmee? · Wapens</h4><div class="lhb-row">${G.W.map((x,j)=>tok('w',j,svgOf(x),cap(x.name))).join('')}</div>
+   <h4>Waar? · Het landhuis</h4><div class="lhb-plan">${range(9).map(room).join('')}</div>
    ${M?'':`<p class="hint">Rood doorgestreept = zeker weg (het nummer zegt door welke puzzel). Tik zelf op iets om het met potlood af te strepen.</p>
    <h4>Stappen</h4>${steps?`<ol class="lhb-steps">${steps}</ol>`:'<p class="hint">Nog niets weggestreept. Na elke puzzel streep je zelf weg wat afvalt.</p>'}`}</section>`}
 // Na een opgeloste puzzel: eerst zelf wegstrepen, dan controleert de rode pen
@@ -3079,44 +3085,58 @@ const LHROOM=[['night',['window',150,110,1.3],['moon',150,62,.5],['stairs',62,15
  ['day',['pot',50,150,1],['tulip',110,150,1.2],['tulip',140,150,1],['window',225,115,1.1]],['wall',['gclock',225,150,1],['armchair',85,172,.9],['candle',150,150,.9]],
  ['wall',['door',150,150,1],['coat',60,150,1],['hooks',235,130,.6]],['wall',['table',150,150,1.3],['candle',150,92,.8]],
  ['desk',['typewriter',150,140,1.3],['books',245,170,.8]],['dark',['shelf',150,150,1],['bottle',60,170,1],['glass',90,172,1]],['wall',['table',150,150,1.2],['teapot',130,92,.8],['plate',180,96,.8]]];
-function lhFilm(G,acc){const S=G.S[G.sol.s],W=G.W[G.sol.w],room=LHR[G.sol.r][1],Room=cap(room),ok=acc&&acc.s===G.sol.s&&acc.w===G.sol.w&&acc.r===G.sol.r;
-  const roomSc=(extra='')=>drawScene(LHROOM[G.sol.r])+extra;
-  const person=(x,y,s,op=1,rot=0)=>FM.G(x,y,s,`<g transform="rotate(${rot})">${PP.person()}</g>`,`opacity="${op}"`);
-  const big=(svgx,lab,sub,k)=>`<div class="flm-card" style="opacity:${k};transform:translate(-50%,-50%) scale(${.6+.4*k}) rotate(${(1-k)*-8}deg)"><span class="flm-ic">${svgx}</span><b>${lab}</b>${sub?`<i>${sub}</i>`:''}</div>`;
-  return [
-   {d:4.5,f:u=>({title:`<p class="flm-k">${ok?'Zaak opgelost':'De waarheid'}</p><h1>${FM.type('Zo is het ',u,.3,14).replace('▌','')}<span>${u>1.3?FM.type('gebeurd',u,1.3,12):''}</span></h1><p style="opacity:${FM.seg(u,2.4,3)}">Landhuis Lindenhof · ${G.event}</p>`})},
-   {d:7,rain:true,f:u=>{const z=1+u*.012;return {chap:Room,stage:FM.svg(FM.G(150,100,z,FM.G(-150,-100,1,roomSc(person(205,190,.8))+FM.rain(u,.12)))),
-     cap:FM.type(`Tijdens ${G.event} is ${G.victim} even alleen in ${room}.`,u,.6)}}},
-   {d:7.5,sfx:[[0.6,'click']],f:u=>{const k=FM.ease(FM.seg(u,.4,1.6)),x=-40+k*130;return {chap:Room,stage:FM.svg(roomSc(person(205,190,.8)+person(x,190,.82,.95))),
-     extra:u>2.2?big(svgOf(S),S.name,'',FM.ease(FM.seg(u,2.2,2.9))):'',cap:FM.type(`Dan gaat de deur open. Het is ${S.name}.`,u,1.2)}}},
-   {d:6.5,f:u=>({chap:'Het wapen',stage:FM.svg(roomSc(person(205,190,.8)+person(90,190,.82,.95))),extra:big(svgOf(W),cap(W.name),'',FM.ease(FM.seg(u,.3,1.1))),
-     cap:FM.type(`In de hand: ${W.name}.`,u,1)})},
-   {d:6,sfx:[[1.4,'thud']],f:u=>{const hit=u>1.4,fall=FM.ease(FM.seg(u,1.5,2.4));return {chap:Room,stage:FM.svg(roomSc(person(118,190,.82,.95)+person(205+fall*30,190-fall*8,.8,1,fall*84))),
-     red:hit?Math.max(0,.55-FM.seg(u,1.4,2.2)*.55):0,flash:0,cap:u>2.6?FM.type('Een klap. Daarna is het stil in het landhuis.',u,2.6):''}}},
-   {d:7,f:u=>{const row=[[svgOf(S),S.name],[svgOf(W),cap(W.name)],[`<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M16 5v9M5 16h8M19 16h8" stroke="currentColor" stroke-width="2.5"/></svg>`,Room]];
-     return {title:`<p class="flm-k">${ok?'Goed gezien, rechercheur':'Dit was de oplossing'}</p><div class="flm-row">${row.map(([ic,l],i)=>`<div style="opacity:${FM.seg(u,.3+i*.6,.8+i*.6)}"><span class="flm-ic">${ic}</span><b>${l}</b></div>`).join('')}</div><h1 style="font-size:40px;opacity:${FM.seg(u,2.4,3)}"><span>Zaak gesloten</span></h1>`}}}]}
 function lhFilmPlay(){if(!LG||!lst||!lst.done)return;fmPlay(lhFilm(LG,lst.acc),{label:'Zo is het gebeurd',end:'Terug naar het landhuis'})}
 
 
-// ---- algemene onthulling: wie, waarmee en waar (Moorddossier, Kamermoord, Spionage) ----
-// o = {kicker, sub, ok, place:{name, svg, buiten}, victim, culprit:{name, svg}, weapon:{name, svg}|null, spy:true voor een overdracht in plaats van een moord, closing}
-function fmReveal(o){const P=o.place,bg=P.buiten?['dusk',['moon',250,38,.6]]:['wall',['window',225,118,1],['door',70,150,.9]];
+function lhFilm(G,acc){const S=G.S[G.sol.s],W=G.W[G.sol.w],room=LHR[G.sol.r][1],ok=acc&&acc.s===G.sol.s&&acc.w===G.sol.w&&acc.r===G.sol.r;
+  return fmReveal({ok,sub:`Landhuis Lindenhof · ${G.event}`,victim:cap(G.victim),bg:LHROOM[G.sol.r],place:{name:cap(room.replace(/^de /,'')),lid:'de',svg:`<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M16 5v9M5 16h8M19 16h8" stroke="currentColor" stroke-width="2.5"/></svg>`,buiten:false},
+    culprit:{name:S.name,svg:svgOf(S)},weapon:{name:W.name,svg:svgOf(W)},after:'Een klap. Daarna is het stil in het landhuis.'})}
+// ---- onthulling: wie (en waarmee) en waar; kaartjes klein linksboven, het wapen in de hand van de dader ----
+// o = {kicker, sub, ok, bg (optioneel plaatjes-spec), place:{name, lid, svg, buiten}, victim, culprit:{name, svg}, weapon:{name, svg}|null, spy, after, closing}
+// een paar bloedspatjes bij de klap: druppels vliegen weg en blijven als spatjes liggen
+function fmBlood(t,x0,y0){let h='';const C='#8f1a10';for(let i=0;i<11;i++){const a=-2.6+FM.rnd(i+3)*2.2,v=55+FM.rnd(i+9)*70,vx=Math.cos(a)*v,vy=Math.sin(a)*v,T=Math.min(t,.7),g=260;
+  let x=x0+vx*T,y=y0+vy*T+.5*g*T*T;const land=y>=188;if(land)y=188;const r=1.6+FM.rnd(i+21)*2.4;
+  h+=land||t>.7?`<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${(r*1.8).toFixed(1)}" ry="${(r*(land?.6:1.2)).toFixed(1)}" fill="${C}" opacity=".85"/>`:`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="${C}"/>`}
+  if(t>.15)h+=`<ellipse cx="${x0+18}" cy="189" rx="${6+FM.seg(t,.15,1.2)*16}" ry="${2+FM.seg(t,.15,1.2)*3}" fill="${C}" opacity=".8"/>`;return h}
+function fmReveal(o){const P=o.place,bg=o.bg||(P.buiten?['dusk',['moon',250,38,.6]]:['wall',['window',225,118,1],['door',70,150,.9]]);
   const scene=(extra='')=>drawScene(bg)+extra,person=(x,y,s,op=1,rot=0)=>FM.G(x,y,s,`<g transform="rotate(${rot})">${PP.person()}</g>`,`opacity="${op}"`);
-  const card=(svgx,lab,k,top=430)=>`<div class="flm-card" style="top:${top}px;opacity:${k};transform:translate(-50%,-50%) scale(${.6+.4*k}) rotate(${(1-k)*-8}deg)"><span class="flm-ic">${svgx}</span><b>${lab}</b></div>`;
+  // wapen in de rechterhand van een figuur op (x,190) met schaal s; ang = draaihoek, k = zichtbaarheid
+  const inHand=(x,s,ang,k=1)=>o.weapon?`<g transform="translate(${x+24*s} ${190-62*s}) rotate(${ang}) scale(${.5+.5*k})" opacity="${k}"><circle r="15" fill="${PK.K}" opacity=".35"/>${o.weapon.svg.replace('<svg ','<svg x="-15" y="-30" width="30" height="30" style="color:#f3f1ea" ')}</g>`:'';
+  const minis=(n,k1,k2)=>{const items=[[o.culprit.svg,o.culprit.name,k1]];if(o.weapon&&n>1)items.push([o.weapon.svg,cap(o.weapon.name),k2]);
+    return items.map(([ic,l,k],i)=>`<div class="flm-mini" style="top:${262+i*84}px;opacity:${k};transform:translateX(${(1-k)*-30}px)"><span class="flm-ic">${ic}</span><b>${l}</b></div>`).join('')};
   const sign=k=>`<div class="flm-sign" style="opacity:${k}"><span class="flm-ic">${P.svg}</span><b>${P.name}</b></div>`;
+  const V=x=>o.victim?person(x,190,.8):'';
   const sc=[{d:4.5,f:u=>({title:`<p class="flm-k">${o.ok?(o.spy?'Spion ontmaskerd':'Zaak opgelost'):'De waarheid'}</p><h1>${FM.type('Zo is het ',u,.3,14).replace('▌','')}<span>${u>1.3?FM.type('gebeurd',u,1.3,12):''}</span></h1><p style="opacity:${FM.seg(u,2.4,3)}">${o.sub||''}</p>`})},
-   {d:6.5,rain:!!P.buiten,f:u=>({chap:P.name,stage:FM.svg(scene(o.victim?person(205,190,.8):'')+(P.buiten?FM.rain(u,.15):'')),extra:sign(FM.ease(FM.seg(u,.3,1))),
-     cap:FM.type(o.spy?`${o.victim}. Iemand heeft hier een afspraak.`:`${o.victim} is alleen in ${P.lid||''}${P.lid?' ':''}${P.name.toLowerCase()}.`,u,.9)})},
-   {d:7,sfx:[[0.5,'click']],f:u=>{const k=FM.ease(FM.seg(u,.4,1.6)),x=-40+k*130;return {chap:P.name,stage:FM.svg(scene((o.victim?person(205,190,.8):'')+person(x,190,.82,.95))),
-     extra:u>2.2?card(o.culprit.svg,o.culprit.name,FM.ease(FM.seg(u,2.2,2.9))):'',cap:FM.type(o.spy?`Dan verschijnt ${o.culprit.name}.`:`Dan gaat de deur open. Het is ${o.culprit.name}.`,u,1.1)}}}];
-  if(o.weapon)sc.push({d:6,f:u=>({chap:o.spy?'Het geheim':'Het wapen',stage:FM.svg(scene((o.victim?person(205,190,.8):'')+person(90,190,.82,.95))),extra:card(o.weapon.svg,cap(o.weapon.name),FM.ease(FM.seg(u,.3,1.1))),
-     cap:FM.type(o.spy?`Onder de jas: ${o.weapon.name}.`:`In de hand: ${o.weapon.name}.`,u,1)})});
-  if(o.spy)sc.push({d:6,f:u=>{const k=FM.ease(FM.seg(u,.8,2.6)),x=100+k*80;return {chap:P.name,stage:FM.svg(scene(person(90,190,.82,.95)+person(230,190,.8,.9)+FM.G(x,150,.7,PP.envelope(),`opacity="${1-FM.seg(u,2.6,3)}"`))),
-     cap:u>.6?FM.type('Een snelle overdracht. Niemand ziet het. Behalve jij.',u,.6):''}}});
-  else sc.push({d:6,sfx:[[1.4,'thud']],f:u=>{const hit=u>1.4,fall=FM.ease(FM.seg(u,1.5,2.4));return {chap:P.name,stage:FM.svg(scene(person(118,190,.82,.95)+person(205+fall*30,190-fall*8,.8,1,fall*84))),
-     red:hit?Math.max(0,.55-FM.seg(u,1.4,2.2)*.55):0,cap:u>2.6?FM.type(o.after||'Een klap. Daarna is het stil.',u,2.6):''}}});
+   {d:6.5,rain:!!P.buiten,f:u=>({chap:P.name,stage:FM.svg(scene(V(205))+(P.buiten?FM.rain(u,.15):'')),extra:sign(FM.ease(FM.seg(u,.3,1))*(1-FM.seg(u,5.6,6.2))),
+     cap:FM.type(o.spy?`${o.victim}. Iemand heeft hier een afspraak.`:`${o.victim} is alleen in ${P.lid?P.lid+' ':''}${P.name.toLowerCase()}.`,u,.9)})},
+   {d:6.5,sfx:[[0.5,'click']],f:u=>{const k=FM.ease(FM.seg(u,.4,1.6)),x=-40+k*158;return {chap:P.name,stage:FM.svg(scene(V(205)+person(x,190,.82,.95))),
+     extra:minis(1,FM.ease(FM.seg(u,2,2.6)),0),cap:FM.type(o.spy?`Dan verschijnt ${o.culprit.name}.`:`Dan gaat de deur open. Het is ${o.culprit.name}.`,u,1.1)}}}];
+  if(o.weapon)sc.push({d:6,f:u=>{const k=FM.ease(FM.seg(u,.5,1.3)),glint=u>1.3&&u<1.9?1-FM.seg(u,1.3,1.9):0;
+    return {chap:o.spy?'Het geheim':'Het wapen',stage:FM.svg(scene(V(205)+person(118,190,.82,.95)+inHand(118,.82,-20,k)+(glint?`<circle cx="${118+24*.82}" cy="${190-62*.82-18}" r="${4+glint*8}" fill="${PK.W}" opacity="${glint}"/>`:''))),
+     extra:minis(2,1,FM.ease(FM.seg(u,1,1.6))),cap:FM.type(o.spy?`Onder de jas: ${o.weapon.name}.`:`In de hand: ${o.weapon.name}.`,u,1)}}});
+  if(o.spy)sc.push({d:6,f:u=>{const k=FM.ease(FM.seg(u,.8,2.6)),x=100+k*80;return {chap:P.name,stage:FM.svg(scene(person(118,190,.82,.95)+person(230,190,.8,.9)+FM.G(x,150,.7,PP.envelope(),`opacity="${1-FM.seg(u,2.6,3)}"`))),
+     extra:minis(2,1,1),cap:u>.6?FM.type('Een snelle overdracht. Niemand ziet het. Behalve jij.',u,.6):''}}});
+  else sc.push({d:6.5,sfx:[[1.5,'thud']],f:u=>{const step=FM.ease(FM.seg(u,0,1)),x=118+step*36,
+      ang=u<1?-20-FM.seg(u,.2,1)*60:u<1.5?-80+FM.ease(FM.seg(u,1,1.5))*150:70,hit=u>1.5,fall=FM.ease(FM.seg(u,1.6,2.5));
+    return {chap:P.name,stage:FM.svg(scene(person(x,190,.82,.95)+inHand(x,.82,ang,1)+(o.victim?person(205+fall*30,190-fall*8,.8,1,fall*84):'')+(hit&&u<1.9?`<path d="M${x+40} ${120}l14 -10M${x+44} ${132}l18 0M${x+40} ${144}l14 10" stroke="${PK.W}" stroke-width="3" stroke-linecap="round" opacity="${1-FM.seg(u,1.5,1.9)}"/>`:'')+(hit&&o.victim?fmBlood(u-1.5,200,104):''))),
+     extra:minis(2,1,1),red:hit?Math.max(0,.55-FM.seg(u,1.5,2.3)*.55):0,cap:u>2.7?FM.type(o.after||'Een klap. Daarna is het stil.',u,2.7):''}}});
   const row=[[o.culprit.svg,o.culprit.name]];if(o.weapon)row.push([o.weapon.svg,cap(o.weapon.name)]);row.push([P.svg,P.name]);
-  sc.push({d:7,f:u=>({title:`<p class="flm-k">${o.ok?'Goed gezien, rechercheur':'Dit was de oplossing'}</p><div class="flm-row">${row.map(([ic,l],i)=>`<div style="opacity:${FM.seg(u,.3+i*.6,.8+i*.6)}"><span class="flm-ic">${ic}</span><b>${l}</b></div>`).join('')}</div><h1 style="font-size:40px;opacity:${FM.seg(u,2.4,3)}"><span>${o.closing||'Zaak gesloten'}</span></h1>`})});
+  // slot: een vergrootglas vindt de dader, daarna kleurt het scherm langzaam rood
+  sc.push({d:9,f:u=>{const sw=FM.ease(FM.seg(u,0,1.6)),lx=-160+sw*430,ly=330,R=150+FM.ease(FM.seg(u,1.8,2.6))*20;
+    const red=FM.seg(u,3,8.4),wy=-60+Math.pow(red,1.35)*1060;
+    // bloed loopt van boven naar beneden: een golvende rand met druppelsporen die sneller zakken
+    let blood=`M-20 -20 L560 -20 L560 ${wy.toFixed(1)}`;for(let i=27;i>=0;i--){const x=i*20;blood+=` L${x} ${(wy+Math.sin(i*1.3)*9+Math.sin(i*.5+1)*7).toFixed(1)}`}blood+=` L-20 ${wy.toFixed(1)}Z`;
+    let drips='';for(let i=0;i<16;i++){const x=12+i*34+FM.rnd(i)*16,w=7+FM.rnd(i+5)*12,start=3+FM.rnd(i+11)*1.4,len=Math.max(0,(u-start))*(60+FM.rnd(i+7)*120);if(len<=0)continue;
+      drips+=`<rect x="${(x-w/2).toFixed(1)}" y="${(wy-5).toFixed(1)}" width="${w.toFixed(1)}" height="${len.toFixed(1)}" rx="${(w/2).toFixed(1)}"/><circle cx="${x.toFixed(1)}" cy="${(wy+len-2).toFixed(1)}" r="${(w*.62).toFixed(1)}"/>`}
+    const items=[[o.culprit.svg,o.culprit.name]];if(o.weapon)items.push([o.weapon.svg,cap(o.weapon.name)]);items.push([P.svg,P.name]);
+    const lens=`<svg class="flm-full" viewBox="0 0 540 960" aria-hidden="true"><defs><clipPath id="lensC"><circle cx="${lx}" cy="${ly}" r="${R-8}"/></clipPath></defs>
+      <rect width="540" height="960" fill="#0b0c0b"/>
+      <g clip-path="url(#lensC)"><rect width="540" height="960" fill="#efece4"/>${FM.G(lx-6,ly+128,2.1,PP.person())}<g transform="translate(${lx+40} ${ly-70}) rotate(${-10+Math.sin(u*2)*3})">${o.weapon?o.weapon.svg.replace('<svg ','<svg x="0" y="0" width="64" height="64" style="color:#1c1f22" '):''}</g></g>
+      <circle cx="${lx}" cy="${ly}" r="${R-4}" fill="none" stroke="#2a2b2a" stroke-width="14"/><circle cx="${lx}" cy="${ly}" r="${R-4}" fill="none" stroke="#6b6b66" stroke-width="3"/>
+      <path d="M${lx+R*.72} ${ly+R*.72}l${80} ${80}" stroke="#2a2b2a" stroke-width="30" stroke-linecap="round"/>
+      <g fill="#9E1F15" opacity="${u<3?0:.93}"><path d="${blood}"/>${drips}</g></svg>`;
+    const row=`<div class="flm-row flm-endrow" style="opacity:${FM.seg(u,2.4,3.2)}">${items.map(([ic,l])=>`<div><span class="flm-ic">${ic}</span><b>${l}</b></div>`).join('')}</div>`;
+    return {fade:u<.4?1-u/.4:0,extra:lens+row+`<div class="flm-endk" style="opacity:${FM.seg(u,1.6,2.2)}">${o.ok?'Goed gezien, rechercheur':'Dit was de oplossing'}</div><div class="flm-stamp" style="opacity:${FM.seg(u,5,5.3)};transform:translateX(-50%) rotate(-8deg) scale(${1.6-.6*FM.ease(FM.seg(u,5,5.4))})">${o.closing||'Zaak gesloten'}</div>`}}});
   return sc}
 const lidOf=x=>x.lid==='het'?'het':'de';
 function murdleFilm(){const ok=!st.revealed;const S=C.S[C.murderer],W=C.W[C.sol.wep[C.murderer]],L=C.L[C.body];
@@ -3496,7 +3516,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261030102622';
+const APPV='20261030105117';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

@@ -682,6 +682,32 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .db-logo{font:800 30px var(--cond);letter-spacing:.2em}.db-logo span{display:block;font:600 13px var(--cond);letter-spacing:.3em;text-transform:uppercase;opacity:.75}
 .db-card{border-left:6px solid #1f3b5c}
 .dm-q h4 em{font-style:normal;margin-left:6px}.dm-q h4 em.ok{color:var(--ok)}.dm-q h4 em.bad{color:var(--red)}
+.br-eps{display:flex;align-items:center;justify-content:center;gap:0;margin:4px 0 12px}.br-eps span{width:30px;height:30px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;font:700 14px var(--cond);background:var(--card)}
+.br-eps span.done{background:var(--ok);border-color:var(--ok);color:#fff}.br-eps span.cur{background:var(--red);border-color:var(--red);color:#fff}.br-eps i{width:22px;height:2px;background:var(--rule)}
+.br-env{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;max-width:380px;margin:10px auto;aspect-ratio:1.55;border:0;border-radius:10px;background:linear-gradient(160deg,#efe3c8,#d9c7a0);box-shadow:0 2px 3px rgba(0,0,0,.2),0 14px 30px rgba(0,0,0,.18);cursor:pointer;overflow:hidden;padding:70px 16px 16px;font:inherit;color:#3a2c18}
+.br-flap{position:absolute;left:0;right:0;top:0;height:58%;background:linear-gradient(180deg,#e6d6b2,#cdb88c);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .5s}
+.br-env.opening .br-flap{transform:rotateX(180deg)}
+.br-stamp{position:absolute;right:14px;top:12px;width:44px;height:52px;background:#b5463a;color:#fff;font:800 24px var(--cond);display:grid;place-items:center;border:3px dotted #f3e9d5;z-index:2}
+.br-to{position:relative;z-index:1;font:italic 15px var(--slab)}.br-env b{position:relative;z-index:1;font:800 26px var(--cond);text-transform:uppercase;letter-spacing:.04em}.br-env em{position:relative;z-index:1;font-style:normal}
+.br-seal{position:relative;z-index:1;margin-top:6px;background:#8a1f17;color:#fff;border-radius:999px;padding:6px 14px;font:700 13px var(--cond);text-transform:uppercase;letter-spacing:.08em}
+.br-letter .sheet-body{font-size:17px;line-height:1.5}.br-code{font:700 17px "Courier New",monospace;letter-spacing:.08em;background:#efe6cf;padding:6px 8px;border-radius:4px}
+.br-svg{width:100%;height:auto;display:block}.br-card{background:#fffdf6;border:1px solid #d8cfb8;border-radius:6px;padding:10px 12px}.br-card p{margin:6px 0 0}
+.br-bags{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.br-bag{background:#fff;border:1px solid #cfc6b0;border-radius:6px 6px 2px 2px;padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;font-size:12px}.br-bag b{font:700 10px var(--cond);text-transform:uppercase;color:#2c6a49}.br-bag span{font-weight:700}
+.br-rub{position:relative}.br-under{position:relative;display:flex;flex-direction:column;gap:6px;padding:16px;background:#f4ecd8;color:#2a2622;font:700 20px var(--slab);min-height:120px;border-radius:4px}.br-under .hand{font-size:22px}
+.br-rub canvas{position:absolute;left:0;top:0;width:100%;height:calc(100% - 34px);touch-action:none;cursor:crosshair;border-radius:4px}
+.br-phone{background:#ece5dd;border:2px solid var(--ink);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
+.br-top{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#1f3b34;color:#fff}.br-top b{display:block;font:700 16px system-ui,sans-serif}.br-top small{opacity:.75}
+.br-chat{height:52vh;min-height:300px;overflow-y:auto;padding:12px 10px;display:flex;flex-direction:column;gap:6px}
+.br-msg{display:flex;align-items:flex-end;gap:6px;max-width:86%}.br-msg p{margin:0;padding:8px 11px;border-radius:14px;font:15.5px/1.35 system-ui,-apple-system,sans-serif;box-shadow:0 1px 1px rgba(0,0,0,.12)}
+.br-msg.in p{background:#fff;color:#111;border-bottom-left-radius:4px}.br-msg.out{align-self:flex-end}.br-msg.out p{background:#d4f5c4;color:#111;border-bottom-right-radius:4px}
+.br-av{flex:none;width:30px;height:30px;border-radius:50%;overflow:hidden;background:#cfd8d2;display:block}.br-av svg{width:100%;height:100%;display:block}.br-av.big{width:40px;height:40px;background:#9fc0b4}
+.br-day{align-self:center;background:#d6e7f0;color:#334;border-radius:8px;padding:3px 10px;font:600 12px system-ui,sans-serif;margin:6px 0}
+.br-typing{align-self:flex-start;background:#fff;border-radius:14px;padding:10px 12px;display:flex;gap:4px;margin-left:36px}.br-typing i{width:7px;height:7px;border-radius:50%;background:#999;animation:brT 1s infinite}.br-typing i:nth-child(2){animation-delay:.15s}.br-typing i:nth-child(3){animation-delay:.3s}
+@keyframes brT{0%,100%{opacity:.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+.br-in{display:flex;gap:6px;padding:8px;background:#f6f3ef;border-top:1px solid #d6cfc6}.br-in input{flex:1;min-width:0;border:1px solid #c9c2b8;border-radius:999px;padding:9px 14px;font:16px system-ui,sans-serif;background:#fff;color:#111}
+.br-hint{margin:0 8px 8px;align-self:flex-start}.br-final{display:flex;flex-direction:column;gap:8px;padding:10px;background:#f6f3ef;border-top:1px solid #d6cfc6}.br-final label{display:flex;flex-direction:column;gap:4px;font-size:14px}.br-final select{font:15px system-ui;padding:8px;border-radius:8px}
+.br-end{text-align:center;font:700 14px var(--cond);text-transform:uppercase;letter-spacing:.1em;color:var(--ok);padding:10px;margin:0;background:#f6f3ef}
+.br-cardx{border-left:6px solid #b5463a}
 </style>
 </head>
 <body>
@@ -705,6 +731,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
     <button role="tab" type="button" data-g="bericht"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 7h6v4h-3l-2 2v-2H9z" fill="currentColor"/><circle cx="12" cy="18.5" r="1.1" fill="currentColor"/></svg>Laatste Bericht</b><span>Onderzoek de telefoon</span></button>
     <button role="tab" type="button" data-g="dossier"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="1.5" fill="currentColor"/><path d="M2.5 6.5L12 14l9.5-7.5" fill="none" stroke="var(--card)" stroke-width="1.6"/><circle cx="12" cy="14" r="2.6" fill="var(--red)" stroke="var(--card)" stroke-width="1"/></svg>Dossiermap</b><span>Enveloppen vol bewijs</span></button>
     <button role="tab" type="button" data-g="databank"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="1.5" fill="currentColor"/><rect x="4" y="6" width="16" height="9" fill="var(--card)"/><circle cx="11" cy="10.5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M13 12.5l2.6 2.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 20h8M12 17v3" stroke="currentColor" stroke-width="2"/></svg>Politiedatabase</b><span>Zoek zelf in het systeem</span></button>
+    <button role="tab" type="button" data-g="brieven"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-6 9 6v11H3z" fill="currentColor"/><path d="M3 9l9 6 9-6" fill="none" stroke="var(--card)" stroke-width="1.6"/><path d="M8 18h8" stroke="var(--card)" stroke-width="1.6"/></svg>Brievenreeks</b><span>Brieven, puzzels en een chat</span></button>
   </div>
   <div class="stats" id="stats"></div>
 
@@ -769,6 +796,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <section class="pane" id="pBericht" hidden></section>
   <section class="pane" id="pDossier" hidden></section>
   <section class="pane" id="pDatabank" hidden></section>
+  <section class="pane" id="pBrieven" hidden></section>
   <section class="pane" id="pUitleg" hidden></section>
   <section class="pane" id="pPas" hidden></section>
 
@@ -3099,7 +3127,7 @@ const TSKIN=['#f3cba8','#ebba94','#dca47c','#c88a62','#a8704b','#7d5236'];
 const THC=['#2a1d15','#4a2f1c','#6b4527','#a0703a','#d6b25e','#a3a39c','#b5502c','#1f1a17'];
 const TTOP=['#4f6475','#7a3b32','#3f5a45','#4a4f6b','#8a6a3a','#5f6468','#2f3a4a','#6b3f5c','#8a4f2a'];
 const TLEG=['#2b2f36','#3a3a3c','#45403a','#26303d','#4b4237'];
-const TFEM=new Set('saar fien isabella rosalind trui clementine fenna lieke merel femke esmee noor yara camille greta hanna lies marie margaretha lola jikke sterre isolde hendrikje annie liesbeth mevrouw juffrouw barones tante oma zuster moeder dochter zus weduwe mevr anouk ria lotte samira sanne mila lisa eva sophie anneke wilma agatha wilhelmina charlotte ilse esra ingrid marieke femke anna emma julia sara fleur iris noor tess linda petra ellen karin monique yvonne joke truus greet mien els annet margriet hanna saskia nadia fatima yara lieke jet roos kim naomi vera isa nina lena amira julia marloes ilona sylvia gerda bep dora fenna hilde jolien lieve maud nienke romy sanna tamara ymke zoë zoe evi demi sharon anja astrid carla dewi esther floor gwen hester ines jasmijn kiki liza mirjam nora olga pien rosa selma trees ursula veerle wendy aaltje aafke birgit cato daphne elise frida gea heleen joyce kaat loes maaike nelleke odette patricia rianne silvia tineke willemijn yasmin'.split(' '));
+const TFEM=new Set('juul gonnie saar fien isabella rosalind trui clementine fenna lieke merel femke esmee noor yara camille greta hanna lies marie margaretha lola jikke sterre isolde hendrikje annie liesbeth mevrouw juffrouw barones tante oma zuster moeder dochter zus weduwe mevr anouk ria lotte samira sanne mila lisa eva sophie anneke wilma agatha wilhelmina charlotte ilse esra ingrid marieke femke anna emma julia sara fleur iris noor tess linda petra ellen karin monique yvonne joke truus greet mien els annet margriet hanna saskia nadia fatima yara lieke jet roos kim naomi vera isa nina lena amira julia marloes ilona sylvia gerda bep dora fenna hilde jolien lieve maud nienke romy sanna tamara ymke zoë zoe evi demi sharon anja astrid carla dewi esther floor gwen hester ines jasmijn kiki liza mirjam nora olga pien rosa selma trees ursula veerle wendy aaltje aafke birgit cato daphne elise frida gea heleen joyce kaat loes maaike nelleke odette patricia rianne silvia tineke willemijn yasmin'.split(' '));
 const TTITLE={Baron:{hat:'top',mono:1,f:0,hair:'short'},Mevrouw:{f:1,hair:'bun',pearls:1},Kok:{hat:'chef',f:0},Dokter:{glasses:1},Juffrouw:{f:1,hair:'bun',glasses:1},
  Kapitein:{hat:'cap',beard:1,f:0},Notaris:{glasses:1,top:'#2b2f36',f:0},Dominee:{collar:1,top:'#1d1f22',f:0,hair:'short'},Barones:{f:1,hair:'bun',pearls:1},jonkheer:{f:0,top:'#3d2b4a'},
  tante:{f:1},oom:{f:0},butler:{top:'#1d1f22',f:0,hair:'bald'},Professor:{glasses:1,beard:1},Agent:{hat:'police',top:'#24364f'},Heer:{hat:'top',f:0},Vrouwe:{f:1,hair:'bun',pearls:1},Chef:{hat:'chef',f:0},Arts:{glasses:1},Lerares:{f:1,hair:'bob',glasses:1},Schipper:{hat:'cap',beard:1,f:0},Advocaat:{glasses:1,top:'#2b2f36',f:0},Pastoor:{collar:1,top:'#1d1f22',f:0},Graaf:{hat:'top',mono:1,f:0},Lady:{f:1,hair:'bun',pearls:1},Kokkin:{f:1,hat:'chef'},Huisarts:{glasses:1},Gouvernante:{f:1,hair:'bun',glasses:1,top:'#1d1f22'},Majoor:{hat:'cap',f:0},Rentmeester:{glasses:1,f:0},Kapelaan:{collar:1,top:'#1d1f22',f:0},Danseres:{f:1},Secretaresse:{f:1},Barones:{f:1,hair:'bun',pearls:1},Inspecteur:{top:'#5a4a3a',hat:'fedora'}};
@@ -3516,6 +3544,110 @@ function renderDatabank(){const P=$('pDatabank');
   on('dbReset',()=>{dbd.cases[C.id]={start:true,tab:'zaak',type:'persoon',q:'',res:null,rec:null,seen:[],hist:[],hints:0,ans:{},tries:0,last:null,done:false,notes:s.notes||''};saveDb();renderDatabank()});
 }
 
+
+// ---------- Brievenreeks: een zaak in afleveringen, met brieven, puzzels en een chat met de hoofdpersoon ----------
+// Nieuwe reeksen achteraan toevoegen. Ids nooit wijzigen: de voortgang hangt eraan.
+function brClocks(hrs){return `<svg viewBox="0 0 ${hrs.length*80} 96" class="br-svg" role="img" aria-label="Vier klokken in de gang">${hrs.map((h,i)=>{const cx=40+i*80,a=(h%12)*30*Math.PI/180;
+  return `<rect x="${cx-30}" y="6" width="60" height="84" rx="8" fill="#6b4a2e"/><circle cx="${cx}" cy="40" r="25" fill="#f6efdc" stroke="#3a2a1a" stroke-width="2"/>${[...Array(12)].map((_,k)=>{const b=k*30*Math.PI/180;return `<path d="M${cx+Math.sin(b)*20} ${40-Math.cos(b)*20}L${cx+Math.sin(b)*23} ${40-Math.cos(b)*23}" stroke="#3a2a1a" stroke-width="${k%3?1:2}"/>`}).join('')}
+   <path d="M${cx} 40L${cx} 19" stroke="#3a2a1a" stroke-width="1.6" stroke-linecap="round"/><path d="M${cx} 40L${cx+Math.sin(a)*13} ${40-Math.cos(a)*13}" stroke="#1a120a" stroke-width="3.4" stroke-linecap="round"/><circle cx="${cx}" cy="40" r="2.4" fill="#1a120a"/>
+   <path d="M${cx} 66v14" stroke="#c9a85a" stroke-width="2"/><circle cx="${cx}" cy="82" r="5" fill="#c9a85a"/>`}).join('')}</svg>`}
+function brPills(){const D=['MA','DI','WO','DO','VR','ZA','ZO'];return `<svg viewBox="0 0 350 110" class="br-svg" role="img" aria-label="Medicijndoos met zeven vakjes">${D.map((d,i)=>{const x=6+i*49;
+  return `<rect x="${x}" y="10" width="44" height="90" rx="6" fill="#dfe9ef" stroke="#7d93a3" stroke-width="2"/><text x="${x+22}" y="28" font-size="12" font-family="Arial" font-weight="700" text-anchor="middle" fill="#3d5466">${d}</text>
+   <circle cx="${x+22}" cy="52" r="9" fill="#fff" stroke="#999"/>${d==='DO'?`<path d="M${x+12} 88L${x+22} 70L${x+32} 88Z" fill="#4a7fd1" stroke="#2c5aa0"/>`:`<path d="M${x+13} 80a9 9 0 0 1 18 0Z" fill="#f1cf46" stroke="#b89a20"/>`}`}).join('')}</svg>`}
+function brBags(){const B=[['G. Wester','Vitamine D','geel, rond','#f1cf46','c'],['F. Rijpma','Slaapmiddel','blauw, driehoekig','#4a7fd1','t'],['T. Brinkman','Hooikoorts','wit, rond','#fff','c']];
+  return `<div class="br-bags">${B.map(([n,m,k,c,s])=>`<div class="br-bag"><b>Apotheek Westerburen</b><span>${n}</span><em>${m}</em><small>${k}</small><svg viewBox="0 0 40 30" width="40" height="30">${s==='t'?`<path d="M8 26L20 4L32 26Z" fill="${c}" stroke="#2c5aa0"/>`:`<circle cx="20" cy="15" r="11" fill="${c}" stroke="#999"/>`}</svg></div>`).join('')}</div>`}
+const BRCASES=[{id:'ate',title:'Brieven van opa Ate',level:'Gemiddeld',time:'3 afleveringen · ± 20 min elk',hero:'Juul Brinkman',heroShort:'Juul',
+ blurb:'Opa Ate is dood. Zijn kleindochter Juul vindt brieven die hij vlak voor zijn dood schreef, vol puzzels. Help haar via de chat. Elke aflevering een nieuwe brief.',
+ eps:[
+  {t:'Een brief van opa',
+   letter:`<p>Lieve Juul,</p><p>Als je dit leest, ben ik er niet meer. Ik weet dat de dokter zal zeggen dat mijn hart gewoon op was. Geloof dat niet zomaar.</p><p>Iemand in dit huis wil mijn geld. Ik vertrouw niemand meer, behalve jou. Daarom schrijf ik in onze oude geheimtaal. Weet je nog? <b>Elke letter drie plaatsen terug</b> in het alfabet.</p><p class="br-code">ZDDU LN DOOHV EHZDDU: NHOGHU</p><p>Het slot zit op een cijferslot. De code hangt in de gang: <b>lees de klokken van links naar rechts, alleen de uren</b>.</p><p>Je opa Ate</p>`,
+   att:[['De vier klokken in de gang',()=>brClocks([7,1,4,9])]],
+   steps:[{ask:['Ik heb opa’s brief gevonden. In zijn bureau, achter de la. 😢','Er staat een zin in geheimtaal: ZDDU LN DOOHV EHZDDU: NHOGHU','Het laatste woord is het belangrijkst, denk ik. Wat staat er?'],ans:['KELDER'],
+     ok:['KELDER! “Waar ik alles bewaar: kelder.” Natuurlijk. Opa zat altijd in die kelder.','Ik loop erheen. Er zit een cijferslot op de deur, vier cijfers.'],hint:['Opa schreef: elke letter drie plaatsen terug. Dus een D wordt een A, een E wordt een B.','Het laatste woord is NHOGHU. N wordt K (M, L, K). H wordt E. Doe de rest ook.']},
+    {ask:['Welke code moet ik invullen? Ik sta nu in de gang bij de klokken.'],ans:['7149'],
+     ok:['Klik! Hij is open. 🔓','Het ruikt naar stof en oude wijn. In de hoek staat een houten kist met mijn naam erop.','Er ligt weer een envelop in. Ik maak hem morgen open, ik moet eerst even zitten.']
+     ,hint:['Opa zei: alleen de uren. Kijk naar de korte, dikke wijzer van elke klok.','De eerste klok staat op 7 uur. Doe de andere drie ook.']}]},
+  {t:'De kist in de kelder',
+   letter:`<p>Juul,</p><p>Goed zo, je hebt de kelder gevonden. Nu het belangrijkste.</p><p>Drie mensen komen hier vaak over de vloer. <b>Gonnie Wester</b>, mijn huishoudster. <b>Folkert Rijpma</b>, de buurman met de kippen. En <b>Thijmen</b>, mijn kleinzoon, jouw neef. Alle drie weten ze dat ik dit huis aan jou nalaat.</p><p>Sinds kort voel ik me na het ontbijt zo vreemd suf. Ik heb mijn medicijndoos bekeken. Op één dag zit er een pil in die er niet hoort. Ik heb de pil laten zien bij de apotheek en de zakjes van de anderen bekeken.</p><p>Bekijk de foto’s. <b>Op welke dag</b> klopt het niet? En <b>van wie</b> komt die pil?</p><p>Ate</p>`,
+   att:[['Recept van de dokter',()=>`<div class="br-card"><b>Dr. Sijbesma · huisarts</b><p>Dhr. A. Brinkman<br>Elke ochtend:<br>1 × witte ronde tablet (hart)<br>1 × gele halve tablet (bloeddruk)</p></div>`],['Opa’s medicijndoos',brPills],['Apotheekzakjes uit de keukenla',brBags]],
+   steps:[{ask:['De kist is open. Er zitten foto’s in van opa’s medicijndoos. En een nieuwe brief.','Op welke dag zat er een pil in die er niet hoorde?'],ans:['DONDERDAG','DO'],
+     ok:['Donderdag. Een blauwe, driehoekige pil in plaats van de gele.','Opa is op een vrijdagochtend gestorven. Na een donderdag…'],hint:['Kijk naar het recept. Welke pillen horen er elke dag in?','Elke dag zit er een witte en een gele in. Op één dag niet.']},
+    {ask:['Van wie komt die blauwe pil? Ik heb de zakjes van de apotheek gevonden. Typ de voornaam.'],ans:['FOLKERT'],
+     ok:['Folkert?! Zijn slaapmiddel. Ik ben meteen naar hem toe gegaan.','Hij schrok echt. Hij zegt dat er al weken een strip slaappillen weg is. Hij dacht dat hij ze kwijt was.','“Iedereen kan bij mij binnenlopen,” zei hij. “Thijmen voerde mijn kippen nog toen ik in maart met vakantie was.” Hmm.']
+     ,hint:['Opa’s vreemde pil was blauw en driehoekig.','Kijk op de zakjes van de apotheek. Welk zakje heeft blauwe driehoekige pillen?']}]},
+  {t:'Het gastenboek',
+   letter:`<p>Lieve Juul,</p><p>Dit is mijn laatste brief. Ik weet nu bijna zeker wie het is, maar ik wil het jou zelf laten zien. Dan kan niemand zeggen dat een oude man in de war was.</p><p>Iedereen die hier komt, schrijft zijn naam in het gastenboek in de hal. <b>De bladzijde van donderdag is eruit gescheurd.</b> Maar de pen drukt altijd door op de volgende bladzijde. Weet je nog hoe je dat zichtbaar maakt? Met een potlood, heel zacht arceren.</p><p>Kijk ook naar het rooster van Gonnie en de agenda van Folkert. Wie was hier op donderdag?</p><p>Je opa</p>`,
+   att:[['Rooster van Gonnie Wester',()=>`<table class="dm-table"><tr><th>Ma</th><th>Di</th><th>Wo</th><th>Do</th><th>Vr</th></tr><tr><td>8–14</td><td>8–14</td><td>8–14</td><td><b>vrij</b></td><td>8–14</td></tr></table>`],
+    ['Agenda van Folkert Rijpma',()=>`<div class="br-card"><b>Week 11</b><p>Do 14 maart: <span class="hand">markt Oosthaven, kraam met eieren, 8–17 uur</span></p></div>`],
+    ['Brief op Thijmens kamer',()=>`<div class="br-card"><b>Incassobureau Noordkust</b><p>Aan: T. Brinkman<br>Laatste aanmaning: € 18.400 vóór 1 april. Daarna volgt beslag.</p></div>`],
+    ['De volgende bladzijde van het gastenboek',()=>`<div class="br-rub" id="brRub"><div class="br-under"><span>Donderdag 14 maart</span><span>14:20 · T.</span><span class="hand">even langs voor opa</span></div><canvas></canvas><p class="hint">Wrijf met je vinger over het papier, als met een potlood.</p></div>`]],
+   steps:[{ask:['Het gastenboek ligt voor me. De bladzijde van donderdag is weg, maar je ziet de afdrukken op de volgende bladzijde.','Ik heb er met een potlood over gewreven. Wat staat er? Wie was er om 14:20? Typ de voornaam.'],ans:['THIJMEN'],
+     ok:['T. Thijmen. Gonnie was vrij en Folkert stond op de markt.','En Thijmen zei op de begrafenis dat hij opa sinds kerst niet meer had gezien…'],hint:['Wrijf over de bladzijde van het gastenboek. Er verschijnt een tijd en een letter.','Gonnie was die dag vrij. Folkert stond de hele dag op de markt. Wie begint er met een T?']}]}],
+ final:{intro:['Ik heb alles. Maar ik wil zeker zijn voordat ik naar de politie ga.','Wat denk jij?'],
+  qs:[{q:'Wie heeft opa Ate vergiftigd?',o:['Thijmen Brinkman','Gonnie Wester','Folkert Rijpma'],a:0},
+   {q:'Hoe deed de dader het?',o:['Slaappillen van Folkert in de medicijndoos, op donderdag','Gif in de wijn in de kelder','Een verkeerd recept van de dokter'],a:0},
+   {q:'Waarom?',o:['Schulden: € 18.400 bij het incassobureau','Ruzie over de kippen','Hij wilde de baan van Gonnie'],a:0}],
+  ok:['Dat denk ik ook. Ik bel de politie.','Dank je. Zonder jou had ik opa’s brieven nooit begrepen. ❤️'],bad:['Dat klopt niet helemaal, denk ik. Kijk nog eens naar de brieven.'],
+  story:'Thijmen Brinkman had grote schulden: € 18.400, en hij moest vóór 1 april betalen. Hij wist dat opa zijn huis aan Juul zou nalaten, en hij hoopte dat er bij opa’s dood toch geld voor hem zou zijn. In maart voerde hij de kippen van buurman Folkert en nam stiekem een strip slaappillen mee. Op donderdag 14 maart, de vrije dag van Gonnie en terwijl Folkert op de markt stond, kwam hij om 14:20 langs. Hij schreef uit gewoonte zijn naam in het gastenboek en verving de gele pil in opa’s medicijndoos door een slaappil. Toen hij later besefte dat zijn naam erin stond, scheurde hij de bladzijde eruit. Maar de pen had doorgedrukt.'}}];
+const BRKEY='md-brieven';
+let brd=store.get(BRKEY)||{cur:null,cases:{}};if(!brd.cases)brd={cur:null,cases:{}};
+const saveBr=()=>store.set(BRKEY,brd);
+const brState=id=>(brd.cases[id]=brd.cases[id]||{start:false,ep:0,step:0,open:false,log:[],hints:0,tab:'brief',fans:{},tries:0,done:false,notes:''});
+let brBusy=false;
+function brGo(c){brd.cur=c;saveBr();renderBrieven();window.scrollTo({top:0})}
+const brAvatar=(who,cls='')=>`<span class="br-av ${cls}"><svg viewBox="-17 -133 34 37" aria-hidden="true">${toonBody(who)}</svg></span>`;
+function brSay(s,lines,after){brBusy=true;let i=0;const step=()=>{if(i>=lines.length){brBusy=false;saveBr();if(after)after();if(s.tab==='chat'||!s.open)renderBrieven();else{const st=document.querySelector('.br-top small');if(st)st.textContent='online'}return}
+  const box=$('brChat');if(box){box.insertAdjacentHTML('beforeend','<div class="br-typing" id="brTyping"><i></i><i></i><i></i></div>');box.scrollTop=box.scrollHeight}
+  setTimeout(()=>{const t=$('brTyping');if(t)t.remove();s.log.push(['h',lines[i++]]);saveBr();brDrawLog(s);setTimeout(step,250)},Math.min(1600,500+lines[i].length*14))};step()}
+function brDrawLog(s){const C=BRCASES.find(c=>c.id===brd.cur),box=$('brChat');if(!box)return;
+  box.innerHTML=s.log.map(([w,t])=>w==='d'?`<p class="br-day">${t}</p>`:`<div class="br-msg ${w==='h'?'in':'out'}">${w==='h'?brAvatar(C.hero):''}<p>${t}</p></div>`).join('');box.scrollTop=box.scrollHeight}
+function brRub(){const w=$('brRub');if(!w)return;const cv=w.querySelector('canvas'),r=w.querySelector('.br-under').getBoundingClientRect();cv.width=r.width;cv.height=r.height;const g=cv.getContext('2d');
+  g.fillStyle='#f4ecd8';g.fillRect(0,0,cv.width,cv.height);g.strokeStyle='rgba(120,100,70,.18)';for(let y=14;y<cv.height;y+=22){g.beginPath();g.moveTo(0,y);g.lineTo(cv.width,y);g.stroke()}
+  g.globalCompositeOperation='destination-out';g.lineCap='round';g.lineWidth=26;let last=null;
+  const pos=e=>{const b=cv.getBoundingClientRect(),p=e.touches?e.touches[0]:e;return [p.clientX-b.left,p.clientY-b.top]};
+  const mv=e=>{if(!last)return;e.preventDefault();const p=pos(e);g.strokeStyle='rgba(0,0,0,.35)';g.beginPath();g.moveTo(...last);g.lineTo(...p);g.stroke();last=p};
+  let moved=0;const S=brState(brd.cur);if(S.rubbed){cv.remove();return}cv.onpointerdown=e=>{last=pos(e);cv.setPointerCapture&&cv.setPointerCapture(e.pointerId)};cv.onpointermove=e=>{if(last)moved++;mv(e)};cv.onpointerup=cv.onpointercancel=()=>{last=null;if(moved>40&&!S.rubbed){S.rubbed=true;saveBr()}}}
+function renderBrieven(){const P=$('pBrieven');
+  if(!brd.cur){P.innerHTML=`<h2 class="bigtitle" style="font-size:clamp(34px,10.5vw,62px)">Brievenreeks</h2>${PENCIL}<p class="lead">Een zaak in afleveringen. Elke aflevering komt er een nieuwe brief binnen, vol puzzels. De hoofdpersoon chat met je mee: los de puzzels op en stuur haar je antwoord. Vast? Vraag om een hint.</p>
+    <div class="caselist">${BRCASES.map(c=>{const s=brState(c.id);return `<article class="casecard br-cardx"><span class="kicker">${c.level} · ${c.time}</span><h3>${c.title}</h3><p>${c.blurb}</p>
+     <div class="controls"><span class="hint">${s.done?'Opgelost':s.start?`Aflevering ${Math.min(s.ep+1,c.eps.length)} van ${c.eps.length}`:'Nog niet begonnen'}</span><button class="btn ${s.done?'':'primary'} small" type="button" data-brcase="${c.id}">${s.done?'Teruglezen':s.start?'Verder':'Begin'}</button></div></article>`}).join('')}</div>`;
+   P.querySelectorAll('[data-brcase]').forEach(b=>b.onclick=()=>brGo(b.dataset.brcase));saveBr();return}
+  const C=BRCASES.find(c=>c.id===brd.cur);if(!C)return brGo(null);const s=brState(C.id),N=C.eps.length,fin=s.ep>=N;
+  const head=`<button class="btn small backbtn" id="brList" type="button">← Alle reeksen</button><div class="storyhead"><span class="kicker">${C.level} · ${C.time}</span><h3>${C.title}</h3>${filmBtn('brieven',C.id)}${s.done?endBtn('brieven',C.id):''}</div>`;
+  const eps=`<div class="br-eps">${C.eps.map((e,i)=>`<span class="${i<s.ep?'done':i===s.ep?'cur':''}">${i<s.ep?'✓':i+1}</span>`).join('<i></i>')}<i></i><span class="${s.done?'done':fin?'cur':''}">${s.done?'✓':'?'}</span></div>`;
+  if(!s.start||!s.open){const E=C.eps[Math.min(s.ep,N-1)];
+    P.innerHTML=`${head}${eps}<button class="br-env" id="brOpen" type="button"><span class="br-flap"></span><span class="br-stamp">${fin?'?':s.ep+1}</span><span class="br-to">Aan: ${C.hero}</span><b>${fin?'Ontknoping':`Aflevering ${s.ep+1}`}</b><em>${fin?'Wie was het?':E.t}</em><span class="br-seal">Tik om te openen</span></button>`;
+    $('brList').onclick=()=>brGo(null);
+    $('brOpen').onclick=()=>{const go=()=>{s.start=true;s.open=true;s.tab=fin?'chat':'brief';if(fin){s.log.push(['d','Ontknoping']);brSay(s,C.final.intro)}else{s.log.push(['d',`Aflevering ${s.ep+1} · ${C.eps[s.ep].t}`]);saveBr();renderBrieven();brSay(s,C.eps[s.ep].steps[s.step].ask)}};
+      $('brOpen').classList.add('opening');setTimeout(()=>{if(!s.start&&!filmSeen('brieven',C.id))storyFilm('brieven',C.id,go);else go()},500)};return}
+  const E=C.eps[Math.min(s.ep,N-1)],t=s.tab||'brief';
+  const TABS=fin?[['chat',`Chat met ${C.heroShort}`]]:[['brief','Brief'],['bijlagen',`Bijlagen ${E.att.length}`],['chat',`Chat met ${C.heroShort}`]];
+  let body='';
+  if(t==='brief'&&!fin)body=`<article class="sheet letter br-letter"><header><span>Aflevering ${s.ep+1}</span><b>${E.t}</b></header><div class="sheet-body hand">${E.letter}</div></article><div class="controls"><button class="btn primary" type="button" data-brtab="bijlagen">Bekijk de bijlagen →</button></div>`;
+  if(t==='bijlagen'&&!fin)body=E.att.map(([n,f],i)=>`<article class="sheet br-att"><header><span>Bijlage ${i+1}</span><b>${n}</b></header><div class="sheet-body">${f()}</div></article>`).join('')+`<div class="controls"><button class="btn primary" type="button" data-brtab="chat">Naar de chat →</button></div>`;
+  if(t==='chat'){const st=!fin&&E.steps[s.step];
+    body=`<div class="br-phone"><div class="br-top">${brAvatar(C.hero,'big')}<div><b>${C.hero}</b><small>${brBusy?'typt…':'online'}</small></div></div><div class="br-chat" id="brChat"></div>
+     ${s.done?`<p class="br-end">Zaak opgelost</p>`:fin?`<div class="br-final">${C.final.qs.map((q,i)=>`<label><b>${q.q}</b><select data-brq="${i}"><option value="">Kies…</option>${q.o.map((o,k)=>`<option value="${k}" ${s.fans[i]===k?'selected':''}>${o}</option>`).join('')}</select></label>`).join('')}<button class="btn primary" id="brAcc" type="button">Stuur naar ${C.heroShort}</button></div>`
+      :`<form class="br-in" id="brForm"><input id="brQ" autocomplete="off" autocapitalize="characters" spellcheck="false" enterkeyhint="send" placeholder="Typ je antwoord" aria-label="Antwoord"><button class="btn primary" type="submit" aria-label="Verstuur">➤</button></form><button class="btn small br-hint" id="brHint" type="button">💡 Vraag om een hint</button>`}</div>`}
+  P.innerHTML=`${head}${eps}<nav class="ktabs" aria-label="Onderdelen">${TABS.map(([k,l])=>`<button type="button" data-brtab="${k}" aria-pressed="${k===t}">${l}</button>`).join('')}</nav><div class="kbody">${body}</div>
+   ${s.done?`<h4 class="solh">Wat er gebeurde</h4><div class="verdict"><p>${C.final.story}</p></div><div class="controls"><button class="btn" id="brReset" type="button">Reeks opnieuw spelen</button></div>`:''}
+   <section class="notes"><label for="brNotes"><b>Notitieblok</b></label><textarea id="brNotes" rows="4" placeholder="Codes, namen, tijden"></textarea></section>`;
+  const on=(id,f)=>{const el=$(id);if(el)el.onclick=f};
+  $('brNotes').value=s.notes||'';$('brNotes').oninput=e=>{s.notes=e.target.value;saveBr()};on('brList',()=>brGo(null));
+  P.querySelectorAll('[data-brtab]').forEach(b=>b.onclick=()=>{s.tab=b.dataset.brtab;saveBr();renderBrieven();window.scrollTo({top:0})});
+  brDrawLog(s);brRub();
+  const f=$('brForm');if(f)f.onsubmit=e=>{e.preventDefault();if(brBusy)return;const v=$('brQ').value.trim();if(!v)return;const st=E.steps[s.step];s.log.push(['u',v.replace(/</g,'&lt;')]);
+    const n=v.toUpperCase().replace(/[^A-Z0-9]/g,'');if(st.ans.some(a=>a===n)){const last=s.step>=E.steps.length-1;brSay(s,st.ok,()=>{if(last){s.ep++;s.step=0;s.open=false;s.log.push(['d',s.ep>=N?'Alle brieven gelezen':'Einde aflevering'])}else{s.step++;brSay(s,E.steps[s.step].ask)}})}
+    else{brSay(s,[pick(['Hmm, dat past niet. Kijk nog eens?','Dat werkt niet… 🤔','Nee, dat is het niet. Weet je het zeker?'],Math.random)])}};
+  on('brHint',()=>{if(brBusy)return;const st=E.steps[s.step];s.hints++;const k=s.hk=(s.hk||{});const key=s.ep+':'+s.step;k[key]=(k[key]||0);const h=st.hint[Math.min(k[key],st.hint.length-1)];k[key]++;s.log.push(['u','Heb je een hint?']);brSay(s,[h])});
+  P.querySelectorAll('[data-brq]').forEach(el=>el.onchange=()=>{s.fans[el.dataset.brq]=el.value===''?null:+el.value;saveBr()});
+  on('brAcc',()=>{if(brBusy)return;if(C.final.qs.some((q,i)=>s.fans[i]==null))return;const good=C.final.qs.every((q,i)=>s.fans[i]===q.a);s.tries++;
+    s.log.push(['u',C.final.qs.map((q,i)=>q.o[s.fans[i]]).join(' · ')]);
+    if(good||s.tries>=2){s.done=true;s.won=good;brSay(s,good?C.final.ok:['Ik heb de politie gebeld. Zij hebben het uitgezocht… en het was anders dan we dachten.'],()=>{setTimeout(()=>endFilm('brieven',C.id),600)})}
+    else brSay(s,C.final.bad)});
+  on('brReset',()=>{brd.cases[C.id]={start:true,ep:0,step:0,open:false,log:[],hints:0,tab:'brief',fans:{},tries:0,done:false,notes:s.notes||''};saveBr();renderBrieven()});
+}
+
 const SCR={
  speur:{
   veiling:[['t','De laatste veiling','veiling','Een zaak voor Inspecteur Snoek'],
@@ -3578,6 +3710,12 @@ const SCR={
    ['s','Escaperoom De Kluis · maandag 09:20',['dark',['lock',150,175,1.4]],'Gamemaster Mats vindt eigenaar Jeroen Smeets in de kamer ‘Het Laboratorium’. De deur zat van buitenaf op slot.'],
    ['p','Naast het slachtoffer',['dark',['goldbar',150,175,1.6],['marker',235,190,1,1]],'Een nep-goudstaaf','Naast hem ligt een zware nep-goudstaaf uit de kamer ‘De Bankkluis’.'],
    ['e','Wie had de code van de deur?','Pak de telefoon']]},
+ brieven:{
+  ate:[['t','Brieven van opa Ate','opa Ate','Brievenreeks · Westerburen'],
+   ['s','Westerburen · maart',['dusk',['house',150,165,1.1]],'In het oude huis aan de dijk woonde opa Ate Brinkman. Vorige week is hij gestorven.'],
+   ['s','De werkkamer',['wall',['bureau',150,172,1],['letter',150,112,.8]],'Zijn kleindochter Juul ruimt zijn bureau op. Achter de la zit een envelop, met haar naam erop.'],
+   ['l','In het huis',[['Juul','kleindochter'],['Thijmen','kleinzoon'],['Gonnie','huishoudster'],['Folkert','buurman']],'Vier mensen kwamen hier elke week. Opa vertrouwde er maar één.'],
+   ['e','Wat wilde opa haar vertellen?','Open de eerste brief']]},
  databank:{
   hartman:[['t','De huurauto','huurauto','Politiedatabase · zaak 001 · Lindewaard'],
    ['s','12 maart 2026 · 06:50',['night',['garage',150,165,1.1]],'De schoonmaker van Wessels Auto’s vindt eigenaar Ruben Wessels dood in zijn kantoor.'],
@@ -3676,6 +3814,13 @@ const SCREND={
    ['s','Het Laboratorium',['dark',['goldbar',255,190,1]],'Ze sloeg Jeroen met de zware nep-goudstaaf.',{hit:'metaal',act:'strike',x:150}],
    ['s','22:58',['dark',['door',150,170,1],['lock',235,170,.7]],'Om 22:58 deed ze de deur van buitenaf op slot.'],
    ['x','Fenna de Haan','de goudstaaf','het Laboratorium']]},
+ brieven:{
+  ate:[['t','Zo is het gebeurd','gebeurd','Brieven van opa Ate'],
+   ['s','Maart',['desk',['letter',140,172,1.3],['money',225,176,.9]],'Thijmen had € 18.400 schuld. Hij hoopte op geld na de dood van opa.'],
+   ['s','Bij de buurman',['grass',['shed',150,165,1]],'Toen hij de kippen van Folkert voerde, nam hij stiekem een strip slaappillen mee.'],
+   ['s','Donderdag · 14:20',['wall',['table',150,172,1],['pills',150,130,.9]],'Gonnie was vrij en Folkert stond op de markt. Thijmen verving opa’s gele pil door een slaappil.',{act:'poison',x:210,y:172,s:.5}],
+   ['s','Het gastenboek',['desk',['books',150,170,1]],'Daarna scheurde hij de bladzijde uit het gastenboek. Maar de pen had doorgedrukt.'],
+   ['x','Thijmen Brinkman','slaappillen','het huis aan de dijk']]},
  databank:{
   hartman:[['t','Zo is het gebeurd','gebeurd','De huurauto'],
    ['s','Het geld',['desk',['money',150,175,1.4]],'Gerard Vermeer haalde al een jaar geld uit Wessels Auto’s. Ruben ontdekte het en wilde praten.'],
@@ -3693,6 +3838,7 @@ const SCREND={
    ['x','Ilse de Wit','het loodje','de drukkerij']]}};
 function endOk(game,id){try{if(game==='koud'){const c=COLD.find(x=>x.id===id),s=kd.cases[id];return !s||!s.acc||s.acc.d===c.answer.dader}
   if(game==='bericht'){const c=BCASES.find(x=>x.id===id),s=bd.cases[id];return !s||!s.acc||s.acc.d===c.answer.dader}
+  if(game==='brieven'){const s=brd.cases[id];return !s||!s.done||s.won!==false}
   if(game==='databank'){const c=DBCASES.find(x=>x.id===id),s=dbd.cases[id];return !s||!s.done||c.qs.every((q,i)=>s.ans[i]===q.a)}
   if(game==='dossier'){const c=DOSSIERS.find(x=>x.id===id),s=dd.cases[id];return !s||s.ans[0]===c.qs[0].a}}catch(e){}return true}
 function endFilm(game,id){const s=(SCREND[game]||{})[id];if(!s)return;fmPlay(fmStory(s,endOk(game,id)),{label:'Zo is het gebeurd',end:'Terug naar de zaak'})}
@@ -3719,7 +3865,7 @@ function pasData(){const sx=k=>store.get(k)||{solved:0,streak:0},m=sx('md-stats'
   const dosPerfect=DOSSIERS.some(c=>{const s=dd.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)&&!Object.values(s.hints||{}).some(v=>v>0)});
   const lhPerfect=lst&&lst.guess&&LHP.every((p,i)=>lst.guess[i]&&!lst.guess[i].m&&!lst.guess[i].w);
   const rows=[['murdle','Moorddossier',m.solved,null],['speur','Speurneus',speur,CASES.length],['koud','Cold Case',koud,COLD.length],['kamer','Kamermoord',km.solved,null],
-   ['landhuis','Het Landhuis',lh.solved,null],['spion','Spionage',spn.solved,null],['bericht','Laatste Bericht',ber,BCASES.length],['dossier','Dossiermap',dos,DOSSIERS.length],['databank','Politiedatabase',DBCASES.filter(c=>{const s=dbd.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,DBCASES.length]];
+   ['landhuis','Het Landhuis',lh.solved,null],['spion','Spionage',spn.solved,null],['bericht','Laatste Bericht',ber,BCASES.length],['dossier','Dossiermap',dos,DOSSIERS.length],['brieven','Brievenreeks',BRCASES.filter(c=>{const s=brd.cases[c.id];return s&&s.done&&s.won}).length,BRCASES.length],['databank','Politiedatabase',DBCASES.filter(c=>{const s=dbd.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,DBCASES.length]];
   const total=rows.reduce((a,r)=>a+r[2],0),streak=Math.max(m.streak||0,km.streak||0,lh.streak||0,spn.streak||0);
   const B=[['eerste','Eerste zaak','Los je eerste zaak op.',total,1],['tien','Volhouder','Los 10 zaken op.',total,10],['vijftig','Veteraan','Los 50 zaken op.',total,50],['honderd','Legende','Los 100 zaken op.',total,100],
    ['logicus','Logicus','10 keer Moorddossier opgelost.',m.solved,10],['meester','Meesterbrein','Niveau 5 vrijgespeeld in Moorddossier.',m.solved,40],
@@ -3850,7 +3996,12 @@ const HELP=[
    'Bij een persoon met een verhoor tik je op <b>▶ Bekijk het verhoor</b>. Je kunt het verhoor ook uitgeschreven lezen.',
    'Bij <b>Gevonden</b> staat alles wat je al hebt geopend. Bij <b>Beschuldig</b> beantwoord je drie vragen. Heb je iets fout, dan zie je welke en krijg je nog één poging.'],
   tips:['Schrijf elk nieuw nummer, kenteken en adres op in het notitieblok, en zoek het daarna op.','Vergelijk tijden: belgegevens, kentekencamera’s en verhoren moeten met elkaar kloppen.','Iemand die zegt dat hij thuis was, kan zijn telefoon thuis hebben gelaten.'],
-  extra:()=>`${DBCASES.length} ${DBCASES.length===1?'zaak':'zaken'}, elk ongeveer drie kwartier.`}
+  extra:()=>`${DBCASES.length} ${DBCASES.length===1?'zaak':'zaken'}, elk ongeveer drie kwartier.`},
+ {g:'brieven',name:'Brievenreeks',insp:'Zaak in afleveringen · in de stijl van de escape-spellen die per brief bij je thuiskomen',
+  what:'Een verhaal in afleveringen. Elke aflevering komt er een brief binnen met puzzels en bijlagen. De hoofdpersoon chat met je mee: zij vertelt wat ze ziet, jij stuurt haar de antwoorden.',
+  steps:['Kies een reeks en tik op de envelop om de eerste brief te openen.','Lees de <b>Brief</b> en bekijk de <b>Bijlagen</b>: foto’s, kaartjes, lijstjes. Soms moet je er iets mee doen, zoals wrijven met je vinger.','Ga naar de <b>Chat</b>. Typ je antwoord en stuur het. Klopt het, dan gaat het verhaal verder.','Vast? Tik op <b>Vraag om een hint</b>. De hoofdpersoon geeft je een duwtje.','Na de laatste brief volgt de ontknoping: kies wie het deed, hoe en waarom. Fout? Dan krijg je nog één kans.'],
+  tips:['Lees de brief heel precies. De instructie staat er vaak gewoon in.','Hoofdletters en spaties maken niet uit bij je antwoord.','Schrijf codes en namen op in het notitieblok.'],
+  extra:()=>`${BRCASES.length} ${BRCASES.length===1?'reeks':'reeksen'}, elk drie afleveringen.`}
 ];
 function renderUitleg(){
   $('pUitleg').innerHTML=`<h2 class="bigtitle">Uitleg</h2>${PENCIL}
@@ -3888,7 +4039,7 @@ function setTab(t){st.tab=t;save();renderPanes();window.scrollTo({top:0})}
 function renderPanes(){
   const t=st.tab||'zaak';
   const g=game,M=g==='murdle';
-  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';$('pBericht').hidden=g!=='bericht';$('pDossier').hidden=g!=='dossier';$('pDatabank').hidden=g!=='databank';if(g==='databank'&&!$('pDatabank').innerHTML)renderDatabank();if(g==='dossier'&&!$('pDossier').innerHTML)renderDossier();if(g==='bericht'&&!$('pBericht').innerHTML)renderBericht();if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
+  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';$('pBericht').hidden=g!=='bericht';$('pDossier').hidden=g!=='dossier';$('pDatabank').hidden=g!=='databank';$('pBrieven').hidden=g!=='brieven';if(g==='brieven'&&!$('pBrieven').innerHTML)renderBrieven();if(g==='databank'&&!$('pDatabank').innerHTML)renderDatabank();if(g==='dossier'&&!$('pDossier').innerHTML)renderDossier();if(g==='bericht'&&!$('pBericht').innerHTML)renderBericht();if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
   document.querySelector('.tabs').hidden=!M;document.querySelector('.games').hidden=g==='uitleg'||g==='pas';$('helpBtn').textContent=g==='uitleg'?'← Terug':'? Uitleg';$('pasBtn').textContent=g==='pas'?'← Terug':'Pas';$('pPas').hidden=g!=='pas';if(g==='pas')renderPas();document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('lvLine').hidden=!M;$('stats').hidden=!M;
   document.querySelectorAll('.games button').forEach(b=>b.setAttribute('aria-selected',b.dataset.g===g));
   if(g==='speur'&&!$('pVerhaal').innerHTML)renderStory();if(g==='koud'&&!$('pKoud').innerHTML)renderKoud();
@@ -3994,7 +4145,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261103064355';
+const APPV='20261103073909';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

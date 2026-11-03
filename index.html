@@ -770,6 +770,14 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .vh-conf{margin-top:4px;border:2px solid #c0392b;background:#fff3f0;color:#c0392b;border-radius:999px;padding:4px 12px;font:700 13px var(--cond);cursor:pointer}
 .vh-pick{background:#fff7e6;border:2px solid #e08a1e;border-radius:14px;padding:10px}.vh-quote{font:italic 15px Georgia,serif;margin:0 0 8px}.vh-ev{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;text-align:left;border:2px solid var(--ink);border-radius:10px;background:#fff;padding:8px 10px;margin-bottom:6px;cursor:pointer;font:inherit;color:var(--ink)}.vh-ev b{font:700 15px var(--cond)}.vh-ev span{font-size:13px;color:#444}
 .vh-card{border-left:6px solid #2f6db5}
+.tl-line{list-style:none;margin:6px 0;padding:0 0 0 18px;border-left:3px solid var(--ink);display:flex;flex-direction:column;gap:8px}
+.tl-ev{position:relative}.tl-dot{position:absolute;left:-27px;top:12px;width:14px;height:14px;border-radius:50%;background:var(--card);border:3px solid var(--ink)}.tl-ev.ok .tl-dot{background:var(--ok);border-color:var(--ok)}.tl-ev.bad .tl-dot{background:var(--red);border-color:var(--red)}
+.tl-body{background:var(--card);border:2px solid var(--ink);border-radius:12px;padding:8px 10px}.tl-ev.ok .tl-body{border-color:var(--ok);background:#eef5ef}.tl-ev.bad .tl-body{border-color:var(--red);background:#fbeceb}.tl-body p{margin:4px 0 0;font-size:14.5px}
+.tl-row{display:flex;align-items:center;justify-content:space-between;gap:8px}.tl-row b{font:700 16px var(--cond)}.tl-row select{font:700 15px var(--cond);padding:4px 6px;border-radius:8px}.tl-time{font:800 16px var(--cond);color:var(--ok)}
+.tl-lanes{position:relative;background:var(--card);border:2px solid var(--ink);border-radius:12px;padding:10px 10px 26px}.tl-win{position:absolute;top:0;bottom:20px;background:rgba(192,57,43,.15);border-left:2px dashed #c0392b;border-right:2px dashed #c0392b;margin-left:96px;max-width:calc(100% - 106px)}.tl-win span{position:absolute;top:2px;left:4px;font:700 10px var(--cond);color:#c0392b;text-transform:uppercase}
+.tl-lane{display:grid;grid-template-columns:90px 1fr;grid-template-rows:auto auto;column-gap:6px;align-items:center;margin:6px 0}.tl-lane b{display:flex;align-items:center;gap:4px;font:700 13px var(--cond)}.tl-lane .br-av{width:24px;height:24px}
+.tl-track{position:relative;height:14px;background:#eee;border-radius:7px}.tl-w{position:absolute;top:-4px;bottom:-4px;background:rgba(192,57,43,.22);border-left:2px dashed #c0392b;border-right:2px dashed #c0392b}.tl-track i{position:absolute;top:0;bottom:0;background:#2e8b57;border-radius:7px}.tl-lane small{grid-column:2;font-size:11px;color:var(--muted)}
+.tl-axis{position:absolute;left:106px;right:10px;bottom:4px;height:14px}.tl-axis span{position:absolute;transform:translateX(-50%);font:600 10px var(--cond);color:var(--muted)}.tl-card{border-left:6px solid #7d3c98}
 </style>
 </head>
 <body>
@@ -799,6 +807,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
     <button role="tab" type="button" data-g="team"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="3" fill="currentColor"/><circle cx="17" cy="8" r="3" fill="currentColor"/><circle cx="12" cy="6" r="3.4" fill="currentColor"/><path d="M1 20c0-4 3-6 6-6s6 2 6 6zM11 20c0-4 3-6 6-6s6 2 6 6z" fill="currentColor"/><path d="M5 21c0-5 3-7 7-7s7 2 7 7z" fill="currentColor"/></svg>Teamzaak</b><span>Drie specialisten, één zaak</span></button>
     <button role="tab" type="button" data-g="casino"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4" fill="currentColor"/><circle cx="8" cy="8" r="1.7" fill="var(--card)"/><circle cx="16" cy="16" r="1.7" fill="var(--card)"/><circle cx="12" cy="12" r="1.7" fill="var(--card)"/><circle cx="16" cy="8" r="1.7" fill="var(--card)"/><circle cx="8" cy="16" r="1.7" fill="var(--card)"/></svg>Casino-escape</b><span>Ontsnap en wijs de dader aan</span></button>
     <button role="tab" type="button" data-g="verhoor"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v4" stroke="currentColor" stroke-width="2"/><path d="M7 6h10l-2 4H9z" fill="currentColor"/><circle cx="12" cy="15" r="3.4" fill="currentColor"/><path d="M5 23c0-4 3-6 7-6s7 2 7 6z" fill="currentColor"/></svg>Het Verhoor</b><span>Prik de leugens door</span></button>
+    <button role="tab" type="button" data-g="tijdlijn"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18" stroke="currentColor" stroke-width="2.4"/><circle cx="6" cy="12" r="2.6" fill="currentColor"/><circle cx="12" cy="12" r="2.6" fill="currentColor"/><circle cx="18" cy="12" r="2.6" fill="currentColor"/><path d="M6 4v5M12 15v5M18 4v5" stroke="currentColor" stroke-width="2"/></svg>De Tijdlijn</b><span>Wie had de gelegenheid?</span></button>
   </div>
   <div class="stats" id="stats"></div>
 
@@ -867,6 +876,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <section class="pane" id="pTeam" hidden></section>
   <section class="pane" id="pCasino" hidden></section>
   <section class="pane" id="pVerhoor" hidden></section>
+  <section class="pane" id="pTijdlijn" hidden></section>
   <section class="pane" id="pUitleg" hidden></section>
   <section class="pane" id="pPas" hidden></section>
 
@@ -4169,6 +4179,80 @@ function renderVerhoor(){const P=$('pVerhoor');
   on('vhReset',()=>{vhd.cases[C.id]={start:true,asked:[],adm:[],log:[['s','Weer jij. Ik heb niks gedaan.']],cof:VHMAX,stress:10,mood:'smug',pick:null,tries:0,done:false,won:false,notes:s.notes||''};saveVh();renderVerhoor()});
 }
 
+
+// ---------- De Tijdlijn: zet de gebeurtenissen op de juiste tijd en ontdek wie de gelegenheid had ----------
+// Nieuwe zaken achteraan toevoegen. Ids nooit wijzigen: de voortgang hangt eraan.
+const TLCASES=[{id:'meerzicht',nr:'001',title:'Onweer op camping Meerzicht',level:'Gemiddeld',time:'± 25 min',
+ blurb:'Tijdens een zwaar onweer valt de stroom uit op camping Meerzicht. Een half uur later is de campingbaas dood. Leg de avond op de juiste volgorde en zie wie de gelegenheid had.',
+ brief:`<p><b>Camping Meerzicht, vrijdag 22:30.</b> Campingbaas <b>Anton Kievit</b> (58) wordt dood gevonden bij de stroomkast aan het meer. Hij is neergeslagen met zijn eigen zware zaklamp.</p>
+  <p>Die ochtend had Anton tegen een vaste gast, Fleur Dekema, gezegd dat ze de camping moest verlaten: er was geld weg uit de kassa van de receptie.</p>
+  <p>Je hebt negen losse gebeurtenissen van die avond. Niet bij allemaal staat de tijd erbij, maar je kunt hem uitrekenen. Kies bij elke kaart de juiste tijd en tik op <b>Controleer</b>. Staat alles goed, dan zie je wie er tijdens de moord <b>geen</b> alibi had.</p>`,
+ times:['21:20','21:30','21:40','21:50','21:55','21:58','22:00','22:10','22:30'],
+ cards:[['storm','21:40','Het onweer','Logboek van de camping: om 21:40 slaat de bliksem in. Op de hele camping valt de stroom uit.'],
+  ['dood','22:30','Anton gevonden','Antons vrouw vindt hem bij de stroomkast, twintig minuten nadat de stroom terugkwam.'],
+  ['bon','21:20','Patat','Fleur haalt patat bij de snackbar. Op haar bonnetje staat: twintig over negen.'],
+  ['licht','22:10','De stroom is terug','Precies een half uur na de storing gaan alle lampen weer aan. Anton komt niet terug.'],
+  ['kaart','21:30','Kaarten in de kantine','Willemijn gaat in de kantine kaarten. ‘Tien minuten later begon het te onweren,’ zegt de barman.'],
+  ['lamp','21:50','Anton gaat op pad','Anton pakt zijn zaklamp en loopt naar de stroomkast bij het meer. ‘Tien minuten na de storing,’ zegt zijn vrouw.'],
+  ['jas','22:00','De gele regenjas','Een meisje ziet bij het meer iemand in een gele regenjas lopen. ‘Op mijn telefoon was het precies tien uur.’'],
+  ['bel','21:55','Een lang telefoontje','Rens belt vanuit zijn tent zijn moeder, vijf minuten nadat Anton vertrok. Volgens zijn telefoon duurt het gesprek 25 minuten.'],
+  ['boom','21:58','De slagboom','Het logboek van de slagboom bij de ingang: twee minuten voor tien gaat hij open. Beheerder Nils laat een laat gezin binnen.']],
+ people:[['Fleur Dekema','vaste gast',`‘Na de patat ben ik naar mijn caravan gegaan en heb ik de hele avond geslapen. Mijn gele regenjas hing de hele tijd binnen.’`],
+  ['Rens Haverkamp','gast in een tent',`‘Ik zat in mijn tent te bellen met mijn moeder. Het regende zo hard, ik ben er niet uit geweest.’ Rens heeft een blauwe regenjas.`],
+  ['Willemijn Ooms','gast',`‘Ik zat in de kantine tot het licht weer aanging. Vraag het maar aan de barman.’ De barman bevestigt dat.`],
+  ['Nils Brakel','beheerder',`‘Ik stond bij de slagboom en liep daarna terug naar de receptie.’ Van de slagboom naar het meer is het een kwartier lopen. Hij draagt een groene campingjas.`]],
+ lanes:[['Fleur',[[21.33,21.33,'snackbar']],'Geen alibi na 21:20'],['Rens',[[21.917,22.333,'aan de telefoon']],'Belt van 21:55 tot 22:20'],['Willemijn',[[21.5,22.167,'kantine']],'In de kantine tot 22:10'],['Nils',[[21.967,21.967,'slagboom']],'21:58 bij de slagboom, een kwartier lopen van het meer']],
+ win:[21.833,22.167],
+ qs:[{q:'Wie heeft Anton Kievit vermoord?',o:['Fleur Dekema','Rens Haverkamp','Willemijn Ooms','Nils Brakel'],a:0,x:'Alleen Fleur had tussen 21:50 en 22:10 geen alibi.'},
+  {q:'Welk moment verraadt de dader?',o:['22:00: de gele regenjas bij het meer','21:20: het bonnetje van de snackbar','21:58: de slagboom','21:55: het telefoontje'],a:0,x:'Om 22:00 liep iemand in een gele regenjas bij het meer. Fleur heeft als enige een gele regenjas.'},
+  {q:'Waarom deed ze het?',o:['Anton zette haar van de camping, vanwege het geld uit de kassa','Ruzie over een staanplaats','Ze wilde de camping kopen','Jaloezie'],a:0,x:'Die ochtend had Anton gezegd dat ze moest vertrekken. Hij wist dat zij het geld had gepakt.'}],
+ story:'Fleur Dekema had geld uit de kassa van de receptie gepakt. Die ochtend zei Anton dat ze de camping moest verlaten. Toen om 21:40 de stroom uitviel, zag Fleur haar kans. Ze trok haar gele regenjas aan en wachtte bij het meer. Om 21:50 kwam Anton met zijn zaklamp naar de stroomkast. Ze kregen ruzie, en ze sloeg hem met zijn eigen zaklamp. Om 22:00 zag een meisje haar weglopen. Toen om 22:10 het licht weer aanging, lag Fleur al in haar caravan.'}];
+const TLKEY='md-tijdlijn';
+let tld=store.get(TLKEY)||{cur:null,cases:{}};if(!tld.cases)tld={cur:null,cases:{}};
+const saveTl=()=>store.set(TLKEY,tld);
+const tlState=id=>(tld.cases[id]=tld.cases[id]||{start:false,pick:{},ok:[],checks:0,tab:'tijd',ans:{},tries:0,last:null,done:false,notes:''});
+function tlGo(c){tld.cur=c;saveTl();renderTijdlijn();window.scrollTo({top:0})}
+const tlH=t=>{const [h,m]=t.split(':').map(Number);return h+m/60};
+function tlLanes(C){const a=20.9,b=22.6,X=v=>((v-a)/(b-a)*100).toFixed(2);
+  return `<div class="tl-lanes">${C.lanes.map(([n,segs,lab])=>`<div class="tl-lane"><b>${brAvatar(n+' '+(C.people.find(p=>p[0].startsWith(n))||[''])[0].split(' ')[1])}${n}</b><div class="tl-track"><span class="tl-w" style="left:${X(C.win[0])}%;width:${(X(C.win[1])-X(C.win[0])).toFixed(2)}%"></span>${segs.map(([s,e,t])=>`<i style="left:${X(s)}%;width:${Math.max(2.2,X(e)-X(s))}%" title="${t}"></i>`).join('')}</div><small>${lab}</small></div>`).join('')}
+   <div class="tl-axis">${['21:00','21:30','22:00','22:30'].map(t=>`<span style="left:${X(tlH(t))}%">${t}</span>`).join('')}</div></div>`}
+function renderTijdlijn(){const P=$('pTijdlijn');
+  if(!tld.cur){P.innerHTML=`<h2 class="bigtitle">De Tijdlijn</h2>${PENCIL}<p class="lead">Je krijgt losse gebeurtenissen van één avond. Bij sommige staat de tijd erbij, bij andere moet je hem uitrekenen. Zet alles op de juiste tijd. Dan zie je in één oogopslag wie er tijdens de moord geen alibi had.</p>
+    <div class="caselist">${TLCASES.map(c=>{const s=tlState(c.id);return `<article class="casecard tl-card"><span class="kicker">Zaak ${c.nr} · ${c.level} · ${c.time}</span><h3>${c.title}</h3><p>${c.blurb}</p>
+     <div class="controls"><span class="hint">${s.done?(c.qs.every((q,i)=>s.ans[i]===q.a)?'Opgelost':'Gesloten, niet alles goed'):s.start?`${s.ok.length}/${c.cards.length} op de juiste tijd`:'Nog niet begonnen'}</span><button class="btn ${s.done?'':'primary'} small" type="button" data-tlcase="${c.id}">${s.done?'Teruglezen':s.start?'Verder':'Start'}</button></div></article>`}).join('')}</div>`;
+   P.querySelectorAll('[data-tlcase]').forEach(b=>b.onclick=()=>tlGo(b.dataset.tlcase));saveTl();return}
+  const C=TLCASES.find(c=>c.id===tld.cur);if(!C)return tlGo(null);const s=tlState(C.id),all=s.ok.length===C.cards.length;
+  const head=`<button class="btn small backbtn" id="tlList" type="button">← Alle zaken</button><div class="storyhead"><span class="kicker">Zaak ${C.nr} · ${C.level} · ${C.time}</span><h3>${C.title}</h3>${filmBtn('tijdlijn',C.id)}${s.done?endBtn('tijdlijn',C.id):''}</div>`;
+  if(!s.start){P.innerHTML=`${head}<article class="sheet letter"><header><span>Melding</span><b>${C.title}</b></header><div class="sheet-body">${C.brief}</div></article><div class="controls"><button class="btn primary" id="tlIn" type="button">Naar de tijdlijn</button></div>`;
+    $('tlList').onclick=()=>tlGo(null);$('tlIn').onclick=()=>{const go=()=>{s.start=true;saveTl();renderTijdlijn()};if(!filmSeen('tijdlijn',C.id))storyFilm('tijdlijn',C.id,go);else go()};return}
+  const t=s.tab||'tijd',TABS=[['tijd',`Tijdlijn ${s.ok.length}/${C.cards.length}`],['mensen','Verklaringen'],['dader',s.done?'Oplossing':all?'Wijs de dader aan':'🔒 Dader'],['melding','Melding']];
+  let body='';
+  if(t==='melding')body=`<article class="sheet letter"><header><span>Melding</span><b>${C.title}</b></header><div class="sheet-body">${C.brief}</div></article>`;
+  if(t==='mensen')body=C.people.map(([n,r,v])=>`<article class="sheet rl-p"><header><span>${r}</span><b>${n}</b></header><div class="sheet-body rl-pv">${brAvatar(n,'big')}<p>${v}</p></div></article>`).join('');
+  if(t==='tijd'){const order=C.cards.map((c,i)=>[c,i]).sort((x,y)=>{const a=s.pick[x[0][0]],b=s.pick[y[0][0]];if(a&&b)return tlH(a)-tlH(b);if(a)return -1;if(b)return 1;return x[1]-y[1]});
+    body=`<p class="hint">Kies bij elke kaart de tijd. De kaarten schuiven vanzelf op volgorde. ${s.checks?`Gecontroleerd: ${s.checks} keer.`:''}</p>
+     <ol class="tl-line">${order.map(([c])=>{const ok=s.ok.includes(c[0]),v=s.pick[c[0]]||'',bad=s.last&&s.last.includes(c[0]);
+      return `<li class="tl-ev ${ok?'ok':''} ${bad?'bad':''}"><span class="tl-dot"></span><div class="tl-body"><div class="tl-row"><b>${c[2]}</b>${ok?`<span class="tl-time">${c[1]} ✓</span>`:`<select data-tl="${c[0]}" aria-label="Tijd voor ${c[2]}"><option value="">tijd?</option>${C.times.map(x=>`<option ${v===x?'selected':''}>${x}</option>`).join('')}</select>`}</div><p>${c[3]}</p></div></li>`}).join('')}</ol>
+     ${all?`<h4 class="solh">Wie was waar?</h4>${tlLanes(C)}<p class="hint">Het rode vlak is het moment van de moord: tussen het vertrek van Anton (21:50) en het terugkomen van de stroom (22:10).</p><div class="controls"><button class="btn primary" type="button" data-tltab="dader">Wijs de dader aan →</button></div>`
+      :`<p class="msg" id="tlMsg">${s.last?`${s.last.length} ${s.last.length===1?'kaart staat':'kaarten staan'} nog niet goed (rood).`:''}</p><div class="controls"><button class="btn primary" id="tlCheck" type="button">Controleer</button></div>`}`}
+  if(t==='dader'){const L=s.last2;
+    if(!all)body=`<p class="msg">Zet eerst alle gebeurtenissen op de juiste tijd.</p>`;
+    else if(!s.done)body=`<p class="hint">${s.tries?'Dit is je laatste poging.':'Heb je iets fout, dan krijg je nog één poging.'}</p>${C.qs.map((q,i)=>`<section class="dm-q"><h4><span>${i+1}</span>${q.q}${L?` <em class="${L[i]?'ok':'bad'}">${L[i]?'✓':'✗'}</em>`:''}</h4><select data-tlq="${i}" aria-label="Antwoord ${i+1}"><option value="">Kies…</option>${q.o.map((o,k)=>`<option value="${k}" ${s.ans[i]===k?'selected':''}>${o}</option>`).join('')}</select></section>`).join('')}${L?`<p class="msg">Niet alles klopt. Bij ✗ zit je fout. Probeer het nog één keer.</p>`:''}<div class="controls"><button class="btn primary" id="tlAcc" type="button">${s.tries?'Laatste poging':'Wijs de dader aan'}</button></div>`;
+    else{const sc=C.qs.filter((q,i)=>s.ans[i]===q.a).length;body=`<div class="verdict ${sc===3?'':'bad'}"><p><b>${sc===3?'Zaak opgelost.':'Zaak niet opgelost.'}</b> ${sc}/3 goed · ${s.checks} keer gecontroleerd.</p></div><ol class="solsteps">${C.qs.map((q,i)=>`<li class="${s.ans[i]===q.a?'good':'bad'}"><b>${s.ans[i]===q.a?'✓':'✗'} ${q.q}</b><br>Jij: ${q.o[s.ans[i]]}${s.ans[i]===q.a?'':` · Juist: ${q.o[q.a]}`}<br>${q.x}</li>`).join('')}</ol><h4 class="solh">Wat er gebeurde</h4><div class="verdict"><p>${C.story}</p></div><div class="controls"><button class="btn" id="tlReset" type="button">Opnieuw spelen</button></div>`}}
+  P.innerHTML=`${head}<nav class="ktabs" aria-label="Onderdelen">${TABS.map(([k,l])=>`<button type="button" data-tltab="${k}" aria-pressed="${k===t}">${l}</button>`).join('')}</nav><div class="kbody">${body}</div><section class="notes"><label for="tlNotes"><b>Notitieblok</b></label><textarea id="tlNotes" rows="3" placeholder="Rekensommen met tijden"></textarea></section>`;
+  const on=(id,f)=>{const el=$(id);if(el)el.onclick=f};
+  $('tlNotes').value=s.notes||'';$('tlNotes').oninput=e=>{s.notes=e.target.value;saveTl()};on('tlList',()=>tlGo(null));
+  P.querySelectorAll('[data-tltab]').forEach(b=>b.onclick=()=>{s.tab=b.dataset.tltab;saveTl();renderTijdlijn();window.scrollTo({top:0})});
+  P.querySelectorAll('[data-tl]').forEach(el=>el.onchange=()=>{s.pick[el.dataset.tl]=el.value;if(s.last)s.last=s.last.filter(x=>x!==el.dataset.tl);saveTl();renderTijdlijn()});
+  on('tlCheck',()=>{const miss=C.cards.filter(c=>!s.pick[c[0]]);if(miss.length){$('tlMsg').textContent=`Kies eerst bij alle kaarten een tijd. Nog ${miss.length} te gaan.`;return}
+    s.checks++;C.cards.forEach(c=>{if(s.pick[c[0]]===c[1]&&!s.ok.includes(c[0]))s.ok.push(c[0])});s.last=C.cards.filter(c=>!s.ok.includes(c[0])).map(c=>c[0]);if(!s.last.length)s.last=null;saveTl();renderTijdlijn()});
+  P.querySelectorAll('[data-tlq]').forEach(el=>el.onchange=()=>{s.ans[el.dataset.tlq]=el.value===''?null:+el.value;saveTl()});
+  on('tlAcc',()=>{if(C.qs.some((q,i)=>s.ans[i]==null)){const m=P.querySelector('.kbody .hint');if(m)m.textContent='Beantwoord eerst alle drie de vragen.';return}
+    s.tries++;const res=C.qs.map((q,i)=>s.ans[i]===q.a),ok=res.every(Boolean);
+    if(ok||s.tries>=2){s.done=true;s.last2=null;if(ok){const x=store.get('md-tijdlijn-stats')||{solved:0,streak:0};x.solved++;store.set('md-tijdlijn-stats',x)}saveTl();renderTijdlijn();setTimeout(()=>endFilm('tijdlijn',C.id),500)}else{s.last2=res;saveTl();renderTijdlijn()}});
+  on('tlReset',()=>{tld.cases[C.id]={start:true,pick:{},ok:[],checks:0,tab:'tijd',ans:{},tries:0,last:null,done:false,notes:s.notes||''};saveTl();renderTijdlijn()});
+}
+
 const SCR={
  speur:{
   veiling:[['t','De laatste veiling','veiling','Een zaak voor Inspecteur Snoek'],
@@ -4231,6 +4315,12 @@ const SCR={
    ['s','Escaperoom De Kluis · maandag 09:20',['dark',['lock',150,175,1.4]],'Gamemaster Mats vindt eigenaar Jeroen Smeets in de kamer ‘Het Laboratorium’. De deur zat van buitenaf op slot.'],
    ['p','Naast het slachtoffer',['dark',['goldbar',150,175,1.6],['marker',235,190,1,1]],'Een nep-goudstaaf','Naast hem ligt een zware nep-goudstaaf uit de kamer ‘De Bankkluis’.'],
    ['e','Wie had de code van de deur?','Pak de telefoon']]},
+ tijdlijn:{
+  meerzicht:[['t','Onweer op camping Meerzicht','Meerzicht','De Tijdlijn · zaak 001'],
+   ['s','Vrijdag · 21:40',['night',['tent',110,170,1],['lantern',220,150,.8]],'Boven camping Meerzicht barst een zwaar onweer los. Overal valt de stroom uit.',{rain:true}],
+   ['s','Bij het meer',['water',['stand',150,168,1]],'Campingbaas Anton Kievit loopt met zijn zaklamp naar de stroomkast. Hij komt niet terug.',{rain:true}],
+   ['l','Wie waren er die avond?',[['Fleur','vaste gast'],['Rens','in een tent'],['Willemijn','in de kantine'],['Nils','beheerder']],'Vier mensen. Allemaal zeggen ze dat ze ergens anders waren.'],
+   ['e','Klopt de tijd van iedereen?','Naar de tijdlijn']]},
  verhoor:{
   anker:[['t','De koelcel van Het Anker','Het Anker','Het Verhoor · verhoor 001'],
    ['s','Zaterdag · 07:10',['dark',['door',150,170,1.1]],'In restaurant Het Anker gaat de deur van de koelcel open. Eigenaar Margot Lievens is dood.'],
@@ -4368,6 +4458,12 @@ const SCREND={
    ['s','Het Laboratorium',['dark',['goldbar',255,190,1]],'Ze sloeg Jeroen met de zware nep-goudstaaf.',{hit:'metaal',act:'strike',x:150}],
    ['s','22:58',['dark',['door',150,170,1],['lock',235,170,.7]],'Om 22:58 deed ze de deur van buitenaf op slot.'],
    ['x','Fenna de Haan','de goudstaaf','het Laboratorium']]},
+ tijdlijn:{
+  meerzicht:[['t','Zo is het gebeurd','gebeurd','Onweer op camping Meerzicht'],
+   ['s','Die ochtend',['day',['tent',150,170,1]],'Anton zei tegen Fleur dat ze moest vertrekken. Hij wist dat zij geld uit de kassa had gepakt.'],
+   ['s','21:50 · de stroomkast',['water',['stand',230,168,.9]],'In haar gele regenjas wachtte Fleur bij het meer. Toen Anton kwam, sloeg ze hem met zijn eigen zaklamp.',{hit:'metaal',act:'strike',x:130,rain:true}],
+   ['s','22:00',['night',['moon',250,38,.6],['tent',120,170,1]],'Een meisje zag haar weglopen. Om 22:10 ging het licht weer aan, en lag Fleur al in haar caravan.',{rain:true}],
+   ['x','Fleur Dekema','de zaklamp','het meer']]},
  verhoor:{
   anker:[['t','Zo is het gebeurd','gebeurd','De koelcel van Het Anker'],
    ['s','22:50',['desk',['phone',150,172,1.3]],'Margot stuurde Jelte een sms: kom om half twaalf praten over je ontslag.'],
@@ -4413,6 +4509,7 @@ const SCREND={
    ['x','Ilse de Wit','het loodje','de drukkerij']]}};
 function endOk(game,id){try{if(game==='koud'){const c=COLD.find(x=>x.id===id),s=kd.cases[id];return !s||!s.acc||s.acc.d===c.answer.dader}
   if(game==='bericht'){const c=BCASES.find(x=>x.id===id),s=bd.cases[id];return !s||!s.acc||s.acc.d===c.answer.dader}
+  if(game==='tijdlijn'){const c=TLCASES.find(x=>x.id===id),s=tld.cases[id];return !s||!s.done||c.qs.every((q,i)=>s.ans[i]===q.a)}
   if(game==='verhoor'){const s=vhd.cases[id];return !s||!s.done||s.won}
   if(game==='casino'){const c=CSCASES.find(x=>x.id===id),s=csd.cases[id];return !s||!s.fin||c.qs.every((q,i)=>s.ans[i]===q.a)}
   if(game==='team'){const c=RLCASES.find(x=>x.id===id),s=rld.cases[id];return !s||!s.done||c.qs.every((q,i)=>s.ans[i]===q.a)}
@@ -4443,7 +4540,7 @@ function pasData(){const sx=k=>store.get(k)||{solved:0,streak:0},m=sx('md-stats'
   const dosPerfect=DOSSIERS.some(c=>{const s=dd.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)&&!Object.values(s.hints||{}).some(v=>v>0)});
   const lhPerfect=lst&&lst.guess&&LHP.every((p,i)=>lst.guess[i]&&!lst.guess[i].m&&!lst.guess[i].w);
   const rows=[['murdle','Moorddossier',m.solved,null],['speur','Speurneus',speur,CASES.length],['koud','Cold Case',koud,COLD.length],['kamer','Kamermoord',km.solved,null],
-   ['landhuis','Het Landhuis',lh.solved,null],['spion','Spionage',spn.solved,null],['bericht','Laatste Bericht',ber,BCASES.length],['dossier','Dossiermap',dos,DOSSIERS.length],['verhoor','Het Verhoor',VHCASES.filter(c=>{const s=vhd.cases[c.id];return s&&s.done&&s.won}).length,VHCASES.length],['casino','Casino-escape',CSCASES.filter(c=>{const s=csd.cases[c.id];return s&&s.fin&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,CSCASES.length],['team','Teamzaak',RLCASES.filter(c=>{const s=rld.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,RLCASES.length],['brieven','Brievenreeks',BRCASES.filter(c=>{const s=brd.cases[c.id];return s&&s.done&&s.won}).length,BRCASES.length],['databank','Politiedatabase',DBCASES.filter(c=>{const s=dbd.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,DBCASES.length]];
+   ['landhuis','Het Landhuis',lh.solved,null],['spion','Spionage',spn.solved,null],['bericht','Laatste Bericht',ber,BCASES.length],['dossier','Dossiermap',dos,DOSSIERS.length],['tijdlijn','De Tijdlijn',TLCASES.filter(c=>{const s=tld.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,TLCASES.length],['verhoor','Het Verhoor',VHCASES.filter(c=>{const s=vhd.cases[c.id];return s&&s.done&&s.won}).length,VHCASES.length],['casino','Casino-escape',CSCASES.filter(c=>{const s=csd.cases[c.id];return s&&s.fin&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,CSCASES.length],['team','Teamzaak',RLCASES.filter(c=>{const s=rld.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,RLCASES.length],['brieven','Brievenreeks',BRCASES.filter(c=>{const s=brd.cases[c.id];return s&&s.done&&s.won}).length,BRCASES.length],['databank','Politiedatabase',DBCASES.filter(c=>{const s=dbd.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,DBCASES.length]];
   const total=rows.reduce((a,r)=>a+r[2],0),streak=Math.max(m.streak||0,km.streak||0,lh.streak||0,spn.streak||0);
   const B=[['eerste','Eerste zaak','Los je eerste zaak op.',total,1],['tien','Volhouder','Los 10 zaken op.',total,10],['vijftig','Veteraan','Los 50 zaken op.',total,50],['honderd','Legende','Los 100 zaken op.',total,100],
    ['logicus','Logicus','10 keer Moorddossier opgelost.',m.solved,10],['meester','Meesterbrein','Niveau 5 vrijgespeeld in Moorddossier.',m.solved,40],
@@ -4594,7 +4691,12 @@ const HELP=[
   what:'Je zit in de verhoorkamer tegenover een verdachte. Je stelt vragen en vergelijkt zijn antwoorden met je bewijs. Klopt een uitspraak niet, dan confronteer je hem. Elke doorgeprikte leugen brengt hem dichter bij een bekentenis. Zijn gezicht laat zien hoe hij zich voelt.',
   steps:['Open een verhoor en lees het dossier.','Kies bij <b>Stel een vraag</b> wat je wilt weten. Elke vraag kost 1 ☕.','Klopt een antwoord niet met <b>Jouw bewijs</b>? Tik dan bij die uitspraak op <b>⚡ Confronteer</b> en kies het bewijs.','Goed bewijs: hij geeft iets toe en er komen nieuwe vragen. Fout bewijs: hij lacht je uit en het kost 2 ☕.','Prik alle leugens door voor een bekentenis. Is je koffie op, dan krijg je nog één kans met 6 ☕.'],
   tips:['Lees eerst al je bewijs. Let op tijden en namen.','Niet elke uitspraak is gelogen. Confronteer alleen als je het zeker weet.','Kijk naar zijn gezicht: hoe zenuwachtiger, hoe dichter bij de waarheid.'],
-  extra:()=>`${VHCASES.length} ${VHCASES.length===1?'verhoor':'verhoren'}, elk ongeveer twintig minuten.`}
+  extra:()=>`${VHCASES.length} ${VHCASES.length===1?'verhoor':'verhoren'}, elk ongeveer twintig minuten.`},
+ {g:'tijdlijn',name:'De Tijdlijn',insp:'Tijdlijnpuzzel · eigen spel: reken de tijden uit en vind wie de gelegenheid had',
+  what:'Je krijgt losse gebeurtenissen van één avond. Bij sommige staat de tijd, bij andere reken je hem uit (‘tien minuten na de storing’). Zet alles op de juiste tijd. Daarna zie je in een overzicht wie er tijdens de moord geen alibi had.',
+  steps:['Open een zaak en lees de <b>Melding</b>.','Kies bij elke kaart een tijd. De kaarten schuiven vanzelf op volgorde.','Tik op <b>Controleer</b>. Goede kaarten worden groen en blijven staan, foute worden rood.','Staat alles goed, dan zie je per persoon waar die was, met het moment van de moord in rood.','Wijs de dader aan met drie vragen. Fout? Dan krijg je nog één poging.'],
+  tips:['Begin bij de kaarten waar de tijd gewoon in staat.','Reken daarna verder: ‘tien minuten na…’, ‘een half uur na…’.','Lees ook de verklaringen: daar staat wie welke jas draagt en wie waar was.'],
+  extra:()=>`${TLCASES.length} ${TLCASES.length===1?'zaak':'zaken'}, elk ongeveer 25 minuten.`}
 ];
 function renderUitleg(){
   $('pUitleg').innerHTML=`<h2 class="bigtitle">Uitleg</h2>${PENCIL}
@@ -4632,7 +4734,7 @@ function setTab(t){st.tab=t;save();renderPanes();window.scrollTo({top:0})}
 function renderPanes(){
   const t=st.tab||'zaak';
   const g=game,M=g==='murdle';
-  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';$('pBericht').hidden=g!=='bericht';$('pDossier').hidden=g!=='dossier';$('pDatabank').hidden=g!=='databank';$('pBrieven').hidden=g!=='brieven';$('pTeam').hidden=g!=='team';$('pCasino').hidden=g!=='casino';$('pVerhoor').hidden=g!=='verhoor';if(g==='verhoor'&&!$('pVerhoor').innerHTML)renderVerhoor();if(g==='casino'&&!$('pCasino').innerHTML)renderCasino();if(g==='team'&&!$('pTeam').innerHTML)renderTeam();if(g==='brieven'&&!$('pBrieven').innerHTML)renderBrieven();if(g==='databank'&&!$('pDatabank').innerHTML)renderDatabank();if(g==='dossier'&&!$('pDossier').innerHTML)renderDossier();if(g==='bericht'&&!$('pBericht').innerHTML)renderBericht();if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
+  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';$('pBericht').hidden=g!=='bericht';$('pDossier').hidden=g!=='dossier';$('pDatabank').hidden=g!=='databank';$('pBrieven').hidden=g!=='brieven';$('pTeam').hidden=g!=='team';$('pCasino').hidden=g!=='casino';$('pVerhoor').hidden=g!=='verhoor';$('pTijdlijn').hidden=g!=='tijdlijn';if(g==='tijdlijn'&&!$('pTijdlijn').innerHTML)renderTijdlijn();if(g==='verhoor'&&!$('pVerhoor').innerHTML)renderVerhoor();if(g==='casino'&&!$('pCasino').innerHTML)renderCasino();if(g==='team'&&!$('pTeam').innerHTML)renderTeam();if(g==='brieven'&&!$('pBrieven').innerHTML)renderBrieven();if(g==='databank'&&!$('pDatabank').innerHTML)renderDatabank();if(g==='dossier'&&!$('pDossier').innerHTML)renderDossier();if(g==='bericht'&&!$('pBericht').innerHTML)renderBericht();if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
   document.querySelector('.tabs').hidden=!M;const H=g==='home',GB=document.querySelector(`.games [data-g="${g}"] b`);document.querySelector('.games').hidden=!(H||gmOpen)||g==='uitleg'||g==='pas';document.querySelector('.games').classList.toggle('drop',!H);$('homeTitle').hidden=!H;$('gameBar').hidden=H||g==='uitleg'||g==='pas';$('gbCur').innerHTML=GB?GB.innerHTML:'';$('gbMenu').textContent=gmOpen?'✕ Sluit':'☰ Spellen';$('gbMenu').setAttribute('aria-expanded',gmOpen);$('helpBtn').textContent=g==='uitleg'?'← Terug':'? Uitleg';$('pasBtn').textContent=g==='pas'?'← Terug':'Pas';$('pPas').hidden=g!=='pas';if(g==='pas')renderPas();document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('lvLine').hidden=!M;$('stats').hidden=!M;
   document.querySelectorAll('.games button').forEach(b=>b.setAttribute('aria-selected',b.dataset.g===g));
   if(g==='speur'&&!$('pVerhaal').innerHTML)renderStory();if(g==='koud'&&!$('pKoud').innerHTML)renderKoud();
@@ -4739,7 +4841,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261103161810';
+const APPV='20261103165935';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

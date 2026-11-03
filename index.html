@@ -723,6 +723,33 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .hometitle{font:800 28px var(--cond);text-transform:uppercase;letter-spacing:.04em;text-align:center;margin:6px 0 10px}
 .games.drop{background:var(--band);border-radius:16px;padding:8px;margin-bottom:10px;box-shadow:0 8px 20px rgba(0,0,0,.15)}
 .accuse2 label em{font-style:normal;margin-left:6px}.accuse2 label em.ok{color:var(--ok)}.accuse2 label em.bad{color:var(--red)}
+.lhcards-wrap h2,.lhplan-wrap h2{font:800 22px var(--cond);text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px}
+.lhcards{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory}
+.lhcard{flex:none;width:132px;scroll-snap-align:start;background:var(--card);border:2px solid var(--ink);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 8px 8px;text-align:center;box-shadow:0 3px 0 var(--ink)}
+.lhcard::before{content:"";align-self:stretch;height:10px;margin:0 -8px 4px;background:var(--c)}.lhcard .lhf{width:62px;height:62px}.lhcard b{font:700 14px/1.1 var(--cond)}.lhcard small{font-size:11.5px;line-height:1.25;color:var(--muted)}
+.lhf{display:inline-block;width:34px;height:34px;border-radius:50%;padding:3px;background:var(--c);flex:none}.lhf .br-av{width:100%;height:100%;background:#f3ead8}
+.lhplan{position:relative;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:0;border:4px solid #3a2a1a;border-radius:6px;background:#3a2a1a;aspect-ratio:1.15;overflow:hidden}
+.lhpr{position:relative;border:2px solid #3a2a1a;background:repeating-linear-gradient(90deg,#e8d6b0 0 14px,#e1cda4 14px 15px);color:#2a1d12;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;font:inherit;padding:4px}
+.lhpr b{font:800 13px var(--cond);text-transform:uppercase;letter-spacing:.03em}.lhpr small{font-size:10.5px;line-height:1.1;color:#6b5236}
+.lhpr.hal{background:repeating-conic-gradient(#efe6d2 0 25%,#cbb994 0 50%) 0 0/22px 22px}.lhpr.done{background:repeating-linear-gradient(90deg,#cfe2c9 0 14px,#c4dabd 14px 15px)}.lhpr.done small{color:var(--ok);font-weight:700}
+.lhpr.here{box-shadow:inset 0 0 0 3px var(--red)}
+.lhpawn{position:absolute;left:calc((100% / 3) * var(--x) + (100% / 6) - 13px);top:calc((100% / 3) * var(--y) + (100% / 6) + 6px);width:26px;height:30px;transition:left .45s ease,top .45s ease;pointer-events:none;
+ background:radial-gradient(circle at 50% 28%,#e2614b 0 7px,transparent 7.5px),radial-gradient(ellipse at 50% 100%,#b5291b 0 13px,transparent 13.5px);filter:drop-shadow(0 2px 2px rgba(0,0,0,.5))}
+.lhlg{border-collapse:collapse;margin:8px auto;width:100%;table-layout:fixed}.lhlg th{font:700 9.5px var(--cond);text-transform:uppercase;padding:4px 0;text-align:center;letter-spacing:0}.lhlg tr:first-child th:first-child{width:36%}.lhlg tr th:first-child{text-align:left;text-transform:none;font-size:12px;line-height:1.15}.lhlg tr th:first-child .lhf{width:28px;height:28px;float:left;margin-right:4px}
+.lhlg td{border:1px solid var(--rule);padding:0}.lgc{width:100%;aspect-ratio:1.4;border:0;background:var(--card);font:800 20px var(--cond);cursor:pointer;color:var(--ink)}.lgc.x{color:var(--red);background:#fbeceb}.lgc.v{color:var(--ok);background:#e6f2e9}
+.lhboard{background:repeating-linear-gradient(#fffdf3 0 27px,#d7e3ef 27px 28px);border:2px solid var(--ink);border-left:10px solid #c0392b;border-radius:6px}
+.lhboard h2{font:800 24px var(--cond);letter-spacing:.12em;text-align:center;border-bottom:3px double var(--ink);padding-bottom:4px}
+.lhb-rooms .lhb-room{min-height:auto}.lhb-ic{display:flex;justify-content:center}
+.lhshow{display:flex;align-items:center;gap:12px;margin:4px 0 10px}.lhshow p{margin:0;font-size:14px}
+.lhflip{flex:none;width:86px;height:116px;perspective:600px;position:relative;animation:lhFlip 1.1s .35s both}
+@keyframes lhFlip{from{transform:rotateY(0)}to{transform:rotateY(180deg)}}.lhflip{transform-style:preserve-3d}
+.lhfc{position:absolute;inset:0;border-radius:10px;border:2px solid var(--ink);backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:6px}
+.lhfb{background:repeating-linear-gradient(45deg,#7a1f17 0 6px,#8f2a20 6px 12px);color:#f3e9d5;font:800 34px var(--cond)}.lhff{transform:rotateY(180deg);background:var(--card);border-top:10px solid var(--c)}.lhff b{font:700 12px/1.1 var(--cond)}.lhff .lhf{width:44px;height:44px}.lhc-room{font-size:30px}
+.lhenv{position:relative;margin:4px auto 12px;width:min(100%,300px);aspect-ratio:1.6;border-radius:8px;background:linear-gradient(160deg,#efe3c8,#d9c7a0);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:18px;color:#7a1f17;overflow:hidden;box-shadow:0 10px 24px rgba(0,0,0,.2)}
+.lhenv b{font:800 24px var(--cond);letter-spacing:.2em;border:3px solid #7a1f17;padding:2px 10px;transform:rotate(-6deg);position:relative;z-index:1}.lhenv small{font:600 12px var(--cond);letter-spacing:.2em;text-transform:uppercase;margin-top:6px;position:relative;z-index:1}
+.lhenv-flap{position:absolute;left:0;right:0;top:0;height:55%;background:linear-gradient(180deg,#e6d6b2,#cdb88c);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .6s}
+.lhenv-seal{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:#8a1f17;color:#f3e9d5;display:grid;place-items:center;font-size:18px;z-index:2}
+.lhenv.open .lhenv-flap{transform:rotateX(180deg)}.lhenv.open .lhenv-seal{opacity:0}
 </style>
 </head>
 <body>
@@ -2337,7 +2364,10 @@ const LHR=[['TORENKAMER','de torenkamer'],['BIBLIOTHEEK','de bibliotheek'],['SER
 const LHW=[{name:'de klomp',w:'KLOMP',mono:'KL'},{name:'de bierpul',w:'BIERPUL',mono:'BP'},{name:'de schaats',w:'SCHAATS',mono:'SC'},{name:'het vaasje',w:'VAASJE',mono:'DV'},{name:'de deegroller',w:'DEEGROLLER',mono:'RO'},{name:'de kaasschaaf',w:'KAASSCHAAF',mono:'KS'}];
 const LHV=['oom Bertus Lindenhof','tante Agatha Lindenhof','jonkheer Godfried Lindenhof','de oude butler Hendrik','barones Wilhelmina Lindenhof','neef Constantijn Lindenhof'];
 const LHE=['een stormachtige verjaardag','het jaarlijkse kerstdiner','de voorlezing van het testament','een chique tuinfeest','een avond vol bridge','het eerste sneeuwweekend van het jaar'];
-const LHP=[['doolhof','De geheime gang'],['woord','De wapenkamer'],['route','Voetsporen'],['sudoku','De speeltafel'],['cijfer','Een gecodeerd briefje'],['anagram','Een verscheurde envelop'],['kluis','De kluis']];
+const LHP=[['doolhof','De geheime gang'],['woord','De wapenkamer'],['route','Voetsporen'],['sudoku','De speeltafel'],['cijfer','Een gecodeerd briefje'],['anagram','Een verscheurde envelop'],['kluis','De kluis'],['logica','Het logboek van de butler']];
+// elke puzzel heeft zijn eigen kamer op de plattegrond; de hal (4) is de kamer van de verzegelde envelop
+const LHROOMOF={woord:0,doolhof:1,route:2,sudoku:3,cijfer:5,kluis:6,logica:7,anagram:8};
+const LHCOL=['#c0392b','#d4a017','#2e8b57','#2f6db5','#7d3c98','#8a8f94'];
 function lhMaze(r,W,H){const cells=Array(W*H).fill(0),seen=Array(W*H).fill(false),st=[0];seen[0]=true;const D=[[0,-1,1,4],[1,0,2,8],[0,1,4,1],[-1,0,8,2]];
   while(st.length){const c=st[st.length-1],x=c%W,y=Math.floor(c/W);const nb=shuffle(D,r).filter(([dx,dy])=>{const nx=x+dx,ny=y+dy;return nx>=0&&ny>=0&&nx<W&&ny<H&&!seen[ny*W+nx]});
     if(!nb.length){st.pop();continue}const [dx,dy,b,ob]=nb[0],n=(y+dy)*W+x+dx;cells[c]|=b;cells[n]|=ob;seen[n]=true;st.push(n)}return cells}
@@ -2389,6 +2419,15 @@ function lhGen(seed,lv){const r=mulberry32(seed*6151+17+(lv?lv*19:0));const LL=L
     anaS:[iS[3],iS[4]],ana:[scram(S[iS[3]].name),scram(S[iS[4]].name)],safe,safeW:iW[4],safeS:iS[2],
     victim:pick(LHV,r),event:pick(LHE,r),wsW:iW.slice(0,4),sudS:[iS[0],iS[1]]};
 }
+function lhFace(G,i){return `<span class="lhf" style="--c:${LHCOL[i%6]}">${brAvatar(G.S[i].name)}</span>`}
+function lhLogic(G){if(G.logic)return G.logic;const r=mulberry32(G.seed*31+7+(G.lv||1));
+  const sus=shuffle(range(6).filter(i=>i!==G.sol.s),r).slice(0,3),rooms=shuffle(range(9).filter(i=>i!==G.sol.r&&i!==4),r).slice(0,3),perm=shuffle([0,1,2],r);
+  const P=[[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]],R=j=>LHR[rooms[j]][1],N=i=>G.S[sus[i]].name;
+  const pool=[];for(let i=0;i<3;i++)for(let j=0;j<3;j++){if(perm[i]!==j)pool.push([`${N(i)} was niet in ${R(j)}.`,q=>q[i]!==j,0]);}
+  for(let i=0;i<3;i++)for(let a=0;a<3;a++)for(let b=a+1;b<3;b++)if(perm[i]===a||perm[i]===b)pool.push([`${N(i)} zat in ${R(a)} of in ${R(b)}.`,q=>q[i]===a||q[i]===b,0]);
+  for(let tries=0;tries<50;tries++){let cand=P.slice();const ch=[];for(const c of shuffle(pool,r)){const f=cand.filter(c[1]);if(f.length<cand.length){ch.push(c[0]);cand=f}if(cand.length===1)break}
+    if(cand.length===1&&ch.length>=2)return G.logic={sus,rooms,perm,clues:ch}}
+  return G.logic={sus,rooms,perm,clues:[0,1,2].map(i=>`${N(i)} zat in ${R(perm[i])}.`)}}
 function lhReward(G,k){const R=i=>LHR[i][1],Sn=i=>G.S[i].name,Wn=i=>G.W[i].name;
   return {doolhof:`Aan het eind van de geheime gang hangt een lijstje van de butler: ‘Doorzocht en in orde: ${R(G.mazeRooms[0])}, ${R(G.mazeRooms[1])} en ${R(G.mazeRooms[2])}.’`,
    woord:`Deze wapens hingen de hele avond netjes in de wapenkamer: ${G.wsW.map(Wn).join(', ')}.`,
@@ -2396,6 +2435,7 @@ function lhReward(G,k){const R=i=>LHR[i][1],Sn=i=>G.S[i].name,Wn=i=>G.W[i].name;
    sudoku:`In de vakjes met het vergrootglas staan ${Sn(G.sudS[0])} en ${Sn(G.sudS[1])}. Zij zaten de hele avond samen aan de speeltafel.`,
    cijfer:`Ontcijferd staat er: ‘${G.msg}.’`,
    anagram:`Het zijn de namen van ${Sn(G.anaS[0])} en ${Sn(G.anaS[1])}. Volgens de chauffeur zaten zij samen in de auto naar het dorp.`,
+   logica:(()=>{const L=lhLogic(G);return `Volgens het logboek zat ${L.sus.map((i,j)=>`${G.S[i].name} in ${LHR[L.rooms[L.perm[j]]][1]}`).join(', ')}. Ze hebben elkaar de hele avond gezien: alle drie zijn ze onschuldig.`})(),
    kluis:`In de kluis ligt een briefje: ‘${cap(Wn(G.safeW))} heb ik zelf opgeborgen, en ${Sn(G.safeS)} was de hele avond bij mij.’`}[k]}
 
 const LHKEY='md-landhuis',LHSKEY='md-landhuis-stats';
@@ -2431,12 +2471,16 @@ function lhPuzzle(i){const G=LG,[k,title]=LHP[i],solved=lst.solved.includes(i);l
   if(k==='kluis'){h=`<p>In de studeerkamer staat een kluis met een cijferslot van drie cijfers (1 tot en met 9). Op de binnenkant van het bureaula staat:</p>
      <ul class="safeclues">${G.safe.clues.map(c=>`<li>${c}</li>`).join('')}</ul>
      <div class="dials">${lst.safe.map((d,j)=>`<div class="dial"><button type="button" class="btn small" data-du="${j}">▲</button><span>${d}</span><button type="button" class="btn small" data-dd="${j}">▼</button></div>`).join('')}</div>`}
-  const actions=solved?`<div class="verdict"><p><b>${lst.skipped.includes(i)?'Overgeslagen.':'Opgelost!'}</b> ${lhReward(G,k)}</p></div><div class="controls">${lhChk().includes(i)?'<button class="btn" id="lhToBoard" type="button">Bekijk speelbord ↓</button>':'<button class="btn primary" id="lhGuessBtn" type="button">Streep weg op het speelbord</button>'}<button class="btn primary" id="lhNext" type="button">${i===LHP.length-1?'Naar de beschuldiging':'Volgende puzzel'}</button></div>`
-    :`<div class="controls">${['cijfer','anagram','kluis'].includes(k)?`<button class="btn primary small" id="lhCheck" type="button">${k==='kluis'?'Open de kluis':'Controleer'}</button>`:''}<button class="btn small" id="lhSkip" type="button">Sla over</button></div>
+  if(k==='logica'){const L=lhLogic(G),g=lst.lg||(lst.lg=Array(9).fill(''));
+    h=`<p>In de wijnkelder ligt het logboek van de butler. Hij noteerde waar drie gasten zaten, maar schreef het in raadsels. Elke gast zat in precies één van deze drie kamers, en in elke kamer zat één gast. Tik in het rooster: één keer = ✗ (kan niet), twee keer = ✓ (daar zat hij of zij).</p>
+     <ul class="safeclues">${L.clues.map(c=>`<li>${c}</li>`).join('')}</ul>
+     <table class="lhlg"><tr><th></th>${L.rooms.map(j=>`<th>${cap(LHR[j][1].replace(/^de /,''))}</th>`).join('')}</tr>${L.sus.map((si,a)=>`<tr><th>${lhFace(G,si)}<span>${G.S[si].name}</span></th>${[0,1,2].map(b=>`<td><button type="button" class="lgc ${g[a*3+b]}" data-lg="${a*3+b}" aria-label="${G.S[si].name} in ${LHR[L.rooms[b]][1]}">${g[a*3+b]==='v'?'✓':g[a*3+b]==='x'?'✗':''}</button></td>`).join('')}</tr>`).join('')}</table>`}
+  const actions=solved?`<div class="verdict"><p><b>${lst.skipped.includes(i)?'Overgeslagen.':'Opgelost!'}</b> ${lhReward(G,k)}</p></div><div class="controls">${lhChk().includes(i)?'<button class="btn" id="lhToBoard" type="button">Bekijk speelbord ↓</button>':'<button class="btn primary" id="lhGuessBtn" type="button">Streep weg op het speelbord</button>'}<button class="btn primary" id="lhNext" type="button">${lst.solved.length>=LHP.length?'Naar de envelop in de hal':'Naar de volgende kamer'}</button></div>`
+    :`<div class="controls">${['cijfer','anagram','kluis','logica'].includes(k)?`<button class="btn primary small" id="lhCheck" type="button">${k==='kluis'?'Open de kluis':'Controleer'}</button>`:''}<button class="btn small" id="lhSkip" type="button">Sla over</button></div>
      ${lhAsk?`<div class="spoiler"><p>Overslaan? Je krijgt de aanwijzing dan zonder de puzzel op te lossen.</p><div class="controls" style="justify-content:center"><button class="btn primary" id="lhYes" type="button">Ja, sla over</button><button class="btn" id="lhNo" type="button">Nee</button></div></div>`:''}<p class="msg" id="lhMsg"></p>`;
-  return `<article class="chapter"><div class="kicker">Puzzel ${i+1} van ${LHP.length}</div><h3>${title}</h3>${h}${actions}</article>`}
+  return `<article class="chapter lhroomcard" id="lhPz"><div class="kicker">${cap(LHR[LHROOMOF[k]][1].replace(/^de /,''))} · puzzel ${i+1} van ${LHP.length}</div><h3>${title}</h3>${h}${actions}</article>`}
 // Speelbord: wat elke opgeloste puzzel wegstreept, op een plattegrond met alle gasten en wapens
-const LHX={doolhof:G=>({r:G.mazeRooms}),woord:G=>({w:G.wsW}),route:G=>({r:G.route}),sudoku:G=>({s:G.sudS}),cijfer:G=>({r:G.cipRooms}),anagram:G=>({s:G.anaS}),kluis:G=>({w:[G.safeW],s:[G.safeS]})};
+const LHX={logica:G=>({s:lhLogic(G).sus}),doolhof:G=>({r:G.mazeRooms}),woord:G=>({w:G.wsW}),route:G=>({r:G.route}),sudoku:G=>({s:G.sudS}),cijfer:G=>({r:G.cipRooms}),anagram:G=>({s:G.anaS}),kluis:G=>({w:[G.safeW],s:[G.safeS]})};
 const lhChk=()=>{if(!lst.chk)lst.chk=lst.solved.slice();return lst.chk};
 function lhElim(){const G=LG,E={s:{},w:{},r:{}};lhChk().forEach(i=>{const x=LHX[LHP[i][0]](G);['s','w','r'].forEach(t=>(x[t]||[]).forEach(j=>{if(E[t][j]===undefined)E[t][j]=i}))});return E}
 function lhGone(i){const x=LHX[LHP[i][0]](LG),R=j=>cap(LHR[j][1].replace(/^de /,'')),parts=[];
@@ -2453,21 +2497,22 @@ function lhBoard(M=null,id='lhBoard'){const G=LG,E=lhElim(),n=lst.note,chk=lhChk
     const dis=k==='off'||(M&&M.res)?'disabled':'';
     return [cls,d,x,tag,dis,inner]};
   const room=j=>{const [c,d,x,tag,dis]=one('r',j);return `<button type="button" class="lhb-room ${c}" data-nb="r${j}"${d} ${dis}>${x}<b>${cap(LHR[j][1].replace(/^de /,''))}</b>${tag}</button>`};
-  const tok=(t,j,svg,name)=>{const [c,d,x,tag,dis]=one(t,j);return `<button type="button" class="lhb-tok ${c}" data-nb="${t}${j}"${d} ${dis}>${x}<span class="tok">${svg}</span><span class="lhb-nm">${name}</span>${tag}</button>`};
+  const tok=(t,j,svg,name)=>{const [c,d,x,tag,dis]=one(t,j);return `<button type="button" class="lhb-tok ${c}" data-nb="${t}${j}"${d} ${dis}>${x}<span class="lhb-ic">${t==='s'?lhFace(G,j):`<span class="tok">${svg}</span>`}</span><span class="lhb-nm">${name}</span>${tag}</button>`};
   const steps=chk.map(i=>{const g=(lst.guess||{})[i];return `<li value="${i+1}" class="${i===last?'new':''}"><b>${LHP[i][1]}${lst.skipped.includes(i)?' (overgeslagen)':''}</b><span>Weg: ${lhGone(i)}${g?` · <em class="${g.m||g.w?'':'ok'}">jij: ${g.h} van ${g.h+g.m} goed${g.w?`, ${g.w} te veel`:''}</em>`:''}</span></li>`}).join('');
   const word=(t,a,b)=>`<span data-word="${t}" data-a="${a}" data-b="${b}">${left(t)===1?a:b}</span>`;
-  return `<section class="lhboard ${M?'anim':''}" id="${id}">${M?'':'<h2>Speelbord</h2>'}
+  return `<section class="lhboard ${M?'anim':''}" id="${id}">${M?'':'<h2>Detectiveblok</h2>'}
    <p class="lhb-sum">Nog verdacht: <b data-left="s">${left('s')}</b> ${word('s','gast','gasten')} · <b data-left="w">${left('w')}</b> ${word('w','wapen','wapens')} · <b data-left="r">${left('r')}</b> ${word('r','kamer','kamers')}</p>
    <h4>Wie? · Gasten</h4><div class="lhb-row">${G.S.map((x,j)=>tok('s',j,svgOf(x),x.name)).join('')}</div>
    <h4>Waarmee? · Wapens</h4><div class="lhb-row">${G.W.map((x,j)=>tok('w',j,svgOf(x),cap(x.name))).join('')}</div>
-   <h4>Waar? · Het landhuis</h4><div class="lhb-plan">${range(9).map(room).join('')}</div>
-   ${M?'':`<p class="hint">Rood doorgestreept = zeker weg (het nummer zegt door welke puzzel). Tik zelf op iets om het met potlood af te strepen.</p>
+   <h4>Waar? · Kamers</h4><div class="lhb-row lhb-rooms">${range(9).map(room).join('')}</div>
+   ${M?'':`<p class="hint">Rood doorgestreept = zeker weg (het nummer zegt door welke puzzel). Tik zelf op iets om het met potlood af te strepen, net als op een echt detectiveblok.</p>
    <h4>Stappen</h4>${steps?`<ol class="lhb-steps">${steps}</ol>`:'<p class="hint">Nog niets weggestreept. Na elke puzzel streep je zelf weg wat afvalt.</p>'}`}</section>`}
 // Na een opgeloste puzzel: eerst zelf wegstrepen, dan controleert de rode pen
 function lhGuess(i){if(document.querySelector('.lhov'))return;const truth=new Set(),x=LHX[LHP[i][0]](LG);['s','w','r'].forEach(t=>(x[t]||[]).forEach(j=>truth.add(t+j)));
   const picks=new Set(),ov=document.createElement('div');ov.className='lhov';ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Streep weg op het speelbord');
   ov.innerHTML=`<div class="lhov-card"><div class="lhov-head"><span class="kicker">Puzzel ${i+1} opgelost</span><h3>${LHP[i][1]}</h3></div>
-   <div class="lhov-clue">${lhReward(LG,LHP[i][0])}</div><p class="lhov-ask" id="lhAsk">Wat valt er nu af? Tik aan wie, wat of welke kamer volgens jou <b>niet meer verdacht</b> is.</p>
+   ${(()=>{const t=[...truth][0];if(!t)return '';const ty=t[0],j=+t.slice(1),face=ty==='s'?lhFace(LG,j):ty==='w'?`<span class="tok">${svgOf(LG.W[j])}</span>`:'<span class="lhc-room">🚪</span>',nm=ty==='s'?LG.S[j].name:ty==='w'?cap(LG.W[j].name):cap(LHR[j][1].replace(/^de /,''));
+     return `<div class="lhshow"><div class="lhflip"><div class="lhfc lhfb"><span>?</span></div><div class="lhfc lhff" style="--c:${ty==='s'?LHCOL[j%6]:'#6b4a2e'}">${face}<b>${nm}</b></div></div><p>Een getuige laat je stiekem één kaart zien. Deze is dus <b>niet</b> verdacht.</p></div>`})()}<div class="lhov-clue">${lhReward(LG,LHP[i][0])}</div><p class="lhov-ask" id="lhAsk">Wat valt er nu af? Tik aan wie, wat of welke kamer volgens jou <b>niet meer verdacht</b> is.</p>
    <div id="lhGB">${lhBoard({pick:picks},'lhBoardAnim')}</div><p class="lhov-step" id="lhRes"></p>
    <div class="controls lhov-ctl"><button class="btn small" type="button" id="lhOvLater">Later</button><button class="btn primary" type="button" id="lhOvCheck">Controleer</button></div></div>`;
   document.body.appendChild(ov);document.body.style.overflow='hidden';
@@ -2491,27 +2536,33 @@ function lhNotebook(){const G=LG,n=lst.note;
   return `<section class="notebook"><h2>Notitieblok</h2><p class="hint">Tik om weg te strepen.</p>
    ${grp('s',G.S.map(s=>`<span class="tok">${svgOf(s)}</span>${s.name}`),'Wie')}${grp('w',G.W.map(w=>`<span class="tok">${svgOf(w)}</span>${cap(w.name)}`),'Waarmee')}${grp('r',LHR.map(r=>cap(r[1].replace(/^de /,''))),'Waar')}</section>`}
 function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let i=0;i<N;i++)if(!lst.solved.includes(i)){open=i;break}
-  const v=Math.min(lst.view??open,open),st=store.get(LHSKEY)||{solved:0,streak:0};
-  let dots='';for(let i=0;i<N;i++)dots+=`<button type="button" data-lp="${i}" class="${lst.solved.includes(i)?'done':''} ${i===v?'cur':''}" ${i>open?'disabled':''} aria-label="Puzzel ${i+1}">${lst.solved.includes(i)?'✓':i+1}</button>`;
-  dots+=`<button type="button" data-lp="${N}" class="${v===N?'cur':''}" aria-label="Beschuldiging">★</button>`;
+  const v=Math.min(lst.view??open,N),st=store.get(LHSKEY)||{solved:0,streak:0};
+  const pzOf=Object.fromEntries(LHP.map(([k],i)=>[LHROOMOF[k],i])),pos=v===N?4:LHROOMOF[LHP[v][0]];
+  const plan=`<section class="lhplan-wrap"><h2>Het landhuis</h2><p class="hint">Tik op een kamer om erheen te lopen. In elke kamer wacht een puzzel. In de hal ligt de verzegelde envelop.</p><div class="lhplan" id="lhPlan">${range(9).map(c=>{const pi=pzOf[c],done=pi!==undefined&&lst.solved.includes(pi);
+     return `<button type="button" class="lhpr ${c===4?'hal':''} ${done?'done':''} ${c===pos?'here':''}" data-room="${c}"><b>${cap(LHR[c][1].replace(/^de /,''))}</b><small>${c===4?'✉ envelop':done?'✓ opgelost':pi!==undefined?LHP[pi][1]:''}</small></button>`}).join('')}
+     <span class="lhpawn" id="lhPawn" style="--x:${pos%3};--y:${Math.floor(pos/3)}"></span></div></section>`;
+  const cards=`<section class="lhcards-wrap"><h2>De verdachten</h2><div class="lhcards">${G.S.map((x,j)=>`<div class="lhcard" style="--c:${LHCOL[j%6]}">${lhFace(G,j)}<b>${x.name}</b><small>${x.bio||''}</small></div>`).join('')}</div></section>`;
+  const dots='';
   let body;
   if(v===N){const sel=(id,arr,lab)=>`<label for="${id}">${lab}</label><select id="${id}"><option value="">Kies…</option>${arr.map((o,i)=>`<option value="${i}">${o}</option>`).join('')}</select>`;
     const ok=lst.acc&&lst.acc.s===G.sol.s&&lst.acc.w===G.sol.w&&lst.acc.r===G.sol.r;
-    body=`<article class="chapter"><div class="kicker">Beschuldiging</div><h3>Wie, waarmee en waar?</h3>
+    body=`<article class="chapter lhenv-card" id="lhPz"><div class="lhenv ${lst.done?'open':''}"><span class="lhenv-flap"></span><span class="lhenv-seal">✦</span><b>VERTROUWELIJK</b><small>Wie · Waarmee · Waar</small></div><div class="kicker">De hal · de verzegelde envelop</div><h3>Wie, waarmee en waar?</h3>
      ${lst.solved.length<N?`<p class="hint">Je hebt nog niet alle puzzels opgelost. Je mag het toch proberen.</p>`:''}
      ${lst.done?`<div class="verdict ${ok?'':'bad'}"><p>${ok?'Goed gezien!':'Helaas, mis.'} Het was <b>${G.S[G.sol.s].name}</b>, met <b>${G.W[G.sol.w].name}</b>, in <b>${LHR[G.sol.r][1]}</b>.${ok&&lst.skipped.length?` Je sloeg ${lst.skipped.length} puzzel${lst.skipped.length>1?'s':''} over.`:''}</p></div><div class="controls"><button class="btn" id="lhFilm" type="button">▶ Zo is het gebeurd</button><button class="btn primary" id="lhAgain" type="button">Nieuwe zaak</button></div>`
-     :`<div class="accuse2">${sel('lhS',G.S.map(s=>s.name),'Wie?')}${sel('lhW',G.W.map(w=>cap(w.name)),'Waarmee?')}${sel('lhR',LHR.map(r=>cap(r[1].replace(/^de /,''))),'Waar?')}<p class="msg" id="lhMsg"></p><div class="controls"><button class="btn primary" id="lhAcc" type="button">Beschuldig</button></div></div>`}</article>`;
+     :`<div class="accuse2">${sel('lhS',G.S.map(s=>s.name),'Wie?')}${sel('lhW',G.W.map(w=>cap(w.name)),'Waarmee?')}${sel('lhR',LHR.map(r=>cap(r[1].replace(/^de /,''))),'Waar?')}<p class="msg" id="lhMsg"></p><div class="controls"><button class="btn primary" id="lhAcc" type="button">Open de envelop en beschuldig</button></div></div>`}</article>`;
   }else body=lhPuzzle(v);
   P.innerHTML=`<div class="controls"><button class="btn" id="lhNew" type="button">Nieuwe zaak</button></div>${lvBar('landhuis',st.solved,G.lv||1)}<div class="stats">Opgelost: ${st.solved} · Reeks: ${st.streak}</div>
    <div class="storyhead"><span class="kicker">Zaak ${String(G.seed).padStart(4,'0')} · Landhuis Lindenhof</span><h3>Moord in het landhuis</h3></div>
-   <p class="lead" style="font-size:16px">Tijdens ${G.event} wordt ${G.victim} dood gevonden. Zes gasten, zes mogelijke wapens, negen kamers. Los de puzzels op: elke puzzel streept iets weg. Wat overblijft, is de waarheid.</p>
-   <nav class="chapters" aria-label="Puzzels">${dots}</nav>${body}${lhBoard()}`;
+   <p class="lead" style="font-size:16px">Tijdens ${G.event} wordt ${G.victim} dood gevonden. Zes gasten, zes mogelijke wapens, negen kamers. Loop door het huis en los in elke kamer de puzzel op. Elke puzzel streept iets weg op je detectiveblok. Wat overblijft, zit in de envelop.</p>
+   ${cards}${plan}${body}${lhBoard()}`;
   const on=(id,f)=>{const el=$(id);if(el)el.onclick=f};const msg=t=>{const m=$('lhMsg');if(m)m.textContent=t};
-  P.querySelectorAll('[data-lp]').forEach(b=>b.onclick=()=>{lst.view=+b.dataset.lp;lhAsk=false;saveLh();renderLH()});
+  P.querySelectorAll('[data-room]').forEach(b=>b.onclick=()=>{const c=+b.dataset.room,nv=c===4?N:pzOf[c];if(nv===undefined)return;const pw=$('lhPawn');if(pw){pw.style.setProperty('--x',c%3);pw.style.setProperty('--y',Math.floor(c/3))}
+    setTimeout(()=>{lst.view=nv;lhAsk=false;saveLh();renderLH();const z=$('lhPz');if(z)z.scrollIntoView({behavior:'smooth',block:'start'})},matchMedia('(prefers-reduced-motion: reduce)').matches?0:480)});
+  P.querySelectorAll('[data-lg]').forEach(b=>b.onclick=()=>{const i=+b.dataset.lg,g=lst.lg;g[i]=g[i]===''?'x':g[i]==='x'?'v':'';saveLh();renderLH()});
   P.querySelectorAll('[data-nb]').forEach(b=>b.onclick=()=>{const key=b.dataset.nb[0],i=+b.dataset.nb.slice(1);lst.note[key]=lst.note[key].includes(i)?lst.note[key].filter(x=>x!==i):[...lst.note[key],i];saveLh();b.classList.toggle('pen')});
   on('lhToBoard',()=>$('lhBoard').scrollIntoView({behavior:'smooth',block:'start'}));on('lhGuessBtn',()=>lhGuess(v));
   on('lhNew',()=>lhNew(1+Math.floor(Math.random()*9999)));on('lhAgain',()=>lhNew(1+Math.floor(Math.random()*9999)));
-  on('lhNext',()=>{lst.view=v+1;saveLh();renderLH()});
+  on('lhNext',()=>{let nx=N;for(let i=0;i<N;i++)if(!lst.solved.includes(i)){nx=i;break}lst.view=nx;saveLh();renderLH();const z=$('lhPlan');if(z)z.scrollIntoView({behavior:'smooth',block:'center'})});
   on('lhSkip',()=>{lhAsk=true;renderLH()});on('lhNo',()=>{lhAsk=false;renderLH()});
   on('lhYes',()=>{lhAsk=false;lst.skipped.push(v);lhSolve(v)});
   // doolhof
@@ -2572,6 +2623,7 @@ function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let 
   on('lhCheck',()=>{const k=LHP[v][0];const same=(a,b)=>a.length===b.length&&a.every(x=>b.includes(x));
     if(k==='cijfer'){if(same(lst.cip,G.cipRooms))return lhSolve(v);return msg(lst.cip.length<2?'Kies twee kamers.':'Dat zijn niet de kamers uit het bericht. Draai verder aan het wiel.')}
     if(k==='anagram'){if(same(lst.ana,G.anaS))return lhSolve(v);return msg(lst.ana.length<2?'Kies twee verdachten.':'Dat klopt niet. Tel de letters van de namen eens na.')}
+    if(k==='logica'){const L=lhLogic(G),g=lst.lg||[];if([0,1,2].every(a=>[0,1,2].every(b=>(g[a*3+b]==='v')===(L.perm[a]===b))))return lhSolve(v);return msg('Nog niet goed. Zet in elke rij precies één ✓, en lees de raadsels nog eens.')}
     if(k==='kluis'){if(lst.safe.every((d,j)=>d===G.safe.code[j]))return lhSolve(v);return msg('De kluis blijft dicht. Probeer het nog eens.')}});
   on('lhAcc',()=>{const g=id=>$(id).value===''?null:+$(id).value;const a={s:g('lhS'),w:g('lhW'),r:g('lhR')};if(a.s===null||a.w===null||a.r===null)return msg('Kies wie, waarmee en waar.');
     const ok=a.s===G.sol.s&&a.w===G.sol.w&&a.r===G.sol.r;if(!ok&&!lst.retry){lst.retry=1;saveLh();const v=x=>x?'✓':'✗';return msg(`Niet alles klopt: Wie ${v(a.s===G.sol.s)} · Waarmee ${v(a.w===G.sol.w)} · Waar ${v(a.r===G.sol.r)}. Neem de zaak nog één keer door en probeer het opnieuw. Dit is je laatste kans.`)}lst.acc=a;lst.done=true;const x=store.get(LHSKEY)||{solved:0,streak:0};const lb=lvMax(x.solved);if(ok){x.solved++;x.streak++}else x.streak=0;setTimeout(()=>lvAfter('landhuis',lb,lvMax(x.solved)),300);store.set(LHSKEY,x);saveLh();renderLH();lhFilmPlay()});
@@ -4312,7 +4364,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261103084011';
+const APPV='20261103104227';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

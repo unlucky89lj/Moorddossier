@@ -616,7 +616,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .flm-sign{position:absolute;right:30px;top:268px;display:flex;align-items:center;gap:10px;background:#f3f1ea;color:#1c1f22;border-radius:6px;padding:8px 14px 8px 8px;box-shadow:0 8px 20px rgba(0,0,0,.5)}
 .flm-sign .flm-ic{width:52px;height:52px}.flm-sign b{font:800 24px var(--cond);text-transform:uppercase}
 .flm-pol{position:absolute;left:108px;width:324px;background:#f3f1ea;padding:12px 12px 46px;box-shadow:0 10px 30px rgba(0,0,0,.6)}
-.flm-pol svg{width:100%;display:block;filter:grayscale(1) contrast(1.1)}
+.flm-pol svg{width:100%;display:block;filter:saturate(.85) contrast(1.05)}
 .flm-pol b{position:absolute;left:14px;bottom:10px;font:600 26px "Caveat",cursive;color:#222}
 .flm-sus{position:absolute;width:150px;text-align:center}
 .flm-sus svg{width:150px;height:auto;display:block}
@@ -1158,7 +1158,7 @@ const PP={
  chalk:(t,sz)=>`<text x="0" y="0" text-anchor="middle" font-size="${sz||26}" font-family="'Caveat',cursive" fill="${PK.W}" opacity=".9">${t}</text>`
 };
 // spec: [bg, [prop, x, y, scale, arg1, arg2], ...]
-function drawScene(spec){const [bg,...items]=spec;return ((FILM&&FBG[bg])||PBG[bg]||PBG.wall)()+items.map(([n,x,y,s,a,b])=>`<g transform="translate(${x} ${y}) scale(${s||1})">${PP[n]?PP[n](a,b):''}</g>`).join('')}
+function drawScene(spec){if(!FILM){try{return rlColor(()=>FDEFS+drawScene(spec))}catch(e){}}const [bg,...items]=spec;return ((FILM&&FBG[bg])||PBG[bg]||PBG.wall)()+items.map(([n,x,y,s,a,b])=>`<g transform="translate(${x} ${y}) scale(${s||1})">${PP[n]?PP[n](a,b):''}</g>`).join('')}
 function polaroid(spec,label,cls=''){if(!spec)return '';const rot=((label.length*37)%7-3)*.6;
   return `<figure class="polaroid ${cls}" style="--rot:${rot}deg"><span class="tape" aria-hidden="true"></span><span class="ph"><svg viewBox="0 0 300 200" role="img" aria-label="${label.replace(/"/g,'')}">${drawScene(spec)}</svg></span><figcaption>${label}</figcaption></figure>`}
 PP.note=()=>`<g transform="rotate(-4)">${R(-52,-104,104,104,PK.W)}</g>`;
@@ -4294,7 +4294,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261103080327';
+const APPV='20261103080658';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

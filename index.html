@@ -750,6 +750,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .lhenv-flap{position:absolute;left:0;right:0;top:0;height:55%;background:linear-gradient(180deg,#e6d6b2,#cdb88c);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .6s}
 .lhenv-seal{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:#8a1f17;color:#f3e9d5;display:grid;place-items:center;font-size:18px;z-index:2}
 .lhenv.open .lhenv-flap{transform:rotateX(180deg)}.lhenv.open .lhenv-seal{opacity:0}
+.tok:has(svg.wreal){background:#f6efe0;box-shadow:inset 0 0 0 2px var(--ink)}.tok svg.wreal{width:88%;height:88%}
 </style>
 </head>
 <body>
@@ -938,7 +939,49 @@ const ICONS={
  DI:'<path d="M2 27c2.5-2 5-2 7.5 0"/><path d="M8 22l6-8h7l8 8"/><path d="M2 22h28"/><path d="M17.5 14V9M15.5 10h4" stroke-width="1.5"/>',
  LOEP:'<circle cx="13" cy="13" r="8"/><path d="M19 19l9 9" stroke-width="3.5"/>'
 };
-const svgOf=x=>`<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[typeof x==='string'?x:x.mono]||''}</svg>`;
+
+// ---------- realistische, gekleurde tekeningen van de moordwapens (vervangen de lijn-iconen) ----------
+const WREAL={
+ KS:`<defs><linearGradient id="wKS1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset=".5" stop-color="#b9c1c8"/><stop offset="1" stop-color="#7d868e"/></linearGradient><linearGradient id="wKS2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9a6234"/><stop offset=".5" stop-color="#c58a52"/><stop offset="1" stop-color="#7a4a24"/></linearGradient></defs>
+  <g transform="rotate(-38 16 16)"><path d="M9 2.5h14a2 2 0 0 1 2 2v9.5a3 3 0 0 1-3 3H10a3 3 0 0 1-3-3V4.5a2 2 0 0 1 2-2z" fill="url(#wKS1)" stroke="#5c646b" stroke-width=".8"/>
+  <rect x="10" y="9" width="12" height="2.2" rx="1.1" fill="#3e454b"/><path d="M10.5 9.2h11" stroke="#e8edf1" stroke-width=".6"/><path d="M9 4h4" stroke="#fff" stroke-width=".9" opacity=".8" stroke-linecap="round"/>
+  <rect x="14.6" y="16.8" width="2.8" height="3" fill="#8e979e"/><rect x="13.5" y="19.5" width="5" height="11" rx="2.4" fill="url(#wKS2)" stroke="#5a3415" stroke-width=".7"/><circle cx="16" cy="22.5" r=".7" fill="#d9d0c2"/><circle cx="16" cy="27.5" r=".7" fill="#d9d0c2"/></g>`,
+ KL:`<defs><linearGradient id="wKL1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe27a"/><stop offset=".6" stop-color="#f1bf2c"/><stop offset="1" stop-color="#b98710"/></linearGradient></defs>
+  <path d="M2.5 23.5c0-3 2-4.5 5-4.8l6.5-.7c1.6-4.4 5.4-8 10.5-8 3.6 0 5.5 2.4 5.5 5.6v5.8c0 2.8-2 4.6-5 4.6H6.5c-2.4 0-4-1.1-4-2.5z" fill="url(#wKL1)" stroke="#8a6206" stroke-width=".8"/>
+  <ellipse cx="22.6" cy="14.6" rx="4.4" ry="2.6" fill="#5a3a12" stroke="#8a6206" stroke-width=".6"/><path d="M6 21.5c3-1.3 6.5-1.4 9.5-.8" stroke="#c43a2a" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+  <path d="M8.5 23.2l1.6-1.2 1.6 1.2-1.6 1.2zM12.6 23.6l1.4-1 1.4 1-1.4 1z" fill="#2f63b8"/><circle cx="18.2" cy="22.6" r="1.1" fill="#c43a2a"/><path d="M3 25.6h25.8" stroke="#8a6206" stroke-width=".6" opacity=".7"/><path d="M14 18.6c2-3.6 5.6-6.2 9.4-6.4" stroke="#fff4c2" stroke-width=".9" fill="none" opacity=".8"/>`,
+ DV:`<defs><linearGradient id="wDV1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#eef2f8"/><stop offset="1" stop-color="#bcc8db"/></linearGradient></defs>
+  <path d="M12.5 3.2h7v4.2c4.6 2.2 7 6.4 7 11.3 0 5.6-4.6 10.1-10.5 10.1S5.5 24.3 5.5 18.7c0-4.9 2.4-9.1 7-11.3z" fill="url(#wDV1)" stroke="#6f84a8" stroke-width=".8"/>
+  <rect x="11.6" y="2.4" width="8.8" height="2.2" rx="1" fill="#e9eef6" stroke="#6f84a8" stroke-width=".6"/><path d="M12.5 7.6h7" stroke="#1f4fa0" stroke-width="1.2"/>
+  <path d="M16 12.5c-2.6 1.4-2.6 5 0 6.2 2.6-1.2 2.6-4.8 0-6.2zM16 18.7v5.4M16 21.2c-1.8-.5-3.4.1-4.4 1.4M16 21.2c1.8-.5 3.4.1 4.4 1.4" stroke="#1f4fa0" stroke-width="1" fill="#3f73c8" fill-opacity=".55" stroke-linecap="round"/>
+  <path d="M7.6 16.6c.6-2.4 2-4.2 3.6-5.3M8.6 24.2c3.8 2.6 10.6 2.6 14.8 0" stroke="#1f4fa0" stroke-width=".9" fill="none" stroke-dasharray="1.6 1"/><path d="M9.2 13.4c-1.4 2-1.8 4.6-1.4 6.8" stroke="#fff" stroke-width="1.2" fill="none" opacity=".9" stroke-linecap="round"/>`,
+ BP:`<defs><linearGradient id="wBP1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7c34a"/><stop offset="1" stop-color="#c47a12"/></linearGradient></defs>
+  <path d="M23 11.5h2.6a3.6 3.6 0 0 1 3.6 3.6v4.6a3.6 3.6 0 0 1-3.6 3.6H23" fill="none" stroke="#b8c7cf" stroke-width="2.4"/><path d="M23 11.5h2.6a3.6 3.6 0 0 1 3.6 3.6v4.6a3.6 3.6 0 0 1-3.6 3.6H23" fill="none" stroke="#eaf3f6" stroke-width=".8"/>
+  <path d="M5 8.5h18.6v18.2a2.6 2.6 0 0 1-2.6 2.6H7.6A2.6 2.6 0 0 1 5 26.7z" fill="url(#wBP1)" stroke="#9fb3bd" stroke-width=".9"/>
+  <path d="M8.5 11v16M12.4 11v16M16.2 11v16M20 11v16" stroke="#fff" stroke-opacity=".28" stroke-width="1.2"/><circle cx="10" cy="20" r=".6" fill="#fff" opacity=".7"/><circle cx="17.5" cy="16" r=".5" fill="#fff" opacity=".7"/><circle cx="14" cy="24" r=".5" fill="#fff" opacity=".7"/>
+  <path d="M4.2 9.2c0-2.6 1.6-4.4 3.8-4.2.8-1.8 3-2.4 4.6-1.4 1.4-1.4 4-1.2 5 .4 2.4-.6 4.6 1.2 4.8 3.4.4 1 .2 2.2-.6 2.8H5.2c-.7-.2-1-.6-1-1z" fill="#fffaf0" stroke="#e2d9c2" stroke-width=".6"/>`,
+ SC:`<defs><linearGradient id="wSC1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b07a46"/><stop offset="1" stop-color="#6e4420"/></linearGradient><linearGradient id="wSC2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e9eef2"/><stop offset="1" stop-color="#8a959e"/></linearGradient></defs>
+  <path d="M5 23h21.5c1.8 0 3.2-1 3.2-2.4" stroke="url(#wSC2)" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M29.7 20.6c.4-2.4-1.2-4.4-3.4-4.2-1.8.2-2.4 2-1.2 3" stroke="url(#wSC2)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  <path d="M4.5 23.8h21" stroke="#4e575e" stroke-width=".7"/><path d="M8 23v-2.6M20.5 23v-2.6" stroke="#6d777f" stroke-width="1.6"/>
+  <path d="M4 16.4h20.4c1.4 0 2.2.8 2.2 2v1.4H4.6c-1 0-1.6-.6-1.6-1.6v-.2c0-.9.4-1.6 1-1.6z" fill="url(#wSC1)" stroke="#4d2c10" stroke-width=".7"/>
+  <path d="M8 16.4c.4-3.6 2.4-5.4 4.4-5.4M19.6 16.4c-.2-3.2-1.6-5.2-3.6-5.6" stroke="#6b2f1a" stroke-width="1.6" fill="none"/><path d="M7.2 13.4h14" stroke="#7a3820" stroke-width="1.8" stroke-linecap="round"/><circle cx="21.6" cy="13.4" r="1" fill="#d9b45a"/>`,
+ RO:`<defs><linearGradient id="wRO1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0cf9c"/><stop offset=".55" stop-color="#d4a462"/><stop offset="1" stop-color="#9c6c32"/></linearGradient><linearGradient id="wRO2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c38a4a"/><stop offset="1" stop-color="#7c4e20"/></linearGradient></defs>
+  <g transform="rotate(-30 16 16)"><rect x="-1" y="14.2" width="5.5" height="3.6" rx="1.8" fill="url(#wRO2)" stroke="#5c3713" stroke-width=".6"/><rect x="27.5" y="14.2" width="5.5" height="3.6" rx="1.8" fill="url(#wRO2)" stroke="#5c3713" stroke-width=".6"/>
+  <rect x="4" y="11" width="24" height="10" rx="4.2" fill="url(#wRO1)" stroke="#7c5322" stroke-width=".8"/><path d="M7 13.4c6 .6 12 .4 18-.4M7.5 17.6c5 .8 11 .8 17 0" stroke="#a57538" stroke-width=".6" fill="none" opacity=".8"/>
+  <path d="M7 12.6h16" stroke="#fff3dc" stroke-width="1.1" opacity=".8" stroke-linecap="round"/><ellipse cx="13" cy="20" rx="2.4" ry=".7" fill="#f6f1e6" opacity=".9"/></g>`,
+ SW:`<defs><radialGradient id="wSW1" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#6a6f74"/><stop offset="1" stop-color="#26292c"/></radialGradient></defs>
+  <path d="M19 15.5l11-6.5M19.5 18l11.2-5.2" stroke="#2b2e31" stroke-width="2.2" stroke-linecap="round"/><path d="M27.6 10.4l3-1.8M28.2 13.4l2.6-1.2" stroke="#7a4a24" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="12" cy="17" r="10" fill="url(#wSW1)" stroke="#151719" stroke-width=".8"/><circle cx="12" cy="17" r="7.6" fill="#3a3e42" stroke="#1d2023" stroke-width=".6"/>
+  <g stroke="#8a9096" stroke-width=".8" opacity=".9"><path d="M6.6 13.4l10.8 7.2M5.8 16.6l9.8 6.6M8.4 11.2l9.8 6.6M6.6 20.6l10.8-7.2M8.4 22.8l9.8-6.6M5.8 17.4l9.8-6.6"/></g><path d="M5.4 13.6c1.2-3 3.6-5 6.6-5.4" stroke="#a6acb2" stroke-width="1" fill="none" stroke-linecap="round"/>`,
+ TB:`<defs><radialGradient id="wTB1" cx=".4" cy=".45" r=".7"><stop offset="0" stop-color="#e9c99c"/><stop offset=".6" stop-color="#b7864f"/><stop offset="1" stop-color="#7a5128"/></radialGradient></defs>
+  <path d="M16 3.5c-.8 2.6-.4 4.6 1 6" stroke="#4c9a3a" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M17 9.5c1.6-2.8 4-3.6 6-3.2-1 2.4-3.2 3.8-6 3.8z" fill="#5fb34a"/>
+  <path d="M16 8.6c-5.8 3.6-9.2 8-9.2 12.2a9.2 8 0 0 0 18.4 0c0-4.2-3.4-8.6-9.2-12.2z" fill="url(#wTB1)" stroke="#6a4420" stroke-width=".8"/>
+  <path d="M16 9.2c-2 4.4-2.6 9.4-1 15.4M16 9.2c2.6 4 3.8 8.6 3 14M11 15c-1.4 2.6-1.6 5.4-.6 8" stroke="#8f6232" stroke-width=".7" fill="none" opacity=".8"/>
+  <path d="M10.8 27.6l-1 2.4M14 28.6l-.4 2.4M17.6 28.6l.6 2.4M21 27.6l1.2 2.2" stroke="#d9c7a4" stroke-width=".9" stroke-linecap="round"/><path d="M10 17.2c.6-2.4 2.2-4.4 4-5.6" stroke="#fff1d6" stroke-width="1" fill="none" opacity=".8" stroke-linecap="round"/>
+  <g transform="translate(23.5 5.5)"><circle r="4.2" fill="#f6efe0" stroke="#7a1f17" stroke-width=".8"/><circle cx="-1.2" cy="-.6" r=".9" fill="#2a1d15"/><circle cx="1.2" cy="-.6" r=".9" fill="#2a1d15"/><path d="M-1.4 1.6h2.8" stroke="#2a1d15" stroke-width=".7"/></g>`};
+
+const svgOf=x=>{const m=typeof x==='string'?x:x&&x.mono;return WREAL[m]?`<svg viewBox="0 0 32 32" class="wreal" aria-hidden="true">${WREAL[m]}</svg>`:svgOf0(x)};
+const svgOf0=x=>`<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[typeof x==='string'?x:x.mono]||''}</svg>`;
 const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 const range=n=>[...Array(n).keys()];
 
@@ -4364,7 +4407,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261103104227';
+const APPV='20261103110612';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

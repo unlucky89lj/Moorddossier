@@ -3331,6 +3331,7 @@ function fmReveal(o){const P=o.place,bg=o.bg||(P.buiten?['dusk',['moon',250,38,.
      extra:minis(2,1,1),red:hit?Math.max(0,.55-FM.seg(u,1.5,2.3)*.55):0,cap:u>2.7?FM.type(o.after||'Een klap. Daarna is het stil.',u,2.7):''}}});
   const row=[[o.culprit.svg,o.culprit.name]];if(o.weapon)row.push([o.weapon.svg,cap(o.weapon.name)]);row.push([P.svg,P.name]);
   // slot: een vergrootglas vindt de dader, daarna kleurt het scherm langzaam rood
+  if(o.ok){sc.push(fmArrest({who:o.culprit.name,mono:o.culprit.mono,how:o.weapon?cap(o.weapon.name):'',where:P.name}));return sc}
   sc.push({d:9,f:u=>{const sw=FM.ease(FM.seg(u,0,1.6)),lx=-160+sw*430,ly=330,R=150+FM.ease(FM.seg(u,1.8,2.6))*20;
     const red=FM.seg(u,3,8.4),wy=-60+Math.pow(red,1.35)*1060;
     // bloed loopt van boven naar beneden: een golvende rand met druppelsporen die sneller zakken
@@ -3866,17 +3867,31 @@ const SCR={
 
 // ---- slotfilmpjes bij de verhaalspellen: zo is het gebeurd ----
 // extra scènetypes: ['s',…,{hit:true}] = klap met rode flits en spatjes, {hit:'duw'} = alleen flits · ['x',dader,waarmee,waar] = vergrootglas en bloed dat naar beneden loopt
-function fmFinale(o){return {d:9,f:u=>{const sw=FM.ease(FM.seg(u,0,1.6)),lx=-160+sw*430,ly=330,R=150+FM.ease(FM.seg(u,1.8,2.6))*20;
+// opgelost: arrestatie onder zwaailichten, handboeien klikken dicht, stempel Zaak gesloten
+function fmArrest(o){return {d:9.5,sfx:[[3,'click'],[3.25,'click'],[5.6,'thud']],f:u=>{const ph=Math.floor(u*2.6)%2,walk=FM.ease(FM.seg(u,.8,2.6)),cuff=FM.seg(u,2.9,3.2),ax=560-walk*250,cx=200;
+    const glow=`<radialGradient id="arR" cx=".15" cy=".2" r=".7"><stop offset="0" stop-color="#ff2a2a" stop-opacity="${ph?.55:.12}"/><stop offset="1" stop-color="#ff2a2a" stop-opacity="0"/></radialGradient><radialGradient id="arB" cx=".85" cy=".2" r=".7"><stop offset="0" stop-color="#2a6bff" stop-opacity="${ph?.12:.6}"/><stop offset="1" stop-color="#2a6bff" stop-opacity="0"/></radialGradient>`;
+    const cuffs=cuff>0?`<g transform="translate(${cx} 700) scale(2.1)" opacity="${cuff}"><circle cx="-29" cy="-53" r="6.5" fill="none" stroke="#d8dde2" stroke-width="2.6"/><circle cx="29" cy="-53" r="6.5" fill="none" stroke="#d8dde2" stroke-width="2.6"/><path d="M-23 -53Q0 ${-46+cuff*4} 23 -53" stroke="#aab2ba" stroke-width="1.6" fill="none" stroke-dasharray="2.4 1.2"/></g>`:'';
+    const flash=u>2.9&&u<3.3?`<rect width="540" height="960" fill="#fff" opacity="${(1-FM.seg(u,2.9,3.3))*.5}"/>`:'';
+    const tiles=[['Wie',o.who],['Waarmee',o.how],['Waar',o.where]].filter(t=>t[1]);
+    const svg=`<svg class="flm-full" viewBox="0 0 540 960" aria-hidden="true"><defs>${glow}</defs>${FDEFS}<rect width="540" height="960" fill="#0e1524"/><rect y="560" width="540" height="400" fill="#1a1d22"/><path d="M0 560h540" stroke="#2c323b" stroke-width="3"/>
+      ${[[60,90],[170,60],[300,110],[420,70],[480,150]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="1.4" fill="#fff" opacity=".6"/>`).join('')}
+      <g transform="translate(400 560) scale(1.5)"><rect x="-70" y="-40" width="140" height="34" rx="10" fill="#e9edf2"/><path d="M-50 -40Q-40 -66 -10 -66H24Q44 -66 54 -40Z" fill="#e9edf2"/><path d="M-42 -42Q-34 -60 -10 -60H4V-42ZM10 -60H22Q38 -60 46 -42H10Z" fill="#2b3a50"/><rect x="-70" y="-26" width="140" height="8" fill="#2a5ad6"/><rect x="-20" y="-74" width="20" height="8" rx="3" fill="${ph?'#ff3030':'#5a1010'}"/><rect x="0" y="-74" width="20" height="8" rx="3" fill="${ph?'#10205a':'#3060ff'}"/><text x="0" y="-12" font-size="9" font-family="Arial" font-weight="800" fill="#2a5ad6" text-anchor="middle">POLITIE</text><circle cx="-42" cy="-4" r="11" fill="#111"/><circle cx="44" cy="-4" r="11" fill="#111"/></g>
+      ${FM.G(cx,700,2.1,PP.person(o.who||o.mono))}${FM.G(ax,705,2.05,PP.person('Agent Lars Koopmans'))}${cuffs}
+      <rect width="540" height="960" fill="url(#arR)"/><rect width="540" height="960" fill="url(#arB)"/>${flash}</svg>`;
+    return {fade:u<.4?1-u/.4:0,extra:svg+`<div class="flm-endk" style="opacity:${FM.seg(u,1.2,1.8)}">${u<3.3?'De dader':'Gearresteerd'}</div><div class="flm-tiles" style="top:760px;opacity:${FM.seg(u,3.6,4.3)}">${tiles.map(([a,b])=>`<div><span>${a}</span><b>${b}</b></div>`).join('')}</div>
+      <div class="flm-stamp" style="top:180px;border-color:#7fd1a8;color:#7fd1a8;opacity:${FM.seg(u,5.6,5.9)};transform:translateX(-50%) rotate(-8deg) scale(${1.6-.6*FM.ease(FM.seg(u,5.6,6))})">Zaak gesloten</div>
+      <div class="flm-endk" style="top:270px;font-size:18px;opacity:${FM.seg(u,6.6,7.2)}">Goed gedaan, rechercheur</div>`}}}}
+function fmFinale(o){if(o.ok!==false)return fmArrest(o);return {d:9,f:u=>{const sw=FM.ease(FM.seg(u,0,1.6)),lx=-160+sw*430,ly=330,R=150+FM.ease(FM.seg(u,1.8,2.6))*20;
     const red=FM.seg(u,3,8.4),wy=-60+Math.pow(red,1.35)*1060;let blood=`M-20 -20 L560 -20 L560 ${wy.toFixed(1)}`;for(let i=27;i>=0;i--){const x=i*20;blood+=` L${x} ${(wy+Math.sin(i*1.3)*9+Math.sin(i*.5+1)*7).toFixed(1)}`}blood+=` L-20 ${wy.toFixed(1)}Z`;
     let drips='';for(let i=0;i<16;i++){const x=12+i*34+FM.rnd(i)*16,w=7+FM.rnd(i+5)*12,start=3+FM.rnd(i+11)*1.4,len=Math.max(0,(u-start))*(60+FM.rnd(i+7)*120);if(len<=0)continue;
       drips+=`<rect x="${(x-w/2).toFixed(1)}" y="${(wy-5).toFixed(1)}" width="${w.toFixed(1)}" height="${len.toFixed(1)}" rx="${(w/2).toFixed(1)}"/><circle cx="${x.toFixed(1)}" cy="${(wy+len-2).toFixed(1)}" r="${(w*.62).toFixed(1)}"/>`}
-    const face=o.mono&&ICONS[o.mono]?fmFace(o.mono):'';
+    const face=!FILM&&o.mono&&ICONS[o.mono]?fmFace(o.mono):'';
     const lens=`<svg class="flm-full" viewBox="0 0 540 960" aria-hidden="true"><defs><clipPath id="lensF"><circle cx="${lx}" cy="${ly}" r="${R-8}"/></clipPath></defs><rect width="540" height="960" fill="#0b0c0b"/>
-      <g clip-path="url(#lensF)"><rect width="540" height="960" fill="#efece4"/>${FM.G(lx-6,ly+128,2.1,PP.person()+face)}</g>
+      <g clip-path="url(#lensF)"><rect width="540" height="960" fill="#efece4"/>${FM.G(lx-6,ly+128,2.1,PP.person(o.who||o.mono)+face)}</g>
       <circle cx="${lx}" cy="${ly}" r="${R-4}" fill="none" stroke="#2a2b2a" stroke-width="14"/><circle cx="${lx}" cy="${ly}" r="${R-4}" fill="none" stroke="#6b6b66" stroke-width="3"/>
       <path d="M${lx+R*.72} ${ly+R*.72}l80 80" stroke="#2a2b2a" stroke-width="30" stroke-linecap="round"/><g fill="#9E1F15" opacity="${u<3?0:.93}"><path d="${blood}"/>${drips}</g></svg>`;
     const tiles=[['Wie',o.who],['Waarmee',o.how],['Waar',o.where]].filter(t=>t[1]);
-    return {fade:u<.4?1-u/.4:0,extra:lens+`<div class="flm-endk" style="opacity:${FM.seg(u,1.6,2.2)}">${o.ok===false?'Je had het mis · de echte dader':'De dader'}</div><div class="flm-tiles" style="opacity:${FM.seg(u,2.2,3)}">${tiles.map(([a,b])=>`<div><span>${a}</span><b>${b}</b></div>`).join('')}</div>
+    return {fade:u<.4?1-u/.4:0,extra:lens+`<div class="flm-endk" style="opacity:${FM.seg(u,1.6,2.2)};font-size:17px;letter-spacing:.12em">${o.ok===false?'Je had het mis · de echte dader':'De dader'}</div><div class="flm-tiles" style="opacity:${FM.seg(u,2.2,3)}">${tiles.map(([a,b])=>`<div><span>${a}</span><b>${b}</b></div>`).join('')}</div>
       <div class="flm-stamp ${o.ok===false?'fail':''}" style="opacity:${FM.seg(u,5,5.3)};transform:translateX(-50%) rotate(-8deg) scale(${1.6-.6*FM.ease(FM.seg(u,5,5.4))})">${o.ok===false?'Zaak niet opgelost':'Zaak gesloten'}</div>`}}}}
 const SCREND={
  speur:{
@@ -4294,7 +4309,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261103080658';
+const APPV='20261103082630';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

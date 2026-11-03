@@ -664,6 +664,24 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .retry{background:var(--card);border-left:5px solid #D9822B;padding:10px 12px;border-radius:6px;font-size:16px}
 .fbmark{font:700 12px var(--cond);letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;margin-left:6px;white-space:nowrap}
 .fbmark.ok{background:var(--ok);color:#fff}.fbmark.no{background:var(--red);color:#fff}
+.db-box{background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.db-types{display:flex;gap:6px;flex-wrap:wrap}
+.db-types button{border:2px solid var(--ink);border-radius:999px;background:var(--card);color:var(--ink);padding:5px 11px;font:700 14px var(--cond);text-transform:uppercase;letter-spacing:.04em;cursor:pointer}
+.db-types button[aria-checked="true"]{background:#1f3b5c;border-color:#1f3b5c;color:#fff}
+.db-form{display:flex;gap:8px}.db-form input{flex:1;min-width:0;font:600 17px var(--cond);padding:9px 12px;border:2px solid var(--ink);border-radius:10px;background:#fff;color:var(--ink)}
+.db-count{font:700 13px var(--cond);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0}
+.db-hits{display:flex;flex-direction:column;gap:6px}
+.db-hit{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:1px;border:2px solid var(--ink);border-left:6px solid #1f3b5c;border-radius:10px;background:var(--card);color:var(--ink);padding:8px 12px;cursor:pointer;font:inherit}
+.db-hit b{font:700 17px var(--cond)}.db-hit small{color:var(--muted);font-size:13px}.db-hit.cur{background:#e4ebf3}
+.db-rows{display:grid;grid-template-columns:max-content 1fr;gap:4px 12px;margin:4px 0 8px}.db-rows dt{font:700 13px var(--cond);text-transform:uppercase;letter-spacing:.05em;color:#8A2A1A;padding-top:2px}.db-rows dd{margin:0}
+.db-h{font:700 14px var(--cond);text-transform:uppercase;letter-spacing:.08em;margin:12px 0 4px;color:var(--ink)}
+.db-list{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+.db-vh{margin-top:8px}.db-vh summary{cursor:pointer;font-weight:700}.db-vh p{margin:6px 0}
+.db-histbox{margin-top:4px}.db-hist{display:flex;gap:6px;flex-wrap:wrap}.db-hist button{border:1px solid var(--rule);border-radius:999px;background:var(--card);color:var(--ink);padding:4px 10px;font:600 13px var(--cond);cursor:pointer}
+.db-login{background:#14263b;color:#e9eef4;border-radius:16px;padding:28px 18px;text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center}
+.db-logo{font:800 30px var(--cond);letter-spacing:.2em}.db-logo span{display:block;font:600 13px var(--cond);letter-spacing:.3em;text-transform:uppercase;opacity:.75}
+.db-card{border-left:6px solid #1f3b5c}
+.dm-q h4 em{font-style:normal;margin-left:6px}.dm-q h4 em.ok{color:var(--ok)}.dm-q h4 em.bad{color:var(--red)}
 </style>
 </head>
 <body>
@@ -686,6 +704,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
     <button role="tab" type="button" data-g="spion"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11h18M6 11l1.5-6h9L18 11" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7.5" cy="16.5" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16.5" cy="16.5" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 16.5h3" stroke="currentColor" stroke-width="2"/></svg>Spionage</b><span>Ontmasker de spion</span></button>
     <button role="tab" type="button" data-g="bericht"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 7h6v4h-3l-2 2v-2H9z" fill="currentColor"/><circle cx="12" cy="18.5" r="1.1" fill="currentColor"/></svg>Laatste Bericht</b><span>Onderzoek de telefoon</span></button>
     <button role="tab" type="button" data-g="dossier"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="1.5" fill="currentColor"/><path d="M2.5 6.5L12 14l9.5-7.5" fill="none" stroke="var(--card)" stroke-width="1.6"/><circle cx="12" cy="14" r="2.6" fill="var(--red)" stroke="var(--card)" stroke-width="1"/></svg>Dossiermap</b><span>Enveloppen vol bewijs</span></button>
+    <button role="tab" type="button" data-g="databank"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="1.5" fill="currentColor"/><rect x="4" y="6" width="16" height="9" fill="var(--card)"/><circle cx="11" cy="10.5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M13 12.5l2.6 2.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 20h8M12 17v3" stroke="currentColor" stroke-width="2"/></svg>Politiedatabase</b><span>Zoek zelf in het systeem</span></button>
   </div>
   <div class="stats" id="stats"></div>
 
@@ -749,6 +768,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <section class="pane" id="pSpion" hidden></section>
   <section class="pane" id="pBericht" hidden></section>
   <section class="pane" id="pDossier" hidden></section>
+  <section class="pane" id="pDatabank" hidden></section>
   <section class="pane" id="pUitleg" hidden></section>
   <section class="pane" id="pPas" hidden></section>
 
@@ -3212,13 +3232,30 @@ function spyFilm(){const G=SG,S=G.S[G.spy],W=G.W[G.sol.wep[G.spy]],L=G.L[G.meet]
 
 // ---- openingsfilmpjes bij de verhaalspellen ----
 // scènes: ['t',titel,rood woord,ondertitel] · ['s',kop,spec,tekst,{rain,zoom,steps,move:[index,dx]}] · ['p',kop,spec,label,tekst] · ['l',kop,[[naam,rol],…],tekst] · ['e',vraag,knoptekst]
+// figuren die de daad naspelen: strike (slaan), fall (duw van een hoogte), drown (onder water), poison (gif in het glas)
+function fmFig(x,y,s,rot=0,op=1){return FM.G(x,y,s,`<g transform="rotate(${rot})"><circle cy="-112" r="15" fill="#1d1e1d" stroke="#9a978f" stroke-width="2.5"/><path d="M-28 0V-70Q-28 -94 0 -94Q28 -94 28 -70V0Z" fill="#1d1e1d" stroke="#9a978f" stroke-width="2.5"/></g>`,`opacity="${op}"`)}
+function fmClub(x,y,ang){return `<g transform="translate(${x} ${y}) rotate(${ang})"><rect x="-3.5" y="-34" width="7" height="36" rx="2.5" fill="#2a2b2a" stroke="#9a978f" stroke-width="1.5"/></g>`}
+function fmAct(fx,u){const a=fx.act,s=fx.s||.6;
+  if(a==='strike'){const x=fx.x||150,g=fx.g||192,st=FM.ease(FM.seg(u,.6,1.6)),cx=x-80+st*36,ang=u<1.6?-20-FM.seg(u,1,1.6)*60:u<2.2?-80+FM.ease(FM.seg(u,1.6,2.2))*150:70,fall=FM.ease(FM.seg(u,2.3,3));
+    return {svg:fmFig(cx,g,s)+fmClub(cx+24*s,g-62*s,ang)+fmFig(x+18+fall*16,g-fall*4,s*.96,fall*84),bx:x+12,by:g-70*s}}
+  if(a==='fall'){const [tx,ty]=fx.top,[bx,by]=fx.bottom,push=FM.ease(FM.seg(u,1.5,2.1)),f=FM.seg(u,2.15,3.15),dir=Math.sign(bx-tx)||1;
+    const vx=u<2.15?tx+push*4*dir:tx+(bx-tx)*f,vy=u<2.15?ty:ty+(by-ty)*f*f-Math.sin(f*Math.PI)*12,rot=u<2.15?push*12*dir:f*450*dir;
+    const club=fx.club?fmClub(tx-22*dir+24*s,ty-62*s,u<1.5?-30:u<2.1?-30+FM.seg(u,1.5,2.1)*110:80):'';
+    return {svg:fmFig(tx-24*dir+push*8*dir,ty,s)+club+fmFig(vx,vy,s,rot),bx,by:by-8}}
+  if(a==='drown'){const x=fx.x||150,y=fx.y||150,push=FM.ease(FM.seg(u,1.2,2.2)),sink=FM.seg(u,2.2,3.6);let bub='';for(let i=0;i<6;i++){const t=u-2.3-i*.25;if(t>0&&t<1.2)bub+=`<circle cx="${x-20+i*8}" cy="${y-6-t*30}" r="${2+i%3}" fill="none" stroke="${PK.W}" stroke-width="1.2" opacity="${1-t/1.2}"/>`}
+    return {svg:FM.G(x,y-4+sink*8,s,`<g transform="rotate(90)"><circle cy="-112" r="15" fill="#1d1e1d" stroke="#9a978f" stroke-width="2.5"/><path d="M-28 0V-70Q-28 -94 0 -94Q28 -94 28 -70V0Z" fill="#1d1e1d" stroke="#9a978f" stroke-width="2.5"/></g>`,`opacity="${1-sink*.6}"`)+`<rect x="${x-66}" y="${y-2}" width="132" height="8" fill="#6f7a80" opacity=".55"/>`+fmFig(x+52,y+20,s,-28*push)+bub,bx:x,by:y}}
+  if(a==='poison'){const x=fx.x||60,y=fx.y||172,slump=FM.ease(FM.seg(u,2.8,3.6)),drink=FM.seg(u,1,2);const gy=y-70*s-drink*14+FM.ease(FM.seg(u,2.9,3.4))*60;
+    return {svg:FM.G(x,y,s,`<g transform="rotate(${slump*38} 0 -30)"><circle cy="-112" r="15" fill="#1d1e1d" stroke="#9a978f" stroke-width="2.5"/><path d="M-28 0V-70Q-28 -94 0 -94Q28 -94 28 -70V0Z" fill="#1d1e1d" stroke="#9a978f" stroke-width="2.5"/></g>`)+FM.G(x+22*s,gy,.6,PP.glass()),bx:x,by:y-60}}
+  return {svg:'',bx:150,by:105}}
 function fmStory(script,ok=true){return script.map(sc=>{const k=sc[0];
   if(k==='t'){const [,t0,hi,sub]=sc,t=!ok&&t0==='Zo is het gebeurd'?'Dit is er echt gebeurd':t0,a=t.replace(hi,''),d=Math.max(4.5,1.5+t.length/12);return {d,f:u=>({title:`<h1>${FM.type(a,u,.4,14).replace('▌','')}<span>${u>.4+a.length/14?FM.type(hi,u,.4+a.length/14,10).replace('▌',''):''}</span></h1><p style="opacity:${FM.seg(u,d-2,d-1.4)}">${sub||''}</p>`})}}
   if(k==='x'){const [,who,how,where,mono]=sc;return fmFinale({who,how,where,mono,ok})}
-  if(k==='s'){const [,chap,spec,txt,fx={}]=sc,d=Math.max(6,1.6+txt.length/24)+(fx.hit?1:0);return {d,rain:!!fx.rain,sfx:fx.hit?[[2.2,'hit',fx.hit===true?'hout':fx.hit==='duw'?'plant':fx.hit]]:[],f:u=>{const z=fx.zoom===false?1:1+FM.ease(FM.seg(u,0,d))*.14;let sp=spec;
+  if(k==='s'){const [,chap,spec,txt,fx={}]=sc,act=fx.act,HT=act==='fall'?3.15:act==='poison'?2.8:2.2,d=Math.max(6,1.6+txt.length/24)+(fx.hit?1:0)+(act?1.5:0);
+    return {d,rain:!!fx.rain,sfx:fx.hit?[[HT,'hit',fx.hit===true?'hout':fx.hit==='duw'?'plant':fx.hit]]:[],f:u=>{const z=act?1:(fx.zoom===false?1:1+FM.ease(FM.seg(u,0,d))*.14);let sp=spec;
       if(fx.move){const [i,dx]=fx.move;sp=spec.map((it,j)=>j===i?[it[0],it[1]+dx*FM.seg(u,0,d),...it.slice(2)]:it)}
       let fp='';if(fx.steps)for(let i=0;i<7;i++){const a=.6+i*.45;if(u>a){const x=30+i*28,y=i%2?182:176;fp+=`<ellipse cx="${x}" cy="${y}" rx="5" ry="10" fill="${PK.K}" opacity="${.75*FM.seg(u,a,a+.3)}" transform="rotate(80 ${x} ${y})"/>`}}
-      return {chap,stage:FM.svg(FM.G(150,100,z,FM.G(-150,-100,1,drawScene(sp)+fp+(fx.hit&&fx.hit!=='duw'&&u>2.2?fmBlood(u-2.2,150,105):'')+(fx.rain?FM.rain(u):'')+(fx.snow?FM.rain(u*.25,.5):'')))),red:fx.hit&&u>2.2?Math.max(0,.5-FM.seg(u,2.2,3)*.5):0,cap:FM.type(txt,u,.7)}}}}
+      const A=act?fmAct(fx,u):{svg:'',bx:150,by:105};const bl=fx.hit&&fx.hit!=='duw'&&u>HT?fmBlood(u-HT,A.bx,A.by):'';
+      return {chap,stage:FM.svg(FM.G(150,100,z,FM.G(-150,-100,1,drawScene(sp)+fp+A.svg+bl+(fx.rain?FM.rain(u):'')+(fx.snow?FM.rain(u*.25,.5):'')))),red:fx.hit&&u>HT?Math.max(0,.5-FM.seg(u,HT,HT+.8)*.5):0,cap:FM.type(txt,u,.7)}}}}
   if(k==='p'){const [,chap,spec,label,txt]=sc,d=Math.max(6.5,3+txt.length/24);return {d,sfx:[[.4,'click'],[1.1,'click']],f:u=>{const drop=FM.ease(FM.seg(u,1.2,2.1)),y=-420+drop*(250+420),rot=-14+drop*10;
       return {chap,flash:Math.max(u>.4?1-FM.seg(u,.4,.75):0,u>1.1?1-FM.seg(u,1.1,1.45):0),extra:`<div class="flm-pol" style="top:${y}px;transform:rotate(${rot}deg)">${FM.svg(drawScene(spec))}<b>${label}</b></div>`,cap:FM.type(txt,u,2.2)}}}}
   if(k==='l'){const [,chap,ppl,txt]=sc,n=ppl.length,per=n>3?3:n,d=Math.max(7,1.2+n*.9+txt.length/24);return {d,f:u=>{const W=150,H=n>3?104:170;
@@ -3227,6 +3264,179 @@ function fmStory(script,ok=true){return script.map(sc=>{const k=sc[0];
       return {chap,extra:cells,cap:FM.type(txt,u,1+n*.7)}}}}
   if(k==='e'){const [,q,cta]=sc;return {d:5.5,f:u=>({title:`<p style="font-size:30px;color:#e4e1d6;opacity:${FM.seg(u,.4,1)}">${q}</p><h1 style="font-size:40px;opacity:${FM.seg(u,1.8,2.4)}"><span>${cta}</span></h1>`})}}
   return {d:1,f:()=>({})}})}
+
+// ---------- Politiedatabase: zoek zelf in de database (personen, kentekens, telefoons, adressen, camera's) ----------
+// Nieuwe zaken achteraan toevoegen. Ids nooit wijzigen: de voortgang hangt eraan.
+const DBTYPES=[['persoon','Persoon','naam, bijvoorbeeld Jansen'],['kenteken','Kenteken','heel of een deel, bijvoorbeeld AB-12'],['telefoon','Telefoon','nummer, bijvoorbeeld 06-12345678'],['adres','Adres','straat of bedrijf'],['camera','Camera','locatie van de camera']];
+const DBCASES=[{id:'hartman',nr:'001',title:'De huurauto',level:'Gemiddeld',time:'± 45 min',
+ blurb:'Een garagehouder ligt dood in zijn kantoor. Een buurman zag een donkere auto wegrijden. Meer heb je niet. De rest staat in de database.',
+ brief:`<p><b>Aan:</b> dienstdoend rechercheur<br><b>Van:</b> teamleider Esra Doğan<br><b>Zaak:</b> dood Ruben Hartman, Lindewaard</p>
+  <p>Op 12 maart 2026 om 06:50 vond de schoonmaker <b>Ruben Hartman</b> (44) dood in zijn kantoor bij <b>Hartman Auto’s</b>, <b>Industrieweg 14</b>. Hij is van achteren met een zwaar metalen voorwerp op het hoofd geslagen. Volgens de schouwarts overleed hij op 11 maart tussen 22:00 en 23:30. Uit de werkplaats ontbreekt een wielsleutel.</p>
+  <p>Een buurman zag rond 22:40 een <b>donkere auto</b> wegrijden. Hij onthield alleen het begin van het kenteken: <b>KX</b>.</p>
+  <p>In de omgeving hangen camera’s bij de <b>Industrieweg</b>, bij <b>Tankstation De Pomp</b> aan de Kanaalweg, in de <b>Kerkstraat</b> en bij <b>Sporthal De Brug</b>.</p>
+  <p>Zoek in de database. Typ zelf wat je wilt weten: een naam, een kenteken, een nummer, een adres. Elke vondst geeft je een nieuw spoor. Wijs de dader pas aan als je het kunt bewijzen.</p>`,
+ recs:[
+  {id:'p-ruben',type:'persoon',keys:['Ruben Hartman','R. Hartman'],title:'Ruben Hartman',sub:'Overleden 11-03-2026',
+   rows:[['Geboren','3 juni 1981 (44)'],['Adres','Wilgenlaan 9, Lindewaard'],['Telefoon','06-21557031'],['Beroep','Eigenaar Hartman Auto’s, Industrieweg 14'],['Voertuig','KR-554-H, zilveren Audi A4'],['Relaties','Echtgenote <b>Sanne Hartman</b> · compagnon <b>Joost Vermeer</b>'],['Antecedenten','Geen']]},
+  {id:'p-sanne',type:'persoon',keys:['Sanne Hartman','S. Hartman'],title:'Sanne Hartman',sub:'Echtgenote van het slachtoffer',
+   rows:[['Geboren','14 april 1983 (42)'],['Adres','Wilgenlaan 9, Lindewaard'],['Telefoon','06-29004417'],['Beroep','Verpleegkundige, Ziekenhuis Lindewaard'],['Voertuig','Geen eigen voertuig'],['Antecedenten','Geen']],
+   verhoor:{who:'Sanne Hartman',when:'12 maart 2026 · 11:20',lines:[['R','Wanneer sprak u uw man voor het laatst?'],['S','Om half tien belde ik hem. Hij zat nog op de zaak. Hij zei dat hij op iemand wachtte.'],['R','Op wie?'],['S','Dat wilde hij niet zeggen. Hij was al weken gespannen. Er was geld weg uit de zaak, zei hij. Hij ging het die week uitpraten met Joost.'],['R','Waar was u zelf die avond?'],['S','Om kwart over tien ben ik naar mijn nachtdienst gefietst. Om negen over tien kreeg ik nog een sms’je van hem.'],['R','Wat stond erin?'],['S','“Hij komt zo. Wordt laat.” Dat was het laatste wat ik van hem hoorde.']]}},
+  {id:'p-joost',type:'persoon',keys:['Joost Vermeer','J. Vermeer','J.M. Vermeer'],title:'Joost Vermeer',sub:'Compagnon van het slachtoffer',
+   rows:[['Geboren','22 oktober 1978 (47)'],['Adres','Dorpsstraat 31, Lindewaard'],['Telefoon','06-38870412'],['Beroep','Mede-eigenaar Hartman Auto’s (30%), doet de inkoop'],['Voertuig','KR-201-Z, grijze Toyota Corolla'],['Antecedenten','Geen'],['Let op','Lopende betalingsachterstand bij twee leveranciers']],
+   verhoor:{who:'Joost Vermeer',when:'12 maart 2026 · 14:10',lines:[['R','Waar was u op de avond van 11 maart?'],['J','Thuis. De hele avond. Ik heb tv gekeken en ben om elf uur naar bed gegaan.'],['R','Kan iemand dat bevestigen?'],['J','Ik woon alleen. Maar mijn telefoon lag de hele avond naast me. Kijkt u dat maar na.'],['R','Bent u die avond nog de deur uit geweest?'],['J','Nee. Geen moment.'],['R','Ruben had de boeken nagekeken. Wist u dat?'],['J','Ruben keek altijd overal in. Er was niets mis met de boeken.'],['R','Kent u een D. Smit?'],['J','Dennis Smit. Monteur. Ruben heeft hem vorige week ontslagen. Als u het mij vraagt, moet u bij hem zijn.']]}},
+  {id:'p-dennis',type:'persoon',keys:['Dennis Smit','D. Smit'],title:'Dennis Smit',sub:'Oud-monteur bij Hartman Auto’s',
+   rows:[['Geboren','8 januari 1997 (29)'],['Adres','Kerkpad 4b, Lindewaard'],['Telefoon','06-11920384'],['Beroep','Monteur, ontslagen per 4 maart 2026'],['Voertuig','Snorscooter F-482-KX'],['Rijbewijs','Ingevorderd sinds 2025'],['Antecedenten','2022: vernieling (boete)']],
+   verhoor:{who:'Dennis Smit',when:'12 maart 2026 · 16:45',lines:[['R','Er is een auto gehuurd op uw naam.'],['D','Op mijn naam? Ik heb geen auto gehuurd. Ik mag niet eens rijden, mijn rijbewijs is ingevorderd.'],['R','Waar was u op 11 maart?'],['D','Darten in Café De Hoek. Van negen uur tot sluitingstijd. Vraag het maar aan iedereen.'],['R','Waarom bent u ontslagen?'],['D','Er waren onderdelen weg, zei Ruben. Ik heb nooit iets gestolen.'],['R','Wie dan wel?'],['D','Joost deed de inkoop. Niet ik. Meer zeg ik er niet over.']]}},
+  {id:'p-mila',type:'persoon',keys:['Mila Verbeek','M. Verbeek'],title:'Mila Verbeek',sub:'Geen bekende relatie met het slachtoffer',
+   rows:[['Geboren','30 juli 1990 (35)'],['Adres','Havenkade 2, Lindewaard'],['Telefoon','06-70318855'],['Beroep','Sportinstructeur, Sporthal De Brug'],['Voertuig','KX-119-T, donkerblauwe Volkswagen Golf'],['Antecedenten','Geen']]},
+  {id:'p-henk',type:'persoon',keys:['Henk de Boer','H. de Boer'],title:'Henk de Boer',sub:'Geen bekende relatie met het slachtoffer',
+   rows:[['Geboren','2 februari 1945 (81)'],['Adres','Molenweg 12, Lindewaard'],['Voertuig','KX-77-PL, rode Fiat 500'],['Antecedenten','Geen']]},
+  {id:'k-volvo',type:'kenteken',keys:['KX-482-B'],title:'KX-482-B',sub:'Zwarte Volvo V60',
+   rows:[['Eigenaar','Hartman Auto’s, Industrieweg 14 (huurauto)'],['Kleur','Zwart'],['APK','Geldig']],
+   list:{h:'Kentekencamera’s (ANPR)',items:['11-03 · 21:44 · Kanaalweg, richting tankstation','11-03 · 22:12 · Industrieweg','11-03 · 22:41 · Industrieweg','11-03 · 22:58 · Dorpsstraat','12-03 · 05:52 · Industrieweg']}},
+  {id:'k-golf',type:'kenteken',keys:['KX-119-T'],title:'KX-119-T',sub:'Donkerblauwe Volkswagen Golf',
+   rows:[['Eigenaar','<b>Mila Verbeek</b>, Havenkade 2'],['Kleur','Donkerblauw']],
+   list:{h:'Kentekencamera’s (ANPR)',items:['11-03 · 18:02 · Havenkade','11-03 · 22:05 · Sporthal De Brug (parkeerplaats)','11-03 · 22:58 · Havenkade']}},
+  {id:'k-fiat',type:'kenteken',keys:['KX-77-PL'],title:'KX-77-PL',sub:'Rode Fiat 500',
+   rows:[['Eigenaar','<b>Henk de Boer</b>, Molenweg 12'],['Kleur','Rood']],list:{h:'Kentekencamera’s (ANPR)',items:['Geen registraties op 11 en 12 maart']}},
+  {id:'k-scooter',type:'kenteken',keys:['F-482-KX'],title:'F-482-KX',sub:'Snorscooter',
+   rows:[['Eigenaar','<b>Dennis Smit</b>, Kerkpad 4b']],list:{h:'Kentekencamera’s (ANPR)',items:['11-03 · 20:51 · Kerkstraat','12-03 · 00:21 · Kerkstraat']}},
+  {id:'k-audi',type:'kenteken',keys:['KR-554-H'],title:'KR-554-H',sub:'Zilveren Audi A4',
+   rows:[['Eigenaar','<b>Ruben Hartman</b>, Wilgenlaan 9']],list:{h:'Kentekencamera’s (ANPR)',items:['11-03 · 18:40 · Industrieweg']}},
+  {id:'k-toyota',type:'kenteken',keys:['KR-201-Z'],title:'KR-201-Z',sub:'Grijze Toyota Corolla',
+   rows:[['Eigenaar','<b>Joost Vermeer</b>, Dorpsstraat 31']],list:{h:'Kentekencamera’s (ANPR)',items:['10-03 · 08:12 · Industrieweg','10-03 · 17:35 · Dorpsstraat','Geen registraties op 11 maart']}},
+  {id:'t-ruben',type:'telefoon',keys:['06-21557031'],title:'06-21557031',sub:'Houder: Ruben Hartman',
+   list:{h:'Verkeer 11 maart',items:['21:31 · inkomend gesprek van 06-29004417 · 4 min','21:58 · inkomend gesprek van <b>06-44182290</b> · 1 min 12 s','22:09 · uitgaande sms naar 06-29004417: “Hij komt zo. Wordt laat.”','22:14 · laatste contact met het netwerk · mast Industrieweg']}},
+  {id:'t-prepaid',type:'telefoon',keys:['06-44182290'],title:'06-44182290',sub:'Prepaid · houder onbekend',
+   rows:[['Geactiveerd','9 maart 2026 · simkaart verkocht bij Tankstation De Pomp'],['Status','Uit sinds 11-03 · 23:02']],
+   list:{h:'Verkeer',items:['10-03 · 14:22 · sms van Hartman Auto’s: “Uw reservering KX-482-B is bevestigd.”','11-03 · 21:58 · uitgaand gesprek naar 06-21557031 · 1 min 12 s · mast Kanaalweg','11-03 · 22:30 · mast Industrieweg','11-03 · 23:02 · mast Dorpsstraat · daarna uit']}},
+  {id:'t-joost',type:'telefoon',keys:['06-38870412'],title:'06-38870412',sub:'Houder: Joost Vermeer',
+   list:{h:'Verkeer 11 maart',items:['19:00 tot 07:00 · alleen mast Dorpsstraat','Geen gesprekken of berichten tussen 19:40 en 07:15']}},
+  {id:'t-sanne',type:'telefoon',keys:['06-29004417'],title:'06-29004417',sub:'Houder: Sanne Hartman',
+   list:{h:'Verkeer 11 maart',items:['21:31 · uitgaand gesprek naar 06-21557031 · 4 min · mast Wilgenlaan','22:09 · sms ontvangen van 06-21557031','22:33 tot 07:30 · mast Ziekenhuis Lindewaard']}},
+  {id:'t-dennis',type:'telefoon',keys:['06-11920384'],title:'06-11920384',sub:'Houder: Dennis Smit',
+   list:{h:'Verkeer 11 maart',items:['20:55 tot 00:15 · mast Kerkstraat','22:47 · uitgaande sms naar een vriend: “Nog 1 potje, dan ben ik blut”']}},
+  {id:'t-mila',type:'telefoon',keys:['06-70318855'],title:'06-70318855',sub:'Houder: Mila Verbeek',
+   list:{h:'Verkeer 11 maart',items:['18:00 tot 22:00 · mast Havenkade','22:00 tot 22:55 · mast Sporthal De Brug','22:58 · mast Havenkade']}},
+  {id:'a-garage',type:'adres',keys:['Industrieweg 14','Industrieweg','Hartman Auto’s','Hartman Autos','Garage'],title:'Industrieweg 14',sub:'Hartman Auto’s · garage en autoverhuur',
+   rows:[['Eigenaren','<b>Ruben Hartman</b> (70%) en <b>Joost Vermeer</b> (30%)'],['Melding','12-03 · 06:50 · schoonmaker vindt het lichaam in het kantoor']],
+   list:{h:'Verhuurlog',items:['KX-482-B · online gereserveerd op 10-03 om 14:20 door “D. Smit”, tel. 06-44182290','Ophalen 11-03 via de sleutelkluis, met een eenmalige code','Codes voor de sleutelkluis kunnen alleen worden aangemaakt door Ruben Hartman en Joost Vermeer','De code voor deze reservering is aangemaakt op 10-03 om 14:31']}},
+  {id:'a-joost',type:'adres',keys:['Dorpsstraat 31','Dorpsstraat'],title:'Dorpsstraat 31',sub:'Bewoner: Joost Vermeer',
+   list:{h:'Meldingen',items:['12-03 · 00:20 · buurvrouw belt: “Op nummer 31 staat iemand iets te verbranden in een ton in de tuin.” Bij aankomst is het vuur uit.']}},
+  {id:'a-ruben',type:'adres',keys:['Wilgenlaan 9','Wilgenlaan'],title:'Wilgenlaan 9',sub:'Bewoners: Ruben en Sanne Hartman',list:{h:'Meldingen',items:['Geen meldingen']}},
+  {id:'a-dennis',type:'adres',keys:['Kerkpad 4b','Kerkpad'],title:'Kerkpad 4b',sub:'Bewoner: Dennis Smit',list:{h:'Meldingen',items:['Geen meldingen']}},
+  {id:'a-cafe',type:'adres',keys:['Café De Hoek','Cafe De Hoek','De Hoek','Kerkstraat 2'],title:'Café De Hoek',sub:'Kerkstraat 2',
+   list:{h:'Verklaring van de barman',items:['“Dennis was hier vanaf negen uur. Hij heeft de hele avond gedart en is pas na twaalven weggegaan. Hij is geen moment weg geweest, hij had de bar-rekening open staan.”']}},
+  {id:'a-mila',type:'adres',keys:['Havenkade 2','Havenkade'],title:'Havenkade 2',sub:'Bewoner: Mila Verbeek',list:{h:'Meldingen',items:['Geen meldingen']}},
+  {id:'a-henk',type:'adres',keys:['Molenweg 12','Molenweg'],title:'Molenweg 12',sub:'Bewoner: Henk de Boer',list:{h:'Meldingen',items:['Geen meldingen']}},
+  {id:'c-industrie',type:'camera',keys:['Industrieweg'],title:'Camera Industrieweg',sub:'Gemeentecamera, gericht op de inrit van Hartman Auto’s',
+   photos:[[['night',['car',150,170,1.1],['text',150,40,1,'22:12 · KX-482-B',14]],'22:12 · inrit'],[['night',['garage',150,165,1],['text',150,40,1,'05:58',14]],'05:58 · te voet weg']],
+   list:{h:'Registraties 11 en 12 maart',items:['18:40 · KR-554-H rijdt het terrein op','22:12 · zwarte Volvo <b>KX-482-B</b> rijdt het terrein op. Bestuurder draagt een capuchon, niet herkenbaar','22:41 · KX-482-B rijdt weg','05:52 · KX-482-B wordt teruggezet op het terrein','05:58 · een persoon loopt te voet weg, richting de bushalte']}},
+  {id:'c-pomp',type:'camera',keys:['Tankstation De Pomp','De Pomp','Tankstation','Kanaalweg'],title:'Camera Tankstation De Pomp',sub:'Kanaalweg · pompen en kassa',
+   photos:[[['night',['car',150,170,1.1],['text',150,40,1,'21:47 · POMP 3',14]],'21:47 · pomp 3'],[['wall',['register',150,165,1],['card',220,175,.8]],'21:51 · kassa']],
+   list:{h:'Registraties',items:['09-03 · 16:10 · man in een grijze jas koopt een prepaid simkaart, betaalt contant','11-03 · 21:47 · zwarte Volvo <b>KX-482-B</b> tankt bij pomp 3 · €61,20','11-03 · 21:51 · man in een grijze jas rekent af aan de kassa met een pinpas','Pintransactie 21:51 · €61,20 · pas op naam van <b>J.M. Vermeer</b>']}},
+  {id:'c-kerk',type:'camera',keys:['Kerkstraat'],title:'Camera Kerkstraat',sub:'Gericht op de ingang van Café De Hoek',
+   list:{h:'Registraties 11 maart',items:['20:51 · snorscooter F-482-KX parkeert voor Café De Hoek','21:00 tot 00:15 · Dennis Smit staat drie keer buiten om te roken, steeds kort','00:21 · F-482-KX vertrekt']}},
+  {id:'c-sporthal',type:'camera',keys:['Sporthal De Brug','Sporthal','De Brug'],title:'Camera Sporthal De Brug',sub:'Parkeerplaats en zaal',
+   list:{h:'Registraties 11 maart',items:['22:05 · donkerblauwe Golf KX-119-T parkeert','22:08 tot 22:50 · Mila Verbeek geeft een les in zaal 2','22:53 · KX-119-T vertrekt']}}],
+ hints:['Begin met het kenteken uit de verklaring van de buurman. Zoek bij Kenteken op <b>KX</b>.','De zwarte Volvo is een huurauto. Zoek op het adres van de garage. Wie heeft hem gehuurd, en klopt dat wel?','De huurauto is vlak voor de moord gaan tanken. Bekijk de camera van Tankstation De Pomp.'],
+ qs:[{q:'Wie heeft Ruben Hartman vermoord?',o:['Joost Vermeer','Dennis Smit','Sanne Hartman','Mila Verbeek'],a:0,x:'Joost Vermeer had motief, maakte de code voor de sleutelkluis en zijn pinpas werd gebruikt bij het tanken van de huurauto.'},
+  {q:'Met welke auto kwam de dader naar de garage?',o:['KX-482-B, zwarte Volvo','KX-119-T, donkerblauwe Golf','KR-201-Z, grijze Toyota','F-482-KX, snorscooter'],a:0,x:'De zwarte Volvo reed om 22:12 het terrein op en om 22:41 weer weg. Om 22:58 reed hij door de Dorpsstraat, waar Joost woont.'},
+  {q:'Welk bewijs koppelt de dader aan die auto?',o:['De pinbetaling bij Tankstation De Pomp om 21:51','De camera bij de Industrieweg om 22:12','Het sms’je van Ruben om 22:09','Het verhoor van Dennis Smit'],a:0,x:'Op de camera bij de Industrieweg is de bestuurder niet herkenbaar. Maar bij het tanken betaalde hij met een pinpas op naam van J.M. Vermeer.'}],
+ story:'Joost Vermeer haalde al een jaar geld uit Hartman Auto’s, via valse inkoopfacturen. Toen Ruben het ontdekte, wilde hij praten. Joost kocht op 9 maart een prepaid simkaart en huurde de zwarte Volvo op naam van Dennis Smit, de monteur die net was ontslagen. Zijn eigen telefoon liet hij thuis liggen, als alibi. Op 11 maart belde hij Ruben om 21:58 met de prepaid telefoon: hij kwam eraan. Onderweg tankte hij, en betaalde uit gewoonte met zijn eigen pinpas. Om 22:12 reed hij het terrein op. In het kantoor sloeg hij Ruben neer met een wielsleutel uit de werkplaats. Thuis verbrandde hij zijn jas in een ton in de tuin. Om 05:52 zette hij de Volvo terug en liep naar de bus.'}];
+const DBKEY='md-databank';
+let dbd=store.get(DBKEY)||{cur:null,cases:{}};if(!dbd.cases)dbd={cur:null,cases:{}};
+const saveDb=()=>store.set(DBKEY,dbd);
+const dbState=id=>(dbd.cases[id]=dbd.cases[id]||{start:false,tab:'zaak',type:'persoon',q:'',res:null,rec:null,seen:[],hist:[],hints:0,ans:{},tries:0,last:null,done:false,notes:''});
+const dbNorm=s=>String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]/g,'');
+function dbGo(c){dbd.cur=c;saveDb();renderDatabank();window.scrollTo({top:0})}
+function dbSearch(C,type,q){const n=dbNorm(q),min=type==='kenteken'?2:3;if(n.length<min)return {err:`Typ minstens ${min} tekens.`};
+  const of=t=>C.recs.filter(r=>r.type===t),exact=of(type).filter(r=>r.keys.some(k=>dbNorm(k)===n));if(exact.length)return {hits:exact};
+  const part=of(type).filter(r=>r.keys.some(k=>dbNorm(k).includes(n)));if(part.length)return {hits:part};
+  const elsewhere=C.recs.filter(r=>r.type!==type&&r.keys.some(k=>dbNorm(k).includes(n)));
+  return {hits:[],other:elsewhere.length?DBTYPES.find(t=>t[0]===elsewhere[0].type)[1]:null}}
+function dbRecHtml(r){const T=DBTYPES.find(t=>t[0]===r.type)[1];
+  return `<article class="sheet db-rec" id="dbRec"><header><span>${T} · ${r.sub}</span><b>${r.title}</b></header><div class="sheet-body">
+   ${r.photos?`<div class="dm-photos">${r.photos.map(([sp,l])=>polaroid(sp,l,'mini')).join('')}</div>`:''}
+   ${r.rows?`<dl class="db-rows">${r.rows.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`:''}
+   ${r.list?`<h4 class="db-h">${r.list.h}</h4><ul class="db-list">${r.list.items.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}
+   ${r.verhoor?`<h4 class="db-h">Verhoor · ${r.verhoor.when}</h4><button class="btn small filmbtn" type="button" id="dbVh">▶ Bekijk het verhoor</button>
+    <details class="db-vh"><summary>Uitgeschreven verhoor lezen</summary>${r.verhoor.lines.map(([w,t])=>`<p><b>${w==='R'?'Rechercheur':r.verhoor.who.split(' ')[0]}:</b> ${t}</p>`).join('')}</details>`:''}</div></article>`}
+// verhoorfilm: verhoorkamer, camerabeeld met REC en tijd, regels verschijnen een voor een
+function dbVerhoorFilm(v){const first=v.who.split(' ')[0];
+  const room=(u,talk)=>FM.svg(`${PBG.dark()}<rect x="0" y="0" width="300" height="150" fill="#2b2d2c"/><path d="M0 150h300" stroke="#111" stroke-width="2"/>
+   <path d="M150 0v34" stroke="#111" stroke-width="2"/><path d="M128 34h44l-8 12h-28z" fill="#111"/><path d="M136 46L80 200h140L164 46z" fill="#fff8d8" opacity=".09"/>
+   ${FM.G(150,150+(talk?Math.sin(u*9)*.8:0),.62,PP.person())}<g transform="translate(150 186) scale(1.6)">${PP.table()}</g>
+   ${FM.G(40,206,.5,PP.person(),'opacity=".85"')}
+   <circle cx="16" cy="15" r="4.5" fill="#e0412e" opacity="${Math.floor(u*1.6)%2?1:.25}"/><text x="25" y="19" fill="#e8e6df" font-size="10" font-family="monospace">REC</text>
+   <text x="292" y="19" fill="#e8e6df" font-size="9" font-family="monospace" text-anchor="end">${v.when.replace(' · ',' ')}</text>
+   <text x="292" y="194" fill="#e8e6df" font-size="9" font-family="monospace" text-anchor="end" opacity=".7">VERHOORKAMER 2</text>`);
+  const sc=[{d:3.6,f:u=>({title:`<p class="flm-k">Verhoor</p><h1>${FM.type(v.who,u,.3,14).replace('▌','')}</h1><p style="opacity:${FM.seg(u,1.6,2.2)}">${v.when} · Bureau Lindewaard</p>`})}];
+  v.lines.forEach(([w,t])=>{const d=Math.max(3.4,1.4+t.length/17),me=w!=='R';
+    sc.push({d,f:u=>({chap:me?first:'Rechercheur',stage:room(u,me&&u<1.2+t.length/22),cap:FM.type(t,u,.3)})})});
+  fmPlay(sc,{label:'Verhoor',end:'Terug naar de database'})}
+function renderDatabank(){const P=$('pDatabank');
+  if(!dbd.cur){
+    P.innerHTML=`<h2 class="bigtitle" style="font-size:clamp(34px,10.5vw,62px)">Politiedatabase</h2>${PENCIL}<p class="lead">Je krijgt een korte melding en toegang tot de politiedatabase. Zoek zelf naar personen, kentekens, telefoons, adressen en camerabeelden. Elke vondst geeft een nieuw spoor. Bekijk de verhoren en wijs de dader aan als je het kunt bewijzen.</p>
+     <div class="caselist">${DBCASES.map(c=>{const s=dbState(c.id),sc=s.done?c.qs.filter((q,i)=>s.ans[i]===q.a).length:0;
+      return `<article class="casecard db-card"><span class="kicker">Zaak ${c.nr} · ${c.level} · ${c.time}</span><h3>${c.title}</h3><p>${c.blurb}</p>
+       <div class="controls"><span class="hint">${s.done?(sc===3?'Opgelost':'Gesloten, niet alles goed'):s.start?`${s.seen.length} dossiers bekeken`:'Open zaak'}</span><button class="btn ${s.done?'':'primary'} small" type="button" data-dbcase="${c.id}">${s.done?'Teruglezen':s.start?'Verder':'Inloggen'}</button></div></article>`}).join('')}</div>`;
+    P.querySelectorAll('[data-dbcase]').forEach(b=>b.onclick=()=>dbGo(b.dataset.dbcase));saveDb();return}
+  const C=DBCASES.find(c=>c.id===dbd.cur);if(!C)return dbGo(null);const s=dbState(C.id);
+  const head=`<button class="btn small backbtn" id="dbList" type="button">← Alle zaken</button><div class="storyhead"><span class="kicker">Zaak ${C.nr} · ${C.level} · ${C.time}</span><h3>${C.title}</h3>${filmBtn('databank',C.id)}${s.done?endBtn('databank',C.id):''}</div>`;
+  if(!s.start){P.innerHTML=`${head}<div class="db-login"><div class="db-logo">POLITIE<span>Recherchesysteem</span></div><p>Toegang voor zaak ${C.nr}: <b>${C.title}</b></p><button class="btn primary" id="dbIn" type="button">Inloggen</button></div>`;
+    $('dbList').onclick=()=>dbGo(null);$('dbIn').onclick=()=>{const go=()=>{s.start=true;s.tab='zaak';saveDb();renderDatabank()};if(!filmSeen('databank',C.id))storyFilm('databank',C.id,go);else go()};return}
+  const t=s.tab||'zaak',TABS=[['zaak','Melding'],['zoek','Zoeken'],['gevonden',`Gevonden ${s.seen.length}`],['beschuldig',s.done?'Oplossing':'Beschuldig']];
+  let body='';
+  if(t==='zaak')body=`<article class="sheet letter"><header><span>Melding · ${C.nr}</span><b>${C.title}</b></header><div class="sheet-body">${C.brief}</div></article>
+    <section class="hb db-hints"><h4>Hints · ${s.hints} van ${C.hints.length}</h4>${C.hints.slice(0,s.hints).map((h,i)=>`<p class="dm-hint"><b>Hint ${i+1}</b> ${h}</p>`).join('')}
+     ${s.hints<C.hints.length&&!s.done?`<button class="btn small" id="dbHint" type="button">Toon hint ${s.hints+1}</button>`:''}</section>
+    <div class="controls"><button class="btn primary" type="button" data-dbtab="zoek">Naar de database →</button></div>`;
+  if(t==='zoek'){const R=s.res,rec=s.rec&&C.recs.find(r=>r.id===s.rec),TT=DBTYPES.find(x=>x[0]===s.type)||DBTYPES[0];
+    body=`<div class="db-box"><div class="db-types" role="radiogroup" aria-label="Zoek op">${DBTYPES.map(([k,l])=>`<button type="button" role="radio" aria-checked="${k===s.type}" data-dbtype="${k}">${l}</button>`).join('')}</div>
+      <form class="db-form" id="dbForm"><input id="dbQ" type="search" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" placeholder="${TT[2]}" value="${(s.q||'').replace(/"/g,'&quot;')}" aria-label="Zoekterm"><button class="btn primary" type="submit">Zoek</button></form>
+      ${R?R.err?`<p class="msg">${R.err}</p>`:R.hits.length?`<p class="db-count">${R.hits.length} ${R.hits.length===1?'resultaat':'resultaten'} voor “${R.q}”</p><div class="db-hits">${R.hits.map(id=>{const r=C.recs.find(x=>x.id===id);return `<button type="button" class="db-hit ${s.rec===id?'cur':''}" data-dbrec="${id}"><b>${r.title}</b><small>${r.sub}</small></button>`}).join('')}</div>`
+       :`<p class="msg">Geen resultaten voor “${R.q}” bij ${TT[1]}.${R.other?` Probeer eens het zoektype <b>${R.other}</b>.`:''}</p>`:''}</div>
+     ${rec?dbRecHtml(rec):''}
+     ${s.hist.length?`<section class="db-histbox"><h4 class="db-h">Zoekgeschiedenis</h4><div class="db-hist">${s.hist.slice(-12).reverse().map(([ty,q])=>`<button type="button" data-dbagain="${ty}|${q.replace(/"/g,'&quot;')}">${DBTYPES.find(x=>x[0]===ty)[1]}: ${q}</button>`).join('')}</div></section>`:''}`}
+  if(t==='gevonden')body=s.seen.length?`<p class="hint">Alles wat je al hebt geopend. Tik om het opnieuw te bekijken.</p>${DBTYPES.map(([k,l])=>{const rs=C.recs.filter(r=>r.type===k&&s.seen.includes(r.id));
+     return rs.length?`<h4 class="db-h">${l}</h4><div class="db-hits">${rs.map(r=>`<button type="button" class="db-hit" data-dbopen="${r.id}"><b>${r.title}</b><small>${r.sub}${r.verhoor?' · verhoor':''}</small></button>`).join('')}</div>`:''}).join('')}`
+    :`<p class="msg">Je hebt nog niets gevonden. Begin met zoeken.</p><div class="controls"><button class="btn primary" type="button" data-dbtab="zoek">Naar de database</button></div>`;
+  if(t==='beschuldig'){const L=s.last;
+    if(!s.done){body=`<p class="hint">Beantwoord alle drie de vragen. ${s.tries?'Dit is je laatste poging.':'Heb je iets fout, dan krijg je nog één poging.'}</p>
+     ${C.qs.map((q,i)=>`<section class="dm-q"><h4><span>${i+1}</span>${q.q}${L?` <em class="${L[i]?'ok':'bad'}">${L[i]?'✓':'✗'}</em>`:''}</h4><select data-dbq="${i}" aria-label="Antwoord op vraag ${i+1}"><option value="">Kies…</option>${q.o.map((o,k)=>`<option value="${k}" ${s.ans[i]===k?'selected':''}>${o}</option>`).join('')}</select></section>`).join('')}
+     ${L?`<p class="msg">Niet alles klopt. Bij ✗ zit je fout. Pas je antwoord aan en probeer het nog één keer.</p>`:''}
+     <div class="controls"><button class="btn primary" id="dbAcc" type="button">${s.tries?'Laatste poging':'Dien de beschuldiging in'}</button></div>`}
+    else{const sc=C.qs.filter((q,i)=>s.ans[i]===q.a).length;
+     body=`<div class="verdict ${sc===3?'':'bad'}"><p><b>${sc===3?'Zaak opgelost.':'Zaak niet opgelost.'}</b> ${sc}/3 goed${s.tries>1?', in twee pogingen':''}.</p></div>
+      <ol class="solsteps">${C.qs.map((q,i)=>`<li class="${s.ans[i]===q.a?'good':'bad'}"><b>${s.ans[i]===q.a?'✓':'✗'} ${q.q}</b><br>Jij: ${q.o[s.ans[i]]}${s.ans[i]===q.a?'':` · Juist: ${q.o[q.a]}`}<br>${q.x}</li>`).join('')}</ol>
+      <h4 class="solh">Wat er gebeurde</h4><div class="verdict"><p>${C.story}</p></div>
+      <div class="controls"><button class="btn" id="dbReset" type="button">Zaak opnieuw spelen</button></div>`}}
+  P.innerHTML=`${head}<nav class="ktabs" aria-label="Onderdelen">${TABS.map(([k,l])=>`<button type="button" data-dbtab="${k}" aria-pressed="${k===t}">${l}</button>`).join('')}</nav>
+   <div class="kbody">${body}</div>
+   <section class="notes"><label for="dbNotes"><b>Notitieblok</b> <span class="hint">namen, kentekens, tijden</span></label><textarea id="dbNotes" rows="5" placeholder="Bijvoorbeeld: 22:12 zwarte Volvo op het terrein"></textarea></section>`;
+  const on=(id,f)=>{const el=$(id);if(el)el.onclick=f};
+  $('dbNotes').value=s.notes||'';$('dbNotes').oninput=e=>{s.notes=e.target.value;saveDb()};
+  on('dbList',()=>dbGo(null));on('dbHint',()=>{s.hints++;saveDb();renderDatabank()});
+  P.querySelectorAll('[data-dbtab]').forEach(b=>b.onclick=()=>{s.tab=b.dataset.dbtab;saveDb();renderDatabank();window.scrollTo({top:0})});
+  P.querySelectorAll('[data-dbtype]').forEach(b=>b.onclick=()=>{s.type=b.dataset.dbtype;s.q=$('dbQ').value;s.res=null;saveDb();renderDatabank();const q=$('dbQ');if(q)q.focus()});
+  const openRec=(id,scroll=true)=>{s.rec=id;if(!s.seen.includes(id))s.seen.push(id);saveDb();renderDatabank();const el=$('dbRec');if(el&&scroll)el.scrollIntoView({block:'start'})};
+  const run=(type,q)=>{const R=dbSearch(C,type,q);s.type=type;s.q=q;s.res={q,err:R.err||null,hits:(R.hits||[]).map(r=>r.id),other:R.other||null};s.rec=null;
+    if(!R.err){s.hist=s.hist.filter(h=>!(h[0]===type&&dbNorm(h[1])===dbNorm(q)));s.hist.push([type,q])}
+    if(R.hits&&R.hits.length===1)return openRec(R.hits[0].id);saveDb();renderDatabank()};
+  const f=$('dbForm');if(f)f.onsubmit=e=>{e.preventDefault();const q=$('dbQ').value.trim();if(q){$('dbQ').blur();run(s.type,q)}};
+  P.querySelectorAll('[data-dbrec]').forEach(b=>b.onclick=()=>openRec(b.dataset.dbrec));
+  P.querySelectorAll('[data-dbagain]').forEach(b=>b.onclick=()=>{const [ty,...q]=b.dataset.dbagain.split('|');run(ty,q.join('|'));window.scrollTo({top:0})});
+  P.querySelectorAll('[data-dbopen]').forEach(b=>b.onclick=()=>{s.tab='zoek';s.res=null;openRec(b.dataset.dbopen)});
+  on('dbVh',()=>{const r=C.recs.find(x=>x.id===s.rec);if(r&&r.verhoor)dbVerhoorFilm(r.verhoor)});
+  P.querySelectorAll('[data-dbq]').forEach(el=>el.onchange=()=>{s.ans[el.dataset.dbq]=el.value===''?null:+el.value;saveDb()});
+  on('dbAcc',()=>{if(C.qs.some((q,i)=>s.ans[i]===undefined||s.ans[i]===null)){const m=P.querySelector('.kbody .hint');if(m)m.textContent='Beantwoord eerst alle drie de vragen.';return}
+    s.tries++;const res=C.qs.map((q,i)=>s.ans[i]===q.a),all=res.every(Boolean);
+    if(all||s.tries>=2){s.done=true;s.last=null;if(all){const x=store.get('md-databank-stats')||{solved:0,streak:0};x.solved++;store.set('md-databank-stats',x)}saveDb();renderDatabank();setTimeout(()=>endFilm('databank',C.id),500)}
+    else{s.last=res;saveDb();renderDatabank()}});
+  on('dbReset',()=>{dbd.cases[C.id]={start:true,tab:'zaak',type:'persoon',q:'',res:null,rec:null,seen:[],hist:[],hints:0,ans:{},tries:0,last:null,done:false,notes:s.notes||''};saveDb();renderDatabank()});
+}
+
 const SCR={
  speur:{
   veiling:[['t','De laatste veiling','veiling','Een zaak voor Inspecteur Mol'],
@@ -3289,6 +3499,12 @@ const SCR={
    ['s','Escaperoom De Kluis · maandag 09:20',['dark',['lock',150,175,1.4]],'Gamemaster Tim vindt eigenaar Jeroen Smit in de kamer ‘Het Laboratorium’. De deur zat van buitenaf op slot.'],
    ['p','Naast het slachtoffer',['dark',['goldbar',150,175,1.6],['marker',235,190,1,1]],'Een nep-goudstaaf','Naast hem ligt een zware nep-goudstaaf uit de kamer ‘De Bankkluis’.'],
    ['e','Wie had de code van de deur?','Pak de telefoon']]},
+ databank:{
+  hartman:[['t','De huurauto','huurauto','Politiedatabase · zaak 001 · Lindewaard'],
+   ['s','12 maart 2026 · 06:50',['night',['garage',150,165,1.1]],'De schoonmaker van Hartman Auto’s vindt eigenaar Ruben Hartman dood in zijn kantoor.'],
+   ['s','11 maart · 22:40',['night',['car',110,172,1.2],['moon',250,38,.6]],'Een buurman ziet een donkere auto wegrijden. Van het kenteken onthoudt hij alleen het begin: KX.',{move:[1,90]}],
+   ['l','In het systeem',[['Sanne','echtgenote'],['Joost','compagnon'],['Dennis','ex-monteur'],['Mila','onbekend']],'Namen, kentekens, telefoons, camera’s. Het antwoord zit ergens in de database.'],
+   ['e','Je hebt toegang. Begin met zoeken.','Naar de melding']]},
  dossier:{
   drukkerij:[['t','Dood in de drukkerij','drukkerij','Dossier 01 · Zwolle'],
    ['s','Maandag · 06:49',['wall',['stairs',150,150,1.2]],'Chef drukker Ruud Bakker opent de drukkerij. Het alarm staat uit. Dan ziet hij zijn baas liggen.',{steps:true}],
@@ -3314,82 +3530,91 @@ const SCREND={
  speur:{
   veiling:[['t','Zo is het gebeurd','gebeurd','De laatste veiling'],
    ['s','Het testament',['desk',['letter',150,175,1.5]],'Notaris Brouwer had het testament van Cornelis vervalst. In zijn versie ging de Zwarte Parel naar hem.'],
-   ['s','Op de zolder',SIMG.veiling.ch[1],'Die avond ontdekte Cornelis het bedrog. Er volgde een worsteling, de klok viel om, en Brouwer sloeg toe met de veilinghamer.',{hit:true}],
+   ['s','Op de zolder',SIMG.veiling.ch[1],'Die avond ontdekte Cornelis het bedrog. Er volgde een worsteling, de klok viel om, en Brouwer sloeg toe met de veilinghamer.',{hit:true,act:'strike',x:120}],
    ['s','De Zwarte Parel',SIMG.veiling.ch[4],'Daarna zocht Brouwer de Parel. Maar Cornelis had haar slim verstopt, achter de slinger van de klok.'],
    ['x','Notaris Brouwer','de veilinghamer','de zolder']],
   wadoog:[['t','Zo is het gebeurd','gebeurd','Storm op Wadoog'],
    ['s','Hotel De Duinroos · 23:05',['wall',['bar',150,175,.8],['receipt',150,125,.65]],'Om vijf over elf tekende Maarten Duin bon 43. Daarna pakte hij een stormlantaarn uit de hal.'],
    ['s','De vuurtoren',SIMG.wadoog.cover,'Door de regen liep hij naar de vuurtoren. Jelle zag hem aankomen en seinde GEVAAR. Alleen Inspecteur Mol zag het.',{rain:true}],
-   ['s','Op de trap',SIMG.wadoog.ch[7],'Op de trap kregen ze ruzie. Eén duw.',{hit:'duw'}],
+   ['s','Op de trap',['wall',['stairs',160,150,1.3]],'Op de trap kregen ze ruzie. Eén duw.',{hit:'duw',act:'fall',top:[232,76],bottom:[95,192],s:.42}],
    ['s','23:55',['wall',['bar',150,175,.8]],'Om vijf voor twaalf stond Maarten weer achter de bar, alsof er niets gebeurd was.'],
    ['x','Maarten Duin','een duw','de vuurtorentrap']],
   ravensteyn:[['t','Zo is het gebeurd','gebeurd','Het spookslot van Ravensteyn'],
    ['s','Het familiezilver',SIMG.ravensteyn.ch[9],'Dokter Holtkamp verving al maanden het familiezilver door namaak, en verkocht het echte.'],
    ['s','21:12 · De geheime gang',['dark',['door',150,150,1],['candle',230,160,.8]],'Hij kwam niet om vijf voor tien, maar om twaalf over negen. Door de geheime gang sloop hij naar de bibliotheek.'],
    ['s','De bibliotheek',SIMG.ravensteyn.ch[7],'Daar verwisselde hij de hartpillen van de jonkheer voor tabletten die vijf keer zo sterk waren.'],
-   ['s','22:00',SIMG.ravensteyn.ch[2],'Om tien uur nam Willem zoals altijd zijn pil, met een glas port. De dokter hoefde alleen maar te wachten.'],
+   ['s','22:00',SIMG.ravensteyn.ch[2],'Om tien uur nam Willem zoals altijd zijn pil, met een glas port. De dokter hoefde alleen maar te wachten.',{act:'poison',x:52,y:168,s:.5}],
    ['x','Dokter Holtkamp','verwisselde hartpillen','de bibliotheek']],
   elfsteden:[['t','Zo is het gebeurd','gebeurd','Dood op de Elfstedentocht'],
    ['s','De weddenschap',SIMG.elfsteden.ch[9],'Trainer Wiebe Zijlstra zette 4.000 euro in op een ander. Als Sietse verloor, kreeg hij 20.000 euro.'],
    ['s','Dokkum · 12:20',SIMG.elfsteden.ch[6],'Na zijn eerste radiogesprek liep Wiebe met zijn rode thermosfles over het ijs naar de stempeltent.',{snow:true}],
-   ['s','Achter de tent',SIMG.elfsteden.ch[12],'Daar kregen ze ruzie, en Wiebe sloeg toe.',{hit:'metaal',snow:true}],
+   ['s','Achter de tent',SIMG.elfsteden.ch[12],'Daar kregen ze ruzie, en Wiebe sloeg toe.',{hit:'metaal',snow:true,act:'strike',x:170}],
    ['s','12:31',SIMG.elfsteden.ch[7],'Om 12:31 zat hij weer in zijn bus, precies op tijd voor het tweede gesprek. De fles liet hij in de sneeuw vallen.'],
    ['x','Wiebe Zijlstra','de rode thermosfles','de stempeltent']]},
  koud:{
   sluis:[['t','Zo is het gebeurd','gebeurd','Dossier 001 · De laatste ronde'],
    ['s','De kasstaat',CIMG.sluis.photos[0],'Ria had ontdekt wie er geld uit de kassa stal. Op donderdag en zaterdag werkte alleen Dennis. Om 01:38 schreef ze: ‘Ik weet nu wie.’'],
    ['s','Na sluitingstijd',CIMG.sluis.cover,'Dennis zei dat hij om kwart over één vertrok. Maar hij was er nog.',{rain:true}],
-   ['s','De keldertrap',['dark',['stairs',150,150,1.1],['flashlight',235,180,.9]],'Hij sloeg Ria van achteren met de zware zaklamp. Daarna leek het een val van de keldertrap.',{hit:'metaal'}],
+   ['s','De keldertrap',['dark',['stairs',150,150,1.1]],'Hij sloeg Ria van achteren met de zware zaklamp. Daarna leek het een val van de keldertrap.',{hit:'metaal',act:'fall',club:true,top:[210,86],bottom:[85,192],s:.4}],
    ['s','02:04',['night',['bike',150,185,1.4]],'Om 02:04 fietste een man met een zwarte pet weg. De camera van de buurman zag hem.',{rain:true}],
    ['x','Dennis Wolters','de zaklamp','Café De Sluis']],
   reiger:[['t','Zo is het gebeurd','gebeurd','Dossier 002 · De woonboot'],
    ['s','22:15',['desk',['phone',150,160,1.4]],'Erik belde nog met zijn zakenpartner Maurits Kooij. Daarna liet hij hem zelf binnen. Twee kopjes koffie.'],
-   ['s','De badkamer',['wall',['bath',150,175,1.1]],'In Eriks eigen bad duwde Maurits hem onder water. Voor € 500.000 van de verzekering.',{hit:'duw'}],
+   ['s','De badkamer',['wall',['bath',150,175,1.1]],'In Eriks eigen bad duwde Maurits hem onder water. Voor € 500.000 van de verzekering.',{hit:'duw',act:'drown',x:150,y:142,s:.42}],
    ['s','00:40',CIMG.reiger.cover,'Hij sleepte Erik over het dek naar de gracht en zette een glas whisky neer. Maar op de maanfoto van de buurvrouw staat zijn Volvo.'],
    ['x','Maurits Kooij','het bad','woonboot De Reiger']],
   kade:[['t','Zo is het gebeurd','gebeurd','Dossier 003 · De achtste verdieping'],
    ['s','23:41',CIMG.kade.cover,'Hoofdredacteur Rob Hartman stond in appartement 8C. Sophie had ontdekt dat hij geld kreeg om artikelen tegen te houden.',{rain:true}],
-   ['s','Het balkon',['night',['railing',150,195,1],['moon',245,40,.6]],'Er werd geschreeuwd en gevochten. Om 23:44 viel Sophie van het balkon.',{hit:'duw',rain:true}],
+   ['s','Het balkon',['night',['railing',150,128,1],['moon',245,40,.6]],'Er werd geschreeuwd en gevochten. Om 23:44 viel Sophie van het balkon.',{hit:'duw',rain:true,act:'fall',top:[150,126],bottom:[205,250],s:.45}],
    ['s','23:52',['desk',['laptop',150,175,1.3]],'Acht minuten later typte Hartman op haar laptop een afscheidsmail. Zijn natte rode paraplu liet hij in de hal staan.'],
    ['x','Rob Hartman','zijn handen','het balkon van 8C']],
   vuurwerk:[['t','Zo is het gebeurd','gebeurd','Dossier 004 · Vuurwerk boven Ommerdijk'],
    ['s','23:01',CIMG.vuurwerk.cover,'Iedereen keek naar het vuurwerk. Gert belde naar huis. Hij wist dat er € 12.000 uit de feestkas verdwenen was.'],
    ['s','Achter de feesttent',['night',['generator',150,185,1],['toolbox',55,190,.7]],'Penningmeester Wim Dekker pakte de rubberen moker uit de kist van de tentbouwer.'],
-   ['s','23:04',['night',['generator',150,185,1],['fireworks',150,90,1]],'Een klap. De telefoon viel stil.',{hit:true}],
+   ['s','23:04',['night',['generator',70,185,1],['fireworks',150,90,1]],'Een klap. De telefoon viel stil.',{hit:true,act:'strike',x:190}],
    ['s','Het gat in het filmpje',['desk',['phone',150,165,1.4]],'In Wims filmpjes zat een gat van vijf en een halve minuut. Genoeg om heen en terug te lopen.'],
    ['x','Wim Dekker','de rubberen moker','achter de feesttent']],
   tuin:[['t','Zo is het gebeurd','gebeurd','Dossier 005 · Tuin 17'],
    ['s','Het testament',['desk',['letter',150,175,1.5]],'Herman wilde zijn testament veranderen. Zijn neef Ruud zou niets meer krijgen.'],
    ['s','Zaterdag 19:45',CIMG.tuin.cover,'Ruud was niet bij de wedstrijd in Groningen. Om 19:45 stapte hij al uit de trein in Lindenhorst.'],
-   ['s','Het tuinhuisje',['wall',['workbench',150,180,1],['toolrack',240,150,.6]],'Met de spade sloeg hij Herman. Daarna smeerde hij bloed op de hoek van de werkbank.',{hit:'metaal'}],
+   ['s','Het tuinhuisje',['wall',['workbench',150,180,1],['toolrack',240,150,.6]],'Met de spade sloeg hij Herman. Daarna smeerde hij bloed op de hoek van de werkbank.',{hit:'metaal',act:'strike',x:175}],
    ['s','Zondag 19:40',['wall',['keycab',150,170,1.1]],'Een dag later haalde hij de reservesleutel uit het clubhuis, zette Herman in zijn stoel en deed de deur op slot.'],
    ['x','Ruud Brands','de spade','tuin 17']]},
  bericht:{
   mila:[['t','Zo is het gebeurd','gebeurd','Laatst online'],
    ['s','21:52',['desk',['phone',150,160,1.5]],'Een onbekend nummer deed zich voor als Thijs: ‘23:00 bij de toren, net als vroeger.’ Alleen haar collega’s kenden dat verhaal.'],
    ['s','De uitkijktoren · 23:04',['night',['tower',150,195,1.1],['scooter',60,195,.7]],'Kevin Smit kwam op de bezorgscooter van De Kade. Mila wilde de omkoping de volgende dag aan de krant geven.'],
-   ['s','23:47',['night',['tower',150,195,1.1],['moon',245,40,.6]],'Boven op de toren. Eén duw. Haar telefoon viel uit.',{hit:'duw'}],
+   ['s','23:47',['night',['tower',150,195,1.1],['moon',245,40,.6]],'Boven op de toren. Eén duw. Haar telefoon viel uit.',{hit:'duw',act:'fall',top:[158,40],bottom:[215,194],s:.28}],
    ['x','Kevin Smit','een duw','de uitkijktoren']],
   manege:[['t','Zo is het gebeurd','gebeurd','Stille nacht'],
    ['s','02:14 · De stal',['dark',['horse',150,190,1.1],['syringe',235,165,.8]],'Iris betrapte Charlotte van Loon met een spuit bij Duchess. Het paard moest geld opleveren van de verzekering.'],
    ['s','02:20',['night',['car',150,185,1.3]],'Iris appte: ‘Ik zie jouw auto op het erf.’ Het bericht werd meteen gelezen.'],
-   ['s','De ladder',['dark',['shed',150,180,1]],'Om 02:21 schoot de hartslag van Iris omhoog. Bij de ladder naar de hooizolder kreeg ze een duw.',{hit:'duw'}],
+   ['s','De ladder',['dark',['ladder',170,192,1.25],['horse',262,195,.55]],'Om 02:21 schoot de hartslag van Iris omhoog. Bij de ladder naar de hooizolder kreeg ze een duw.',{hit:'duw',act:'fall',top:[205,40],bottom:[110,192],s:.36}],
    ['x','Charlotte van Loon','een duw','de stal']],
   kluis:[['t','Zo is het gebeurd','gebeurd','Opgesloten'],
    ['s','22:35',['wall',['register',150,175,1]],'Lisa de Vries betaalde bij de snackbar naast De Kluis. Jeroen wilde stoppen met hun samenwerking, om de € 38.000 die zij had opgenomen.'],
    ['s','22:41',['dark',['lock',150,175,1.4]],'Met de mastercode, die alleen zij en Jeroen kenden, ging ze naar binnen.'],
-   ['s','Het Laboratorium',['dark',['goldbar',150,175,1.6]],'Ze sloeg Jeroen met de zware nep-goudstaaf.',{hit:'metaal'}],
+   ['s','Het Laboratorium',['dark',['goldbar',255,190,1]],'Ze sloeg Jeroen met de zware nep-goudstaaf.',{hit:'metaal',act:'strike',x:150}],
    ['s','22:58',['dark',['door',150,170,1],['lock',235,170,.7]],'Om 22:58 deed ze de deur van buitenaf op slot.'],
    ['x','Lisa de Vries','de goudstaaf','het Laboratorium']]},
+ databank:{
+  hartman:[['t','Zo is het gebeurd','gebeurd','De huurauto'],
+   ['s','Het geld',['desk',['money',150,175,1.4]],'Joost Vermeer haalde al een jaar geld uit Hartman Auto’s. Ruben ontdekte het en wilde praten.'],
+   ['s','9 en 10 maart',['desk',['phone',110,172,1],['card',200,176,1]],'Joost kocht een prepaid telefoon en huurde een auto op naam van Dennis Smit, de monteur die net was ontslagen.'],
+   ['s','21:51',['wall',['register',150,165,1],['card',225,175,.8]],'Bij het tankstation maakte hij één fout: hij betaalde met zijn eigen pinpas.'],
+   ['s','22:12',['wall',['toolbox',235,175,.8]],'In het kantoor sloeg hij Ruben neer met een wielsleutel uit de werkplaats.',{hit:'metaal',act:'strike',x:130}],
+   ['s','00:20',['night',['moon',250,38,.6]],'Thuis verbrandde hij zijn jas in een ton in de tuin. Maar de pinbetaling kon hij niet verbranden.'],
+   ['x','Joost Vermeer','de wielsleutel','de garage']]},
  dossier:{
   drukkerij:[['t','Zo is het gebeurd','gebeurd','Dood in de drukkerij'],
    ['s','De boeken',['desk',['money',150,175,1.4]],'Ilse de Wit sluisde al 14 maanden geld weg via haar eigen bureau IdW Advies. Arnold kwam erachter.'],
    ['s','21:16',['wall',['door',150,150,1],['thermos',235,175,.9]],'Ze kwam met haar groene thermos, met koffie en een slaapmiddel. Arnold liet haar binnen via de achterdeur.'],
-   ['s','21:45',['desk',['ring',150,150,1,26]],'Toen hij suf werd, sloeg ze hem twee keer met het loodje van zijn bureau.',{hit:'metaal'}],
+   ['s','21:45',['wall',['bureau',220,150,.9]],'Toen hij suf werd, sloeg ze hem twee keer met het loodje van zijn bureau.',{hit:'metaal',act:'strike',x:140}],
    ['s','22:03',['wall',['stairs',150,150,1.2]],'Ze legde hem onder aan de trap, zodat het op een val leek. Maar de thermos bleef staan.'],
    ['x','Ilse de Wit','het loodje','de drukkerij']]}};
 function endOk(game,id){try{if(game==='koud'){const c=COLD.find(x=>x.id===id),s=kd.cases[id];return !s||!s.acc||s.acc.d===c.answer.dader}
   if(game==='bericht'){const c=BCASES.find(x=>x.id===id),s=bd.cases[id];return !s||!s.acc||s.acc.d===c.answer.dader}
+  if(game==='databank'){const c=DBCASES.find(x=>x.id===id),s=dbd.cases[id];return !s||!s.done||c.qs.every((q,i)=>s.ans[i]===q.a)}
   if(game==='dossier'){const c=DOSSIERS.find(x=>x.id===id),s=dd.cases[id];return !s||s.ans[0]===c.qs[0].a}}catch(e){}return true}
 function endFilm(game,id){const s=(SCREND[game]||{})[id];if(!s)return;fmPlay(fmStory(s,endOk(game,id)),{label:'Zo is het gebeurd',end:'Terug naar de zaak'})}
 const endBtn=(game,id)=>(SCREND[game]||{})[id]?`<button class="btn small filmbtn" type="button" data-endfilm="${game}:${id}">▶ Zo is het gebeurd</button>`:'';
@@ -3415,7 +3640,7 @@ function pasData(){const sx=k=>store.get(k)||{solved:0,streak:0},m=sx('md-stats'
   const dosPerfect=DOSSIERS.some(c=>{const s=dd.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)&&!Object.values(s.hints||{}).some(v=>v>0)});
   const lhPerfect=lst&&lst.guess&&LHP.every((p,i)=>lst.guess[i]&&!lst.guess[i].m&&!lst.guess[i].w);
   const rows=[['murdle','Moorddossier',m.solved,null],['speur','Speurneus',speur,CASES.length],['koud','Cold Case',koud,COLD.length],['kamer','Kamermoord',km.solved,null],
-   ['landhuis','Het Landhuis',lh.solved,null],['spion','Spionage',spn.solved,null],['bericht','Laatste Bericht',ber,BCASES.length],['dossier','Dossiermap',dos,DOSSIERS.length]];
+   ['landhuis','Het Landhuis',lh.solved,null],['spion','Spionage',spn.solved,null],['bericht','Laatste Bericht',ber,BCASES.length],['dossier','Dossiermap',dos,DOSSIERS.length],['databank','Politiedatabase',DBCASES.filter(c=>{const s=dbd.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,DBCASES.length]];
   const total=rows.reduce((a,r)=>a+r[2],0),streak=Math.max(m.streak||0,km.streak||0,lh.streak||0,spn.streak||0);
   const B=[['eerste','Eerste zaak','Los je eerste zaak op.',total,1],['tien','Volhouder','Los 10 zaken op.',total,10],['vijftig','Veteraan','Los 50 zaken op.',total,50],['honderd','Legende','Los 100 zaken op.',total,100],
    ['logicus','Logicus','10 keer Moorddossier opgelost.',m.solved,10],['meester','Meesterbrein','Niveau 5 vrijgespeeld in Moorddossier.',m.solved,40],
@@ -3537,7 +3762,16 @@ const HELP=[
    'Vast? Elke vraag heeft een hint-envelop A en B. B zegt meer dan A.',
    'Zijn alle vijf vragen beantwoord, dan mag de envelop <b>Oplossing</b> open. Je ziet je score, wat je goed had en wat er echt gebeurde.'],
   tips:['Maak in het notitieblok een tijdlijn. Logboeken, belgegevens en bonnetjes hebben allemaal tijden.','Zoek de leugen: zegt iemand iets wat een ander stuk tegenspreekt?','Niet elk stuk is belangrijk. Sommige verdachten blijken een stevig alibi te hebben.'],
-  extra:()=>`${DOSSIERS.length} ${DOSSIERS.length===1?'dossier':'dossiers'}, elk ongeveer een tot anderhalf uur.`}
+  extra:()=>`${DOSSIERS.length} ${DOSSIERS.length===1?'dossier':'dossiers'}, elk ongeveer een tot anderhalf uur.`},
+ {g:'databank',name:'Politiedatabase',insp:'Zoeken in het systeem · in de stijl van de true-crimespellen met een online politiedatabase',
+  what:'Je krijgt een korte melding en toegang tot de politiedatabase. Je zoekt zelf naar personen, kentekens, telefoons, adressen en camerabeelden. Elke vondst geeft een nieuw spoor. Verhoren bekijk je als filmpje.',
+  steps:['Open een zaak en log in. Lees de <b>Melding</b>: daar staan je eerste sporen.',
+   'Bij <b>Zoeken</b> kies je wat je zoekt: Persoon, Kenteken, Telefoon, Adres of Camera. Typ een naam, nummer of plaats en tik op Zoek.',
+   'Een deel van een kenteken mag ook, bijvoorbeeld KX. Je krijgt dan alle kentekens die erop lijken.',
+   'Bij een persoon met een verhoor tik je op <b>▶ Bekijk het verhoor</b>. Je kunt het verhoor ook uitgeschreven lezen.',
+   'Bij <b>Gevonden</b> staat alles wat je al hebt geopend. Bij <b>Beschuldig</b> beantwoord je drie vragen. Heb je iets fout, dan zie je welke en krijg je nog één poging.'],
+  tips:['Schrijf elk nieuw nummer, kenteken en adres op in het notitieblok, en zoek het daarna op.','Vergelijk tijden: belgegevens, kentekencamera’s en verhoren moeten met elkaar kloppen.','Iemand die zegt dat hij thuis was, kan zijn telefoon thuis hebben gelaten.'],
+  extra:()=>`${DBCASES.length} ${DBCASES.length===1?'zaak':'zaken'}, elk ongeveer drie kwartier.`}
 ];
 function renderUitleg(){
   $('pUitleg').innerHTML=`<h2 class="bigtitle">Uitleg</h2>${PENCIL}
@@ -3575,7 +3809,7 @@ function setTab(t){st.tab=t;save();renderPanes();window.scrollTo({top:0})}
 function renderPanes(){
   const t=st.tab||'zaak';
   const g=game,M=g==='murdle';
-  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';$('pBericht').hidden=g!=='bericht';$('pDossier').hidden=g!=='dossier';if(g==='dossier'&&!$('pDossier').innerHTML)renderDossier();if(g==='bericht'&&!$('pBericht').innerHTML)renderBericht();if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
+  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';$('pBericht').hidden=g!=='bericht';$('pDossier').hidden=g!=='dossier';$('pDatabank').hidden=g!=='databank';if(g==='databank'&&!$('pDatabank').innerHTML)renderDatabank();if(g==='dossier'&&!$('pDossier').innerHTML)renderDossier();if(g==='bericht'&&!$('pBericht').innerHTML)renderBericht();if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
   document.querySelector('.tabs').hidden=!M;document.querySelector('.games').hidden=g==='uitleg'||g==='pas';$('helpBtn').textContent=g==='uitleg'?'← Terug':'? Uitleg';$('pasBtn').textContent=g==='pas'?'← Terug':'Pas';$('pPas').hidden=g!=='pas';if(g==='pas')renderPas();document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('lvLine').hidden=!M;$('stats').hidden=!M;
   document.querySelectorAll('.games button').forEach(b=>b.setAttribute('aria-selected',b.dataset.g===g));
   if(g==='speur'&&!$('pVerhaal').innerHTML)renderStory();if(g==='koud'&&!$('pKoud').innerHTML)renderKoud();
@@ -3681,7 +3915,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261030143928';
+const APPV='20261103063251';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

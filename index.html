@@ -779,6 +779,8 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .tl-track{position:relative;height:14px;background:#eee;border-radius:7px}.tl-w{position:absolute;top:-4px;bottom:-4px;background:rgba(192,57,43,.22);border-left:2px dashed #c0392b;border-right:2px dashed #c0392b}.tl-track i{position:absolute;top:0;bottom:0;background:#2e8b57;border-radius:7px}.tl-lane small{grid-column:2;font-size:11px;color:var(--muted)}
 .tl-axis{position:absolute;left:106px;right:10px;bottom:4px;height:14px}.tl-axis span{position:absolute;transform:translateX(-50%);font:600 10px var(--cond);color:var(--muted)}.tl-card{border-left:6px solid #7d3c98}
 .helpbtn.pasbadge{padding:0;border:0;background:none;box-shadow:none;min-height:0;line-height:0;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35));transition:transform .15s}.helpbtn.pasbadge:hover,.helpbtn.pasbadge:focus-visible{transform:scale(1.08) rotate(-4deg)}.helpbtn.pasbadge:active{transform:scale(.96)}
+.st-q{background:var(--card,#fbf9f3);border:2px solid #1c1f22;border-radius:12px;padding:10px 12px;margin:8px 0}.st-q span{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#c2321f;font-weight:700}.st-q b{font-size:17px}.st-mapbox{position:relative;height:64vh;min-height:360px;overflow:hidden;border:2px solid #1c1f22;border-radius:12px;background:#d8d3c6;touch-action:none;user-select:none;-webkit-user-select:none}.st-map{transform-origin:0 0;will-change:transform}.st-map svg{width:100%;height:100%;display:block}.st-zoom{position:absolute;right:8px;top:8px;display:flex;flex-direction:column;gap:6px}.st-zoom .btn{width:40px;height:40px;padding:0;font-size:20px;background:#fbf9f3}.st-found{margin:10px 0;padding-left:20px}.st-found li{margin:6px 0}
+.nu-box{display:grid;grid-template-columns:118px 1fr;gap:12px;align-items:center;width:100%;text-align:left;background:#14213a;color:#eef1f4;border:2px solid #0b1424;border-radius:14px;padding:10px;margin:6px 0 14px;cursor:pointer;box-shadow:0 4px 0 #0b1424}.nu-box .kicker{color:#f0b850}.nu-box b{display:block;font-size:17px;line-height:1.2;margin:2px 0 4px}.nu-box small{display:block;opacity:.85;font-size:13px}.nu-box em{font-style:normal;font-weight:800;color:#f0b850}.nu-art{width:100%;height:auto;display:block}.nu-list{display:flex;flex-wrap:wrap;gap:4px;margin:2px 0 6px}.nu-list i{font-style:normal;font-size:12px;font-weight:700;background:#f0b850;color:#1c1f22;border-radius:20px;padding:2px 8px}.nu-box.wiggle .nu-art{animation:nuw .5s}@keyframes nuw{25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
 </style>
 </head>
 <body>
@@ -793,6 +795,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   </div>
   <p class="lvline" id="lvLine"></p>
   <div class="gamebar" id="gameBar" hidden><button class="btn small" id="gbHome" type="button" aria-label="Naar het hoofdscherm">⌂</button><button class="btn small" id="gbMenu" type="button" aria-expanded="false">☰ Spellen</button><span class="gb-cur" id="gbCur"></span></div>
+  <div id="nextUp" hidden></div>
   <h2 class="hometitle" id="homeTitle" hidden>Kies een spel</h2>
   <div class="games" role="tablist" aria-label="Kies een spel">
     <button role="tab" type="button" data-g="murdle"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 4.5l3 3M7.5 4.5l-3 3" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="12" r="1.8" fill="currentColor"/></svg>Moorddossier</b><span>Logicapuzzels met een rooster</span></button>
@@ -809,6 +812,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
     <button role="tab" type="button" data-g="casino"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4" fill="currentColor"/><circle cx="8" cy="8" r="1.7" fill="var(--card)"/><circle cx="16" cy="16" r="1.7" fill="var(--card)"/><circle cx="12" cy="12" r="1.7" fill="var(--card)"/><circle cx="16" cy="8" r="1.7" fill="var(--card)"/><circle cx="8" cy="16" r="1.7" fill="var(--card)"/></svg>Casino-escape</b><span>Ontsnap en wijs de dader aan</span></button>
     <button role="tab" type="button" data-g="verhoor"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v4" stroke="currentColor" stroke-width="2"/><path d="M7 6h10l-2 4H9z" fill="currentColor"/><circle cx="12" cy="15" r="3.4" fill="currentColor"/><path d="M5 23c0-4 3-6 7-6s7 2 7 6z" fill="currentColor"/></svg>Het Verhoor</b><span>Prik de leugens door</span></button>
     <button role="tab" type="button" data-g="tijdlijn"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18" stroke="currentColor" stroke-width="2.4"/><circle cx="6" cy="12" r="2.6" fill="currentColor"/><circle cx="12" cy="12" r="2.6" fill="currentColor"/><circle cx="18" cy="12" r="2.6" fill="currentColor"/><path d="M6 4v5M12 15v5M18 4v5" stroke="currentColor" stroke-width="2"/></svg>De Tijdlijn</b><span>Wie had de gelegenheid?</span></button>
+    <button role="tab" type="button" data-g="stad"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5l6-2 6 2 6-2v16l-6 2-6-2-6 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 3v16M15 5v16" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="9" r="2.2" fill="currentColor"/></svg>Stadsplattegrond</b><span>Zoek het in de drukke stad</span></button>
   </div>
   <div class="stats" id="stats"></div>
 
@@ -878,6 +882,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <section class="pane" id="pCasino" hidden></section>
   <section class="pane" id="pVerhoor" hidden></section>
   <section class="pane" id="pTijdlijn" hidden></section>
+  <section class="pane" id="pStad" hidden></section>
   <section class="pane" id="pUitleg" hidden></section>
   <section class="pane" id="pPas" hidden></section>
 
@@ -5336,6 +5341,222 @@ function renderVerhoor(){const P=$('pVerhoor');
 }
 
 
+
+// ---------- Stadsplattegrond: één grote, drukke stadstekening; zoek per zaak de juiste plekken ----------
+// Nieuwe zaken achteraan toevoegen. Ids nooit wijzigen: de voortgang hangt eraan.
+const STW=1400,STH=1800;
+function stRng(seed){let s=seed>>>0;return ()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296}}
+const stLk=o=>({f:false,skin:TSKIN[1],hc:THC[1],top:'#4f6475',legs:'#2b2f36',glasses:false,ph:.5,hair:'short',beard:false,...o});
+// figuur op de kaart; item = extra tekening in lichaamscoördinaten (hand rechts op 29,-53)
+function stFig(L,x,y,o={}){const s=o.s||.22,fl=o.flip?-1:1;return `<g transform="translate(${x} ${y}) scale(${s*fl} ${s}) rotate(${o.rot||0})">${toonBody(L)}${o.item||''}</g>`}
+const STI={
+ umbrella:`<path d="M29 -53V-150" stroke="#222" stroke-width="3"/><path d="M-12 -140Q29 -188 70 -140Q56 -151 43 -140Q29 -151 16 -140Q2 -151 -12 -140Z" fill="#d0302a" stroke="#222" stroke-width="2.4"/>`,
+ rope:`<circle cx="36" cy="-48" r="11" fill="none" stroke="#a8743e" stroke-width="6"/><circle cx="36" cy="-48" r="5" fill="none" stroke="#a8743e" stroke-width="3"/>`,
+ suitcase:`<rect x="22" y="-42" width="30" height="34" rx="4" fill="#7a4a24" stroke="#222" stroke-width="2.4"/><path d="M31 -42v-6h12v6" fill="none" stroke="#222" stroke-width="2.4"/>`,
+ ladder:`<g transform="rotate(-8)"><path d="M-60 -70H90M-60 -52H90" stroke="#8a6a3a" stroke-width="5"/>${[0,1,2,3,4,5,6].map(i=>`<path d="M${-55+i*23} -70v18" stroke="#8a6a3a" stroke-width="4"/>`).join('')}</g>`,
+ bag:`<rect x="20" y="-46" width="24" height="28" rx="4" fill="#2a2b2a" stroke="#111" stroke-width="2"/><path d="M24 -46q8 -12 16 0" fill="none" stroke="#111" stroke-width="2.4"/>`,
+ thermos:`<rect x="23" y="-74" width="13" height="30" rx="4" fill="#3a8ac8" stroke="#222" stroke-width="2"/><rect x="25" y="-80" width="9" height="7" fill="#222"/>`,
+ candle:`<path d="M29 -53v-46" stroke="#c9c9cf" stroke-width="5"/><ellipse cx="29" cy="-50" rx="9" ry="3.5" fill="#c9c9cf" stroke="#555" stroke-width="1.4"/><rect x="25" y="-112" width="8" height="14" fill="#f3efe6" stroke="#555"/>`,
+ sponge:`<rect x="24" y="-58" width="18" height="12" rx="3" fill="#f2d24a" stroke="#222" stroke-width="2"/>`,
+ phone:`<rect x="25" y="-70" width="10" height="17" rx="2" fill="#222"/>`,
+ money:`<rect x="20" y="-58" width="28" height="14" rx="2" fill="#6aa86a" stroke="#2a5a2a" stroke-width="2"/>`,
+ shout:`<path d="M-6 -150l10 -14M8 -146l14 -8M-16 -150l-6 -14" stroke="#c22" stroke-width="4" stroke-linecap="round"/>`,
+ sweat:`<path d="M18 -128q4 6 0 10q-4 -4 0 -10z" fill="#6ab8e8"/>`,
+ cup:`<rect x="24" y="-60" width="12" height="11" rx="2" fill="#f3efe6" stroke="#222" stroke-width="2"/>`};
+const STO={
+ bin:(x,y,extra='')=>`<g transform="translate(${x} ${y})">${extra}<rect x="-8" y="-20" width="16" height="20" rx="2" fill="#4a5a4a" stroke="#222" stroke-width="1.4"/><rect x="-9" y="-22" width="18" height="4" fill="#3a4a3a"/></g>`,
+ bench:(x,y)=>`<g transform="translate(${x} ${y})"><rect x="-22" y="-10" width="44" height="5" fill="#8a6a3a" stroke="#3a2a1a"/><rect x="-22" y="-20" width="44" height="4" fill="#8a6a3a" stroke="#3a2a1a"/><path d="M-18 -5v6M18 -5v6" stroke="#333" stroke-width="2.4"/></g>`,
+ tree:(x,y,s=1)=>`<g transform="translate(${x} ${y}) scale(${s})"><rect x="-3" y="-14" width="6" height="14" fill="#6b4a2e"/><circle cx="0" cy="-26" r="17" fill="#4f8a4a" stroke="#2f5a2a" stroke-width="1.5"/><circle cx="-7" cy="-31" r="7" fill="#6aa860" opacity=".7"/></g>`,
+ lamp:(x,y)=>`<g transform="translate(${x} ${y})"><path d="M0 0v-40" stroke="#333" stroke-width="2.4"/><circle cx="0" cy="-42" r="4" fill="#f6e6a0" stroke="#333"/></g>`,
+ car:(x,y,c='#c8302a',rot=0,dent=false)=>`<g transform="translate(${x} ${y}) rotate(${rot})"><rect x="-26" y="-13" width="52" height="26" rx="8" fill="${c}" stroke="#222" stroke-width="1.6"/><rect x="-12" y="-11" width="22" height="22" rx="4" fill="#cfe0ea" stroke="#222"/>${dent?`<path d="M24 -8l-6 4 5 3-6 4" stroke="#222" stroke-width="2" fill="none"/><circle cx="25" cy="8" r="3" fill="#888"/>`:`<circle cx="25" cy="-8" r="2.4" fill="#fff6c8"/><circle cx="25" cy="8" r="2.4" fill="#fff6c8"/>`}</g>`,
+ van:(x,y,c='#f3efe6',rot=0,dent=false)=>`<g transform="translate(${x} ${y}) rotate(${rot})"><rect x="-34" y="-15" width="68" height="30" rx="5" fill="${c}" stroke="#222" stroke-width="1.6"/><rect x="18" y="-13" width="14" height="26" rx="3" fill="#cfe0ea" stroke="#222"/>${dent?`<path d="M34 -10l-7 5 6 4-7 5" stroke="#222" stroke-width="2.4" fill="none"/>`:''}</g>`,
+ boat:(x,y,c='#c8302a',name='')=>`<g transform="translate(${x} ${y})"><path d="M-46 -6h92l-14 18h-64z" fill="${c}" stroke="#222" stroke-width="1.6"/><rect x="-14" y="-24" width="26" height="18" fill="#f3efe6" stroke="#222"/><path d="M20 -6v-40l22 34z" fill="#fff" stroke="#222"/>${name?`<text x="0" y="8" font-size="8" text-anchor="middle" fill="#fff" font-family="Arial" font-weight="700">${name}</text>`:''}</g>`,
+ stall:(x,y,c='#c8302a')=>`<g transform="translate(${x} ${y})"><rect x="-30" y="-16" width="60" height="16" fill="#8a6a3a" stroke="#3a2a1a"/><path d="M-34 -30h68l-6 10h-56z" fill="${c}" stroke="#222"/>${[0,1,2,3,4].map(i=>`<circle cx="${-22+i*11}" cy="-19" r="4" fill="${['#e0503a','#f0b030','#6aa84a','#e0503a','#9a5ac8'][i]}"/>`).join('')}</g>`,
+ crate:(x,y)=>`<g transform="translate(${x} ${y})"><rect x="-12" y="-18" width="24" height="18" fill="#b8925a" stroke="#5a3a1a" stroke-width="1.5"/><path d="M-12 -18l24 18M12 -18l-24 18" stroke="#5a3a1a"/></g>`,
+ ladderLean:(x,y)=>`<g transform="translate(${x} ${y}) rotate(14)"><path d="M-7 0V-70M7 0V-70" stroke="#8a6a3a" stroke-width="3"/>${[0,1,2,3,4,5].map(i=>`<path d="M-7 ${-8-i*12}h14" stroke="#8a6a3a" stroke-width="2.4"/>`).join('')}</g>`,
+ cover:(x,y)=>`<g transform="translate(${x} ${y})"><path d="M-30 -4q30 -14 60 0v6h-60z" fill="#c8c4b8" stroke="#555" stroke-width="1.4"/><path d="M28 -2l8 2" stroke="#3a2a1a" stroke-width="3"/></g>`,
+ shards:(x,y)=>`<g transform="translate(${x} ${y})" fill="#dfe8ee" stroke="#555" stroke-width=".8">${[[-8,0],[-2,4],[5,-2],[9,5],[0,-5]].map(([a,b])=>`<path d="M${a} ${b}l4 -3 2 4z"/>`).join('')}</g>`,
+ puddle:(x,y,c='#9ec6d8')=>`<ellipse cx="${x}" cy="${y}" rx="22" ry="7" fill="${c}" opacity=".8"/>`,
+ sign:(x,y,t,c='#2a3a4a')=>`<g transform="translate(${x} ${y})"><rect x="${-t.length*3.6-6}" y="-11" width="${t.length*7.2+12}" height="15" rx="2" fill="${c}" stroke="#111"/><text x="0" y="0" font-size="10" text-anchor="middle" fill="#fff" font-family="Arial" font-weight="800" letter-spacing=".5">${t}</text></g>`};
+// ---- de vaste stadstekening ----
+let STMAP='';
+function stBase(){if(STMAP)return STMAP;const r=stRng(4417),out=[];const P=a=>out.push(a);
+ const COL=[[40,380],[440,780],[840,1180],[1240,1380]],ROW=[[70,380],[440,760],[880,1220],[1280,1600]];
+ P(`<rect width="${STW}" height="${STH}" fill="#d8d3c6"/>`);
+ P(`<rect x="0" y="0" width="${STW}" height="44" fill="#b9b2a2"/>${[0,1].map(i=>`<path d="M0 ${12+i*18}H${STW}" stroke="#555" stroke-width="2.4"/>`).join('')}${Array.from({length:70},(_,i)=>`<path d="M${i*20+4} 8v26" stroke="#7a6a52" stroke-width="3"/>`).join('')}`);
+ P(`<rect x="0" y="790" width="${STW}" height="60" fill="#6f9fb8"/>${Array.from({length:24},(_,i)=>`<path d="M${i*60+10} ${810+(i%3)*10}q10 -5 20 0" stroke="#a8cde0" stroke-width="2" fill="none"/>`).join('')}`);
+ for(const bx of [410,810,1210])P(`<rect x="${bx-32}" y="782" width="64" height="76" fill="#b8a88a" stroke="#6a5a42" stroke-width="2"/><path d="M${bx-32} 790v60M${bx+32} 790v60" stroke="#6a5a42" stroke-width="4"/>`);
+ P(`<rect x="0" y="1640" width="${STW}" height="${STH-1640}" fill="#5f8fa8"/><rect x="0" y="1620" width="${STW}" height="22" fill="#9a8a72" stroke="#5a4a32"/>${Array.from({length:30},(_,i)=>`<path d="M${i*50+10} ${1690+(i%4)*25}q12 -6 24 0" stroke="#9cc4d8" stroke-width="2" fill="none"/>`).join('')}`);
+ const ROOF=['#a8503a','#8a3a2a','#5a5a62','#7a6a52','#9a5a3a','#4a5a6a'],WALL=['#e8dcc4','#d8c8a8','#c8a888','#e0d0b8','#b8a890','#d0c0a0'];
+ const house=(x,y,w,h,side)=>{const rc=ROOF[Math.floor(r()*ROOF.length)],wc=WALL[Math.floor(r()*WALL.length)];let s=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${wc}" stroke="#5a4a3a" stroke-width="1.4"/>`;
+   const win=(wx,wy)=>`<rect x="${wx}" y="${wy}" width="8" height="10" fill="#9ab8c8" stroke="#5a4a3a"/>`;
+   if(side==='n'||side==='s'){s+=`<rect x="${x}" y="${side==='n'?y:y+h-14}" width="${w}" height="14" fill="${rc}" stroke="#5a4a3a"/>`;for(let i=0;i<Math.floor(w/16);i++)s+=win(x+5+i*16,side==='n'?y+22:y+h-36);s+=`<rect x="${x+w/2-5}" y="${side==='n'?y+h-14:y+2}" width="10" height="12" fill="#6b4a2e"/>`}
+   else{s+=`<rect x="${side==='w'?x:x+w-14}" y="${y}" width="14" height="${h}" fill="${rc}" stroke="#5a4a3a"/>`;for(let i=0;i<Math.floor(h/18);i++)s+=win(side==='w'?x+22:x+w-30,y+5+i*18)}
+   return s};
+ const special={'0,0':'station','1,1':'markt','2,3':'park','3,1':'kerk','2,0':'winkels','1,2':'apotheek','3,2':'bank','0,3':'garage','0,2':'school'};
+ ROW.forEach(([y0,y1],ri)=>COL.forEach(([x0,x1],ci)=>{const k=special[`${ci},${ri}`];
+  if(k==='markt'){P(`<rect x="${x0}" y="${y0}" width="${x1-x0}" height="${y1-y0}" fill="#cfc4ae"/>`);for(let i=0;i<12;i++)for(let j=0;j<10;j++)P(`<rect x="${x0+i*28}" y="${y0+j*32}" width="28" height="32" fill="none" stroke="#bfb49e" stroke-width=".8"/>`);P(STO.sign((x0+x1)/2,y0+20,'MARKT','#8a3a2a'));return}
+  if(k==='park'){P(`<rect x="${x0}" y="${y0}" width="${x1-x0}" height="${y1-y0}" fill="#9cc48a"/><ellipse cx="1010" cy="1500" rx="110" ry="55" fill="#7fb0c8" stroke="#5a8aa0" stroke-width="2"/><path d="M${x0} 1400Q1000 1350 ${x1} 1420" stroke="#d8cfb4" stroke-width="16" fill="none"/>`);for(let i=0;i<16;i++)P(STO.tree(x0+20+r()*(x1-x0-40),y0+30+r()*(y1-y0-50),.9+r()*.5));P(STO.sign((x0+x1)/2,y0+18,'STADSPARK','#2f5a2a'));return}
+  if(k==='station'){P(`<rect x="${x0}" y="${y0}" width="${x1-x0}" height="${y1-y0}" fill="#cfc4ae"/><rect x="${x0+30}" y="${y0+90}" width="${x1-x0-60}" height="170" fill="#b8604a" stroke="#5a2a1a" stroke-width="2"/><path d="M${x0+20} ${y0+90}L${(x0+x1)/2} ${y0+40}L${x1-20} ${y0+90}Z" fill="#5a5a62" stroke="#333" stroke-width="2"/><circle cx="${(x0+x1)/2}" cy="${y0+130}" r="18" fill="#f3efe6" stroke="#333" stroke-width="2"/><path d="M${(x0+x1)/2} ${y0+130}v-12M${(x0+x1)/2} ${y0+130}l8 4" stroke="#333" stroke-width="2"/>${[0,1,2,3,4].map(i=>`<rect x="${x0+50+i*58}" y="${y0+170}" width="28" height="60" rx="12" fill="#9ab8c8" stroke="#5a2a1a"/>`).join('')}<rect x="0" y="44" width="${x1}" height="20" fill="#9a9488"/>`);P(STO.sign((x0+x1)/2,y0+80,'STATION','#2a3a4a'));return}
+  if(k==='kerk'){P(`<rect x="${x0}" y="${y0}" width="${x1-x0}" height="${y1-y0}" fill="#b8c8a0"/><rect x="${x0+20}" y="${y0+120}" width="${x1-x0-40}" height="190" fill="#c8b898" stroke="#5a4a3a" stroke-width="2"/><rect x="${x0+45}" y="${y0+30}" width="50" height="100" fill="#c8b898" stroke="#5a4a3a" stroke-width="2"/><path d="M${x0+40} ${y0+30}L${x0+70} ${y0-20}L${x0+100} ${y0+30}Z" fill="#5a5a62"/><circle cx="${x0+70}" cy="${y0+60}" r="10" fill="#f3efe6" stroke="#333"/><rect x="${x0+58}" y="${y0+270}" width="24" height="40" rx="10" fill="#6b4a2e"/>`);P(STO.sign((x0+x1)/2,y0+108,'KERK','#5a4a3a'));for(let i=0;i<4;i++)P(STO.tree(x0+15+i*40,y1-10,.7));return}
+  // gewone blokken: huizen rond de rand, tuin in het midden
+  P(`<rect x="${x0}" y="${y0}" width="${x1-x0}" height="${y1-y0}" fill="#a8c494"/>`);
+  for(let x=x0;x<x1-20;){const w=40+Math.floor(r()*24);const ww=Math.min(w,x1-x);P(house(x,y0,ww,64,'n'));P(house(x,y1-64,ww,64,'s'));x+=ww}
+  for(let y=y0+64;y<y1-64-10;){const h=40+Math.floor(r()*22);const hh=Math.min(h,y1-64-y);P(house(x0,y,64,hh,'w'));P(house(x1-64,y,64,hh,'e'));y+=hh}
+  for(let i=0;i<3;i++)P(STO.tree(x0+90+r()*(x1-x0-180),y0+110+r()*(y1-y0-200),.8));
+  const lab={winkels:['IJZERWAREN','#8a3a2a'],apotheek:['APOTHEEK','#2a7a5a'],bank:['BANK','#2a3a6a'],garage:['GARAGE','#4a4a4a'],school:['SCHOOL','#7a5a1a']}[k];
+  if(lab)P(STO.sign((x0+x1)/2,k==='winkels'||k==='school'?y1-20:y0+20,lab[0],lab[1]))}));
+ for(const [x,y] of [[410,420],[810,420],[1210,420],[410,1250],[810,1250],[1210,1250],[410,1610],[810,1610],[1210,1610],[30,770],[700,770],[1100,870],[300,870]])P(STO.lamp(x,y));
+ const cars=[[410,560,'#3a6ab8',90],[810,1000,'#e0e0e0',90],[600,410,'#2a8a5a',0],[1000,1250,'#8a3ab8',0],[1210,1450,'#d0a020',90],[200,1250,'#5a5a62',0],[1300,410,'#c8302a',0],[410,1100,'#3aa0a8',90]];
+ for(const [x,y,c,rt] of cars)P(STO.car(x,y,c,rt));
+ for(const [x,y,c] of [[220,1700,'#3a6ab8'],[1250,1720,'#e0b020'],[700,1760,'#6a6a72']])P(STO.boat(x,y,c));
+ // drukte: wandelaars op straten en pleinen
+ const spots=[];for(let i=0;i<170;i++){const t=r();let x,y;if(t<.3){x=r()*STW;y=[410,1250,1610,870,770][Math.floor(r()*5)]+r()*14-7}else if(t<.55){x=[410,810,1210,20][Math.floor(r()*4)]+r()*16-8;y=70+r()*1540}else if(t<.75){x=450+r()*320;y=460+r()*290}else if(t<.9){x=850+r()*320;y=1300+r()*290}else{x=50+r()*320;y=270+r()*100}
+   if(y>780&&y<860&&!(Math.abs(x-410)<26||Math.abs(x-810)<26||Math.abs(x-1210)<26))continue;if(Math.hypot(x-1010,y-1500)<120)continue;spots.push([x,y])}
+ const fill=spots.filter(([x,y])=>!STCASES.some(c=>c.steps.some(s=>Math.hypot(s.x-x,s.y-y)<70)));
+ for(const [x,y] of fill){const L=stLk({f:r()<.5,skin:TSKIN[Math.floor(r()*TSKIN.length)],hc:THC[Math.floor(r()*THC.length)],top:TTOP[Math.floor(r()*TTOP.length)],legs:TLEG[Math.floor(r()*TLEG.length)],glasses:r()<.15,ph:r()*3});L.hair=L.f?['long','bun','bob'][Math.floor(r()*3)]:['short','curly','bald'][Math.floor(r()*3)];L.beard=!L.f&&r()<.2;
+   if(r()<.12)L.hat=['cap','fedora'][Math.floor(r()*2)];P(stFig(L,x,y,{s:.2,flip:r()<.5,item:r()<.15?STI.bag:r()<.1?STI.phone:''}))}
+ return STMAP=rlColor(()=>out.join(''))}
+// ---- de zaken: elke stap is een plek op de kaart (x,y,r) met een tekening ----
+const STL={
+ huib:stLk({skin:TSKIN[0],top:'#2f9a3a',hair:'bald',glasses:true,legs:'#3a3a3c'}),
+ rinus:stLk({skin:TSKIN[2],top:'#f2c21a',hc:THC[7],hair:'short',hat:'cap',legs:'#26303d'}),
+ agent:stLk({skin:TSKIN[3],top:'#1d3a7a',hat:'police',legs:'#1d2a4a'}),
+ koster:stLk({skin:TSKIN[1],top:'#1c1c1c',hair:'bald',beard:true,hc:THC[5],legs:'#1c1c1c'}),
+ ottoline:stLk({f:true,skin:TSKIN[4],top:'#e8e8f0',hc:THC[0],hair:'bob',hat:'fedora',legs:'#1c1c1c'}),
+ oma:stLk({f:true,skin:TSKIN[0],top:'#c86aa8',hc:THC[5],hair:'bun',glasses:true,legs:'#5a4a6a'}),
+ joost:stLk({skin:TSKIN[1],top:'#7a2ac8',hc:THC[4],hair:'curly',legs:'#2b2f36'}),
+ schipper:stLk({skin:TSKIN[2],top:'#e0702a',hc:THC[6],hair:'short',beard:true,legs:'#26303d'}),
+ visser:stLk({skin:TSKIN[3],top:'#2a9aa8',hc:THC[0],hair:'short',hat:'cap',legs:'#3a3a3c'}),
+ fietser:stLk({f:true,skin:TSKIN[2],top:'#e83a7a',hc:THC[3],hair:'long',legs:'#26303d'}),
+ bestuurder:stLk({skin:TSKIN[5],top:'#8a8a2a',hc:THC[7],hair:'short',glasses:true,legs:'#45403a'})};
+const STCASES=[
+ {id:'paraplu',nr:'001',title:'De rode paraplu',level:'Instap',
+  blurb:'Bij de middelste brug wordt een man uit de gracht gehaald. Zoek op de plattegrond waar het begon, en waar de dader nu is.',
+  intro:'Vanochtend vroeg is groenteman Huib Wennekes uit de gracht gehaald, bij de middelste brug. Volg zijn laatste dag over de hele stad.',
+  steps:[{q:'Bij de middelste brug ligt iemand onder een deken. Zoek hem.',x:870,y:872,r:46,ok:'Daar ligt Huib Wennekes, de groenteman. Een agent houdt de wacht. Op zijn groene jas zit een gele verfvlek.'},
+   {q:'Die ochtend had Huib ruzie op de markt. Met wie?',x:560,y:600,r:46,ok:'Achter zijn groentekraam schreeuwt een man in een gele regenjas met een rode paraplu tegen Huib.'},
+   {q:'Waar kocht de man in de gele jas een rol touw?',x:1000,y:404,r:44,ok:'Hij komt de ijzerwarenwinkel uit, met een rol touw.'},
+   {q:'Waar heeft hij zijn rode paraplu weggegooid?',x:930,y:1405,r:40,ok:'Uit een afvalbak in het park steekt een rode paraplu.'},
+   {q:'Waar is de man in de gele jas nu?',x:250,y:58,r:46,ok:'Op het perron wacht hij met een koffer op de trein. Dat is Rinus Vosselman. Gearresteerd!'}],
+  draw:()=>`${STO.cover(870,875)}${stFig(STL.agent,905,880,{s:.2})}${STO.stall(560,600,'#2f9a3a')}${stFig(STL.huib,548,592,{s:.2})}${stFig(STL.rinus,590,612,{s:.2,flip:true,item:STI.umbrella+STI.shout})}
+   ${stFig(STL.rinus,1000,412,{s:.2,item:STI.rope})}${STO.bin(930,1410,`<g transform="rotate(20)"><path d="M0 -14V-44" stroke="#222" stroke-width="2"/><path d="M-6 -44q6 -10 12 0l-3 16h-6z" fill="#d0302a" stroke="#222"/></g>`)}${stFig(STL.rinus,250,62,{s:.2,item:STI.suitcase})}`,
+  story:'Rinus Vosselman had geld geleend van groenteman Huib Wennekes en kon het niet terugbetalen. Op de markt kregen ze ruzie. Rinus kocht touw bij de ijzerwarenwinkel en wachtte Huib ’s avonds op bij de brug. Daar duwde hij hem in de gracht. Zijn rode paraplu gooide hij in het park weg, want die had iedereen gezien. Maar met zijn gele jas viel hij op het perron alsnog op.'},
+ {id:'kandelaar',nr:'002',title:'Stilte in de kerk',level:'Gemiddeld',
+  blurb:'De koster ligt bij de deur van de kerk. De zilveren kandelaar is weg. Volg de dader met de ladder door de stad.',
+  intro:'De koster van de kerk is neergeslagen. De zilveren kandelaar van het altaar is verdwenen. Iemand zag een vrouw met een witte jas en een hoed.',
+  steps:[{q:'Zoek de koster bij de kerk.',x:1310,y:770,r:44,ok:'De koster ligt voor de kerk. Hij is neergeslagen.'},
+   {q:'Hoe kwam de dader binnen? Zoek de ladder.',x:1372,y:520,r:40,ok:'Tegen de achterkant van de kerk staat een ladder, onder een open raam.'},
+   {q:'Waar loopt de vrouw met de witte jas met de kandelaar?',x:1210,y:1000,r:44,ok:'Op de oostelijke kade loopt een vrouw in een witte jas met een hoed. In haar hand: de zilveren kandelaar.'},
+   {q:'Waar heeft ze de ladder verstopt?',x:210,y:1060,r:44,ok:'In de tuin achter de school ligt de ladder in het gras.'},
+   {q:'Waar is ze nu?',x:700,y:720,r:44,ok:'Op het terras van de markt zit ze met een tas. Dat is Ottoline Stoppelenburg. Gearresteerd!'}],
+  draw:()=>`${stFig(STL.koster,1310,772,{s:.2,rot:-84})}${STO.ladderLean(1372,530)}${stFig(STL.ottoline,1210,1004,{s:.2,item:STI.candle})}${`<g transform="translate(210 1066) rotate(84) scale(.6)">${STI.ladder}</g>`}${STO.bench(700,732)}${stFig(STL.ottoline,700,724,{s:.2,item:STI.bag})}`,
+  story:'Ottoline Stoppelenburg wilde de zilveren kandelaar van de kerk verkopen. ’s Nachts zette ze een ladder tegen de achterkant van de kerk en klom door het raam naar binnen. De koster betrapte haar bij de deur. Ze sloeg hem neer en vluchtte met de kandelaar over de kade. De ladder verstopte ze achter de school. Op het terras van de markt wachtte ze op haar koper.'},
+ {id:'thee',nr:'003',title:'Thee op het bankje',level:'Gemiddeld',
+  blurb:'Een oude dame zakt in elkaar op een bankje in het park. Haar neef bracht thee mee. Volg zijn route.',
+  intro:'Mevrouw Annigje Rotsheuvel zat elke ochtend op hetzelfde bankje in het park. Vandaag zakte ze in elkaar na een kopje thee.',
+  steps:[{q:'Zoek mevrouw Rotsheuvel op haar bankje.',x:880,y:1560,r:44,ok:'Ze ligt op het bankje aan de rand van het park. Naast haar een omgevallen kopje.'},
+   {q:'Waar haalde de man in de paarse jas iets bij de apotheek?',x:610,y:870,r:44,ok:'Bij de apotheek komt een man in een paarse jas naar buiten, met een zakje.'},
+   {q:'Waar vulde hij de blauwe thermosfles?',x:1150,y:1310,r:40,ok:'Bij de kiosk in het park vult hij een blauwe thermosfles.'},
+   {q:'Waar gooide hij het lege pillendoosje weg?',x:1125,y:1528,r:40,ok:'Aan de rand van de vijver gooit hij iets in het water. Een pillendoosje drijft nog.'},
+   {q:'Waar is de man in de paarse jas nu?',x:1300,y:870,r:44,ok:'Bij de bank haalt hij geld op. Dat is haar neef Jorrit-Jan Plasmeijer. Gearresteerd!'}],
+  draw:()=>`${STO.bench(880,1566)}${stFig(STL.oma,876,1560,{s:.2,rot:-70})}${`<rect x="900" y="1560" width="7" height="6" fill="#f3efe6" stroke="#222" transform="rotate(40 903 1563)"/>`}${stFig(STL.joost,610,874,{s:.2,item:STI.bag})}${`<g transform="translate(1160 1306)"><rect x="-16" y="-30" width="32" height="30" fill="#e0b060" stroke="#5a3a1a"/><path d="M-20 -30h40l-4 -8h-32z" fill="#c8302a"/></g>`}${stFig(STL.joost,1135,1314,{s:.2,item:STI.thermos})}${stFig(STL.joost,1132,1532,{s:.2,flip:true})}<rect x="1104" y="1512" width="6" height="4" fill="#fff" stroke="#c22"/>${stFig(STL.joost,1300,874,{s:.2,item:STI.money})}`,
+  story:'Jorrit-Jan Plasmeijer erfde alles van zijn tante. Hij haalde bij de apotheek haar slaappillen op en loste ze op in thee, in een blauwe thermosfles die hij bij de kiosk vulde. Op het bankje schonk hij haar een kopje in. Het lege doosje gooide hij in de vijver. Daarna ging hij meteen naar de bank.'},
+ {id:'haven',nr:'004',title:'Man overboord',level:'Gemiddeld',
+  blurb:'In de haven drijft een visser. Op de kade lag een gevecht. Zoek de schipper met de rode baard.',
+  intro:'In de haven is visser Gerrit-Jaap Hoogduin gevonden. Gisteravond had hij ruzie met een schipper. Waar ging die heen?',
+  steps:[{q:'Zoek de visser in het water.',x:500,y:1690,r:46,ok:'Tussen de boten drijft visser Gerrit-Jaap Hoogduin, met zijn witte pet nog op.'},
+   {q:'Waar vochten de visser en de schipper met de rode baard?',x:520,y:1628,r:44,ok:'Op de kade duwt een schipper met een rode baard en een oranje trui de visser van de rand.'},
+   {q:'Op welke boot liggen de gestolen kisten?',x:960,y:1700,r:46,ok:'Op een rode boot met de naam ZEEROVER staan kisten met vis, gestolen van de visser.'},
+   {q:'Waar laat de schipper een nieuwe sleutel maken?',x:930,y:404,r:44,ok:'Bij de ijzerwarenwinkel laat de schipper met de rode baard een sleutel maken.'},
+   {q:'Waar is de schipper nu?',x:1210,y:700,r:44,ok:'Achter de kerk staat hij nerveus te bellen. Dat is Barend-Jan Kroeskamp. Gearresteerd!'}],
+  draw:()=>`${stFig(STL.visser,500,1694,{s:.2,rot:90})}${stFig(STL.schipper,530,1636,{s:.2,flip:true,item:STI.shout})}${stFig(STL.visser,500,1640,{s:.2,rot:-20})}${STO.boat(960,1700,'#c8302a','ZEEROVER')}${STO.crate(945,1694)}${STO.crate(970,1694)}${stFig(STL.schipper,930,410,{s:.2})}${stFig(STL.schipper,1218,706,{s:.2,item:STI.phone+STI.sweat})}`,
+  story:'Schipper Barend-Jan Kroeskamp stal al weken kisten vis van visser Gerrit-Jaap Hoogduin. Gisteravond betrapte de visser hem. Op de kade kregen ze ruzie, en Barend-Jan duwde hem in het water. Hij laadde de kisten op zijn boot, de Zeerover, en liet een nieuwe sleutel maken voor de loods van de visser.'},
+ {id:'fiets',nr:'005',title:'Doorgereden',level:'Gemiddeld',
+  blurb:'Op het kruispunt bij het park ligt een fietsster. De auto reed door. Zoek het witte busje met de deuk.',
+  intro:'Op het kruispunt bij het park is fietsster Marijtje Wolfskamp geschept. De bestuurder reed door.',
+  steps:[{q:'Zoek de fietsster op het kruispunt.',x:810,y:1268,r:44,ok:'Marijtje Wolfskamp ligt naast haar fiets. Er liggen scherven van een koplamp.'},
+   {q:'Waar staat het witte busje met de deuk?',x:220,y:1450,r:46,ok:'In de garage staat een wit busje met een deuk en een kapotte koplamp.'},
+   {q:'Waar probeert de bestuurder het bewijs weg te poetsen?',x:150,y:1500,r:40,ok:'Naast het busje staat een man in een olijfgroene jas met een spons en een emmer.'},
+   {q:'Waar verstopte hij het kapotte nummerbord?',x:420,y:1590,r:40,ok:'Bij de kade steekt een nummerbord uit een afvalbak.'},
+   {q:'Waar is de bestuurder nu?',x:600,y:700,r:44,ok:'Op de markt zit hij met een koffie, alsof er niks gebeurd is. Dat is Edgar Bongaerts. Gearresteerd!'}],
+  draw:()=>`${STO.shards(825,1262)}${stFig(STL.fietser,800,1270,{s:.2,rot:80})}${`<g transform="translate(830 1276)"><circle cx="-8" cy="0" r="7" fill="none" stroke="#222" stroke-width="2"/><circle cx="10" cy="0" r="7" fill="none" stroke="#222" stroke-width="2"/><path d="M-8 0l8 -8 10 8M0 -8h-4" stroke="#e83a7a" stroke-width="2.4" fill="none"/></g>`}${STO.van(220,1450,'#f3efe6',0,true)}${stFig(STL.bestuurder,150,1504,{s:.2,item:STI.sponge})}<rect x="128" y="1494" width="12" height="10" fill="#9aa3aa" stroke="#222"/>${STO.bin(420,1596,'<rect x="-11" y="-30" width="22" height="9" fill="#f2c21a" stroke="#222"/>')}${stFig(STL.bestuurder,600,704,{s:.2,item:STI.cup})}`,
+  story:'Edgar Bongaerts reed te hard en schepte op het kruispunt bij het park fietsster Marijtje Wolfskamp. Hij reed door naar zijn garage en probeerde de deuk en het bloed weg te poetsen. Het kapotte nummerbord gooide hij bij de kade in een afvalbak. Daarna ging hij koffie drinken op de markt, alsof er niks gebeurd was.'}];
+const STADKEY='md-stad';
+let std=store.get(STADKEY)||{cur:null,cases:{}};if(!std.cases)std={cur:null,cases:{}};
+const saveSt=()=>store.set(STADKEY,std);
+const stState=id=>(std.cases[id]=std.cases[id]||{start:false,step:0,found:[],miss:0,done:false,notes:''});
+let stView={k:1,tx:0,ty:0},stMsg='';
+function stGo(c){std.cur=c;stMsg='';stView={k:1,tx:0,ty:0};saveSt();renderStad();window.scrollTo({top:0})}
+function stCasesSvg(){return rlColor(()=>STCASES.map(c=>c.draw()).join(''))}
+let STCS='';
+function renderStad(){const P=$('pStad');
+  if(!std.cur){P.innerHTML=`<h2 class="bigtitle" style="font-size:clamp(30px,9.5vw,62px)">Stadsplattegrond</h2>${PENCIL}<p class="lead">Eén grote, drukke stad. Overal gebeurt iets. Bij elke zaak krijg je vragen: zoek op de plattegrond waar het gebeurde en tik erop. Zoom in met twee vingers of met de knoppen. Sommige mensen zie je op meer plekken terug.</p>
+    <div class="caselist">${STCASES.map(c=>{const s=stState(c.id);return `<article class="casecard st-card"><span class="kicker">Zaak ${c.nr} · ${c.level}</span><h3>${c.title}</h3><p>${c.blurb}</p>
+     <div class="controls"><span class="hint">${s.done?'Opgelost':s.start?`${s.found.length}/${c.steps.length} plekken`:'Nog niet begonnen'}</span><button class="btn ${s.done?'':'primary'} small" type="button" data-stcase="${c.id}">${s.done?'Teruglezen':s.start?'Verder':'Start'}</button></div></article>`}).join('')}</div>`;
+   P.querySelectorAll('[data-stcase]').forEach(b=>b.onclick=()=>stGo(b.dataset.stcase));saveSt();return}
+  const C=STCASES.find(c=>c.id===std.cur);if(!C)return stGo(null);const s=stState(C.id);
+  const head=`<button class="btn small backbtn" id="stList" type="button">← Alle zaken</button><div class="storyhead"><span class="kicker">Zaak ${C.nr} · ${C.level}</span><h3>${C.title}</h3>${filmBtn('stad',C.id)}${s.done?endBtn('stad',C.id):''}</div>`;
+  if(!s.start){P.innerHTML=`${head}<article class="sheet letter"><header><span>Melding</span><b>${C.title}</b></header><div class="sheet-body"><p>${C.intro}</p><p>Zoek de plekken op de plattegrond. Tik op de juiste plek om verder te gaan.</p></div></article><div class="controls"><button class="btn primary" id="stIn2" type="button">Naar de plattegrond</button></div>`;
+    $('stList').onclick=()=>stGo(null);$('stIn2').onclick=()=>{const go=()=>{s.start=true;saveSt();renderStad()};if(!filmSeen('stad',C.id))storyFilm('stad',C.id,go);else go()};return}
+  if(!STCS)STCS=stCasesSvg();
+  const marks=s.found.map(i=>{const t=C.steps[i];return `<g transform="translate(${t.x} ${t.y})"><circle r="${t.r}" fill="none" stroke="#c2321f" stroke-width="5" opacity=".9"/><circle cx="${t.r*.7}" cy="${-t.r*.7}" r="13" fill="#c2321f"/><text x="${t.r*.7}" y="${-t.r*.7+5}" font-size="15" font-weight="800" text-anchor="middle" fill="#fff" font-family="Arial">${i+1}</text></g>`}).join('');
+  const cur=!s.done&&C.steps[s.step];
+  P.innerHTML=`${head}<div class="st-q">${s.done?`<b>Zaak opgelost.</b> ${s.miss} keer mis getikt.`:`<span>Vraag ${s.step+1} van ${C.steps.length}</span><b>${cur.q}</b>`}${stMsg?`<p class="msg">${stMsg}</p>`:''}</div>
+   <div class="st-mapbox" id="stBox"><div class="st-map" id="stMapI"><svg viewBox="0 0 ${STW} ${STH}" xmlns="http://www.w3.org/2000/svg">${FDEFS}${stBase()}${STCS}${marks}</svg></div>
+    <div class="st-zoom"><button type="button" class="btn small" id="stZin" aria-label="Inzoomen">+</button><button type="button" class="btn small" id="stZout" aria-label="Uitzoomen">−</button><button type="button" class="btn small" id="stZ0" aria-label="Hele kaart">⤢</button></div></div>
+   <ol class="st-found">${s.found.map(i=>`<li><b>${C.steps[i].q}</b><br>${C.steps[i].ok}</li>`).join('')}</ol>
+   ${s.done?`<h4 class="solh">Wat er gebeurde</h4><div class="verdict"><p>${C.story}</p></div><div class="controls"><button class="btn" id="stReset" type="button">Zaak opnieuw spelen</button></div>`:''}
+   <section class="notes"><label for="stNotes"><b>Notitieblok</b></label><textarea id="stNotes" rows="3" placeholder="Wat zie je waar?"></textarea></section>`;
+  const on=(id,f)=>{const el=$(id);if(el)el.onclick=f};
+  $('stNotes').value=s.notes||'';$('stNotes').oninput=e=>{s.notes=e.target.value;saveSt()};on('stList',()=>stGo(null));
+  on('stReset',()=>{std.cases[C.id]={start:true,step:0,found:[],miss:0,done:false,notes:s.notes||''};stMsg='';saveSt();renderStad()});
+  stPanZoom(C,s)}
+function stPanZoom(C,s){const box=$('stBox'),inner=$('stMapI');if(!box)return;const W=box.clientWidth,H=box.clientHeight,MH=W*STH/STW;
+  const clamp=()=>{const k=stView.k;stView.tx=Math.min(0,Math.max(W-W*k,stView.tx));stView.ty=Math.min(0,Math.max(H-MH*k,stView.ty));if(MH*k<H)stView.ty=(H-MH*k)/2};
+  const apply=()=>{clamp();inner.style.transform=`translate(${stView.tx}px,${stView.ty}px) scale(${stView.k})`};
+  const zoomAt=(f,cx,cy)=>{const k0=stView.k,k=Math.max(1,Math.min(10,k0*f));stView.tx=cx-(cx-stView.tx)*k/k0;stView.ty=cy-(cy-stView.ty)*k/k0;stView.k=k;apply()};
+  inner.style.width=W+'px';inner.style.height=MH+'px';apply();
+  $('stZin').onclick=()=>zoomAt(1.6,W/2,H/2);$('stZout').onclick=()=>zoomAt(1/1.6,W/2,H/2);$('stZ0').onclick=()=>{stView={k:1,tx:0,ty:0};apply()};
+  const pts=new Map();let moved=0,last=null,pinch=null;
+  box.onpointerdown=e=>{box.setPointerCapture(e.pointerId);pts.set(e.pointerId,[e.clientX,e.clientY]);moved=0;last=[e.clientX,e.clientY];if(pts.size===2){const [a,b]=[...pts.values()];pinch={d:Math.hypot(a[0]-b[0],a[1]-b[1])}}};
+  box.onpointermove=e=>{if(!pts.has(e.pointerId))return;const p=[e.clientX,e.clientY];pts.set(e.pointerId,p);const R=box.getBoundingClientRect();
+    if(pts.size===2&&pinch){const [a,b]=[...pts.values()],d=Math.hypot(a[0]-b[0],a[1]-b[1]);zoomAt(d/pinch.d,(a[0]+b[0])/2-R.left,(a[1]+b[1])/2-R.top);pinch.d=d;moved+=10;return}
+    if(last){stView.tx+=p[0]-last[0];stView.ty+=p[1]-last[1];moved+=Math.abs(p[0]-last[0])+Math.abs(p[1]-last[1]);last=p;apply()}};
+  box.onpointerup=box.onpointercancel=e=>{pts.delete(e.pointerId);if(pts.size<2)pinch=null;if(pts.size===1)last=[...pts.values()][0];else last=null;
+    if(e.type==='pointerup'&&moved<8&&!e.target.closest('.st-zoom')&&pts.size===0){const R=box.getBoundingClientRect(),mx=(e.clientX-R.left-stView.tx)/stView.k/W*STW,my=(e.clientY-R.top-stView.ty)/stView.k/W*STW;stTap(C,s,mx,my)}};
+  box.onwheel=e=>{e.preventDefault();const R=box.getBoundingClientRect();zoomAt(e.deltaY<0?1.2:1/1.2,e.clientX-R.left,e.clientY-R.top)}}
+function stTap(C,s,mx,my){if(s.done)return;const t=C.steps[s.step];
+  if(Math.hypot(mx-t.x,my-t.y)<=t.r){s.found.push(s.step);s.step++;stMsg='';if(s.step>=C.steps.length){s.done=true;const x=store.get('md-stad-stats')||{solved:0,streak:0};x.solved++;store.set('md-stad-stats',x);saveSt();renderStad();setTimeout(()=>endFilm('stad',C.id),700);return}saveSt();renderStad()}
+  else{s.miss++;stMsg=pick(['Hier zie je niets bijzonders voor deze vraag.','Nee, dat is het niet. Zoek verder.','Kijk nog eens goed rond. Zoom in!'],Math.random);saveSt();const q=document.querySelector('.st-q');if(q){const m=q.querySelector('.msg');if(m)m.textContent=stMsg;else q.insertAdjacentHTML('beforeend',`<p class="msg">${stMsg}</p>`)}}}
+
+
+// ---------- Geheim dossier op het hoofdscherm: welke spellen krijgen deze week nieuwe zaken? Bekend op maandag 19:00 ----------
+// nextup.json (naast index.html) wordt elke maandag om 18:41 door de geplande taak geschreven: {reveal:ISO,release:ISO,plan:[[game,aantal],…]}
+let NEXTUP=null;
+const NU_NAMES={speur:'Speurneus',koud:'Cold Case',bericht:'Laatste Bericht',dossier:'Dossiermap',databank:'Politiedatabase',brieven:'Brievenreeks',team:'Teamzaak',casino:'Casino-escape',verhoor:'Het Verhoor',tijdlijn:'De Tijdlijn',stad:'Stadsplattegrond'};
+function nuNextMonday19(now=new Date()){const d=new Date(now);const dow=(d.getDay()+6)%7;d.setHours(19,0,0,0);d.setDate(d.getDate()-dow);if(d<=now)d.setDate(d.getDate()+7);return d}
+async function nuLoad(){try{const r=await fetch('nextup.json',{cache:'no-store'});if(r.ok){NEXTUP=await r.json();if(game==='home')nuRender()}}catch(e){}}
+const nuFolder=(open)=>`<svg viewBox="0 0 320 200" class="nu-art" aria-hidden="true">
+ <rect x="6" y="24" width="308" height="170" rx="10" fill="#1d2a44"/>
+ <path d="M20 40h96l12 14h172v128H20z" fill="#e0a640" stroke="#8a5a1a" stroke-width="2"/>
+ ${open?`<rect x="30" y="58" width="128" height="116" fill="#eef1f4" stroke="#b9c3cc"/><rect x="38" y="66" width="112" height="62" fill="#262a2e"/><path d="M60 110q6 -22 22 -20q8 -14 20 -4q14 2 10 14l18 6-8 6-16 -4q-6 10-20 6l-14 10-8 -6 10 -8z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="62" cy="98" r="6" fill="#c8302a"/><path d="M38 140h110M38 148h110M38 156h70" stroke="#b9c3cc" stroke-width="3"/>
+  <rect x="164" y="58" width="128" height="116" fill="#eef1f4" stroke="#b9c3cc"/><circle cx="196" cy="82" r="14" fill="#c8d4e0"/><path d="M182 104q14 -14 28 0" fill="#c8d4e0"/><rect x="226" y="66" width="56" height="44" fill="#fff" stroke="#c8d4e0"/><path d="M240 100q14 -18 28 0" fill="#9ab0c4"/><circle cx="254" cy="84" r="8" fill="#9ab0c4"/><rect x="176" y="118" width="62" height="46" fill="#f3d58a"/><path d="M180 150q20 -30 54 -20M188 124l18 34" stroke="#e8a030" stroke-width="5" fill="none"/><path d="M200 146l20 -16" stroke="#7ab8e0" stroke-width="4"/><circle cx="226" cy="132" r="4" fill="none" stroke="#c8302a" stroke-width="2"/><rect x="246" y="120" width="38" height="38" fill="#8aa4c0"/><path d="M258 152l2 -18 4 0 2 18M254 136l14 -2" stroke="#c8302a" stroke-width="5"/>`
+ :`<path d="M20 62h280v120H20z" fill="#f0b850" stroke="#8a5a1a" stroke-width="2"/><rect x="40" y="80" width="100" height="70" fill="#fff" opacity=".85" transform="rotate(-4 90 115)"/><path d="M52 98h76M52 110h76M52 122h50" stroke="#b9c3cc" stroke-width="3" transform="rotate(-4 90 115)"/>
+  <g transform="translate(212 122) rotate(-12)"><rect x="-74" y="-22" width="148" height="44" rx="4" fill="none" stroke="#c2321f" stroke-width="5"/><text x="0" y="12" font-size="30" font-weight="900" text-anchor="middle" fill="#c2321f" font-family="Arial" letter-spacing="4">GEHEIM</text></g>`}
+</svg>`;
+function nuState(now=new Date()){const N=NEXTUP,rev=N&&new Date(N.reveal),rel=N&&new Date(N.release);
+ if(N&&rev&&now>=rev&&rel&&now<new Date(rel.getTime()+3*864e5))return {open:true,plan:N.plan||[],rel,live:now>=rel};
+ return {open:false,rev:N&&rev&&now<rev?rev:nuNextMonday19(now)}}
+function nuCount(ms){const d=Math.floor(ms/864e5),h=Math.floor(ms/36e5)%24,m=Math.floor(ms/6e4)%60;return d?`${d} d ${h} u`:h?`${h} u ${m} min`:`${m} min`}
+let nuTick=null;
+function nuRender(){const el=$('nextUp');if(!el)return;const S=nuState(),dag=d=>d.toLocaleDateString('nl-NL',{weekday:'long',day:'numeric',month:'long'});
+ el.innerHTML=`<button type="button" class="nu-box ${S.open?'open':''}" id="nuBtn">${nuFolder(S.open)}<span class="nu-txt">${S.open?`<span class="kicker">${S.live?'Nu nieuw':'Deze week nieuw'}</span><b>${S.plan.reduce((a,p)=>a+p[1],0)} nieuwe zaken</b><span class="nu-list">${S.plan.map(([g,n])=>`<i>${NU_NAMES[g]||g}${n>1?` ×${n}`:''}</i>`).join('')}</span><small>${S.live?'Staat online. Open de app opnieuw als je ze nog niet ziet.':`Online: ${dag(S.rel)} in de ochtend`}</small>`
+  :`<span class="kicker">Geheim dossier</span><b>Welke spellen krijgen nieuwe zaken?</b><small>Gaat open op maandag om 19:00 · nog <em id="nuCd">${nuCount(S.rev-new Date())}</em></small>`}</span></button>`;
+ clearInterval(nuTick);if(!S.open)nuTick=setInterval(()=>{if(game!=='home')return clearInterval(nuTick);const c=$('nuCd');if(!c)return clearInterval(nuTick);const ms=S.rev-new Date();if(ms<=0){clearInterval(nuTick);nuLoad().then(nuRender)}else c.textContent=nuCount(ms)},30000);
+ $('nuBtn').onclick=()=>{$('nuBtn').classList.add('wiggle');setTimeout(()=>{const b=$('nuBtn');if(b)b.classList.remove('wiggle')},500)}}
+
+setTimeout(nuLoad,800);
 // ---------- De Tijdlijn: zet de gebeurtenissen op de juiste tijd en ontdek wie de gelegenheid had ----------
 // Nieuwe zaken achteraan toevoegen. Ids nooit wijzigen: de voortgang hangt eraan.
 const TLCASES=[{id:'meerzicht',nr:'001',title:'Onweer op camping Meerzicht',level:'Gemiddeld',time:'± 25 min',
@@ -5973,8 +6194,23 @@ Object.assign(SCREND.dossier,{
  observatorium:en('Sterren boven de Veluwe',['De komeet','Selma vond hem eerst. Bartholomeus wilde de eer en de prijs.'],['night',['telescope',150,172,1.1]],['23:40 · de koepel','Hij pakte haar vast en sloeg haar hoofd tegen de telescoop.'],['night',['telescope',225,172,.9]],STR,['08:02','Hij meldde de komeet als zijn eigen ontdekking.'],['desk',['laptop',150,170,1.2]],'Bartholomeus Assenberg','de voet van de telescoop','de sterrenwacht')});
 })();
 
+// filmpjes Stadsplattegrond
+SCR.stad={
+ paraplu:[['t','De rode paraplu','paraplu','Stadsplattegrond · zaak 001'],['s','Vroeg in de ochtend',['water',['boat',150,150,1]],'Bij de middelste brug wordt een man uit de gracht gehaald.'],['s','De hele stad',['day',['flat',90,170,.8],['cafe',220,170,.8,'MARKT']],'Overal lopen mensen. Ergens in de stad zit het antwoord.'],['e','Volg zijn laatste dag.','Naar de plattegrond']],
+ kandelaar:[['t','Stilte in de kerk','kerk','Stadsplattegrond · zaak 002'],['s','’s Nachts',['dusk',['church',140,175,1]],'Voor de kerk ligt de koster. De zilveren kandelaar is weg.'],['e','Wie klom er naar binnen?','Naar de plattegrond']],
+ thee:[['t','Thee op het bankje','bankje','Stadsplattegrond · zaak 003'],['s','In het stadspark',['grass',['teapot',150,160,1.2]],'Mevrouw Rotsheuvel zakt in elkaar na een kopje thee.'],['e','Wie schonk de thee in?','Naar de plattegrond']],
+ haven:[['t','Man overboord','overboord','Stadsplattegrond · zaak 004'],['s','In de haven',['water',['boat',150,150,1.2]],'Tussen de boten drijft een visser.'],['e','Waar is de schipper met de rode baard?','Naar de plattegrond']],
+ fiets:[['t','Doorgereden','Doorgereden','Stadsplattegrond · zaak 005'],['s','Het kruispunt bij het park',['day',['bike',150,172,1.2]],'Een fietsster is geschept. De auto reed door.'],['e','Zoek het busje met de deuk.','Naar de plattegrond']]};
+SCREND.stad={
+ paraplu:[['t','Zo is het gebeurd','gebeurd','De rode paraplu'],['s','Op de markt',['day',['stand',150,172,1]],'Rinus kon zijn schuld niet betalen. Ze kregen ruzie.'],['s','’s Avonds bij de brug',['night',['boat',150,150,1]],'Rinus wachtte Huib op en duwde hem in de gracht.',{hit:'duw',act:'drown',x:150,y:142,s:.42}],['x','Rinus Vosselman','een duw in de gracht','de middelste brug']],
+ kandelaar:[['t','Zo is het gebeurd','gebeurd','Stilte in de kerk'],['s','Het open raam',['dusk',['ladder',150,172,1]],'Ottoline klom met een ladder door het raam.'],['s','Bij de deur',['dark',['church',150,175,1]],'De koster betrapte haar. Ze sloeg hem met de kandelaar.',{hit:'metaal',act:'strike',x:130}],['x','Ottoline Stoppelenburg','de kandelaar','de kerk']],
+ thee:[['t','Zo is het gebeurd','gebeurd','Thee op het bankje'],['s','De apotheek',['wall',['pills',150,150,1.4]],'Jorrit-Jan haalde de slaappillen van zijn tante op.'],['s','Het bankje',['grass',['teapot',150,160,1.2]],'Hij loste ze op in de thee en schonk haar een kopje in.',{act:'poison',x:210,y:172,s:.5}],['x','Jorrit-Jan Plasmeijer','slaappillen in de thee','het stadspark']],
+ haven:[['t','Zo is het gebeurd','gebeurd','Man overboord'],['s','De kisten',['water',['boat',150,150,1.2]],'Barend-Jan stal al weken vis van de visser.'],['s','Op de kade',['water',['boat',220,150,.9]],'De visser betrapte hem. Barend-Jan duwde hem in het water.',{hit:'duw',act:'drown',x:150,y:142,s:.42}],['x','Barend-Jan Kroeskamp','een duw in het water','de haven']],
+ fiets:[['t','Zo is het gebeurd','gebeurd','Doorgereden'],['s','Het kruispunt',['day',['car',150,170,1.1]],'Edgar reed veel te hard en schepte de fietsster.'],['s','De garage',['dark',['garage',150,168,1]],'Hij poetste zijn busje schoon en gooide het nummerbord weg.'],['x','Edgar Bongaerts','het witte busje','het kruispunt']]};
+
 function endOk(game,id){try{if(game==='koud'){const c=COLD.find(x=>x.id===id),s=kd.cases[id];return !s||!s.acc||s.acc.d===c.answer.dader}
   if(game==='bericht'){const c=BCASES.find(x=>x.id===id),s=bd.cases[id];return !s||!s.acc||s.acc.d===c.answer.dader}
+  if(game==='stad')return true;
   if(game==='tijdlijn'){const c=TLCASES.find(x=>x.id===id),s=tld.cases[id];return !s||!s.done||c.qs.every((q,i)=>s.ans[i]===q.a)}
   if(game==='verhoor'){const s=vhd.cases[id];return !s||!s.done||s.won}
   if(game==='casino'){const c=CSCASES.find(x=>x.id===id),s=csd.cases[id];return !s||!s.fin||c.qs.every((q,i)=>s.ans[i]===q.a)}
@@ -6006,7 +6242,7 @@ function pasData(){const sx=k=>store.get(k)||{solved:0,streak:0},m=sx('md-stats'
   const dosPerfect=DOSSIERS.some(c=>{const s=dd.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)&&!Object.values(s.hints||{}).some(v=>v>0)});
   const lhPerfect=lst&&lst.guess&&LHP.every((p,i)=>lst.guess[i]&&!lst.guess[i].m&&!lst.guess[i].w);
   const rows=[['murdle','Moorddossier',m.solved,null],['speur','Speurneus',speur,CASES.length],['koud','Cold Case',koud,COLD.length],['kamer','Kamermoord',km.solved,null],
-   ['landhuis','Het Landhuis',lh.solved,null],['spion','Spionage',spn.solved,null],['bericht','Laatste Bericht',ber,BCASES.length],['dossier','Dossiermap',dos,DOSSIERS.length],['tijdlijn','De Tijdlijn',TLCASES.filter(c=>{const s=tld.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,TLCASES.length],['verhoor','Het Verhoor',VHCASES.filter(c=>{const s=vhd.cases[c.id];return s&&s.done&&s.won}).length,VHCASES.length],['casino','Casino-escape',CSCASES.filter(c=>{const s=csd.cases[c.id];return s&&s.fin&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,CSCASES.length],['team','Teamzaak',RLCASES.filter(c=>{const s=rld.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,RLCASES.length],['brieven','Brievenreeks',BRCASES.filter(c=>{const s=brd.cases[c.id];return s&&s.done&&s.won}).length,BRCASES.length],['databank','Politiedatabase',DBCASES.filter(c=>{const s=dbd.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,DBCASES.length]];
+   ['landhuis','Het Landhuis',lh.solved,null],['spion','Spionage',spn.solved,null],['bericht','Laatste Bericht',ber,BCASES.length],['dossier','Dossiermap',dos,DOSSIERS.length],['stad','Stadsplattegrond',STCASES.filter(c=>{const s=std.cases[c.id];return s&&s.done}).length,STCASES.length],['tijdlijn','De Tijdlijn',TLCASES.filter(c=>{const s=tld.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,TLCASES.length],['verhoor','Het Verhoor',VHCASES.filter(c=>{const s=vhd.cases[c.id];return s&&s.done&&s.won}).length,VHCASES.length],['casino','Casino-escape',CSCASES.filter(c=>{const s=csd.cases[c.id];return s&&s.fin&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,CSCASES.length],['team','Teamzaak',RLCASES.filter(c=>{const s=rld.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,RLCASES.length],['brieven','Brievenreeks',BRCASES.filter(c=>{const s=brd.cases[c.id];return s&&s.done&&s.won}).length,BRCASES.length],['databank','Politiedatabase',DBCASES.filter(c=>{const s=dbd.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,DBCASES.length]];
   const total=rows.reduce((a,r)=>a+r[2],0),streak=Math.max(m.streak||0,km.streak||0,lh.streak||0,spn.streak||0);
   const B=[['eerste','Eerste zaak','Los je eerste zaak op.',total,1],['tien','Volhouder','Los 10 zaken op.',total,10],['vijftig','Veteraan','Los 50 zaken op.',total,50],['honderd','Legende','Los 100 zaken op.',total,100],
    ['logicus','Logicus','10 keer Moorddossier opgelost.',m.solved,10],['meester','Meesterbrein','Niveau 5 vrijgespeeld in Moorddossier.',m.solved,40],
@@ -6184,6 +6420,11 @@ const HELP=[
   steps:['Open een verhoor en lees het dossier.','Kies bij <b>Stel een vraag</b> wat je wilt weten. Elke vraag kost 1 ☕.','Klopt een antwoord niet met <b>Jouw bewijs</b>? Tik dan bij die uitspraak op <b>⚡ Confronteer</b> en kies het bewijs.','Goed bewijs: hij geeft iets toe en er komen nieuwe vragen. Fout bewijs: hij lacht je uit en het kost 2 ☕.','Prik alle leugens door voor een bekentenis. Is je koffie op, dan krijg je nog één kans met 6 ☕.'],
   tips:['Lees eerst al je bewijs. Let op tijden en namen.','Niet elke uitspraak is gelogen. Confronteer alleen als je het zeker weet.','Kijk naar zijn gezicht: hoe zenuwachtiger, hoe dichter bij de waarheid.'],
   extra:()=>`${VHCASES.length} ${VHCASES.length===1?'verhoor':'verhoren'}, elk ongeveer twintig minuten.`},
+ {g:'stad',name:'Stadsplattegrond',insp:'Zoekplaat · eigen spel: één grote, drukke stad vol kleine verhalen',
+  what:'Eén grote tekening van een drukke stad. Overal gebeurt iets, en sommige mensen zie je op meer plekken terug. Bij elke zaak krijg je vragen: zoek op de plattegrond waar het gebeurde en tik erop.',
+  steps:['Open een zaak en lees de <b>Melding</b>.','Zoom in met twee vingers of met de knoppen + en −. Sleep om rond te kijken.','Lees de vraag en tik op de plek op de kaart waar het gebeurt.','Goed? Dan komt er een rode cirkel en krijg je de volgende vraag.','Na de laatste vraag weet je wie het was.'],
+  tips:['Let op kleding: een gele jas of een rode paraplu valt op, ook van ver.','Volg één persoon door de stad. Waar ging die eerder heen?','Zoom goed in: veel dingen zijn klein.'],
+  extra:()=>`${STCASES.length} ${STCASES.length===1?'zaak':'zaken'} op één plattegrond.`},
  {g:'tijdlijn',name:'De Tijdlijn',insp:'Tijdlijnpuzzel · eigen spel: reken de tijden uit en vind wie de gelegenheid had',
   what:'Je krijgt losse gebeurtenissen van één avond. Bij sommige staat de tijd, bij andere reken je hem uit (‘tien minuten na de storing’). Zet alles op de juiste tijd. Daarna zie je in een overzicht wie er tijdens de moord geen alibi had.',
   steps:['Open een zaak en lees de <b>Melding</b>.','Kies bij elke kaart een tijd. De kaarten schuiven vanzelf op volgorde.','Tik op <b>Controleer</b>. Goede kaarten worden groen en blijven staan, foute worden rood.','Staat alles goed, dan zie je per persoon waar die was, met het moment van de moord in rood.','Wijs de dader aan met drie vragen. Fout? Dan krijg je nog één poging.'],
@@ -6226,8 +6467,8 @@ function setTab(t){st.tab=t;save();renderPanes();window.scrollTo({top:0})}
 function renderPanes(){
   const t=st.tab||'zaak';
   const g=game,M=g==='murdle';
-  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';$('pBericht').hidden=g!=='bericht';$('pDossier').hidden=g!=='dossier';$('pDatabank').hidden=g!=='databank';$('pBrieven').hidden=g!=='brieven';$('pTeam').hidden=g!=='team';$('pCasino').hidden=g!=='casino';$('pVerhoor').hidden=g!=='verhoor';$('pTijdlijn').hidden=g!=='tijdlijn';if(g==='tijdlijn'&&!$('pTijdlijn').innerHTML)renderTijdlijn();if(g==='verhoor'&&!$('pVerhoor').innerHTML)renderVerhoor();if(g==='casino'&&!$('pCasino').innerHTML)renderCasino();if(g==='team'&&!$('pTeam').innerHTML)renderTeam();if(g==='brieven'&&!$('pBrieven').innerHTML)renderBrieven();if(g==='databank'&&!$('pDatabank').innerHTML)renderDatabank();if(g==='dossier'&&!$('pDossier').innerHTML)renderDossier();if(g==='bericht'&&!$('pBericht').innerHTML)renderBericht();if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
-  document.querySelector('.tabs').hidden=!M;const H=g==='home',GB=document.querySelector(`.games [data-g="${g}"] b`);document.querySelector('.games').hidden=!(H||gmOpen)||g==='uitleg'||g==='pas';document.querySelector('.games').classList.toggle('drop',!H);$('homeTitle').hidden=!H;$('gameBar').hidden=H||g==='uitleg'||g==='pas';$('gbCur').innerHTML=GB?GB.innerHTML:'';$('gbMenu').textContent=gmOpen?'✕ Sluit':'☰ Spellen';$('gbMenu').setAttribute('aria-expanded',gmOpen);$('helpBtn').textContent=g==='uitleg'?'← Terug':'? Uitleg';{const pb=$('pasBtn');pb.classList.toggle('pasbadge',g!=='pas');pb.innerHTML=g==='pas'?'← Terug':PASBADGE}$('pPas').hidden=g!=='pas';if(g==='pas')renderPas();document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('lvLine').hidden=!M;$('stats').hidden=!M;
+  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';$('pBericht').hidden=g!=='bericht';$('pDossier').hidden=g!=='dossier';$('pDatabank').hidden=g!=='databank';$('pBrieven').hidden=g!=='brieven';$('pTeam').hidden=g!=='team';$('pCasino').hidden=g!=='casino';$('pVerhoor').hidden=g!=='verhoor';$('pTijdlijn').hidden=g!=='tijdlijn';if(g==='tijdlijn'&&!$('pTijdlijn').innerHTML)renderTijdlijn();$('pStad').hidden=g!=='stad';if(g==='stad')renderStad();if(g==='verhoor'&&!$('pVerhoor').innerHTML)renderVerhoor();if(g==='casino'&&!$('pCasino').innerHTML)renderCasino();if(g==='team'&&!$('pTeam').innerHTML)renderTeam();if(g==='brieven'&&!$('pBrieven').innerHTML)renderBrieven();if(g==='databank'&&!$('pDatabank').innerHTML)renderDatabank();if(g==='dossier'&&!$('pDossier').innerHTML)renderDossier();if(g==='bericht'&&!$('pBericht').innerHTML)renderBericht();if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
+  document.querySelector('.tabs').hidden=!M;const H=g==='home',GB=document.querySelector(`.games [data-g="${g}"] b`);document.querySelector('.games').hidden=!(H||gmOpen)||g==='uitleg'||g==='pas';document.querySelector('.games').classList.toggle('drop',!H);$('homeTitle').hidden=!H;$('nextUp').hidden=!H;if(H)nuRender();$('gameBar').hidden=H||g==='uitleg'||g==='pas';$('gbCur').innerHTML=GB?GB.innerHTML:'';$('gbMenu').textContent=gmOpen?'✕ Sluit':'☰ Spellen';$('gbMenu').setAttribute('aria-expanded',gmOpen);$('helpBtn').textContent=g==='uitleg'?'← Terug':'? Uitleg';{const pb=$('pasBtn');pb.classList.toggle('pasbadge',g!=='pas');pb.innerHTML=g==='pas'?'← Terug':PASBADGE}$('pPas').hidden=g!=='pas';if(g==='pas')renderPas();document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('lvLine').hidden=!M;$('stats').hidden=!M;
   document.querySelectorAll('.games button').forEach(b=>b.setAttribute('aria-selected',b.dataset.g===g));
   if(g==='speur'&&!$('pVerhaal').innerHTML)renderStory();if(g==='koud'&&!$('pKoud').innerHTML)renderKoud();
   document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===t));
@@ -6333,7 +6574,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261103220258';
+const APPV='20261103221845';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

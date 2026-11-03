@@ -626,7 +626,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .pas{background:linear-gradient(135deg,#efe7d2,#e2d6b8);color:#1c1f22;border-radius:18px;padding:16px;box-shadow:0 8px 24px rgba(0,0,0,.18);display:flex;flex-direction:column;gap:10px;border:2px solid #1c1f22}
 .pas-top{display:flex;justify-content:space-between;font:800 13px var(--cond);letter-spacing:.14em;text-transform:uppercase;color:#8A2A1A;border-bottom:2px solid #1c1f22;padding-bottom:8px}
 .pas-body{display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;align-items:start}
-.pas-foto{width:96px;height:116px;border-radius:8px;background:#1c1f22;color:#efe7d2;display:grid;place-items:center}.pas-foto svg{width:56px;height:56px}
+.pas-foto{width:96px;height:116px;border-radius:8px;background:#1c1f22;color:#efe7d2;display:grid;place-items:center}.pas-foto svg{width:56px;height:56px}.pas-foto{position:relative;border:0;padding:0;cursor:pointer;overflow:hidden}.pas-foto svg.pas-av{width:100%;height:100%;background:linear-gradient(#5a6a7a,#2f3a4a)}.pas-edit{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.62);color:#fff;font:700 10px/1.2 var(--sans,Arial);padding:4px 2px;text-transform:uppercase;letter-spacing:.04em}.av-wrap{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:start}.av-big{background:linear-gradient(#5a6a7a,#2f3a4a);border-radius:10px;overflow:hidden;position:sticky;top:8px}.av-big svg{width:100%;height:auto;display:block}.av-ctl{display:grid;gap:6px}.av-ctl>b{font-size:12px;text-transform:uppercase;letter-spacing:.06em;margin-top:6px}.av-sw{display:flex;flex-wrap:wrap;gap:6px}.av-sw button{width:30px;height:30px;border-radius:50%;border:2px solid rgba(0,0,0,.35);cursor:pointer}.av-sw button[aria-pressed=true]{outline:3px solid var(--red,#c2321f);outline-offset:2px}.av-opt{display:flex;flex-wrap:wrap;gap:6px}.av-opt .btn[aria-pressed=true]{background:var(--ink,#1c1f22);color:#fff}@media(max-width:420px){.av-wrap{grid-template-columns:96px 1fr}}
 .pas-info{display:flex;flex-direction:column;gap:2px;min-width:0}
 .pas-info label,.pas-k{font:700 11px var(--cond);letter-spacing:.12em;text-transform:uppercase;color:#5e635f}
 .pas-info input{font:600 22px "Caveat",cursive;border:0;border-bottom:1.5px dashed #5e635f;background:transparent;color:#1d3f8c;padding:0 0 2px;margin-bottom:4px;width:100%}
@@ -6017,13 +6017,32 @@ function pasData(){const sx=k=>store.get(k)||{solved:0,streak:0},m=sx('md-stats'
   const ps=store.get(PASKEY)||{earned:{}};let changed=false;B.forEach(b=>{if(b[3]>=b[4]&&!ps.earned[b[0]]){ps.earned[b[0]]=Date.now();changed=true}});if(changed)store.set(PASKEY,ps);
   let ri=0;RANKS.forEach((r,i)=>{if(total>=r[0])ri=i});return {rows,total,B,ps,ri}}
 function giOf(g){const ic=document.querySelector(`.games [data-g="${g}"] .gi`);return ic?ic.outerHTML:''}
+// eigen personage op de Rechercheurspas
+const AVDEF={f:0,skin:1,hc:1,hair:'short',beard:false,glasses:false,hat:'none',top:6};
+const AVHAIR={0:[['short','Kort'],['curly','Krullen'],['bald','Kaal']],1:[['long','Lang'],['bob','Kort'],['bun','Knot']]};
+const AVHAT=[['none','Geen'],['fedora','Hoed'],['cap','Pet'],['police','Politiepet']];
+function avLook(a){a={...AVDEF,...(a||{})};return {f:!!a.f,skin:TSKIN[a.skin]||TSKIN[1],hc:THC[a.hc]||THC[1],top:TTOP[a.top]||TTOP[6],legs:TLEG[0],glasses:!!a.glasses,ph:0,hair:a.hair,beard:!a.f&&!!a.beard,hat:a.hat==='none'?undefined:a.hat}}
+const avSvg=(a,vb='-34 -146 68 104')=>`<svg viewBox="${vb}" class="pas-av" aria-hidden="true">${toonBody(avLook(a))}</svg>`;
+function pasAvEditor(a){a={...AVDEF,...(a||{})};const sw=(k,list)=>`<div class="av-sw">${list.map((c,i)=>`<button type="button" data-av="${k}" data-v="${i}" aria-pressed="${a[k]===i}" style="background:${c}" aria-label="${k} ${i+1}"></button>`).join('')}</div>`;
+  const opt=(k,list)=>`<div class="av-opt">${list.map(([v,l])=>`<button type="button" class="btn small" data-av="${k}" data-v="${v}" aria-pressed="${String(a[k])===String(v)}">${l}</button>`).join('')}</div>`;
+  return `<section class="hb av-ed" id="avEd"><h4>Kies je personage</h4><div class="av-wrap"><div class="av-big">${avSvg(a,'-40 -150 80 152')}</div><div class="av-ctl">
+   <b>Ik ben</b>${opt('f',[[0,'Man'],[1,'Vrouw']])}
+   <b>Huidskleur</b>${sw('skin',TSKIN)}
+   <b>Kapsel</b>${opt('hair',AVHAIR[a.f?1:0])}
+   <b>Haarkleur</b>${sw('hc',THC)}
+   <b>Hoofddeksel</b>${opt('hat',AVHAT)}
+   <b>Extra</b><div class="av-opt"><button type="button" class="btn small" data-av="glasses" data-v="t" aria-pressed="${!!a.glasses}">Bril</button>${a.f?'':`<button type="button" class="btn small" data-av="beard" data-v="t" aria-pressed="${!!a.beard}">Baard</button>`}</div>
+   <b>Jas</b>${sw('top',TTOP)}
+   <div class="controls"><button class="btn primary small" id="avDone" type="button">Klaar</button><button class="btn small" id="avRand" type="button">🎲 Verras me</button></div></div></div></section>`}
+
+let avOpen=false;
 function renderPas(){const D=pasData(),R=RANKS[D.ri],N=RANKS[D.ri+1],ps=D.ps,got=D.B.filter(b=>ps.earned[b[0]]).length;
   const pct=N?Math.round((D.total-R[0])/(N[0]-R[0])*100):100;
   $('pPas').innerHTML=`<h2 class="bigtitle" style="font-size:clamp(28px,8vw,64px);overflow-wrap:anywhere">Rechercheurspas</h2>${PENCIL}
    <article class="pas"><div class="pas-top"><span>Politie · Recherche</span><span>Nr. ${String(D.total).padStart(4,'0')}</span></div>
-    <div class="pas-body"><div class="pas-foto">${svgOf('LOEP')}</div><div class="pas-info"><label for="pasName">Naam</label><input id="pasName" type="text" maxlength="28" placeholder="Jouw naam" value="${(ps.name||'').replace(/"/g,'&quot;')}">
+    <div class="pas-body"><button type="button" class="pas-foto" id="pasFoto" aria-label="Kies je personage">${ps.av?avSvg(ps.av):svgOf('LOEP')}<span class="pas-edit">${ps.av?'✎ Wijzig':'Kies je personage'}</span></button><div class="pas-info"><label for="pasName">Naam</label><input id="pasName" type="text" maxlength="28" placeholder="Jouw naam" value="${(ps.name||'').replace(/"/g,'&quot;')}">
      <span class="pas-k">Rang</span><b class="pas-rank">${R[1]}</b><span class="pas-k">Opgeloste zaken</span><b>${D.total}</b></div></div>
-    <div class="pas-bar"><i style="width:${pct}%"></i></div><p class="pas-next">${N?`Nog ${N[0]-D.total} ${N[0]-D.total===1?'zaak':'zaken'} tot <b>${N[1]}</b>`:'Hoogste rang bereikt. Petje af, commissaris.'}</p></article>
+    <div class="pas-bar"><i style="width:${pct}%"></i></div><p class="pas-next">${N?`Nog ${N[0]-D.total} ${N[0]-D.total===1?'zaak':'zaken'} tot <b>${N[1]}</b>`:'Hoogste rang bereikt. Petje af, commissaris.'}</p></article>${avOpen?pasAvEditor(ps.av):''}
    <section class="hb"><h4>Per spel</h4><ul class="pas-games">${D.rows.map(([g,n,v,t])=>`<li><span class="pas-gi">${giOf(g)}</span><b>${n}</b><em>${v}${t?` / ${t}`:''}</em></li>`).join('')}</ul></section>
    <section class="hb"><h4>Badges · ${got} van ${D.B.length}</h4><div class="pas-badges">${D.B.map(([id,n,dsc,v,need])=>{const on=!!ps.earned[id];return `<div class="badge ${on?'on':''}"><span class="medal">${on?'★':'🔒'}</span><b>${n}</b><i>${dsc}</i>${on?'':`<em>${Math.min(v,need)} / ${need}</em>`}</div>`}).join('')}</div></section>
    <section class="hb" id="backup"><h4>Back-up van je voortgang</h4><p>Je voortgang staat alleen op dit toestel. Maak af en toe een back-up, bijvoorbeeld voordat je een nieuwe telefoon neemt. Met de back-up zet je alles terug, ook op een ander toestel.</p>
@@ -6032,6 +6051,13 @@ function renderPas(){const D=pasData(),R=RANKS[D.ri],N=RANKS[D.ri+1],ps=D.ps,got
      <div class="controls"><button class="btn small" id="bkCopy" type="button">Kopieer code</button><button class="btn small" id="bkPaste" type="button">Plak code en zet terug</button></div><textarea id="bkText" rows="3" placeholder="Plak hier je back-upcode" aria-label="Back-upcode"></textarea></details>
     <p class="msg" id="bkMsg"></p></section>`;
   $('pasName').oninput=e=>{const p=store.get(PASKEY)||{earned:{}};p.name=e.target.value;store.set(PASKEY,p)};
+  const avSave=a=>{const p=store.get(PASKEY)||{earned:{}};p.av=a;store.set(PASKEY,p);renderPas();const el=$('avEd');if(el)el.scrollIntoView({block:'nearest'})};
+  $('pasFoto').onclick=()=>{avOpen=!avOpen;if(avOpen&&!ps.av){const p=store.get(PASKEY)||{earned:{}};p.av={...AVDEF};store.set(PASKEY,p)}renderPas();const el=$('avEd');if(el)el.scrollIntoView({block:'start',behavior:'smooth'})};
+  $('pPas').querySelectorAll('[data-av]').forEach(b=>b.onclick=()=>{const p=store.get(PASKEY)||{earned:{}},a={...AVDEF,...(p.av||{})},k=b.dataset.av,v=b.dataset.v;
+    if(v==='t')a[k]=!a[k];else if(k==='hair'||k==='hat')a[k]=v;else a[k]=+v;
+    if(k==='f'){a.hair=AVHAIR[a.f?1:0][0][0];if(a.f)a.beard=false}avSave(a)});
+  const dn=$('avDone');if(dn)dn.onclick=()=>{avOpen=false;renderPas();window.scrollTo({top:0,behavior:'smooth'})};
+  const rn=$('avRand');if(rn)rn.onclick=()=>{const r=n=>Math.floor(Math.random()*n),f=r(2);avSave({f,skin:r(TSKIN.length),hc:r(THC.length),hair:AVHAIR[f][r(3)][0],beard:!f&&r(3)===0,glasses:r(3)===0,hat:AVHAT[r(4)][0],top:r(TTOP.length)})};
   const msg=t=>$('bkMsg').textContent=t;
   $('bkSave').onclick=async()=>{const json=bkMake(),name=`moorddossier-backup-${new Date().toISOString().slice(0,10)}.json`;
     try{const f=new File([json],name,{type:'application/json'});if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'Moorddossier back-up'});msg('Back-up gedeeld. Bewaar hem in Bestanden of stuur hem naar jezelf.');return}}catch(e){if(e&&e.name==='AbortError')return}
@@ -6307,7 +6333,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261103214948';
+const APPV='20261103215844';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

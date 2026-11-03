@@ -751,6 +751,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .lhenv-seal{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:#8a1f17;color:#f3e9d5;display:grid;place-items:center;font-size:18px;z-index:2}
 .lhenv.open .lhenv-flap{transform:rotateX(180deg)}.lhenv.open .lhenv-seal{opacity:0}
 .tok:has(svg.wreal){background:#f6efe0;box-shadow:inset 0 0 0 2px var(--ink)}.tok svg.wreal{width:88%;height:88%}
+.lhpr-ic{width:34px;height:34px;display:block}.lhpr-ic svg{width:100%;height:100%}.lhb-ric{width:26px;height:26px;flex:none;display:block;margin:0 auto 2px}.lhb-rooms .lhb-room{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px 2px}.lhb-rooms .lhb-room b{font:700 11px/1.1 var(--cond)!important;letter-spacing:0!important;overflow-wrap:normal}.lhb-ric svg{width:100%;height:100%}
 </style>
 </head>
 <body>
@@ -979,6 +980,59 @@ const WREAL={
   <path d="M16 9.2c-2 4.4-2.6 9.4-1 15.4M16 9.2c2.6 4 3.8 8.6 3 14M11 15c-1.4 2.6-1.6 5.4-.6 8" stroke="#8f6232" stroke-width=".7" fill="none" opacity=".8"/>
   <path d="M10.8 27.6l-1 2.4M14 28.6l-.4 2.4M17.6 28.6l.6 2.4M21 27.6l1.2 2.2" stroke="#d9c7a4" stroke-width=".9" stroke-linecap="round"/><path d="M10 17.2c.6-2.4 2.2-4.4 4-5.6" stroke="#fff1d6" stroke-width="1" fill="none" opacity=".8" stroke-linecap="round"/>
   <g transform="translate(23.5 5.5)"><circle r="4.2" fill="#f6efe0" stroke="#7a1f17" stroke-width=".8"/><circle cx="-1.2" cy="-.6" r=".9" fill="#2a1d15"/><circle cx="1.2" cy="-.6" r=".9" fill="#2a1d15"/><path d="M-1.4 1.6h2.8" stroke="#2a1d15" stroke-width=".7"/></g>`};
+
+// ---------- realistische, gekleurde tekeningen van de locaties en de kamers van het landhuis ----------
+Object.assign(WREAL,{
+ BI:`<rect x="3" y="3" width="26" height="27" rx="1.5" fill="#6b4226" stroke="#3e2412" stroke-width=".8"/><rect x="5" y="5" width="22" height="7" fill="#2a170b"/><rect x="5" y="14" width="22" height="7" fill="#2a170b"/><rect x="5" y="23" width="22" height="5" fill="#2a170b"/>
+  ${[['#b5382b',5,2.2],['#2f6db5',7.4,2],['#d4a017',9.6,2.4],['#2e8b57',12.2,1.8],['#7d3c98',14.2,2.4],['#c06030',17,2],['#3a5a8a',19.2,2.2],['#b5382b',21.6,1.8],['#e0c080',23.6,2.6]].map(([c,x,w])=>`<rect x="${x}" y="5.6" width="${w}" height="6.4" fill="${c}"/>`).join('')}
+  ${[['#2e8b57',5,2.4],['#d4a017',7.6,2],['#b5382b',9.8,2.2],['#2f6db5',12.2,2.6],['#e0c080',15,2],['#7d3c98',17.2,2.2]].map(([c,x,w])=>`<rect x="${x}" y="14.6" width="${w}" height="6.4" fill="${c}"/>`).join('')}<rect x="20.5" y="16.6" width="2.4" height="5.6" fill="#c06030" transform="rotate(-20 21.7 19.4)"/>
+  <path d="M5 12h22M5 21h22" stroke="#8a5a36" stroke-width="1.2"/><circle cx="21" cy="25.6" r="2" fill="#e8d9b0"/><path d="M8 28v-3.4h6V28" fill="#a0522d"/>`,
+ KA:`<defs><linearGradient id="rKA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd85a"/><stop offset="1" stop-color="#d9a420"/></linearGradient></defs>
+  <path d="M3 29h26" stroke="#6b4a2e" stroke-width="2"/>${[[9,23],[23,23],[16,15.6],[16,23]].map(([x,y],i)=>`<g transform="translate(${x} ${y})"><ellipse cx="0" cy="3.6" rx="${i===3?0:6.4}" ry="2.2" fill="#c2401f"/><rect x="-6.4" y="-1.6" width="12.8" height="5.2" fill="url(#rKA)"/><ellipse cy="-1.6" rx="6.4" ry="2.2" fill="#ffe58a" stroke="#c99a1a" stroke-width=".6"/><path d="M-6.4 0.6h12.8" stroke="#c2401f" stroke-width="1.6"/></g>`).join('')}
+  <path d="M19.6 13.4l3.4 2-3.4 1.6z" fill="#fff3c2" stroke="#c99a1a" stroke-width=".5"/>`,
+ TK:`<path d="M3 29V15L16 5l13 10v14z" fill="#d9eef0" fill-opacity=".75" stroke="#6f8c90" stroke-width="1"/><path d="M3 15h26M9.5 10v19M16 5v24M22.5 10v19M3 22h26" stroke="#8fb0b4" stroke-width=".8"/>
+  ${[[7,'#d93b3b'],[12,'#f2c12e'],[19.5,'#e05aa0'],[25,'#d93b3b']].map(([x,c])=>`<path d="M${x} 29v-6" stroke="#3f8a3a" stroke-width="1.2"/><path d="M${x-1.8} 22.6c0-2.6 1-3.8 1.8-4.2.8.4 1.8 1.6 1.8 4.2-1 .9-2.6.9-3.6 0z" fill="${c}"/><path d="M${x} 26.6c-1.6-.4-2.4-1.6-2.4-3" stroke="#3f8a3a" stroke-width="1" fill="none"/>`).join('')}
+  <path d="M4.5 16.5l5-4" stroke="#fff" stroke-width="1" opacity=".8"/>`,
+ GP:`<path d="M2 28h28v3H2z" fill="#3c6d8f"/><path d="M4 29.4h6M14 30h7M24 29.4h5" stroke="#9fc3dc" stroke-width=".8"/>
+  <path d="M8 28V12h2.2V9.2h2.6V6.4h6.4v2.8h2.6V12H24v16z" fill="#a8452f" stroke="#5a2216" stroke-width=".8"/><path d="M8 12h16" stroke="#d9c7a8" stroke-width="1"/>
+  ${[[10.6,14],[14.6,14],[18.6,14],[10.6,19.4],[18.6,19.4]].map(([x,y])=>`<rect x="${x}" y="${y}" width="2.8" height="3.6" fill="#f3efe6" stroke="#2a2a2a" stroke-width=".5"/>`).join('')}<path d="M14.4 28v-5.4a1.6 1.6 0 0 1 3.2 0V28z" fill="#1f3b2f"/><rect x="14.8" y="7.6" width="2.4" height="2.4" rx="1.2" fill="#f3efe6"/><path d="M16 4.6V6.4M14 4.6h4" stroke="#2a2a2a" stroke-width=".9"/>`,
+ WM:`<path d="M12.4 29l1.6-14h4l1.6 14z" fill="#7a5233" stroke="#3e2412" stroke-width=".8"/><path d="M12.6 15.4h6.8l-1.2-3.4h-4.4z" fill="#5a3a20"/><path d="M15 29v-4h2v4" fill="#2a170b"/><circle cx="16" cy="19" r="1" fill="#f3e9d5"/>
+  <g transform="translate(16 12) rotate(20)">${[0,90,180,270].map(a=>`<g transform="rotate(${a})"><path d="M0 0V-12" stroke="#3e2412" stroke-width="1.2"/><rect x=".6" y="-12" width="3.6" height="9.4" fill="#f3e9d5" stroke="#8a6a46" stroke-width=".5"/><path d="M.6 -9h3.6M.6 -6h3.6M2.4 -12v9.4" stroke="#8a6a46" stroke-width=".4"/></g>`).join('')}<circle r="1.4" fill="#2a170b"/></g><path d="M2 29h28" stroke="#3f8a3a" stroke-width="2"/>`,
+ IJ:`<ellipse cx="16" cy="20" rx="14" ry="9" fill="#cfe9f6" stroke="#7fb3cf" stroke-width="1"/><ellipse cx="16" cy="20" rx="14" ry="9" fill="none" stroke="#fff" stroke-width=".6" stroke-dasharray="2 2" opacity=".8"/>
+  <path d="M6 22c4-4 10-5 16-2M8 25c5-3 11-3.6 17-1M10 18c3-1.6 7-2 11-1" stroke="#9fc7dd" stroke-width=".9" fill="none"/>
+  <path d="M24 13V3" stroke="#6b4a2e" stroke-width="1.2"/><path d="M24 3.4h5.4l-1.6 2 1.6 2H24z" fill="#d93b3b"/><rect x="5" y="8.6" width="8" height="5.6" rx="1" fill="#a0522d"/><path d="M4.4 8.8h9.2l-1-2.4H5.4z" fill="#d93b3b"/><path d="M6.6 11h4.8" stroke="#ffe58a" stroke-width="1"/>`,
+ HA:`<rect y="20" width="32" height="12" fill="#2f5f86"/><path d="M2 24h7M14 26h8M24 23.4h6M5 29h9" stroke="#8fbbe0" stroke-width=".9"/>
+  <path d="M10 21h16l-3 4.6H13z" fill="#b5382b" stroke="#5a1c14" stroke-width=".7"/><path d="M17.4 21V9.4" stroke="#4a3220" stroke-width="1.2"/><path d="M17.8 10l6 9.4h-6z" fill="#f3efe6" stroke="#a89f8a" stroke-width=".5"/>
+  <rect x="2.4" y="15.4" width="5.2" height="5" fill="#3a3e42"/><ellipse cx="5" cy="15.4" rx="3.4" ry="1.4" fill="#55595d"/><path d="M7.6 17c2.4.8 3.4 2.2 3.2 4" stroke="#c9a46a" stroke-width="1.1" fill="none"/>`,
+ RT:`<path d="M5 30V14a11 11 0 0 1 22 0v16" stroke="#7a5233" stroke-width="2" fill="none"/><path d="M5 30V14a11 11 0 0 1 22 0" stroke="#3f8a3a" stroke-width="1.4" fill="none" stroke-dasharray="3 2"/>
+  ${[[7,12],[11,5.8],[18,4.8],[24,9.6],[25.6,17],[6,20]].map(([x,y])=>`<g transform="translate(${x} ${y})"><circle r="2.6" fill="#c8243c"/><path d="M-1.4 -.4a1.6 1.6 0 0 1 2.8 0M-.8 .8a1 1 0 0 0 1.6 0" stroke="#7a0f20" stroke-width=".6" fill="none"/></g>`).join('')}
+  ${[[9,9],[14.6,5],[21.4,6.4],[26.4,13]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="1.8" ry="1" fill="#4f9a3a" transform="rotate(-30 ${x} ${y})"/>`).join('')}<path d="M3 30h26" stroke="#3f8a3a" stroke-width="2"/>`,
+ DI:`<rect width="32" height="32" rx="3" fill="#bfe0f0"/><path d="M0 24c4-1.6 6 1.6 10 0s6 1.6 10 0 6 1.6 12 0V32H0z" fill="#2f6f98"/><path d="M2 27c3-1 5 1 8 0" stroke="#9fd0ec" stroke-width=".8" fill="none"/>
+  <path d="M8 24l8-11h6l10 11z" fill="#5aa04a"/><path d="M16 13h6" stroke="#3f8a3a" stroke-width="1.6"/><path d="M8 24l3-4h3" stroke="#8a7a5a" stroke-width="1" fill="none"/>
+  ${[[20,12],[24,12.4]].map(([x,y])=>`<g transform="translate(${x} ${y})"><ellipse cy="-1" rx="2" ry="1.2" fill="#f6f1e6"/><circle cx="1.6" cy="-2" r=".8" fill="#f6f1e6"/><path d="M-.6 0v1.2M.6 0v1.2" stroke="#333" stroke-width=".4"/></g>`).join('')}<circle cx="6" cy="6" r="3" fill="#ffd85a"/>`});
+// kamers van het landhuis (volgorde van LHR)
+const LHRI=[
+ `<rect x="3" y="3" width="26" height="26" rx="2" fill="#3a3f5c"/><circle cx="16" cy="13" r="9" fill="#13183a" stroke="#c9a46a" stroke-width="1.6"/>${[[12,9],[19,11],[15,16],[20,7]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r=".7" fill="#fff"/>`).join('')}<path d="M16 4v18" stroke="#c9a46a" stroke-width=".8"/><path d="M7 13h18" stroke="#c9a46a" stroke-width=".8"/>
+  <g transform="rotate(-25 18 23)"><rect x="8" y="21" width="16" height="3.6" rx="1.6" fill="#c9a46a" stroke="#6b4a1e" stroke-width=".6"/><rect x="23" y="20.4" width="3" height="4.8" rx=".8" fill="#8a6a2e"/></g><path d="M14 25l-3 5M18 25l2 5" stroke="#4a3220" stroke-width="1.2"/>`,
+ null,
+ `<path d="M3 29V13Q16 2 29 13v16z" fill="#d9eef0" fill-opacity=".8" stroke="#6f8c90" stroke-width="1"/><path d="M16 5v24M9 9v20M23 9v20M3 19h26" stroke="#8fb0b4" stroke-width=".8"/><path d="M3 29h26" stroke="#6b4a2e" stroke-width="2"/>
+  <path d="M10 28h6l-1 -5h-4z" fill="#b5602d"/><path d="M13 23c-3-4-6-4-7-3 2 0 4 1 7 3zM13 23c1-5 4-7 6-6-2 1-4 3-6 6zM13 23c-1-4 0-8 1-9 0 3 0 6-1 9z" fill="#3f8a3a"/><path d="M22 28v-8M22 21c-2-2-4-1-4 0M22 22c2-2 4-1 4 0" stroke="#3f8a3a" stroke-width="1.2" fill="none"/><circle cx="22" cy="19" r="2" fill="#e05aa0"/>`,
+ `<path d="M4 14h20a4 4 0 0 1 4 4v5H4z" fill="#1d1d1f" stroke="#000" stroke-width=".6"/><path d="M4 14l2-6h16l2 6" fill="#2a2a2d"/><rect x="4" y="19" width="24" height="3.6" fill="#f6f3ea"/>${[6.5,9,13,15.5,18,22,24.5].map(x=>`<rect x="${x}" y="19" width="1.4" height="2.2" fill="#1d1d1f"/>`).join('')}
+  <path d="M6 23v6M26 23v6M8 23v5" stroke="#1d1d1f" stroke-width="1.4"/><rect x="11" y="9.6" width="8" height="5" fill="#f6f3ea" transform="rotate(-8 15 12)"/><path d="M12 11h6M12 12.6h5" stroke="#555" stroke-width=".5" transform="rotate(-8 15 12)"/><path d="M26 6c1 2 1 4-1 5" stroke="#c9a46a" stroke-width=".9" fill="none"/><circle cx="24.6" cy="11.2" r="1.2" fill="#c9a46a"/>`,
+ `<rect x="2" y="3" width="28" height="27" fill="#e9dcc0"/><path d="M2 30l11-11h6l11 11z" fill="#8a2a24"/><path d="M8 30l7-7h2l7 7" fill="none" stroke="#c9a46a" stroke-width=".7"/>
+  <path d="M16 3v4" stroke="#6b4a1e" stroke-width=".9"/><path d="M10 9h12l-2 3h-8z" fill="#c9a46a"/>${[11,14,18,21].map(x=>`<path d="M${x} 12v1.6" stroke="#c9a46a" stroke-width=".8"/><circle cx="${x}" cy="14.2" r=".9" fill="#ffe9a0"/>`).join('')}<rect x="3.5" y="12" width="5" height="10" rx="2.5" fill="#6b4a2e"/><rect x="23.5" y="12" width="5" height="10" rx="2.5" fill="#6b4a2e"/>`,
+ `<rect x="3" y="18" width="26" height="4" rx="1" fill="#7a4a24" stroke="#4a2a12" stroke-width=".6"/><path d="M3 18h26" stroke="#f6f1e6" stroke-width="2.2"/><path d="M6 22v7M26 22v7" stroke="#4a2a12" stroke-width="1.8"/>
+  ${[9,16,23].map(x=>`<rect x="${x-.8}" y="10" width="1.6" height="7" fill="#f6f1e6"/><path d="M${x} 7c-1 1.2-1 2.4 0 3 1-.6 1-1.8 0-3z" fill="#ffb42a"/>`).join('')}<path d="M7 17h18" stroke="#c9a46a" stroke-width="1.4"/><ellipse cx="12.6" cy="16.4" rx="2" ry=".7" fill="#e8e3d6"/><ellipse cx="19.6" cy="16.4" rx="2" ry=".7" fill="#e8e3d6"/>`,
+ `<rect x="4" y="16" width="24" height="3" fill="#6b3f1e" stroke="#3e2412" stroke-width=".6"/><rect x="5" y="19" width="7" height="10" fill="#7a4a24" stroke="#3e2412" stroke-width=".6"/><path d="M5 22.4h7M5 25.6h7" stroke="#3e2412" stroke-width=".6"/><circle cx="8.5" cy="20.8" r=".5" fill="#c9a46a"/><path d="M25 19v10" stroke="#3e2412" stroke-width="1.6"/>
+  <path d="M22 16V9l-4-2" stroke="#2e5e3a" stroke-width="1.2" fill="none"/><path d="M14 4l6 1-2 5z" fill="#2e8b57"/><path d="M15 9.6l4 .4" stroke="#ffe9a0" stroke-width=".7"/><rect x="9" y="12.6" width="7" height="3.4" fill="#f6f3ea" transform="rotate(4 12 14)"/><path d="M15 15.4l3-3" stroke="#2a2a2a" stroke-width=".7"/>`,
+ `<rect x="2" y="3" width="28" height="27" rx="2" fill="#3a2d26"/><path d="M2 10q14-8 28 0" stroke="#5a4a3e" stroke-width="1.4" fill="none"/>
+  ${[[9,22],[23,22]].map(([x,y])=>`<g transform="translate(${x} ${y})"><ellipse rx="6" ry="6.6" fill="#8a5a2e" stroke="#4a2a12" stroke-width=".7"/><path d="M-6 -2.6h12M-6 2.6h12" stroke="#2a2a2a" stroke-width="1.1"/><ellipse rx="2" ry="2.2" fill="#6b4220"/><circle r=".6" fill="#2a170b"/></g>`).join('')}
+  ${[13,16,19].map((x,i)=>`<path d="M${x} 14v-4.4q0-1 .6-1.6v-1.6h1.2V8q.6.6.6 1.6V14z" fill="${['#2a4a2a','#5a1a2a','#2a4a2a'][i]}" stroke="#111" stroke-width=".4"/>`).join('')}<path d="M12 14h9" stroke="#6b4a2e" stroke-width="1.4"/>`,
+ `<rect x="4" y="14" width="24" height="15" rx="1.4" fill="#2a2c2f" stroke="#111" stroke-width=".7"/><rect x="7" y="19" width="18" height="8" rx="1" fill="#1a1b1d" stroke="#4a4d52" stroke-width=".7"/><path d="M10 19v-1.4h12V19" stroke="#c9a46a" stroke-width=".8" fill="none"/>
+  <ellipse cx="11" cy="13.4" rx="4.4" ry="1.4" fill="#b87333"/><rect x="6.6" y="10.6" width="8.8" height="2.8" fill="#c88340"/><path d="M15.4 11.4h3" stroke="#6b4a2e" stroke-width="1.2" stroke-linecap="round"/><ellipse cx="22" cy="13" rx="3.6" ry="1.2" fill="#7a7f85"/>
+  <path d="M9 9c0-1.6 1.4-1.6 1.4-3M12 9c0-1.6 1.4-1.6 1.4-3" stroke="#d9d9d9" stroke-width=".7" fill="none" opacity=".8"/><path d="M28 4v8M26 4v3M30 4v3M26 7h4" stroke="#7a7f85" stroke-width=".8"/>`];
+LHRI[1]=WREAL.BI;
+const lhRoomIc=j=>`<svg viewBox="0 0 32 32" class="wreal" aria-hidden="true">${LHRI[j]}</svg>`;
 
 const svgOf=x=>{const m=typeof x==='string'?x:x&&x.mono;return WREAL[m]?`<svg viewBox="0 0 32 32" class="wreal" aria-hidden="true">${WREAL[m]}</svg>`:svgOf0(x)};
 const svgOf0=x=>`<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[typeof x==='string'?x:x.mono]||''}</svg>`;
@@ -2539,7 +2593,7 @@ function lhBoard(M=null,id='lhBoard'){const G=LG,E=lhElim(),n=lst.note,chk=lhChk
     const tag=k==='off'?`<span class="lhb-tag">${E[t][j]+1}</span>`:k==='hit'?`<span class="lhb-tag">✓</span>`:k==='miss'?`<span class="lhb-tag miss">!</span>`:k==='wrong'?`<span class="lhb-tag wrong">?</span>`:'';
     const dis=k==='off'||(M&&M.res)?'disabled':'';
     return [cls,d,x,tag,dis,inner]};
-  const room=j=>{const [c,d,x,tag,dis]=one('r',j);return `<button type="button" class="lhb-room ${c}" data-nb="r${j}"${d} ${dis}>${x}<b>${cap(LHR[j][1].replace(/^de /,''))}</b>${tag}</button>`};
+  const room=j=>{const [c,d,x,tag,dis]=one('r',j);return `<button type="button" class="lhb-room ${c}" data-nb="r${j}"${d} ${dis}>${x}<span class="lhb-ric">${lhRoomIc(j)}</span><b>${cap(LHR[j][1].replace(/^de /,''))}</b>${tag}</button>`};
   const tok=(t,j,svg,name)=>{const [c,d,x,tag,dis]=one(t,j);return `<button type="button" class="lhb-tok ${c}" data-nb="${t}${j}"${d} ${dis}>${x}<span class="lhb-ic">${t==='s'?lhFace(G,j):`<span class="tok">${svg}</span>`}</span><span class="lhb-nm">${name}</span>${tag}</button>`};
   const steps=chk.map(i=>{const g=(lst.guess||{})[i];return `<li value="${i+1}" class="${i===last?'new':''}"><b>${LHP[i][1]}${lst.skipped.includes(i)?' (overgeslagen)':''}</b><span>Weg: ${lhGone(i)}${g?` · <em class="${g.m||g.w?'':'ok'}">jij: ${g.h} van ${g.h+g.m} goed${g.w?`, ${g.w} te veel`:''}</em>`:''}</span></li>`}).join('');
   const word=(t,a,b)=>`<span data-word="${t}" data-a="${a}" data-b="${b}">${left(t)===1?a:b}</span>`;
@@ -2582,7 +2636,7 @@ function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let 
   const v=Math.min(lst.view??open,N),st=store.get(LHSKEY)||{solved:0,streak:0};
   const pzOf=Object.fromEntries(LHP.map(([k],i)=>[LHROOMOF[k],i])),pos=v===N?4:LHROOMOF[LHP[v][0]];
   const plan=`<section class="lhplan-wrap"><h2>Het landhuis</h2><p class="hint">Tik op een kamer om erheen te lopen. In elke kamer wacht een puzzel. In de hal ligt de verzegelde envelop.</p><div class="lhplan" id="lhPlan">${range(9).map(c=>{const pi=pzOf[c],done=pi!==undefined&&lst.solved.includes(pi);
-     return `<button type="button" class="lhpr ${c===4?'hal':''} ${done?'done':''} ${c===pos?'here':''}" data-room="${c}"><b>${cap(LHR[c][1].replace(/^de /,''))}</b><small>${c===4?'✉ envelop':done?'✓ opgelost':pi!==undefined?LHP[pi][1]:''}</small></button>`}).join('')}
+     return `<button type="button" class="lhpr ${c===4?'hal':''} ${done?'done':''} ${c===pos?'here':''}" data-room="${c}"><span class="lhpr-ic">${lhRoomIc(c)}</span><b>${cap(LHR[c][1].replace(/^de /,''))}</b><small>${c===4?'✉ envelop':done?'✓ opgelost':pi!==undefined?LHP[pi][1]:''}</small></button>`}).join('')}
      <span class="lhpawn" id="lhPawn" style="--x:${pos%3};--y:${Math.floor(pos/3)}"></span></div></section>`;
   const cards=`<section class="lhcards-wrap"><h2>De verdachten</h2><div class="lhcards">${G.S.map((x,j)=>`<div class="lhcard" style="--c:${LHCOL[j%6]}">${lhFace(G,j)}<b>${x.name}</b><small>${x.bio||''}</small></div>`).join('')}</div></section>`;
   const dots='';
@@ -3393,7 +3447,7 @@ function lhFilmPlay(){if(!LG||!lst||!lst.done)return;fmPlay(lhFilm(LG,lst.acc),{
 
 
 function lhFilm(G,acc){const S=G.S[G.sol.s],W=G.W[G.sol.w],room=LHR[G.sol.r][1],ok=acc&&acc.s===G.sol.s&&acc.w===G.sol.w&&acc.r===G.sol.r;
-  return fmReveal({ok,sub:`Landhuis Lindenhof · ${G.event}`,victim:cap(G.victim),bg:LHROOM[G.sol.r],place:{name:cap(room.replace(/^de /,'')),lid:'de',svg:`<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M16 5v9M5 16h8M19 16h8" stroke="currentColor" stroke-width="2.5"/></svg>`,buiten:false},
+  return fmReveal({ok,sub:`Landhuis Lindenhof · ${G.event}`,victim:cap(G.victim),bg:LHROOM[G.sol.r],place:{name:cap(room.replace(/^de /,'')),lid:'de',svg:lhRoomIc(G.sol.r),buiten:false},
     culprit:{name:S.name,svg:svgOf(S),mono:S.mono},weapon:{name:W.name,svg:svgOf(W),mat:{KL:'hout',BP:'glas',SC:'metaal',DV:'aardewerk',RO:'hout',KS:'metaal'}[W.mono]||'hout'},after:'Een klap. Daarna is het stil in het landhuis.'})}
 // ---- onthulling: wie (en waarmee) en waar; kaartjes klein linksboven, het wapen in de hand van de dader ----
 // o = {kicker, sub, ok, bg (optioneel plaatjes-spec), place:{name, lid, svg, buiten}, victim, culprit:{name, svg}, weapon:{name, svg}|null, spy, after, closing}
@@ -4407,7 +4461,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261103110612';
+const APPV='20261103112131';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

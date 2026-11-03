@@ -722,6 +722,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .gb-cur{display:block;flex:1;gap:6px;min-width:0;font:800 16px var(--cond);text-transform:uppercase;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.gb-cur .gi{width:18px;height:18px;vertical-align:-3px;margin-right:5px;color:var(--red)}
 .hometitle{font:800 28px var(--cond);text-transform:uppercase;letter-spacing:.04em;text-align:center;margin:6px 0 10px}
 .games.drop{background:var(--band);border-radius:16px;padding:8px;margin-bottom:10px;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.accuse2 label em{font-style:normal;margin-left:6px}.accuse2 label em.ok{color:var(--ok)}.accuse2 label em.bad{color:var(--red)}
 </style>
 </head>
 <body>
@@ -2111,6 +2112,7 @@ function koudHandbook(){
   <section class="hb"><h4>Kijk goed naar de foto’s</h4><p>Het belangrijkste detail staat vaak gewoon in beeld, in een hoekje van de foto. De nummers op de plattegrond horen bij de foto’s eronder.</p></section>
   <button class="btn backbtn" id="kBack2" type="button">← Terug</button>`;
 }
+function kMk(s,k){return s.last&&!s.open?` <em class="${s.last[k]?'ok':'bad'}">${s.last[k]?'✓':'✗'}</em>`:''}
 function renderKoud(){
   const P=$('pKoud');
   if(!kd.cur){
@@ -2138,11 +2140,12 @@ function renderKoud(){
     if(!s.open){
       const a=s.draft||{};
       body=`<div class="accuse2"><p>Ben je eruit? Leg je beschuldiging vast. Pas daarna wordt het zegel van de oplossing verbroken.</p>
-       <label for="kD">Wie is de dader?</label>${sel('kD',c.opts.dader,a.d)}
-       <label for="kE">Welk bewijs breekt de zaak open?</label>${sel('kE',c.opts.bewijs,a.e)}
-       <label for="kM">Wat was het motief?</label>${sel('kM',c.opts.motief,a.m)}
+       <label for="kD">Wie is de dader?${kMk(s,'d')}</label>${sel('kD',c.opts.dader,a.d)}
+       <label for="kE">Welk bewijs breekt de zaak open?${kMk(s,'e')}</label>${sel('kE',c.opts.bewijs,a.e)}
+       <label for="kM">Wat was het motief?${kMk(s,'m')}</label>${sel('kM',c.opts.motief,a.m)}
+       ${s.last?`<p class="msg">Niet alles klopt. Bij ✗ zit je fout. Neem de zaak nog één keer door en pas je antwoord aan. Dit is je laatste kans.</p>`:''}
        <p class="msg" id="kMsg"></p>
-       ${kConfirm?`<div class="spoiler"><p>Weet je het zeker? Na het verbreken van het zegel kun je je antwoord niet meer veranderen.</p><div class="controls" style="justify-content:center"><button class="btn primary" id="kYes" type="button">Verbreek het zegel</button><button class="btn" id="kNo" type="button">Nog even nadenken</button></div></div>`
+       ${kConfirm?`<div class="spoiler"><p>Weet je het zeker? ${s.retry?'Dit is je laatste kans.':'Klopt er iets niet, dan krijg je nog één kans om de zaak door te nemen.'}</p><div class="controls" style="justify-content:center"><button class="btn primary" id="kYes" type="button">Verbreek het zegel</button><button class="btn" id="kNo" type="button">Nog even nadenken</button></div></div>`
         :`<div class="seal"><span>ZEGEL</span><button class="btn primary" id="kSeal" type="button">Leg beschuldiging vast</button></div>`}</div>`;
     }else{
       const A=s.acc,ok=k=>k==='e'?c.answer.bewijs.includes(A.e):A[k]===c.answer[k==='d'?'dader':'motief'];
@@ -2169,7 +2172,7 @@ function renderKoud(){
   ['kD','kE','kM'].forEach(id=>{const el=$(id);if(el)el.onchange=()=>{s.draft=grab();saveK()}});
   on('kSeal',()=>{const a=grab();if(a.d===null||a.e===null||a.m===null){$('kMsg').textContent='Kies eerst een dader, een bewijsstuk en een motief.';return}s.draft=a;kConfirm=true;saveK();renderKoud()});
   on('kNo',()=>{kConfirm=false;renderKoud()});
-  on('kYes',()=>{s.acc=s.draft;s.open=true;kConfirm=false;saveK();renderKoud();setTimeout(()=>endFilm('koud',c.id),500)});
+  on('kYes',()=>{const A=s.draft||{},okv={d:A.d===c.answer.dader,e:c.answer.bewijs.includes(A.e),m:A.m===c.answer.motief};if(!(okv.d&&okv.e&&okv.m)&&!s.retry){s.retry=1;s.last=okv;kConfirm=false;saveK();renderKoud();window.scrollTo({top:0});return}s.last=null;s.acc=s.draft;s.open=true;kConfirm=false;saveK();renderKoud();setTimeout(()=>endFilm('koud',c.id),500)});
   on('kReset',()=>{kd.cases[c.id]={tab:'rapport',notes:s.notes||'',acc:null,open:false};saveK();renderKoud()});
 }
 
@@ -2571,7 +2574,7 @@ function renderLH(){const P=$('pLandhuis'),G=LG,N=LHP.length;let open=N;for(let 
     if(k==='anagram'){if(same(lst.ana,G.anaS))return lhSolve(v);return msg(lst.ana.length<2?'Kies twee verdachten.':'Dat klopt niet. Tel de letters van de namen eens na.')}
     if(k==='kluis'){if(lst.safe.every((d,j)=>d===G.safe.code[j]))return lhSolve(v);return msg('De kluis blijft dicht. Probeer het nog eens.')}});
   on('lhAcc',()=>{const g=id=>$(id).value===''?null:+$(id).value;const a={s:g('lhS'),w:g('lhW'),r:g('lhR')};if(a.s===null||a.w===null||a.r===null)return msg('Kies wie, waarmee en waar.');
-    lst.acc=a;lst.done=true;const ok=a.s===G.sol.s&&a.w===G.sol.w&&a.r===G.sol.r;const x=store.get(LHSKEY)||{solved:0,streak:0};const lb=lvMax(x.solved);if(ok){x.solved++;x.streak++}else x.streak=0;setTimeout(()=>lvAfter('landhuis',lb,lvMax(x.solved)),300);store.set(LHSKEY,x);saveLh();renderLH();lhFilmPlay()});
+    const ok=a.s===G.sol.s&&a.w===G.sol.w&&a.r===G.sol.r;if(!ok&&!lst.retry){lst.retry=1;saveLh();const v=x=>x?'✓':'✗';return msg(`Niet alles klopt: Wie ${v(a.s===G.sol.s)} · Waarmee ${v(a.w===G.sol.w)} · Waar ${v(a.r===G.sol.r)}. Neem de zaak nog één keer door en probeer het opnieuw. Dit is je laatste kans.`)}lst.acc=a;lst.done=true;const x=store.get(LHSKEY)||{solved:0,streak:0};const lb=lvMax(x.solved);if(ok){x.solved++;x.streak++}else x.streak=0;setTimeout(()=>lvAfter('landhuis',lb,lvMax(x.solved)),300);store.set(LHSKEY,x);saveLh();renderLH();lhFilmPlay()});
   on('lhFilm',lhFilmPlay);
 }
 
@@ -3092,14 +3095,14 @@ function renderDossier(){const P=$('pDossier');
     body=(s.doc!==null&&s.doc!==undefined?`${dDoc(C,s.doc)}<div class="controls dm-nav"><button class="btn small" id="dPrev" type="button" ${s.doc===0?'disabled':''}>‹ Vorige</button><button class="btn small" id="dStar" type="button" aria-pressed="${s.star.includes(s.doc)}" aria-label="Markeer als belangrijk">${s.star.includes(s.doc)?'★':'☆'}</button><button class="btn small" id="dClose" type="button">Sluit</button><button class="btn small" id="dNext" type="button" ${s.doc===C.docs.length-1?'disabled':''}>Volgende ›</button></div>`:`<p class="hint">Tik op een stuk om het te lezen. Met ☆ markeer je stukken die je belangrijk vindt.</p>`)+
      `<div class="dm-grid">${C.docs.map((d,i)=>`<button type="button" class="dm-thumb ${s.read.includes(i)?'read':''} ${s.doc===i?'cur':''}" data-doc="${i}"><span class="dm-nr">${i+1}</span><small>${d.t}</small><b>${d.n}</b><em>${s.star.includes(i)?'★':''}${s.read.includes(i)?' ✓':''}</em></button>`).join('')}</div>`}
   if(t==='vragen'){
-    body=`<p class="hint">Je antwoorden worden meteen bewaard. Je kunt ze veranderen tot je de oplossing opent.</p>${C.qs.map((q,i)=>{const n=s.hints[i]||0;
-      return `<section class="dm-q"><h4><span>${i+1}</span>${q.q}</h4>${s.done?`<p><b>Jouw antwoord:</b> ${q.o[s.ans[i]]}</p>`:`<select data-q="${i}" aria-label="Antwoord op vraag ${i+1}"><option value="">Kies…</option>${q.o.map((o,k)=>`<option value="${k}" ${s.ans[i]===k?'selected':''}>${o}</option>`).join('')}</select>`}
+    body=`${s.lastq&&!s.done?`<p class="msg">Niet alles klopt: ${s.lastq.filter(Boolean).length} van de 5 goed. Bij ✗ zit je fout. Neem de stukken nog één keer door, pas je antwoorden aan en open dan de envelop. Dit is je laatste kans.</p>`:''}<p class="hint">Je antwoorden worden meteen bewaard. Je kunt ze veranderen tot je de oplossing opent.</p>${C.qs.map((q,i)=>{const n=s.hints[i]||0;
+      return `<section class="dm-q"><h4><span>${i+1}</span>${q.q}${s.lastq&&!s.done?` <em class="${s.lastq[i]?'ok':'bad'}">${s.lastq[i]?'✓':'✗'}</em>`:''}</h4>${s.done?`<p><b>Jouw antwoord:</b> ${q.o[s.ans[i]]}</p>`:`<select data-q="${i}" aria-label="Antwoord op vraag ${i+1}"><option value="">Kies…</option>${q.o.map((o,k)=>`<option value="${k}" ${s.ans[i]===k?'selected':''}>${o}</option>`).join('')}</select>`}
        ${q.h.slice(0,n).map((h,k)=>`<p class="dm-hint"><b>Hint ${k+1}</b> ${h}</p>`).join('')}
        ${!s.done&&n<q.h.length?`<button type="button" class="dm-hbtn" data-hint="${i}"><span class="dm-mini"></span>Open hint-envelop ${i+1}${n?'B':'A'}</button>`:''}</section>`}).join('')}
      <div class="controls"><button class="btn primary" type="button" data-dtab="oplossing">Naar de oplossing →</button></div>`}
   if(t==='oplossing'){
     if(!s.done){body=answered<5?`<div class="dm-env shut wide"><span class="dm-flap"></span><span class="dm-label"><small>Envelop 3</small>OPLOSSING</span></div><p class="msg">Beantwoord eerst alle vijf vragen. Nog ${5-answered} te gaan.</p><div class="controls"><button class="btn" type="button" data-dtab="vragen">Naar de vragen</button></div>`
-      :dAsk?`<div class="spoiler"><p>Weet je het zeker? Na het openen kun je je antwoorden niet meer veranderen.</p><div class="controls" style="justify-content:center"><button class="btn primary" id="dYes" type="button">Open de envelop</button><button class="btn" id="dNo" type="button">Nog even nadenken</button></div></div>`
+      :dAsk?`<div class="spoiler"><p>Weet je het zeker? ${s.retry?'Dit is je laatste kans.':'Klopt er iets niet, dan krijg je nog één kans om de stukken door te nemen.'}</p><div class="controls" style="justify-content:center"><button class="btn primary" id="dYes" type="button">Open de envelop</button><button class="btn" id="dNo" type="button">Nog even nadenken</button></div></div>`
       :`<button type="button" class="dm-env big wide" id="dSeal"><span class="dm-flap"></span><span class="dm-label"><small>Envelop 3</small>OPLOSSING</span><span class="dm-seal">Open</span></button><p class="hint">Alle vragen zijn beantwoord. Je hebt ${hintsUsed} ${hintsUsed===1?'hint':'hints'} gebruikt.</p>`}
     else{const sc=C.qs.filter((q,i)=>s.ans[i]===q.a).length,R=DRANK.find(r=>sc>=r[0]);
       body=`<div class="verdict ${sc>=3?'':'bad'}"><p><b>${sc}/5 goed · ${R[1]}.</b> ${R[2]} Je gebruikte ${hintsUsed} ${hintsUsed===1?'hint':'hints'}.</p></div>
@@ -3121,7 +3124,7 @@ function renderDossier(){const P=$('pDossier');
     const n=C.qs.filter((q,i)=>s.ans[i]!==undefined&&s.ans[i]!==null).length,tb=P.querySelector('[data-dtab="vragen"]');if(tb)tb.textContent=`Vragen ${n}/5`});
   P.querySelectorAll('[data-hint]').forEach(b=>b.onclick=()=>{const i=b.dataset.hint;s.hints[i]=(s.hints[i]||0)+1;saveD();renderDossier()});
   on('dSeal',()=>{dAsk=true;renderDossier()});on('dNo',()=>{dAsk=false;renderDossier()});
-  on('dYes',()=>{s.done=true;dAsk=false;saveD();renderDossier();setTimeout(()=>endFilm('dossier',C.id),500)});
+  on('dYes',()=>{const res=C.qs.map((q,i)=>s.ans[i]===q.a);if(!res.every(Boolean)&&!s.retry){s.retry=1;s.lastq=res;s.tab='vragen';dAsk=false;saveD();renderDossier();window.scrollTo({top:0});return}s.done=true;dAsk=false;saveD();renderDossier();setTimeout(()=>endFilm('dossier',C.id),500)});
   on('dReset',()=>{dd.cases[C.id]={start:true,tab:'stukken',doc:null,read:[],star:[],ans:{},hints:{},done:false,notes:s.notes||''};saveD();renderDossier()});
 }
 
@@ -4309,7 +4312,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261103082630';
+const APPV='20261103084011';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

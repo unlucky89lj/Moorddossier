@@ -1023,6 +1023,18 @@ body.kiosk-join .tv-jform .btn.primary{font-size:22px;padding:16px}
 .shifty .tf-eyes{animation:tfBlink2 1.2s infinite}
 @keyframes tfBlink2{0%,40%,100%{transform:scaleY(1)}46%{transform:scaleY(.08)}}
 @media (prefers-reduced-motion:reduce){.tf-eyes,.talking .tf-open,.shifty .tf-eyes{animation:none}.talking .tf-open{opacity:.6}}
+/* eigen zaak met vrienden */
+.tv-tag{display:inline-block;font:700 13px/1 system-ui,sans-serif;background:#e2a93e;color:#1d1a16;border-radius:20px;padding:4px 9px;vertical-align:middle}
+.tv-eigbtn{background:#c2321f!important;color:#fff!important;border-color:#c2321f!important}
+.tv-eig{max-width:760px;margin:0 auto;color:var(--ink)}.tv-eig h2{font:800 28px/1.1 var(--cond,system-ui);margin:0 0 6px}.tv-eig h3{margin:18px 0 8px}.tv-eig p{margin:0 0 12px;line-height:1.45}
+.tv-eig.big{color:#f3efe6;padding:30px 40px;max-width:1300px}.tv-eig.big .tv-eigt button,.tv-eig.big .tv-eigr button{font-size:20px;padding:12px 16px}.tv-eig.big .tv-eigr input{font-size:22px;padding:12px 14px}.tv-eig.big h2{font-size:44px}.tv-eig.big p{font-size:20px}
+.tv-eigt,.tv-eigl{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}.tv-eigl span{display:flex;gap:4px}
+.tv-eigt button,.tv-eigr button{border:2px solid currentColor;background:transparent;color:inherit;border-radius:10px;padding:9px 12px;font:600 15px system-ui,sans-serif;cursor:pointer}
+.tv-eigt button[aria-pressed=true]{background:#e2a93e;color:#1d1a16;border-color:#e2a93e}
+.tv-eigp{display:grid;grid-template-columns:1fr;grid-gap:8px;gap:8px;margin:0 0 14px}.tv-eig.big .tv-eigp{grid-template-columns:1fr 1fr}
+.tv-eigr{display:flex;gap:6px}.tv-eigr input{flex:1;min-width:0;font:600 17px system-ui,sans-serif;padding:10px 12px;border-radius:10px;border:2px solid #9a948a;background:#fffdf6;color:#1d1a16}
+.tv-eigr button{white-space:nowrap}.tv-eigr button[aria-pressed=true]{background:#5a3a6a;color:#fff;border-color:#5a3a6a}
+.tv-eerr{color:#e86a55;font-weight:700}
 </style>
 
 <div class="wrap">
@@ -7192,7 +7204,7 @@ async function tvHostStart(C){const s=tvS(C.id);if(!s.room){s.room=tvRoom();save
   peer.on('connection',c=>{tvHost.conns.push(c);c.on('data',d=>tvOnData(C,c,d));c.on('close',()=>{tvHost.conns=tvHost.conns.filter(x=>x!==c);const p=tvHost.players[c.peer];if(p)p.gone=true;tvVipFix(C,tvS(C.id));tvStageRender()})});
  }catch(e){tvHost.status='offline'}tvStageRender()}
 function tvOnData(C,c,d){if(!d||!tvHost)return;const s=tvS(C.id);
- if(d.t==='hi'){const pl={name:String(d.name||'Speler').slice(0,20),slots:d.slots||[],uid:d.uid,join:!!d.join,at:Date.now()};tvHost.players[c.peer]=pl;if(d.rc){pl.rc=true;pl.join=false;tvSend(c,{t:'slot',id:C.id,p:[],n:0,rc:true})}else{if(d.join)tvAssign(C,s,c,pl);tvSendTips(C,s,c,pl.uid);if(s.trait)tvTraitSync(C,s,(s.round||0)>0)}tvSend(c,{t:'state',phase:tvScr,reveal:s.reveal||null,env:!!s.envOpen})}
+ if(d.t==='hi'){if(C.custom)tvSend(c,{t:'case',p:C.custom});const pl={name:String(d.name||'Speler').slice(0,20),slots:d.slots||[],uid:d.uid,join:!!d.join,at:Date.now()};tvHost.players[c.peer]=pl;if(d.rc){pl.rc=true;pl.join=false;tvSend(c,{t:'slot',id:C.id,p:[],n:0,rc:true})}else{if(d.join)tvAssign(C,s,c,pl);tvSendTips(C,s,c,pl.uid);if(s.trait)tvTraitSync(C,s,(s.round||0)>0)}tvSend(c,{t:'state',phase:tvScr,reveal:s.reveal||null,env:!!s.envOpen})}
  if(d.t==='cmd'){const pl=tvHost.players[c.peer];if(pl&&pl.rc)tvCmd(d.a,d.v);return}
  if(d.t==='vote'&&C.suspects.some(x=>x.id===d.s)){tvHost.votes[d.uid||c.peer]={name:String(d.name||'Speler').slice(0,20),s:d.s,tr:String(d.tr||'')};s.votes=tvHost.votes;saveTv();tvSend(c,{t:'ok'})}
  tvStageRender()}
@@ -7240,7 +7252,7 @@ function tvCloseStage(){tvStop();if(MDK==='tv'){tvScr='home';tvBig=null;tvStageR
 function tvFit(){if(!tvStage||tvStage.hidden)return;const el=tvStage.querySelector('.tv-16');if(!el)return;const de=document.documentElement,vv=window.visualViewport,W=Math.min(innerWidth,de.clientWidth||innerWidth,vv?vv.width:innerWidth),H=Math.min(innerHeight,de.clientHeight||innerHeight,vv?vv.height:innerHeight);const k=Math.min(W/1600,H/900)*(window.MDKIOSK==='tv'?.96:1);el.style.transform=`translate(-50%,-50%) scale(${k})`;tvStage.classList.toggle('portrait',innerHeight>innerWidth*1.1)}
 const TVSCR=[['melding','Melding'],['pd','Plaats delict'],['verd','Verdachten'],['verh','Verhoren'],['ronde','Geheime tips'],['env','Envelop B'],['spel','Spelers'],['stem','Beschuldig']];
 const tvScrList=(s,C)=>(s.tvsolo?TVSCR.map(x=>x[0]==='spel'?['dos','Dossiers']:x):TVSCR).filter(x=>!(x[0]==='env'&&C&&!C.envelope)&&!(x[0]==='ronde'&&C&&!(C.rounds&&C.rounds.length)));
-function tvStageRender(){if(!tvStage||tvStage.hidden)return;if(tvScr==='home')return tvHomeRender();const C=tvC(tvd.cur);if(!C)return;const s=tvS(C.id);s.scr=tvScr;saveTv();
+function tvStageRender(){if(!tvStage||tvStage.hidden)return;if(tvScr==='home')return tvHomeRender();if(tvScr==='eigen')return tvEigenTv();const C=tvC(tvd.cur);if(!C)return;const s=tvS(C.id);s.scr=tvScr;saveTv();
  const body=({melding:tvScrMelding,pd:tvScrPd,verd:tvScrVerd,verh:tvScrVerh,env:tvScrEnv,ronde:tvScrRonde,spel:tvScrSpel,dos:tvScrDos,stem:tvScrStem,onth:tvScrOnth,opl:tvScrOpl}[tvScr]||tvScrMelding)(C,s);
  const np=tvHost?Object.values(tvHost.players).filter(p=>!p.gone).length:0;
  tvStage.innerHTML=`<div class="tv-16"><header class="tv-top"><span class="tv-logo">${PASBADGE}<b>TV-DOSSIER</b><i>Zaak ${C.nr} · ${C.title}</i></span><span class="tv-room">${s.tmode?`<b class="tv-clock ${s.trun?'':'pause'}" id="tvClock">⏱ ${tvClock(s)}</b> · `:''}${s.tvsolo?'🕵️ Alleen op de tv':`${s.room?`Kamer <b>${s.room}</b>`:''} · ${np} ${np===1?'telefoon':'telefoons'} · <i class="${tvHost&&tvHost.status==='online'?'on':''}">${tvHost?tvHost.status:''}</i>`}</span></header>
@@ -7326,7 +7338,7 @@ const tvNotes=id=>{const A=store.get('md-tv-notes')||{},N=A[id]||{};N.sus=N.sus|
 const tvNotesSave=(id,N)=>{const A=store.get('md-tv-notes')||{};A[id]=N;store.set('md-tv-notes',A)};
 function tvPhRender(){const a=document.activeElement,P=$('pTv');if(a&&/TEXTAREA|INPUT/.test(a.tagName)&&P&&P.contains(a)){tvPh.dirty=true;return}renderTv()}
 function tvPhWire(c){
-   c.on('data',d=>{if(d&&d.t==='role'){tvPh.role=d.on?d:null;store.set('md-tv-role',d.on?d:null);tvPhRender();return}if(d&&d.t==='tips'){const old=(store.get('md-tv-tips')||{});const prev=old.room===d.room?(old.list||[]).length:0;store.set('md-tv-tips',{room:d.room,round:d.round,list:d.list});if(d.list.length>prev){tvPh.newTips=d.list.length-prev;try{navigator.vibrate&&navigator.vibrate([80,60,80])}catch(e){}}tvPhRender();return}if(d&&d.t==='hs'){tvPh.hs=d;if(TVQ&&TVQ.rc)tvPhRender();return}if(d&&d.t==='slot'){TVQ.p=d.p||[];TVQ.n=d.n;TVQ.spec=!d.n;TVQ.rc=!!d.rc;store.set('md-tv-join',{id:TVQ.id,r:TVQ.r,p:TVQ.p,n:TVQ.n,t:Date.now()});tvPhRender();return}if(!d)return;if(d.t==='ok'){tvPh.sent=true;tvPhRender()}if(d.t==='env'){tvPh.env=true;tvPhRender()}if(d.t==='state'){if(d.env)tvPh.env=true;if(d.clear){tvPh.sent=false;tvPh.vote=null}tvPh.reveal=d.reveal||null;if(d.reveal&&!(TVQ&&TVQ.rc))tvPh.tab='stem';tvPhRender()}});
+   c.on('data',d=>{if(d&&d.t==='case'){const had=!!tvC('eigen-'+d.p.tpl+'-'+(d.p.seed>>>0).toString(36));tvAddCustom(d.p,false);if(!had)renderTv();return}if(d&&d.t==='role'){tvPh.role=d.on?d:null;store.set('md-tv-role',d.on?d:null);tvPhRender();return}if(d&&d.t==='tips'){const old=(store.get('md-tv-tips')||{});const prev=old.room===d.room?(old.list||[]).length:0;store.set('md-tv-tips',{room:d.room,round:d.round,list:d.list});if(d.list.length>prev){tvPh.newTips=d.list.length-prev;try{navigator.vibrate&&navigator.vibrate([80,60,80])}catch(e){}}tvPhRender();return}if(d&&d.t==='hs'){tvPh.hs=d;if(TVQ&&TVQ.rc)tvPhRender();return}if(d&&d.t==='slot'){TVQ.p=d.p||[];TVQ.n=d.n;TVQ.spec=!d.n;TVQ.rc=!!d.rc;store.set('md-tv-join',{id:TVQ.id,r:TVQ.r,p:TVQ.p,n:TVQ.n,t:Date.now()});tvPhRender();return}if(!d)return;if(d.t==='ok'){tvPh.sent=true;tvPhRender()}if(d.t==='env'){tvPh.env=true;tvPhRender()}if(d.t==='state'){if(d.env)tvPh.env=true;if(d.clear){tvPh.sent=false;tvPh.vote=null}tvPh.reveal=d.reveal||null;if(d.reveal&&!(TVQ&&TVQ.rc))tvPh.tab='stem';tvPhRender()}});
    c.on('close',()=>{tvPh.online='offline';tvPhRender()})}
 const tvName=()=>{const n=store.get('md-tv-name');if(n)return n;const ps=store.get(PASKEY)||{};return (ps.name||'').trim()||'Rechercheur'};
 function tvPhone(C,solo){if(!solo&&TVQ&&TVQ.rc){const P=$('pTv');P.innerHTML=`<div class="storyhead"><span class="kicker">Tv-dossier · kamer ${TVQ.r} · bediening</span><h3>${C.title}</h3></div>${tvRemote(C)}<p class="hint">${tvPh.online==='offline'?'Geen verbinding met de tv. <button type="button" class="btn small" id="tvRetry">Opnieuw verbinden</button>':''}</p>`;P.querySelectorAll('[data-rc]').forEach(b=>b.onclick=()=>tvRc(b.dataset.rc,b.dataset.v));const rt=$('tvRetry');if(rt)rt.onclick=()=>{try{tvPeerPh&&tvPeerPh.peer&&tvPeerPh.peer.destroy()}catch(e){}tvPeerPh=null;renderTv()};return}const P=$('pTv'),slots=solo?C.secret.map((_,i)=>i+1):TVQ.spec?[]:TVQ.p.length?TVQ.p.filter(k=>tvSlotOk(C,k)):C.secret.map((_,i)=>i+1),s=tvS(C.id);
@@ -7394,7 +7406,7 @@ function tvJoinGo(code,nm,rc){const J=TVJOIN,fail=m=>{J.busy=false;J.err=m;try{p
  tvLib('peer').then(Pc=>{peer=new Pc();peer.on('error',e=>{clearTimeout(to);fail(e&&e.type==='peer-unavailable'?'Deze kamer bestaat niet. Kijk goed naar de code op de tv.':'Geen verbinding. Probeer het nog eens.')});
   peer.on('open',()=>{const c=peer.connect('mdtv-'+code.toLowerCase(),{reliable:true});
    c.on('open',()=>c.send({t:'hi',uid:tvUid(),name:nm,slots:[],join:!rc,rc:!!rc}));
-   c.on('data',function first(d){if(!d||d.t!=='slot'||done)return;done=true;clearTimeout(to);c.off&&c.off('data',first);
+   c.on('data',function first(d){if(d&&d.t==='case'){tvAddCustom(d.p,false);return}if(!d||d.t!=='slot'||done)return;done=true;clearTimeout(to);c.off&&c.off('data',first);
     TVQ={id:d.id,r:code,p:d.p||[],n:d.n,spec:!d.n,join:true,rc:!!d.rc};store.set('md-tv-join',{id:d.id,r:code,p:TVQ.p,n:d.n,t:Date.now()});
     tvPeerPh={peer,c};tvPh={tab:'dos',open:null,vote:null,sent:false,online:'online',reveal:null,tip:0};tvPhWire(c);TVJOIN=null;
     try{history.replaceState(null,'',`${location.pathname}?tv=${d.id}&r=${code}&p=${TVQ.p.join('.')}&j=1${TVQ.rc?'&rc=1':''}`)}catch(e){}renderTv();window.scrollTo({top:0})})})}).catch(()=>{clearTimeout(to);fail('Geen internet. Probeer het opnieuw.')})}
@@ -7404,12 +7416,13 @@ function renderTv(){const P=$('pTv');if(!P)return;
  if(MDK==='tv')return tvKioskTv();
  if(MDK==='join'&&!TVQ&&!TVJOIN){let c0='';try{c0=(new URLSearchParams(location.search).get('c')||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,4)}catch(e){}TVJOIN={code:c0,err:'',busy:false}}
  if(TVJOIN&&!TVQ)return tvJoinScreen();
- if(TVQ){const C=tvC(TVQ.id);if(!C){P.innerHTML=`<p class="lead">Deze zaak bestaat niet (meer). Vraag de host om een nieuwe link.</p>`;return}tvPhoneJoin(C);return tvPhone(C,false)}
+ if(TVQ){const C=tvC(TVQ.id);if(!C&&/^eigen-/.test(TVQ.id)&&TVQ.r){P.innerHTML=`<p class="lead">De eigen zaak wordt opgehaald bij de tv…</p>`;tvPhoneJoin(null);return}if(!C){P.innerHTML=`<p class="lead">Deze zaak bestaat niet (meer). Vraag de host om een nieuwe link.</p>`;return}tvPhoneJoin(C);return tvPhone(C,false)}
+ if(tvPh.eig){P.innerHTML=tvEigenHtml(false);tvEigenWire(P,C=>{tvPh.eig=false;tvd.cur=C.id;saveTv();renderTv();window.scrollTo({top:0})},()=>{tvPh.eig=false;renderTv()},()=>renderTv());return}
  const C=tvC(tvd.cur);
  if(C&&tvPh.solo)return tvPhone(C,true);
  if(!C){P.innerHTML=`<h2 class="bigtitle" style="font-size:clamp(34px,10vw,64px)">Tv-dossier</h2>${PENCIL}<p class="lead">Een groot, echt aanvoelend moordonderzoek voor op de tv. Cast je telefoon naar de tv, deel de geheime dossiers uit met QR-codes en stem samen op de dader. Je kunt ook alleen spelen, of vrienden op afstand meedoen met een link.</p>
-  <button type="button" class="tv-mode tv-joinbtn" id="tvJoinApp"><b>📱 Doe mee met een code</b><span>Staat het spel al op de tv bij iemand anders? Vul de kamercode in.</span></button><div class="tv-list">${TVCASES.map(c=>{const s=tvS(c.id);return `<button type="button" class="tv-card" data-tvc="${c.id}"><span class="tv-cfold"><i>ZAAK ${c.nr}</i>${s.done?tvStamp(s.won?'OPGELOST':'GESLOTEN',s.won?'green':''):''}</span><b>${c.title}</b><span>${c.blurb}</span><small>${tvLv(c)} ${c.level} · ${c.time} · ${c.players}</small></button>`}).join('')}</div>`;
-  P.querySelectorAll('[data-tvc]').forEach(b=>b.onclick=()=>{tvd.cur=b.dataset.tvc;saveTv();renderTv();window.scrollTo({top:0})});$('tvJoinApp').onclick=()=>{TVJOIN={code:'',err:'',busy:false};renderTv();window.scrollTo({top:0})};return}
+  <button type="button" class="tv-mode tv-joinbtn" id="tvJoinApp"><b>📱 Doe mee met een code</b><span>Staat het spel al op de tv bij iemand anders? Vul de kamercode in.</span></button><button type="button" class="tv-mode tv-joinbtn" id="tvEigApp"><b>🎉 Eigen zaak met je vrienden</b><span>Vul de namen van je gasten in. Zij worden de verdachten.</span></button><div class="tv-list">${TVCASES.map(c=>{const s=tvS(c.id);return `<button type="button" class="tv-card" data-tvc="${c.id}"><span class="tv-cfold"><i>ZAAK ${c.nr}</i>${s.done?tvStamp(s.won?'OPGELOST':'GESLOTEN',s.won?'green':''):''}</span><b>${c.title}</b><span>${c.blurb}</span><small>${tvLv(c)} ${c.level} · ${c.time} · ${c.players}</small></button>`}).join('')}</div>`;
+  P.querySelectorAll('[data-tvc]').forEach(b=>b.onclick=()=>{tvd.cur=b.dataset.tvc;saveTv();renderTv();window.scrollTo({top:0})});$('tvJoinApp').onclick=()=>{TVJOIN={code:'',err:'',busy:false};renderTv();window.scrollTo({top:0})};$('tvEigApp').onclick=()=>{tvPh.eig=true;renderTv();window.scrollTo({top:0})};return}
  const s=tvS(C.id);
  P.innerHTML=`<button class="btn small backbtn" id="tvList" type="button">← Alle zaken</button><div class="storyhead"><span class="kicker">Zaak ${C.nr} · ${tvLv(C)} ${C.level}</span><h3>${C.title}</h3>${filmBtn('tv',C.id)}${s.done?endBtn('tv',C.id):''}</div>
   <div class="tv-cover">${tvPhoto(C,0)}<p>${C.blurb}</p><small>${C.players} · ${C.time}</small></div>
@@ -7429,13 +7442,16 @@ if(MDK)document.body.classList.add('kiosk','kiosk-'+MDK);
 function tvEnsureStage(){if(!tvStage){tvStage=document.createElement('div');tvStage.className='tv-ov';tvStage.setAttribute('role','dialog');tvStage.setAttribute('aria-label','Tv-scherm');document.body.appendChild(tvStage);addEventListener('resize',tvFit)}tvStage.hidden=false;document.body.classList.add('tv-lock')}
 function tvKioskTv(){const P=$('pTv');if(P)P.innerHTML='';if(!tvStage||tvStage.hidden){tvEnsureStage();tvScr='home';tvStageRender()}}
 let tvHomeLv='Alle';
+function tvEigenTv(){tvStage.innerHTML=`<div class="tv-16 tv-home">${tvEigenHtml(true)}</div>`;
+ tvEigenWire(tvStage,C=>{tvd.cur=C.id;saveTv();const go=()=>{tvOpenStage(C,false);tvScr='spel';tvStageRender()};if(!filmSeen('tv',C.id))storyFilm('tv',C.id,go);else go()},()=>{tvScr='home';tvStageRender()},()=>tvEigenTv());tvFit()}
 function tvHomeRender(){const url=tvJoinUrl('').replace(/^https?:\/\//,'');
  tvStage.innerHTML=`<div class="tv-16 tv-home"><div class="tv-hlogo">${PASBADGE}<div><h1>MOORDDOSSIER <span>TV</span></h1><p>Echte moordzaken voor op het grote scherm. Jullie telefoons zijn de controllers.</p></div></div>
- <div class="tv-hlvl">${['Alle','Makkelijk','Gemiddeld','Moeilijk','Expert'].map(l=>`<button type="button" data-hl="${l}" aria-pressed="${(tvHomeLv||'Alle')===l}">${l==='Alle'?'Alle zaken':`${'⭐'.repeat(TVLV[l])} ${l}`}</button>`).join('')}</div>
- <div class="tv-hgrid">${TVCASES.filter(c=>!tvHomeLv||tvHomeLv==='Alle'||c.level===tvHomeLv).map(c=>{const s=tvS(c.id);return `<article class="tv-hmini"><div>${tvPhoto(c,0)}</div><div><span class="tv-cfold"><i>ZAAK ${c.nr}</i></span> <span class="tv-lv">${tvLv(c)}</span><h2>${c.title}</h2><p>${c.blurb}</p><small>${c.level} · ${c.time} · ${c.players}${s.done?(s.won?' · ✅ opgelost':' · gesloten'):''}</small>
+ <div class="tv-hlvl"><button type="button" class="tv-eigbtn" id="tvEig">🎉 Eigen zaak met vrienden</button>${['Alle','Makkelijk','Gemiddeld','Moeilijk','Expert'].map(l=>`<button type="button" data-hl="${l}" aria-pressed="${(tvHomeLv||'Alle')===l}">${l==='Alle'?'Alle zaken':`${'⭐'.repeat(TVLV[l])} ${l}`}</button>`).join('')}</div>
+ <div class="tv-hgrid">${TVCASES.filter(c=>!tvHomeLv||tvHomeLv==='Alle'||c.level===tvHomeLv).map(c=>{const s=tvS(c.id);return `<article class="tv-hmini"><div>${tvPhoto(c,0)}</div><div><span class="tv-cfold"><i>ZAAK ${c.nr}</i></span> <span class="tv-lv">${tvLv(c)}</span>${c.tag?` <span class="tv-tag">${c.tag}</span>`:''}<h2>${c.title}</h2><p>${c.blurb}</p><small>${c.level} · ${c.time} · ${c.players}${s.done?(s.won?' · ✅ opgelost':' · gesloten'):''}</small>
   <div class="tv-row left" style="margin-top:0"><button type="button" class="tv-btn primary" data-hc="${c.id}" data-solo="0">👥 Samen</button><button type="button" class="tv-btn" data-hc="${c.id}" data-solo="1">🕵️ Alleen</button></div></div></article>`}).join('')}</div>
  <p class="tv-hfoot">Spelers doen mee via <b>${url}</b> met de kamercode die je zo te zien krijgt.</p></div>`;
  tvStage.querySelectorAll('[data-hl]').forEach(b=>b.onclick=()=>{tvHomeLv=b.dataset.hl;tvHomeRender()});
+ {const e=tvStage.querySelector('#tvEig');if(e)e.onclick=()=>{tvScr='eigen';tvStageRender()}}
  tvStage.querySelectorAll('[data-hc]').forEach(b=>b.onclick=()=>{const C=tvC(b.dataset.hc),solo=b.dataset.solo==='1';tvd.cur=C.id;saveTv();
   const go=()=>{tvOpenStage(C,solo);if(!solo){tvScr='spel';tvStageRender()}};if(!filmSeen('tv',C.id))storyFilm('tv',C.id,go);else go()});
  tvFit();const f=tvStage.querySelector('[data-hc]');if(f)try{f.focus({preventScroll:true})}catch(e){}}
@@ -8038,6 +8054,99 @@ SCREND.tv=Object.assign(SCREND.tv||{},{
  glas:[['t','Zo is het gebeurd','gebeurd','Het alibi van glas'],['s','Paal 9 · 19:39',['day',['umbrella',150,170,1]],'Dolf maakte de foto van de zonsondergang en reed meteen weg.'],['s','De loods',['dark',['shed',150,170,1]],'Hij sloeg Wout met de lier en postte daarna de foto.',{hit:'metaal',act:'strike',x:150}],['x','Dolf Peelmeer','een zware lier','de loods']]});
 
 // [EINDE TV-ZAKEN] Nieuwe tv-zaken hierboven toevoegen: TVCASES.push({...}) en Object.assign(SCR.tv,{...}), Object.assign(SCREND.tv,{...}).
+
+// ---------- eigen zaak met vrienden: de app maakt een zaak met jouw gasten als verdachten ----------
+// p={tpl,seed,ppl:[{n:naam,f:0|1}]} — alles volgt uit deze paar gegevens, dus telefoons maken precies dezelfde zaak.
+const TVTPL={
+ feest:{title:'Het verjaardagsfeest',tag:'🎉 Eigen zaak',victim:['Reinald Zandvoortman',61,'rijke oom van de jarige',0],place:'de wijnkelder',weapon:'een champagnefles',win:['22:00','22:30'],door:['22:11','22:19'],
+  blurb:'Midden op het feest ligt oom Reinald dood in de wijnkelder. Al zijn gasten zijn verdacht, en het zijn jullie.',
+  melding:(V,P)=>`<p class="tv-mono">MELDING 112 · ZATERDAG · 22:41</p><p>Op het verjaardagsfeest in villa <b>De Linde</b> vindt de cateraar <b>${V}</b> (61) dood in de wijnkelder. Hij is geslagen met een champagnefles. <b>Tussen 22:00 en 22:30</b> is hij overleden.</p><p>Niemand heeft het feest verlaten. De verdachten zijn de gasten: <b>${P}</b>.</p>`,
+  spots:['de tuin bij de vuurkorf','de dansvloer','de keuken','de serre','de bar','het terras','de fotohoek','de voortuin','de garderobe','de muziekhoek'],
+  src:['de foto’s van de fotograaf','de telefoon van de dj','de videobeelden van de tuincamera','de bonnetjes van de bar','de selfies in de groepsapp'],
+  motives:[['erfenis','Hij zou geld erven van oom Reinald'],['lening','Oom Reinald eiste een lening terug'],['geheim','Oom Reinald kende een pijnlijk geheim'],['ruzie','Een oude ruzie over het familiebedrijf'],['huis','Oom Reinald wilde zijn huis verkopen'],['baan','Oom Reinald had hem ontslagen'],['liefde','Oom Reinald zat een liefde in de weg'],['schuld','Een gokschuld bij oom Reinald']],
+  mtxt:{erfenis:'In het testament staat dat NAAM een groot deel van het geld krijgt.',lening:'Oom Reinald stuurde NAAM vorige week een brief: “Ik wil mijn € 15.000 terug, voor het einde van de maand.”',geheim:'In de agenda van oom Reinald staat: “Zaterdag NAAM spreken. Ik zwijg niet langer.”',ruzie:'NAAM en oom Reinald maakten al jaren ruzie over het familiebedrijf.',huis:'NAAM woont in een huis van oom Reinald. Hij wilde het verkopen.',baan:'Oom Reinald ontsloeg NAAM vorige maand uit zijn bedrijf.',liefde:'Oom Reinald was tegen de relatie van NAAM en zei dat hardop op het feest.',schuld:'NAAM had een gokschuld van € 9.000 bij oom Reinald.'},
+  doorDoc:'Slim slot kelderdeur',fx:{photo:['kelder','woonkamer','tuin'],spec:[['dark',['bottle',150,170,1.3]],['wall',['table',150,170,1.1]],['night',['house',150,170,1.1]]],cap:['1 · de wijnkelder','2 · de feestzaal','3 · de tuin met de vuurkorf'],
+   marks:[['1 · gebroken champagnefles','2 · omgevallen wijnrek'],['3 · lege glazen bij de bar'],['4 · voetstappen in het natte gras']],notes:['Oom Reinald lag tussen de wijnrekken. Naast hem een gebroken champagnefles.','In de zaal staan nog overal glazen. De muziek speelde de hele avond.','In het gras bij de kelderdeur staan natte voetstappen.']}},
+ huis:{title:'Weekend in het vakantiehuis',tag:'🏡 Eigen zaak',victim:['Wendelien Tjallingius',58,'eigenaar van het vakantiehuis',1],place:'de boothuis aan het meer',weapon:'een zware kandelaar',win:['20:30','21:00'],door:['20:38','20:47'],
+  blurb:'Een weekend weg met vrienden. Op zaterdagavond ligt de verhuurster dood in het boothuis. Wie van jullie was daar?',
+  melding:(V,P)=>`<p class="tv-mono">MELDING 112 · ZATERDAG · 21:20</p><p>Bij vakantiehuis <b>Het Rietland</b> wordt verhuurster <b>${V}</b> (58) dood gevonden in het boothuis. Ze is geslagen met een zware kandelaar. <b>Tussen 20:30 en 21:00</b> is ze overleden.</p><p>Alleen de vrienden die het huis huurden waren er: <b>${P}</b>.</p>`,
+  spots:['de woonkamer bij de open haard','de keuken','de veranda','de sauna','de zolder','de hangmat in de tuin','de bank bij het meer','de slaapkamer boven','het spelletjeshok','de oprit'],
+  src:['de slimme meter van het huis','de wifi-router','de smartwatch-gegevens','de beelden van de deurbel','de groepsapp van het weekend'],
+  motives:[['borg','Ze hield de borg van € 2.000 in'],['klacht','Ze dreigde met een klacht bij de politie'],['grond','Ruzie over de grond aan het meer'],['brief','Ze had een geheime brief gevonden'],['huur','Een oude huurschuld'],['familie','Een oude familieruzie'],['diefstal','Ze verdacht hem van diefstal'],['plan','Ze stond een bouwplan in de weg']],
+  mtxt:{borg:'Wendelien mailde NAAM: “De borg van € 2.000 houd ik in. Jullie hebben de boot kapotgemaakt.”',klacht:'Wendelien schreef in haar agenda: “Maandag aangifte doen tegen NAAM.”',grond:'NAAM wilde de grond aan het meer kopen. Wendelien weigerde.',brief:'Wendelien vond een brief van NAAM die nooit gevonden mocht worden.',huur:'NAAM had nog € 1.800 huur open staan bij Wendelien.',familie:'De families van NAAM en Wendelien hebben al jaren ruzie.',diefstal:'Wendelien noteerde: “NAAM heeft het zilver gepakt, denk ik.”',plan:'NAAM wilde een huisje bouwen aan het meer. Wendelien stond het in de weg.'},
+  doorDoc:'Sensor deur boothuis',fx:{photo:['haven','woonkamer','zonsondergang'],spec:[['water',['boat',150,160,1]],['wall',['armchair',150,170,1.1]],['dusk',['house',150,170,1.1]]],cap:['1 · het boothuis','2 · de woonkamer','3 · het meer bij zonsondergang'],
+   marks:[['1 · kandelaar op de steiger','2 · natte voetafdruk'],['3 · lege kandelaarhouder'],[]],notes:['Wendelien lag in het boothuis. Op de steiger ligt een zware kandelaar.','Op de schoorsteenmantel staat nog maar één kandelaar.','Het meer was stil. Om 20:40 ging de zon onder.']}},
+ uitje:{title:'Het bedrijfsuitje',tag:'💼 Eigen zaak',victim:['Ludger Brandsema',55,'directeur van het bedrijf',0],place:'het archief op de tweede verdieping',weapon:'een glazen trofee',win:['16:00','16:30'],door:['16:09','16:18'],
+  blurb:'Tijdens het bedrijfsuitje in het oude kantoor wordt de directeur dood gevonden. Alleen de collega’s waren binnen.',
+  melding:(V,P)=>`<p class="tv-mono">MELDING 112 · VRIJDAG · 16:52</p><p>Tijdens het bedrijfsuitje vindt de beveiliger directeur <b>${V}</b> (55) dood in het archief. Hij is geslagen met de glazen trofee van het bedrijf. <b>Tussen 16:00 en 16:30</b> is hij overleden.</p><p>De verdachten zijn de collega’s van het uitje: <b>${P}</b>.</p>`,
+  spots:['de kantine','het dak­terras','de vergaderzaal','de escape room','de koffiehoek','het kopieerhok','de lobby','de gamehoek','de fietsenstalling','de lounge'],
+  src:['het pasjessysteem','de beelden van de beveiligingscamera','de laptop-inlog','de scores van de escape room','de koffieautomaat met personeelspas'],
+  motives:[['ontslag','Hij stond op de ontslaglijst'],['fraude','Ludger ontdekte zijn fraude'],['promotie','Ludger gaf de promotie aan een ander'],['idee','Ludger stal zijn idee'],['ruzie','Een hoog opgelopen ruzie in de vergadering'],['bonus','Zijn bonus werd geschrapt'],['klacht','Ludger diende een klacht tegen hem in'],['verhuizing','Ludger wilde hem naar een ander kantoor sturen']],
+  mtxt:{ontslag:'Op het bureau van Ludger ligt een lijst: “Ontslag na de zomer: NAAM.”',fraude:'In de mail van Ludger: “NAAM heeft facturen vervalst. Maandag bespreken.”',promotie:'Ludger gaf de promotie die NAAM wilde aan iemand anders.',idee:'NAAM zei vaak: “Ludger heeft mijn idee gestolen.”',ruzie:'In de vergadering van vrijdagochtend schreeuwde NAAM tegen Ludger.',bonus:'Ludger schrapte de bonus van NAAM.',klacht:'Ludger diende een klacht in tegen NAAM bij de afdeling personeelszaken.',verhuizing:'Ludger wilde NAAM naar het kantoor in Groningen sturen.'},
+  doorDoc:'Pasjeslog archiefdeur',fx:{photo:['archief','kantoor','parkeer'],spec:[['desk',['shelf',150,170,1.1]],['wall',['laptop',150,170,1.2]],['dark',['car',150,170,1]]],cap:['1 · het archief','2 · het kantoor van Ludger','3 · de parkeergarage'],
+   marks:[['1 · gebroken glazen trofee','2 · opengetrokken la'],['3 · laptop nog ingelogd'],['4 · auto van Ludger']],notes:['Ludger lag tussen de kasten. Naast hem de gebroken glazen trofee.','In zijn kantoor staat de laptop nog aan.','De auto van Ludger staat nog in de garage.']}}};
+const tvRng=seed=>{let x=seed>>>0||1;return ()=>{x^=x<<13;x>>>=0;x^=x>>17;x^=x<<5;x>>>=0;return x/4294967296}};
+const tvShuf=(a,R)=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function tvGen(p){const T=TVTPL[p.tpl]||TVTPL.feest,R=tvRng(p.seed),ppl=p.ppl.slice(0,8).map(x=>({n:String(x.n||'').trim().slice(0,24)||'Gast',f:x.f?1:0})),n=ppl.length;
+ const id='eigen-'+p.tpl+'-'+(p.seed>>>0).toString(36),V=T.victim[0],cul=Math.floor(R()*n),spots=tvShuf(T.spots,R),mot=tvShuf(T.motives,R).slice(0,n),srcs=tvShuf(T.src,R);
+ const [w0,w1]=T.win,[d0,d1]=T.door,hm=t=>{const [h,m]=t.split(':').map(Number);return h*60+m},fm=v=>`${String(Math.floor(v/60)).padStart(2,'0')}:${String(v%60).padStart(2,'0')}`;
+ const first=s=>s.n.split(' ')[0],hij=s=>s.f?'ze':'hij',Hij=s=>s.f?'Ze':'Hij',zijn=s=>s.f?'haar':'zijn';
+ const pal=['#f3cba8','#ebba94','#dca47c','#c88a62','#a8704b','#7d5236'],hcs=['#2a1d15','#4a2f1c','#6b4527','#a0703a','#d6b25e','#1f1a17','#b5502c'],tcs=['#2a4a8a','#7a3b32','#3f5a45','#4a4f6b','#8a6a3a','#5a3a6a','#2f3a4a','#3a7a8a'];
+ const S=ppl.map((x,i)=>{const r=()=>R();const f=x.f;return {id:'g'+i,name:x.n,n:x.n,role:i===0?'gast':'gast',motive:mot[i][1]+'.',mk:mot[i][0],f,voice:[f?1.1+r()*.1:.88+r()*.14,.96+r()*.1],spot:spots[i],src:srcs[i%srcs.length],
+  look:{f,skin:pal[Math.floor(r()*pal.length)],hc:hcs[Math.floor(r()*hcs.length)],hair:f?['long','bob','bun','long','curly'][Math.floor(r()*5)]:['short','short','receding','curly','short'][Math.floor(r()*5)],eyes:['#4a6a8a','#3a2a1a','#5a6a4a','#5a4a3a'][Math.floor(r()*4)],top:['shirt','blouse','tweed','vest','shirt'][Math.floor(r()*5)],tc:tcs[Math.floor(r()*tcs.length)],age:24+Math.floor(r()*26),beard:!f&&r()<.3?(r()<.5?'stubble':'full'):undefined,glasses:r()<.22?'#2a2a2a':undefined}}});
+ S.forEach(s=>{if(s.look.top==='blouse'&&!s.f)s.look.top='shirt'});
+ const C0=S[cul],other=i=>S[(i+1)%n],seen=fm(hm(w0)-5),back=fm(hm(d1)+6);
+ S.forEach((s,i)=>{const o=other(i);s.v=[['R',`Waar was u tussen ${w0} en ${w1}?`],['S',`In ${s.spot}. Ik ben daar de hele tijd gebleven.`],['R',`Hoe goed kende u ${V.split(' ')[0]}?`],['S',i===cul?`Goed genoeg. We hadden het weleens moeilijk, maar dat is toch normaal?`:`Best goed. ${mot[i][1]}, dat klopt. Maar daar doe je toch niemand iets voor aan?`],['R',`Heeft u iemand richting ${T.place} zien gaan?`],['S',`Nee. Wel zag ik ${o.n} om ${seen} in ${o.spot}.`]];if(i===cul)s.lie=1});
+ const doc=(t,h)=>({t,h});
+ const alibi=S.map((s,i)=>i===cul?doc(`Alibi ${first(s)}: ${s.src}`,`<p>Volgens ${s.src} was <b>${s.n}</b> om ${seen} in ${s.spot}, en weer om ${back}.</p><p><b>Tussen ${fm(hm(d0)-3)} en ${fm(hm(d1)+3)} is ${hij(s)} daar nergens te zien.</b></p>`)
+   :doc(`Alibi ${first(s)}: ${s.src}`,`<p>Volgens ${s.src} was <b>${s.n}</b> van ${fm(hm(w0)-5)} tot ${fm(hm(w1)+5)} in ${s.spot}. ${Hij(s)} is er de hele tijd te zien, ook om ${d0} en ${d1}.</p>`));
+ const motd=S.map((s,i)=>doc(`Motief? ${first(s)}`,`<p>${T.mtxt[s.mk].replace(/NAAM/g,s.n)}</p>`));
+ const base=[doc('Sectierapport',`<p><b>Doodsoorzaak:</b> een klap op het hoofd met ${T.weapon}.</p><p><b>Tijdstip van overlijden:</b> tussen ${w0} en ${w1}.</p>`),doc(T.doorDoc,`<table class="tv-t"><tr><th>Tijd</th><th>Wat</th></tr><tr><td><b>${d0}</b></td><td><b>open</b></td></tr><tr><td><b>${d1}</b></td><td><b>dicht</b></td></tr></table><p>Daarvoor en daarna bleef de deur dicht.</p>`),doc('Sporen',`<p>Op ${T.weapon} zitten geen bruikbare vingerafdrukken: de dader veegde hem af.</p><p>Wel zat er iemand <b>tussen ${d0} en ${d1}</b> in ${T.place}.</p>`),doc('Getuige',`<p>Een medewerker hoorde om ongeveer ${fm(hm(d0)+4)} gestommel bij ${T.place}. ${Hij({f:0})} zag niemand.</p>`)];
+ // mappen: forensisch, alibi's (in twee mappen), motieven
+ const half=Math.ceil(n/2);
+ const secret=[{t:'Forensisch dossier',ic:'🔬',docs:[base[0],base[2]]},{t:'Sloten en getuigen',ic:'🎥',docs:[base[1],base[3]]},{t:'Alibi’s (1)',ic:'📱',docs:alibi.slice(0,half)},{t:'Alibi’s (2)',ic:'📱',docs:alibi.slice(half)},{t:'Motieven',ic:'📒',docs:motd}].filter(D=>D.docs.length);
+ const tips1=S.map((s,i)=>`${s.n} zei dat ${hij(s)} de hele tijd in ${s.spot} was.`),tips2=S.map((s,i)=>T.mtxt[s.mk].replace(/NAAM/g,s.n));
+ const rounds=[{t:'Wie was waar?',tips:[...tips1,`De deur van ${T.place} ging om ${d0} open en om ${d1} dicht.`,`${V.split(' ')[0]} ging rond ${fm(hm(w0)+5)} naar ${T.place}.`]},{t:'Waarom?',tips:[...tips2,`Wie niet te zien is tussen ${d0} en ${d1}, heeft geen alibi.`,`Kijk goed welke bron het alibi van iedereen bevestigt.`]}];
+ const keys=tvShuf([['alibi',`${C0.src[0].toUpperCase()+C0.src.slice(1)}: ${first(C0)} niet te zien tussen ${d0} en ${d1}`],['getuige','Het gestommel bij '+T.place],['sporen','Het afgevegde wapen'],['motief','De ruzie met '+V.split(' ')[0]]],R);
+ const lies={};S.forEach((s,i)=>lies[s.id]=i===cul?`Liegt: “Ik ben daar de hele tijd gebleven.” Volgens ${s.src} was ${hij(s)} tussen ${d0} en ${d1} nergens in ${s.spot} te zien. Precies toen stond de deur van ${T.place} open.`:`Vertelt de waarheid. Volgens ${s.src} was ${hij(s)} de hele tijd in ${s.spot}.`);
+ const P=ppl.map(x=>x.n),pl=P.length>1?P.slice(0,-1).join(', ')+' en '+P[P.length-1]:P[0];
+ const C={id,custom:p,nr:'★',title:T.title,tag:T.tag,level:'Gemiddeld',time:'30 tot 60 minuten',players:`1 tot 10 spelers`,date:p.d||'',blurb:T.blurb,melding:T.melding(V,pl),
+  question:`Wie was er tussen ${d0} en ${d1} in ${T.place}?`,victim:`${V}</b> (${T.victim[1]}), ${T.victim[2]}`,
+  photos:T.fx.spec.map((sp,i)=>[sp,T.fx.cap[i]]),real:T.fx.photo,markers:T.fx.marks,photoNotes:T.fx.notes,
+  timeline:[[fm(hm(w0)-30),'het feest is in volle gang'.replace('het feest',p.tpl==='uitje'?'het uitje':p.tpl==='huis'?'de avond':'het feest')],[`${w0} – ${w1}`,'tijdstip van overlijden'],[`${d0} – ${d1}`,`iemand is in ${T.place}`],[fm(hm(w1)+11),`${V.split(' ')[0]} wordt gevonden`]],
+  suspects:S.map(({spot,src,mk,n,...s})=>s),secret,rounds,motives:tvShuf(mot.map(([k,t])=>[k,t]),R),motive:C0.mk,keys,key:'alibi',lies,
+  breaker:`${s0(C0.src)}: ${C0.n} zei dat ${hij(C0)} de hele tijd in ${C0.spot} was, maar tussen ${d0} en ${d1} is ${hij(C0)} daar niet te zien. Precies toen stond de deur van ${T.place} open.`,
+  solTimeline:[[seen,`${C0.n} is nog in ${C0.spot}`],[d0,`${C0.n} gaat ${T.place} in`],[`± ${fm(hm(d0)+4)}`,`ruzie; de klap met ${T.weapon}`],[d1,`${C0.n} gaat weer naar buiten`],[back,`${C0.n} is terug in ${C0.spot}`]],
+  answer:C0.id,weapon:T.weapon,place:T.place,tips:['Vergelijk wat iedereen zegt met de alibi’s in de dossiers.',`Wie is er niet te zien tussen ${d0} en ${d1}?`,'Welk motief hoort bij die persoon?'],
+  story:`${C0.n} had een motief: ${mot[cul][1].toLowerCase()}. Om ${d0} glipte ${hij(C0)} weg uit ${C0.spot} naar ${T.place}. Daar kregen ${hij(C0)} en ${V.split(' ')[0]} ruzie. ${Hij(C0)} sloeg ${V.split(' ')[0]} met ${T.weapon} en veegde het wapen af. Om ${d1} ging de deur weer dicht en om ${back} stond ${hij(C0)} weer in ${C0.spot}, alsof er niets gebeurd was.`};
+ SCR.tv=SCR.tv||{};SCREND.tv=SCREND.tv||{};const sp=T.fx.spec;
+ SCR.tv[id]=[['t',T.title,T.title.split(' ').pop(),'Tv-dossier · eigen zaak'],['s',T.title,sp[2],T.blurb],['s',fm(hm(w1)+11),sp[0],`${V} wordt gevonden in ${T.place}.`],['e','Wie van jullie was het?','Start het onderzoek']];
+ SCREND.tv[id]=[['t','Zo is het gebeurd','gebeurd',T.title],['s',fm(hm(d0)),sp[1],`${C0.n} glipt weg uit ${C0.spot}.`],['s',T.place.replace(/^\w/,c=>c.toUpperCase()),sp[0],`${C0.n} slaat toe met ${T.weapon}.`,{hit:'metaal',act:'strike',x:150}],['x',C0.n,T.weapon,T.place]];
+ return C}
+const s0=x=>x.charAt(0).toUpperCase()+x.slice(1);
+function tvAddCustom(p,own){try{const C=tvGen(p);const i=TVCASES.findIndex(c=>c.id===C.id);if(i>=0)TVCASES[i]=C;else TVCASES.push(C);
+ const K=own?'md-tv-own':'md-tv-recv',L=(store.get(K)||[]).filter(x=>'eigen-'+x.tpl+'-'+(x.seed>>>0).toString(36)!==C.id);L.unshift(p);store.set(K,L.slice(0,12));return C}catch(e){return null}}
+function tvDelCustom(id){['md-tv-own','md-tv-recv'].forEach(K=>store.set(K,(store.get(K)||[]).filter(x=>'eigen-'+x.tpl+'-'+(x.seed>>>0).toString(36)!==id)));const i=TVCASES.findIndex(c=>c.id===id);if(i>=0)TVCASES.splice(i,1);delete tvd.cases[id];saveTv()}
+try{[...(store.get('md-tv-recv')||[]),...(store.get('md-tv-own')||[])].reverse().forEach(p=>{const C=tvGen(p);if(!TVCASES.some(c=>c.id===C.id))TVCASES.push(C)})}catch(e){}
+// formulier (op de tv-pagina en in de app)
+let tvEig={tpl:'feest',ppl:[{n:'',f:0},{n:'',f:1},{n:'',f:0}],err:''};
+function tvEigenHtml(big){const E=tvEig;return `<div class="tv-eig ${big?'big':''}"><h2>🎉 Eigen zaak met je vrienden</h2><p>Vul de namen in van 3 tot 8 gasten. De app maakt een moordzaak waarin zij de verdachten zijn. Niemand weet wie de dader is, ook jij niet.</p>
+ <div class="tv-eigt">${Object.entries(TVTPL).map(([k,T])=>`<button type="button" data-etpl="${k}" aria-pressed="${E.tpl===k}">${T.tag.split(' ')[0]} ${T.title}</button>`).join('')}</div>
+ <div class="tv-eigp">${E.ppl.map((x,i)=>`<div class="tv-eigr"><input data-en="${i}" maxlength="24" placeholder="Naam gast ${i+1}" value="${tvEsc(x.n)}"><button type="button" data-ef="${i}" aria-pressed="${!!x.f}" title="Man of vrouw">${x.f?'♀ vrouw':'♂ man'}</button>${E.ppl.length>3?`<button type="button" data-ex="${i}" aria-label="Verwijder">✕</button>`:''}</div>`).join('')}</div>
+ <div class="tv-row left">${E.ppl.length<8?'<button type="button" class="tv-btn" id="tvEAdd">+ Gast erbij</button>':''}<button type="button" class="tv-btn primary" id="tvEGo">Maak de zaak</button><button type="button" class="tv-btn" id="tvEBack">← Terug</button></div>${E.err?`<p class="tv-eerr">${E.err}</p>`:''}
+ ${(store.get('md-tv-own')||[]).length?`<h3>Jullie eigen zaken</h3><div class="tv-eigl">${(store.get('md-tv-own')||[]).map(p=>{const id='eigen-'+p.tpl+'-'+(p.seed>>>0).toString(36),T=TVTPL[p.tpl];return T?`<span><button type="button" class="tv-btn" data-eopen="${id}">${T.tag.split(' ')[0]} ${T.title} · ${p.ppl.map(x=>tvEsc(x.n.split(' ')[0])).join(', ')}</button><button type="button" class="tv-btn" data-edel="${id}" aria-label="Verwijder">🗑</button></span>`:''}).join('')}</div>`:''}</div>`}
+function tvEigenWire(root,onOpen,onBack,rerender){const q=s=>root.querySelectorAll(s),one=id=>root.querySelector('#'+id),E=tvEig;
+ q('[data-etpl]').forEach(b=>b.onclick=()=>{E.tpl=b.dataset.etpl;rerender()});
+ q('[data-en]').forEach(t=>t.oninput=()=>{E.ppl[+t.dataset.en].n=t.value});
+ q('[data-ef]').forEach(b=>b.onclick=()=>{const x=E.ppl[+b.dataset.ef];x.f=x.f?0:1;rerender()});
+ q('[data-ex]').forEach(b=>b.onclick=()=>{E.ppl.splice(+b.dataset.ex,1);rerender()});
+ const a=one('tvEAdd');if(a)a.onclick=()=>{E.ppl.push({n:'',f:0});rerender()};
+ one('tvEBack').onclick=onBack;
+ one('tvEGo').onclick=()=>{const ppl=E.ppl.map(x=>({n:x.n.trim().replace(/[<>"]/g,''),f:x.f})).filter(x=>x.n);if(ppl.length<3){E.err='Vul minstens 3 namen in.';rerender();return}
+  const names=ppl.map(x=>x.n.toLowerCase());if(new Set(names).size<names.length){E.err='Elke naam mag maar één keer voorkomen.';rerender();return}
+  E.err='';const dt=new Date(),C=tvAddCustom({tpl:E.tpl,seed:Math.floor(Math.random()*4e9)+1,ppl,d:String(dt.getDate()).padStart(2,'0')+'-'+String(dt.getMonth()+1).padStart(2,'0')},true);tvd.cur=C.id;saveTv();onOpen(C)};
+ q('[data-eopen]').forEach(b=>b.onclick=()=>{const C=tvC(b.dataset.eopen);if(C)onOpen(C)});
+ q('[data-edel]').forEach(b=>b.onclick=()=>{tvDelCustom(b.dataset.edel);rerender()})}
 
 function endOk(game,id){try{if(game==='koud'){const c=COLD.find(x=>x.id===id),s=kd.cases[id];return !s||!s.acc||s.acc.d===c.answer.dader}
   if(game==='bericht'){const c=BCASES.find(x=>x.id===id),s=bd.cases[id];return !s||!s.acc||s.acc.d===c.answer.dader}

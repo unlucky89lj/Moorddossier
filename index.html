@@ -11630,7 +11630,10 @@ const tvUid = () => {
   }
   return u;
 };
-const tvBase = () => /github\.io$/.test(location.hostname) && location.pathname.endsWith("/") ? location.origin + location.pathname : "https://unlucky89lj.github.io/Moorddossier/";
+const tvBase = () => {
+  const pth = location.pathname.replace(/(tv|join)\/(index\.html)?$/, "").replace(/index\.html$/, "");
+  return /github\.io$/.test(location.hostname) && pth.endsWith("/") ? location.origin + pth : "https://unlucky89lj.github.io/Moorddossier/";
+};
 const tvJoinUrl = (r) => tvBase() + "join" + (r ? "?c=" + r : "");
 const tvLink = (C2, r, slots) => "".concat(tvBase(), "?tv=").concat(C2.id, "&r=").concat(r, "&p=").concat(slots.join("."));
 const TVSPLIT = { 1: [[1, 2, 3, 4]], 2: [[1, 3], [2, 4]], 3: [[1, 4], [2], [3]], 4: [[1], [2], [3], [4]] };
@@ -13774,7 +13777,7 @@ function start(data) {
 }
 ((_b = (_a = window.claude) == null ? void 0 : _a.hot) == null ? void 0 : _b.ready) ? window.claude.hot.ready(start) : start((_e = (_d = (_c = window.claude) == null ? void 0 : _c.hot) == null ? void 0 : _d.data) != null ? _e : {});
 </script>
-<script>const APPV = "20261104151710";
+<script>const APPV = "20261104151913";
 if ("serviceWorker" in navigator) {
   addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {
   }));

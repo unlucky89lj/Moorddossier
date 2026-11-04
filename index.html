@@ -1023,6 +1023,22 @@ body.kiosk-join .tv-jform .btn.primary{font-size:22px;padding:16px}
 .tv-slots.two{display:grid;grid-template-columns:1fr 1fr;grid-gap:8px;grid-gap:8px;gap:8px}
 .tv-slots.two .tv-slot{padding:8px 10px;grid-gap:10px;gap:10px}.tv-slots.two .tv-sn{width:38px;height:38px;font-size:22px}.tv-slots.two .tv-sw b{font-size:19px}.tv-slots.two .tv-sw small{font-size:12px;line-height:1.2}
 .tv-rrow .tv-rc[data-rc=np]{flex:1 1 15%}
+/* de verrader */
+.tv-trait{display:flex;align-items:center;grid-gap:12px;gap:12px;margin:0 0 10px}.tv-trait small{color:#e9e1cf;font-size:16px;line-height:1.3;max-width:360px}
+.tv-traitres{margin:12px 0 0;padding:10px 14px;border-radius:10px;background:#3a1414;color:#ffe2d8;border:2px solid #b5382b;font-size:17px;line-height:1.35}.tv-traitres.ok{background:#14321f;color:#dff5e6;border-color:#3c9a5f}
+.tv-paper .tv-traitres{font-size:20px}
+.tv-traitcard{margin:0 0 14px;border-radius:12px;background:#2a1212;color:#f6e6e0;border:2px solid #b5382b;padding:0}.tv-traitcard summary{cursor:pointer;padding:12px 14px;font-weight:700;list-style:none}.tv-traitcard summary small{display:block;font-weight:400;opacity:.75;margin-top:2px}.tv-traitcard p{margin:0 14px 10px;line-height:1.45}.tv-traitcard[open]{padding-bottom:4px}
+/* levende verdachten: knipperen, praten, wegkijken bij een leugen */
+.tf-open{opacity:0}
+.talking .tf-open{opacity:1;animation:tfTalk .24s ease-in-out infinite alternate}
+@keyframes tfTalk{from{transform:scaleY(.12)}to{transform:scaleY(1)}}
+.tf-eyes{animation:tfBlink 5.3s infinite}
+@keyframes tfBlink{0%,95%,100%{transform:scaleY(1)}97%{transform:scaleY(.08)}}
+.tf-iris{transition:transform .35s}
+.shifty .tf-iris{transform:translateX(7px)}
+.shifty .tf-eyes{animation:tfBlink2 1.2s infinite}
+@keyframes tfBlink2{0%,40%,100%{transform:scaleY(1)}46%{transform:scaleY(.08)}}
+@media (prefers-reduced-motion:reduce){.tf-eyes,.talking .tf-open,.shifty .tf-eyes{animation:none}.talking .tf-open{opacity:.6}}
 </style>
 </head>
 <body>
@@ -11443,7 +11459,7 @@ const TF = /* @__PURE__ */ (() => {
     };
     const eye = (x, side) => {
       const w = 15 * eyeS, h = 10 * eyeS * (age > 60 ? 0.85 : 1), lid = age > 55 ? 3 : 0, ly = ey - h * 0.2;
-      return '<ellipse cx="'.concat(x, '" cy="').concat(ey - 2, '" rx="').concat(w + 7, '" ry="').concat(h + 6, '" fill="').concat(sk3, '" opacity=".5" filter="url(#').concat(id, 'b4)"/>\n    <path d="M').concat(x - w + 2, " ").concat(ey - h - 4, "Q").concat(x, " ").concat(ey - h * 1.9 - 4, " ").concat(x + w - 1, " ").concat(ey - h - 3, '" fill="none" stroke="').concat(sk3, '" stroke-width="1.8" opacity=".5"/>\n    <path d="M').concat(x - w, " ").concat(ey, "Q").concat(x, " ").concat(ey - h * 1.25, " ").concat(x + w, " ").concat(ey, "Q").concat(x, " ").concat(ey + h * 1.05, " ").concat(x - w, " ").concat(ey, 'Z" fill="url(#').concat(id, 'sc)"/>\n    <circle cx="').concat(x + side * 1.5, '" cy="').concat(ey + 0.5, '" r="').concat(h * 0.86, '" fill="url(#').concat(id, 'ir)"/><circle cx="').concat(x + side * 1.5, '" cy="').concat(ey + 0.5, '" r="').concat(h * 0.4, '" fill="#120c08"/>\n    <ellipse cx="').concat(x + side * 1.5 - 3, '" cy="').concat(ey - 3, '" rx="2.6" ry="2.1" fill="#fff"/><circle cx="').concat(x + side * 1.5 + 3, '" cy="').concat(ey + 3, '" r="1.1" fill="#fff" opacity=".8"/>\n    <path d="M').concat(x - w - 1, " ").concat(ey + 0.5, "Q").concat(x, " ").concat(ey - h * 1.3 - lid, " ").concat(x + w + 1, " ").concat(ey + 0.5, "Q").concat(x, " ").concat(ey - h * 0.75 + lid, " ").concat(x - w - 1, " ").concat(ey + 0.5, 'Z" fill="').concat(sh(S, -0.18), '"/>\n    <path d="M').concat(x - w - 1, " ").concat(ey + 0.5, "Q").concat(x, " ").concat(ey - h * 1.3 + lid * 0.3, " ").concat(x + w + 1, " ").concat(ey + 0.5, '" fill="none" stroke="#2a1a12" stroke-width="2.6" stroke-linecap="round"/>\n    <path d="M').concat(x - w + 3, " ").concat(ey + h * 0.95, "Q").concat(x, " ").concat(ey + h * 1.35, " ").concat(x + w - 3, " ").concat(ey + h * 0.95, '" fill="none" stroke="').concat(sk3, '" stroke-width="1.4" opacity=".45"/>\n    ').concat(age > 45 ? '<path d="M'.concat(x - w + 4, " ").concat(ey + h * 1.7, "Q").concat(x, " ").concat(ey + h * 2.2, " ").concat(x + w - 2, " ").concat(ey + h * 1.6, '" fill="none" stroke="').concat(sk3, '" stroke-width="1.3" opacity=".4"/>') : "");
+      return '<ellipse cx="'.concat(x, '" cy="').concat(ey - 2, '" rx="').concat(w + 7, '" ry="').concat(h + 6, '" fill="').concat(sk3, '" opacity=".5" filter="url(#').concat(id, 'b4)"/>\n    <path d="M').concat(x - w + 2, " ").concat(ey - h - 4, "Q").concat(x, " ").concat(ey - h * 1.9 - 4, " ").concat(x + w - 1, " ").concat(ey - h - 3, '" fill="none" stroke="').concat(sk3, '" stroke-width="1.8" opacity=".5"/>\n    <path d="M').concat(x - w, " ").concat(ey, "Q").concat(x, " ").concat(ey - h * 1.25, " ").concat(x + w, " ").concat(ey, "Q").concat(x, " ").concat(ey + h * 1.05, " ").concat(x - w, " ").concat(ey, 'Z" fill="url(#').concat(id, 'sc)"/>\n    <g class="tf-iris"><circle cx="').concat(x + side * 1.5, '" cy="').concat(ey + 0.5, '" r="').concat(h * 0.86, '" fill="url(#').concat(id, 'ir)"/><circle cx="').concat(x + side * 1.5, '" cy="').concat(ey + 0.5, '" r="').concat(h * 0.4, '" fill="#120c08"/>\n    <ellipse cx="').concat(x + side * 1.5 - 3, '" cy="').concat(ey - 3, '" rx="2.6" ry="2.1" fill="#fff"/><circle cx="').concat(x + side * 1.5 + 3, '" cy="').concat(ey + 3, '" r="1.1" fill="#fff" opacity=".8"/></g>\n    <path d="M').concat(x - w - 1, " ").concat(ey + 0.5, "Q").concat(x, " ").concat(ey - h * 1.3 - lid, " ").concat(x + w + 1, " ").concat(ey + 0.5, "Q").concat(x, " ").concat(ey - h * 0.75 + lid, " ").concat(x - w - 1, " ").concat(ey + 0.5, 'Z" fill="').concat(sh(S, -0.18), '"/>\n    <path d="M').concat(x - w - 1, " ").concat(ey + 0.5, "Q").concat(x, " ").concat(ey - h * 1.3 + lid * 0.3, " ").concat(x + w + 1, " ").concat(ey + 0.5, '" fill="none" stroke="#2a1a12" stroke-width="2.6" stroke-linecap="round"/>\n    <path d="M').concat(x - w + 3, " ").concat(ey + h * 0.95, "Q").concat(x, " ").concat(ey + h * 1.35, " ").concat(x + w - 3, " ").concat(ey + h * 0.95, '" fill="none" stroke="').concat(sk3, '" stroke-width="1.4" opacity=".45"/>\n    ').concat(age > 45 ? '<path d="M'.concat(x - w + 4, " ").concat(ey + h * 1.7, "Q").concat(x, " ").concat(ey + h * 2.2, " ").concat(x + w - 2, " ").concat(ey + h * 1.6, '" fill="none" stroke="').concat(sk3, '" stroke-width="1.3" opacity=".4"/>') : "");
     };
     const brow = (x, s) => {
       const by = ey - 20 * eyeS - 4, a = brA * s, th = f ? 3.2 : 5.4, c = age > 60 ? sh(H2, 0.2) : sh(H2, -0.25);
@@ -11459,7 +11475,7 @@ const TF = /* @__PURE__ */ (() => {
     })();
     const mouth = (() => {
       const w = f ? 20 : 23, a = smirk;
-      return '<path d="M'.concat(150 - w - 4, " ").concat(my + a * 0.2, "Q150 ").concat(my + 10, " ").concat(150 + w + 4, " ").concat(my - a * 0.3, '" fill="none" stroke="').concat(sk3, '" stroke-width="3" opacity=".35" filter="url(#').concat(id, 'b1)"/>\n    <path d="M').concat(150 - w, " ").concat(my + a * 0.2, "Q").concat(150 - w * 0.5, " ").concat(my - 6, " 150 ").concat(my - 3, "Q").concat(150 + w * 0.5, " ").concat(my - 6, " ").concat(150 + w, " ").concat(my - a * 0.3, "Q150 ").concat(my + (f ? 2 : 0), " ").concat(150 - w, " ").concat(my + a * 0.2, 'Z" fill="').concat(sh(LIP, -0.15), '"/>\n    <path d="M').concat(150 - w + 1, " ").concat(my + a * 0.2, "Q150 ").concat(my + (f ? 13 : 9), " ").concat(150 + w - 1, " ").concat(my - a * 0.3, "Q150 ").concat(my + 2, " ").concat(150 - w + 1, " ").concat(my + a * 0.2, 'Z" fill="url(#').concat(id, 'lp)"/>\n    <path d="M').concat(150 - w, " ").concat(my + a * 0.2, "Q150 ").concat(my + 1, " ").concat(150 + w, " ").concat(my - a * 0.3, '" fill="none" stroke="#3a1a14" stroke-width="1.8" stroke-linecap="round"/>\n    <ellipse cx="').concat(150 - 4, '" cy="').concat(my + (f ? 7 : 5), '" rx="').concat(w * 0.35, '" ry="2" fill="#fff" opacity="').concat(f ? 0.4 : 0.2, '" filter="url(#').concat(id, 'b1)"/>\n    <ellipse cx="150" cy="').concat(my + 20, '" rx="12" ry="5" fill="').concat(sk2, '" opacity=".5" filter="url(#').concat(id, 'b2)"/>');
+      return '<g class="tf-mouth"><ellipse class="tf-open" cx="150" cy="'.concat(my + 4, '" rx="').concat(w * 0.62, '" ry="7" fill="#2e0e0a" style="transform-origin:150px ').concat(my, 'px"/><path d="M').concat(150 - w - 4, " ").concat(my + a * 0.2, "Q150 ").concat(my + 10, " ").concat(150 + w + 4, " ").concat(my - a * 0.3, '" fill="none" stroke="').concat(sk3, '" stroke-width="3" opacity=".35" filter="url(#').concat(id, 'b1)"/>\n    <path d="M').concat(150 - w, " ").concat(my + a * 0.2, "Q").concat(150 - w * 0.5, " ").concat(my - 6, " 150 ").concat(my - 3, "Q").concat(150 + w * 0.5, " ").concat(my - 6, " ").concat(150 + w, " ").concat(my - a * 0.3, "Q150 ").concat(my + (f ? 2 : 0), " ").concat(150 - w, " ").concat(my + a * 0.2, 'Z" fill="').concat(sh(LIP, -0.15), '"/>\n    <path d="M').concat(150 - w + 1, " ").concat(my + a * 0.2, "Q150 ").concat(my + (f ? 13 : 9), " ").concat(150 + w - 1, " ").concat(my - a * 0.3, "Q150 ").concat(my + 2, " ").concat(150 - w + 1, " ").concat(my + a * 0.2, 'Z" fill="url(#').concat(id, 'lp)"/>\n    <path d="M').concat(150 - w, " ").concat(my + a * 0.2, "Q150 ").concat(my + 1, " ").concat(150 + w, " ").concat(my - a * 0.3, '" fill="none" stroke="#3a1a14" stroke-width="1.8" stroke-linecap="round"/>\n    <ellipse cx="').concat(150 - 4, '" cy="').concat(my + (f ? 7 : 5), '" rx="').concat(w * 0.35, '" ry="2" fill="#fff" opacity="').concat(f ? 0.4 : 0.2, '" filter="url(#').concat(id, 'b1)"/>\n    <ellipse cx="150" cy="').concat(my + 20, '" rx="12" ry="5" fill="').concat(sk2, '" opacity=".5" filter="url(#').concat(id, 'b2)"/></g>');
     })();
     const wr = age > 48 ? '<g fill="none" stroke="'.concat(sk3, '" stroke-linecap="round" opacity="').concat(Math.min(0.6, (age - 40) / 50), '"><path d="M120 ').concat(Tp + 48, "Q150 ").concat(Tp + 42, " 180 ").concat(Tp + 48, "M126 ").concat(Tp + 60, "Q150 ").concat(Tp + 55, " 174 ").concat(Tp + 60, '" stroke-width="1.6"/><path d="M').concat(150 - 30, " ").concat(my - 26, "Q").concat(150 - 40, " ").concat(my - 6, " ").concat(150 - 30, " ").concat(my + 10, "M").concat(150 + 30, " ").concat(my - 26, "Q").concat(150 + 40, " ").concat(my - 6, " ").concat(150 + 30, " ").concat(my + 10, '" stroke-width="2.4"/>').concat(age > 62 ? '<path d="M'.concat(150 - ex - 20, " ").concat(ey + 4, "l-8 -3M").concat(150 - ex - 20, " ").concat(ey + 9, "l-8 1M").concat(150 + ex + 20, " ").concat(ey + 4, "l8 -3M").concat(150 + ex + 20, " ").concat(ey + 9, 'l8 1" stroke-width="1.4"/>') : "", "</g>") : "";
     const beard = o.beard === "full" ? '<path d="'.concat(sm([[150 - cw + 1, ey + 18], [150 - jx - 5, Tp + 150], [150 - jx * 0.7, Bt], [150, Bt + 14], [150 + jx * 0.7, Bt], [150 + jx + 5, Tp + 150], [150 + cw - 1, ey + 18], [150 + cw - 14, ey + 34], [150 + 24, my + 6], [150, my + 12], [150 - 24, my + 6], [150 - cw + 14, ey + 34]]), '" fill="url(#').concat(id, 'hr)"/><path d="').concat(sm([[150 - jx * 0.5, Bt - 14], [150, Bt + 4], [150 + jx * 0.5, Bt - 14], [150, Bt - 8]]), '" fill="#fff" opacity=".12" filter="url(#').concat(id, 'b2)"/>') : o.beard === "stubble" ? '<g clip-path="url(#'.concat(id, 'fc)"><path d="').concat(sm([[150 - jx - 30, Tp + 130], [150 - jx, Bt - 10], [150, Bt + 6], [150 + jx, Bt - 10], [150 + jx + 30, Tp + 130], [150 + 34, my - 4], [150, my - 14], [150 - 34, my - 4]]), '" fill="').concat(mix(S, H2, 0.35), '" opacity=".55"/><path d="').concat(sm([[150 - jx - 30, Tp + 130], [150 - jx, Bt - 10], [150, Bt + 6], [150 + jx, Bt - 10], [150 + jx + 30, Tp + 130], [150 + 34, my - 4], [150, my - 14], [150 - 34, my - 4]]), '" fill="').concat(H2, '" filter="url(#').concat(id, 'st)" opacity=".8"/></g>') : "";
@@ -11495,7 +11511,7 @@ const TF = /* @__PURE__ */ (() => {
     const gl = o.glasses ? '<g fill="none" stroke="'.concat(o.glasses, '" stroke-width="4.5"><rect x="').concat(150 - ex - 21, '" y="').concat(ey - 15, '" width="42" height="30" rx="11"/><rect x="').concat(150 + ex - 21, '" y="').concat(ey - 15, '" width="42" height="30" rx="11"/><path d="M').concat(150 - ex + 21, " ").concat(ey - 2, "Q150 ").concat(ey - 8, " ").concat(150 + ex - 21, " ").concat(ey - 2, "M").concat(150 - ex - 21, " ").concat(ey - 4, "L").concat(150 - cw, " ").concat(ey - 8, "M").concat(150 + ex + 21, " ").concat(ey - 4, "L").concat(150 + cw, " ").concat(ey - 8, '"/></g><path d="M').concat(150 - ex - 14, " ").concat(ey - 8, "l12 -3M").concat(150 + ex - 10, " ").concat(ey - 8, 'l12 -3" stroke="#fff" stroke-width="3" opacity=".5"/>') : "";
     const ear2 = o.earring ? '<circle cx="'.concat(150 - cw - 6, '" cy="').concat(ey + 30, '" r="4" fill="#f2e6c0" stroke="#a08c58"/><circle cx="').concat(150 + cw + 6, '" cy="').concat(ey + 30, '" r="4" fill="#e2d4a8" stroke="#a08c58"/>') : "";
     const ruler = o.bg ? "" : [...Array(9)].map((_, i) => '<path d="M0 '.concat(20 + i * 40, 'H300" stroke="#8b8f8b" stroke-width="').concat(i % 2 ? 1 : 2, '"/><text x="274" y="').concat(16 + i * 40, '" font-size="10" text-anchor="end" fill="#55594f" font-family="Courier New,monospace">').concat(200 - i * 10, "</text>")).join("");
-    return '<svg viewBox="'.concat(o.full ? "0 0 300 360" : "20 26 260 312", '" class="rf tf" role="img" aria-label="').concat(o.alt || "portret", '"><g clip-path="url(#').concat(id, 'cp)">').concat(D, '\n   <rect width="300" height="360" fill="').concat(o.bg || "#c3c8c6", '"/>').concat(ruler, '<rect width="300" height="360" fill="url(#').concat(id, 'key)"/>\n   <ellipse cx="166" cy="').concat(Bt - 40, '" rx="').concat(cw + 40, '" ry="150" fill="#000" opacity=".18" filter="url(#').concat(id, 'b8)"/>\n   ').concat(hair.back).concat(body).concat(neck, '<ellipse cx="150" cy="').concat(Bt + 2, '" rx="').concat(jx, '" ry="14" fill="#000" opacity=".25" filter="url(#').concat(id, 'b4)"/>\n   ').concat(ear(1)).concat(ear(299)).concat(ear2, '\n   <path d="').concat(face, '" fill="url(#').concat(id, 'sk)"/>\n   <g clip-path="url(#').concat(id, 'fc)">\n    <rect x="').concat(150 - cw - 10, '" y="0" width="').concat(2 * cw + 20, '" height="360" fill="url(#').concat(id, 'sd)"/>\n    <path d="').concat(face, '" fill="none" stroke="#9fd0ff" stroke-width="7" opacity=".28" filter="url(#').concat(id, 'b2)" transform="translate(-4 0)"/>\n    <ellipse cx="').concat(150 + cw - 6, '" cy="').concat(ey + 20, '" rx="26" ry="90" fill="').concat(sss, '" opacity=".35" filter="url(#').concat(id, 'b8)"/>\n    <ellipse cx="').concat(150 - ex - 6, '" cy="').concat(ey + 30, '" rx="18" ry="11" fill="#d0504a" opacity="').concat(f ? 0.22 : 0.13, '" filter="url(#').concat(id, 'b4)"/><ellipse cx="').concat(150 + ex + 6, '" cy="').concat(ey + 30, '" rx="18" ry="11" fill="#d0504a" opacity="').concat(f ? 0.2 : 0.12, '" filter="url(#').concat(id, 'b4)"/>\n    <ellipse cx="136" cy="').concat(Tp + 50, '" rx="34" ry="16" fill="#fff" opacity=".22" filter="url(#').concat(id, 'b4)"/>\n    <ellipse cx="150" cy="').concat(Bt - 10, '" rx="').concat(jx * 0.9, '" ry="16" fill="').concat(sk3, '" opacity=".3" filter="url(#').concat(id, 'b4)"/>\n    ').concat(hair.scalp || "").concat(wr).concat(eye(150 - ex, 1)).concat(eye(150 + ex, -1)).concat(brow(150 - ex, -1)).concat(brow(150 + ex, 1)).concat(o.beard === "full" ? "" : beard + mouth + noseSvg, "\n   </g>\n   ").concat(o.beard === "full" ? beard + mouth + '<path d="M'.concat(150 - 32, " ").concat(my - 1, "Q").concat(150 - 18, " ").concat(my - 15, " 150 ").concat(my - 9, "Q").concat(150 + 18, " ").concat(my - 15, " ").concat(150 + 32, " ").concat(my - 1, "Q").concat(150 + 16, " ").concat(my - 6, " 150 ").concat(my - 4, "Q").concat(150 - 16, " ").concat(my - 6, " ").concat(150 - 32, " ").concat(my - 1, 'Z" fill="url(#').concat(id, 'hr)"/>') + noseSvg : "", "\n   ").concat(hair.top).concat(gl, '\n   <rect width="300" height="360" fill="url(#').concat(id, 'vg)"/>\n  </g></svg>');
+    return '<svg viewBox="'.concat(o.full ? "0 0 300 360" : "20 26 260 312", '" class="rf tf" role="img" aria-label="').concat(o.alt || "portret", '"><g clip-path="url(#').concat(id, 'cp)">').concat(D, '\n   <rect width="300" height="360" fill="').concat(o.bg || "#c3c8c6", '"/>').concat(ruler, '<rect width="300" height="360" fill="url(#').concat(id, 'key)"/>\n   <ellipse cx="166" cy="').concat(Bt - 40, '" rx="').concat(cw + 40, '" ry="150" fill="#000" opacity=".18" filter="url(#').concat(id, 'b8)"/>\n   ').concat(hair.back).concat(body).concat(neck, '<ellipse cx="150" cy="').concat(Bt + 2, '" rx="').concat(jx, '" ry="14" fill="#000" opacity=".25" filter="url(#').concat(id, 'b4)"/>\n   ').concat(ear(1)).concat(ear(299)).concat(ear2, '\n   <path d="').concat(face, '" fill="url(#').concat(id, 'sk)"/>\n   <g clip-path="url(#').concat(id, 'fc)">\n    <rect x="').concat(150 - cw - 10, '" y="0" width="').concat(2 * cw + 20, '" height="360" fill="url(#').concat(id, 'sd)"/>\n    <path d="').concat(face, '" fill="none" stroke="#9fd0ff" stroke-width="7" opacity=".28" filter="url(#').concat(id, 'b2)" transform="translate(-4 0)"/>\n    <ellipse cx="').concat(150 + cw - 6, '" cy="').concat(ey + 20, '" rx="26" ry="90" fill="').concat(sss, '" opacity=".35" filter="url(#').concat(id, 'b8)"/>\n    <ellipse cx="').concat(150 - ex - 6, '" cy="').concat(ey + 30, '" rx="18" ry="11" fill="#d0504a" opacity="').concat(f ? 0.22 : 0.13, '" filter="url(#').concat(id, 'b4)"/><ellipse cx="').concat(150 + ex + 6, '" cy="').concat(ey + 30, '" rx="18" ry="11" fill="#d0504a" opacity="').concat(f ? 0.2 : 0.12, '" filter="url(#').concat(id, 'b4)"/>\n    <ellipse cx="136" cy="').concat(Tp + 50, '" rx="34" ry="16" fill="#fff" opacity=".22" filter="url(#').concat(id, 'b4)"/>\n    <ellipse cx="150" cy="').concat(Bt - 10, '" rx="').concat(jx * 0.9, '" ry="16" fill="').concat(sk3, '" opacity=".3" filter="url(#').concat(id, 'b4)"/>\n    ').concat(hair.scalp || "").concat(wr, '<g class="tf-eyes" style="transform-origin:150px ').concat(ey, "px;animation-delay:-").concat(r % 53 / 10, 's">').concat(eye(150 - ex, 1)).concat(eye(150 + ex, -1), "</g>").concat(brow(150 - ex, -1)).concat(brow(150 + ex, 1)).concat(o.beard === "full" ? "" : beard + mouth + noseSvg, "\n   </g>\n   ").concat(o.beard === "full" ? beard + mouth + '<path d="M'.concat(150 - 32, " ").concat(my - 1, "Q").concat(150 - 18, " ").concat(my - 15, " 150 ").concat(my - 9, "Q").concat(150 + 18, " ").concat(my - 15, " ").concat(150 + 32, " ").concat(my - 1, "Q").concat(150 + 16, " ").concat(my - 6, " 150 ").concat(my - 4, "Q").concat(150 - 16, " ").concat(my - 6, " ").concat(150 - 32, " ").concat(my - 1, 'Z" fill="url(#').concat(id, 'hr)"/>') + noseSvg : "", "\n   ").concat(hair.top).concat(gl, '\n   <rect width="300" height="360" fill="url(#').concat(id, 'vg)"/>\n  </g></svg>');
   };
 })();
 const RS = /* @__PURE__ */ (() => {
@@ -11970,11 +11986,13 @@ function tvSpeak(S, i, onLine, onEnd) {
     if (!tvSay.on || tvSay.id !== S.id) return;
     if (tvSay.i >= S.v.length) {
       tvSay.on = false;
+      tvTalkFx(null);
       onEnd && onEnd();
       return;
     }
     const [w, t] = S.v[tvSay.i];
     onLine && onLine(tvSay.i);
+    tvTalkFx(S, tvSay.i);
     let u;
     try {
       u = new SpeechSynthesisUtterance(t);
@@ -11995,6 +12013,7 @@ function tvSpeak(S, i, onLine, onEnd) {
     }
     u.onend = () => {
       tvSay.i++;
+      tvTalkFx(null);
       setTimeout(step, 350);
     };
     u.onerror = () => {
@@ -12012,10 +12031,52 @@ function tvSpeak(S, i, onLine, onEnd) {
 }
 function tvStop() {
   tvSay.on = false;
+  tvTalkFx(null);
   try {
     speechSynthesis.cancel();
   } catch (e) {
   }
+}
+const TVLIE = { "badhuis/gerben": [1, 7], "overwerk/dirkjan": [3], "tuinhuis/kiki": [1, 3], "botenloods/durk": [1], "botenloods/pepijn": [1], "badhuis/joris": [1], "zeezicht/isa": [1], "klok/marloes": [1], "sleutels/victor": [1], "glas/esmee": [1] };
+function tvLies(C2, S) {
+  if (S.lie != null) return [].concat(S.lie);
+  const k = TVLIE[C2.id + "/" + S.id];
+  if (k) return k;
+  const i = tvLieIdx(C2, S);
+  return i < 0 ? [] : [i];
+}
+function tvLieIdx(C2, S) {
+  const L = C2 && C2.lies && C2.lies[S.id] || "";
+  if (!/^\s*Liegt/i.test(L)) return -1;
+  const q = (L.match(/[“"]([^”"]+)[”"]/) || [])[1];
+  if (!q) return -1;
+  const W = (x) => x.toLowerCase().replace(/[^a-zà-ÿ0-9 ]/g, " ").split(/\s+/).filter((w) => w.length > 2);
+  const qw = new Set(W(q));
+  let best = -1, bs = 0;
+  S.v.forEach(([w, x], i) => {
+    if (w !== "S") return;
+    const sc = W(x).filter((y) => qw.has(y)).length;
+    if (sc > bs) {
+      bs = sc;
+      best = i;
+    }
+  });
+  return bs >= 2 ? best : -1;
+}
+let tvTalkCls = "";
+function tvTalkFx(S, i) {
+  tvTalkCls = "";
+  document.querySelectorAll(".tv-cam,.tv-phcam").forEach((el) => {
+    el.classList.remove("talking", "shifty");
+  });
+  if (!S) return;
+  const C2 = tvC(TVQ ? TVQ.id : tvd.cur), line = S.v[i];
+  if (!line) return;
+  tvTalkCls = (line[0] === "S" ? "talking " : "") + (C2 && C2.level !== "Expert" && tvLies(C2, S).includes(i) ? "shifty" : "");
+  document.querySelectorAll(".tv-cam,.tv-phcam").forEach((el) => {
+    if (line[0] === "S") el.classList.add("talking");
+    if (C2 && C2.level !== "Expert" && tvLies(C2, S).includes(i)) el.classList.add("shifty");
+  });
 }
 const tvTranscript = (S, cur = -1) => '<div class="tv-pv"><p class="tv-mono">PROCES-VERBAAL VAN VERHOOR · '.concat(S.name.toUpperCase(), " · ").concat(S.role, "</p>").concat(S.v.map(([w, t], i) => '<p class="tv-line '.concat(w === "R" ? "r" : "s", " ").concat(i === cur ? "now" : "", '" data-ln="').concat(i, '"><b>').concat(w === "R" ? "Rechercheur" : S.name.split(" ")[0], ":</b> ").concat(t, "</p>")).join(""), "</div>");
 function tvQr(el, url) {
@@ -12097,6 +12158,7 @@ function tvOnData(C2, c, d) {
     } else {
       if (d.join) tvAssign(C2, s, c, pl);
       tvSendTips(C2, s, c, pl.uid);
+      if (s.trait) tvTraitSync(C2, s, (s.round || 0) > 0);
     }
     tvSend(c, { t: "state", phase: tvScr, reveal: s.reveal || null, env: !!s.envOpen });
   }
@@ -12106,7 +12168,7 @@ function tvOnData(C2, c, d) {
     return;
   }
   if (d.t === "vote" && C2.suspects.some((x) => x.id === d.s)) {
-    tvHost.votes[d.uid || c.peer] = { name: String(d.name || "Speler").slice(0, 20), s: d.s };
+    tvHost.votes[d.uid || c.peer] = { name: String(d.name || "Speler").slice(0, 20), s: d.s, tr: String(d.tr || "") };
     s.votes = tvHost.votes;
     saveTv();
     tvSend(c, { t: "ok" });
@@ -12157,6 +12219,7 @@ function tvSendTips(C2, s, c, uid) {
 function tvNextRound(C2, s) {
   const r = s.round || 0;
   if (r >= C2.rounds.length) return;
+  if (r === 0 && s.trait) tvTraitSync(C2, s, true);
   s.round = r + 1;
   s.given = s.given || {};
   const live = tvLive(), g = {};
@@ -12177,6 +12240,39 @@ function tvNextRound(C2, s) {
   } catch (e) {
   }
   tvStageRender();
+}
+function tvPlayersList() {
+  const m = {};
+  tvLive().forEach(([c, p]) => {
+    if (!p.rc) m[p.uid] = p.name;
+  });
+  return Object.entries(m).map(([uid, name]) => ({ uid, name }));
+}
+function tvSendRole(C2, s, c, uid) {
+  if (!s.trait || !s.traitor || s.tvsolo) {
+    tvSend(c, { t: "role", on: false, room: s.room });
+    return;
+  }
+  const me = s.traitor === uid, S = C2.suspects.find((x) => x.id === C2.answer), K = (C2.keys.find((k) => k[0] === C2.key) || [])[1] || "";
+  tvSend(c, { t: "role", on: true, room: s.room, traitor: me, culprit: me ? S.name : null, key: me ? K : null, players: tvPlayersList().filter((p) => p.uid !== uid) });
+}
+function tvTraitSync(C2, s, pick2) {
+  if (!tvHost) return;
+  const ids = tvPlayersList().map((p) => p.uid);
+  if (s.trait && !s.tvsolo && pick2 && ids.length >= 4 && (!s.traitor || !ids.includes(s.traitor))) {
+    s.traitor = ids[Math.floor(Math.random() * ids.length)];
+    const p = tvPlayersList().find((x) => x.uid === s.traitor);
+    s.traitName = p ? p.name : "?";
+    saveTv();
+  }
+  tvLive().forEach(([c, p]) => {
+    if (!p.rc) tvSendRole(C2, s, c, p.uid);
+  });
+}
+function tvTraitRes(C2, s) {
+  if (!s.trait || !s.traitor) return null;
+  const V = Object.entries(tvHost ? tvHost.votes : s.votes || {}).filter(([u]) => u !== s.traitor), k = V.filter(([u, v]) => v.tr === s.traitor).length;
+  return { name: s.traitName || "?", k, n: V.length, caught: V.length > 0 && k * 2 > V.length };
 }
 function tvScrRonde(C2, s) {
   const r = s.round || 0, R0 = C2.rounds, next = r < R0.length, live = tvLive(), solo = s.tvsolo;
@@ -12211,7 +12307,7 @@ function tvTally(C2) {
   return n;
 }
 function tvResetPlay(s) {
-  ["reveal", "votes", "manual", "pick", "mot", "key", "tipN", "envOpen", "round", "given", "assign", "tmode", "trun", "tacc", "tstart"].forEach((k) => delete s[k]);
+  ["reveal", "votes", "manual", "pick", "mot", "key", "tipN", "envOpen", "round", "given", "assign", "tmode", "trun", "tacc", "tstart", "traitor", "traitName"].forEach((k) => delete s[k]);
   s.scr = null;
 }
 function tvOpenStage(C2, solo) {
@@ -12300,7 +12396,7 @@ function tvStageRender() {
 }
 function tvHS(C2, s) {
   if (!tvHost) return;
-  tvBroadcast({ t: "hs", scr: tvScr, big: tvBig, play: tvSay.on ? tvSay.id : null, env: !!s.envOpen, mot: s.mot || null, key: s.key || null, tm: s.tmode || 0, trun: !!s.trun, np: s.np || 4, rev: s.reveal || null, ok: s.reveal ? s.reveal.pick === C2.answer : null, tip: s.tipN || 0, round: s.round || 0, rounds: C2.rounds.length });
+  tvBroadcast({ t: "hs", scr: tvScr, big: tvBig, play: tvSay.on ? tvSay.id : null, env: !!s.envOpen, mot: s.mot || null, key: s.key || null, tm: s.tmode || 0, trun: !!s.trun, np: s.np || 4, trait: !!s.trait, rev: s.reveal || null, ok: s.reveal ? s.reveal.pick === C2.answer : null, tip: s.tipN || 0, round: s.round || 0, rounds: C2.rounds.length });
 }
 function tvScrMelding(C2, s) {
   return '<div class="tv-desk"><article class="tv-paper tv-rot1">'.concat(tvStamp("POLITIE · VERTROUWELIJK")).concat(C2.melding, '<span class="tv-clip"></span></article>\n <aside class="tv-paper tv-strip tv-rot2"><h3>Tijdlijn</h3><ol class="tv-tl">').concat(C2.timeline.map(([t, w]) => "<li><b>".concat(t, "</b><span>").concat(w, "</span></li>")).join(""), '</ol><p class="tv-hand">').concat(C2.question || "", "</p>").concat(C2.level === "Expert" ? '<p class="tv-hand" style="color:#b3241b">Expert: geen hulptips. Durf je het met de timer van 2 uur?</p>' : "", '<div class="tv-chal"><b>Uitdaging</b>').concat([[0, "Geen timer"], [60, "1 uur"], [120, "2 uur"]].map(([m, n]) => '<button type="button" data-tm="'.concat(m, '" aria-pressed="').concat((s.tmode || 0) === m, '">').concat(n, "</button>")).join("")).concat(s.tmode ? '<button type="button" id="tvPause">'.concat(s.trun ? "⏸ Pauze" : "▶ Verder", "</button>") : "", "</div></aside></div>");
@@ -12317,13 +12413,13 @@ function tvScrVerd(C2) {
 }
 function tvScrVerh(C2, s) {
   const S = C2.suspects.find((x) => x.id === tvBig);
-  if (S) return '<div class="tv-room2"><div class="tv-cam">'.concat(tvMug(S, 420, "#4a4e4b"), '<span class="tv-rec">● REC</span><span class="tv-ts">VERHOORKAMER 2 · ').concat(C2.date || "07-03", " · 09:").concat(String(10 + C2.suspects.indexOf(S) * 14).padStart(2, "0"), '</span></div><div class="tv-paper tv-pvbox" id="tvPv">').concat(tvTranscript(S, tvSay.on && tvSay.id === S.id ? tvSay.i : -1), '</div></div>\n  <div class="tv-row"><button type="button" class="tv-btn" data-big="">← Alle verhoren</button><button type="button" class="tv-btn primary" id="tvPlay">').concat(tvSay.on && tvSay.id === S.id ? "⏸ Stop" : "▶ Speel het verhoor af", "</button></div>");
+  if (S) return '<div class="tv-room2"><div class="tv-cam '.concat(tvSay.on && tvSay.id === S.id ? tvTalkCls : "", '">').concat(tvMug(S, 420, "#4a4e4b"), '<span class="tv-rec">● REC</span><span class="tv-ts">VERHOORKAMER 2 · ').concat(C2.date || "07-03", " · 09:").concat(String(10 + C2.suspects.indexOf(S) * 14).padStart(2, "0"), '</span></div><div class="tv-paper tv-pvbox" id="tvPv">').concat(tvTranscript(S, tvSay.on && tvSay.id === S.id ? tvSay.i : -1), '</div></div>\n  <div class="tv-row"><button type="button" class="tv-btn" data-big="">← Alle verhoren</button><button type="button" class="tv-btn primary" id="tvPlay">').concat(tvSay.on && tvSay.id === S.id ? "⏸ Stop" : "▶ Speel het verhoor af", "</button></div>");
   return '<div class="tv-tapes">'.concat(C2.suspects.map((S2, i) => '<button type="button" class="tv-tape" data-big="'.concat(S2.id, '">').concat(tvMug(S2, 120), "<span><b>Verhoor ").concat(i + 1, "</b>").concat(S2.name, "<small>").concat(S2.role, "</small></span><i>▶</i></button>")).join(""), '</div><p class="tv-sub">Speel een verhoor af op de tv, of luister op je eigen telefoon via je QR-code of link.</p>');
 }
 function tvScrSpel(C2, s) {
   const n = s.np || 4, sp2 = tvSplit(C2, n), pls = tvHost ? Object.values(tvHost.players).filter((p) => !p.gone) : [], url = tvJoinUrl("").replace(/^https?:\/\//, "");
   const who = (i) => pls.find((p) => p.join && p.n === i + 1);
-  return '<div class="tv-join"><div class="tv-jl"><p class="tv-jgo">Pak je telefoon en ga naar</p><p class="tv-jurl">'.concat(url, '</p><p class="tv-jgo">en vul deze code in</p><p class="tv-jcode">').concat((s.room || "····").split("").map((ch) => "<b>".concat(ch, "</b>")).join(""), '</p>\n  <div class="tv-jrow"><div class="tv-qr big" data-jqr="1"></div><div><p class="tv-jgo small">Of scan de QR-code. Speel je op afstand? Stuur de link naar je vrienden.</p><button type="button" class="tv-btn" id="tvJShare">🔗 Stuur link</button></div></div></div>\n <div class="tv-jr"><div class="tv-np">Spelers ').concat([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((k) => '<button type="button" data-np="'.concat(k, '" aria-pressed="').concat(k === n, '">').concat(k, "</button>")).join(""), '</div>\n  <div class="tv-slots ').concat(sp2.length > 5 ? "two" : "", '">').concat(sp2.map((sl, i) => {
+  return '<div class="tv-join"><div class="tv-jl"><p class="tv-jgo">Pak je telefoon en ga naar</p><p class="tv-jurl">'.concat(url, '</p><p class="tv-jgo">en vul deze code in</p><p class="tv-jcode">').concat((s.room || "····").split("").map((ch) => "<b>".concat(ch, "</b>")).join(""), '</p>\n  <div class="tv-jrow"><div class="tv-qr big" data-jqr="1"></div><div><p class="tv-jgo small">Of scan de QR-code. Speel je op afstand? Stuur de link naar je vrienden.</p><button type="button" class="tv-btn" id="tvJShare">🔗 Stuur link</button></div></div></div>\n <div class="tv-jr"><div class="tv-np">Spelers ').concat([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((k) => '<button type="button" data-np="'.concat(k, '" aria-pressed="').concat(k === n, '">').concat(k, "</button>")).join(""), '</div>\n  <div class="tv-trait"><button type="button" class="tv-btn ').concat(s.trait ? "primary" : "", '" id="tvTrait" aria-pressed="').concat(!!s.trait, '">🗡️ Verrader: ').concat(s.trait ? "aan" : "uit", '</button><small>Vanaf 4 spelers. Eén telefoon krijgt in het geheim de opdracht de dader te helpen.</small></div><div class="tv-slots ').concat(sp2.length > 4 ? "two" : "", '">').concat(sp2.map((sl, i) => {
     const p = who(i);
     return '<div class="tv-slot '.concat(p ? "in" : "", '"><span class="tv-sn">').concat(i + 1, '</span><span class="tv-sw"><b>').concat(p ? tvEsc(p.name) : "wacht op speler…", "</b><small>").concat(tvSlotLabel(C2, sl), "</small></span>").concat(p ? "<i>✓</i>" : "", "</div>");
   }).join(""), "</div>\n  ").concat(pls.filter((p) => !p.rc && (!p.join || p.n === 0)).length ? '<p class="tv-jgo small">Ook mee: '.concat(pls.filter((p) => !p.rc && (!p.join || p.n === 0)).map((p) => tvEsc(p.name)).join(", "), "</p>") : "").concat(pls.filter((p) => p.rc).length ? '<p class="tv-jgo small">📺 Bediening: '.concat(pls.filter((p) => p.rc).map((p) => tvEsc(p.name)).join(", "), "</p>") : '<p class="tv-jgo small">Tip: een tablet of extra telefoon kan de tv bedienen. Kies op de meedoe-pagina voor <b>Alleen de tv bedienen</b>.</p>', '\n  <p class="tv-jst">').concat(tvHost && tvHost.status === "online" ? "🟢 Kamer is open" : tvHost && tvHost.status === "offline" ? "🔴 Geen live verbinding. Doe mee met de losse links of tel de stemmen met de hand." : "🟡 Kamer openen…", "</p></div></div>");
@@ -12339,13 +12435,13 @@ function tvScrDos(C2, s) {
 function tvScrStem(C2, s) {
   if (s.tvsolo) return '<h2 class="tv-h2">Wie, waarom en met welk bewijs?</h2><div class="tv-votes">'.concat(C2.suspects.map((S) => '<button type="button" class="tv-vote tv-pick" data-pick="'.concat(S.id, '" aria-pressed="').concat(s.pick === S.id, '">').concat(tvMug(S, 150), "<b>").concat(S.name, "</b><small>").concat(S.role, "</small></button>")).join(""), '</div>\n <div class="tv-acc"><div><b>Waarom?</b>').concat(C2.motives.map(([k, n2]) => '<button type="button" data-mot="'.concat(k, '" aria-pressed="').concat(s.mot === k, '">').concat(n2, "</button>")).join(""), "</div><div><b>Welk bewijs is doorslaggevend?</b>").concat(C2.keys.map(([k, n2]) => '<button type="button" data-key="'.concat(k, '" aria-pressed="').concat(s.key === k, '">').concat(n2, "</button>")).join(""), '</div></div>\n <div class="tv-row">').concat((s.tipN || 0) < C2.tips.length ? '<button type="button" class="tv-btn" id="tvTip">💡 Tip '.concat((s.tipN || 0) + 1, "</button>") : "", '<button type="button" class="tv-btn primary" id="tvRev" ').concat(s.pick ? "" : "disabled", ">🔒 Dit is de dader</button></div>").concat(s.tipN ? '<ol class="tv-tips">'.concat(C2.tips.slice(0, s.tipN).map((t) => "<li>".concat(t, "</li>")).join(""), "</ol>") : "");
   const n = tvTally(C2), tot = Object.values(n).reduce((a, b) => a + b, 0), max = Math.max(1, ...Object.values(n));
-  return '<h2 class="tv-h2">Wie, waarom en met welk bewijs?</h2><div class="tv-votes">'.concat(C2.suspects.map((S, i) => '<div class="tv-vote">'.concat(tvMug(S, 130), "<b>").concat(S.name, '</b><div class="tv-bar"><i style="width:').concat(n[S.id] / max * 100, '%"></i></div><span class="tv-cnt">').concat(n[S.id], '</span><span class="tv-pm"><button type="button" data-man="').concat(S.id, '" data-d="-1" aria-label="Stem eraf">−</button><button type="button" data-man="').concat(S.id, '" data-d="1" aria-label="Stem erbij">+</button></span></div>')).join(""), '</div>\n <p class="tv-sub">').concat(tot, " ").concat(tot === 1 ? "stem" : "stemmen", '. Stem op je telefoon, of tel met + en − als iemand hardop stemt.</p><div class="tv-acc"><div><b>Waarom?</b>').concat(C2.motives.map(([k, n2]) => '<button type="button" data-mot="'.concat(k, '" aria-pressed="').concat(s.mot === k, '">').concat(n2, "</button>")).join(""), "</div><div><b>Welk bewijs is doorslaggevend?</b>").concat(C2.keys.map(([k, n2]) => '<button type="button" data-key="'.concat(k, '" aria-pressed="').concat(s.key === k, '">').concat(n2, "</button>")).join(""), '</div></div>\n <div class="tv-row">').concat((s.tipN || 0) < C2.tips.length ? '<button type="button" class="tv-btn" id="tvTip">💡 Tip '.concat((s.tipN || 0) + 1, "</button>") : "", '<button type="button" class="tv-btn" id="tvClr">Stemmen wissen</button><button type="button" class="tv-btn primary" id="tvRev" ').concat(tot ? "" : "disabled", ">🔒 Onthul de dader</button></div>").concat(s.tipN ? '<ol class="tv-tips">'.concat(C2.tips.slice(0, s.tipN).map((t) => "<li>".concat(t, "</li>")).join(""), "</ol>") : "");
+  return '<h2 class="tv-h2">Wie, waarom en met welk bewijs?</h2><div class="tv-votes">'.concat(C2.suspects.map((S, i) => '<div class="tv-vote">'.concat(tvMug(S, 130), "<b>").concat(S.name, '</b><div class="tv-bar"><i style="width:').concat(n[S.id] / max * 100, '%"></i></div><span class="tv-cnt">').concat(n[S.id], '</span><span class="tv-pm"><button type="button" data-man="').concat(S.id, '" data-d="-1" aria-label="Stem eraf">−</button><button type="button" data-man="').concat(S.id, '" data-d="1" aria-label="Stem erbij">+</button></span></div>')).join(""), '</div>\n <p class="tv-sub">').concat(tot, " ").concat(tot === 1 ? "stem" : "stemmen", ". Stem op je telefoon, of tel met + en − als iemand hardop stemt.").concat(s.trait && s.traitor ? " 🗡️ Kies op je telefoon ook wie de verrader is (".concat(Object.values(tvHost ? tvHost.votes : s.votes || {}).filter((v) => v.tr).length, " keer gekozen).") : "", '</p><div class="tv-acc"><div><b>Waarom?</b>').concat(C2.motives.map(([k, n2]) => '<button type="button" data-mot="'.concat(k, '" aria-pressed="').concat(s.mot === k, '">').concat(n2, "</button>")).join(""), "</div><div><b>Welk bewijs is doorslaggevend?</b>").concat(C2.keys.map(([k, n2]) => '<button type="button" data-key="'.concat(k, '" aria-pressed="').concat(s.key === k, '">').concat(n2, "</button>")).join(""), '</div></div>\n <div class="tv-row">').concat((s.tipN || 0) < C2.tips.length ? '<button type="button" class="tv-btn" id="tvTip">💡 Tip '.concat((s.tipN || 0) + 1, "</button>") : "", '<button type="button" class="tv-btn" id="tvClr">Stemmen wissen</button><button type="button" class="tv-btn primary" id="tvRev" ').concat(tot ? "" : "disabled", ">🔒 Onthul de dader</button></div>").concat(s.tipN ? '<ol class="tv-tips">'.concat(C2.tips.slice(0, s.tipN).map((t) => "<li>".concat(t, "</li>")).join(""), "</ol>") : "");
 }
 function tvScrOnth(C2, s) {
   const R2 = s.reveal;
   if (!R2) return tvScrStem(C2, s);
   const S = C2.suspects.find((x) => x.id === R2.pick), ok = R2.pick === C2.answer;
-  return '<div class="tv-onth '.concat(ok ? "ok" : "no", '">').concat(tvMugshot(S, C2.suspects.indexOf(S), "big"), '<div class="tv-paper"><p class="tv-mono">UITSPRAAK VAN HET TEAM</p><h2>').concat(S.name, "</h2>").concat(tvStamp(ok ? "DADER · OPGELOST" : "ONSCHULDIG", ok ? "green" : ""), "<p>").concat(ok ? "Goed gedaan, rechercheurs! Het bewijs klopt." : "Dat klopt niet. Het bewijs wijst naar iemand anders.", '</p>\n <div class="tv-row">').concat(ok ? '<p class="tv-score">'.concat("★".repeat(tvStars(C2, R2))).concat("☆".repeat(3 - tvStars(C2, R2)), " <small>dader ✓ · motief").concat(R2.mot === C2.motive ? " ✓" : " ✗", " · bewijs").concat(R2.key === C2.key ? " ✓" : " ✗", '</small></p><button type="button" class="tv-btn primary" id="tvOpl">📜 De volledige oplossing</button>') : '<button type="button" class="tv-btn" id="tvAgain">↺ Nog eens overleggen</button><button type="button" class="tv-btn primary" id="tvGive">Toon de oplossing</button>', "</div></div></div>");
+  return '<div class="tv-onth '.concat(ok ? "ok" : "no", '">').concat(tvMugshot(S, C2.suspects.indexOf(S), "big"), '<div class="tv-paper"><p class="tv-mono">UITSPRAAK VAN HET TEAM</p><h2>').concat(S.name, "</h2>").concat(tvStamp(ok ? "DADER · OPGELOST" : "ONSCHULDIG", ok ? "green" : ""), "<p>").concat(ok ? "Goed gedaan, rechercheurs! Het bewijs klopt." : "Dat klopt niet. Het bewijs wijst naar iemand anders.", "</p>").concat(R2.tr ? '<div class="tv-traitres '.concat(R2.tr.caught ? "ok" : "", '">🗡️ De verrader was <b>').concat(tvEsc(R2.tr.name), "</b>. ").concat(R2.tr.k, " van de ").concat(R2.tr.n, " speurders had het door. <b>").concat(R2.tr.caught ? "De groep heeft de verrader ontmaskerd!" : "De verrader is ontsnapt!", "</b></div>") : "", '\n <div class="tv-row">').concat(ok ? '<p class="tv-score">'.concat("★".repeat(tvStars(C2, R2))).concat("☆".repeat(3 - tvStars(C2, R2)), " <small>dader ✓ · motief").concat(R2.mot === C2.motive ? " ✓" : " ✗", " · bewijs").concat(R2.key === C2.key ? " ✓" : " ✗", '</small></p><button type="button" class="tv-btn primary" id="tvOpl">📜 De volledige oplossing</button>') : '<button type="button" class="tv-btn" id="tvAgain">↺ Nog eens overleggen</button><button type="button" class="tv-btn primary" id="tvGive">Toon de oplossing</button>', "</div></div></div>");
 }
 function tvClock(s) {
   const used = (s.tacc || 0) + (s.trun ? Date.now() - s.tstart : 0), left = Math.max(0, s.tmode * 6e4 - used), h = Math.floor(left / 36e5), m = Math.floor(left / 6e4) % 60, x = Math.floor(left / 1e3) % 60;
@@ -12408,6 +12504,17 @@ function tvWire(C2, s) {
     tvReassign(C2, s);
     tvStageRender();
   });
+  const trb = one("tvTrait");
+  if (trb) trb.onclick = () => {
+    s.trait = !s.trait;
+    if (!s.trait) {
+      delete s.traitor;
+      delete s.traitName;
+    }
+    saveTv();
+    tvTraitSync(C2, s, (s.round || 0) > 0);
+    tvStageRender();
+  };
   q("[data-jqr]").forEach((el) => tvQr(el, tvJoinUrl(s.room)));
   const js = one("tvJShare");
   if (js) js.onclick = async () => {
@@ -12504,6 +12611,8 @@ function tvWire(C2, s) {
       return;
     }
     s.reveal = { pick: best[0][0], mot: s.mot, key: s.key };
+    const trR = tvTraitRes(C2, s);
+    if (trR) s.reveal.tr = trR;
     if (s.trun) {
       s.tacc = (s.tacc || 0) + Date.now() - s.tstart;
       s.trun = false;
@@ -12580,6 +12689,15 @@ function tvPhoneJoin(C2) {
     renderTv();
   });
 }
+const tvRole = () => {
+  const r = tvPh.role || store.get("md-tv-role");
+  return r && r.on && TVQ && r.room === TVQ.r ? r : null;
+};
+const tvRoleCard = () => {
+  const r = tvRole();
+  if (!r) return "";
+  return '<details class="tv-traitcard"><summary>🗡️ Jouw geheime opdracht <small>(tik om te openen, laat niemand meekijken)</small></summary>'.concat(r.traitor ? "<p><b>Jij bent de verrader.</b> Je helpt in het geheim de dader: <b>".concat(tvEsc(r.culprit), "</b>.</p><p>Stuur de groep de verkeerde kant op. Twijfel hardop, wijs naar een ander en praat over dingen die er niet toe doen. Lieg niet over wat er in je eigen stukken staat.</p><p>Hou de aandacht vooral weg van: <i>").concat(tvEsc(r.key), "</i>.</p><p>Je wint als de groep de verkeerde dader kiest, of als ze niet doorhebben dat jij de verrader bent.</p>") : "<p><b>Jij bent eerlijk.</b> Maar één van de spelers helpt in het geheim de dader.</p><p>Let op wie twijfel zaait of de aandacht afleidt. Bij het stemmen kies je ook wie de verrader is.</p>", "</details>");
+};
 const tvNotes = (id) => {
   const A = store.get("md-tv-notes") || {}, N = A[id] || {};
   N.sus = N.sus || {};
@@ -12600,6 +12718,12 @@ function tvPhRender() {
 }
 function tvPhWire(c) {
   c.on("data", (d) => {
+    if (d && d.t === "role") {
+      tvPh.role = d.on ? d : null;
+      store.set("md-tv-role", d.on ? d : null);
+      tvPhRender();
+      return;
+    }
     if (d && d.t === "tips") {
       const old = store.get("md-tv-tips") || {};
       const prev = old.room === d.room ? (old.list || []).length : 0;
@@ -12694,13 +12818,13 @@ function tvPhone(C2, solo) {
       return '<div class="tv-note tvn-'.concat(n.st || "q", '"><div class="tv-nh">').concat(tvMug(S, 54), "<span><b>").concat(S.name, "</b><small>").concat(S.role, '</small></span></div><div class="tv-nst">').concat([["q", "❔ Twijfel"], ["v", "🔴 Verdacht"], ["o", "🟢 Onschuldig"]].map(([k, l]) => '<button type="button" data-nst="'.concat(S.id, '" data-v="').concat(k, '" aria-pressed="').concat((n.st || "q") === k, '">').concat(l, "</button>")).join(""), '</div><textarea data-ntx="').concat(S.id, '" rows="2" placeholder="Alibi, motief, wat klopt er niet?">').concat(tvEsc(n.t || ""), "</textarea></div>");
     }).join(""), '<h3 class="tv-ph3">Vrije notities</h3><textarea class="tv-nfree" id="tvNFree" rows="7" placeholder="Tijden, vragen, ideeën…">').concat(tvEsc(N.free || ""), "</textarea>");
   } else if (tvPh.tab === "bed") body = tvRemote(C2);
-  else if (tvPh.tab === "dos" && !slots.length) body = '<div class="tv-paper tv-doc"><h4>Alle dossiers zijn al vergeven</h4><p>Je doet mee als extra rechercheur. Luister de verhoren, bekijk de zaak en stem mee met de groep.</p></div>';
-  else if (tvPh.tab === "dos") body = '<p class="hint">'.concat(solo ? "Je speelt alleen: je hebt alle ".concat(C2.secret.length, " dossiers.") : "Dit dossier is alleen voor jou. Lees het goed en vertel de anderen wat je ziet. Laat je telefoon niet zomaar zien!", "</p>").concat(tvSlotGroups(C2, slots).map(({ D, docs }) => {
+  else if (tvPh.tab === "dos" && !slots.length) body = "".concat(tvRoleCard(), '<div class="tv-paper tv-doc"><h4>Alle dossiers zijn al vergeven</h4><p>Je doet mee als extra rechercheur. Luister de verhoren, bekijk de zaak en stem mee met de groep.</p></div>');
+  else if (tvPh.tab === "dos") body = "".concat(tvRoleCard(), '<p class="hint">').concat(solo ? "Je speelt alleen: je hebt alle ".concat(C2.secret.length, " dossiers.") : "Dit dossier is alleen voor jou. Lees het goed en vertel de anderen wat je ziet. Laat je telefoon niet zomaar zien!", "</p>").concat(tvSlotGroups(C2, slots).map(({ D, docs }) => {
     return '<details class="tv-fold" '.concat(slots.length <= 2 ? "open" : "", '><summary><span class="tv-tab">').concat(D.ic, " ").concat(D.t, "</span><small>").concat(docs.length, " ").concat(docs.length === 1 ? "stuk" : "stukken", "</small></summary>").concat(docs.map((d) => '<article class="tv-paper tv-doc">'.concat(tvStamp("VERTROUWELIJK"), "<h4>").concat(d.t, "</h4>").concat(d.h, "</article>")).join(""), "</details>");
   }).join(""));
   if (tvPh.tab === "verh") {
     const S = C2.suspects.find((x) => x.id === tvPh.open);
-    body = S ? '<button type="button" class="btn small backbtn" data-tvo="">← Alle verhoren</button><div class="tv-phcam">'.concat(tvMug(S, 150), "<span><b>").concat(S.name, "</b>").concat(S.role, '</span></div><button type="button" class="btn primary" id="tvPPlay">').concat(tvSay.on && tvSay.id === S.id ? "⏸ Stop" : "▶ Luister het verhoor", '</button><div class="tv-paper tv-pvbox ph" id="tvPv">').concat(tvTranscript(S, tvSay.on && tvSay.id === S.id ? tvSay.i : -1), "</div>") : '<p class="hint">Luister de verhoren met geluid aan, of lees mee. Eén van hen liegt.</p><div class="tv-tapes ph">'.concat(C2.suspects.map((S2, i) => '<button type="button" class="tv-tape" data-tvo="'.concat(S2.id, '">').concat(tvMug(S2, 70), "<span><b>Verhoor ").concat(i + 1, "</b>").concat(S2.name, "<small>").concat(S2.role, "</small></span><i>▶</i></button>")).join(""), "</div>");
+    body = S ? '<button type="button" class="btn small backbtn" data-tvo="">← Alle verhoren</button><div class="tv-phcam '.concat(tvSay.on && tvSay.id === S.id ? tvTalkCls : "", '">').concat(tvMug(S, 150), "<span><b>").concat(S.name, "</b>").concat(S.role, '</span></div><button type="button" class="btn primary" id="tvPPlay">').concat(tvSay.on && tvSay.id === S.id ? "⏸ Stop" : "▶ Luister het verhoor", '</button><div class="tv-paper tv-pvbox ph" id="tvPv">').concat(tvTranscript(S, tvSay.on && tvSay.id === S.id ? tvSay.i : -1), "</div>") : '<p class="hint">Luister de verhoren met geluid aan, of lees mee. Eén van hen liegt.</p><div class="tv-tapes ph">'.concat(C2.suspects.map((S2, i) => '<button type="button" class="tv-tape" data-tvo="'.concat(S2.id, '">').concat(tvMug(S2, 70), "<span><b>Verhoor ").concat(i + 1, "</b>").concat(S2.name, "<small>").concat(S2.role, "</small></span><i>▶</i></button>")).join(""), "</div>");
   }
   if (tvPh.tab === "zaak") body = '<article class="tv-paper tv-doc">'.concat(tvStamp("POLITIE")).concat(C2.melding, '</article><article class="tv-paper tv-doc"><h4>Tijdlijn</h4><ol class="tv-tl">').concat(C2.timeline.map(([t, w]) => "<li><b>".concat(t, "</b><span>").concat(w, "</span></li>")).join(""), "</ol></article>\n  ").concat(!C2.envelope ? "" : (solo ? s.envOpen : tvPh.env) ? '<article class="tv-paper tv-doc">'.concat(tvStamp("NIEUW BEWIJS"), "<h4>").concat(C2.envelope.t, "</h4>").concat(C2.envelope.h, "</article>") : '<div class="tv-envelope ph"><span class="tv-seal">B</span><b>Envelop B</b><i>'.concat(C2.envelope.when, "</i>").concat(solo ? '<button type="button" class="btn small" id="tvSEnv">Verbreek het zegel</button>' : "<small>De host opent hem op de tv.</small>", "</div>"), '<h3 class="tv-ph3">Plaats delict</h3>').concat(C2.photos.map((p, i) => "".concat(tvPhoto(C2, i), '<p class="tv-hand tv-pn">').concat(C2.photoNotes[i], "</p>")).join(""), '<h3 class="tv-ph3">Verdachten</h3><div class="tv-mugs ph">').concat(C2.suspects.map((S, i) => tvMugshot(S, i)).join(""), "</div>");
   if (tvPh.tab === "stem" && tvPh.opl && solo) {
@@ -12710,8 +12834,8 @@ function tvPhone(C2, solo) {
     const R2 = solo ? s.reveal || null : tvPh.reveal;
     if (R2) {
       const S = C2.suspects.find((x) => x.id === R2.pick), ok = R2.pick === C2.answer;
-      body = '<div class="tv-paper tv-doc tv-res '.concat(ok ? "ok" : "", '"><p class="tv-mono">UITSPRAAK</p><h3>').concat(S.name, "</h3>").concat(tvStamp(ok ? "DADER · OPGELOST" : "ONSCHULDIG", ok ? "green" : ""), "<p>").concat(ok ? "Goed gedaan, rechercheur!" : "Dat klopt niet. Het bewijs wijst naar iemand anders.", "</p>").concat(solo ? ok ? '<p class="tv-score">'.concat("★".repeat(tvStars(C2, R2))).concat("☆".repeat(3 - tvStars(C2, R2)), " <small>dader ✓ · motief ").concat(R2.mot === C2.motive ? "✓" : "✗", " · bewijs ").concat(R2.key === C2.key ? "✓" : "✗", '</small></p><button type="button" class="btn primary" id="tvSOpl">📜 De volledige oplossing</button>') : '<button type="button" class="btn" id="tvSAgain">↺ Nog eens proberen</button> <button type="button" class="btn" id="tvSGive">Toon de oplossing</button>' : "", "</div>");
-    } else body = '<p class="hint">'.concat(solo ? "Weet je het zeker? Je mag één keer kiezen; daarna kun je opnieuw proberen." : "Kies wie het volgens jou gedaan heeft. Je stem gaat naar het tv-scherm.", "</p>").concat(solo ? "" : '<label class="tv-nm">Jouw naam <input id="tvNm" maxlength="20" value="'.concat(tvEsc(tvName()), '"></label>'), '\n  <div class="tv-vgrid">').concat(C2.suspects.map((S) => '<button type="button" class="tv-vb" data-tvv="'.concat(S.id, '" aria-pressed="').concat(tvPh.vote === S.id, '">').concat(tvMug(S, 90), "<b>").concat(S.name, "</b><small>").concat(S.role, "</small></button>")).join(""), "</div>\n  ").concat(solo ? '<h3 class="tv-ph3">Waarom?</h3><div class="tv-acc ph">'.concat(C2.motives.map(([k, n]) => '<button type="button" data-tvm="'.concat(k, '" aria-pressed="').concat(tvPh.mot === k, '">').concat(n, "</button>")).join(""), '</div><h3 class="tv-ph3">Doorslaggevend bewijs</h3><div class="tv-acc ph">').concat(C2.keys.map(([k, n]) => '<button type="button" data-tvk="'.concat(k, '" aria-pressed="').concat(tvPh.key === k, '">').concat(n, "</button>")).join(""), "</div>") : "", '<button type="button" class="btn primary" id="tvSend" ').concat(tvPh.vote && (!solo || tvPh.mot && tvPh.key) ? "" : "disabled", ">").concat(solo ? "🔒 Dit is de dader" : tvPh.sent ? "✓ Verstuurd · opnieuw sturen" : "Verstuur mijn stem", "</button>\n  ").concat(solo ? "".concat((tvPh.tip || 0) < C2.tips.length ? '<button type="button" class="btn small" id="tvPTip">💡 Tip '.concat((tvPh.tip || 0) + 1, "</button>") : "").concat(tvPh.tip ? '<ol class="tv-tips ph">'.concat(C2.tips.slice(0, tvPh.tip).map((t) => "<li>".concat(t, "</li>")).join(""), "</ol>") : "") : '<p class="hint">'.concat(tvPh.online === "online" ? "✅ Verbonden met het tv-scherm." : tvPh.online === "offline" ? 'Geen verbinding met het tv-scherm. Zeg je stem hardop; de host telt hem mee. <button type="button" class="btn small" id="tvRetry">Opnieuw verbinden</button>' : "Verbinden met het tv-scherm…", "</p>"));
+      body = '<div class="tv-paper tv-doc tv-res '.concat(ok ? "ok" : "", '"><p class="tv-mono">UITSPRAAK</p><h3>').concat(S.name, "</h3>").concat(tvStamp(ok ? "DADER · OPGELOST" : "ONSCHULDIG", ok ? "green" : ""), "<p>").concat(ok ? "Goed gedaan, rechercheur!" : "Dat klopt niet. Het bewijs wijst naar iemand anders.", "</p>").concat(R2.tr ? '<p class="tv-traitres '.concat(R2.tr.caught ? "ok" : "", '">🗡️ De verrader was <b>').concat(tvEsc(R2.tr.name), "</b>. ").concat(R2.tr.caught ? "Ontmaskerd!" : "Ontsnapt!", "</p>") : "").concat(solo ? ok ? '<p class="tv-score">'.concat("★".repeat(tvStars(C2, R2))).concat("☆".repeat(3 - tvStars(C2, R2)), " <small>dader ✓ · motief ").concat(R2.mot === C2.motive ? "✓" : "✗", " · bewijs ").concat(R2.key === C2.key ? "✓" : "✗", '</small></p><button type="button" class="btn primary" id="tvSOpl">📜 De volledige oplossing</button>') : '<button type="button" class="btn" id="tvSAgain">↺ Nog eens proberen</button> <button type="button" class="btn" id="tvSGive">Toon de oplossing</button>' : "", "</div>");
+    } else body = '<p class="hint">'.concat(solo ? "Weet je het zeker? Je mag één keer kiezen; daarna kun je opnieuw proberen." : "Kies wie het volgens jou gedaan heeft. Je stem gaat naar het tv-scherm.", "</p>").concat(solo ? "" : '<label class="tv-nm">Jouw naam <input id="tvNm" maxlength="20" value="'.concat(tvEsc(tvName()), '"></label>'), '\n  <div class="tv-vgrid">').concat(C2.suspects.map((S) => '<button type="button" class="tv-vb" data-tvv="'.concat(S.id, '" aria-pressed="').concat(tvPh.vote === S.id, '">').concat(tvMug(S, 90), "<b>").concat(S.name, "</b><small>").concat(S.role, "</small></button>")).join(""), "</div>").concat(!solo && tvRole() ? '<h3 class="tv-ph3">🗡️ Wie is de verrader?</h3><div class="tv-acc ph">'.concat(tvRole().players.map((p) => '<button type="button" data-tvtr="'.concat(tvEsc(p.uid), '" aria-pressed="').concat(tvPh.tr === p.uid, '">').concat(tvEsc(p.name), "</button>")).join(""), "</div>") : "", "\n  ").concat(solo ? '<h3 class="tv-ph3">Waarom?</h3><div class="tv-acc ph">'.concat(C2.motives.map(([k, n]) => '<button type="button" data-tvm="'.concat(k, '" aria-pressed="').concat(tvPh.mot === k, '">').concat(n, "</button>")).join(""), '</div><h3 class="tv-ph3">Doorslaggevend bewijs</h3><div class="tv-acc ph">').concat(C2.keys.map(([k, n]) => '<button type="button" data-tvk="'.concat(k, '" aria-pressed="').concat(tvPh.key === k, '">').concat(n, "</button>")).join(""), "</div>") : "", '<button type="button" class="btn primary" id="tvSend" ').concat(tvPh.vote && (!solo || tvPh.mot && tvPh.key) ? "" : "disabled", ">").concat(solo ? "🔒 Dit is de dader" : tvPh.sent ? "✓ Verstuurd · opnieuw sturen" : "Verstuur mijn stem", "</button>\n  ").concat(solo ? "".concat((tvPh.tip || 0) < C2.tips.length ? '<button type="button" class="btn small" id="tvPTip">💡 Tip '.concat((tvPh.tip || 0) + 1, "</button>") : "").concat(tvPh.tip ? '<ol class="tv-tips ph">'.concat(C2.tips.slice(0, tvPh.tip).map((t) => "<li>".concat(t, "</li>")).join(""), "</ol>") : "") : '<p class="hint">'.concat(tvPh.online === "online" ? "✅ Verbonden met het tv-scherm." : tvPh.online === "offline" ? 'Geen verbinding met het tv-scherm. Zeg je stem hardop; de host telt hem mee. <button type="button" class="btn small" id="tvRetry">Opnieuw verbinden</button>' : "Verbinden met het tv-scherm…", "</p>"));
   }
   P.innerHTML = "".concat(solo ? '<button class="btn small backbtn" id="tvBack" type="button">← Terug</button>' : "", '<div class="storyhead"><span class="kicker">Tv-dossier · zaak ').concat(C2.nr).concat(solo ? " · alleen" : TVQ && TVQ.r ? " · kamer ".concat(TVQ.r).concat(TVQ.n ? " · speler ".concat(TVQ.n) : "") : "", "</span><h3>").concat(C2.title, '</h3></div>\n  <div class="tv-ptabs" role="tablist">').concat(tabs.map(([k, n]) => '<button type="button" role="tab" data-tvt="'.concat(k, '" aria-selected="').concat(tvPh.tab === k, '">').concat(n, "</button>")).join(""), '</div><div class="tv-pbody">').concat(body, "</div>");
   const on = (id, f) => {
@@ -12786,6 +12910,11 @@ function tvPhone(C2, solo) {
     tvPh.sent = false;
     renderTv();
   });
+  P.querySelectorAll("[data-tvtr]").forEach((b) => b.onclick = () => {
+    tvPh.tr = b.dataset.tvtr;
+    tvPh.sent = false;
+    renderTv();
+  });
   const nm = $("tvNm");
   if (nm) nm.onchange = () => store.set("md-tv-name", nm.value.trim().slice(0, 20));
   on("tvSend", () => {
@@ -12799,7 +12928,7 @@ function tvPhone(C2, solo) {
     }
     const c = tvPeerPh && tvPeerPh.c;
     if (c && c.open) {
-      c.send({ t: "vote", uid: tvUid(), name: tvName(), s: tvPh.vote });
+      c.send({ t: "vote", uid: tvUid(), name: tvName(), s: tvPh.vote, tr: tvPh.tr || "" });
     } else {
       tvPh.online = "offline";
       renderTv();
@@ -13118,7 +13247,7 @@ function tvCmd(a, v) {
     if (click(q('[data-big=""]')) || click(q('[data-big="-1"]'))) return click(q('[data-big="'.concat(esc(v), '"]')));
     return false;
   }
-  const ids = { round: "tvRound", play: "tvPlay", env: "tvEnv", rev: "tvRev", opl: "tvOpl", again: "tvAgain", give: "tvGive", film: "tvFilm", tip: "tvTip", pause: "tvPause", clr: "tvClr" };
+  const ids = { trait: "tvTrait", round: "tvRound", play: "tvPlay", env: "tvEnv", rev: "tvRev", opl: "tvOpl", again: "tvAgain", give: "tvGive", film: "tvFilm", tip: "tvTip", pause: "tvPause", clr: "tvClr" };
   if (ids[a]) return click(q("#" + ids[a]));
   const at = { mot: "data-mot", key: "data-key", tm: "data-tm", np: "data-np" };
   if (at[a]) return click(q("[".concat(at[a], '="').concat(esc(v), '"]')));
@@ -13146,7 +13275,7 @@ function tvRemote(C2) {
   let ctx = "", t = "";
   if (sc === "spel") {
     t = "Wie doen er mee?";
-    ctx = '<p class="hint">Iedereen binnen? Tik op <b>Melding</b> om het onderzoek te starten.</p><div class="tv-rrow">'.concat([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((k) => B("np", k, String(k), h.np === k)).join(""), "</div>");
+    ctx = '<p class="hint">Iedereen binnen? Tik op <b>Melding</b> om het onderzoek te starten.</p><div class="tv-rrow">'.concat([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((k) => B("np", k, String(k), h.np === k)).join(""), '</div><div class="tv-rrow">').concat(B("trait", "", h.trait ? "🗡️ Verrader: aan" : "🗡️ Verrader: uit", !!h.trait), "</div>");
   }
   if (sc === "melding") {
     t = "Melding";
@@ -15258,7 +15387,7 @@ function start(data) {
 }
 ((_b = (_a = window.claude) == null ? void 0 : _a.hot) == null ? void 0 : _b.ready) ? window.claude.hot.ready(start) : start((_e = (_d = (_c = window.claude) == null ? void 0 : _c.hot) == null ? void 0 : _d.data) != null ? _e : {});
 </script>
-<script>const APPV = "20261104213627";
+<script>const APPV = "20261104215516";
 if ("serviceWorker" in navigator) {
   addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {
   }));

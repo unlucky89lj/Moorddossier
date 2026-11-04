@@ -5411,9 +5411,12 @@ function stBase(){if(STMAP)return STMAP;const r=stRng(4417),out=[];const P=a=>ou
  for(const [x,y,c,rt] of cars)P(STO.car(x,y,c,rt));
  for(const [x,y,c] of [[220,1700,'#3a6ab8'],[1250,1720,'#e0b020'],[700,1760,'#6a6a72']])P(STO.boat(x,y,c));
  // drukte: wandelaars op straten en pleinen
- const spots=[];for(let i=0;i<260;i++){const t=r();let x,y;if(t<.3){x=r()*STW;y=[410,1250,1610,870,770][Math.floor(r()*5)]+r()*14-7}else if(t<.55){x=[410,810,1210,20][Math.floor(r()*4)]+r()*16-8;y=70+r()*1540}else if(t<.75){x=450+r()*320;y=460+r()*290}else if(t<.9){x=850+r()*320;y=1300+r()*290}else{x=50+r()*320;y=270+r()*100}
+ const spots=[];for(let i=0;i<420;i++){const t=r();let x,y;if(t<.3){x=r()*STW;y=[410,1250,1610,870,770][Math.floor(r()*5)]+r()*14-7}else if(t<.55){x=[410,810,1210,20][Math.floor(r()*4)]+r()*16-8;y=70+r()*1540}else if(t<.75){x=450+r()*320;y=460+r()*290}else if(t<.9){x=850+r()*320;y=1300+r()*290}else{x=50+r()*320;y=270+r()*100}
    if(y>780&&y<860&&!(Math.abs(x-410)<26||Math.abs(x-810)<26||Math.abs(x-1210)<26))continue;if(Math.hypot(x-1010,y-1500)<120)continue;spots.push([x,y])}
- const fill=spots.filter(([x,y])=>!STCASES.some(c=>c.steps.some(s=>Math.hypot(s.x-x,s.y-y)<70))&&!STEGP.some(([a,b])=>Math.hypot(a-x,b-y)<45));
+ const inCar=(x,y)=>cars.some(([cx,cy,,rt])=>rt===90?Math.abs(x-cx)<20&&y>cy-36&&y<cy+46:Math.abs(x-cx)<36&&y>cy-16&&y<cy+42);
+ const fill=[];for(const [x,y] of spots){if(STCASES.some(c=>c.steps.some(s=>Math.hypot(s.x-x,s.y-y)<70))||STEGP.some(([a,b])=>Math.hypot(a-x,b-y)<45)||inCar(x,y))continue;
+   if(fill.some(([fx,fy])=>{const dx=Math.abs(fx-x),dy=Math.abs(fy-y);return (dx<14&&dy>5&&dy<32)||(dx<7&&dy<=5)}))continue;fill.push([x,y])}
+ fill.sort((p,q)=>p[1]-q[1]);
  for(const [x,y] of fill){const L=stLk({f:r()<.5,skin:TSKIN[Math.floor(r()*TSKIN.length)],hc:THC[Math.floor(r()*THC.length)],top:TTOP[Math.floor(r()*TTOP.length)],legs:TLEG[Math.floor(r()*TLEG.length)],glasses:r()<.15,ph:r()*3});L.hair=L.f?['long','bun','bob'][Math.floor(r()*3)]:['short','curly','bald'][Math.floor(r()*3)];L.beard=!L.f&&r()<.2;
    if(r()<.12)L.hat=['cap','fedora'][Math.floor(r()*2)];P(stFig(L,x,y,{s:.2,flip:r()<.5,item:r()<.15?STI.bag:r()<.1?STI.phone:''}))}
  return STMAP=rlColor(()=>out.join(''))}
@@ -6629,7 +6632,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261104093720';
+const APPV='20261104095719';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

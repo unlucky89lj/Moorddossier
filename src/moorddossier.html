@@ -6907,8 +6907,12 @@ let TVQ=null,TVJOIN=null;try{const u0=new URLSearchParams(location.search);if(u0
 try{const u=new URLSearchParams(location.search);if(u.get('tv')){TVQ={id:u.get('tv'),r:(u.get('r')||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,4),p:(u.get('p')||'').split('.').map(Number).filter(n=>n>=1&&n<=4),join:u.get('j')==='1',rc:u.get('rc')==='1'};if(TVQ.join){const sv=store.get('md-tv-join');if(sv&&sv.r===TVQ.r){TVQ.n=sv.n;TVQ.p=sv.p||TVQ.p;TVQ.spec=!sv.n}}}}catch(e){}
 let tvPh={tab:'dos',open:null,vote:null,sent:false,online:'',reveal:null,tip:0};
 let tvHost=null,tvStage=null,tvScr='melding',tvBig=null,tvPeerPh=null;
-const TVLIB={peer:['https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js','Peer']};
-const TVLP={};function tvLib(k){const [src,g]=TVLIB[k];if(window[g])return Promise.resolve(window[g]);if(TVLP[k])return TVLP[k];return TVLP[k]=new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.async=true;s.onload=()=>window[g]?res(window[g]):rej();s.onerror=()=>{delete TVLP[k];s.remove();rej()};document.head.appendChild(s)})}
+// eigen, voor oude tv-browsers omgezette PeerJS 1.5.4 (lib/peerjs.legacy.js); de online versie is reserve
+const tvRoot=()=>location.origin+location.pathname.replace(/(tv|join)\/(index\.html)?$/,'').replace(/index\.html$/,'');
+const TVLIB={peer:[()=>tvRoot()+'lib/peerjs.legacy.js','https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js','Peer']};
+const TVLP={};function tvLib(k){const L=TVLIB[k],g=L[L.length-1],srcs=L.slice(0,-1).map(x=>typeof x==='function'?x():x);if(window[g])return Promise.resolve(window[g]);if(TVLP[k])return TVLP[k];
+ const one=src=>new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.async=true;s.onload=()=>window[g]?res(window[g]):rej();s.onerror=()=>{s.remove();rej()};document.head.appendChild(s)});
+ return TVLP[k]=srcs.reduce((p,src)=>p.catch(()=>one(src)),Promise.reject()).catch(e=>{delete TVLP[k];throw e})}
 const tvRoom=()=>Array.from({length:4},()=>'BCDFGHJKLMNPRSTVWXZ'[Math.floor(Math.random()*19)]).join('');
 const tvUid=()=>{let u=store.get('md-tv-uid');if(!u){u=Math.random().toString(36).slice(2,10);store.set('md-tv-uid',u)}return u};
 const tvBase=()=>{const pth=location.pathname.replace(/(tv|join)\/(index\.html)?$/,'').replace(/index\.html$/,'');return /github\.io$/.test(location.hostname)&&pth.endsWith('/')?location.origin+pth:'https://unlucky89lj.github.io/Moorddossier/'};

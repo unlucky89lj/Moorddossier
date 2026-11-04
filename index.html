@@ -11701,23 +11701,27 @@ try {
 }
 let tvPh = { tab: "dos", open: null, vote: null, sent: false, online: "", reveal: null, tip: 0 };
 let tvHost = null, tvStage = null, tvScr = "melding", tvBig = null, tvPeerPh = null;
-const TVLIB = { peer: ["https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js", "Peer"] };
+const tvRoot = () => location.origin + location.pathname.replace(/(tv|join)\/(index\.html)?$/, "").replace(/index\.html$/, "");
+const TVLIB = { peer: [() => tvRoot() + "lib/peerjs.legacy.js", "https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js", "Peer"] };
 const TVLP = {};
 function tvLib(k) {
-  const [src, g] = TVLIB[k];
+  const L = TVLIB[k], g = L[L.length - 1], srcs = L.slice(0, -1).map((x) => typeof x === "function" ? x() : x);
   if (window[g]) return Promise.resolve(window[g]);
   if (TVLP[k]) return TVLP[k];
-  return TVLP[k] = new Promise((res, rej) => {
+  const one = (src) => new Promise((res, rej) => {
     const s = document.createElement("script");
     s.src = src;
     s.async = true;
     s.onload = () => window[g] ? res(window[g]) : rej();
     s.onerror = () => {
-      delete TVLP[k];
       s.remove();
       rej();
     };
     document.head.appendChild(s);
+  });
+  return TVLP[k] = srcs.reduce((p, src) => p.catch(() => one(src)), Promise.reject()).catch((e) => {
+    delete TVLP[k];
+    throw e;
   });
 }
 const tvRoom = () => Array.from({ length: 4 }, () => "BCDFGHJKLMNPRSTVWXZ"[Math.floor(Math.random() * 19)]).join("");
@@ -15006,7 +15010,7 @@ function start(data) {
 }
 ((_b = (_a = window.claude) == null ? void 0 : _a.hot) == null ? void 0 : _b.ready) ? window.claude.hot.ready(start) : start((_e = (_d = (_c = window.claude) == null ? void 0 : _c.hot) == null ? void 0 : _d.data) != null ? _e : {});
 </script>
-<script>const APPV = "20261104162704";
+<script>const APPV = "20261104164714";
 if ("serviceWorker" in navigator) {
   addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {
   }));

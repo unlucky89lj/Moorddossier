@@ -1016,6 +1016,12 @@ body.kiosk-join .tv-jform .btn.primary{font-size:22px;padding:16px}
 .tv-hmini .tv-btn{font-size:17px;padding:9px 14px}
 .tv-hlvl{display:flex;grid-gap:10px;gap:10px;position:relative;z-index:1}.tv-hlvl button{font:700 20px system-ui;padding:10px 18px;border-radius:999px;border:2px solid #e0a640;background:transparent;color:#f3efe6;cursor:pointer}.tv-hlvl button[aria-pressed=true]{background:#e0a640;color:#151716}
 .tv-pbody .tv-stamp{font-size:10px;letter-spacing:2px;padding:3px 8px;top:10px;right:10px}.tv-pbody .tv-doc h4{padding-right:120px}
+/* tot 10 spelers */
+.tv-np{flex-wrap:wrap}.tv-np button{min-width:44px}
+.tv-slots{display:flex;flex-direction:column;grid-gap:10px;gap:10px}
+.tv-slots.two{display:grid;grid-template-columns:1fr 1fr;grid-gap:8px;grid-gap:8px;gap:8px}
+.tv-slots.two .tv-slot{padding:8px 10px;grid-gap:10px;gap:10px}.tv-slots.two .tv-sn{width:38px;height:38px;font-size:22px}.tv-slots.two .tv-sw b{font-size:19px}.tv-slots.two .tv-sw small{font-size:12px;line-height:1.2}
+.tv-rrow .tv-rc[data-rc=np]{flex:1 1 15%}
 </style>
 </head>
 <body>
@@ -11576,7 +11582,7 @@ const TVCASES = [{
   title: "Het laatste gerecht",
   level: "Gemiddeld",
   time: "60 tot 90 minuten",
-  players: "1 tot 4 spelers",
+  players: "1 tot 10 spelers",
   blurb: "Na sluitingstijd ligt de chef van restaurant De Vergulde Lepel dood in zijn keuken. Vier mensen waren die avond in de buurt. Eén van hen liegt.",
   melding: '<p class="tv-mono">MELDING 112 · ZATERDAG 7 MAART · 00:41</p><p>Schoonmaker <b>Sjaak Tetteroo</b> belt 112. In de keuken van restaurant <b>De Vergulde Lepel</b> aan de Lindengracht ligt chef-kok <b>Ferre Hoogwerf</b> (52) op de grond. Hij leeft niet meer.</p><p>De schouwarts ziet een harde klap op het achterhoofd. Tijdstip van overlijden: <b>tussen 23:20 en 00:00</b>. Het restaurant ging om 23:00 dicht.</p><p>Vier mensen waren die avond in de buurt: de sous-chef, de sommelier, zijn vrouw en een restaurantcriticus. Bekijk de plaats delict, luister de verhoren en verdeel de dossiers. Wijs samen de dader aan.</p>',
   photos: [[["wall", ["stove", 120, 182, 1.25], ["shards", 212, 186, 1.1], ["marker", 262, 190, 1, 1]], "1 · keuken, bij het fornuis"], [["dark", ["shelf", 150, 178, 1.1], ["bottle", 112, 122, 0.7], ["bottle", 188, 122, 0.7], ["marker", 240, 188, 1, 2]], "2 · wijnkelder, het rek"], [["night", ["door", 130, 182, 1.1], ["bike", 228, 182, 0.7], ["marker", 62, 188, 1, 3]], "3 · achterdeur, de steeg"], [["desk", ["laptop", 108, 162, 1], ["letter", 204, 172, 1], ["marker", 262, 188, 1, 4]], "4 · bureau van Ferre"]],
@@ -11687,7 +11693,7 @@ try {
 try {
   const u = new URLSearchParams(location.search);
   if (u.get("tv")) {
-    TVQ = { id: u.get("tv"), r: (u.get("r") || "").toUpperCase().replace(/[^A-Z]/g, "").slice(0, 4), p: (u.get("p") || "").split(".").map(Number).filter((n) => n >= 1 && n <= 4), join: u.get("j") === "1", rc: u.get("rc") === "1" };
+    TVQ = { id: u.get("tv"), r: (u.get("r") || "").toUpperCase().replace(/[^A-Z]/g, "").slice(0, 4), p: (u.get("p") || "").split(".").map(Number).filter((n) => n >= 1 && n <= 9 || n >= 110 && n <= 199), join: u.get("j") === "1", rc: u.get("rc") === "1" };
     if (TVQ.join) {
       const sv = store.get("md-tv-join");
       if (sv && sv.r === TVQ.r) {
@@ -11740,9 +11746,29 @@ const tvBase = () => {
 const tvJoinUrl = (r) => tvBase() + "join" + (r ? "?c=" + r : "");
 const tvLink = (C2, r, slots) => "".concat(tvBase(), "?tv=").concat(C2.id, "&r=").concat(r, "&p=").concat(slots.join("."));
 const tvSplit = (C2, np) => {
-  const k = C2.secret.length, n = Math.min(np || 4, k);
-  return [...Array(n)].map((_, i) => [...Array(k)].map((_2, j) => j + 1).filter((j) => (j - 1) % n === i));
+  np = np || 4;
+  const k = C2.secret.length;
+  if (np <= k) return [...Array(np)].map((_, i) => [...Array(k)].map((_2, j) => j + 1).filter((j) => (j - 1) % np === i));
+  const docs = [];
+  C2.secret.forEach((D, f) => D.docs.forEach((d, j) => docs.push(100 + (f + 1) * 10 + j)));
+  const n = Math.min(np, docs.length);
+  return [...Array(np)].map((_, i) => i < n ? docs.filter((_2, x) => x % n === i) : [docs[i * 7 % docs.length]]);
 };
+const tvSlotOk = (C2, k) => k >= 1 && k <= C2.secret.length || k >= 110 && C2.secret[Math.floor((k - 100) / 10) - 1] && C2.secret[Math.floor((k - 100) / 10) - 1].docs[(k - 100) % 10];
+const tvSlotGroups = (C2, slots) => {
+  const g = /* @__PURE__ */ new Map();
+  slots.forEach((k) => {
+    if (k < 100) {
+      g.set(k, C2.secret[k - 1].docs.slice());
+    } else {
+      const f = Math.floor((k - 100) / 10), j = (k - 100) % 10;
+      if (!g.has(f)) g.set(f, []);
+      if (g.get(f) !== null) g.get(f).push(C2.secret[f - 1].docs[j]);
+    }
+  });
+  return [...g].map(([f, docs]) => ({ D: C2.secret[f - 1], docs }));
+};
+const tvSlotLabel = (C2, sl) => tvSlotGroups(C2, sl).map(({ D, docs }) => docs.length === D.docs.length ? "".concat(D.ic, " ").concat(D.t) : "".concat(D.ic, " ").concat(docs.map((d) => d.t).join(", "))).join(" · ");
 const TVLV = { Makkelijk: 1, Gemiddeld: 2, Moeilijk: 3, Expert: 4 };
 const tvLv = (C2) => "⭐".repeat(TVLV[C2.level] || 2);
 const tvMug = (S, w = 180, bg) => S.look ? RF(__spreadProps(__spreadValues({}, S.look), { alt: S.name, bg })).replace('class="rf"', 'class="rf tv-mugsvg" width="'.concat(w, '"')) : '<svg viewBox="-34 -150 68 66" class="tv-mugsvg" width="'.concat(w, '" aria-hidden="true">').concat(toonBody(S.name), "</svg>");
@@ -11963,6 +11989,8 @@ function tvNextRound(C2, s) {
       const u = ids[i % ids.length];
       (g[u] = g[u] || []).push(i);
     });
+    const nt = C2.rounds[r].tips.length;
+    for (let i = nt; i < ids.length; i++) (g[ids[i]] = g[ids[i]] || []).push(i % nt);
   }
   s.given[r] = g;
   saveTv();
@@ -11979,7 +12007,7 @@ function tvScrRonde(C2, s) {
   return '<div class="tv-ronde"><div class="tv-rleft"><p class="tv-mono" style="color:#e0a640">GEHEIME TIPS</p><h2 class="tv-h2" style="text-align:left">'.concat(r ? "Ronde ".concat(r, " · ").concat(cur.t) : "Nog geen ronde gestart", '</h2>\n  <div class="tv-rdots">').concat(R0.map((x, i) => '<span class="'.concat(i < r ? "on" : "", '">').concat(i + 1, "</span>")).join(""), "</div>\n  ").concat(solo ? "" : '<div class="tv-paper tv-rule"><b>Spelregel</b><p>Elke ronde krijgt iedereen <b>andere, geheime tips</b> op zijn telefoon. Je mag je scherm <b>niet laten zien</b>. Vertel in je eigen woorden wat je weet. Niet elke tip is belangrijk!</p></div>', "\n  ").concat(next ? '<button type="button" class="tv-btn primary" id="tvRound">📨 '.concat(r ? "Start ronde " + (r + 1) : "Start ronde 1", ": ").concat(R0[r].t, "</button>") : '<p class="tv-sub" style="text-align:left">Alle rondes zijn gespeeld. Tijd om te beschuldigen!</p>', '</div>\n  <div class="tv-rright">').concat(solo ? r ? R0.slice(0, r).map((x, ri) => x.tips.map((t) => '<article class="tv-paper tv-tip">'.concat(tvStamp("RONDE " + (ri + 1)), "<p>").concat(t, "</p></article>")).join("")).join("") : '<p class="tv-sub">Start een ronde om de tips te zien.</p>' : r ? '<h3 class="tv-sub" style="text-align:left;margin:0 0 10px">Wie heeft er een tip?</h3>'.concat(live.length ? live.map(([c, p]) => {
     const n = (g[p.uid] || []).length;
     return '<div class="tv-slot '.concat(n ? "in" : "", '"><span class="tv-sn">').concat(p.n || "·", '</span><span class="tv-sw"><b>').concat(tvEsc(p.name), "</b><small>").concat(n ? "".concat(n, " geheime ").concat(n === 1 ? "tip" : "tips", " · vertel wat je weet!") : "deze ronde geen tip · luister goed", "</small></span>").concat(n ? "<i>📨</i>" : "", "</div>");
-  }).join("") : '<p class="tv-sub">Er zijn nog geen telefoons verbonden.</p>') : '<p class="tv-sub" style="text-align:left">Er zijn '.concat(C2.rounds.length, " rondes met elk ").concat(C2.rounds[0].tips.length, " tips. De tips worden verdeeld over alle telefoons die meedoen.</p>"), "</div></div>");
+  }).join("") : '<p class="tv-sub">Er zijn nog geen telefoons verbonden.</p>') : '<p class="tv-sub" style="text-align:left">Er zijn '.concat(C2.rounds.length === 1 ? "1 ronde" : C2.rounds.length + " rondes", " met samen ").concat(C2.rounds.reduce((n, R02) => n + R02.tips.length, 0), " tips. De tips worden verdeeld over alle telefoons die meedoen.</p>"), "</div></div>");
 }
 function tvSend(c, m) {
   try {
@@ -12117,10 +12145,10 @@ function tvScrVerh(C2, s) {
 function tvScrSpel(C2, s) {
   const n = s.np || 4, sp2 = tvSplit(C2, n), pls = tvHost ? Object.values(tvHost.players).filter((p) => !p.gone) : [], url = tvJoinUrl("").replace(/^https?:\/\//, "");
   const who = (i) => pls.find((p) => p.join && p.n === i + 1);
-  return '<div class="tv-join"><div class="tv-jl"><p class="tv-jgo">Pak je telefoon en ga naar</p><p class="tv-jurl">'.concat(url, '</p><p class="tv-jgo">en vul deze code in</p><p class="tv-jcode">').concat((s.room || "····").split("").map((ch) => "<b>".concat(ch, "</b>")).join(""), '</p>\n  <div class="tv-jrow"><div class="tv-qr big" data-jqr="1"></div><div><p class="tv-jgo small">Of scan de QR-code. Speel je op afstand? Stuur de link naar je vrienden.</p><button type="button" class="tv-btn" id="tvJShare">🔗 Stuur link</button></div></div></div>\n <div class="tv-jr"><div class="tv-np">Spelers ').concat([1, 2, 3, 4].map((k) => '<button type="button" data-np="'.concat(k, '" aria-pressed="').concat(k === n, '">').concat(k, "</button>")).join(""), "</div>\n  ").concat(sp2.map((sl, i) => {
+  return '<div class="tv-join"><div class="tv-jl"><p class="tv-jgo">Pak je telefoon en ga naar</p><p class="tv-jurl">'.concat(url, '</p><p class="tv-jgo">en vul deze code in</p><p class="tv-jcode">').concat((s.room || "····").split("").map((ch) => "<b>".concat(ch, "</b>")).join(""), '</p>\n  <div class="tv-jrow"><div class="tv-qr big" data-jqr="1"></div><div><p class="tv-jgo small">Of scan de QR-code. Speel je op afstand? Stuur de link naar je vrienden.</p><button type="button" class="tv-btn" id="tvJShare">🔗 Stuur link</button></div></div></div>\n <div class="tv-jr"><div class="tv-np">Spelers ').concat([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((k) => '<button type="button" data-np="'.concat(k, '" aria-pressed="').concat(k === n, '">').concat(k, "</button>")).join(""), '</div>\n  <div class="tv-slots ').concat(sp2.length > 5 ? "two" : "", '">').concat(sp2.map((sl, i) => {
     const p = who(i);
-    return '<div class="tv-slot '.concat(p ? "in" : "", '"><span class="tv-sn">').concat(i + 1, '</span><span class="tv-sw"><b>').concat(p ? tvEsc(p.name) : "wacht op speler…", "</b><small>").concat(sl.map((k) => "".concat(C2.secret[k - 1].ic, " ").concat(C2.secret[k - 1].t)).join(" · "), "</small></span>").concat(p ? "<i>✓</i>" : "", "</div>");
-  }).join(""), "\n  ").concat(pls.filter((p) => !p.rc && (!p.join || p.n === 0)).length ? '<p class="tv-jgo small">Ook mee: '.concat(pls.filter((p) => !p.rc && (!p.join || p.n === 0)).map((p) => tvEsc(p.name)).join(", "), "</p>") : "").concat(pls.filter((p) => p.rc).length ? '<p class="tv-jgo small">📺 Bediening: '.concat(pls.filter((p) => p.rc).map((p) => tvEsc(p.name)).join(", "), "</p>") : '<p class="tv-jgo small">Tip: een tablet of extra telefoon kan de tv bedienen. Kies op de meedoe-pagina voor <b>Alleen de tv bedienen</b>.</p>', '\n  <p class="tv-jst">').concat(tvHost && tvHost.status === "online" ? "🟢 Kamer is open" : tvHost && tvHost.status === "offline" ? "🔴 Geen live verbinding. Doe mee met de losse links of tel de stemmen met de hand." : "🟡 Kamer openen…", "</p></div></div>");
+    return '<div class="tv-slot '.concat(p ? "in" : "", '"><span class="tv-sn">').concat(i + 1, '</span><span class="tv-sw"><b>').concat(p ? tvEsc(p.name) : "wacht op speler…", "</b><small>").concat(tvSlotLabel(C2, sl), "</small></span>").concat(p ? "<i>✓</i>" : "", "</div>");
+  }).join(""), "</div>\n  ").concat(pls.filter((p) => !p.rc && (!p.join || p.n === 0)).length ? '<p class="tv-jgo small">Ook mee: '.concat(pls.filter((p) => !p.rc && (!p.join || p.n === 0)).map((p) => tvEsc(p.name)).join(", "), "</p>") : "").concat(pls.filter((p) => p.rc).length ? '<p class="tv-jgo small">📺 Bediening: '.concat(pls.filter((p) => p.rc).map((p) => tvEsc(p.name)).join(", "), "</p>") : '<p class="tv-jgo small">Tip: een tablet of extra telefoon kan de tv bedienen. Kies op de meedoe-pagina voor <b>Alleen de tv bedienen</b>.</p>', '\n  <p class="tv-jst">').concat(tvHost && tvHost.status === "online" ? "🟢 Kamer is open" : tvHost && tvHost.status === "offline" ? "🔴 Geen live verbinding. Doe mee met de losse links of tel de stemmen met de hand." : "🟡 Kamer openen…", "</p></div></div>");
 }
 function tvScrDos(C2, s) {
   const k = typeof tvBig === "string" && /^d\d$/.test(tvBig) ? +tvBig[1] : -1;
@@ -12469,7 +12497,7 @@ function tvPhone(C2, solo) {
     };
     return;
   }
-  const P = $("pTv"), slots = solo ? C2.secret.map((_, i) => i + 1) : TVQ.spec ? [] : TVQ.p.length ? TVQ.p.filter((k) => k <= C2.secret.length) : C2.secret.map((_, i) => i + 1), s = tvS(C2.id);
+  const P = $("pTv"), slots = solo ? C2.secret.map((_, i) => i + 1) : TVQ.spec ? [] : TVQ.p.length ? TVQ.p.filter((k) => tvSlotOk(C2, k)) : C2.secret.map((_, i) => i + 1), s = tvS(C2.id);
   const tabs = [["dos", "📁 Mijn dossier"], ["verh", "🎧 Verhoren"], ["tips", "🕵️ Tips".concat(tvPh.newTips ? ' <i class="tv-badge">'.concat(tvPh.newTips, "</i>") : "")], ["zaak", "🗂 De zaak"], ["not", "📝 Notities"], ["stem", "🗳 Stem"]];
   let body = "";
   if (tvPh.tab === "tips") {
@@ -12489,9 +12517,8 @@ function tvPhone(C2, solo) {
     }).join(""), '<h3 class="tv-ph3">Vrije notities</h3><textarea class="tv-nfree" id="tvNFree" rows="7" placeholder="Tijden, vragen, ideeën…">').concat(tvEsc(N.free || ""), "</textarea>");
   } else if (tvPh.tab === "bed") body = tvRemote(C2);
   else if (tvPh.tab === "dos" && !slots.length) body = '<div class="tv-paper tv-doc"><h4>Alle dossiers zijn al vergeven</h4><p>Je doet mee als extra rechercheur. Luister de verhoren, bekijk de zaak en stem mee met de groep.</p></div>';
-  else if (tvPh.tab === "dos") body = '<p class="hint">'.concat(solo ? "Je speelt alleen: je hebt alle ".concat(C2.secret.length, " dossiers.") : "Dit dossier is alleen voor jou. Lees het goed en vertel de anderen wat je ziet. Laat je telefoon niet zomaar zien!", "</p>").concat(slots.map((k) => {
-    const D = C2.secret[k - 1];
-    return '<details class="tv-fold" '.concat(slots.length === 1 ? "open" : "", '><summary><span class="tv-tab">').concat(D.ic, " ").concat(D.t, "</span><small>").concat(D.docs.length, " stukken</small></summary>").concat(D.docs.map((d) => '<article class="tv-paper tv-doc">'.concat(tvStamp("VERTROUWELIJK"), "<h4>").concat(d.t, "</h4>").concat(d.h, "</article>")).join(""), "</details>");
+  else if (tvPh.tab === "dos") body = '<p class="hint">'.concat(solo ? "Je speelt alleen: je hebt alle ".concat(C2.secret.length, " dossiers.") : "Dit dossier is alleen voor jou. Lees het goed en vertel de anderen wat je ziet. Laat je telefoon niet zomaar zien!", "</p>").concat(tvSlotGroups(C2, slots).map(({ D, docs }) => {
+    return '<details class="tv-fold" '.concat(slots.length <= 2 ? "open" : "", '><summary><span class="tv-tab">').concat(D.ic, " ").concat(D.t, "</span><small>").concat(docs.length, " ").concat(docs.length === 1 ? "stuk" : "stukken", "</small></summary>").concat(docs.map((d) => '<article class="tv-paper tv-doc">'.concat(tvStamp("VERTROUWELIJK"), "<h4>").concat(d.t, "</h4>").concat(d.h, "</article>")).join(""), "</details>");
   }).join(""));
   if (tvPh.tab === "verh") {
     const S = C2.suspects.find((x) => x.id === tvPh.open);
@@ -12941,7 +12968,7 @@ function tvRemote(C2) {
   let ctx = "", t = "";
   if (sc === "spel") {
     t = "Wie doen er mee?";
-    ctx = '<p class="hint">Iedereen binnen? Tik op <b>Melding</b> om het onderzoek te starten.</p><div class="tv-rrow">'.concat([1, 2, 3, 4].map((k) => B("np", k, k + (k === 1 ? " speler" : " spelers"), h.np === k)).join(""), "</div>");
+    ctx = '<p class="hint">Iedereen binnen? Tik op <b>Melding</b> om het onderzoek te starten.</p><div class="tv-rrow">'.concat([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((k) => B("np", k, String(k), h.np === k)).join(""), "</div>");
   }
   if (sc === "melding") {
     t = "Melding";
@@ -12994,7 +13021,7 @@ TVCASES.push(
     title: "Val van de trap",
     level: "Makkelijk",
     time: "20 tot 30 minuten",
-    players: "1 tot 3 spelers",
+    players: "1 tot 10 spelers",
     date: "12-01",
     blurb: "Een oud-notaris ligt onder aan de trap van zijn villa. Een ongeluk, denkt de familie. De schouwarts denkt van niet.",
     melding: '<p class="tv-mono">MELDING 112 · DINSDAG 12 JANUARI · 20:16</p><p>Huishoudster <b>Inge Kroonhuis</b> belt 112. In de hal van villa <b>Eikenrode</b> ligt oud-notaris <b>Zeger Scholvliet</b> (71) onder aan de trap. Hij leeft niet meer.</p><p>De schouwarts ziet blauwe plekken op zijn borst. <b>Tussen 19:30 en 20:00</b> is hij overleden.</p><p>Drie mensen waren die avond in de buurt. Was het een ongeluk, of is hij geduwd?</p>',
@@ -13045,9 +13072,22 @@ TVCASES.push(
       { t: "Camera’s en pasjes", ic: "🎥", docs: [
         { t: "Sportschool: pasjes", h: '<table class="tv-t"><tr><th>Tijd</th><th>Naam</th><th>Wat</th></tr><tr><td>18:02</td><td>B. Molenkamp</td><td>in</td></tr><tr><td><b>19:10</b></td><td><b>B. Molenkamp</b></td><td><b>uit</b></td></tr></table>' },
         { t: "Deurbelcamera buurman", h: "<p>19:32 · een <b>rode auto</b> stopt bij Eikenrode. Een jongen in een <b>blauw trainingsjack</b> loopt naar binnen.</p><p>19:51 · hij rent naar buiten en rijdt snel weg.</p>" }
+      ] },
+      { t: "Getuigen", ic: "🗣️", docs: [
+        { t: "Pizzabezorger", h: "<p>“Om 19:35 bracht ik een pizza bij de buurman. Bij de villa ernaast stond een jongen in een <b>blauw trainingsjack</b> aan te bellen. Hij leek boos.”</p>" },
+        { t: "Telefoon Inge", h: "<p>19:20 – 20:02 · gesprek met haar zus.</p><p>De telefoon zat al die tijd op de <b>mast in haar eigen dorp</b>, zes kilometer van Eikenrode.</p>" },
+        { t: "Tv-kastje buurman", h: "<p>18:45 – 21:10 · voetbal, zonder pauze aan.</p><p>19:35 · de pizza wordt aan de deur afgerekend met de pas van <b>N. Grauwwold</b>.</p>" }
+      ] },
+      { t: "Sporen in huis", ic: "🔍", docs: [
+        { t: "Telefoon van Zeger", h: "<p>19:28 · gemiste oproep van <b>Benno</b>.</p><p>19:31 · sms van <b>Benno</b>: “Ik sta voor de deur. Doe open.”</p>" },
+        { t: "De traploper", h: "<p>De loper is <b>bovenaan</b> losgetrokken. Op de bovenste tree staat de afdruk van een <b>sportschoen, maat 43</b>.</p>" },
+        { t: "Tankbon", h: "<p>Tankstation aan de ringweg, vier kilometer van Eikenrode.</p><p><b>19:58</b> · € 20 benzine · betaald met de pas van <b>B. Molenkamp</b>.</p>" }
       ] }
     ],
-    rounds: [{ t: "De eerste indruk", tips: ["Benno vroeg vorige week aan zijn opa € 8.000 te leen. Opa zei nee.", "Benno rijdt in een kleine rode auto.", "Nanne en Zeger hadden al maanden ruzie over de eik in de tuin."] }],
+    rounds: [
+      { t: "De eerste indruk", tips: ["Benno vroeg vorige week aan zijn opa € 8.000 te leen. Opa zei nee.", "Benno rijdt in een kleine rode auto.", "Nanne en Zeger hadden al maanden ruzie over de eik in de tuin.", "Inge belt elke dinsdagavond lang met haar zus.", "Nanne bestelt bij elke voetbalwedstrijd een pizza.", "Zeger had het testament al vijf jaar niet veranderd."] },
+      { t: "Nieuwe sporen", tips: ["Benno draagt bij het sporten altijd zijn blauwe trainingsjack met een wit streepje.", "De sportschool ligt tien minuten rijden van Eikenrode.", "Inge heeft geen auto. Ze gaat altijd met de bus.", "Benno heeft schoenmaat 43."] }
+    ],
     motives: [["geld", "Hij wilde geld en kreeg het niet"], ["boom", "Ruzie over de eik"], ["erfenis", "Het geld uit het testament"]],
     motive: "geld",
     keys: [["camera", "Deurbelcamera: rode auto om 19:32"], ["ruzie", "De ruzie over de boom"], ["tas", "De vergeten tas"]],
@@ -13067,7 +13107,7 @@ TVCASES.push(
     title: "Overwerk",
     level: "Makkelijk",
     time: "25 tot 35 minuten",
-    players: "1 tot 3 spelers",
+    players: "1 tot 10 spelers",
     date: "03-02",
     blurb: "Een boekhouder werkt laat door op kantoor. De schoonmaakster vindt haar om tien voor elf. Wie kwam er nog langs?",
     melding: '<p class="tv-mono">MELDING 112 · WOENSDAG 3 FEBRUARI · 22:52</p><p>Schoonmaakster <b>Geertje Stroowold</b> vindt boekhouder <b>Froukje Pluimveld</b> (49) dood in haar kantoor op de vierde verdieping van <b>administratiekantoor Kwakernaak</b>.</p><p>Ze is geslagen met de zware nietmachine van haar bureau. <b>Tussen 21:00 en 21:30</b> is ze overleden.</p>',
@@ -13118,9 +13158,22 @@ TVCASES.push(
       { t: "Administratie", ic: "📒", docs: [
         { t: "Mail van Froukje", h: "<p><b>Aan:</b> directie · <b>20:58</b></p><p>“Er verdwijnt al maanden geld van klanten. Morgen laat ik jullie de rekeningen van Ype zien. H.”</p>" },
         { t: "Bankoverzicht", h: "<p>Van de rekening van klanten ging <b>€ 64.000</b> naar een rekening op naam van <b>Y. Kalkdam</b>.</p>" }
+      ] },
+      { t: "Garage en telefoons", ic: "🚗", docs: [
+        { t: "Slagboom garage", h: '<table class="tv-t"><tr><th>Tijd</th><th>Auto</th><th>Wat</th></tr><tr><td>08:10</td><td>grijze stationwagen, Y. Kalkdam</td><td>in</td></tr><tr><td><b>21:39</b></td><td><b>grijze stationwagen, Y. Kalkdam</b></td><td><b>uit</b></td></tr></table>' },
+        { t: "Telefoon Ype", h: "<p>20:59 · de mail van Froukje aan de directie wordt <b>geopend</b>. Froukje had Ype in de kopie gezet.</p><p>Zijn telefoon zit dan op de mast naast het kantoor.</p>" },
+        { t: "Clubapp hockey", h: "<p>Training jeugd · 20:00 – 22:00.</p><p>21:15 · foto in de clubapp: trainer <b>Merijn</b> met de spelers op het veld.</p>" }
+      ] },
+      { t: "Sporen op kantoor", ic: "🔍", docs: [
+        { t: "Vingerafdrukken nietmachine", h: "<p>Op de nietmachine zitten vingerafdrukken van <b>Froukje</b> en van <b>Ype</b>.</p><p>De afdrukken van Ype zitten op de <b>onderkant</b>, alsof hij de machine als een steen vasthield.</p>" },
+        { t: "Schoonmaakrooster", h: "<p>Vierde verdieping, elke avond: 22:00 keuken · 22:20 vergaderzalen · <b>22:50 kantoor Pluimveld</b>.</p>" },
+        { t: "Brief van de advocaat", h: "<p>Aan Merijn en Froukje: “Het huis is verkocht. U heeft allebei getekend. De zaak is <b>vorige week afgerond</b>.”</p>" }
       ] }
     ],
-    rounds: [{ t: "De eerste indruk", tips: ["De hockeytrainer zag Merijn de hele avond langs het veld staan.", "De nietmachine is van de afdeling waar Ype werkt.", "Geertje begint elke avond om 22:00 op de vierde verdieping."] }],
+    rounds: [
+      { t: "De eerste indruk", tips: ["De hockeytrainer zag Merijn de hele avond langs het veld staan.", "De nietmachine is van de afdeling waar Ype werkt.", "Geertje begint elke avond om 22:00 op de vierde verdieping.", "Ype en Froukje werken al twintig jaar op dezelfde afdeling.", "Merijn traint op woensdag altijd de jeugd.", "De koffieautomaat werkt alleen met een personeelspas."] },
+      { t: "Na de verhoren", tips: ["Ype rijdt in een grijze stationwagen.", "Ype kocht vorige maand een boot van € 60.000.", "Geertje heeft geen pas voor de garage. Ze komt altijd met de fiets.", "In de agenda van Froukje staat voor donderdag: “gesprek directie, fraude”."] }
+    ],
     motives: [["fraude", "Froukje ontdekte zijn fraude"], ["huis", "Ruzie over het huis"], ["baan", "Hij wilde haar baan"]],
     motive: "fraude",
     keys: [["lift", "Pasjeslog lift: om 21:05 weer naar boven"], ["auto", "De grijze auto in de garage"], ["hockey", "Het hockeyveld"]],
@@ -13140,7 +13193,7 @@ TVCASES.push(
     title: "Nacht in de haven",
     level: "Makkelijk",
     time: "25 tot 35 minuten",
-    players: "1 tot 3 spelers",
+    players: "1 tot 10 spelers",
     date: "19-03",
     blurb: "Vroeg in de ochtend drijft de havenmeester naast de steiger. De nachtwaker heeft niets gehoord. Zegt hij.",
     melding: '<p class="tv-mono">MELDING 112 · VRIJDAG 19 MAART · 06:10</p><p>Visser <b>Rinse Scholwijk</b> ziet havenmeester <b>Nout Lommerwold</b> (61) in het water naast de steiger bij de oude loods drijven.</p><p>De schouwarts ziet een harde klap op zijn hoofd. Nout is <b>tussen 02:00 en 03:00</b> overleden.</p>',
@@ -13191,9 +13244,22 @@ TVCASES.push(
       { t: "Logs en camera’s", ic: "🎥", docs: [
         { t: "Prikklokken van de rondes", h: '<table class="tv-t"><tr><th>Tijd</th><th>Klok</th></tr><tr><td>00:50</td><td>poort</td></tr><tr><td>01:50</td><td>poort</td></tr><tr><td><b>02:50</b></td><td><b>niet geprikt</b></td></tr><tr><td>03:20</td><td>poort</td></tr></table>' },
         { t: "GPS-kastje boot van Rinse", h: "<p>23:10 – 05:20 · op zee, 12 kilometer uit de kust.</p><p>05:30 · terug in de haven.</p>" }
+      ] },
+      { t: "Getuigen", ic: "🗣️", docs: [
+        { t: "Barvrouw De Meerpaal", h: "<p>“Om half twaalf rekende Nout af. Hij zei: <b>‘Ik ga nog even naar de oude loods kijken. Daar klopt iets niet.’</b>”</p>" },
+        { t: "Buurvrouw van Klaartje", h: "<p>“Om 01:25 kwam Klaartje thuis met een gast. Tot een uur of drie hoorde ik muziek en gelach. <b>Niemand ging meer weg.</b>”</p>" },
+        { t: "Camera tankstation kade", h: "<p>02:35 · een man in een <b>donkere nachtwakersjas</b> loopt snel van de steiger naar de loods. Hij heeft <b>geen zaklamp</b> bij zich.</p>" }
+      ] },
+      { t: "De smokkel", ic: "📦", docs: [
+        { t: "Douane", h: "<p>De veertig dozen sigaretten komen uit een partij die vorige maand van een vrachtwagen is <b>verdwenen</b>.</p>" },
+        { t: "Bankrekening Wybren", h: "<p>Sinds januari elke maand een <b>contante storting van € 2.000</b>. Zijn salaris is € 1.900.</p>" },
+        { t: "Regeling ligplaats", h: "<p>Rinse heeft een schuld van € 900 voor zijn ligplaats. Vorige week tekende hij met Nout een <b>betalingsregeling</b>. Nout schreef erbij: “Prima geregeld.”</p>" }
       ] }
     ],
-    rounds: [{ t: "De eerste indruk", tips: ["Klaartje liep om kwart over één met een gast naar huis. De buren hoorden hen lachen.", "Wybren heeft sinds kort een nieuwe auto, terwijl hij weinig verdient.", "Op de zaklamp van de steiger staan de letters W.K."] }],
+    rounds: [
+      { t: "De eerste indruk", tips: ["Klaartje liep om kwart over één met een gast naar huis. De buren hoorden hen lachen.", "Wybren heeft sinds kort een nieuwe auto, terwijl hij weinig verdient.", "Op de zaklamp van de steiger staan de letters W.K.", "Nout liep ’s nachts vaak nog een rondje over de kade.", "De nachtwaker moet elk uur prikken bij de poort.", "Rinse vaart elke donderdagavond om elf uur uit."] },
+      { t: "De loods", tips: ["Alleen de havenmeester en de nachtwaker hebben een sleutel van de oude loods.", "Wybren betaalde zijn nieuwe auto contant.", "Klaartje en Nout spraken vorige week af dat het terras mag blijven.", "Elke medewerker van de haven heeft een eigen zaklamp met zijn letters erop."] }
+    ],
     motives: [["smokkel", "Nout ontdekte de smokkel"], ["schuld", "De schuld voor de ligplaats"], ["terras", "Ruzie over het terras"]],
     motive: "smokkel",
     keys: [["zaklamp", "De zaklamp met W.K. en bloed"], ["gps", "Het GPS-kastje van de boot"], ["terras", "De brief over het terras"]],
@@ -13225,7 +13291,7 @@ TVCASES.push(
     title: "Thee in het tuinhuis",
     level: "Gemiddeld",
     time: "45 tot 75 minuten",
-    players: "1 tot 4 spelers",
+    players: "1 tot 10 spelers",
     date: "22-05",
     blurb: "Een rijke weduwe drinkt elke middag thee in haar tuinhuis. Vandaag was het haar laatste kopje.",
     melding: '<p class="tv-mono">MELDING 112 · ZATERDAG 22 MEI · 16:40</p><p>Tuinman <b>Remco Hamerdam</b> vindt weduwe <b>Hiske Eikbergen</b> (78) in haar tuinhuis. Ze zit in haar rieten stoel en leeft niet meer.</p><p>Haar hart is stilgevallen. In de theepot vindt het lab <b>vingerhoedskruid</b>, een giftige plant. Ze is <b>tussen 15:00 en 16:00</b> overleden.</p><p>Vier mensen kwamen die middag langs.</p>',
@@ -13281,7 +13347,8 @@ TVCASES.push(
     secret: [
       { t: "Forensisch dossier", ic: "🔬", docs: [
         { t: "Sectierapport", h: "<p><b>Doodsoorzaak:</b> hartstilstand door gif uit <b>vingerhoedskruid</b>.</p><p>Het gif zat in de thee. Hiske dronk minstens twee koppen.</p><p><b>Tijdstip van overlijden:</b> tussen 15:00 en 16:00.</p>" },
-        { t: "Labrapport theekopjes", h: "<p>Kopje 1 (van Hiske): <b>gif</b>.</p><p>Kopje 2: afgewassen, maar op het oor zit nog een <b>vingerafdruk van A. Zeilvliet</b>.</p>" }
+        { t: "Labrapport theekopjes", h: "<p>Kopje 1 (van Hiske): <b>gif</b>.</p><p>Kopje 2: afgewassen, maar op het oor zit nog een <b>vingerafdruk van A. Zeilvliet</b>.</p>" },
+        { t: "De theepot", h: "<p>Tussen de rooibos zitten <b>gedroogde, fijngeknipte bladeren</b>. Verse bladeren uit de tuin zien er heel anders uit.</p>" }
       ] },
       { t: "Digitaal dossier", ic: "📱", docs: [
         { t: "Zoekgeschiedenis telefoon Aukje", h: "<p>Donderdag 22:14 · “vingerhoedskruid giftig thee”</p><p>Donderdag 22:20 · “hoeveel vingerhoedskruid dodelijk”</p>" },
@@ -13293,13 +13360,14 @@ TVCASES.push(
       ] },
       { t: "Administratie", ic: "📒", docs: [
         { t: "Brief van de notaris", h: "<p>“Geachte mevrouw Eikbergen, hierbij bevestig ik uw afspraak van maandag 10:00. U wilt uw nicht uit uw testament halen en alles nalaten aan het dierenasiel.”</p>" },
+        { t: "Het huidige testament", h: "<p>Opgemaakt in 2019: <b>alles</b> gaat naar nicht <b>Aukje Zeilvliet</b>.</p>" },
         { t: "Lening van de huisarts", h: "<p>€ 40.000, netjes terugbetaald tot en met april. Nog € 12.000 open.</p>" }
       ] }
     ],
     envelope: { t: "Envelop B · het tasje", when: "Open pas als jullie alle verhoren gehoord hebben.", h: "<p>In de fietstas van Aukje vindt de politie een <b>leeg zakje met gedroogde bladeren</b> en een tuinschaar.</p><p>Het lab: de bladeren zijn van <b>vingerhoedskruid</b>.</p>" },
     rounds: [
-      { t: "Het tuinhuis", tips: ["Hiske dronk elke dag om drie uur thee met haar eigen blikje rooibos.", "Remco droeg vandaag zijn groene laarzen, maat 44.", "Mieke zit elke middag in haar serre en kan precies zien wie er bij Hiske aanbelt.", "De huisarts heeft vandaag een nieuwe bloeddrukmeter gekocht."] },
-      { t: "Na de verhoren", tips: ["Aukje heeft maat 38.", "Aukje had een tasje bij zich toen ze aankwam. Toen ze wegging niet meer.", "In het blikje rooibos zit geen gif. Het gif kwam er later bij.", "Remco had vorige week al een briefje opgehangen: “Pas op: giftige planten achter het tuinhuis.”"] }
+      { t: "Het tuinhuis", tips: ["Hiske dronk elke dag om drie uur thee met haar eigen blikje rooibos.", "Remco droeg vandaag zijn groene laarzen, maat 44.", "Mieke zit elke middag in haar serre en kan precies zien wie er bij Hiske aanbelt.", "Aukje kwam om kwart voor drie aan op de fiets.", "De huisarts heeft vandaag een nieuwe bloeddrukmeter gekocht."] },
+      { t: "Na de verhoren", tips: ["Aukje heeft maat 38.", "Aukje had een tasje bij zich toen ze aankwam. Toen ze wegging niet meer.", "In het blikje rooibos zit geen gif. Het gif kwam er later bij.", "Remco had vorige week al een briefje opgehangen: “Pas op: giftige planten achter het tuinhuis.”", "Hiske had alleen haar nicht nog in haar testament staan."] }
     ],
     motives: [["erfenis", "Ze zou uit het testament gaan"], ["ontslag", "Ontslag als tuinman"], ["lening", "De lening van de huisarts"], ["heg", "Ruzie over de heg"]],
     motive: "erfenis",
@@ -13320,7 +13388,7 @@ TVCASES.push(
     title: "Parkeerdek vier",
     level: "Gemiddeld",
     time: "50 tot 75 minuten",
-    players: "1 tot 4 spelers",
+    players: "1 tot 10 spelers",
     date: "08-09",
     blurb: "Een projectontwikkelaar ligt naast zijn auto op het hoogste parkeerdek. Zijn compagnon zat in een videogesprek. Toch?",
     melding: '<p class="tv-mono">MELDING 112 · DINSDAG 8 SEPTEMBER · 19:41</p><p>Parkeerwachter <b>Rindert Zeilwold</b> vindt projectontwikkelaar <b>Jildert Lierwijk</b> (44) naast zijn auto op <b>parkeerdek 4</b> van garage De Kroon.</p><p>Hij is geslagen met een zware krik. <b>Tussen 18:50 en 19:20</b> is hij overleden.</p>',
@@ -13384,17 +13452,19 @@ TVCASES.push(
       ] },
       { t: "Camera’s en kentekens", ic: "🎥", docs: [
         { t: "Slagboom garage De Kroon", h: '<table class="tv-t"><tr><th>Tijd</th><th>Kenteken</th><th>Wat</th></tr><tr><td>17:48</td><td>auto Jildert</td><td>in</td></tr><tr><td><b>18:52</b></td><td><b>donkerblauwe leaseauto, op naam van Lierwijk &amp; Klapveld</b></td><td><b>in</b></td></tr><tr><td><b>19:21</b></td><td><b>zelfde auto</b></td><td><b>uit</b></td></tr></table>' },
-        { t: "Liftcamera", h: "<p>Geen beelden van 18:50 tot 19:20: iemand nam de <b>trap</b>.</p>" }
+        { t: "Liftcamera", h: "<p>Geen beelden van 18:50 tot 19:20: iemand nam de <b>trap</b>.</p>" },
+        { t: "Branddeur trappenhuis", h: "<p>De branddeur naar dek 4 ging open om <b>18:58</b> en om <b>19:16</b>.</p>" }
       ] },
       { t: "Administratie", ic: "📒", docs: [
         { t: "Contract", h: "<p>Notitie van Jildert bij het nieuwe contract: <b>“Tijs eruit? Advocaat bellen dinsdag.”</b></p>" },
-        { t: "Leaseauto’s van de zaak", h: "<p>Lierwijk &amp; Klapveld heeft twee leaseauto’s: een grijze (Jildert) en een <b>donkerblauwe (Tijs)</b>.</p>" }
+        { t: "Leaseauto’s van de zaak", h: "<p>Lierwijk &amp; Klapveld heeft twee leaseauto’s: een grijze (Jildert) en een <b>donkerblauwe (Tijs)</b>.</p>" },
+        { t: "Rondes parkeerwachter", h: "<p>Rindert loopt elk uur een ronde: om 19:00 dek 1 en 2, om <b>19:40 dek 4</b>.</p>" }
       ] }
     ],
     envelope: { t: "Envelop B · het parkeerkaartje", when: "Open pas als jullie alle verhoren gehoord hebben.", h: "<p>In de prullenbak van het kantoor vindt de politie een <b>parkeerkaartje van garage De Kroon</b>: in 18:52, uit 19:21.</p><p>Op het kaartje zit een vingerafdruk van <b>T. Klapveld</b>.</p>" },
     rounds: [
-      { t: "De garage", tips: ["De klanten in het videogesprek hoorden Tijs na 18:41 niets meer zeggen.", "Corrie at bij haar zus in Utrecht. De bon van het restaurant staat op 19:05.", "De krik op dek 4 hoort niet bij de auto van Jildert.", "Rindert zag om 18:52 een donkere auto naar boven rijden."] },
-      { t: "Na de verhoren", tips: ["Tijs rijdt in een donkerblauwe leaseauto van de zaak.", "Pelle stond tot acht uur op de bouwplaats in Almere. Zijn ploeg bevestigt het.", "Het kantoor van Lierwijk & Klapveld is drie minuten lopen van garage De Kroon.", "Jildert wilde dinsdag zijn advocaat bellen over Tijs."] }
+      { t: "De garage", tips: ["De klanten in het videogesprek hoorden Tijs na 18:41 niets meer zeggen.", "Corrie at bij haar zus in Utrecht. De bon van het restaurant staat op 19:05.", "De krik op dek 4 hoort niet bij de auto van Jildert.", "Rindert zag om 18:52 een donkere auto naar boven rijden.", "De branddeur naar het trappenhuis piept hard als hij opengaat."] },
+      { t: "Na de verhoren", tips: ["Tijs rijdt in een donkerblauwe leaseauto van de zaak.", "Pelle stond tot acht uur op de bouwplaats in Almere. Zijn ploeg bevestigt het.", "Het kantoor van Lierwijk & Klapveld is drie minuten lopen van garage De Kroon.", "Jildert wilde dinsdag zijn advocaat bellen over Tijs.", "Tijs heeft altijd leren handschoenen in zijn auto liggen."] }
     ],
     motives: [["zaak", "Jildert wilde hem uit de zaak"], ["scheiding", "De scheiding"], ["rekening", "De onbetaalde rekening"], ["baan", "Bang voor ontslag"]],
     motive: "zaak",
@@ -13425,7 +13495,7 @@ TVCASES.push(
     title: "Brand in de botenloods",
     level: "Moeilijk",
     time: "75 tot 90 minuten",
-    players: "2 tot 4 spelers",
+    players: "2 tot 10 spelers",
     date: "14-10",
     blurb: "Een jachtbouwer sterft in zijn brandende loods. Maar toen het vuur begon, was hij al dood.",
     melding: '<p class="tv-mono">MELDING 112 · WOENSDAG 14 OKTOBER · 22:58</p><p>Een voorbijganger ziet vlammen bij <b>jachtwerf Scheeringa</b> aan het Zwarte Water. De brandweer vindt in de loods het lichaam van eigenaar <b>Gabe Scheeringa</b> (57).</p><p>De schouwarts: Gabe was <b>al dood</b> toen de brand begon. Hij kreeg een klap op het hoofd, <b>tussen 22:15 en 22:45</b>. De brand begon rond 22:50.</p><p>Vijf mensen hadden een reden. Twee van hen liegen.</p>',
@@ -13535,7 +13605,7 @@ TVCASES.push(
     title: "Het gesloten badhuis",
     level: "Moeilijk",
     time: "75 tot 90 minuten",
-    players: "2 tot 4 spelers",
+    players: "2 tot 10 spelers",
     date: "26-11",
     blurb: "Na sluitingstijd ligt de eigenaar van een wellness in het warme bad. Verdronken. Maar ze kon prima zwemmen.",
     melding: '<p class="tv-mono">MELDING 112 · DONDERDAG 26 NOVEMBER · 23:04</p><p>Beveiliger van de ronde vindt <b>Marrit Eschweerd</b> (48), eigenaar van wellness <b>Badhuis De Bron</b>, in het privébad. Ze is verdronken.</p><p>De schouwarts ziet <b>blauwe plekken op haar schouders</b>: iemand heeft haar onder water gehouden. <b>Tussen 21:45 en 22:15</b> is ze overleden. Het badhuis sloot om 21:30.</p><p>Vijf mensen hadden een sleutel of een reden. Twee van hen liegen.</p>',
@@ -13645,7 +13715,7 @@ TVCASES.push(
     title: "Diner in Villa Zeezicht",
     level: "Moeilijk",
     time: "75 tot 90 minuten",
-    players: "2 tot 4 spelers",
+    players: "2 tot 10 spelers",
     date: "31-12",
     blurb: "Oudejaarsavond. Een rijke reder geeft een diner voor zijn familie. Tussen het hoofdgerecht en het toetje is hij dood.",
     melding: '<p class="tv-mono">MELDING 112 · OUDEJAARSAVOND 31 DECEMBER · 21:41</p><p>In <b>Villa Zeezicht</b> wordt reder <b>Rogier Sluishuis</b> (66) dood gevonden in zijn woonkamer, naast de open haard. Hij is geslagen met een <b>bronzen beeldje</b> van een zeilschip.</p><p>Vijf mensen zaten met hem aan tafel. Volgens de kok verliet Rogier om 21:05 de eetkamer om een fles wijn te pakken. <b>Tussen 21:05 en 21:30</b> is hij overleden.</p><p>Twee mensen liegen.</p>',
@@ -13767,7 +13837,7 @@ TVCASES.push(
     title: "De klok loopt voor",
     level: "Expert",
     time: "90 tot 120 minuten",
-    players: "2 tot 4 spelers",
+    players: "2 tot 10 spelers",
     date: "02-02",
     blurb: "De buurvrouw hoorde een gil toen de grote klok negen uur sloeg. Iedereen heeft een alibi voor negen uur. Te mooi?",
     melding: '<p class="tv-mono">MELDING 112 · DINSDAG 2 FEBRUARI · 21:30</p><p>Buurvrouw <b>Grietje Wolfkamp</b> vindt klokkenmaker <b>Doede Scheergaard</b> (74) dood in zijn werkplaats boven de winkel <b>Scheergaard Uurwerken</b>. Hij is geslagen met een zwaar koperen klokgewicht.</p><p>Grietje: <i>“Ik hoorde een gil, precies toen de grote staande klok in de winkel negen uur sloeg.”</i></p><p>De schouwarts: tijdstip van overlijden <b>tussen 20:30 en 21:00</b>. Twee mensen liegen. Geen hulptips: jullie staan er alleen voor.</p>',
@@ -13877,7 +13947,7 @@ TVCASES.push(
     title: "Twee sleutels",
     level: "Expert",
     time: "90 tot 120 minuten",
-    players: "2 tot 4 spelers",
+    players: "2 tot 10 spelers",
     date: "16-06",
     blurb: "Een notaris ligt dood in het archief. De deur zat op slot. Haar sleutel zat in haar zak, de reservesleutel in de kluis.",
     melding: '<p class="tv-mono">MELDING 112 · DINSDAG 16 JUNI · 08:34</p><p>Secretaresse <b>Annerieke Kalkvliet</b> vindt notaris <b>Minke Haversma</b> (59) dood in het archief in de kelder van notariskantoor <b>Haversma</b>. De deur zat <b>op slot</b>.</p><p>Minke had haar eigen sleutel in haar jaszak. De enige reservesleutel lag in de kluis. Ze is gisteravond <b>tussen 19:00 en 20:00</b> overleden, door een klap met een zware perforator.</p><p>Hoe kwam de dader eruit? Twee mensen liegen. Geen hulptips.</p>',
@@ -13987,7 +14057,7 @@ TVCASES.push(
     title: "Het alibi van glas",
     level: "Expert",
     time: "90 tot 120 minuten",
-    players: "2 tot 4 spelers",
+    players: "2 tot 10 spelers",
     date: "18-09",
     blurb: "Een zeilinstructeur ligt dood in zijn loods. Zijn compagnon postte op dat moment een foto van de zonsondergang. Kilometers verderop.",
     melding: '<p class="tv-mono">MELDING 112 · VRIJDAG 18 SEPTEMBER · 21:12</p><p>Havenmeester <b>Neeltje Mosveld</b> vindt zeilinstructeur <b>Wout Gaastburg</b> (38) dood in de loods van <b>zeilschool De Wind</b>. Hij is geslagen met een zware lier.</p><p>De schouwarts: <b>tussen 19:30 en 20:15</b>. Zijn compagnon postte om 20:05 een foto van de zonsondergang bij strandpaviljoen Paal 9, vijftien kilometer verderop.</p><p>Twee mensen liegen. Geen hulptips.</p>',
@@ -15010,7 +15080,7 @@ function start(data) {
 }
 ((_b = (_a = window.claude) == null ? void 0 : _a.hot) == null ? void 0 : _b.ready) ? window.claude.hot.ready(start) : start((_e = (_d = (_c = window.claude) == null ? void 0 : _c.hot) == null ? void 0 : _d.data) != null ? _e : {});
 </script>
-<script>const APPV = "20261104164714";
+<script>const APPV = "20261104172119";
 if ("serviceWorker" in navigator) {
   addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {
   }));

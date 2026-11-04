@@ -1001,6 +1001,12 @@ body.kiosk-join .tv-jform .btn.primary{font-size:22px;padding:16px}
 .tv-hmini .tv-btn{font-size:17px;padding:9px 14px}
 .tv-hlvl{display:flex;gap:10px;position:relative;z-index:1}.tv-hlvl button{font:700 20px system-ui;padding:10px 18px;border-radius:999px;border:2px solid #e0a640;background:transparent;color:#f3efe6;cursor:pointer}.tv-hlvl button[aria-pressed=true]{background:#e0a640;color:#151716}
 .tv-pbody .tv-stamp{font-size:10px;letter-spacing:2px;padding:3px 8px;top:10px;right:10px}.tv-pbody .tv-doc h4{padding-right:120px}
+/* tot 10 spelers */
+.tv-np{flex-wrap:wrap}.tv-np button{min-width:44px}
+.tv-slots{display:flex;flex-direction:column;gap:10px}
+.tv-slots.two{display:grid;grid-template-columns:1fr 1fr;grid-gap:8px;gap:8px}
+.tv-slots.two .tv-slot{padding:8px 10px;gap:10px}.tv-slots.two .tv-sn{width:38px;height:38px;font-size:22px}.tv-slots.two .tv-sw b{font-size:19px}.tv-slots.two .tv-sw small{font-size:12px;line-height:1.2}
+.tv-rrow .tv-rc[data-rc=np]{flex:1 1 15%}
 </style>
 
 <div class="wrap">
@@ -6845,7 +6851,7 @@ const tvQrSvg=(()=>{const EXP=new Array(512),LOG=new Array(256);let x=1;for(let 
 
 // ---------- Tv-dossier: groot onderzoek op de tv (casten), met QR-codes en een deellink voor de telefoons van de spelers ----------
 // Nieuwe zaken achteraan toevoegen. Ids nooit wijzigen.
-const TVCASES=[{id:'lepel',nr:'01',question:'Wie was er tussen 23:20 en 00:00 in het restaurant?',date:'07-03',title:'Het laatste gerecht',level:'Gemiddeld',time:'60 tot 90 minuten',players:'1 tot 4 spelers',
+const TVCASES=[{id:'lepel',nr:'01',question:'Wie was er tussen 23:20 en 00:00 in het restaurant?',date:'07-03',title:'Het laatste gerecht',level:'Gemiddeld',time:'60 tot 90 minuten',players:'1 tot 10 spelers',
  blurb:'Na sluitingstijd ligt de chef van restaurant De Vergulde Lepel dood in zijn keuken. Vier mensen waren die avond in de buurt. Eén van hen liegt.',
  melding:`<p class="tv-mono">MELDING 112 · ZATERDAG 7 MAART · 00:41</p><p>Schoonmaker <b>Sjaak Tetteroo</b> belt 112. In de keuken van restaurant <b>De Vergulde Lepel</b> aan de Lindengracht ligt chef-kok <b>Ferre Hoogwerf</b> (52) op de grond. Hij leeft niet meer.</p><p>De schouwarts ziet een harde klap op het achterhoofd. Tijdstip van overlijden: <b>tussen 23:20 en 00:00</b>. Het restaurant ging om 23:00 dicht.</p><p>Vier mensen waren die avond in de buurt: de sous-chef, de sommelier, zijn vrouw en een restaurantcriticus. Bekijk de plaats delict, luister de verhoren en verdeel de dossiers. Wijs samen de dader aan.</p>`,
  photos:[[['wall',['stove',120,182,1.25],['shards',212,186,1.1],['marker',262,190,1,1]],'1 · keuken, bij het fornuis'],[['dark',['shelf',150,178,1.1],['bottle',112,122,.7],['bottle',188,122,.7],['marker',240,188,1,2]],'2 · wijnkelder, het rek'],[['night',['door',130,182,1.1],['bike',228,182,.7],['marker',62,188,1,3]],'3 · achterdeur, de steeg'],[['desk',['laptop',108,162,1],['letter',204,172,1],['marker',262,188,1,4]],'4 · bureau van Ferre']],
@@ -6904,7 +6910,7 @@ const tvC=id=>TVCASES.find(c=>c.id===id);
 const tvEsc=t=>String(t||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 // rol op de telefoon: via de link (?tv=zaak&r=KAMER&p=1.3) of alleen spelen in de app
 let TVQ=null,TVJOIN=null;try{const u0=new URLSearchParams(location.search);if(u0.has('join'))TVJOIN={code:(u0.get('c')||u0.get('join')||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,4),err:'',busy:false};}catch(e){}
-try{const u=new URLSearchParams(location.search);if(u.get('tv')){TVQ={id:u.get('tv'),r:(u.get('r')||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,4),p:(u.get('p')||'').split('.').map(Number).filter(n=>n>=1&&n<=4),join:u.get('j')==='1',rc:u.get('rc')==='1'};if(TVQ.join){const sv=store.get('md-tv-join');if(sv&&sv.r===TVQ.r){TVQ.n=sv.n;TVQ.p=sv.p||TVQ.p;TVQ.spec=!sv.n}}}}catch(e){}
+try{const u=new URLSearchParams(location.search);if(u.get('tv')){TVQ={id:u.get('tv'),r:(u.get('r')||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,4),p:(u.get('p')||'').split('.').map(Number).filter(n=>n>=1&&n<=9||n>=110&&n<=199),join:u.get('j')==='1',rc:u.get('rc')==='1'};if(TVQ.join){const sv=store.get('md-tv-join');if(sv&&sv.r===TVQ.r){TVQ.n=sv.n;TVQ.p=sv.p||TVQ.p;TVQ.spec=!sv.n}}}}catch(e){}
 let tvPh={tab:'dos',open:null,vote:null,sent:false,online:'',reveal:null,tip:0};
 let tvHost=null,tvStage=null,tvScr='melding',tvBig=null,tvPeerPh=null;
 // eigen, voor oude tv-browsers omgezette PeerJS 1.5.4 (lib/peerjs.legacy.js); de online versie is reserve
@@ -6919,7 +6925,12 @@ const tvBase=()=>{const pth=location.pathname.replace(/(tv|join)\/(index\.html)?
 const tvJoinUrl=r=>tvBase()+'join'+(r?'?c='+r:'');
 const tvLink=(C,r,slots)=>`${tvBase()}?tv=${C.id}&r=${r}&p=${slots.join('.')}`;
 // dossiers verdelen over 1 tot 4 spelers
-const tvSplit=(C,np)=>{const k=C.secret.length,n=Math.min(np||4,k);return [...Array(n)].map((_,i)=>[...Array(k)].map((_,j)=>j+1).filter(j=>(j-1)%n===i))};
+// verdeling: tot zoveel spelers als er mappen zijn krijgt iedereen hele mappen; met meer spelers worden de losse stukken verdeeld (code 100+map*10+stuk)
+const tvSplit=(C,np)=>{np=np||4;const k=C.secret.length;if(np<=k)return [...Array(np)].map((_,i)=>[...Array(k)].map((_,j)=>j+1).filter(j=>(j-1)%np===i));
+ const docs=[];C.secret.forEach((D,f)=>D.docs.forEach((d,j)=>docs.push(100+(f+1)*10+j)));const n=Math.min(np,docs.length);return [...Array(np)].map((_,i)=>i<n?docs.filter((_,x)=>x%n===i):[docs[(i*7)%docs.length]])};
+const tvSlotOk=(C,k)=>k>=1&&k<=C.secret.length||k>=110&&C.secret[Math.floor((k-100)/10)-1]&&C.secret[Math.floor((k-100)/10)-1].docs[(k-100)%10];
+const tvSlotGroups=(C,slots)=>{const g=new Map();slots.forEach(k=>{if(k<100){g.set(k,C.secret[k-1].docs.slice())}else{const f=Math.floor((k-100)/10),j=(k-100)%10;if(!g.has(f))g.set(f,[]);if(g.get(f)!==null)g.get(f).push(C.secret[f-1].docs[j])}});return [...g].map(([f,docs])=>({D:C.secret[f-1],docs}))};
+const tvSlotLabel=(C,sl)=>tvSlotGroups(C,sl).map(({D,docs})=>docs.length===D.docs.length?`${D.ic} ${D.t}`:`${D.ic} ${docs.map(d=>d.t).join(', ')}`).join(' · ');
 const TVLV={Makkelijk:1,Gemiddeld:2,Moeilijk:3,Expert:4};const tvLv=C=>'⭐'.repeat(TVLV[C.level]||2);
 const tvMug=(S,w=180,bg)=>S.look?RF({...S.look,alt:S.name,bg}).replace('class="rf"',`class="rf tv-mugsvg" width="${w}"`):`<svg viewBox="-34 -150 68 66" class="tv-mugsvg" width="${w}" aria-hidden="true">${toonBody(S.name)}</svg>`;
 const tvMugshot=(S,i,cls='')=>`<figure class="tv-mug ${cls}"><div class="tv-mugbg">${tvMug(S)}<span class="tv-board">${String(i+1).padStart(2,'0')} · ${(tvC(TVQ?TVQ.id:tvd.cur)||{}).date||"07-03"}</span></div><figcaption><b>${S.name}</b><span>${S.role}</span><em>${S.motive||''}</em></figcaption></figure>`;
@@ -6969,7 +6980,7 @@ function tvLive(){return tvHost?tvHost.conns.map(c=>[c,tvHost.players[c.peer]]).
 function tvTipsFor(s,uid){const out=[];Object.entries(s.given||{}).forEach(([r,g])=>(g[uid]||[]).forEach(i=>out.push([+r,i])));return out}
 function tvSendTips(C,s,c,uid){tvSend(c,{t:'tips',room:s.room,round:s.round||0,list:tvTipsFor(s,uid).map(([r,i])=>[r,i,C.rounds[r].tips[i]])})}
 function tvNextRound(C,s){const r=s.round||0;if(r>=C.rounds.length)return;s.round=r+1;s.given=s.given||{};const live=tvLive(),g={};
- if(!s.tvsolo&&live.length){const ids=[...new Set(live.map(x=>x[1].uid))];C.rounds[r].tips.forEach((t,i)=>{const u=ids[i%ids.length];(g[u]=g[u]||[]).push(i)})}
+ if(!s.tvsolo&&live.length){const ids=[...new Set(live.map(x=>x[1].uid))];C.rounds[r].tips.forEach((t,i)=>{const u=ids[i%ids.length];(g[u]=g[u]||[]).push(i)});const nt=C.rounds[r].tips.length;for(let i=nt;i<ids.length;i++)(g[ids[i]]=g[ids[i]]||[]).push(i%nt)}
  s.given[r]=g;saveTv();live.forEach(([c,p])=>tvSendTips(C,s,c,p.uid));try{tvBeep&&tvBeep()}catch(e){}tvStageRender()}
 function tvScrRonde(C,s){const r=s.round||0,R0=C.rounds,next=r<R0.length,live=tvLive(),solo=s.tvsolo;
  const cur=r?R0[r-1]:null,g=r?(s.given||{})[r-1]||{}:{};
@@ -6979,7 +6990,7 @@ function tvScrRonde(C,s){const r=s.round||0,R0=C.rounds,next=r<R0.length,live=tv
   ${next?`<button type="button" class="tv-btn primary" id="tvRound">📨 ${r?'Start ronde '+(r+1):'Start ronde 1'}: ${R0[r].t}</button>`:`<p class="tv-sub" style="text-align:left">Alle rondes zijn gespeeld. Tijd om te beschuldigen!</p>`}</div>
   <div class="tv-rright">${solo?(r?R0.slice(0,r).map((x,ri)=>x.tips.map(t=>`<article class="tv-paper tv-tip">${tvStamp('RONDE '+(ri+1))}<p>${t}</p></article>`).join('')).join(''):'<p class="tv-sub">Start een ronde om de tips te zien.</p>')
    :r?`<h3 class="tv-sub" style="text-align:left;margin:0 0 10px">Wie heeft er een tip?</h3>${live.length?live.map(([c,p])=>{const n=(g[p.uid]||[]).length;return `<div class="tv-slot ${n?'in':''}"><span class="tv-sn">${p.n||'·'}</span><span class="tv-sw"><b>${tvEsc(p.name)}</b><small>${n?`${n} geheime ${n===1?'tip':'tips'} · vertel wat je weet!`:'deze ronde geen tip · luister goed'}</small></span>${n?'<i>📨</i>':''}</div>`}).join(''):'<p class="tv-sub">Er zijn nog geen telefoons verbonden.</p>'}`
-   :`<p class="tv-sub" style="text-align:left">Er zijn ${C.rounds.length} rondes met elk ${C.rounds[0].tips.length} tips. De tips worden verdeeld over alle telefoons die meedoen.</p>`}</div></div>`}
+   :`<p class="tv-sub" style="text-align:left">Er zijn ${C.rounds.length===1?'1 ronde':C.rounds.length+' rondes'} met samen ${C.rounds.reduce((n,R0)=>n+R0.tips.length,0)} tips. De tips worden verdeeld over alle telefoons die meedoen.</p>`}</div></div>`}
 function tvSend(c,m){try{c.open&&c.send(m)}catch(e){}}
 function tvBroadcast(m){if(tvHost)tvHost.conns.forEach(c=>tvSend(c,m))}
 function tvTally(C){const s=tvS(C.id),n={};C.suspects.forEach(x=>n[x.id]=0);if(s.tvsolo){if(s.pick&&n[s.pick]!=null)n[s.pick]=1;return n}Object.values(tvHost?tvHost.votes:s.votes||{}).forEach(v=>{if(n[v.s]!=null)n[v.s]++});Object.entries(s.manual||{}).forEach(([k,v])=>{if(n[k]!=null)n[k]+=v});return n}
@@ -7017,8 +7028,8 @@ function tvScrSpel(C,s){const n=s.np||4,sp=tvSplit(C,n),pls=tvHost?Object.values
  const who=i=>pls.find(p=>p.join&&p.n===i+1);
  return `<div class="tv-join"><div class="tv-jl"><p class="tv-jgo">Pak je telefoon en ga naar</p><p class="tv-jurl">${url}</p><p class="tv-jgo">en vul deze code in</p><p class="tv-jcode">${(s.room||'····').split('').map(ch=>`<b>${ch}</b>`).join('')}</p>
   <div class="tv-jrow"><div class="tv-qr big" data-jqr="1"></div><div><p class="tv-jgo small">Of scan de QR-code. Speel je op afstand? Stuur de link naar je vrienden.</p><button type="button" class="tv-btn" id="tvJShare">🔗 Stuur link</button></div></div></div>
- <div class="tv-jr"><div class="tv-np">Spelers ${[1,2,3,4].map(k=>`<button type="button" data-np="${k}" aria-pressed="${k===n}">${k}</button>`).join('')}</div>
-  ${sp.map((sl,i)=>{const p=who(i);return `<div class="tv-slot ${p?'in':''}"><span class="tv-sn">${i+1}</span><span class="tv-sw"><b>${p?tvEsc(p.name):'wacht op speler…'}</b><small>${sl.map(k=>`${C.secret[k-1].ic} ${C.secret[k-1].t}`).join(' · ')}</small></span>${p?'<i>✓</i>':''}</div>`}).join('')}
+ <div class="tv-jr"><div class="tv-np">Spelers ${[1,2,3,4,5,6,7,8,9,10].map(k=>`<button type="button" data-np="${k}" aria-pressed="${k===n}">${k}</button>`).join('')}</div>
+  <div class="tv-slots ${sp.length>5?'two':''}">${sp.map((sl,i)=>{const p=who(i);return `<div class="tv-slot ${p?'in':''}"><span class="tv-sn">${i+1}</span><span class="tv-sw"><b>${p?tvEsc(p.name):'wacht op speler…'}</b><small>${tvSlotLabel(C,sl)}</small></span>${p?'<i>✓</i>':''}</div>`}).join('')}</div>
   ${pls.filter(p=>!p.rc&&(!p.join||p.n===0)).length?`<p class="tv-jgo small">Ook mee: ${pls.filter(p=>!p.rc&&(!p.join||p.n===0)).map(p=>tvEsc(p.name)).join(', ')}</p>`:''}${pls.filter(p=>p.rc).length?`<p class="tv-jgo small">📺 Bediening: ${pls.filter(p=>p.rc).map(p=>tvEsc(p.name)).join(', ')}</p>`:`<p class="tv-jgo small">Tip: een tablet of extra telefoon kan de tv bedienen. Kies op de meedoe-pagina voor <b>Alleen de tv bedienen</b>.</p>`}
   <p class="tv-jst">${tvHost&&tvHost.status==='online'?'🟢 Kamer is open':tvHost&&tvHost.status==='offline'?'🔴 Geen live verbinding. Doe mee met de losse links of tel de stemmen met de hand.':'🟡 Kamer openen…'}</p></div></div>`}
 function tvScrDos(C,s){const k=typeof tvBig==='string'&&/^d\d$/.test(tvBig)?+tvBig[1]:-1;
@@ -7081,7 +7092,7 @@ function tvPhWire(c){
    c.on('data',d=>{if(d&&d.t==='tips'){const old=(store.get('md-tv-tips')||{});const prev=old.room===d.room?(old.list||[]).length:0;store.set('md-tv-tips',{room:d.room,round:d.round,list:d.list});if(d.list.length>prev){tvPh.newTips=d.list.length-prev;try{navigator.vibrate&&navigator.vibrate([80,60,80])}catch(e){}}tvPhRender();return}if(d&&d.t==='hs'){tvPh.hs=d;if(TVQ&&TVQ.rc)tvPhRender();return}if(d&&d.t==='slot'){TVQ.p=d.p||[];TVQ.n=d.n;TVQ.spec=!d.n;TVQ.rc=!!d.rc;store.set('md-tv-join',{id:TVQ.id,r:TVQ.r,p:TVQ.p,n:TVQ.n,t:Date.now()});tvPhRender();return}if(!d)return;if(d.t==='ok'){tvPh.sent=true;tvPhRender()}if(d.t==='env'){tvPh.env=true;tvPhRender()}if(d.t==='state'){if(d.env)tvPh.env=true;if(d.clear){tvPh.sent=false;tvPh.vote=null}tvPh.reveal=d.reveal||null;if(d.reveal&&!(TVQ&&TVQ.rc))tvPh.tab='stem';tvPhRender()}});
    c.on('close',()=>{tvPh.online='offline';tvPhRender()})}
 const tvName=()=>{const n=store.get('md-tv-name');if(n)return n;const ps=store.get(PASKEY)||{};return (ps.name||'').trim()||'Rechercheur'};
-function tvPhone(C,solo){if(!solo&&TVQ&&TVQ.rc){const P=$('pTv');P.innerHTML=`<div class="storyhead"><span class="kicker">Tv-dossier · kamer ${TVQ.r} · bediening</span><h3>${C.title}</h3></div>${tvRemote(C)}<p class="hint">${tvPh.online==='offline'?'Geen verbinding met de tv. <button type="button" class="btn small" id="tvRetry">Opnieuw verbinden</button>':''}</p>`;P.querySelectorAll('[data-rc]').forEach(b=>b.onclick=()=>tvRc(b.dataset.rc,b.dataset.v));const rt=$('tvRetry');if(rt)rt.onclick=()=>{try{tvPeerPh&&tvPeerPh.peer&&tvPeerPh.peer.destroy()}catch(e){}tvPeerPh=null;renderTv()};return}const P=$('pTv'),slots=solo?C.secret.map((_,i)=>i+1):TVQ.spec?[]:TVQ.p.length?TVQ.p.filter(k=>k<=C.secret.length):C.secret.map((_,i)=>i+1),s=tvS(C.id);
+function tvPhone(C,solo){if(!solo&&TVQ&&TVQ.rc){const P=$('pTv');P.innerHTML=`<div class="storyhead"><span class="kicker">Tv-dossier · kamer ${TVQ.r} · bediening</span><h3>${C.title}</h3></div>${tvRemote(C)}<p class="hint">${tvPh.online==='offline'?'Geen verbinding met de tv. <button type="button" class="btn small" id="tvRetry">Opnieuw verbinden</button>':''}</p>`;P.querySelectorAll('[data-rc]').forEach(b=>b.onclick=()=>tvRc(b.dataset.rc,b.dataset.v));const rt=$('tvRetry');if(rt)rt.onclick=()=>{try{tvPeerPh&&tvPeerPh.peer&&tvPeerPh.peer.destroy()}catch(e){}tvPeerPh=null;renderTv()};return}const P=$('pTv'),slots=solo?C.secret.map((_,i)=>i+1):TVQ.spec?[]:TVQ.p.length?TVQ.p.filter(k=>tvSlotOk(C,k)):C.secret.map((_,i)=>i+1),s=tvS(C.id);
  const tabs=[['dos','📁 Mijn dossier'],['verh','🎧 Verhoren'],['tips',`🕵️ Tips${tvPh.newTips?` <i class="tv-badge">${tvPh.newTips}</i>`:''}`],['zaak','🗂 De zaak'],['not','📝 Notities'],['stem','🗳 Stem']];
  let body='';
  if(tvPh.tab==='tips'){tvPh.newTips=0;if(solo){const r=s.round||0;body=`<p class="hint">Elke ronde komen er nieuwe tips bij. Niet elke tip is belangrijk.</p>${C.rounds.slice(0,r).map((R0,ri)=>`<h3 class="tv-ph3">Ronde ${ri+1} · ${R0.t}</h3>${R0.tips.map(t=>`<article class="tv-paper tv-doc tv-tip">${tvStamp('GEHEIM')}<p>${t}</p></article>`).join('')}`).join('')}${r<C.rounds.length?`<button type="button" class="btn primary" id="tvSRound">📨 Open ronde ${r+1}: ${C.rounds[r].t}</button>`:'<p class="hint">Alle rondes zijn open.</p>'}`}
@@ -7089,7 +7100,7 @@ function tvPhone(C,solo){if(!solo&&TVQ&&TVQ.rc){const P=$('pTv');P.innerHTML=`<d
  else if(tvPh.tab==='not'){const N=tvNotes(C.id);body=`<p class="hint">Je eigen notitieboekje. Alleen jij ziet dit, ook als je de pagina ververst.</p>${C.suspects.map(S=>{const n=N.sus[S.id]||{};return `<div class="tv-note tvn-${n.st||"q"}"><div class="tv-nh">${tvMug(S,54)}<span><b>${S.name}</b><small>${S.role}</small></span></div><div class="tv-nst">${[['q','❔ Twijfel'],['v','🔴 Verdacht'],['o','🟢 Onschuldig']].map(([k,l])=>`<button type="button" data-nst="${S.id}" data-v="${k}" aria-pressed="${(n.st||'q')===k}">${l}</button>`).join('')}</div><textarea data-ntx="${S.id}" rows="2" placeholder="Alibi, motief, wat klopt er niet?">${tvEsc(n.t||'')}</textarea></div>`}).join('')}<h3 class="tv-ph3">Vrije notities</h3><textarea class="tv-nfree" id="tvNFree" rows="7" placeholder="Tijden, vragen, ideeën…">${tvEsc(N.free||'')}</textarea>`}
  else if(tvPh.tab==='bed')body=tvRemote(C);
  else if(tvPh.tab==='dos'&&!slots.length)body=`<div class="tv-paper tv-doc"><h4>Alle dossiers zijn al vergeven</h4><p>Je doet mee als extra rechercheur. Luister de verhoren, bekijk de zaak en stem mee met de groep.</p></div>`;
- else if(tvPh.tab==='dos')body=`<p class="hint">${solo?`Je speelt alleen: je hebt alle ${C.secret.length} dossiers.`:'Dit dossier is alleen voor jou. Lees het goed en vertel de anderen wat je ziet. Laat je telefoon niet zomaar zien!'}</p>${slots.map(k=>{const D=C.secret[k-1];return `<details class="tv-fold" ${slots.length===1?'open':''}><summary><span class="tv-tab">${D.ic} ${D.t}</span><small>${D.docs.length} stukken</small></summary>${D.docs.map(d=>`<article class="tv-paper tv-doc">${tvStamp('VERTROUWELIJK')}<h4>${d.t}</h4>${d.h}</article>`).join('')}</details>`}).join('')}`;
+ else if(tvPh.tab==='dos')body=`<p class="hint">${solo?`Je speelt alleen: je hebt alle ${C.secret.length} dossiers.`:'Dit dossier is alleen voor jou. Lees het goed en vertel de anderen wat je ziet. Laat je telefoon niet zomaar zien!'}</p>${tvSlotGroups(C,slots).map(({D,docs})=>{return `<details class="tv-fold" ${slots.length<=2?'open':''}><summary><span class="tv-tab">${D.ic} ${D.t}</span><small>${docs.length} ${docs.length===1?'stuk':'stukken'}</small></summary>${docs.map(d=>`<article class="tv-paper tv-doc">${tvStamp('VERTROUWELIJK')}<h4>${d.t}</h4>${d.h}</article>`).join('')}</details>`}).join('')}`;
  if(tvPh.tab==='verh'){const S=C.suspects.find(x=>x.id===tvPh.open);
   body=S?`<button type="button" class="btn small backbtn" data-tvo="">← Alle verhoren</button><div class="tv-phcam">${tvMug(S,150)}<span><b>${S.name}</b>${S.role}</span></div><button type="button" class="btn primary" id="tvPPlay">${tvSay.on&&tvSay.id===S.id?'⏸ Stop':'▶ Luister het verhoor'}</button><div class="tv-paper tv-pvbox ph" id="tvPv">${tvTranscript(S,tvSay.on&&tvSay.id===S.id?tvSay.i:-1)}</div>`
   :`<p class="hint">Luister de verhoren met geluid aan, of lees mee. Eén van hen liegt.</p><div class="tv-tapes ph">${C.suspects.map((S,i)=>`<button type="button" class="tv-tape" data-tvo="${S.id}">${tvMug(S,70)}<span><b>Verhoor ${i+1}</b>${S.name}<small>${S.role}</small></span><i>▶</i></button>`).join('')}</div>`}
@@ -7207,7 +7218,7 @@ function tvRemote(C){const h=tvPh.hs;if(!h)return `<p class="hint">📺 Jij bedi
  const B=(a,v,l,on,cls='')=>`<button type="button" class="tv-rc ${cls}" data-rc="${a}" data-v="${v==null?'':v}" aria-pressed="${!!on}">${l}</button>`;
  const L=[['spel','👥','Spelers'],['melding','🚨','Melding'],['pd','📸','Plaats delict'],['verd','🧑','Verdachten'],['verh','🎧','Verhoren'],['ronde','📨','Geheime tips'],['env','✉️','Envelop B'],['stem','⚖️','Beschuldig']].filter(x=>!(x[0]==='env'&&!C.envelope)&&!(x[0]==='ronde'&&!(C.rounds&&C.rounds.length)));
  const sc=h.scr;let ctx='',t='';
- if(sc==='spel'){t='Wie doen er mee?';ctx=`<p class="hint">Iedereen binnen? Tik op <b>Melding</b> om het onderzoek te starten.</p><div class="tv-rrow">${[1,2,3,4].map(k=>B('np',k,k+(k===1?' speler':' spelers'),h.np===k)).join('')}</div>`}
+ if(sc==='spel'){t='Wie doen er mee?';ctx=`<p class="hint">Iedereen binnen? Tik op <b>Melding</b> om het onderzoek te starten.</p><div class="tv-rrow">${[1,2,3,4,5,6,7,8,9,10].map(k=>B('np',k,String(k),h.np===k)).join('')}</div>`}
  if(sc==='melding'){t='Melding';ctx=`<p class="hint">Uitdaging: speel met een timer.</p><div class="tv-rrow">${[[0,'Geen timer'],[60,'1 uur'],[120,'2 uur']].map(([m,n])=>B('tm',m,n,h.tm===m)).join('')}${h.tm?B('pause','',h.trun?'⏸ Pauze':'▶ Verder'):''}</div>`}
  if(sc==='pd'){t='Plaats delict';ctx=`<div class="tv-rrow">${C.photos.map((p,i)=>B('big',i,'📷 Foto '+(i+1),h.big===i)).join('')}</div>${h.big!=null?B('big','','← Terug naar het bord','', 'wide'):''}`}
  if(sc==='verd'){t='Verdachten';ctx=`<p class="hint">De vier verdachten staan op de tv.</p>`}
@@ -7226,7 +7237,7 @@ SCREND.tv={
 
 // ---------- extra tv-zaken: MAKKELIJK (± 30 minuten) ----------
 TVCASES.push(
-{id:'trap',nr:'02',title:'Val van de trap',level:'Makkelijk',time:'20 tot 30 minuten',players:'1 tot 3 spelers',date:'12-01',
+{id:'trap',nr:'02',title:'Val van de trap',level:'Makkelijk',time:'20 tot 30 minuten',players:'1 tot 10 spelers',date:'12-01',
  blurb:'Een oud-notaris ligt onder aan de trap van zijn villa. Een ongeluk, denkt de familie. De schouwarts denkt van niet.',
  melding:`<p class="tv-mono">MELDING 112 · DINSDAG 12 JANUARI · 20:16</p><p>Huishoudster <b>Inge Kroonhuis</b> belt 112. In de hal van villa <b>Eikenrode</b> ligt oud-notaris <b>Zeger Scholvliet</b> (71) onder aan de trap. Hij leeft niet meer.</p><p>De schouwarts ziet blauwe plekken op zijn borst. <b>Tussen 19:30 en 20:00</b> is hij overleden.</p><p>Drie mensen waren die avond in de buurt. Was het een ongeluk, of is hij geduwd?</p>`,
  question:'Wie was er tussen 19:30 en 20:00 bij Zeger?',
@@ -7249,8 +7260,17 @@ TVCASES.push(
    {t:'Vezels onder de nagels',h:`<p>Onder de nagels van Zeger zitten <b>blauwe vezels</b> van een trainingsjack met een wit streepje.</p>`}]},
   {t:'Camera’s en pasjes',ic:'🎥',docs:[
    {t:'Sportschool: pasjes',h:`<table class="tv-t"><tr><th>Tijd</th><th>Naam</th><th>Wat</th></tr><tr><td>18:02</td><td>B. Molenkamp</td><td>in</td></tr><tr><td><b>19:10</b></td><td><b>B. Molenkamp</b></td><td><b>uit</b></td></tr></table>`},
-   {t:'Deurbelcamera buurman',h:`<p>19:32 · een <b>rode auto</b> stopt bij Eikenrode. Een jongen in een <b>blauw trainingsjack</b> loopt naar binnen.</p><p>19:51 · hij rent naar buiten en rijdt snel weg.</p>`}]}],
- rounds:[{t:'De eerste indruk',tips:['Benno vroeg vorige week aan zijn opa € 8.000 te leen. Opa zei nee.','Benno rijdt in een kleine rode auto.','Nanne en Zeger hadden al maanden ruzie over de eik in de tuin.']}],
+   {t:'Deurbelcamera buurman',h:`<p>19:32 · een <b>rode auto</b> stopt bij Eikenrode. Een jongen in een <b>blauw trainingsjack</b> loopt naar binnen.</p><p>19:51 · hij rent naar buiten en rijdt snel weg.</p>`}]},
+  {t:'Getuigen',ic:'🗣️',docs:[
+   {t:'Pizzabezorger',h:`<p>“Om 19:35 bracht ik een pizza bij de buurman. Bij de villa ernaast stond een jongen in een <b>blauw trainingsjack</b> aan te bellen. Hij leek boos.”</p>`},
+   {t:'Telefoon Inge',h:`<p>19:20 – 20:02 · gesprek met haar zus.</p><p>De telefoon zat al die tijd op de <b>mast in haar eigen dorp</b>, zes kilometer van Eikenrode.</p>`},
+   {t:'Tv-kastje buurman',h:`<p>18:45 – 21:10 · voetbal, zonder pauze aan.</p><p>19:35 · de pizza wordt aan de deur afgerekend met de pas van <b>N. Grauwwold</b>.</p>`}]},
+  {t:'Sporen in huis',ic:'🔍',docs:[
+   {t:'Telefoon van Zeger',h:`<p>19:28 · gemiste oproep van <b>Benno</b>.</p><p>19:31 · sms van <b>Benno</b>: “Ik sta voor de deur. Doe open.”</p>`},
+   {t:'De traploper',h:`<p>De loper is <b>bovenaan</b> losgetrokken. Op de bovenste tree staat de afdruk van een <b>sportschoen, maat 43</b>.</p>`},
+   {t:'Tankbon',h:`<p>Tankstation aan de ringweg, vier kilometer van Eikenrode.</p><p><b>19:58</b> · € 20 benzine · betaald met de pas van <b>B. Molenkamp</b>.</p>`}]}],
+ rounds:[{t:'De eerste indruk',tips:['Benno vroeg vorige week aan zijn opa € 8.000 te leen. Opa zei nee.','Benno rijdt in een kleine rode auto.','Nanne en Zeger hadden al maanden ruzie over de eik in de tuin.','Inge belt elke dinsdagavond lang met haar zus.','Nanne bestelt bij elke voetbalwedstrijd een pizza.','Zeger had het testament al vijf jaar niet veranderd.']},
+  {t:'Nieuwe sporen',tips:['Benno draagt bij het sporten altijd zijn blauwe trainingsjack met een wit streepje.','De sportschool ligt tien minuten rijden van Eikenrode.','Inge heeft geen auto. Ze gaat altijd met de bus.','Benno heeft schoenmaat 43.']}],
  motives:[['geld','Hij wilde geld en kreeg het niet'],['boom','Ruzie over de eik'],['erfenis','Het geld uit het testament']],motive:'geld',
  keys:[['camera','Deurbelcamera: rode auto om 19:32'],['ruzie','De ruzie over de boom'],['tas','De vergeten tas']],key:'camera',
  lies:{thijmen:'Liegt: “Ik was tot half negen in de sportschool.” Volgens zijn pasje ging hij al om 19:10 weg. Om 19:32 stond zijn rode auto bij Eikenrode.',riek:'Vertelt de waarheid. Ze ging om 19:00 weg en kwam om 20:15 terug voor haar tas.',wessel:'Vertelt de waarheid. Zijn deurbelcamera filmde juist de dader.'},
@@ -7260,7 +7280,7 @@ TVCASES.push(
  tips:['Klopt het alibi van iedereen met de tijden in de dossiers?','Kijk naar het pasje van de sportschool. Hoe laat ging Benno echt weg?','Wie draagt een blauw trainingsjack, en wie rijdt in een rode auto?'],
  story:`Benno Molenkamp had schulden. Zijn opa wilde hem niets meer lenen. Om 19:10 ging Benno weg uit de sportschool en reed naar Eikenrode. Boven aan de trap kregen ze ruzie. Benno duwde zijn opa, die naar beneden viel. In paniek reed hij om 19:51 weg en vertelde iedereen dat hij de hele avond in de sportschool was.`},
 
-{id:'overwerk',nr:'03',title:'Overwerk',level:'Makkelijk',time:'25 tot 35 minuten',players:'1 tot 3 spelers',date:'03-02',
+{id:'overwerk',nr:'03',title:'Overwerk',level:'Makkelijk',time:'25 tot 35 minuten',players:'1 tot 10 spelers',date:'03-02',
  blurb:'Een boekhouder werkt laat door op kantoor. De schoonmaakster vindt haar om tien voor elf. Wie kwam er nog langs?',
  melding:`<p class="tv-mono">MELDING 112 · WOENSDAG 3 FEBRUARI · 22:52</p><p>Schoonmaakster <b>Geertje Stroowold</b> vindt boekhouder <b>Froukje Pluimveld</b> (49) dood in haar kantoor op de vierde verdieping van <b>administratiekantoor Kwakernaak</b>.</p><p>Ze is geslagen met de zware nietmachine van haar bureau. <b>Tussen 21:00 en 21:30</b> is ze overleden.</p>`,
  question:'Wie was er tussen 21:00 en 21:30 op de vierde verdieping?',
@@ -7283,8 +7303,17 @@ TVCASES.push(
    {t:'Koffieautomaat 4e etage',h:`<p>21:12 · cappuccino · betaald met pas <b>Y. Kalkdam</b>.</p>`}]},
   {t:'Administratie',ic:'📒',docs:[
    {t:'Mail van Froukje',h:`<p><b>Aan:</b> directie · <b>20:58</b></p><p>“Er verdwijnt al maanden geld van klanten. Morgen laat ik jullie de rekeningen van Ype zien. H.”</p>`},
-   {t:'Bankoverzicht',h:`<p>Van de rekening van klanten ging <b>€ 64.000</b> naar een rekening op naam van <b>Y. Kalkdam</b>.</p>`}]}],
- rounds:[{t:'De eerste indruk',tips:['De hockeytrainer zag Merijn de hele avond langs het veld staan.','De nietmachine is van de afdeling waar Ype werkt.','Geertje begint elke avond om 22:00 op de vierde verdieping.']}],
+   {t:'Bankoverzicht',h:`<p>Van de rekening van klanten ging <b>€ 64.000</b> naar een rekening op naam van <b>Y. Kalkdam</b>.</p>`}]},
+  {t:'Garage en telefoons',ic:'🚗',docs:[
+   {t:'Slagboom garage',h:`<table class="tv-t"><tr><th>Tijd</th><th>Auto</th><th>Wat</th></tr><tr><td>08:10</td><td>grijze stationwagen, Y. Kalkdam</td><td>in</td></tr><tr><td><b>21:39</b></td><td><b>grijze stationwagen, Y. Kalkdam</b></td><td><b>uit</b></td></tr></table>`},
+   {t:'Telefoon Ype',h:`<p>20:59 · de mail van Froukje aan de directie wordt <b>geopend</b>. Froukje had Ype in de kopie gezet.</p><p>Zijn telefoon zit dan op de mast naast het kantoor.</p>`},
+   {t:'Clubapp hockey',h:`<p>Training jeugd · 20:00 – 22:00.</p><p>21:15 · foto in de clubapp: trainer <b>Merijn</b> met de spelers op het veld.</p>`}]},
+  {t:'Sporen op kantoor',ic:'🔍',docs:[
+   {t:'Vingerafdrukken nietmachine',h:`<p>Op de nietmachine zitten vingerafdrukken van <b>Froukje</b> en van <b>Ype</b>.</p><p>De afdrukken van Ype zitten op de <b>onderkant</b>, alsof hij de machine als een steen vasthield.</p>`},
+   {t:'Schoonmaakrooster',h:`<p>Vierde verdieping, elke avond: 22:00 keuken · 22:20 vergaderzalen · <b>22:50 kantoor Pluimveld</b>.</p>`},
+   {t:'Brief van de advocaat',h:`<p>Aan Merijn en Froukje: “Het huis is verkocht. U heeft allebei getekend. De zaak is <b>vorige week afgerond</b>.”</p>`}]}],
+ rounds:[{t:'De eerste indruk',tips:['De hockeytrainer zag Merijn de hele avond langs het veld staan.','De nietmachine is van de afdeling waar Ype werkt.','Geertje begint elke avond om 22:00 op de vierde verdieping.','Ype en Froukje werken al twintig jaar op dezelfde afdeling.','Merijn traint op woensdag altijd de jeugd.','De koffieautomaat werkt alleen met een personeelspas.']},
+  {t:'Na de verhoren',tips:['Ype rijdt in een grijze stationwagen.','Ype kocht vorige maand een boot van € 60.000.','Geertje heeft geen pas voor de garage. Ze komt altijd met de fiets.','In de agenda van Froukje staat voor donderdag: “gesprek directie, fraude”.']}],
  motives:[['fraude','Froukje ontdekte zijn fraude'],['huis','Ruzie over het huis'],['baan','Hij wilde haar baan']],motive:'fraude',
  keys:[['lift','Pasjeslog lift: om 21:05 weer naar boven'],['auto','De grijze auto in de garage'],['hockey','Het hockeyveld']],key:'lift',
  lies:{dirkjan:'Liegt: “Ik ben niet meer teruggekomen.” Zijn pasje nam om 21:05 de lift naar de vierde en hij haalde om 21:12 koffie.',rutger:'Vertelt de waarheid. De hockeytrainer zag hem de hele avond.',fenna:'Vertelt de waarheid. Haar pasje ging pas om 22:01 naar boven.'},
@@ -7294,7 +7323,7 @@ TVCASES.push(
  tips:['Vergelijk de verhoren met het liftlog.','Wie haalde er om 21:12 nog koffie?','Lees de mail van Froukje. Wie wordt daar genoemd?'],
  story:`Ype Kalkdam haalde al maanden geld weg van de rekeningen van klanten. Froukje ontdekte het en mailde om 20:58 de directie. Ype zat beneden in zijn auto te wachten en zag de mail op zijn telefoon. Om 21:05 ging hij met de lift terug naar boven en haalde nog snel een koffie. In haar kantoor kregen ze ruzie. Hij sloeg haar met de nietmachine en reed om 21:34 de garage uit.`},
 
-{id:'nachthaven',nr:'04',title:'Nacht in de haven',level:'Makkelijk',time:'25 tot 35 minuten',players:'1 tot 3 spelers',date:'19-03',
+{id:'nachthaven',nr:'04',title:'Nacht in de haven',level:'Makkelijk',time:'25 tot 35 minuten',players:'1 tot 10 spelers',date:'19-03',
  blurb:'Vroeg in de ochtend drijft de havenmeester naast de steiger. De nachtwaker heeft niets gehoord. Zegt hij.',
  melding:`<p class="tv-mono">MELDING 112 · VRIJDAG 19 MAART · 06:10</p><p>Visser <b>Rinse Scholwijk</b> ziet havenmeester <b>Nout Lommerwold</b> (61) in het water naast de steiger bij de oude loods drijven.</p><p>De schouwarts ziet een harde klap op zijn hoofd. Nout is <b>tussen 02:00 en 03:00</b> overleden.</p>`,
  question:'Wie was er tussen 02:00 en 03:00 bij de oude loods?',
@@ -7317,8 +7346,17 @@ TVCASES.push(
    {t:'De zaklamp',h:`<p>De grote zaklamp van de steiger heeft een deuk. Er zit <b>bloed van Nout</b> op. Op de zaklamp staat met stift: <b>“W.K.”</b></p>`}]},
   {t:'Logs en camera’s',ic:'🎥',docs:[
    {t:'Prikklokken van de rondes',h:`<table class="tv-t"><tr><th>Tijd</th><th>Klok</th></tr><tr><td>00:50</td><td>poort</td></tr><tr><td>01:50</td><td>poort</td></tr><tr><td><b>02:50</b></td><td><b>niet geprikt</b></td></tr><tr><td>03:20</td><td>poort</td></tr></table>`},
-   {t:'GPS-kastje boot van Rinse',h:`<p>23:10 – 05:20 · op zee, 12 kilometer uit de kust.</p><p>05:30 · terug in de haven.</p>`}]}],
- rounds:[{t:'De eerste indruk',tips:['Klaartje liep om kwart over één met een gast naar huis. De buren hoorden hen lachen.','Wybren heeft sinds kort een nieuwe auto, terwijl hij weinig verdient.','Op de zaklamp van de steiger staan de letters W.K.']}],
+   {t:'GPS-kastje boot van Rinse',h:`<p>23:10 – 05:20 · op zee, 12 kilometer uit de kust.</p><p>05:30 · terug in de haven.</p>`}]},
+  {t:'Getuigen',ic:'🗣️',docs:[
+   {t:'Barvrouw De Meerpaal',h:`<p>“Om half twaalf rekende Nout af. Hij zei: <b>‘Ik ga nog even naar de oude loods kijken. Daar klopt iets niet.’</b>”</p>`},
+   {t:'Buurvrouw van Klaartje',h:`<p>“Om 01:25 kwam Klaartje thuis met een gast. Tot een uur of drie hoorde ik muziek en gelach. <b>Niemand ging meer weg.</b>”</p>`},
+   {t:'Camera tankstation kade',h:`<p>02:35 · een man in een <b>donkere nachtwakersjas</b> loopt snel van de steiger naar de loods. Hij heeft <b>geen zaklamp</b> bij zich.</p>`}]},
+  {t:'De smokkel',ic:'📦',docs:[
+   {t:'Douane',h:`<p>De veertig dozen sigaretten komen uit een partij die vorige maand van een vrachtwagen is <b>verdwenen</b>.</p>`},
+   {t:'Bankrekening Wybren',h:`<p>Sinds januari elke maand een <b>contante storting van € 2.000</b>. Zijn salaris is € 1.900.</p>`},
+   {t:'Regeling ligplaats',h:`<p>Rinse heeft een schuld van € 900 voor zijn ligplaats. Vorige week tekende hij met Nout een <b>betalingsregeling</b>. Nout schreef erbij: “Prima geregeld.”</p>`}]}],
+ rounds:[{t:'De eerste indruk',tips:['Klaartje liep om kwart over één met een gast naar huis. De buren hoorden hen lachen.','Wybren heeft sinds kort een nieuwe auto, terwijl hij weinig verdient.','Op de zaklamp van de steiger staan de letters W.K.','Nout liep ’s nachts vaak nog een rondje over de kade.','De nachtwaker moet elk uur prikken bij de poort.','Rinse vaart elke donderdagavond om elf uur uit.']},
+  {t:'De loods',tips:['Alleen de havenmeester en de nachtwaker hebben een sleutel van de oude loods.','Wybren betaalde zijn nieuwe auto contant.','Klaartje en Nout spraken vorige week af dat het terras mag blijven.','Elke medewerker van de haven heeft een eigen zaklamp met zijn letters erop.']}],
  motives:[['smokkel','Nout ontdekte de smokkel'],['schuld','De schuld voor de ligplaats'],['terras','Ruzie over het terras']],motive:'smokkel',
  keys:[['zaklamp','De zaklamp met W.K. en bloed'],['gps','Het GPS-kastje van de boot'],['terras','De brief over het terras']],key:'zaklamp',
  lies:{evert:'Liegt: “Ik zat in mijn hokje en hoorde niks.” Om 02:50 prikte hij zijn ronde niet. Zijn zaklamp, met W.K. erop, lag met bloed op de steiger.',jelte:'Vertelt de waarheid. Volgens het GPS-kastje was hij op zee.',tjitske:'Vertelt de waarheid. Zij gaf zelfs de tip dat Nout naar de loods ging.'},
@@ -7338,7 +7376,7 @@ SCREND.tv=Object.assign(SCREND.tv||{},{
 
 // ---------- extra tv-zaken: GEMIDDELD (45 tot 75 minuten) ----------
 TVCASES.push(
-{id:'tuinhuis',nr:'05',title:'Thee in het tuinhuis',level:'Gemiddeld',time:'45 tot 75 minuten',players:'1 tot 4 spelers',date:'22-05',
+{id:'tuinhuis',nr:'05',title:'Thee in het tuinhuis',level:'Gemiddeld',time:'45 tot 75 minuten',players:'1 tot 10 spelers',date:'22-05',
  blurb:'Een rijke weduwe drinkt elke middag thee in haar tuinhuis. Vandaag was het haar laatste kopje.',
  melding:`<p class="tv-mono">MELDING 112 · ZATERDAG 22 MEI · 16:40</p><p>Tuinman <b>Remco Hamerdam</b> vindt weduwe <b>Hiske Eikbergen</b> (78) in haar tuinhuis. Ze zit in haar rieten stoel en leeft niet meer.</p><p>Haar hart is stilgevallen. In de theepot vindt het lab <b>vingerhoedskruid</b>, een giftige plant. Ze is <b>tussen 15:00 en 16:00</b> overleden.</p><p>Vier mensen kwamen die middag langs.</p>`,
  question:'Wie zette de thee voor Hiske?',
@@ -7360,7 +7398,8 @@ TVCASES.push(
  secret:[
   {t:'Forensisch dossier',ic:'🔬',docs:[
    {t:'Sectierapport',h:`<p><b>Doodsoorzaak:</b> hartstilstand door gif uit <b>vingerhoedskruid</b>.</p><p>Het gif zat in de thee. Hiske dronk minstens twee koppen.</p><p><b>Tijdstip van overlijden:</b> tussen 15:00 en 16:00.</p>`},
-   {t:'Labrapport theekopjes',h:`<p>Kopje 1 (van Hiske): <b>gif</b>.</p><p>Kopje 2: afgewassen, maar op het oor zit nog een <b>vingerafdruk van A. Zeilvliet</b>.</p>`}]},
+   {t:'Labrapport theekopjes',h:`<p>Kopje 1 (van Hiske): <b>gif</b>.</p><p>Kopje 2: afgewassen, maar op het oor zit nog een <b>vingerafdruk van A. Zeilvliet</b>.</p>`},
+   {t:'De theepot',h:`<p>Tussen de rooibos zitten <b>gedroogde, fijngeknipte bladeren</b>. Verse bladeren uit de tuin zien er heel anders uit.</p>`}]},
   {t:'Digitaal dossier',ic:'📱',docs:[
    {t:'Zoekgeschiedenis telefoon Aukje',h:`<p>Donderdag 22:14 · “vingerhoedskruid giftig thee”</p><p>Donderdag 22:20 · “hoeveel vingerhoedskruid dodelijk”</p>`},
    {t:'Agenda van dokter Liervliet',h:`<p>15:00 – 16:30 · spreekuur, zes patiënten, in de praktijk aan het Dorpsplein.</p>`}]},
@@ -7369,10 +7408,11 @@ TVCASES.push(
    {t:'Buurvrouw Mieke',h:`<p>“Om 15:40 fietste de nicht weg. Ze had haar tasje niet meer bij zich.”</p>`}]},
   {t:'Administratie',ic:'📒',docs:[
    {t:'Brief van de notaris',h:`<p>“Geachte mevrouw Eikbergen, hierbij bevestig ik uw afspraak van maandag 10:00. U wilt uw nicht uit uw testament halen en alles nalaten aan het dierenasiel.”</p>`},
+   {t:'Het huidige testament',h:`<p>Opgemaakt in 2019: <b>alles</b> gaat naar nicht <b>Aukje Zeilvliet</b>.</p>`},
    {t:'Lening van de huisarts',h:`<p>€ 40.000, netjes terugbetaald tot en met april. Nog € 12.000 open.</p>`}]}],
  envelope:{t:'Envelop B · het tasje',when:'Open pas als jullie alle verhoren gehoord hebben.',h:`<p>In de fietstas van Aukje vindt de politie een <b>leeg zakje met gedroogde bladeren</b> en een tuinschaar.</p><p>Het lab: de bladeren zijn van <b>vingerhoedskruid</b>.</p>`},
- rounds:[{t:'Het tuinhuis',tips:['Hiske dronk elke dag om drie uur thee met haar eigen blikje rooibos.','Remco droeg vandaag zijn groene laarzen, maat 44.','Mieke zit elke middag in haar serre en kan precies zien wie er bij Hiske aanbelt.','De huisarts heeft vandaag een nieuwe bloeddrukmeter gekocht.']},
-  {t:'Na de verhoren',tips:['Aukje heeft maat 38.','Aukje had een tasje bij zich toen ze aankwam. Toen ze wegging niet meer.','In het blikje rooibos zit geen gif. Het gif kwam er later bij.','Remco had vorige week al een briefje opgehangen: “Pas op: giftige planten achter het tuinhuis.”']}],
+ rounds:[{t:'Het tuinhuis',tips:['Hiske dronk elke dag om drie uur thee met haar eigen blikje rooibos.','Remco droeg vandaag zijn groene laarzen, maat 44.','Mieke zit elke middag in haar serre en kan precies zien wie er bij Hiske aanbelt.','Aukje kwam om kwart voor drie aan op de fiets.','De huisarts heeft vandaag een nieuwe bloeddrukmeter gekocht.']},
+  {t:'Na de verhoren',tips:['Aukje heeft maat 38.','Aukje had een tasje bij zich toen ze aankwam. Toen ze wegging niet meer.','In het blikje rooibos zit geen gif. Het gif kwam er later bij.','Remco had vorige week al een briefje opgehangen: “Pas op: giftige planten achter het tuinhuis.”','Hiske had alleen haar nicht nog in haar testament staan.']}],
  motives:[['erfenis','Ze zou uit het testament gaan'],['ontslag','Ontslag als tuinman'],['lening','De lening van de huisarts'],['heg','Ruzie over de heg']],motive:'erfenis',
  keys:[['kopje','Vingerafdruk op het afgewassen kopje'],['laars','Laarzen bij het tuinhuis'],['agenda','De agenda van de huisarts'],['heg','De ruzie over de heg']],key:'kopje',
  lies:{kiki:'Liegt: ze ging niet om half drie weg maar om 15:40, en ze heeft wel thee gezet. Haar vingerafdruk zit op het afgewassen kopje.',sjors:'Vertelt de waarheid. De voetafdrukken zijn niet van hem.',ewout:'Vertelt de waarheid. Hij had spreekuur.',rina:'Vertelt de waarheid. Zij zag precies hoe laat Aukje wegfietste.'},
@@ -7382,7 +7422,7 @@ TVCASES.push(
  tips:['Wie zegt dat ze om half drie wegging? Vraag het de buurvrouw.','Waarom is één kopje afgewassen?','Lees de brief van de notaris. Wie had haast?'],
  story:`Aukje Zeilvliet hoorde dat haar tante haar uit het testament wilde halen. Ze zocht op hoe giftig vingerhoedskruid is en knipte het achter het tuinhuis af. Zaterdag kwam ze met een tasje gedroogde bladeren. Ze zette thee voor haar tante en deed het gif in de pot. Daarna waste ze haar eigen kopje af, maar vergat het oor. Om 15:40 fietste ze weg.`},
 
-{id:'parkeer',nr:'06',title:'Parkeerdek vier',level:'Gemiddeld',time:'50 tot 75 minuten',players:'1 tot 4 spelers',date:'08-09',
+{id:'parkeer',nr:'06',title:'Parkeerdek vier',level:'Gemiddeld',time:'50 tot 75 minuten',players:'1 tot 10 spelers',date:'08-09',
  blurb:'Een projectontwikkelaar ligt naast zijn auto op het hoogste parkeerdek. Zijn compagnon zat in een videogesprek. Toch?',
  melding:`<p class="tv-mono">MELDING 112 · DINSDAG 8 SEPTEMBER · 19:41</p><p>Parkeerwachter <b>Rindert Zeilwold</b> vindt projectontwikkelaar <b>Jildert Lierwijk</b> (44) naast zijn auto op <b>parkeerdek 4</b> van garage De Kroon.</p><p>Hij is geslagen met een zware krik. <b>Tussen 18:50 en 19:20</b> is hij overleden.</p>`,
  question:'Wie was er tussen 18:50 en 19:20 op parkeerdek 4?',
@@ -7410,13 +7450,15 @@ TVCASES.push(
    {t:'Telefoon Pelle',h:`<p>17:00 – 20:05 · mast bouwplaats Almere-Poort.</p>`}]},
   {t:'Camera’s en kentekens',ic:'🎥',docs:[
    {t:'Slagboom garage De Kroon',h:`<table class="tv-t"><tr><th>Tijd</th><th>Kenteken</th><th>Wat</th></tr><tr><td>17:48</td><td>auto Jildert</td><td>in</td></tr><tr><td><b>18:52</b></td><td><b>donkerblauwe leaseauto, op naam van Lierwijk &amp; Klapveld</b></td><td><b>in</b></td></tr><tr><td><b>19:21</b></td><td><b>zelfde auto</b></td><td><b>uit</b></td></tr></table>`},
-   {t:'Liftcamera',h:`<p>Geen beelden van 18:50 tot 19:20: iemand nam de <b>trap</b>.</p>`}]},
+   {t:'Liftcamera',h:`<p>Geen beelden van 18:50 tot 19:20: iemand nam de <b>trap</b>.</p>`},
+   {t:'Branddeur trappenhuis',h:`<p>De branddeur naar dek 4 ging open om <b>18:58</b> en om <b>19:16</b>.</p>`}]},
   {t:'Administratie',ic:'📒',docs:[
    {t:'Contract',h:`<p>Notitie van Jildert bij het nieuwe contract: <b>“Tijs eruit? Advocaat bellen dinsdag.”</b></p>`},
-   {t:'Leaseauto’s van de zaak',h:`<p>Lierwijk &amp; Klapveld heeft twee leaseauto’s: een grijze (Jildert) en een <b>donkerblauwe (Tijs)</b>.</p>`}]}],
+   {t:'Leaseauto’s van de zaak',h:`<p>Lierwijk &amp; Klapveld heeft twee leaseauto’s: een grijze (Jildert) en een <b>donkerblauwe (Tijs)</b>.</p>`},
+   {t:'Rondes parkeerwachter',h:`<p>Rindert loopt elk uur een ronde: om 19:00 dek 1 en 2, om <b>19:40 dek 4</b>.</p>`}]}],
  envelope:{t:'Envelop B · het parkeerkaartje',when:'Open pas als jullie alle verhoren gehoord hebben.',h:`<p>In de prullenbak van het kantoor vindt de politie een <b>parkeerkaartje van garage De Kroon</b>: in 18:52, uit 19:21.</p><p>Op het kaartje zit een vingerafdruk van <b>T. Klapveld</b>.</p>`},
- rounds:[{t:'De garage',tips:['De klanten in het videogesprek hoorden Tijs na 18:41 niets meer zeggen.','Corrie at bij haar zus in Utrecht. De bon van het restaurant staat op 19:05.','De krik op dek 4 hoort niet bij de auto van Jildert.','Rindert zag om 18:52 een donkere auto naar boven rijden.']},
-  {t:'Na de verhoren',tips:['Tijs rijdt in een donkerblauwe leaseauto van de zaak.','Pelle stond tot acht uur op de bouwplaats in Almere. Zijn ploeg bevestigt het.','Het kantoor van Lierwijk & Klapveld is drie minuten lopen van garage De Kroon.','Jildert wilde dinsdag zijn advocaat bellen over Tijs.']}],
+ rounds:[{t:'De garage',tips:['De klanten in het videogesprek hoorden Tijs na 18:41 niets meer zeggen.','Corrie at bij haar zus in Utrecht. De bon van het restaurant staat op 19:05.','De krik op dek 4 hoort niet bij de auto van Jildert.','Rindert zag om 18:52 een donkere auto naar boven rijden.','De branddeur naar het trappenhuis piept hard als hij opengaat.']},
+  {t:'Na de verhoren',tips:['Tijs rijdt in een donkerblauwe leaseauto van de zaak.','Pelle stond tot acht uur op de bouwplaats in Almere. Zijn ploeg bevestigt het.','Het kantoor van Lierwijk & Klapveld is drie minuten lopen van garage De Kroon.','Jildert wilde dinsdag zijn advocaat bellen over Tijs.','Tijs heeft altijd leren handschoenen in zijn auto liggen.']}],
  motives:[['zaak','Jildert wilde hem uit de zaak'],['scheiding','De scheiding'],['rekening','De onbetaalde rekening'],['baan','Bang voor ontslag']],motive:'zaak',
  keys:[['slagboom','Slagboom: donkerblauwe leaseauto 18:52 – 19:21'],['bericht','Het dreigende bericht'],['zus','Het etentje in Utrecht'],['ronde','De ronde van de parkeerwachter']],key:'slagboom',
  lies:{reinout:'Liegt: “Ik zat een uur in het videogesprek.” Zijn camera stond uit en na 18:41 zei hij niets meer. Om 18:52 reed zijn donkerblauwe leaseauto de garage in.',liselot:'Vertelt de waarheid. Ze at in Utrecht.',gijsbert:'Vertelt de waarheid. Zijn bericht was dreigend, maar hij was in Almere.',tygo:'Vertelt de waarheid. Hij zag de auto zelfs naar boven rijden.'},
@@ -7434,7 +7476,7 @@ SCREND.tv=Object.assign(SCREND.tv||{},{
 
 // ---------- extra tv-zaken: MOEILIJK (75 tot 90 minuten) · 5 verdachten, twee mensen liegen ----------
 TVCASES.push(
-{id:'botenloods',nr:'07',title:'Brand in de botenloods',level:'Moeilijk',time:'75 tot 90 minuten',players:'2 tot 4 spelers',date:'14-10',
+{id:'botenloods',nr:'07',title:'Brand in de botenloods',level:'Moeilijk',time:'75 tot 90 minuten',players:'2 tot 10 spelers',date:'14-10',
  blurb:'Een jachtbouwer sterft in zijn brandende loods. Maar toen het vuur begon, was hij al dood.',
  melding:`<p class="tv-mono">MELDING 112 · WOENSDAG 14 OKTOBER · 22:58</p><p>Een voorbijganger ziet vlammen bij <b>jachtwerf Scheeringa</b> aan het Zwarte Water. De brandweer vindt in de loods het lichaam van eigenaar <b>Gabe Scheeringa</b> (57).</p><p>De schouwarts: Gabe was <b>al dood</b> toen de brand begon. Hij kreeg een klap op het hoofd, <b>tussen 22:15 en 22:45</b>. De brand begon rond 22:50.</p><p>Vijf mensen hadden een reden. Twee van hen liegen.</p>`,
  question:'Wie was er tussen 22:15 en 22:50 bij de loods, en wie stak de brand aan?',
@@ -7485,7 +7527,7 @@ TVCASES.push(
  tips:['Twee mensen liegen. Wie liegt om iets anders dan de moord?','Leg de alarmcodes naast de telefoons. Wiens telefoon ging uit?'],
  story:`Bedrijfsleider Auke Gaastbroek haalde al maanden geld uit de kas van de werf. Toen hij hoorde dat er donderdag een accountant kwam, wilde hij de boekhouding laten verdwijnen. Hij kocht benzine met de bedrijfspas, zette zijn telefoon uit en opende om 22:08 met zijn eigen code de loods. Gabe zat nog in zijn kantoortje en betrapte hem bij de kluis. Auke sloeg hem met een moersleutel. Daarna stak hij de loods aan en vluchtte met het werkbootje. Thom loog ook, maar alleen om zijn gokschulden te verbergen.`},
 
-{id:'badhuis',nr:'08',title:'Het gesloten badhuis',level:'Moeilijk',time:'75 tot 90 minuten',players:'2 tot 4 spelers',date:'26-11',
+{id:'badhuis',nr:'08',title:'Het gesloten badhuis',level:'Moeilijk',time:'75 tot 90 minuten',players:'2 tot 10 spelers',date:'26-11',
  blurb:'Na sluitingstijd ligt de eigenaar van een wellness in het warme bad. Verdronken. Maar ze kon prima zwemmen.',
  melding:`<p class="tv-mono">MELDING 112 · DONDERDAG 26 NOVEMBER · 23:04</p><p>Beveiliger van de ronde vindt <b>Marrit Eschweerd</b> (48), eigenaar van wellness <b>Badhuis De Bron</b>, in het privébad. Ze is verdronken.</p><p>De schouwarts ziet <b>blauwe plekken op haar schouders</b>: iemand heeft haar onder water gehouden. <b>Tussen 21:45 en 22:15</b> is ze overleden. Het badhuis sloot om 21:30.</p><p>Vijf mensen hadden een sleutel of een reden. Twee van hen liegen.</p>`,
  question:'Wie was er na sluitingstijd nog in het badhuis?',
@@ -7536,7 +7578,7 @@ TVCASES.push(
  tips:['Twee mensen liegen over waar ze waren. Maar waarom?','Kijk naar het sleutellog en de app van het horloge samen.'],
  story:`Niek Bleekburg wilde Badhuis De Bron voor vier miljoen verkopen. Marrit schreef “NOOIT” op het contract. Om 21:49 opende Niek met zijn eigen sleutel de achterdeur. Hij wist dat Marrit na sluiting in het privébad lag. Ze kregen ruzie en hij duwde haar onder water. In het gevecht brak het bandje van zijn sporthorloge. Om 22:12 vertrok hij. Roel loog ook, maar alleen om zijn relatie met Afke geheim te houden.`},
 
-{id:'zeezicht',nr:'09',title:'Diner in Villa Zeezicht',level:'Moeilijk',time:'75 tot 90 minuten',players:'2 tot 4 spelers',date:'31-12',
+{id:'zeezicht',nr:'09',title:'Diner in Villa Zeezicht',level:'Moeilijk',time:'75 tot 90 minuten',players:'2 tot 10 spelers',date:'31-12',
  blurb:'Oudejaarsavond. Een rijke reder geeft een diner voor zijn familie. Tussen het hoofdgerecht en het toetje is hij dood.',
  melding:`<p class="tv-mono">MELDING 112 · OUDEJAARSAVOND 31 DECEMBER · 21:41</p><p>In <b>Villa Zeezicht</b> wordt reder <b>Rogier Sluishuis</b> (66) dood gevonden in zijn woonkamer, naast de open haard. Hij is geslagen met een <b>bronzen beeldje</b> van een zeilschip.</p><p>Vijf mensen zaten met hem aan tafel. Volgens de kok verliet Rogier om 21:05 de eetkamer om een fles wijn te pakken. <b>Tussen 21:05 en 21:30</b> is hij overleden.</p><p>Twee mensen liegen.</p>`,
  question:'Wie verliet tussen 21:05 en 21:30 de tafel?',
@@ -7597,7 +7639,7 @@ SCREND.tv=Object.assign(SCREND.tv||{},{
 
 // ---------- extra tv-zaken: EXPERT (90 tot 120 minuten) · geen hulptips, het bewijs zit in een combinatie ----------
 TVCASES.push(
-{id:'klok',nr:'10',title:'De klok loopt voor',level:'Expert',time:'90 tot 120 minuten',players:'2 tot 4 spelers',date:'02-02',
+{id:'klok',nr:'10',title:'De klok loopt voor',level:'Expert',time:'90 tot 120 minuten',players:'2 tot 10 spelers',date:'02-02',
  blurb:'De buurvrouw hoorde een gil toen de grote klok negen uur sloeg. Iedereen heeft een alibi voor negen uur. Te mooi?',
  melding:`<p class="tv-mono">MELDING 112 · DINSDAG 2 FEBRUARI · 21:30</p><p>Buurvrouw <b>Grietje Wolfkamp</b> vindt klokkenmaker <b>Doede Scheergaard</b> (74) dood in zijn werkplaats boven de winkel <b>Scheergaard Uurwerken</b>. Hij is geslagen met een zwaar koperen klokgewicht.</p><p>Grietje: <i>“Ik hoorde een gil, precies toen de grote staande klok in de winkel negen uur sloeg.”</i></p><p>De schouwarts: tijdstip van overlijden <b>tussen 20:30 en 21:00</b>. Twee mensen liegen. Geen hulptips: jullie staan er alleen voor.</p>`,
  question:'Hoe laat was die gil écht?',
@@ -7648,7 +7690,7 @@ TVCASES.push(
  tips:[],
  story:`Leerling Hylke Duinstra stal antieke horloges uit de vitrine en bracht ze naar de lommerd. Doede schreef in zijn werkboek dat hij het hem wilde vragen. Om half negen kwam Hylke via de achterdeur. Ze kregen ruzie en Hylke sloeg met een koperen klokgewicht. De klok beneden sloeg “negen”, maar die liep twintig minuten voor: het was 20:40. Het polshorloge van Doede stopte op 20:41. Hylke rende naar het café en zei dat hij daar al vanaf half negen zat. Dieuwke kwam rond negen uur, vond haar vader en vluchtte met geld uit de kassa. Daarom loog zij ook.`},
 
-{id:'sleutels',nr:'11',title:'Twee sleutels',level:'Expert',time:'90 tot 120 minuten',players:'2 tot 4 spelers',date:'16-06',
+{id:'sleutels',nr:'11',title:'Twee sleutels',level:'Expert',time:'90 tot 120 minuten',players:'2 tot 10 spelers',date:'16-06',
  blurb:'Een notaris ligt dood in het archief. De deur zat op slot. Haar sleutel zat in haar zak, de reservesleutel in de kluis.',
  melding:`<p class="tv-mono">MELDING 112 · DINSDAG 16 JUNI · 08:34</p><p>Secretaresse <b>Annerieke Kalkvliet</b> vindt notaris <b>Minke Haversma</b> (59) dood in het archief in de kelder van notariskantoor <b>Haversma</b>. De deur zat <b>op slot</b>.</p><p>Minke had haar eigen sleutel in haar jaszak. De enige reservesleutel lag in de kluis. Ze is gisteravond <b>tussen 19:00 en 20:00</b> overleden, door een klap met een zware perforator.</p><p>Hoe kwam de dader eruit? Twee mensen liegen. Geen hulptips.</p>`,
  question:'Hoe kon iemand de deur van buiten op slot doen?',
@@ -7699,7 +7741,7 @@ TVCASES.push(
  tips:[],
  story:`Kandidaat-notaris Christiaan Knotveld vervalste voor € 20.000 het testament van de oude heer Stroodam, zodat zoon Menno het huis kreeg. Drie weken geleden liet hij al een kopie maken van de archiefsleutel. Menno kwam maandag om half zeven verhaal halen bij Minke en vertrok om 18:50. Om 18:58 mailde Minke de beroepsorganisatie. Christiaan kwam om 19:12 terug en vond haar in het archief. Hij sloeg haar met de perforator, pakte de map “Stroodam” en deed de deur met zijn kopie van buiten op slot. Zo leek het een afgesloten kamer.`},
 
-{id:'glas',nr:'12',title:'Het alibi van glas',level:'Expert',time:'90 tot 120 minuten',players:'2 tot 4 spelers',date:'18-09',
+{id:'glas',nr:'12',title:'Het alibi van glas',level:'Expert',time:'90 tot 120 minuten',players:'2 tot 10 spelers',date:'18-09',
  blurb:'Een zeilinstructeur ligt dood in zijn loods. Zijn compagnon postte op dat moment een foto van de zonsondergang. Kilometers verderop.',
  melding:`<p class="tv-mono">MELDING 112 · VRIJDAG 18 SEPTEMBER · 21:12</p><p>Havenmeester <b>Neeltje Mosveld</b> vindt zeilinstructeur <b>Wout Gaastburg</b> (38) dood in de loods van <b>zeilschool De Wind</b>. Hij is geslagen met een zware lier.</p><p>De schouwarts: <b>tussen 19:30 en 20:15</b>. Zijn compagnon postte om 20:05 een foto van de zonsondergang bij strandpaviljoen Paal 9, vijftien kilometer verderop.</p><p>Twee mensen liegen. Geen hulptips.</p>`,
  question:'Wanneer is die foto van de zonsondergang écht gemaakt?',

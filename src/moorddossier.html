@@ -6617,6 +6617,134 @@ const RF=(()=>{let n=0;
    <rect width="300" height="360" filter="url(#${id}gr)" opacity=".16"/>
   </g></svg>`}})();
 
+// 3D-animatiestijl portretten voor het Tv-dossier (eigen figuren, overdreven trekken, zachte filmbelichting).
+// zelfde invoer als RF: o={f,skin,hc,hair,eyes,top,tc,age,beard,glasses,jaw,earring,bg,full,alt}
+const TF=(()=>{let n=0;
+ const sh=(hex,k)=>{const c=parseInt(hex.slice(1),16);let r=c>>16,g=c>>8&255,b=c&255;const f=v=>Math.max(0,Math.min(255,Math.round(k<0?v*(1+k):v+(255-v)*k)));return '#'+[f(r),f(g),f(b)].map(v=>v.toString(16).padStart(2,'0')).join('')};
+ const mix=(a,b,t)=>{const p=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));const A=p(a),B=p(b);return '#'+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')).join('')};
+ const hash=s=>{let h=2166136261;for(const c of String(s||'x'))h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0};
+ // gesloten vloeiende lijn door punten (catmull-rom)
+ const sm=(P,closed=true)=>{const N=P.length,g=i=>P[closed?(i+N)%N:Math.max(0,Math.min(N-1,i))];let d=`M${P[0][0].toFixed(1)} ${P[0][1].toFixed(1)}`;
+  for(let i=0;i<(closed?N:N-1);i++){const a=g(i-1),b=g(i),c=g(i+1),e=g(i+2);d+=`C${(b[0]+(c[0]-a[0])/6).toFixed(1)} ${(b[1]+(c[1]-a[1])/6).toFixed(1)} ${(c[0]-(e[0]-b[0])/6).toFixed(1)} ${(c[1]-(e[1]-b[1])/6).toFixed(1)} ${c[0].toFixed(1)} ${c[1].toFixed(1)}`}return d+(closed?'Z':'')};
+ const mir=P=>P.map(([x,y])=>[300-x,y]);
+ return o=>{const id='tf'+(++n),S=o.skin||'#e8c0a4',H=o.hc||'#4a3a2a',E=o.eyes||'#5a4a3a',age=o.age||35,f=!!o.f,tc=o.tc||'#3a4a5a',T=o.top||'shirt',hs=o.hair||'short';
+  const r=hash(o.alt||JSON.stringify(o)),R=k=>((r>>>k)&255)/255;
+  // eigen karikatuur per persoon
+  const jw=(o.jaw||0)*1.6;
+  const shape=Math.floor(R(0)*4);              // 0 ei, 1 peer, 2 lang, 3 rond
+  const nose=f?[3,2,3,0][Math.floor(R(8)*4)]:Math.floor(R(8)*4);               // 0 lang en spits, 1 knol, 2 haak, 3 klein
+  const eyeS=.9+R(16)*.35-(age>55?.08:0), brA=(R(24)-.5)*10, smirk=(R(4)-.5)*8;
+  const Tp=58+(shape===2?-8:0), Bt=262+(shape===2?8:0)+(shape===3?-10:0);
+  const fw=shape===1?62:shape===3?78:70, cw=shape===3?82:shape===0?72:74, jx=(shape===1?70:shape===0?46:shape===3?60:52)+jw;
+  const FL=[[150,Tp],[150-fw*.62,Tp+12],[150-fw,Tp+52],[150-cw,Tp+104],[150-jx,Tp+160],[150-jx*.55,Bt-14],[150,Bt]];
+  const face=sm([...FL,...mir([FL[5],FL[4],FL[3],FL[2],FL[1]])]);
+  const ey=Tp+108, ex=34, BR=[15,25,19,13][nose]*(f?.85:1), nb=Math.min(ey+[62,48,56,42][nose],Bt-40-BR), my=nb+BR+16;
+  const sk2=sh(S,-.22), sk3=sh(S,-.42), skL=sh(S,.18), sss=mix(S,'#d2503c',.35);
+  const LIP=o.lip||(f?mix('#b8505c',S,.15):mix(sh(S,-.25),'#a04848',.25));
+  const blur=(k,v)=>`<filter id="${id}b${k}" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="${v}"/></filter>`;
+  const D=`<defs>
+   <radialGradient id="${id}sk" cx="38%" cy="34%" r="78%"><stop offset="0" stop-color="${skL}"/><stop offset=".45" stop-color="${S}"/><stop offset=".85" stop-color="${sk2}"/><stop offset="1" stop-color="${sss}"/></radialGradient>
+   <radialGradient id="${id}ns" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="${sh(S,.28)}"/><stop offset=".55" stop-color="${S}"/><stop offset="1" stop-color="${mix(sk2,'#c04a3a',.25)}"/></radialGradient>
+   <linearGradient id="${id}nk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sk3}"/><stop offset=".6" stop-color="${sk2}"/><stop offset="1" stop-color="${S}"/></linearGradient>
+   <linearGradient id="${id}hr" x1="0" y1="0" x2=".6" y2="1"><stop offset="0" stop-color="${sh(H,.3)}"/><stop offset=".5" stop-color="${H}"/><stop offset="1" stop-color="${sh(H,-.55)}"/></linearGradient>
+   <radialGradient id="${id}hh" cx="40%" cy="20%" r="45%"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+   <radialGradient id="${id}ir" cx="45%" cy="40%" r="55%"><stop offset="0" stop-color="${sh(E,.45)}"/><stop offset=".55" stop-color="${E}"/><stop offset="1" stop-color="${sh(E,-.6)}"/></radialGradient>
+   <radialGradient id="${id}sc" cx="50%" cy="60%" r="60%"><stop offset="0" stop-color="#fbf8f2"/><stop offset=".8" stop-color="#e6ded4"/><stop offset="1" stop-color="#c9b8aa"/></radialGradient>
+   <linearGradient id="${id}cl" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="${sh(tc,.25)}"/><stop offset=".55" stop-color="${tc}"/><stop offset="1" stop-color="${sh(tc,-.5)}"/></linearGradient>
+   <linearGradient id="${id}lp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sh(LIP,-.2)}"/><stop offset=".6" stop-color="${LIP}"/><stop offset="1" stop-color="${sh(LIP,.15)}"/></linearGradient>
+   <linearGradient id="${id}sd" x1="0" x2="1"><stop offset=".5" stop-color="#1a0a04" stop-opacity="0"/><stop offset=".8" stop-color="#1a0a04" stop-opacity=".2"/><stop offset="1" stop-color="#1a0a04" stop-opacity=".42"/></linearGradient>
+   <radialGradient id="${id}vg" cx="50%" cy="42%" r="75%"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".45"/></radialGradient>
+   <radialGradient id="${id}key" cx="22%" cy="8%" r="70%"><stop offset="0" stop-color="#fff6e0" stop-opacity=".22"/><stop offset="1" stop-color="#fff6e0" stop-opacity="0"/></radialGradient>
+   ${blur(1,1)}${blur(2,2.2)}${blur(4,4.5)}${blur(8,9)}
+   <clipPath id="${id}fc"><path d="${face}"/></clipPath><clipPath id="${id}cp"><rect width="300" height="360"/></clipPath>
+   <filter id="${id}st"><feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="1" seed="${r%97}"/><feColorMatrix values="0 0 0 0 .1 0 0 0 0 .08 0 0 0 0 .06 0 0 0 -2.2 1.25"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+  </defs>`;
+  // lichaam (kleiner dan het hoofd: animatieverhoudingen)
+  const sy=Bt+22, body=(()=>{const sw=f?76:86;
+   const base=`<path d="M${150-sw-22} 360C${150-sw-20} ${sy+40} ${150-sw} ${sy+6} ${150-sw*.5} ${sy-2}L${150+sw*.5} ${sy-2}C${150+sw} ${sy+6} ${150+sw+20} ${sy+40} ${150+sw+22} 360Z" fill="url(#${id}cl)"/>
+    <path d="M${150-sw-22} 360C${150-sw-20} ${sy+40} ${150-sw} ${sy+6} ${150-sw*.5} ${sy-2}" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="3" filter="url(#${id}b1)"/>
+    <path d="M${150+sw*.5} ${sy-2}C${150+sw} ${sy+6} ${150+sw+20} ${sy+40} ${150+sw+22} 360L${150+sw+40} 360V${sy}Z" fill="#000" opacity=".22" filter="url(#${id}b4)"/>`;
+   if(T==='tweed'||T==='vest')return base+`<path d="M132 ${sy-4}L150 ${sy+50}L168 ${sy-4}Z" fill="#f2efe8"/><path d="M144 ${sy+4}L150 ${sy+12}L156 ${sy+4}L154 ${sy+60}L150 ${sy+66}L146 ${sy+60}Z" fill="${T==='vest'?'#2a2a30':sh(tc,-.45)}"/>
+     <path d="M126 ${sy-4}L150 ${sy+58}L134 ${sy+70}L116 ${sy+20}Z" fill="${sh(tc,-.12)}"/><path d="M174 ${sy-4}L150 ${sy+58}L166 ${sy+70}L184 ${sy+20}Z" fill="${sh(tc,-.3)}"/>
+     <path d="M126 ${sy-4}L150 ${sy+58}M174 ${sy-4}L150 ${sy+58}" stroke="#000" stroke-opacity=".3" stroke-width="2"/>`;
+   if(T==='chef')return base.replace(`url(#${id}cl)`,'#f1efe9')+`<path d="M130 ${sy-6}Q150 ${sy+8} 170 ${sy-6}L172 ${sy+6}Q150 ${sy+20} 128 ${sy+6}Z" fill="#dcd8cf"/>${[0,1,2].map(i=>`<circle cx="136" cy="${sy+32+i*18}" r="3.4" fill="#cfc9bd"/><circle cx="164" cy="${sy+32+i*18}" r="3.4" fill="#cfc9bd"/>`).join('')}`;
+   if(T==='blouse')return base+`<path d="M122 ${sy-2}Q150 ${sy+34} 178 ${sy-2}" fill="${sh(S,-.08)}"/>${f?[...Array(9)].map((_,i)=>{const a=Math.PI*(.12+.76*i/8);return `<circle cx="${(150-Math.cos(a)*24).toFixed(1)}" cy="${(sy+4+Math.sin(a)*20).toFixed(1)}" r="3.6" fill="#f6f2ea" stroke="#b8ad9a" stroke-width=".6"/>`}).join(''):''}`;
+   return base+`<path d="M130 ${sy-4}L150 ${sy+22}L170 ${sy-4}Z" fill="${sh(S,-.1)}"/><path d="M128 ${sy-6}L150 ${sy+22}L138 ${sy+30}L120 ${sy+4}Z" fill="${sh(tc,.12)}"/><path d="M172 ${sy-6}L150 ${sy+22}L162 ${sy+30}L180 ${sy+4}Z" fill="${sh(tc,-.1)}"/>`})();
+  const neck=`<path d="M128 ${Bt-30}L126 ${sy+10}Q150 ${sy+22} 174 ${sy+10}L172 ${Bt-30}Z" fill="url(#${id}nk)"/>`;
+  const ear=x=>{const s=x<150?-1:1,cx=150+s*(cw+2),cy=ey+6;return `<path d="${sm([[cx-s*4,cy-22],[cx+s*12,cy-18],[cx+s*14,cy+2],[cx+s*6,cy+20],[cx-s*4,cy+16]])}" fill="${s<0?S:sk2}"/><path d="M${cx+s*2} ${cy-10}Q${cx+s*9} ${cy-6} ${cx+s*6} ${cy+8}" fill="none" stroke="${sk3}" stroke-width="2.2" opacity=".55"/>`};
+  // ogen: groot, glanzend, met dikke bovenleden
+  const eye=(x,side)=>{const w=15*eyeS,h=10*eyeS*(age>60?.85:1),lid=age>55?3:0,ly=ey-h*.2;
+   return `<ellipse cx="${x}" cy="${ey-2}" rx="${w+7}" ry="${h+6}" fill="${sk3}" opacity=".5" filter="url(#${id}b4)"/>
+    <path d="M${x-w+2} ${ey-h-4}Q${x} ${ey-h*1.9-4} ${x+w-1} ${ey-h-3}" fill="none" stroke="${sk3}" stroke-width="1.8" opacity=".5"/>
+    <path d="M${x-w} ${ey}Q${x} ${ey-h*1.25} ${x+w} ${ey}Q${x} ${ey+h*1.05} ${x-w} ${ey}Z" fill="url(#${id}sc)"/>
+    <circle cx="${x+side*1.5}" cy="${ey+.5}" r="${h*.86}" fill="url(#${id}ir)"/><circle cx="${x+side*1.5}" cy="${ey+.5}" r="${h*.4}" fill="#120c08"/>
+    <ellipse cx="${x+side*1.5-3}" cy="${ey-3}" rx="2.6" ry="2.1" fill="#fff"/><circle cx="${x+side*1.5+3}" cy="${ey+3}" r="1.1" fill="#fff" opacity=".8"/>
+    <path d="M${x-w-1} ${ey+.5}Q${x} ${ey-h*1.3-lid} ${x+w+1} ${ey+.5}Q${x} ${ey-h*.75+lid} ${x-w-1} ${ey+.5}Z" fill="${sh(S,-.18)}"/>
+    <path d="M${x-w-1} ${ey+.5}Q${x} ${ey-h*1.3+lid*.3} ${x+w+1} ${ey+.5}" fill="none" stroke="#2a1a12" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M${x-w+3} ${ey+h*.95}Q${x} ${ey+h*1.35} ${x+w-3} ${ey+h*.95}" fill="none" stroke="${sk3}" stroke-width="1.4" opacity=".45"/>
+    ${age>45?`<path d="M${x-w+4} ${ey+h*1.7}Q${x} ${ey+h*2.2} ${x+w-2} ${ey+h*1.6}" fill="none" stroke="${sk3}" stroke-width="1.3" opacity=".4"/>`:''}`};
+  const brow=(x,s)=>{const by=ey-20*eyeS-4,a=brA*s,th=f?3.2:5.4,c=age>60?sh(H,.2):sh(H,-.25);
+   return `<path d="M${x-s*18} ${by+4+a*.4}Q${x-s*2} ${by-6-a*.2} ${x+s*18} ${by+2-a*.6}Q${x} ${by-6+th} ${x-s*18} ${by+4+a*.4+th*.6}Z" fill="${c}" stroke="${c}" stroke-width="1.5" stroke-linejoin="round"/>`};
+  // neus: het opvallendste stuk van de karikatuur
+  const noseSvg=(()=>{const top=ey-8;let bulb,bx=150+(R(12)-.5)*6,br;
+   br=BR;bulb=[bx+(nose===2?4:nose===0?2:0),nb];
+   const bridge=nose===2?`M${143} ${top}Q${150} ${top+4} ${154} ${top}L${bulb[0]+br*.7} ${bulb[1]-br*.6}Q${bulb[0]+br+4} ${bulb[1]-br*.2} ${bulb[0]} ${bulb[1]+br*.7}L${bulb[0]-br*.8} ${bulb[1]-br*.5}Z`
+    :`M${143} ${top}Q${150} ${top+4} ${157} ${top}C${158} ${top+20} ${bulb[0]+br*.9} ${bulb[1]-br*1.4} ${bulb[0]+br*.8} ${bulb[1]-br*.4}L${bulb[0]-br*.8} ${bulb[1]-br*.4}C${bulb[0]-br*.9} ${bulb[1]-br*1.4} ${142} ${top+20} ${143} ${top}Z`;
+   return `<ellipse cx="${bulb[0]+8}" cy="${bulb[1]+br*.9}" rx="${br*1.3}" ry="${br*.6}" fill="${sk3}" opacity=".5" filter="url(#${id}b4)"/>
+    <path d="${bridge}" fill="url(#${id}ns)"/>
+    <ellipse cx="${bulb[0]-br*1.05}" cy="${bulb[1]+br*.25}" rx="${br*.55}" ry="${br*.45}" fill="${sh(S,-.06)}"/><ellipse cx="${bulb[0]+br*1.05}" cy="${bulb[1]+br*.25}" rx="${br*.55}" ry="${br*.45}" fill="${sk2}"/>
+    <path d="M${157} ${top+4}C${158} ${top+22} ${bulb[0]+br*.9} ${bulb[1]-br*1.4} ${bulb[0]+br*.8} ${bulb[1]-br*.4}" fill="none" stroke="${sk3}" stroke-width="5" opacity=".35" filter="url(#${id}b2)"/>
+    <circle cx="${bulb[0]}" cy="${bulb[1]}" r="${br}" fill="url(#${id}ns)"/><circle cx="${bulb[0]+br*.35}" cy="${bulb[1]+br*.25}" r="${br*.75}" fill="${sk3}" opacity=".22" filter="url(#${id}b2)"/>
+    <ellipse cx="${bulb[0]-br*.6}" cy="${bulb[1]+br*.68}" rx="${br*.2}" ry="${br*.1}" fill="#3a1a12" opacity=".6"/><ellipse cx="${bulb[0]+br*.6}" cy="${bulb[1]+br*.68}" rx="${br*.2}" ry="${br*.1}" fill="#3a1a12" opacity=".6"/>
+    <ellipse cx="${bulb[0]-br*.3}" cy="${bulb[1]-br*.42}" rx="${br*.34}" ry="${br*.22}" fill="#fff" opacity=".55" filter="url(#${id}b1)"/>
+    <path d="M${bulb[0]-2} ${top+6}L${bulb[0]-br*.3} ${bulb[1]-br*.9}" stroke="#fff" stroke-opacity=".28" stroke-width="4" stroke-linecap="round" filter="url(#${id}b2)"/>`})();
+  const mouth=(()=>{const w=f?20:23,a=smirk;
+   return `<path d="M${150-w-4} ${my+a*.2}Q150 ${my+10} ${150+w+4} ${my-a*.3}" fill="none" stroke="${sk3}" stroke-width="3" opacity=".35" filter="url(#${id}b1)"/>
+    <path d="M${150-w} ${my+a*.2}Q${150-w*.5} ${my-6} 150 ${my-3}Q${150+w*.5} ${my-6} ${150+w} ${my-a*.3}Q150 ${my+(f?2:0)} ${150-w} ${my+a*.2}Z" fill="${sh(LIP,-.15)}"/>
+    <path d="M${150-w+1} ${my+a*.2}Q150 ${my+(f?13:9)} ${150+w-1} ${my-a*.3}Q150 ${my+2} ${150-w+1} ${my+a*.2}Z" fill="url(#${id}lp)"/>
+    <path d="M${150-w} ${my+a*.2}Q150 ${my+1} ${150+w} ${my-a*.3}" fill="none" stroke="#3a1a14" stroke-width="1.8" stroke-linecap="round"/>
+    <ellipse cx="${150-4}" cy="${my+(f?7:5)}" rx="${w*.35}" ry="2" fill="#fff" opacity="${f?.4:.2}" filter="url(#${id}b1)"/>
+    <ellipse cx="150" cy="${my+20}" rx="12" ry="5" fill="${sk2}" opacity=".5" filter="url(#${id}b2)"/>`})();
+  const wr=age>48?`<g fill="none" stroke="${sk3}" stroke-linecap="round" opacity="${Math.min(.6,(age-40)/50)}"><path d="M120 ${Tp+48}Q150 ${Tp+42} 180 ${Tp+48}M126 ${Tp+60}Q150 ${Tp+55} 174 ${Tp+60}" stroke-width="1.6"/><path d="M${150-30} ${my-26}Q${150-40} ${my-6} ${150-30} ${my+10}M${150+30} ${my-26}Q${150+40} ${my-6} ${150+30} ${my+10}" stroke-width="2.4"/>${age>62?`<path d="M${150-ex-20} ${ey+4}l-8 -3M${150-ex-20} ${ey+9}l-8 1M${150+ex+20} ${ey+4}l8 -3M${150+ex+20} ${ey+9}l8 1" stroke-width="1.4"/>`:''}</g>`:'';
+  const beard=o.beard==='full'?`<path d="${sm([[150-cw+1,ey+18],[150-jx-5,Tp+150],[150-jx*.7,Bt],[150,Bt+14],[150+jx*.7,Bt],[150+jx+5,Tp+150],[150+cw-1,ey+18],[150+cw-14,ey+34],[150+24,my+6],[150,my+12],[150-24,my+6],[150-cw+14,ey+34]])}" fill="url(#${id}hr)"/><path d="${sm([[150-jx*.5,Bt-14],[150,Bt+4],[150+jx*.5,Bt-14],[150,Bt-8]])}" fill="#fff" opacity=".12" filter="url(#${id}b2)"/>`:o.beard==='stubble'?`<g clip-path="url(#${id}fc)"><path d="${sm([[150-jx-30,Tp+130],[150-jx,Bt-10],[150,Bt+6],[150+jx,Bt-10],[150+jx+30,Tp+130],[150+34,my-4],[150,my-14],[150-34,my-4]])}" fill="${mix(S,H,.35)}" opacity=".55"/><path d="${sm([[150-jx-30,Tp+130],[150-jx,Bt-10],[150,Bt+6],[150+jx,Bt-10],[150+jx+30,Tp+130],[150+34,my-4],[150,my-14],[150-34,my-4]])}" fill="${H}" filter="url(#${id}st)" opacity=".8"/></g>`:'';
+  // haar: dikke, gebeeldhouwde plukken
+  const HT=Tp-(hs==='curly'?18:10);
+  const hair=(()=>{const g=`url(#${id}hr)`,lines=(arr)=>arr.map(d=>`<path d="${d}" fill="none" stroke="${sh(H,-.45)}" stroke-width="2.2" stroke-linecap="round" opacity=".6"/>`).join('');
+   const hl=`<ellipse cx="128" cy="${HT+22}" rx="34" ry="12" fill="url(#${id}hh)" transform="rotate(-14 128 ${HT+22})"/>`;
+   if(hs==='receding'){const tuft=[[150-cw-2,ey+14],[150-cw-9,ey-6],[150-fw-8,Tp+62],[150-fw+2,Tp+56],[150-cw+8,ey-16],[150-cw+8,ey+6]];return {back:'',top:`<path d="${sm(tuft)}" fill="${g}"/><path d="${sm(mir(tuft))}" fill="${g}"/>`,scalp:`<ellipse cx="136" cy="${Tp+26}" rx="30" ry="14" fill="#fff" opacity=".4" filter="url(#${id}b4)"/>`}}
+   if(hs==='curly'){const c=[];for(let i=0;i<13;i++){const a=Math.PI*(1.02+i/12*.96);c.push([150+Math.cos(a)*(fw+12),Tp+46+Math.sin(a)*58])}
+    return {back:'',top:c.map(([x,y],i)=>`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${18+(i%3)*3}" fill="${g}"/><circle cx="${(x-5).toFixed(1)}" cy="${(y-6).toFixed(1)}" r="6" fill="#fff" opacity=".18" filter="url(#${id}b2)"/>`).join('')+`<path d="${sm([[150-fw-6,Tp+56],[150-fw+4,Tp+10],[150,Tp-14],[150+fw-4,Tp+10],[150+fw+6,Tp+56],[150+30,Tp+30],[150-30,Tp+30]])}" fill="${g}"/>`}}
+   const cap=`<path d="${sm([[150-cw-2,ey-6],[150-fw-10,Tp+40],[150-fw+6,HT+6],[150-14,HT-6],[150+30,HT-2],[150+fw-2,HT+12],[150+fw+10,Tp+40],[150+cw+2,ey-6],[150+cw-10,Tp+60],[150+40,Tp+36],[150-10,Tp+42],[150-50,Tp+40],[150-cw+10,Tp+60]])}" fill="${g}"/>`;
+   if(hs==='short')return {back:'',top:cap+lines([`M${150-50} ${Tp+34}Q${150-30} ${HT+4} ${150+10} ${HT}`,`M${150-20} ${Tp+38}Q${150+10} ${HT+8} ${150+50} ${HT+10}`,`M${150+20} ${Tp+36}Q${150+50} ${Tp+16} ${150+fw} ${Tp+40}`])+hl};
+   if(hs==='bob'){const bob=sm([[150-cw-14,Bt-30],[150-cw-16,Tp+60],[150-fw+2,HT+8],[150,HT-8],[150+fw-2,HT+8],[150+cw+16,Tp+60],[150+cw+14,Bt-30],[150+cw-4,Bt-26],[150+cw-6,ey-10],[150+30,Tp+36],[150-20,Tp+30],[150-cw+6,ey-10],[150-cw+4,Bt-26]]);
+    return {back:`<path d="${sm([[150-cw-12,Bt-24],[150-cw-14,Tp+60],[150,HT],[150+cw+14,Tp+60],[150+cw+12,Bt-24],[150,Bt-30]])}" fill="${sh(H,-.4)}"/>`,top:`<path d="${bob}" fill="${g}"/>`+lines([`M${150-cw-8} ${Tp+70}Q${150-cw-10} ${ey+30} ${150-cw-6} ${Bt-32}`,`M${150+cw+8} ${Tp+70}Q${150+cw+10} ${ey+30} ${150+cw+6} ${Bt-32}`,`M${150-20} ${Tp+30}Q${150+10} ${HT+4} ${150+fw-6} ${HT+16}`])+hl}}
+   if(hs==='long')return {back:`<path d="${sm([[150-cw-18,Bt+40],[150-cw-20,Tp+60],[150,HT-2],[150+cw+20,Tp+60],[150+cw+18,Bt+40],[150,Bt+10]])}" fill="${sh(H,-.35)}"/>`,
+    top:`<path d="${sm([[150-cw-16,Bt+30],[150-cw-14,Tp+56],[150-fw+4,HT+6],[150+6,HT-6],[150+fw-4,HT+6],[150+cw+14,Tp+56],[150+cw+16,Bt+30],[150+cw-2,Bt+20],[150+cw-6,ey],[150+36,Tp+40],[150+4,Tp+26],[150-34,Tp+44],[150-cw+6,ey],[150-cw+2,Bt+20]])}" fill="${g}"/>`+lines([`M${150-cw-8} ${Tp+70}Q${150-cw-14} ${ey+40} ${150-cw-8} ${Bt+26}`,`M${150+cw+8} ${Tp+70}Q${150+cw+14} ${ey+40} ${150+cw+8} ${Bt+26}`,`M${150+4} ${Tp+26}Q${150+30} ${HT+6} ${150+fw} ${Tp+30}`])+hl};
+   if(hs==='bun')return {back:`<circle cx="150" cy="${HT-14}" r="24" fill="${g}"/><path d="M134 ${HT-20}Q150 ${HT-32} 166 ${HT-20}" fill="none" stroke="${sh(H,-.4)}" stroke-width="2"/>`,top:`<path d="${sm([[150-cw-2,ey-4],[150-fw-8,Tp+40],[150-fw+8,HT+8],[150,HT],[150+fw-8,HT+8],[150+fw+8,Tp+40],[150+cw+2,ey-4],[150+cw-10,Tp+56],[150+30,Tp+30],[150,Tp+26],[150-30,Tp+30],[150-cw+10,Tp+56]])}" fill="${g}"/>`+lines([`M${150-cw+6} ${Tp+54}Q${150-40} ${HT+10} 150 ${HT+2}`,`M${150+cw-6} ${Tp+54}Q${150+40} ${HT+10} 150 ${HT+2}`])+hl};
+   return {back:'',top:cap+hl}})();
+  const gl=o.glasses?`<g fill="none" stroke="${o.glasses}" stroke-width="4.5"><rect x="${150-ex-21}" y="${ey-15}" width="42" height="30" rx="11"/><rect x="${150+ex-21}" y="${ey-15}" width="42" height="30" rx="11"/><path d="M${150-ex+21} ${ey-2}Q150 ${ey-8} ${150+ex-21} ${ey-2}M${150-ex-21} ${ey-4}L${150-cw} ${ey-8}M${150+ex+21} ${ey-4}L${150+cw} ${ey-8}"/></g><path d="M${150-ex-14} ${ey-8}l12 -3M${150+ex-10} ${ey-8}l12 -3" stroke="#fff" stroke-width="3" opacity=".5"/>`:'';
+  const ear2=o.earring?`<circle cx="${150-cw-6}" cy="${ey+30}" r="4" fill="#f2e6c0" stroke="#a08c58"/><circle cx="${150+cw+6}" cy="${ey+30}" r="4" fill="#e2d4a8" stroke="#a08c58"/>`:'';
+  const ruler=o.bg?'':[...Array(9)].map((_,i)=>`<path d="M0 ${20+i*40}H300" stroke="#8b8f8b" stroke-width="${i%2?1:2}"/><text x="274" y="${16+i*40}" font-size="10" text-anchor="end" fill="#55594f" font-family="Courier New,monospace">${200-i*10}</text>`).join('');
+  return `<svg viewBox="${o.full?'0 0 300 360':'20 26 260 312'}" class="rf tf" role="img" aria-label="${o.alt||'portret'}"><g clip-path="url(#${id}cp)">${D}
+   <rect width="300" height="360" fill="${o.bg||'#c3c8c6'}"/>${ruler}<rect width="300" height="360" fill="url(#${id}key)"/>
+   <ellipse cx="166" cy="${Bt-40}" rx="${cw+40}" ry="150" fill="#000" opacity=".18" filter="url(#${id}b8)"/>
+   ${hair.back}${body}${neck}<ellipse cx="150" cy="${Bt+2}" rx="${jx}" ry="14" fill="#000" opacity=".25" filter="url(#${id}b4)"/>
+   ${ear(1)}${ear(299)}${ear2}
+   <path d="${face}" fill="url(#${id}sk)"/>
+   <g clip-path="url(#${id}fc)">
+    <rect x="${150-cw-10}" y="0" width="${2*cw+20}" height="360" fill="url(#${id}sd)"/>
+    <path d="${face}" fill="none" stroke="#9fd0ff" stroke-width="7" opacity=".28" filter="url(#${id}b2)" transform="translate(-4 0)"/>
+    <ellipse cx="${150+cw-6}" cy="${ey+20}" rx="26" ry="90" fill="${sss}" opacity=".35" filter="url(#${id}b8)"/>
+    <ellipse cx="${150-ex-6}" cy="${ey+30}" rx="18" ry="11" fill="#d0504a" opacity="${f?.22:.13}" filter="url(#${id}b4)"/><ellipse cx="${150+ex+6}" cy="${ey+30}" rx="18" ry="11" fill="#d0504a" opacity="${f?.2:.12}" filter="url(#${id}b4)"/>
+    <ellipse cx="136" cy="${Tp+50}" rx="34" ry="16" fill="#fff" opacity=".22" filter="url(#${id}b4)"/>
+    <ellipse cx="150" cy="${Bt-10}" rx="${jx*.9}" ry="16" fill="${sk3}" opacity=".3" filter="url(#${id}b4)"/>
+    ${hair.scalp||''}${wr}${eye(150-ex,1)}${eye(150+ex,-1)}${brow(150-ex,-1)}${brow(150+ex,1)}${o.beard==='full'?'':beard+mouth+noseSvg}
+   </g>
+   ${o.beard==='full'?beard+mouth+`<path d="M${150-32} ${my-1}Q${150-18} ${my-15} 150 ${my-9}Q${150+18} ${my-15} ${150+32} ${my-1}Q${150+16} ${my-6} 150 ${my-4}Q${150-16} ${my-6} ${150-32} ${my-1}Z" fill="url(#${id}hr)"/>`+noseSvg:''}
+   ${hair.top}${gl}
+   <rect width="300" height="360" fill="url(#${id}vg)"/>
+  </g></svg>`}})();
+
 // realistische plaats-delictfoto's (politiefoto met flits) voor het Tv-dossier. RS(naam,{n,stamp}) geeft svg-inhoud voor viewBox 0 0 600 400
 const RS=(()=>{let N=0;
  const G=(id,x1,y1,x2,y2,st)=>`<linearGradient id="${id}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}">${st.map(([o,c,a])=>`<stop offset="${o}" stop-color="${c}"${a!=null?` stop-opacity="${a}"`:''}/>`).join('')}</linearGradient>`;
@@ -6932,7 +7060,7 @@ const tvSlotOk=(C,k)=>k>=1&&k<=C.secret.length||k>=110&&C.secret[Math.floor((k-1
 const tvSlotGroups=(C,slots)=>{const g=new Map();slots.forEach(k=>{if(k<100){g.set(k,C.secret[k-1].docs.slice())}else{const f=Math.floor((k-100)/10),j=(k-100)%10;if(!g.has(f))g.set(f,[]);if(g.get(f)!==null)g.get(f).push(C.secret[f-1].docs[j])}});return [...g].map(([f,docs])=>({D:C.secret[f-1],docs}))};
 const tvSlotLabel=(C,sl)=>tvSlotGroups(C,sl).map(({D,docs})=>docs.length===D.docs.length?`${D.ic} ${D.t}`:`${D.ic} ${docs.map(d=>d.t).join(', ')}`).join(' · ');
 const TVLV={Makkelijk:1,Gemiddeld:2,Moeilijk:3,Expert:4};const tvLv=C=>'⭐'.repeat(TVLV[C.level]||2);
-const tvMug=(S,w=180,bg)=>S.look?RF({...S.look,alt:S.name,bg}).replace('class="rf"',`class="rf tv-mugsvg" width="${w}"`):`<svg viewBox="-34 -150 68 66" class="tv-mugsvg" width="${w}" aria-hidden="true">${toonBody(S.name)}</svg>`;
+const tvMug=(S,w=180,bg)=>S.look?TF({...S.look,alt:S.name,bg}).replace('class="rf tf"',`class="rf tv-mugsvg" width="${w}"`):`<svg viewBox="-34 -150 68 66" class="tv-mugsvg" width="${w}" aria-hidden="true">${toonBody(S.name)}</svg>`;
 const tvMugshot=(S,i,cls='')=>`<figure class="tv-mug ${cls}"><div class="tv-mugbg">${tvMug(S)}<span class="tv-board">${String(i+1).padStart(2,'0')} · ${(tvC(TVQ?TVQ.id:tvd.cur)||{}).date||"07-03"}</span></div><figcaption><b>${S.name}</b><span>${S.role}</span><em>${S.motive||''}</em></figcaption></figure>`;
 const tvStamp=(t,cls='')=>`<span class="tv-stamp ${cls}">${t}</span>`;
 

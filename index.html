@@ -782,6 +782,139 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .st-q{background:var(--card,#fbf9f3);border:2px solid #1c1f22;border-radius:12px;padding:10px 12px;margin:8px 0}.st-q span{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#c2321f;font-weight:700}.st-q b{font-size:17px}.st-mapbox{position:relative;height:64vh;min-height:360px;overflow:hidden;border:2px solid #1c1f22;border-radius:12px;background:#d8d3c6;touch-action:none;user-select:none;-webkit-user-select:none}.st-map{overflow:hidden}.st-map svg{width:100%;height:100%;display:block}.st-zoom{position:absolute;right:8px;top:8px;display:flex;flex-direction:column;gap:6px}.st-zoom .btn{width:40px;height:40px;padding:0;font-size:20px;background:#fbf9f3}.st-tip{margin:6px 0 0;font-size:15px;background:#fff6d6;border-left:4px solid #f0b850;padding:4px 8px}.st-q .btn{margin-top:6px}.st-cardimg{position:relative;margin:-4px 0 8px;border:2px solid #1c1f22;border-radius:8px;overflow:hidden;background:#d8d3c6}.st-crop{display:block;width:100%;height:auto;aspect-ratio:150/110}.st-nr{position:absolute;left:8px;top:8px;background:#c2321f;color:#fff;font-weight:800;font-size:14px;border-radius:6px;padding:2px 8px}.st-stars{color:#e0a020;letter-spacing:1px}.st-qimg{margin:6px 0;border:2px solid #1c1f22;border-radius:8px;overflow:hidden;background:#d8d3c6}.st-qimg small{display:block;text-align:center;font-weight:700;font-size:12px;padding:3px;background:#1c1f22;color:#fff;text-transform:uppercase;letter-spacing:.06em}.st-crop.big{max-height:200px;width:100%}.st-lens{position:absolute;width:150px;height:150px;border-radius:50%;overflow:hidden;border:5px solid #2a2b2a;box-shadow:0 6px 16px rgba(0,0,0,.45),inset 0 0 0 2px #9a978f;background:#d8d3c6;pointer-events:none;z-index:3}.st-lens svg{width:100%;height:100%;display:block}.st-zoom .btn.on{background:#1c1f22;color:#fff}.st-lphint{position:absolute;left:8px;bottom:8px;margin:0;background:rgba(28,31,34,.85);color:#fff;font-size:12px;padding:4px 8px;border-radius:6px;pointer-events:none}.st-found{margin:10px 0;padding-left:20px}.st-found li{margin:6px 0}
 .nu-box{display:grid;grid-template-columns:118px 1fr;gap:12px;align-items:center;width:100%;text-align:left;background:#14213a;color:#eef1f4;border:2px solid #0b1424;border-radius:14px;padding:10px;margin:6px 0 14px;cursor:pointer;box-shadow:0 4px 0 #0b1424}.nu-box .kicker{color:#f0b850}.nu-box b{display:block;font-size:17px;line-height:1.2;margin:2px 0 4px}.nu-box small{display:block;opacity:.85;font-size:13px}.nu-box em{font-style:normal;font-weight:800;color:#f0b850}.nu-art{width:100%;height:auto;display:block}.nu-list{display:flex;flex-wrap:wrap;gap:4px;margin:2px 0 6px}.nu-list i{font-style:normal;font-size:12px;font-weight:700;background:#f0b850;color:#1c1f22;border-radius:20px;padding:2px 8px}.nu-box{cursor:default}.nu-acts{display:flex;gap:8px;flex-wrap:wrap;margin:-6px 0 10px}.nu-panel{background:#14213a;color:#eef1f4;border-radius:12px;padding:10px 12px;margin:0 0 12px}.nu-panel .hint{color:#cfd6e0}.nu-pick{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.nu-pick button{border:2px solid #f0b850;background:none;color:#f0b850;border-radius:20px;padding:5px 10px;font-weight:700;font-size:13px;cursor:pointer}.nu-pick button[aria-pressed=true]{background:#f0b850;color:#1c1f22}.nu-res{background:#fff6d6;border-left:4px solid #f0b850;padding:6px 10px;margin:-6px 0 12px;font-size:14px}.nu-res.win{background:#dff3e4;border-color:#2e6a49}.nu-mine{color:#f0b850!important;font-weight:700}.nu-list i.hit{outline:3px solid #7fd1a8}
 .nu-box.wiggle .nu-art{animation:nuw .5s}@keyframes nuw{25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
+
+/* ---------- Tv-dossier ---------- */
+body.tv-lock{overflow:hidden}
+.tv-ov{position:fixed;inset:0;z-index:70;background:#0b0c0b;overflow:hidden;color:#1d1a16}
+.tv-16{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:center;background:#3b2a1d radial-gradient(ellipse at 30% 20%,#5a4130 0%,#3b2a1d 55%,#24180f 100%);display:flex;flex-direction:column;font-size:26px;font-family:'Source Serif 4',Georgia,serif;box-shadow:0 0 0 2px #000}
+.tv-16:before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 3px,transparent 3px 22px);pointer-events:none}
+.tv-rot{display:none}
+.tv-ov.portrait .tv-rot{display:block;position:absolute;left:0;right:0;bottom:10px;text-align:center;color:#f3efe6;font:600 15px system-ui;margin:0}
+.tv-top{display:flex;justify-content:space-between;align-items:center;padding:16px 34px;background:#151716;color:#f3efe6;position:relative;z-index:1}
+.tv-logo{display:flex;align-items:center;gap:14px}.tv-logo svg{width:44px;height:44px}
+.tv-logo b{font:800 28px 'Barlow Condensed',sans-serif;letter-spacing:4px}.tv-logo i{font-style:normal;opacity:.75;font-size:22px}
+.tv-room{font:500 20px system-ui;opacity:.9}.tv-room b{font-family:'Courier New',monospace;font-size:24px;letter-spacing:3px;color:#f2c21a}
+.tv-room i{font-style:normal;color:#e0a640}.tv-room i.on{color:#6fd08a}
+.tv-clock{font-family:'Courier New',monospace!important;color:#f3efe6!important}.tv-clock.pause{opacity:.6}.tv-clock.out{color:#ff6a5a!important}
+.tv-main{flex:1;position:relative;z-index:1;padding:22px 40px 10px;overflow:hidden}
+.tv-nav{display:flex;gap:8px;padding:12px 30px 16px;background:#151716;position:relative;z-index:1}
+.tv-nav button{flex:1;font:700 21px 'Barlow Condensed',sans-serif;letter-spacing:1px;text-transform:uppercase;padding:14px 6px;border-radius:10px;border:2px solid #3a3d3b;background:#222524;color:#d8d4ca;cursor:pointer}
+.tv-nav button[aria-pressed=true]{background:#e0a640;border-color:#e0a640;color:#151716}
+.tv-nav .tv-x{flex:.7;background:transparent}
+.tv-paper{position:relative;background:#f6f1e4 linear-gradient(180deg,rgba(255,255,255,.4),rgba(0,0,0,.03));padding:30px 36px;box-shadow:0 3px 4px rgba(0,0,0,.3),0 18px 40px rgba(0,0,0,.35);color:#1d1a16;line-height:1.4}
+.tv-paper p{margin:0 0 14px}.tv-paper h3,.tv-paper h4{font-family:'Zilla Slab',Georgia,serif;margin:0 0 12px}
+.tv-mono{font-family:'Courier New',ui-monospace,monospace;font-weight:700;letter-spacing:1px;font-size:.78em;color:#4a443a}
+.tv-hand{font-family:Caveat,cursive;font-size:1.25em;color:#1f3f8a;line-height:1.15}
+.tv-stamp{position:absolute;top:18px;right:22px;transform:rotate(-8deg);border:3px solid #b3241b;color:#b3241b;font:900 .7em 'Barlow Condensed',Arial,sans-serif;letter-spacing:3px;padding:4px 12px;border-radius:4px;opacity:.82;mix-blend-mode:multiply}
+.tv-stamp.green{border-color:#2f7a3a;color:#2f7a3a}
+.tv-clip{position:absolute;top:-16px;left:60px;width:26px;height:70px;border:4px solid #9aa0a4;border-radius:14px;border-bottom-color:transparent}
+.tv-rot1{transform:rotate(-1deg)}.tv-rot2{transform:rotate(1.4deg)}
+.tv-desk{display:grid;grid-template-columns:1.45fr 1fr;gap:44px;height:100%;align-items:start;padding-top:10px}
+.tv-desk.one{grid-template-columns:1fr;max-width:1000px;margin:0 auto}
+.tv-tl{list-style:none;margin:0 0 10px;padding:0 0 0 22px;border-left:4px solid #b3241b}
+.tv-tl li{position:relative;margin:0 0 12px}.tv-tl li:before{content:'';position:absolute;left:-32px;top:9px;width:16px;height:16px;border-radius:50%;background:#b3241b}
+.tv-tl b{font-family:'Courier New',monospace;display:block;font-size:.85em}.tv-tl span{font-size:.9em}
+.tv-strip{font-size:.9em}
+.tv-chal{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px;font:600 18px system-ui}
+.tv-chal button,.tv-acc button,.tv-np button{font:600 18px system-ui;padding:8px 14px;border-radius:999px;border:2px solid #8a7a5a;background:#fff;color:#1d1a16;cursor:pointer}
+.tv-chal button[aria-pressed=true],.tv-acc button[aria-pressed=true],.tv-np button[aria-pressed=true]{background:#1d1a16;color:#f6f1e4;border-color:#1d1a16}
+.tv-cork{position:relative;height:100%;border-radius:10px;background:#b88a56 radial-gradient(circle at 20% 30%,rgba(0,0,0,.08) 1px,transparent 2px) 0 0/9px 9px;box-shadow:inset 0 0 0 14px #6a4628,inset 0 0 40px rgba(0,0,0,.4);display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:center;padding:40px 46px}
+.tv-string{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.tv-pin{all:unset;cursor:pointer;position:relative;transform:rotate(var(--r))}.tv-pin .polaroid{width:100%;max-width:none;margin:0}
+.tv-pin figcaption{font-size:22px}
+.tv-tack{position:absolute;top:-8px;left:50%;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff7a6a,#b3241b 60%,#6a120c);box-shadow:0 3px 4px rgba(0,0,0,.4)}
+.tv-corkhint{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:#2a1a0c;margin:0}
+.tv-zoom{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;height:100%}
+.tv-zoom .polaroid{max-width:none;width:100%;margin:0}.tv-zoom figcaption{font-size:26px}
+.tv-mugs{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.tv-mug{margin:0;background:#f6f1e4;padding:14px 14px 18px;box-shadow:0 10px 26px rgba(0,0,0,.4)}
+.tv-mugbg{position:relative;background:#cfd3cf;aspect-ratio:1/1.05;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+.tv-mugbg i{position:absolute;left:0;right:0;border-top:2px solid rgba(0,0,0,.35)}.tv-mugbg i b{position:absolute;right:6px;top:2px;font:700 14px 'Courier New',monospace;color:#333}
+.tv-mugsvg{display:block;width:100%;height:auto;position:relative}
+.tv-board{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:#1b1d1c;color:#f3efe6;font:700 15px 'Courier New',monospace;padding:4px 12px;letter-spacing:2px;white-space:nowrap}
+.tv-mug figcaption{display:flex;flex-direction:column;gap:2px;padding-top:12px}.tv-mug figcaption b{font-family:'Zilla Slab',serif;font-size:1.05em}.tv-mug figcaption span{font-size:.75em;color:#5a5348}.tv-mug figcaption em{font-family:Caveat,cursive;color:#b3241b;font-size:.95em;font-style:normal}
+.tv-sub{color:#f3efe6;text-align:center;font-size:22px;margin:18px 0 0}
+.tv-tapes{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.tv-tape{all:unset;cursor:pointer;display:flex;align-items:center;gap:20px;background:#1b1d1c;color:#f3efe6;border-radius:14px;padding:14px 24px;border:3px solid #333;box-shadow:0 8px 20px rgba(0,0,0,.4)}
+.tv-tape .tv-mugsvg{width:110px;background:#cfd3cf;border-radius:8px}
+.tv-tape span{display:flex;flex-direction:column;flex:1;font-size:26px}.tv-tape span b{font:700 18px 'Barlow Condensed',sans-serif;letter-spacing:2px;color:#e0a640;text-transform:uppercase}.tv-tape small{opacity:.7;font-size:18px}
+.tv-tape i{font-style:normal;font-size:36px;color:#e0a640}
+.tv-room2{display:grid;grid-template-columns:420px 1fr;gap:30px;height:calc(100% - 80px)}
+.tv-cam{position:relative;background:#2a2d2b;border-radius:8px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;filter:grayscale(.35) contrast(1.05);box-shadow:inset 0 0 60px rgba(0,0,0,.7)}
+.tv-cam .tv-mugsvg{width:100%}
+.tv-rec{position:absolute;top:12px;left:14px;color:#ff3b30;font:700 18px 'Courier New',monospace;animation:tvBlink 1s steps(2) infinite}
+.tv-ts{position:absolute;bottom:10px;left:12px;right:12px;color:#e8e8e8;font:700 14px 'Courier New',monospace;text-shadow:0 1px 2px #000}
+@keyframes tvBlink{50%{opacity:0}}
+.tv-pvbox{overflow:auto;font-size:24px}
+.tv-line{padding:4px 8px;border-radius:6px;transition:background .2s}.tv-line.now{background:#ffe9a0}.tv-line.r b{color:#1f3f8a}.tv-line.s b{color:#b3241b}
+.tv-row{display:flex;gap:16px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.tv-btn{font:700 22px system-ui;padding:14px 26px;border-radius:12px;border:2px solid #e0a640;background:#1b1d1c;color:#f3efe6;cursor:pointer}
+.tv-btn.primary{background:#e0a640;color:#151716}.tv-btn[disabled]{opacity:.5}.tv-btn.small{font-size:17px;padding:8px 14px}
+.tv-paper .tv-btn{color:#151716;background:#fff}.tv-paper .tv-btn.primary{background:#e0a640}
+.tv-spel{display:flex;flex-direction:column;gap:14px;height:100%}
+.tv-np{color:#f3efe6;font:600 22px system-ui;display:flex;gap:10px;align-items:center;justify-content:center}
+.tv-qrs{display:grid;gap:22px;align-content:start}.tv-qrs.n1{grid-template-columns:340px;justify-content:center}.tv-qrs.n2{grid-template-columns:repeat(2,340px);justify-content:center}.tv-qrs.n3{grid-template-columns:repeat(3,1fr)}.tv-qrs.n4{grid-template-columns:repeat(4,1fr)}
+.tv-qrc{background:#f6f1e4;padding:16px;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,.4);display:flex;flex-direction:column;align-items:center}
+.tv-qrc h3{margin:0 0 8px;font:800 24px 'Barlow Condensed',sans-serif;letter-spacing:2px;text-transform:uppercase}.tv-qrc p{font-size:19px;margin:10px 0}
+.tv-qr{width:270px;height:270px;background:#fff;display:flex;align-items:center;justify-content:center}.tv-qr svg{width:100%;height:100%}
+.tv-qrx{font:500 15px system-ui;padding:10px}
+.tv-who{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;color:#f3efe6;font:500 19px system-ui}.tv-who span{background:#1b1d1c;padding:6px 14px;border-radius:999px}.tv-who .gone{opacity:.45}
+.tv-h2{color:#f3efe6;text-align:center;font:800 40px 'Zilla Slab',serif;margin:0 0 16px}
+.tv-votes{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.tv-vote{background:#f6f1e4;padding:14px;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 8px 20px rgba(0,0,0,.4);font-size:22px}
+.tv-vote .tv-mugsvg{width:120px;background:#cfd3cf;border-radius:6px}
+.tv-bar{width:100%;height:16px;background:#ddd5c2;border-radius:8px;overflow:hidden}.tv-bar i{display:block;height:100%;background:#b3241b;transition:width .4s}
+.tv-cnt{font:800 34px 'Barlow Condensed',sans-serif}.tv-pm{display:flex;gap:8px}.tv-pm button{width:44px;height:44px;border-radius:50%;border:2px solid #1d1a16;background:#fff;font-size:24px;cursor:pointer}
+.tv-acc{display:flex;flex-direction:column;gap:8px;margin-top:14px}.tv-acc div{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;color:#f3efe6;font:600 19px system-ui}.tv-acc button{font-size:17px}
+.tv-tips{color:#f3efe6;font-size:19px;max-width:1100px;margin:10px auto 0}
+.tv-onth{display:grid;grid-template-columns:380px 1fr;gap:44px;align-items:center;height:100%;max-width:1200px;margin:0 auto}
+.tv-onth h2{font:800 54px 'Zilla Slab',serif;margin:6px 0 10px}.tv-onth .tv-stamp{position:static;display:inline-block;font-size:30px;margin:6px 0 18px}
+.tv-onth.ok .tv-mug{animation:tvPop .6s ease-out}@keyframes tvPop{from{transform:scale(.8) rotate(-4deg);opacity:0}}
+.tv-score{font-size:1.6em;color:#e0a640;margin:8px 0}.tv-score small{font:500 .45em system-ui;color:#5a5348;display:block}
+.tv-opl{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:24px;height:100%}.tv-opl .tv-paper{overflow:auto;font-size:19px;padding:22px 24px}
+.tv-lie{font-size:.95em}.tv-lie.liar{background:#ffe1dc;padding:6px 8px;border-left:4px solid #b3241b}
+.tv-env{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;height:100%}
+.tv-envelope{position:relative;width:640px;height:380px;background:#c9a46a linear-gradient(160deg,#d8b67c,#b88f52);box-shadow:0 18px 40px rgba(0,0,0,.45);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;clip-path:none;color:#2a1a0c}
+.tv-envelope:before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom right,transparent 49.6%,rgba(0,0,0,.18) 50%,transparent 50.4%),linear-gradient(to bottom left,transparent 49.6%,rgba(0,0,0,.18) 50%,transparent 50.4%);pointer-events:none}
+.tv-envelope b{font:800 34px 'Barlow Condensed',sans-serif;letter-spacing:3px;position:relative}.tv-envelope i{font-family:Caveat,cursive;font-size:30px;font-style:normal;position:relative;text-align:center;padding:0 30px}
+.tv-seal{position:relative;width:96px;height:96px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#e0503a,#8a1a12);color:#f6d6c8;font:900 44px Georgia,serif;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 8px rgba(0,0,0,.4)}
+.tv-t{border-collapse:collapse;width:100%;font-size:.9em}.tv-t th,.tv-t td{border-bottom:1px solid #cdbf9e;padding:5px 8px;text-align:left}.tv-t th{font-family:'Courier New',monospace;font-size:.8em}
+/* in de app en op de telefoon */
+.tv-list{display:flex;flex-direction:column;gap:14px;margin-top:14px}
+.tv-card{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:6px;background:#e0b56a linear-gradient(170deg,#e8c27c,#c9994e);color:#2a1a0c;padding:16px 18px 18px;border-radius:4px 14px 6px 6px;box-shadow:0 6px 16px rgba(0,0,0,.25);position:relative}
+.tv-card b{font:800 24px 'Zilla Slab',serif}.tv-card small{opacity:.8}
+.tv-cfold i{font:700 13px 'Courier New',monospace;letter-spacing:2px;font-style:normal;background:#2a1a0c;color:#f3d58a;padding:2px 8px}
+.tv-card .tv-stamp{top:14px;right:14px;font-size:14px}
+.tv-cover{text-align:center}.tv-cover p{margin:6px 0}
+.tv-modes{display:grid;gap:12px;margin:16px 0}
+.tv-mode{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:4px;padding:16px;border-radius:14px;background:var(--card);border:2px solid var(--rule)}
+.tv-mode b{font-size:19px}.tv-mode span{color:var(--muted);font-size:15px}
+#tvGoTv{background:#1b1d1c;color:#f3efe6;border-color:#e0a640}#tvGoTv span{color:#cfc9bd}
+.tv-how{margin:10px 0}.tv-how li{margin:6px 0}
+.tv-ptabs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:12px 0;position:sticky;top:0;z-index:5;background:var(--page);padding:6px 0}
+.tv-ptabs button{font:700 13px system-ui;padding:10px 2px;border-radius:10px;border:1.5px solid var(--rule);background:var(--card);color:var(--ink)}
+.tv-ptabs button[aria-selected=true]{background:var(--ink);color:var(--page)}
+.tv-pbody .tv-paper{padding:20px 18px;font-size:16px;margin:12px 0}.tv-pbody .tv-stamp{font-size:12px;top:12px;right:12px}
+.tv-fold{background:#e0b56a;border-radius:4px 12px 4px 4px;padding:10px 12px;margin:12px 0;box-shadow:0 4px 10px rgba(0,0,0,.2);color:#2a1a0c}
+.tv-fold summary{display:flex;justify-content:space-between;align-items:center;cursor:pointer;list-style:none}.tv-fold summary::-webkit-details-marker{display:none}
+.tv-tab{font:800 18px 'Zilla Slab',serif}.tv-fold .tv-paper{color:#1d1a16}
+.tv-doc h4{margin-top:0;padding-right:120px}
+.tv-tapes.ph{grid-template-columns:1fr;gap:10px}.tv-tapes.ph .tv-tape{padding:10px 14px}.tv-tapes.ph .tv-tape span{font-size:17px}.tv-tapes.ph .tv-tape .tv-mugsvg{width:64px}
+.tv-phcam{display:flex;gap:14px;align-items:center;margin:10px 0}.tv-phcam .tv-mugsvg{width:110px;background:#cfd3cf;border-radius:10px}.tv-phcam span{display:flex;flex-direction:column}
+.tv-pvbox.ph{font-size:16px;max-height:none}
+.tv-mugs.ph{grid-template-columns:1fr 1fr;gap:12px;font-size:15px}
+.tv-ph3{font-family:'Zilla Slab',serif;margin:20px 0 6px}.tv-pn{margin:-2px 8px 16px;font-size:20px}
+.tv-vgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.tv-vb{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px;border-radius:12px;border:2px solid var(--rule);background:var(--card);color:var(--ink);font:inherit}
+.tv-vb .tv-mugsvg{width:80px;background:#cfd3cf;border-radius:8px}.tv-vb[aria-pressed=true]{border-color:var(--red);box-shadow:0 0 0 3px var(--red)}.tv-vb small{color:var(--muted)}
+.tv-acc.ph{flex-direction:row;flex-wrap:wrap;gap:6px;margin:6px 0 10px}.tv-acc.ph button{font-size:14px;padding:8px 12px}
+.tv-nm{display:flex;gap:8px;align-items:center;margin:8px 0}.tv-nm input{flex:1;font:inherit;padding:8px 10px;border-radius:8px;border:1.5px solid var(--rule)}
+.tv-tips.ph{color:var(--ink);font-size:15px}
+.tv-res .tv-stamp{position:static;display:inline-block;margin:6px 0 12px}
+.tv-envelope.ph{width:auto;height:auto;padding:24px 16px;margin:12px 0}.tv-envelope.ph .tv-seal{width:56px;height:56px;font-size:26px}.tv-envelope.ph b{font-size:22px}.tv-envelope.ph i{font-size:20px}
+
+.rf.tv-mugsvg{display:block;height:auto}.tv-mugbg .rf{width:100%}.tv-cam .rf{width:100%;height:100%;object-fit:cover}
+.tv-mugbg{aspect-ratio:236/283}
 </style>
 </head>
 <body>
@@ -814,6 +947,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
     <button role="tab" type="button" data-g="verhoor"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v4" stroke="currentColor" stroke-width="2"/><path d="M7 6h10l-2 4H9z" fill="currentColor"/><circle cx="12" cy="15" r="3.4" fill="currentColor"/><path d="M5 23c0-4 3-6 7-6s7 2 7 6z" fill="currentColor"/></svg>Het Verhoor</b><span>Prik de leugens door</span></button>
     <button role="tab" type="button" data-g="tijdlijn"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18" stroke="currentColor" stroke-width="2.4"/><circle cx="6" cy="12" r="2.6" fill="currentColor"/><circle cx="12" cy="12" r="2.6" fill="currentColor"/><circle cx="18" cy="12" r="2.6" fill="currentColor"/><path d="M6 4v5M12 15v5M18 4v5" stroke="currentColor" stroke-width="2"/></svg>De Tijdlijn</b><span>Wie had de gelegenheid?</span></button>
     <button role="tab" type="button" data-g="stad"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5l6-2 6 2 6-2v16l-6 2-6-2-6 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 3v16M15 5v16" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="9" r="2.2" fill="currentColor"/></svg>Stadsplattegrond</b><span>Zoek het in de drukke stad</span></button>
+    <button role="tab" type="button" data-g="tv"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="13" rx="2" fill="currentColor"/><rect x="4" y="7" width="16" height="9" rx="1" fill="var(--card)"/><path d="M8 21h8M12 18v3M8 2l4 3 4-3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M11 9.5v4l3.4-2z" fill="currentColor"/></svg>Tv-dossier</b><span>Samen op de tv, met QR-codes</span></button>
   </div>
   <div class="stats" id="stats"></div>
 
@@ -884,6 +1018,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
   <section class="pane" id="pVerhoor" hidden></section>
   <section class="pane" id="pTijdlijn" hidden></section>
   <section class="pane" id="pStad" hidden></section>
+  <section class="pane" id="pTv" hidden></section>
   <section class="pane" id="pUitleg" hidden></section>
   <section class="pane" id="pPas" hidden></section>
 
@@ -1781,7 +1916,7 @@ const CASES=[
   epilogue:'‘Wiebe,’ zegt Inspecteur Snoek, ‘u zette 4.000 euro in op Jelmer de Vries. Als Sietse verloor, kreeg u 20.000 euro. Maar Sietse lag op kop, met hulp van zijn sponsor. Toen u ontdekte dat hij afsneed, besloot u dat hij niet mocht winnen. Na uw eerste radiogesprek, om 12:20, liep u met uw rode thermosfles over het ijs naar de tent. Daar kreeg u ruzie met Sietse, en sloeg u toe. Om 12:31 zat u weer in uw bus, precies op tijd voor het tweede gesprek. De fles liet u in de sneeuw vallen. Een gestolen fles, zou u zeggen.’ Wiebe laat zijn hoofd zakken. Die avond wint Jelmer de Vries de Elfstedentocht. Het wedkantoor betaalt niets uit. En Kingma krijgt een flinke boete, en verkoopt zijn kaas voortaan op een eerlijke manier.'}
 
 ];
-let game=store.get('md-game')==='pas'?'pas':'home',gmOpen=false;
+let game=/[?&]tv=/.test(location.search)?'tv':store.get('md-game')==='pas'?'pas':'home',gmOpen=false;
 function setGame(g){game=g;gmOpen=false;store.set('md-game',g);renderPanes();window.scrollTo({top:0})}
 const STKEY='md-speur';
 let sp=store.get(STKEY);
@@ -3673,7 +3808,7 @@ const TSKIN=['#f3cba8','#ebba94','#dca47c','#c88a62','#a8704b','#7d5236'];
 const THC=['#2a1d15','#4a2f1c','#6b4527','#a0703a','#d6b25e','#a3a39c','#b5502c','#1f1a17'];
 const TTOP=['#4f6475','#7a3b32','#3f5a45','#4a4f6b','#8a6a3a','#5f6468','#2f3a4a','#6b3f5c','#8a4f2a'];
 const TLEG=['#2b2f36','#3a3a3c','#45403a','#26303d','#4b4237'];
-const TFEM=new Set('ariane baukje clementia leonoor josefien jantje eva-lotte linde mientje marlou rosanne selma hedwig quinty gijsje lidewij rowena dirkje annelot jozefien floortje odilia wilmijn nynke djoeke evelien margreet femke-lot vera jildou hinke lize dineke mirabella wendolien silke mariska aleida fenneke mirte jorien hennie saartje agnes truida yvette quirine kirsten liselot annegien marijke imke leonie isaura wieteke rosalie ottelien dorine celine tessel marga henriëtte ylva margje annabel gonda fabienne riet lucienne mirella hanneke selina wendela nadine petronella jitske desirée desiree elodie rinske femmy brecht liesje ingeborg annemoon rixt celeste lotus jolanda ankie sabine adelheid bertha mirthe dewi noortje robin hendrika marlies cornelia tjitske fleur willemijn romy ottilie noa hilde zara juul gonnie saar fien isabella rosalind trui clementine fenna lieke merel femke esmee noor yara camille greta hanna lies marie margaretha lola jikke sterre isolde hendrikje annie liesbeth mevrouw juffrouw barones tante oma zuster moeder dochter zus weduwe mevr anouk ria lotte samira sanne mila lisa eva sophie anneke wilma agatha wilhelmina charlotte ilse esra ingrid marieke femke anna emma julia sara fleur iris noor tess linda petra ellen karin monique yvonne joke truus greet mien els annet margriet hanna saskia nadia fatima yara lieke jet roos kim naomi vera isa nina lena amira julia marloes ilona sylvia gerda bep dora fenna hilde jolien lieve maud nienke romy sanna tamara ymke zoë zoe evi demi sharon anja astrid carla dewi esther floor gwen hester ines jasmijn kiki liza mirjam nora olga pien rosa selma trees ursula veerle wendy aaltje aafke birgit cato daphne elise frida gea heleen joyce kaat loes maaike nelleke odette patricia rianne silvia tineke willemijn yasmin'.split(' '));
+const TFEM=new Set('yfke annemijn ariane baukje clementia leonoor josefien jantje eva-lotte linde mientje marlou rosanne selma hedwig quinty gijsje lidewij rowena dirkje annelot jozefien floortje odilia wilmijn nynke djoeke evelien margreet femke-lot vera jildou hinke lize dineke mirabella wendolien silke mariska aleida fenneke mirte jorien hennie saartje agnes truida yvette quirine kirsten liselot annegien marijke imke leonie isaura wieteke rosalie ottelien dorine celine tessel marga henriëtte ylva margje annabel gonda fabienne riet lucienne mirella hanneke selina wendela nadine petronella jitske desirée desiree elodie rinske femmy brecht liesje ingeborg annemoon rixt celeste lotus jolanda ankie sabine adelheid bertha mirthe dewi noortje robin hendrika marlies cornelia tjitske fleur willemijn romy ottilie noa hilde zara juul gonnie saar fien isabella rosalind trui clementine fenna lieke merel femke esmee noor yara camille greta hanna lies marie margaretha lola jikke sterre isolde hendrikje annie liesbeth mevrouw juffrouw barones tante oma zuster moeder dochter zus weduwe mevr anouk ria lotte samira sanne mila lisa eva sophie anneke wilma agatha wilhelmina charlotte ilse esra ingrid marieke femke anna emma julia sara fleur iris noor tess linda petra ellen karin monique yvonne joke truus greet mien els annet margriet hanna saskia nadia fatima yara lieke jet roos kim naomi vera isa nina lena amira julia marloes ilona sylvia gerda bep dora fenna hilde jolien lieve maud nienke romy sanna tamara ymke zoë zoe evi demi sharon anja astrid carla dewi esther floor gwen hester ines jasmijn kiki liza mirjam nora olga pien rosa selma trees ursula veerle wendy aaltje aafke birgit cato daphne elise frida gea heleen joyce kaat loes maaike nelleke odette patricia rianne silvia tineke willemijn yasmin'.split(' '));
 const TTITLE={Baron:{hat:'top',mono:1,f:0,hair:'short'},Mevrouw:{f:1,hair:'bun',pearls:1},Kok:{hat:'chef',f:0},Dokter:{glasses:1},Juffrouw:{f:1,hair:'bun',glasses:1},
  Kapitein:{hat:'cap',beard:1,f:0},Notaris:{glasses:1,top:'#2b2f36',f:0},Dominee:{collar:1,top:'#1d1f22',f:0,hair:'short'},Barones:{f:1,hair:'bun',pearls:1},jonkheer:{f:0,top:'#3d2b4a'},
  tante:{f:1},oom:{f:0},butler:{top:'#1d1f22',f:0,hair:'bald'},Professor:{glasses:1,beard:1},Agent:{hat:'police',top:'#24364f'},Heer:{hat:'top',f:0},Vrouwe:{f:1,hair:'bun',pearls:1},Chef:{hat:'chef',f:0},Arts:{glasses:1},Lerares:{f:1,hair:'bob',glasses:1},Schipper:{hat:'cap',beard:1,f:0},Advocaat:{glasses:1,top:'#2b2f36',f:0},Pastoor:{collar:1,top:'#1d1f22',f:0},Graaf:{hat:'top',mono:1,f:0},Lady:{f:1,hair:'bun',pearls:1},Kokkin:{f:1,hat:'chef'},Huisarts:{glasses:1},Gouvernante:{f:1,hair:'bun',glasses:1,top:'#1d1f22'},Majoor:{hat:'cap',f:0},Rentmeester:{glasses:1,f:0},Kapelaan:{collar:1,top:'#1d1f22',f:0},Danseres:{f:1},Secretaresse:{f:1},Barones:{f:1,hair:'bun',pearls:1},Inspecteur:{top:'#5a4a3a',hat:'fedora'}};
@@ -6293,9 +6428,383 @@ SCREND.stad={
  haven:[['t','Zo is het gebeurd','gebeurd','Man overboord'],['s','De kisten',['water',['boat',150,150,1.2]],'Barend-Jan stal al weken vis van de visser.'],['s','Op de kade',['water',['boat',220,150,.9]],'De visser betrapte hem. Barend-Jan duwde hem in het water.',{hit:'duw',act:'drown',x:150,y:142,s:.42}],['x','Barend-Jan Kroeskamp','een duw in het water','de haven']],
  fiets:[['t','Zo is het gebeurd','gebeurd','Doorgereden'],['s','Het kruispunt',['day',['car',150,170,1.1]],'Edgar reed veel te hard en schepte de fietsster.'],['s','De garage',['dark',['garage',150,168,1]],'Hij poetste zijn busje schoon en gooide het nummerbord weg.'],['x','Edgar Bongaerts','het witte busje','het kruispunt']]};
 
+
+// realistische portretten (geschilderde fotostijl) voor het Tv-dossier.
+// o={f,skin,hc,hair:'short|curly|long|bun|bob|receding',eyes,top:'chef|vest|blouse|tweed|shirt',tc,age,beard:'stubble|full',glasses,jaw,earring,bg,full,alt}
+const RF=(()=>{let n=0;
+ const sh=(hex,k)=>{const c=parseInt(hex.slice(1),16);let r=c>>16,g=c>>8&255,b=c&255;const f=v=>Math.max(0,Math.min(255,Math.round(k<0?v*(1+k):v+(255-v)*k)));return '#'+[f(r),f(g),f(b)].map(v=>v.toString(16).padStart(2,'0')).join('')};
+ return o=>{const id='rf'+(++n),S=o.skin,H=o.hc,E=o.eyes||'#5a4a3a',age=o.age||35,f=!!o.f,jw=o.jaw||0,tc=o.tc||'#3a4a5a',T=o.top||'shirt',hs=o.hair||'short';
+  const LIP=o.lip||(f?'#b25a62':sh(S,-.28));
+  const face=`M${92-jw} 146C${90-jw} 94 116 76 150 76C184 76 ${210+jw} 94 ${208+jw} 146C${208+jw} 186 ${194+jw*.5} 218 168 232Q150 240 132 232C${106-jw*.5} 218 ${92-jw} 186 ${92-jw} 146Z`;
+  const blur=(k,v)=>`<filter id="${id}b${k}" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="${v}"/></filter>`;
+  const D=`<defs>
+   <radialGradient id="${id}sk" cx="40%" cy="36%" r="72%"><stop offset="0" stop-color="${sh(S,.14)}"/><stop offset=".6" stop-color="${S}"/><stop offset="1" stop-color="${sh(S,-.26)}"/></radialGradient>
+   <linearGradient id="${id}side" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".07"/><stop offset=".5" stop-color="#000" stop-opacity="0"/><stop offset=".78" stop-color="#2a140a" stop-opacity=".16"/><stop offset="1" stop-color="#2a140a" stop-opacity=".38"/></linearGradient>
+   <linearGradient id="${id}nk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sh(S,-.42)}"/><stop offset=".5" stop-color="${sh(S,-.16)}"/><stop offset="1" stop-color="${sh(S,-.05)}"/></linearGradient>
+   <linearGradient id="${id}hr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${sh(H,.22)}"/><stop offset=".45" stop-color="${H}"/><stop offset="1" stop-color="${sh(H,-.5)}"/></linearGradient>
+   <radialGradient id="${id}hl" cx="38%" cy="22%" r="40%"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+   <radialGradient id="${id}ir" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="${sh(E,-.3)}"/><stop offset=".35" stop-color="${sh(E,.25)}"/><stop offset=".85" stop-color="${E}"/><stop offset="1" stop-color="${sh(E,-.65)}"/></radialGradient>
+   <linearGradient id="${id}ul" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sh(LIP,-.25)}"/><stop offset="1" stop-color="${sh(LIP,-.05)}"/></linearGradient>
+   <linearGradient id="${id}ll" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sh(LIP,-.05)}"/><stop offset=".5" stop-color="${sh(LIP,.1)}"/><stop offset="1" stop-color="${sh(LIP,-.1)}"/></linearGradient>
+   <radialGradient id="${id}vg" cx="50%" cy="40%" r="78%"><stop offset=".5" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".5"/></radialGradient>
+   <radialGradient id="${id}fl" cx="44%" cy="34%" r="42%"><stop offset="0" stop-color="#fff" stop-opacity=".14"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+   <filter id="${id}gr" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" seed="${n*7}"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .55 0"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+   <filter id="${id}htx" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="${hs==='curly'?'.12 .12':'.7 .035'}" numOctaves="3" seed="${n*3}"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.25"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+   <filter id="${id}stb" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="1" seed="${n}"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.6 1.5"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+   <filter id="${id}skt" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="${n*5}"/><feColorMatrix values="0 0 0 0 .35  0 0 0 0 .2  0 0 0 0 .15  0 0 0 .5 -.1"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+   ${blur(1,1.2)}${blur(2,2.6)}${blur(4,5)}${blur(8,9)}${blur('s',.55)}
+   <clipPath id="${id}cl"><rect width="300" height="360"/></clipPath><clipPath id="${id}fc"><path d="${face}"/></clipPath>
+  </defs>`;
+  const sho='M2 360C8 298 50 268 108 258L150 274L192 258C250 268 292 298 298 360Z';
+  const body=`<path d="${sho}" fill="${T==='chef'?'#e9e8e2':tc}"/>`+
+   ({chef:`<path d="M108 258L150 276L192 258L186 360H114Z" fill="#f6f5f0"/><path d="M116 276Q150 300 184 276" stroke="#c4c2ba" stroke-width="2.4" fill="none"/>${[0,1,2,3].map(i=>`<circle cx="${i%2?166:134}" cy="${300+Math.floor(i/2)*30}" r="3.6" fill="#dcdad2" stroke="#9a988f"/>`).join('')}`,
+    vest:`<path d="M114 262L150 312L186 262L192 360H108Z" fill="#efeee8"/><path d="M141 278L150 290L159 278L155 360H145Z" fill="#6a1820"/><path d="M108 258L150 360H104Z M192 258L150 360H196Z" fill="${sh(tc,-.25)}"/><circle cx="150" cy="330" r="2.6" fill="#ddd"/>`,
+    blouse:`<path d="M112 262Q150 300 188 262L196 280Q150 322 104 280Z" fill="${sh(tc,.16)}"/>${[...Array(9)].map((_,i)=>{const a=Math.PI*(.12+i*.095);return `<circle cx="${150-Math.cos(a)*36}" cy="${268+Math.sin(a)*22}" r="3.2" fill="#f4efe6"/>`}).join('')}`,
+    tweed:`<path d="M114 262L150 302L186 262L182 360H118Z" fill="#e6e2d8"/><path d="M142 280L150 292L158 280L154 360H146Z" fill="#26344e"/><path d="M106 258L146 360H94Z M194 258L154 360H206Z" fill="${sh(tc,-.18)}"/><path d="${sho}" fill="${tc}" filter="url(#${id}stb)" opacity=".35"/>`,
+    shirt:`<path d="M118 262L150 290L182 262L186 278L150 306L114 278Z" fill="${sh(tc,.2)}"/>`}[T]||'')+
+   `<path d="M108 258Q150 300 192 258" stroke="#000" stroke-width="10" opacity=".18" fill="none" filter="url(#${id}b4)"/>`;
+  const back={long:`M84 140C70 220 74 292 98 316C124 302 176 302 202 316C226 292 230 220 216 140C214 98 190 64 150 64C110 64 86 98 84 140Z`,
+   bun:`M120 66A30 24 0 1 0 180 66A30 24 0 1 0 120 66Z`,
+   bob:`M82 150C80 202 88 234 106 240L194 240C212 234 220 202 218 150C216 94 190 64 150 64C110 64 84 94 82 150Z`}[hs]||'';
+  const top={short:`M90 142C84 92 112 62 152 62C192 62 216 92 210 142C206 116 194 100 180 94C160 102 130 102 114 96C102 104 94 120 90 142Z`,
+   long:`M88 150C80 90 112 62 150 62C190 62 220 90 212 150C206 112 184 90 160 84C146 104 116 118 96 126C92 132 90 140 88 150Z`,
+   bun:`M90 142C86 90 114 68 150 68C186 68 214 90 210 142C204 108 184 90 150 88C116 90 96 108 90 142Z`,
+   bob:`M86 152C80 92 112 64 150 64C188 64 220 92 214 152C210 118 196 98 172 90C148 106 120 108 104 102C94 114 88 132 86 152Z`,
+   receding:`M90 156C86 126 92 102 104 92C102 112 100 132 100 156Z M210 156C214 126 208 102 196 92C198 112 200 132 200 156Z`,
+   curly:`M88 150C78 84 112 56 150 56C190 56 222 84 212 150C206 116 192 98 176 92C160 100 136 100 124 92C108 98 94 116 88 150Z`}[hs]||'';
+  const hairL=d=>d?`<path d="${d}" fill="url(#${id}hr)"/><path d="${d}" fill="${sh(H,-.55)}" filter="url(#${id}htx)" opacity=".55"/><path d="${d}" fill="url(#${id}hl)"/>`:'';
+  const curls=hs==='curly'?[...Array(30)].map((_,i)=>{const a=Math.PI*(1.0+i*.034),r=60+(i*7)%9;return `<circle cx="${150+Math.cos(a)*r}" cy="${146+Math.sin(a)*r*1.08}" r="${9+(i*5)%6}" fill="${i%3?sh(H,.08):sh(H,-.3)}"/>`}).join(''):'';
+  const eye=cx=>{const w=15;return `<path d="M${cx-w-4} 146Q${cx} 136 ${cx+w+4} 146Q${cx} 140 ${cx-w-4} 146Z" fill="${sh(S,-.35)}" opacity=".35" filter="url(#${id}b2)"/>
+   <path d="M${cx-w} 152Q${cx-2} 142 ${cx+w} 151Q${cx} 158 ${cx-w} 152Z" fill="#ece5dc"/>
+   <clipPath id="${id}e${cx}"><path d="M${cx-w} 152Q${cx-2} 142 ${cx+w} 151Q${cx} 158 ${cx-w} 152Z"/></clipPath>
+   <g clip-path="url(#${id}e${cx})"><path d="M${cx-w} 148H${cx+w}V153H${cx-w}Z" fill="#b8a898" opacity=".25" filter="url(#${id}b1)"/><circle cx="${cx}" cy="150.5" r="6.6" fill="url(#${id}ir)"/><circle cx="${cx}" cy="150.5" r="2.7" fill="#0b0908"/><circle cx="${cx+2.2}" cy="148.4" r="1.3" fill="#fff" opacity=".85"/><path d="M${cx-w} 141Q${cx} 140 ${cx+w} 141V150Q${cx} 144 ${cx-w} 150Z" fill="#000" opacity=".28" filter="url(#${id}b1)"/></g>
+   <path d="M${cx-w-1} 152.4Q${cx-2} 141 ${cx+w+1} 151" stroke="#23150f" stroke-width="2" fill="none" stroke-linecap="round" ${f?'':`opacity=".85"`}/>
+   ${f?`<path d="M${cx+w-2} 149.5l4 -2.4M${cx+w-7} 146.6l3 -2.6" stroke="#1a100c" stroke-width="1.1"/>`:''}
+   <path d="M${cx-w+2} 156Q${cx} 159 ${cx+w-1} 155" stroke="${sh(S,-.32)}" stroke-width="1.1" fill="none" opacity=".6"/>
+   <path d="M${cx-w+1} 160Q${cx} 166 ${cx+w} 159" stroke="${sh(S,-.35)}" stroke-width="3" fill="none" opacity="${.18+Math.min(.3,age/180)}" filter="url(#${id}b1)"/>
+   <path d="M${cx-w+1} 142.5Q${cx} 134 ${cx+w} 142" stroke="${sh(S,-.38)}" stroke-width="1.2" fill="none" opacity=".55" filter="url(#${id}bs)"/>`};
+  const brow=(cx,s)=>{const y=f?131:133,t=f?2.6:4.2,c=sh(H,age>58?.05:-.3);
+   return `<path d="M${cx-17*s} ${y+3}Q${cx-4*s} ${y-5} ${cx+16*s} ${y}Q${cx-4*s} ${y-5+t*.5} ${cx-17*s} ${y+3+t}Z" fill="${c}" opacity=".85" filter="url(#${id}bs)"/>${[...Array(9)].map((_,i)=>{const x=cx+(-15+i*3.6)*s;return `<path d="M${x} ${y+3-i*.3}l${2.6*s} ${-2.2}" stroke="${c}" stroke-width=".9" opacity=".6"/>`}).join('')}`};
+  const nose=`<path d="M156 150Q160 170 163 182Q158 188 152 189" stroke="${sh(S,-.4)}" stroke-width="5" fill="none" opacity=".45" filter="url(#${id}b2)"/>
+   <path d="M145 152Q142 170 139 180" stroke="${sh(S,-.3)}" stroke-width="3" fill="none" opacity=".3" filter="url(#${id}b2)"/>
+   <path d="M150 150Q150 168 151 180" stroke="#fff" stroke-width="3.4" opacity=".22" filter="url(#${id}b1)"/>
+   <ellipse cx="150.5" cy="181" rx="6" ry="4.6" fill="#fff" opacity=".18" filter="url(#${id}b1)"/>
+   <path d="M136 183Q141 189 147 188.5M164 183Q159 189 153 188.5" stroke="${sh(S,-.45)}" stroke-width="2.4" fill="none" opacity=".6" filter="url(#${id}bs)"/>
+   <ellipse cx="144" cy="187" rx="3.4" ry="1.7" fill="${sh(S,-.65)}" filter="url(#${id}bs)"/><ellipse cx="156.5" cy="187" rx="3.4" ry="1.7" fill="${sh(S,-.65)}" filter="url(#${id}bs)"/>
+   <ellipse cx="150" cy="191" rx="14" ry="3" fill="#000" opacity=".12" filter="url(#${id}b1)"/>`;
+  const mouth=`<path d="M146 192Q150 194 154 192L155 200Q150 202 145 200Z" fill="${sh(S,-.18)}" opacity=".35" filter="url(#${id}b1)"/>
+   <path d="M130 206Q138 200 145 200Q150 202 155 200Q162 200 170 206Q150 208 130 206Z" fill="url(#${id}ul)"/>
+   <path d="M131 206.5Q150 209 169 206.5Q164 216 150 217Q136 216 131 206.5Z" fill="url(#${id}ll)"/>
+   <path d="M129 206Q150 210 171 206" stroke="#3e1d1a" stroke-width="1.5" fill="none" opacity=".75"/>
+   <path d="M141 211Q150 214 159 211" stroke="#fff" stroke-width="2" opacity=".22" filter="url(#${id}bs)"/>
+   <ellipse cx="150" cy="223" rx="12" ry="3" fill="#000" opacity=".1" filter="url(#${id}b1)"/>
+   <path d="M127 205l-2 2M173 205l2 2" stroke="${sh(S,-.4)}" stroke-width="1.6" opacity=".5"/>`;
+  const wr=age>42?`<g stroke="${sh(S,-.4)}" fill="none" opacity="${Math.min(.5,(age-38)/50)}" stroke-width="1.3" filter="url(#${id}bs)"><path d="M122 112Q150 106 178 112M127 120Q150 115 173 120"/><path d="M137 178Q128 192 131 206M163 178Q172 192 169 206"/><path d="M108 150l-7 -3M108 154l-8 1M192 150l7 -3M192 154l8 1"/></g>`:'';
+  const beard=o.beard==='stubble'?`<path d="M${97-jw} 170C${100-jw} 206 124 236 150 238C176 236 ${200+jw} 206 ${203+jw} 170C196 196 182 212 170 212Q150 222 130 212C118 212 104 196 ${97-jw} 170Z M128 202Q150 192 172 202Q150 198 128 202Z" fill="${sh(H,-.2)}" filter="url(#${id}stb)" opacity=".8"/>`
+   :o.beard==='full'?(()=>{const d=`M${96-jw} 166C${98-jw} 214 122 248 150 250C178 248 ${202+jw} 214 ${204+jw} 166C198 192 186 204 174 222Q150 234 126 222C114 204 102 192 ${96-jw} 166Z`,m=`M124 205Q130 194 150 197Q170 194 176 205Q168 200 150 202Q132 200 124 205Z`;return `<path d="${d}" fill="url(#${id}hr)"/><path d="${d}" fill="${sh(H,-.5)}" filter="url(#${id}htx)" opacity=".45"/><path d="${m}" fill="${H}"/><path d="${m}" fill="${sh(H,-.5)}" filter="url(#${id}htx)" opacity=".4"/>`})():'';
+  const ear=x=>{const s=x<150?1:-1;return `<path d="M${x+6*s} 140Q${x-10*s} 136 ${x-9*s} 158Q${x-8*s} 178 ${x+6*s} 180Z" fill="${sh(S,-.1)}"/><path d="M${x+2*s} 146Q${x-6*s} 148 ${x-4*s} 160Q${x-3*s} 170 ${x+3*s} 172" stroke="${sh(S,-.42)}" stroke-width="2.2" fill="none" filter="url(#${id}bs)"/>`};
+  const gl=o.glasses?`<g fill="none" stroke="${o.glasses}" stroke-width="3.2"><rect x="105" y="136" width="41" height="29" rx="9"/><rect x="154" y="136" width="41" height="29" rx="9"/><path d="M146 148Q150 144 154 148M105 146L92 142M195 146L208 142"/></g><path d="M110 140l12 -2M159 140l12 -2" stroke="#fff" stroke-width="2.4" opacity=".45"/><path d="M106 166h40M155 166h40" stroke="#000" stroke-width="4" opacity=".12" filter="url(#${id}b1)"/>`:'';
+  const ear2=o.earring?`<circle cx="${95-jw}" cy="182" r="3.2" fill="#eee6d0" stroke="#9a8c68" stroke-width=".8"/><circle cx="${205+jw}" cy="182" r="3.2" fill="#eee6d0" stroke="#9a8c68" stroke-width=".8"/>`:'';
+  const ruler=o.bg?'':[...Array(9)].map((_,i)=>`<path d="M0 ${20+i*40}H300" stroke="#8b8f8b" stroke-width="${i%2?1:2}"/><text x="294" y="${16+i*40}" font-size="10" text-anchor="end" fill="#55594f" font-family="Courier New,monospace">${200-i*10}</text>`).join('');
+  return `<svg viewBox="${o.full?'0 0 300 360':'32 42 236 283'}" class="rf" role="img" aria-label="${o.alt||'portret'}"><g clip-path="url(#${id}cl)">${D}
+   <rect width="300" height="360" fill="${o.bg||'#c8ccc8'}"/>${ruler}
+   <ellipse cx="172" cy="210" rx="104" ry="136" fill="#000" opacity=".16" filter="url(#${id}b8)"/>
+   ${back?hairL(back):''}
+   <path d="M116 206L113 266Q150 284 187 266L184 206Z" fill="url(#${id}nk)"/>
+   ${body}
+   ${ear(92-jw)}${ear(208+jw)}${ear2}
+   <path d="${face}" fill="url(#${id}sk)"/>
+   <g clip-path="url(#${id}fc)"><rect width="300" height="360" fill="url(#${id}side)"/><path d="${face}" fill="${S}" filter="url(#${id}skt)" opacity=".5"/>
+    <ellipse cx="120" cy="180" rx="20" ry="13" fill="#c85a50" opacity="${f?.16:.1}" filter="url(#${id}b4)"/><ellipse cx="180" cy="180" rx="20" ry="13" fill="#c85a50" opacity="${f?.14:.08}" filter="url(#${id}b4)"/>
+    <ellipse cx="118" cy="168" rx="14" ry="6" fill="#fff" opacity=".12" filter="url(#${id}b2)"/><ellipse cx="150" cy="104" rx="30" ry="14" fill="#fff" opacity=".1" filter="url(#${id}b4)"/><ellipse cx="150" cy="226" rx="12" ry="5" fill="#fff" opacity=".1" filter="url(#${id}b2)"/>
+    <path d="M${210+jw} 150C${206+jw} 196 188 224 160 236L220 240V120Z" fill="#1a0c06" opacity=".18" filter="url(#${id}b4)"/>
+    ${wr}${eye(127)}${eye(173)}${brow(127,-1)}${brow(173,1)}${nose}${mouth}${o.beard==='full'?'':beard}
+   </g>
+   ${o.beard==='full'?beard:''}
+   ${curls}${hairL(top)}${gl}
+   <rect width="300" height="360" fill="url(#${id}fl)"/><rect width="300" height="360" fill="url(#${id}vg)"/>
+   <rect width="300" height="360" filter="url(#${id}gr)" opacity=".16"/>
+  </g></svg>`}})();
+
+// eigen QR-code maker (byte-modus, foutcorrectie M, versie 1 t/m 10), geen internet nodig
+const tvQrSvg=(()=>{const EXP=new Array(512),LOG=new Array(256);let x=1;for(let i=0;i<255;i++){EXP[i]=x;LOG[x]=i;x<<=1;if(x&256)x^=0x11d}for(let i=255;i<512;i++)EXP[i]=EXP[i-255];
+ const mul=(a,b)=>a&&b?EXP[LOG[a]+LOG[b]]:0;
+ const gen=n=>{let g=[1];for(let i=0;i<n;i++){const ng=new Array(g.length+1).fill(0);for(let j=0;j<g.length;j++){ng[j]^=g[j];ng[j+1]^=mul(g[j],EXP[i])}g=ng}return g};
+ const rs=(d,n)=>{const g=gen(n),r=new Array(n).fill(0);for(const b of d){const f=b^r.shift();r.push(0);for(let j=0;j<n;j++)r[j]^=mul(g[j+1],f)}return r};
+ const T=[0,[10,[[1,16]]],[16,[[1,28]]],[26,[[1,44]]],[18,[[2,32]]],[24,[[2,43]]],[16,[[4,27]]],[18,[[4,31]]],[22,[[2,38],[2,39]]],[22,[[3,36],[2,37]]],[26,[[4,43],[1,44]]]];
+ const AL=[0,[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50]];
+ const cap=v=>T[v][1].reduce((a,[c,l])=>a+c*l,0);
+ return text=>{const by=[...new TextEncoder().encode(text)];let v=1;while(v<=10&&4+(v<10?8:16)+8*by.length>cap(v)*8)v++;if(v>10)return '';
+  const bits=[],push=(val,n)=>{for(let i=n-1;i>=0;i--)bits.push((val>>>i)&1)};push(4,4);push(by.length,v<10?8:16);by.forEach(b=>push(b,8));
+  const C=cap(v);push(0,Math.min(4,C*8-bits.length));while(bits.length%8)bits.push(0);const data=[];for(let i=0;i<bits.length;i+=8)data.push(parseInt(bits.slice(i,i+8).join(''),2));for(let p=0;data.length<C;p++)data.push(p%2?0x11:0xEC);
+  const blocks=[];let k=0;T[v][1].forEach(([c,l])=>{for(let i=0;i<c;i++){blocks.push(data.slice(k,k+l));k+=l}});const ecs=blocks.map(b=>rs(b,T[v][0]));
+  const all=[];const mx=Math.max(...blocks.map(b=>b.length));for(let i=0;i<mx;i++)blocks.forEach(b=>{if(i<b.length)all.push(b[i])});for(let i=0;i<T[v][0];i++)ecs.forEach(e=>all.push(e[i]));
+  const N=17+4*v,M=[...Array(N)].map(()=>new Array(N).fill(0)),F=[...Array(N)].map(()=>new Array(N).fill(false));const set=(x,y,d)=>{M[y][x]=d?1:0;F[y][x]=true};
+  for(let i=0;i<N;i++){set(6,i,i%2===0);set(i,6,i%2===0)}
+  const finder=(cx,cy)=>{for(let dy=-4;dy<=4;dy++)for(let dx=-4;dx<=4;dx++){const xx=cx+dx,yy=cy+dy;if(xx<0||yy<0||xx>=N||yy>=N)continue;const d=Math.max(Math.abs(dx),Math.abs(dy));set(xx,yy,d!==2&&d!==4)}};finder(3,3);finder(N-4,3);finder(3,N-4);
+  const al=AL[v];al.forEach((a,i)=>al.forEach((b,j)=>{if((i===0&&j===0)||(i===0&&j===al.length-1)||(i===al.length-1&&j===0))return;for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++)set(a+dx,b+dy,Math.max(Math.abs(dx),Math.abs(dy))!==1)}));
+  const fmt=mask=>{const d=mask;let r=d;for(let i=0;i<10;i++)r=(r<<1)^((r>>>9)*0x537);const b=((d<<10)|r)^0x5412,g=i=>(b>>>i)&1;
+   for(let i=0;i<=5;i++)set(8,i,g(i));set(8,7,g(6));set(8,8,g(7));set(7,8,g(8));for(let i=9;i<15;i++)set(14-i,8,g(i));for(let i=0;i<8;i++)set(N-1-i,8,g(i));for(let i=8;i<15;i++)set(8,N-15+i,g(i));set(8,N-8,1)};
+  fmt(0);if(v>=7){let r=v;for(let i=0;i<12;i++)r=(r<<1)^((r>>>11)*0x1F25);const b=(v<<12)|r;for(let i=0;i<18;i++){const bt=(b>>>i)&1,a=N-11+i%3,c=Math.floor(i/3);set(a,c,bt);set(c,a,bt)}}
+  let i=0;for(let right=N-1;right>=1;right-=2){if(right===6)right=5;for(let vert=0;vert<N;vert++)for(let j=0;j<2;j++){const xx=right-j,up=((right+1)&2)===0,yy=up?N-1-vert:vert;if(!F[yy][xx]&&i<all.length*8){M[yy][xx]=(all[i>>>3]>>>(7-(i&7)))&1;i++}}}
+  const MK=[(x,y)=>(x+y)%2===0,(x,y)=>y%2===0,(x,y)=>x%3===0,(x,y)=>(x+y)%3===0,(x,y)=>(Math.floor(x/3)+Math.floor(y/2))%2===0,(x,y)=>x*y%2+x*y%3===0,(x,y)=>(x*y%2+x*y%3)%2===0,(x,y)=>((x+y)%2+x*y%3)%2===0];
+  const apply=m=>{for(let y=0;y<N;y++)for(let x=0;x<N;x++)if(!F[y][x]&&MK[m](x,y))M[y][x]^=1};
+  const pen=()=>{let p=0;for(let a=0;a<2;a++)for(let y=0;y<N;y++){let run=1;for(let x=1;x<N;x++){const c=a?M[x][y]:M[y][x],q=a?M[x-1][y]:M[y][x-1];if(c===q){run++;if(run===5)p+=3;else if(run>5)p++}else run=1}}
+   for(let y=0;y<N-1;y++)for(let x=0;x<N-1;x++){const c=M[y][x];if(c===M[y][x+1]&&c===M[y+1][x]&&c===M[y+1][x+1])p+=3}let dk=0;M.forEach(r=>r.forEach(c=>dk+=c));p+=Math.floor(Math.abs(dk*20-N*N*10)/(N*N))*10;return p};
+  let best=0,bp=1e9;for(let m=0;m<8;m++){apply(m);fmt(m);const p=pen();if(p<bp){bp=p;best=m}apply(m)}apply(best);fmt(best);
+  let d='';for(let y=0;y<N;y++)for(let x=0;x<N;x++)if(M[y][x])d+=`M${x+4} ${y+4}h1v1h-1z`;
+  return `<svg viewBox="0 0 ${N+8} ${N+8}" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" role="img" aria-label="QR-code"><rect width="100%" height="100%" fill="#fff"/><path d="${d}" fill="#000"/></svg>`}})();
+
+// ---------- Tv-dossier: groot onderzoek op de tv (casten), met QR-codes en een deellink voor de telefoons van de spelers ----------
+// Nieuwe zaken achteraan toevoegen. Ids nooit wijzigen.
+const TVCASES=[{id:'lepel',nr:'01',title:'Het laatste gerecht',level:'Gemiddeld',time:'60 tot 90 minuten',players:'1 tot 4 spelers',
+ blurb:'Na sluitingstijd ligt de chef van restaurant De Vergulde Lepel dood in zijn keuken. Vier mensen waren die avond in de buurt. Eén van hen liegt.',
+ melding:`<p class="tv-mono">MELDING 112 · ZATERDAG 7 MAART · 00:41</p><p>Schoonmaker <b>Sjaak Tetteroo</b> belt 112. In de keuken van restaurant <b>De Vergulde Lepel</b> aan de Lindengracht ligt chef-kok <b>Ferre Hoogwerf</b> (52) op de grond. Hij leeft niet meer.</p><p>De schouwarts ziet een harde klap op het achterhoofd. Tijdstip van overlijden: <b>tussen 23:20 en 00:00</b>. Het restaurant ging om 23:00 dicht.</p><p>Vier mensen waren die avond in de buurt: de sous-chef, de sommelier, zijn vrouw en een restaurantcriticus. Bekijk de plaats delict, luister de verhoren en verdeel de dossiers. Wijs samen de dader aan.</p>`,
+ photos:[[['wall',['stove',120,182,1.25],['shards',212,186,1.1],['marker',262,190,1,1]],'1 · keuken, bij het fornuis'],[['dark',['shelf',150,178,1.1],['bottle',112,122,.7],['bottle',188,122,.7],['marker',240,188,1,2]],'2 · wijnkelder, het rek'],[['night',['door',130,182,1.1],['bike',228,182,.7],['marker',62,188,1,3]],'3 · achterdeur, de steeg'],[['desk',['laptop',108,162,1],['letter',204,172,1],['marker',262,188,1,4]],'4 · bureau van Ferre']],
+ photoNotes:['Het slachtoffer lag naast het fornuis. Op de vloer glasscherven van een grote, donkergroene fles en rode wijn.','In de wijnkelder is in het rek “Château Montrésor 1990” één vak leeg. Er liggen nog 13 flessen.','De achterdeur naar de steeg zit niet op het nachtslot. Hij opent met een pasje.','Op het bureau ligt een geprinte mail, half verfrommeld. De laptop staat nog aan.'],
+ timeline:[['22:30','laatste gasten aan het dessert'],['22:50','criticus Olof Brinkerink vertrekt'],['23:00','restaurant dicht'],['23:14','sommelier klokt uit'],['23:20 – 00:00','tijdstip van overlijden'],['00:41','schoonmaker vindt Ferre']],
+ suspects:[
+  {id:'yfke',name:'Yfke Dorresteijn',role:'sous-chef',look:{f:1,skin:'#e6b89c',hc:'#8a3e22',hair:'bun',eyes:'#5a7a4a',top:'chef',age:31},motive:'Die middag ontslagen door Ferre.',f:1,voice:[1.18,1.02],
+   v:[['R','Waar was u gisteravond na sluitingstijd?'],['S','Om tien over elf ben ik weggegaan. Ik ben naar café De Kater gegaan, om de hoek. Tot een uur of één.'],['R','Ferre had u die middag ontslagen.'],['S','Ja. Na zes jaar. Omdat ik een fout maakte met de saus voor de criticus. Ik was woedend.'],['R','U stuurde hem om half elf een bericht: “Je krijgt hier spijt van.”'],['S','Dat was dom. Ik bedoelde dat ik naar een ander restaurant zou gaan. Met mijn recepten.'],['R','Bent u nog terug geweest in het restaurant?'],['S','Nee. De barman van De Kater kan het zeggen. Ik heb de hele avond aan de bar gezeten.']]},
+  {id:'lennert',name:'Lennert Schaapveld',role:'sommelier',look:{skin:'#c58c64',hc:'#1f1712',hair:'short',eyes:'#3a2a1a',top:'vest',tc:'#1c1d22',age:42,beard:'stubble',jaw:4},motive:'Beheert de dure wijnkelder.',f:0,voice:[.92,1],
+   v:[['R','Hoe laat bent u weggegaan?'],['S','Ik heb om veertien over elf uitgeklokt. Daarna ben ik meteen naar huis gefietst.'],['R','Bent u daarna nog teruggekomen?'],['S','Nee. Waarom zou ik? Ik was moe. Het was een drukke avond.'],['R','Hoe ging het tussen u en Ferre?'],['S','Prima. Hij vertrouwde mij met de hele wijnkelder. Daar ben ik trots op.'],['R','In de keuken lag een kapotte fles. Château Montrésor 1990.'],['S','Een prachtige wijn. Wij hebben er veertien van. Zonde dat er één kapot is.']]},
+  {id:'annemijn',name:'Annemijn Hoogwerf',role:'vrouw van Ferre, mede-eigenaar',look:{f:1,skin:'#efc8b0',hc:'#d8b878',hair:'bob',eyes:'#4a6a8a',top:'blouse',tc:'#3a4a6a',age:52,earring:1},motive:'Krijgt zijn levensverzekering.',f:1,voice:[1.1,.96],
+   v:[['R','Waar was u gisteravond?'],['S','Thuis. Ik had hoofdpijn. Om tien uur lag ik in bed.'],['R','Uw man kreeg een hoge levensverzekering. Op uw naam.'],['S','Dat hebben we samen afgesloten, voor de zaak. Dat is heel gewoon.'],['R','Ferre sprak de laatste weken veel over geld.'],['S','Er klopte iets niet met de cijfers van de wijn. Hij zei: ik zoek het zelf uit. Meer wilde hij niet zeggen.'],['R','Kan iemand bevestigen dat u thuis was?'],['S','Onze deurbel heeft een camera. Kijk maar.']]},
+  {id:'olof',name:'Olof Brinkerink',role:'restaurantcriticus',look:{skin:'#e8bca4',hc:'#a8a49c',hair:'receding',eyes:'#5a6a7a',top:'tweed',tc:'#6a5a3a',age:63,beard:'full',glasses:'#2a2420',jaw:6},motive:'Ruzie met Ferre om een recensie.',f:0,voice:[.86,1.05],
+   v:[['R','U at gisteravond in De Vergulde Lepel.'],['S','Ja. Voor mijn rubriek in de krant. Het eten was teleurstellend. De saus was verbrand.'],['R','U had ruzie met Ferre.'],['S','Hij kwam aan mijn tafel en zei dat ik niets van eten wist. Dat schrijf ik ook op, hoor.'],['R','Hoe laat ging u weg?'],['S','Om tien voor elf, met een taxi naar het station. Ik heb het bonnetje nog.'],['R','Zag u nog iets bijzonders?'],['S','De sommelier schonk mij een wijn van 1990. Hij smaakte naar supermarktwijn. Vreemd, voor zo’n dure fles.']]}],
+ secret:[
+  {t:'Forensisch dossier',ic:'🔬',docs:[
+   {t:'Sectierapport',h:`<p class="tv-mono">NFI · SECTIE 0307</p><p><b>Overledene:</b> F. Hoogwerf, 52 jaar.</p><p><b>Doodsoorzaak:</b> schedelletsel door één harde klap op het achterhoofd met een zwaar, rond voorwerp.</p><p>In de wond: <b>donkergroene glassplinters</b> en rode wijn.</p><p><b>Tijdstip van overlijden:</b> tussen 23:20 en 00:00.</p>`},
+   {t:'Labrapport glasscherven',h:`<p>De scherven zijn van een <b>magnumfles</b> (1,5 liter). Op een stuk etiket: “…ÂTEAU MONTRÉS… 1990”.</p><p>De wijn in de scherven is géén wijn uit 1990. Het is goedkope wijn uit een pak, minder dan een jaar oud.</p>`},
+   {t:'Vingerafdrukken',h:`<p>Op de hals van de kapotte fles: vingerafdrukken van <b>L. Schaapveld</b>.</p><p class="tv-hand">Let op: de sommelier pakt elke dag flessen vast. Op zich zegt dit nog niet veel.</p>`}]},
+  {t:'Digitaal dossier',ic:'📱',docs:[
+   {t:'Telefoon Lennert Schaapveld',h:`<table class="tv-t"><tr><th>Tijd</th><th>Wat</th></tr><tr><td>23:15</td><td>verlaat wifi “VerguldeLepel”</td></tr><tr><td>23:38</td><td><b>weer verbonden met wifi “VerguldeLepel”</b></td></tr><tr><td>23:57</td><td>verlaat wifi “VerguldeLepel”</td></tr><tr><td>00:12</td><td>mast Westerpark (thuis)</td></tr></table>`},
+   {t:'Telefoon Yfke Dorresteijn',h:`<table class="tv-t"><tr><th>Tijd</th><th>Wat</th></tr><tr><td>22:31</td><td>bericht aan Ferre: “Je krijgt hier spijt van.”</td></tr><tr><td>23:18 – 01:05</td><td>wifi “CafeDeKater”</td></tr></table>`},
+   {t:'Mail op de laptop van Ferre',h:`<p><b>Aan:</b> annemijn@vergulde-lepel.nl · <b>Verstuurd:</b> vrijdag 21:47</p><p>“Ik weet nu wie er wijn steelt. Maandag ga ik naar de politie. Ik vertel je morgen alles. F.”</p>`}]},
+  {t:'Camera’s en pasjes',ic:'🎥',docs:[
+   {t:'Pasjeslog achterdeur',h:`<table class="tv-t"><tr><th>Tijd</th><th>Pas</th><th>Wat</th></tr><tr><td>23:10</td><td>Y. Dorresteijn</td><td>uit</td></tr><tr><td>23:14</td><td>L. Schaapveld</td><td>uitklokken</td></tr><tr><td><b>23:41</b></td><td><b>L. Schaapveld</b></td><td><b>in</b></td></tr><tr><td>23:56</td><td>–</td><td>deur open van binnen</td></tr><tr><td>00:39</td><td>S. Tetteroo</td><td>in</td></tr></table>`},
+   {t:'Camera bakkerij overkant',h:`<p>23:15 · een man zet een zwarte fiets met een rode krat tegen de lantaarnpaal in de steeg en loopt weg.</p><p>23:40 · dezelfde man komt terug en loopt de steeg in.</p><p>23:58 · de man fietst snel weg, met een grote tas.</p>`},
+   {t:'Deurbelcamera Annemijn',h:`<p>21:52 · Annemijn komt thuis.</p><p>Daarna gaat de voordeur niet meer open tot 08:10.</p>`}]},
+  {t:'Administratie',ic:'📒',docs:[
+   {t:'Inkoopfactuur wijnhandel',h:`<p>Februari: <b>14 magnumflessen</b> Château Montrésor 1990, à € 1.150 per fles.</p>`},
+   {t:'Veilingsite (printje in Ferres la)',h:`<p>“Te koop: magnum Château Montrésor 1990, perfect bewaard. € 1.400.” Verkoper: <b>“L.Schaap”</b>. Al 8 keer verkocht sinds februari.</p><p class="tv-hand">Dit zijn ONZE flessen! — F.</p>`},
+   {t:'Taxibon en cafébon',h:`<p>Taxi · 22:52 · Lindengracht → Centraal Station · O. Brinkerink.</p><p>Café De Kater · bon 01:02 · 6 × bier, 1 × tosti · betaald door Y. Dorresteijn.</p>`}]}],
+ victim:'Ferre Hoogwerf</b> (52), chef-kok en eigenaar van De Vergulde Lepel',
+ envelope:{t:'Envelop B · bankafschrift',when:'Open pas als jullie alle vier de verhoren gehoord hebben.',h:`<p class="tv-mono">BANKAFSCHRIFT · L. SCHAAPVELD · FEBRUARI – MAART</p><table class="tv-t"><tr><th>Datum</th><th>Omschrijving</th><th>Bedrag</th></tr><tr><td>12-02</td><td>Veilingsite uitbetaling</td><td>+ € 1.400</td></tr><tr><td>19-02</td><td>Veilingsite uitbetaling</td><td>+ € 2.800</td></tr><tr><td>27-02</td><td>Veilingsite uitbetaling</td><td>+ € 4.200</td></tr><tr><td>03-03</td><td>Slijterij Om de Hoek · 10 pakken rode wijn</td><td>− € 39</td></tr><tr><td>04-03</td><td>Veilingsite uitbetaling</td><td>+ € 2.800</td></tr></table><p class="tv-hand">Waarom koopt een sommelier goedkope pakwijn?</p>`},
+ motives:[['ontslag','Wraak om het ontslag'],['geld','De levensverzekering'],['wijn','Ferre ontdekte de wijndiefstal'],['recensie','Ruzie om de recensie']],motive:'wijn',
+ keys:[['log','Pasjeslog: om 23:41 weer binnen'],['vinger','Vingerafdrukken op de fles'],['sms','Het boze bericht van 22:31'],['verz','De levensverzekering']],key:'log',
+ lies:{yfke:'Vertelt de waarheid. Haar bericht was boos, maar de cafébon en de wifi van De Kater bewijzen dat ze tot na 01:00 in het café zat.',lennert:'Liegt: “Ik ben meteen naar huis gefietst en niet teruggekomen.” Zijn pasje opende om 23:41 de achterdeur en zijn telefoon zat van 23:38 tot 23:57 op de wifi van het restaurant.',annemijn:'Vertelt de waarheid. De deurbelcamera ziet haar om 21:52 thuiskomen en de deur gaat pas om 08:10 weer open.',olof:'Vertelt de waarheid. De taxibon zegt 22:52. Zijn opmerking over de wijn was een belangrijke tip: de fles was nep.'},
+ breaker:'Het pasjeslog van de achterdeur: Lennert klokte om 23:14 uit, maar zijn eigen pasje opende de deur om 23:41, midden in het tijdstip van overlijden.',
+ solTimeline:[['21:47','Ferre mailt Annemijn: hij weet wie de wijn steelt'],['23:14','Lennert klokt uit en zet zijn fiets in de steeg'],['23:38','zijn telefoon zit weer op de wifi van het restaurant'],['23:41','zijn pasje opent de achterdeur'],['± 23:45','Ferre betrapt hem; de klap met de nep-magnum'],['23:56','achterdeur gaat van binnen open'],['23:58','Lennert fietst weg met een tas vol flessen']],
+ answer:'lennert',weapon:'een magnumfles wijn',place:'de keuken',
+ tips:['Leg de verhoren naast de dossiers. Wie zegt iets dat niet klopt met de tijden?','Kijk naar de pasjeslog van de achterdeur en naar de wifi van het restaurant. Wie kwam er na 23:14 nog binnen?','Waarom zou iemand een dure fles stukslaan waar goedkope wijn in zit? Kijk in de administratie wie de flessen verkocht.'],
+ story:`Sommelier Lennert Schaapveld verkocht de dure magnumflessen Château Montrésor 1990 stiekem via een veilingsite. In de wijnkelder zette hij flessen terug met goedkope wijn erin, zodat niemand een leeg vak zag. Ferre ontdekte het en mailde zijn vrouw dat hij maandag naar de politie ging. Na sluitingstijd klokte Lennert om 23:14 uit en liet zijn fiets in de steeg staan. Om 23:41 kwam hij met zijn pasje terug om de laatste echte flessen op te halen. Ferre betrapte hem in de keuken. Lennert sloeg hem met een van de nep-magnums neer en vluchtte om 23:58 met een tas vol flessen.`}];
+
+PP.stove=()=>`${R(-52,-74,104,74,PK.P)}${R(-54,-82,108,9,PK.D)}${R(-40,-58,80,44,PK.K)}${R(-34,-52,68,30,PK.D)}${R(-30,-62,60,3,PK.W)}${[-36,-12,12,36].map(x=>`<circle cx="${x}" cy="-67" r="3.6" fill="${PK.K}"/>`).join('')}<path d="M-34 -86h26M8 -86h26" stroke="${PK.K}" stroke-width="3.4" stroke-linecap="round"/>`;
+PP.shards=()=>`<ellipse cx="0" cy="-3" rx="44" ry="7" fill="#6e1220" opacity=".85"/>${[[-30,-6],[-12,-3],[8,-8],[26,-4],[36,-9]].map(([x,y],i)=>`<path d="M${x} ${y}l${6+i%3*3} -${4+i%2*5}l${3+i} ${7}z" fill="#2f5a34" stroke="#1a3320" stroke-width=".8"/>`).join('')}<path d="M-6 -4q10 -14 22 -6l-4 6z" fill="#2f5a34" stroke="#1a3320"/>`;
+const TVKEY='md-tv';
+let tvd=store.get(TVKEY)||{cases:{}};tvd.cases=tvd.cases||{};
+const saveTv=()=>store.set(TVKEY,tvd);
+const tvS=id=>tvd.cases[id]||(tvd.cases[id]={});
+const tvC=id=>TVCASES.find(c=>c.id===id);
+const tvEsc=t=>String(t||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// rol op de telefoon: via de link (?tv=zaak&r=KAMER&p=1.3) of alleen spelen in de app
+let TVQ=null;try{const u=new URLSearchParams(location.search);if(u.get('tv'))TVQ={id:u.get('tv'),r:(u.get('r')||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,4),p:(u.get('p')||'').split('.').map(Number).filter(n=>n>=1&&n<=4)}}catch(e){}
+let tvPh={tab:'dos',open:null,vote:null,sent:false,online:'',reveal:null,tip:0};
+let tvHost=null,tvStage=null,tvScr='melding',tvBig=null,tvPeerPh=null;
+const TVLIB={peer:['https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js','Peer']};
+const TVLP={};function tvLib(k){const [src,g]=TVLIB[k];if(window[g])return Promise.resolve(window[g]);if(TVLP[k])return TVLP[k];return TVLP[k]=new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.async=true;s.onload=()=>window[g]?res(window[g]):rej();s.onerror=()=>{delete TVLP[k];s.remove();rej()};document.head.appendChild(s)})}
+const tvRoom=()=>Array.from({length:4},()=>'BCDFGHJKLMNPRSTVWXZ'[Math.floor(Math.random()*19)]).join('');
+const tvUid=()=>{let u=store.get('md-tv-uid');if(!u){u=Math.random().toString(36).slice(2,10);store.set('md-tv-uid',u)}return u};
+const tvBase=()=>/github\.io$|^localhost$|^127\./.test(location.hostname)?location.origin+location.pathname:'https://unlucky89lj.github.io/Moorddossier/';
+const tvLink=(C,r,slots)=>`${tvBase()}?tv=${C.id}&r=${r}&p=${slots.join('.')}`;
+// dossiers verdelen over 1 tot 4 spelers
+const TVSPLIT={1:[[1,2,3,4]],2:[[1,3],[2,4]],3:[[1,4],[2],[3]],4:[[1],[2],[3],[4]]};
+const tvMug=(S,w=180,bg)=>S.look?RF({...S.look,alt:S.name,bg}).replace('class="rf"',`class="rf tv-mugsvg" width="${w}"`):`<svg viewBox="-34 -150 68 66" class="tv-mugsvg" width="${w}" aria-hidden="true">${toonBody(S.name)}</svg>`;
+const tvMugshot=(S,i,cls='')=>`<figure class="tv-mug ${cls}"><div class="tv-mugbg">${tvMug(S)}<span class="tv-board">${String(i+1).padStart(2,'0')} · 07-03</span></div><figcaption><b>${S.name}</b><span>${S.role}</span><em>${S.motive||''}</em></figcaption></figure>`;
+const tvStamp=(t,cls='')=>`<span class="tv-stamp ${cls}">${t}</span>`;
+
+// ---------- spraak bij de verhoren ----------
+let tvSay={on:false,i:0,id:null,cb:null};
+function tvVoices(){try{return speechSynthesis.getVoices().filter(v=>/^nl/i.test(v.lang))}catch(e){return []}}
+function tvSpeak(S,i,onLine,onEnd){try{speechSynthesis.cancel()}catch(e){}tvSay={on:true,i,id:S.id};
+ const vs=tvVoices(),fem=vs.filter(v=>/female|vrouw|ellen|claire|colette|fenna|fleur|lotte|sanne/i.test(v.name)),mal=vs.filter(v=>/male|man|xander|maarten|frank|guido|bram/i.test(v.name)&&!/female/i.test(v.name));
+ const step=()=>{if(!tvSay.on||tvSay.id!==S.id)return;if(tvSay.i>=S.v.length){tvSay.on=false;onEnd&&onEnd();return}
+  const [w,t]=S.v[tvSay.i];onLine&&onLine(tvSay.i);
+  let u;try{u=new SpeechSynthesisUtterance(t)}catch(e){tvSay.on=false;onEnd&&onEnd();return}u.lang='nl-NL';
+  if(w==='R'){u.voice=(mal[0]||vs[0])||null;u.pitch=.9;u.rate=1}else{u.voice=(S.f?fem[0]||vs[1]||vs[0]:mal[1]||mal[0]||vs[0])||null;u.pitch=S.voice[0];u.rate=S.voice[1]}
+  u.onend=()=>{tvSay.i++;setTimeout(step,350)};u.onerror=()=>{tvSay.i++;setTimeout(step,200)};
+  try{speechSynthesis.speak(u)}catch(e){tvSay.on=false;onEnd&&onEnd()}};
+ step()}
+function tvStop(){tvSay.on=false;try{speechSynthesis.cancel()}catch(e){}}
+const tvTranscript=(S,cur=-1)=>`<div class="tv-pv"><p class="tv-mono">PROCES-VERBAAL VAN VERHOOR · ${S.name.toUpperCase()} · ${S.role}</p>${S.v.map(([w,t],i)=>`<p class="tv-line ${w==='R'?'r':'s'} ${i===cur?'now':''}" data-ln="${i}"><b>${w==='R'?'Rechercheur':S.name.split(' ')[0]}:</b> ${t}</p>`).join('')}</div>`;
+
+// ---------- QR-code ----------
+function tvQr(el,url){if(!el)return;const q=tvQrSvg(url);el.innerHTML=q||'<span class="tv-qrx">Link te lang voor een QR-code. Gebruik de deelknop.</span>'}
+async function tvShare(url,title){try{if(navigator.share){await navigator.share({title,text:'Doe mee met mijn moordzaak in Moorddossier:',url});return 'gedeeld'}}catch(e){if(e&&e.name==='AbortError')return ''}
+ try{await navigator.clipboard.writeText(url);return 'link gekopieerd'}catch(e){}prompt('Kopieer deze link:',url);return ''}
+
+// ---------- host (de telefoon die naar de tv cast) ----------
+async function tvHostStart(C){const s=tvS(C.id);if(!s.room){s.room=tvRoom();saveTv()}
+ if(tvHost&&tvHost.id===C.id&&tvHost.peer&&!tvHost.peer.destroyed)return;
+ tvHost={id:C.id,conns:[],players:{},votes:s.votes||{},status:'verbinden…'};
+ try{const P=await tvLib('peer');const peer=new P('mdtv-'+s.room.toLowerCase());tvHost.peer=peer;
+  peer.on('open',()=>{tvHost.status='online';tvStageRender()});
+  peer.on('error',e=>{if(e&&e.type==='unavailable-id'){peer.destroy();s.room=tvRoom();saveTv();tvHost=null;tvHostStart(C).then(tvStageRender)}else if(tvHost){tvHost.status='offline';tvStageRender()}});
+  peer.on('connection',c=>{tvHost.conns.push(c);c.on('data',d=>tvOnData(C,c,d));c.on('close',()=>{tvHost.conns=tvHost.conns.filter(x=>x!==c);const p=tvHost.players[c.peer];if(p)p.gone=true;tvStageRender()})});
+ }catch(e){tvHost.status='offline'}tvStageRender()}
+function tvOnData(C,c,d){if(!d||!tvHost)return;const s=tvS(C.id);
+ if(d.t==='hi'){tvHost.players[c.peer]={name:String(d.name||'Speler').slice(0,20),slots:d.slots||[],uid:d.uid};tvSend(c,{t:'state',phase:tvScr,reveal:s.reveal||null,env:!!s.envOpen})}
+ if(d.t==='vote'&&C.suspects.some(x=>x.id===d.s)){tvHost.votes[d.uid||c.peer]={name:String(d.name||'Speler').slice(0,20),s:d.s};s.votes=tvHost.votes;saveTv();tvSend(c,{t:'ok'})}
+ tvStageRender()}
+function tvSend(c,m){try{c.open&&c.send(m)}catch(e){}}
+function tvBroadcast(m){if(tvHost)tvHost.conns.forEach(c=>tvSend(c,m))}
+function tvTally(C){const s=tvS(C.id),n={};C.suspects.forEach(x=>n[x.id]=0);Object.values(tvHost?tvHost.votes:s.votes||{}).forEach(v=>{if(n[v.s]!=null)n[v.s]++});Object.entries(s.manual||{}).forEach(([k,v])=>{if(n[k]!=null)n[k]+=v});return n}
+
+// ---------- het tv-scherm (16:9, past zich aan elk scherm aan) ----------
+function tvOpenStage(C){tvd.cur=C.id;saveTv();tvScr=tvS(C.id).scr||'melding';
+ if(!tvStage){tvStage=document.createElement('div');tvStage.className='tv-ov';tvStage.setAttribute('role','dialog');tvStage.setAttribute('aria-modal','true');tvStage.setAttribute('aria-label','Tv-scherm');document.body.appendChild(tvStage);addEventListener('resize',tvFit)}
+ tvStage.hidden=false;document.body.classList.add('tv-lock');
+ try{const r=document.documentElement;(r.requestFullscreen||r.webkitRequestFullscreen||(()=>{})).call(r);screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape').catch(()=>{})}catch(e){}
+ tvHostStart(C);tvStageRender()}
+function tvCloseStage(){tvStop();if(tvStage)tvStage.hidden=true;document.body.classList.remove('tv-lock');try{if(document.fullscreenElement)document.exitFullscreen();screen.orientation&&screen.orientation.unlock&&screen.orientation.unlock()}catch(e){}renderTv()}
+function tvFit(){if(!tvStage||tvStage.hidden)return;const el=tvStage.querySelector('.tv-16');if(!el)return;const k=Math.min(innerWidth/1600,innerHeight/900);el.style.transform=`translate(-50%,-50%) scale(${k})`;tvStage.classList.toggle('portrait',innerHeight>innerWidth*1.1)}
+const TVSCR=[['melding','Melding'],['pd','Plaats delict'],['verd','Verdachten'],['verh','Verhoren'],['env','Envelop B'],['spel','Spelers'],['stem','Beschuldig']];
+function tvStageRender(){if(!tvStage||tvStage.hidden)return;const C=tvC(tvd.cur);if(!C)return;const s=tvS(C.id);s.scr=tvScr;saveTv();
+ const body=({melding:tvScrMelding,pd:tvScrPd,verd:tvScrVerd,verh:tvScrVerh,env:tvScrEnv,spel:tvScrSpel,stem:tvScrStem,onth:tvScrOnth,opl:tvScrOpl}[tvScr]||tvScrMelding)(C,s);
+ const np=tvHost?Object.values(tvHost.players).filter(p=>!p.gone).length:0;
+ tvStage.innerHTML=`<div class="tv-16"><header class="tv-top"><span class="tv-logo">${PASBADGE}<b>TV-DOSSIER</b><i>Zaak ${C.nr} · ${C.title}</i></span><span class="tv-room">${s.tmode?`<b class="tv-clock ${s.trun?'':'pause'}" id="tvClock">⏱ ${tvClock(s)}</b> · `:''}${s.room?`Kamer <b>${s.room}</b>`:''} · ${np} ${np===1?'telefoon':'telefoons'} · <i class="${tvHost&&tvHost.status==='online'?'on':''}">${tvHost?tvHost.status:''}</i></span></header>
+  <main class="tv-main">${body}</main>
+  <nav class="tv-nav">${TVSCR.map(([k,n])=>`<button type="button" data-scr="${k}" aria-pressed="${tvScr===k}">${n}</button>`).join('')}<button type="button" class="tv-x" data-scr="x">✕ Sluit</button></nav></div><p class="tv-rot">Draai je telefoon dwars voor het tv-beeld 📱↻</p>`;
+ tvStage.querySelectorAll('[data-scr]').forEach(b=>b.onclick=()=>{const k=b.dataset.scr;tvStop();tvBig=null;if(k==='x')return tvCloseStage();tvScr=k;tvBroadcast({t:'state',phase:k,reveal:tvS(C.id).reveal||null});tvStageRender()});
+ tvWire(C,s);tvFit();tvTickStart()}
+function tvScrMelding(C,s){return `<div class="tv-desk"><article class="tv-paper tv-rot1">${tvStamp('POLITIE · VERTROUWELIJK')}${C.melding}<span class="tv-clip"></span></article>
+ <aside class="tv-paper tv-strip tv-rot2"><h3>Tijdlijn</h3><ol class="tv-tl">${C.timeline.map(([t,w])=>`<li><b>${t}</b><span>${w}</span></li>`).join('')}</ol><p class="tv-hand">Wie was er tussen 23:20 en 00:00 in het restaurant?</p><div class="tv-chal"><b>Uitdaging</b>${[[0,'Geen timer'],[60,'1 uur'],[120,'2 uur']].map(([m,n])=>`<button type="button" data-tm="${m}" aria-pressed="${(s.tmode||0)===m}">${n}</button>`).join('')}${s.tmode?`<button type="button" id="tvPause">${s.trun?'⏸ Pauze':'▶ Verder'}</button>`:''}</div></aside></div>`}
+function tvScrPd(C){if(tvBig!=null){const i=tvBig;return `<div class="tv-zoom">${polaroid(C.photos[i][0],C.photos[i][1],'tv-pz')}<div class="tv-paper tv-note"><h3>Foto ${i+1}</h3><p>${C.photoNotes[i]}</p><button type="button" class="tv-btn" data-big="-1">← Terug naar het bord</button></div></div>`}
+ return `<div class="tv-cork"><svg class="tv-string" viewBox="0 0 1500 640" preserveAspectRatio="none" aria-hidden="true"><path d="M190 120L560 90L940 130L1310 100" stroke="#b3241b" stroke-width="3" fill="none"/></svg>${C.photos.map((p,i)=>`<button type="button" class="tv-pin" data-big="${i}" style="--r:${[-3,2,-1.5,3][i]}deg">${polaroid(p[0],p[1])}<i class="tv-tack"></i></button>`).join('')}<p class="tv-hand tv-corkhint">Tik op een foto om hem groot te zien</p></div>`}
+function tvScrVerd(C){return `<div class="tv-mugs">${C.suspects.map((S,i)=>tvMugshot(S,i)).join('')}</div><p class="tv-sub">Slachtoffer: <b>Ferre Hoogwerf</b> (52), chef-kok en eigenaar van De Vergulde Lepel.</p>`.replace('Ferre Hoogwerf</b> (52), chef-kok en eigenaar van De Vergulde Lepel',C.victim||'Ferre Hoogwerf</b> (52), chef-kok en eigenaar van De Vergulde Lepel')}
+function tvScrVerh(C,s){const S=C.suspects.find(x=>x.id===tvBig);
+ if(S)return `<div class="tv-room2"><div class="tv-cam">${tvMug(S,420,'#4a4e4b')}<span class="tv-rec">● REC</span><span class="tv-ts">VERHOORKAMER 2 · 07-03 · 09:${String(10+C.suspects.indexOf(S)*14).padStart(2,'0')}</span></div><div class="tv-paper tv-pvbox" id="tvPv">${tvTranscript(S,tvSay.on&&tvSay.id===S.id?tvSay.i:-1)}</div></div>
+  <div class="tv-row"><button type="button" class="tv-btn" data-big="">← Alle verhoren</button><button type="button" class="tv-btn primary" id="tvPlay">${tvSay.on&&tvSay.id===S.id?'⏸ Stop':'▶ Speel het verhoor af'}</button></div>`;
+ return `<div class="tv-tapes">${C.suspects.map((S,i)=>`<button type="button" class="tv-tape" data-big="${S.id}">${tvMug(S,120)}<span><b>Verhoor ${i+1}</b>${S.name}<small>${S.role}</small></span><i>▶</i></button>`).join('')}</div><p class="tv-sub">Speel een verhoor af op de tv, of luister op je eigen telefoon via je QR-code of link.</p>`}
+function tvScrSpel(C,s){const n=s.np||4,sp=TVSPLIT[n];
+ return `<div class="tv-spel"><div class="tv-np">Aantal spelers ${[1,2,3,4].map(k=>`<button type="button" data-np="${k}" aria-pressed="${k===n}">${k}</button>`).join('')}</div>
+ <div class="tv-qrs n${n}">${sp.map((sl,i)=>`<div class="tv-qrc"><h3>Speler ${i+1}</h3><div class="tv-qr" data-qr="${i}"></div><p>${sl.map(k=>`${C.secret[k-1].ic} ${C.secret[k-1].t}`).join('<br>')}</p><button type="button" class="tv-btn small" data-share="${i}">🔗 Stuur link</button></div>`).join('')}</div>
+ <p class="tv-sub">Scan met de camera van je telefoon. Speel je met vrienden op afstand? Stuur ze de link. Iedereen ziet dan ook de melding, de foto’s en de verhoren.</p>
+ <div class="tv-who">${tvHost&&Object.values(tvHost.players).length?Object.values(tvHost.players).map(p=>`<span class="${p.gone?'gone':''}">📱 ${tvEsc(p.name)}</span>`).join(''):tvHost&&tvHost.status==='offline'?'<span>Geen live verbinding. Jullie kunnen wel scannen en lezen; de stemmen tel je straks met de hand.</span>':'<span>Nog niemand verbonden…</span>'}</div></div>`}
+function tvScrStem(C,s){const n=tvTally(C),tot=Object.values(n).reduce((a,b)=>a+b,0),max=Math.max(1,...Object.values(n));
+ return `<h2 class="tv-h2">Wie, waarom en met welk bewijs?</h2><div class="tv-votes">${C.suspects.map((S,i)=>`<div class="tv-vote">${tvMug(S,130)}<b>${S.name}</b><div class="tv-bar"><i style="width:${n[S.id]/max*100}%"></i></div><span class="tv-cnt">${n[S.id]}</span><span class="tv-pm"><button type="button" data-man="${S.id}" data-d="-1" aria-label="Stem eraf">−</button><button type="button" data-man="${S.id}" data-d="1" aria-label="Stem erbij">+</button></span></div>`).join('')}</div>
+ <p class="tv-sub">${tot} ${tot===1?'stem':'stemmen'}. Stem op je telefoon, of tel met + en − als iemand hardop stemt.</p><div class="tv-acc"><div><b>Waarom?</b>${C.motives.map(([k,n])=>`<button type="button" data-mot="${k}" aria-pressed="${s.mot===k}">${n}</button>`).join('')}</div><div><b>Welk bewijs is doorslaggevend?</b>${C.keys.map(([k,n])=>`<button type="button" data-key="${k}" aria-pressed="${s.key===k}">${n}</button>`).join('')}</div></div>
+ <div class="tv-row">${(s.tipN||0)<C.tips.length?`<button type="button" class="tv-btn" id="tvTip">💡 Tip ${(s.tipN||0)+1}</button>`:''}<button type="button" class="tv-btn" id="tvClr">Stemmen wissen</button><button type="button" class="tv-btn primary" id="tvRev" ${tot?'':'disabled'}>🔒 Onthul de dader</button></div>${s.tipN?`<ol class="tv-tips">${C.tips.slice(0,s.tipN).map(t=>`<li>${t}</li>`).join('')}</ol>`:''}`}
+function tvScrOnth(C,s){const R=s.reveal;if(!R)return tvScrStem(C,s);const S=C.suspects.find(x=>x.id===R.pick),ok=R.pick===C.answer;
+ return `<div class="tv-onth ${ok?'ok':'no'}">${tvMugshot(S,C.suspects.indexOf(S),'big')}<div class="tv-paper"><p class="tv-mono">UITSPRAAK VAN HET TEAM</p><h2>${S.name}</h2>${tvStamp(ok?'DADER · OPGELOST':'ONSCHULDIG',ok?'green':'')}<p>${ok?'Goed gedaan, rechercheurs! Het bewijs klopt.':'Dat klopt niet. Het bewijs wijst naar iemand anders.'}</p>
+ <div class="tv-row">${ok?`<p class="tv-score">${'★'.repeat(tvStars(C,R))}${'☆'.repeat(3-tvStars(C,R))} <small>dader ✓ · motief${R.mot===C.motive?' ✓':' ✗'} · bewijs${R.key===C.key?' ✓':' ✗'}</small></p><button type="button" class="tv-btn primary" id="tvOpl">📜 De volledige oplossing</button>`:`<button type="button" class="tv-btn" id="tvAgain">↺ Nog eens overleggen</button><button type="button" class="tv-btn primary" id="tvGive">Toon de oplossing</button>`}</div></div></div>`}
+function tvClock(s){const used=(s.tacc||0)+(s.trun?Date.now()-s.tstart:0),left=Math.max(0,s.tmode*6e4-used),h=Math.floor(left/36e5),m=Math.floor(left/6e4)%60,x=Math.floor(left/1e3)%60;return `${h}:${String(m).padStart(2,'0')}:${String(x).padStart(2,'0')}`}
+let tvTick=null;function tvTickStart(){clearInterval(tvTick);tvTick=setInterval(()=>{if(!tvStage||tvStage.hidden)return clearInterval(tvTick);const C=tvC(tvd.cur),s=C&&tvS(C.id),el=tvStage.querySelector('#tvClock');if(!s||!s.tmode||!el)return;el.textContent='⏱ '+tvClock(s);if(s.trun&&tvClock(s)==='0:00:00'){el.classList.add('out');el.textContent='⏱ Tijd is om!'}},1000)}
+function tvScrEnv(C,s){const E=C.envelope;if(!s.envOpen)return `<div class="tv-env"><div class="tv-envelope"><span class="tv-seal">B</span><b>${E.t.split('·')[0]}</b><i>${E.when}</i></div><button type="button" class="tv-btn primary" id="tvEnv">Verbreek het zegel</button></div>`;
+ return `<div class="tv-desk one"><article class="tv-paper tv-rot1">${tvStamp('NIEUW BEWIJS')}<h3>${E.t}</h3>${E.h}</article></div>`}
+function tvScrOpl(C,s){const R=s.reveal||{},st=tvStars(C,R);return `<div class="tv-opl"><article class="tv-paper"><p class="tv-mono">OPLOSSING · ZAAK ${C.nr}</p><h3>Zo is het gebeurd</h3><p>${C.story}</p><h4>Wat het alibi brak</h4><p class="tv-hand">${C.breaker}</p></article>
+ <article class="tv-paper"><h4>Wie loog er?</h4>${C.suspects.map(S=>`<p class="tv-lie ${S.id===C.answer?'liar':''}"><b>${S.name}</b> ${C.lies[S.id]}</p>`).join('')}</article>
+ <article class="tv-paper"><h4>De echte tijdlijn</h4><ol class="tv-tl">${C.solTimeline.map(([t,w])=>`<li><b>${t}</b><span>${w}</span></li>`).join('')}</ol>${R.pick?`<p class="tv-score">${'★'.repeat(st)}${'☆'.repeat(3-st)} <small>dader · motief · bewijs</small></p>`:''}<button type="button" class="tv-btn primary" id="tvFilm">🎬 Bekijk het filmpje</button></article></div>`}
+const tvStars=(C,R)=>(R.pick===C.answer)+(R.mot===C.motive)+(R.key===C.key);
+function tvWire(C,s){const q=sel=>tvStage.querySelectorAll(sel),one=id=>tvStage.querySelector('#'+id);
+ q('[data-big]').forEach(b=>b.onclick=()=>{tvStop();const v=b.dataset.big;tvBig=v===''||v==='-1'?null:(/^\d+$/.test(v)?+v:v);tvStageRender()});
+ const pl=one('tvPlay');if(pl){const S=C.suspects.find(x=>x.id===tvBig);pl.onclick=()=>{if(tvSay.on&&tvSay.id===S.id){tvStop();tvStageRender();return}
+  tvSpeak(S,0,i=>{const box=one('tvPv');if(!box)return;box.querySelectorAll('.tv-line').forEach(l=>l.classList.toggle('now',+l.dataset.ln===i));const l=box.querySelector('.now');if(l)l.scrollIntoView({block:'center',behavior:'smooth'})},()=>tvStageRender());pl.textContent='⏸ Stop'}}
+ q('[data-np]').forEach(b=>b.onclick=()=>{s.np=+b.dataset.np;saveTv();tvStageRender()});
+ const sp=TVSPLIT[s.np||4];q('[data-qr]').forEach(el=>tvQr(el,tvLink(C,s.room,sp[+el.dataset.qr])));
+ q('[data-share]').forEach(b=>b.onclick=async()=>{const r=await tvShare(tvLink(C,s.room,sp[+b.dataset.share]),`Moorddossier · ${C.title}`);if(r)b.textContent='✓ '+r});
+ q('[data-man]').forEach(b=>b.onclick=()=>{s.manual=s.manual||{};const k=b.dataset.man,n=tvTally(C)[k],d=+b.dataset.d;if(d<0&&n<=0)return;s.manual[k]=(s.manual[k]||0)+d;saveTv();tvStageRender()});
+ q('[data-mot]').forEach(b=>b.onclick=()=>{s.mot=b.dataset.mot;saveTv();tvStageRender()});q('[data-key]').forEach(b=>b.onclick=()=>{s.key=b.dataset.key;saveTv();tvStageRender()});
+ q('[data-tm]').forEach(b=>b.onclick=()=>{s.tmode=+b.dataset.tm;s.tacc=0;s.tstart=Date.now();s.trun=!!s.tmode;saveTv();tvStageRender()});
+ const pa=one('tvPause');if(pa)pa.onclick=()=>{if(s.trun){s.tacc=(s.tacc||0)+Date.now()-s.tstart;s.trun=false}else{s.tstart=Date.now();s.trun=true}saveTv();tvStageRender()};
+ const en=one('tvEnv');if(en)en.onclick=()=>{s.envOpen=true;saveTv();tvBroadcast({t:'env'});tvStageRender()};
+ const op=one('tvOpl');if(op)op.onclick=()=>{tvScr='opl';tvStageRender()};
+ const tp=one('tvTip');if(tp)tp.onclick=()=>{s.tipN=(s.tipN||0)+1;saveTv();tvStageRender()};
+ const cl=one('tvClr');if(cl)cl.onclick=()=>{s.manual={};s.votes={};if(tvHost)tvHost.votes={};saveTv();tvBroadcast({t:'state',phase:'stem',reveal:null,clear:true});tvStageRender()};
+ const rv=one('tvRev');if(rv)rv.onclick=()=>{const n=tvTally(C),best=Object.entries(n).sort((a,b)=>b[1]-a[1]),top=best.filter(x=>x[1]===best[0][1]);
+  if(top.length>1){rv.textContent='Gelijkspel! Overleg nog even.';return}if(!s.mot||!s.key){rv.textContent='Kies eerst het motief en het bewijs';return}s.reveal={pick:best[0][0],mot:s.mot,key:s.key};if(s.trun){s.tacc=(s.tacc||0)+Date.now()-s.tstart;s.trun=false}tvFinish(C,s,best[0][0]===C.answer);tvScr='onth';tvBroadcast({t:'state',phase:'onth',reveal:s.reveal});tvStageRender()};
+ const ag=one('tvAgain');if(ag)ag.onclick=()=>{s.reveal=null;s.manual={};s.votes={};s.done=false;if(tvHost)tvHost.votes={};saveTv();tvScr='stem';tvBroadcast({t:'state',phase:'stem',reveal:null,clear:true});tvStageRender()};
+ const gv=one('tvGive');if(gv)gv.onclick=()=>{tvFinish(C,s,false);tvScr='opl';tvStageRender()};
+ const fl=one('tvFilm');if(fl)fl.onclick=()=>{tvCloseStage();endFilm('tv',C.id)}}
+function tvFinish(C,s,ok){if(s.done&&s.won)return;s.done=true;s.won=ok;s.tries=(s.tries||0)+1;if(ok&&s.reveal)s.stars=Math.max(s.stars||0,tvStars(C,s.reveal));saveTv()}
+
+// ---------- telefoon van de speler (en alleen spelen) ----------
+function tvPhoneJoin(C){if(!TVQ||!TVQ.r||tvPeerPh)return;tvPh.online='verbinden…';tvPeerPh={};
+ tvLib('peer').then(P=>{const peer=new P();tvPeerPh.peer=peer;const to=setTimeout(()=>{if(tvPh.online!=='online'){tvPh.online='offline';renderTv()}},9000);
+  peer.on('open',()=>{const c=peer.connect('mdtv-'+TVQ.r.toLowerCase(),{reliable:true});tvPeerPh.c=c;
+   c.on('open',()=>{clearTimeout(to);tvPh.online='online';c.send({t:'hi',uid:tvUid(),name:tvName(),slots:TVQ.p});renderTv()});
+   c.on('data',d=>{if(!d)return;if(d.t==='ok'){tvPh.sent=true;renderTv()}if(d.t==='env'){tvPh.env=true;renderTv()}if(d.t==='state'){if(d.env)tvPh.env=true;if(d.clear){tvPh.sent=false;tvPh.vote=null}tvPh.reveal=d.reveal||null;if(d.reveal)tvPh.tab='stem';renderTv()}});
+   c.on('close',()=>{tvPh.online='offline';renderTv()})});
+  peer.on('error',()=>{clearTimeout(to);tvPh.online='offline';renderTv()})}).catch(()=>{tvPh.online='offline';renderTv()})}
+const tvName=()=>{const n=store.get('md-tv-name');if(n)return n;const ps=store.get(PASKEY)||{};return (ps.name||'').trim()||'Rechercheur'};
+function tvPhone(C,solo){const P=$('pTv'),slots=solo?[1,2,3,4]:TVQ.p.length?TVQ.p:[1,2,3,4],s=tvS(C.id);
+ const tabs=[['dos','📁 Mijn dossier'],['verh','🎧 Verhoren'],['zaak','🗂 De zaak'],['stem','🗳 Stem']];
+ let body='';
+ if(tvPh.tab==='dos')body=`<p class="hint">${solo?'Je speelt alleen: je hebt alle vier de dossiers.':'Dit dossier is alleen voor jou. Lees het goed en vertel de anderen wat je ziet. Laat je telefoon niet zomaar zien!'}</p>${slots.map(k=>{const D=C.secret[k-1];return `<details class="tv-fold" ${slots.length===1?'open':''}><summary><span class="tv-tab">${D.ic} ${D.t}</span><small>${D.docs.length} stukken</small></summary>${D.docs.map(d=>`<article class="tv-paper tv-doc">${tvStamp('VERTROUWELIJK')}<h4>${d.t}</h4>${d.h}</article>`).join('')}</details>`}).join('')}`;
+ if(tvPh.tab==='verh'){const S=C.suspects.find(x=>x.id===tvPh.open);
+  body=S?`<button type="button" class="btn small backbtn" data-tvo="">← Alle verhoren</button><div class="tv-phcam">${tvMug(S,150)}<span><b>${S.name}</b>${S.role}</span></div><button type="button" class="btn primary" id="tvPPlay">${tvSay.on&&tvSay.id===S.id?'⏸ Stop':'▶ Luister het verhoor'}</button><div class="tv-paper tv-pvbox ph" id="tvPv">${tvTranscript(S,tvSay.on&&tvSay.id===S.id?tvSay.i:-1)}</div>`
+  :`<p class="hint">Luister de verhoren met geluid aan, of lees mee. Eén van hen liegt.</p><div class="tv-tapes ph">${C.suspects.map((S,i)=>`<button type="button" class="tv-tape" data-tvo="${S.id}">${tvMug(S,70)}<span><b>Verhoor ${i+1}</b>${S.name}<small>${S.role}</small></span><i>▶</i></button>`).join('')}</div>`}
+ if(tvPh.tab==='zaak')body=`<article class="tv-paper tv-doc">${tvStamp('POLITIE')}${C.melding}</article><article class="tv-paper tv-doc"><h4>Tijdlijn</h4><ol class="tv-tl">${C.timeline.map(([t,w])=>`<li><b>${t}</b><span>${w}</span></li>`).join('')}</ol></article>
+  ${(solo?s.envOpen:tvPh.env)?`<article class="tv-paper tv-doc">${tvStamp('NIEUW BEWIJS')}<h4>${C.envelope.t}</h4>${C.envelope.h}</article>`:`<div class="tv-envelope ph"><span class="tv-seal">B</span><b>Envelop B</b><i>${C.envelope.when}</i>${solo?`<button type="button" class="btn small" id="tvSEnv">Verbreek het zegel</button>`:'<small>De host opent hem op de tv.</small>'}</div>`}<h3 class="tv-ph3">Plaats delict</h3>${C.photos.map((p,i)=>`${polaroid(p[0],p[1])}<p class="tv-hand tv-pn">${C.photoNotes[i]}</p>`).join('')}<h3 class="tv-ph3">Verdachten</h3><div class="tv-mugs ph">${C.suspects.map((S,i)=>tvMugshot(S,i)).join('')}</div>`;
+ if(tvPh.tab==='stem'&&tvPh.opl&&solo){const R2=s.reveal||{};body=`<button type="button" class="btn small backbtn" id="tvOplX">← Terug</button><article class="tv-paper tv-doc"><p class="tv-mono">OPLOSSING</p><h4>Zo is het gebeurd</h4><p>${C.story}</p><h4>Wat het alibi brak</h4><p class="tv-hand">${C.breaker}</p></article><article class="tv-paper tv-doc"><h4>Wie loog er?</h4>${C.suspects.map(S=>`<p class="tv-lie ${S.id===C.answer?'liar':''}"><b>${S.name}</b> ${C.lies[S.id]}</p>`).join('')}</article><article class="tv-paper tv-doc"><h4>De echte tijdlijn</h4><ol class="tv-tl">${C.solTimeline.map(([t,w])=>`<li><b>${t}</b><span>${w}</span></li>`).join('')}</ol></article><button type="button" class="btn primary" id="tvSFilm">🎬 Bekijk het filmpje</button>`}
+ else if(tvPh.tab==='stem'){const R=solo?(s.reveal||null):tvPh.reveal;
+  if(R){const S=C.suspects.find(x=>x.id===R.pick),ok=R.pick===C.answer;body=`<div class="tv-paper tv-doc tv-res ${ok?'ok':''}"><p class="tv-mono">UITSPRAAK</p><h3>${S.name}</h3>${tvStamp(ok?'DADER · OPGELOST':'ONSCHULDIG',ok?'green':'')}<p>${ok?'Goed gedaan, rechercheur!':'Dat klopt niet. Het bewijs wijst naar iemand anders.'}</p>${solo?(ok?`<p class="tv-score">${'★'.repeat(tvStars(C,R))}${'☆'.repeat(3-tvStars(C,R))} <small>dader ✓ · motief ${R.mot===C.motive?'✓':'✗'} · bewijs ${R.key===C.key?'✓':'✗'}</small></p><button type="button" class="btn primary" id="tvSOpl">📜 De volledige oplossing</button>`:`<button type="button" class="btn" id="tvSAgain">↺ Nog eens proberen</button> <button type="button" class="btn" id="tvSGive">Toon de oplossing</button>`):''}</div>`}
+  else body=`<p class="hint">${solo?'Weet je het zeker? Je mag één keer kiezen; daarna kun je opnieuw proberen.':'Kies wie het volgens jou gedaan heeft. Je stem gaat naar het tv-scherm.'}</p>${solo?'':`<label class="tv-nm">Jouw naam <input id="tvNm" maxlength="20" value="${tvEsc(tvName())}"></label>`}
+  <div class="tv-vgrid">${C.suspects.map(S=>`<button type="button" class="tv-vb" data-tvv="${S.id}" aria-pressed="${tvPh.vote===S.id}">${tvMug(S,90)}<b>${S.name}</b><small>${S.role}</small></button>`).join('')}</div>
+  ${solo?`<h3 class="tv-ph3">Waarom?</h3><div class="tv-acc ph">${C.motives.map(([k,n])=>`<button type="button" data-tvm="${k}" aria-pressed="${tvPh.mot===k}">${n}</button>`).join('')}</div><h3 class="tv-ph3">Doorslaggevend bewijs</h3><div class="tv-acc ph">${C.keys.map(([k,n])=>`<button type="button" data-tvk="${k}" aria-pressed="${tvPh.key===k}">${n}</button>`).join('')}</div>`:''}<button type="button" class="btn primary" id="tvSend" ${tvPh.vote&&(!solo||tvPh.mot&&tvPh.key)?'':'disabled'}>${solo?'🔒 Dit is de dader':tvPh.sent?'✓ Verstuurd · opnieuw sturen':'Verstuur mijn stem'}</button>
+  ${solo?`${(tvPh.tip||0)<C.tips.length?`<button type="button" class="btn small" id="tvPTip">💡 Tip ${(tvPh.tip||0)+1}</button>`:''}${tvPh.tip?`<ol class="tv-tips ph">${C.tips.slice(0,tvPh.tip).map(t=>`<li>${t}</li>`).join('')}</ol>`:''}`:`<p class="hint">${tvPh.online==='online'?'✅ Verbonden met het tv-scherm.':tvPh.online==='offline'?'Geen verbinding met het tv-scherm. Zeg je stem hardop; de host telt hem mee. <button type="button" class="btn small" id="tvRetry">Opnieuw verbinden</button>':'Verbinden met het tv-scherm…'}</p>`}`}
+ P.innerHTML=`${solo?'<button class="btn small backbtn" id="tvBack" type="button">← Terug</button>':''}<div class="storyhead"><span class="kicker">Tv-dossier · zaak ${C.nr}${solo?' · alleen':TVQ&&TVQ.r?` · kamer ${TVQ.r}`:''}</span><h3>${C.title}</h3></div>
+  <div class="tv-ptabs" role="tablist">${tabs.map(([k,n])=>`<button type="button" role="tab" data-tvt="${k}" aria-selected="${tvPh.tab===k}">${n}</button>`).join('')}</div><div class="tv-pbody">${body}</div>`;
+ const on=(id,f)=>{const e=$(id);if(e)e.onclick=f};
+ on('tvBack',()=>{tvStop();tvPh.solo=false;renderTv()});
+ P.querySelectorAll('[data-tvt]').forEach(b=>b.onclick=()=>{tvStop();tvPh.tab=b.dataset.tvt;renderTv();window.scrollTo({top:0})});
+ P.querySelectorAll('[data-tvo]').forEach(b=>b.onclick=()=>{tvStop();tvPh.open=b.dataset.tvo||null;renderTv()});
+ on('tvPPlay',()=>{const S=C.suspects.find(x=>x.id===tvPh.open);if(tvSay.on&&tvSay.id===S.id){tvStop();renderTv();return}
+  tvSpeak(S,0,i=>{const box=$('tvPv');if(!box)return;box.querySelectorAll('.tv-line').forEach(l=>l.classList.toggle('now',+l.dataset.ln===i));const l=box.querySelector('.now');if(l)l.scrollIntoView({block:'center',behavior:'smooth'})},()=>renderTv());$('tvPPlay').textContent='⏸ Stop'});
+ P.querySelectorAll('[data-tvv]').forEach(b=>b.onclick=()=>{tvPh.vote=b.dataset.tvv;tvPh.sent=false;renderTv()});
+ const nm=$('tvNm');if(nm)nm.onchange=()=>store.set('md-tv-name',nm.value.trim().slice(0,20));
+ on('tvSend',()=>{if(!tvPh.vote)return;if(solo){if(!tvPh.mot||!tvPh.key)return;s.reveal={pick:tvPh.vote,mot:tvPh.mot,key:tvPh.key};tvFinish(C,s,tvPh.vote===C.answer);renderTv();return}
+  const c=tvPeerPh&&tvPeerPh.c;if(c&&c.open){c.send({t:'vote',uid:tvUid(),name:tvName(),s:tvPh.vote})}else{tvPh.online='offline';renderTv()}});
+ on('tvSEnv',()=>{s.envOpen=true;saveTv();renderTv()});
+ P.querySelectorAll('[data-tvm]').forEach(b=>b.onclick=()=>{tvPh.mot=b.dataset.tvm;renderTv()});P.querySelectorAll('[data-tvk]').forEach(b=>b.onclick=()=>{tvPh.key=b.dataset.tvk;renderTv()});
+ on('tvSOpl',()=>{tvPh.opl=true;renderTv()});
+ on('tvOplX',()=>{tvPh.opl=false;renderTv()});
+ on('tvRetry',()=>{try{tvPeerPh&&tvPeerPh.peer&&tvPeerPh.peer.destroy()}catch(e){}tvPeerPh=null;renderTv()});
+ on('tvPTip',()=>{tvPh.tip=(tvPh.tip||0)+1;renderTv()});
+ on('tvSFilm',()=>endFilm('tv',C.id));on('tvSGive',()=>{tvFinish(C,s,false);tvPh.opl=true;renderTv()});
+ on('tvSAgain',()=>{s.reveal=null;s.done=false;saveTv();tvPh.vote=null;renderTv()})}
+
+// ---------- het spel in de app ----------
+function renderTv(){const P=$('pTv');if(!P)return;
+ if(TVQ){const C=tvC(TVQ.id);if(!C){P.innerHTML=`<p class="lead">Deze zaak bestaat niet (meer). Vraag de host om een nieuwe link.</p>`;return}tvPhoneJoin(C);return tvPhone(C,false)}
+ const C=tvC(tvd.cur);
+ if(C&&tvPh.solo)return tvPhone(C,true);
+ if(!C){P.innerHTML=`<h2 class="bigtitle" style="font-size:clamp(34px,10vw,64px)">Tv-dossier</h2>${PENCIL}<p class="lead">Een groot, echt aanvoelend moordonderzoek voor op de tv. Cast je telefoon naar de tv, deel de geheime dossiers uit met QR-codes en stem samen op de dader. Je kunt ook alleen spelen, of vrienden op afstand meedoen met een link.</p>
+  <div class="tv-list">${TVCASES.map(c=>{const s=tvS(c.id);return `<button type="button" class="tv-card" data-tvc="${c.id}"><span class="tv-cfold"><i>ZAAK ${c.nr}</i>${s.done?tvStamp(s.won?'OPGELOST':'GESLOTEN',s.won?'green':''):''}</span><b>${c.title}</b><span>${c.blurb}</span><small>${c.players} · ${c.time} · ${c.level}</small></button>`}).join('')}</div>`;
+  P.querySelectorAll('[data-tvc]').forEach(b=>b.onclick=()=>{tvd.cur=b.dataset.tvc;saveTv();renderTv();window.scrollTo({top:0})});return}
+ const s=tvS(C.id);
+ P.innerHTML=`<button class="btn small backbtn" id="tvList" type="button">← Alle zaken</button><div class="storyhead"><span class="kicker">Zaak ${C.nr} · ${C.level}</span><h3>${C.title}</h3>${filmBtn('tv',C.id)}${s.done?endBtn('tv',C.id):''}</div>
+  <div class="tv-cover">${polaroid(C.photos[0][0],C.photos[0][1])}<p>${C.blurb}</p><small>${C.players} · ${C.time}</small></div>
+  <div class="tv-modes"><button type="button" class="tv-mode" id="tvGoTv"><b>📺 Speel op de tv</b><span>Cast je telefoon naar de tv. Vrienden scannen een QR-code of krijgen een link.</span></button>
+  <button type="button" class="tv-mode" id="tvGoSolo"><b>🕵️ Alleen spelen</b><span>Je krijgt alle dossiers en verhoren op je telefoon.</span></button></div>
+  <details class="tv-how"><summary>Hoe cast ik naar de tv?</summary><ol><li><b>Android + Chromecast of smart-tv:</b> veeg vanaf boven naar beneden en tik op <b>Scherm casten</b> (of: Google Home → je tv → Scherm casten).</li><li><b>iPhone + Apple TV of AirPlay-tv:</b> open het Bedieningspaneel en tik op <b>Synchrone weergave</b>.</li><li>Tik daarna op <b>Speel op de tv</b> en draai je telefoon dwars.</li><li>Geen tv? Het werkt ook op een laptop of tablet: open de app daar en tik op Speel op de tv.</li></ol></details>
+  ${s.done?`<button type="button" class="btn small" id="tvReset">↺ Zaak opnieuw spelen</button>`:''}`;
+ $('tvList').onclick=()=>{tvd.cur=null;saveTv();renderTv()};
+ $('tvGoTv').onclick=()=>{const go=()=>tvOpenStage(C);if(!filmSeen('tv',C.id))storyFilm('tv',C.id,go);else go()};
+ $('tvGoSolo').onclick=()=>{const go=()=>{tvPh={tab:'dos',open:null,vote:null,sent:false,online:'',reveal:null,tip:0,solo:true};renderTv();window.scrollTo({top:0})};if(!filmSeen('tv',C.id))storyFilm('tv',C.id,go);else go()};
+ const rs=$('tvReset');if(rs)rs.onclick=()=>{const keep=tvS(C.id);tvd.cases[C.id]={room:keep.room,np:keep.np,best:keep.won||keep.best||false};saveTv();renderTv()};
+ const fb=P.querySelector('.filmbtn');}
+
+SCR.tv={
+ lepel:[['t','Het laatste gerecht','gerecht','Tv-dossier · zaak 01'],['s','Restaurant De Vergulde Lepel',['night',['cafe',150,178,1.1,'DE VERGULDE LEPEL'],['moon',250,40,1]],'Zaterdagavond. Het restaurant aan de Lindengracht is net dicht.'],['s','De keuken · 00:41',['wall',['stove',120,182,1.25],['shards',212,186,1.1],['marker',262,190,1,1]],'De schoonmaker vindt chef-kok Ferre Hoogwerf naast het fornuis.'],['s','Vier mensen',['dark',['bottle',150,160,1.3]],'Een sous-chef, een sommelier, zijn vrouw en een criticus. Eén van hen liegt.'],['e','Wie sloeg de chef neer?','Start het onderzoek']]};
+SCREND.tv={
+ lepel:[['t','Zo is het gebeurd','gebeurd','Het laatste gerecht'],['s','De wijnkelder',['dark',['shelf',150,178,1.1],['bottle',112,122,.7],['bottle',188,122,.7]],'Lennert verkocht de dure flessen en vulde ze bij met goedkope pakwijn.'],['s','De achterdeur · 23:41',['night',['door',130,182,1.1],['bike',228,182,.7]],'Na het uitklokken kwam hij met zijn pasje terug voor de laatste echte flessen.'],['s','De keuken',['wall',['stove',90,182,1.2],['bottle',210,176,1]],'Ferre betrapte hem. Lennert sloeg toe met een nep-magnum.',{hit:'metaal',act:'strike',x:150}],['x','Lennert Schaapveld','een magnumfles wijn','de keuken']]};
+
 function endOk(game,id){try{if(game==='koud'){const c=COLD.find(x=>x.id===id),s=kd.cases[id];return !s||!s.acc||s.acc.d===c.answer.dader}
   if(game==='bericht'){const c=BCASES.find(x=>x.id===id),s=bd.cases[id];return !s||!s.acc||s.acc.d===c.answer.dader}
   if(game==='stad')return true;
+  if(game==='tv'){const s=tvd.cases[id];return !s||!s.done||s.won!==false}
   if(game==='tijdlijn'){const c=TLCASES.find(x=>x.id===id),s=tld.cases[id];return !s||!s.done||c.qs.every((q,i)=>s.ans[i]===q.a)}
   if(game==='verhoor'){const s=vhd.cases[id];return !s||!s.done||s.won}
   if(game==='casino'){const c=CSCASES.find(x=>x.id===id),s=csd.cases[id];return !s||!s.fin||c.qs.every((q,i)=>s.ans[i]===q.a)}
@@ -6327,7 +6836,7 @@ function pasData(){const sx=k=>store.get(k)||{solved:0,streak:0},m=sx('md-stats'
   const dosPerfect=DOSSIERS.some(c=>{const s=dd.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)&&!Object.values(s.hints||{}).some(v=>v>0)});
   const lhPerfect=lst&&lst.guess&&LHP.every((p,i)=>lst.guess[i]&&!lst.guess[i].m&&!lst.guess[i].w);
   const rows=[['murdle','Moorddossier',m.solved,null],['speur','Speurneus',speur,CASES.length],['koud','Cold Case',koud,COLD.length],['kamer','Kamermoord',km.solved,null],
-   ['landhuis','Het Landhuis',lh.solved,null],['spion','Spionage',spn.solved,null],['bericht','Laatste Bericht',ber,BCASES.length],['dossier','Dossiermap',dos,DOSSIERS.length],['stad','Stadsplattegrond',STCASES.filter(c=>{const s=std.cases[c.id];return s&&s.done}).length,STCASES.length],['tijdlijn','De Tijdlijn',TLCASES.filter(c=>{const s=tld.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,TLCASES.length],['verhoor','Het Verhoor',VHCASES.filter(c=>{const s=vhd.cases[c.id];return s&&s.done&&s.won}).length,VHCASES.length],['casino','Casino-escape',CSCASES.filter(c=>{const s=csd.cases[c.id];return s&&s.fin&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,CSCASES.length],['team','Teamzaak',RLCASES.filter(c=>{const s=rld.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,RLCASES.length],['brieven','Brievenreeks',BRCASES.filter(c=>{const s=brd.cases[c.id];return s&&s.done&&s.won}).length,BRCASES.length],['databank','Politiedatabase',DBCASES.filter(c=>{const s=dbd.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,DBCASES.length]];
+   ['landhuis','Het Landhuis',lh.solved,null],['spion','Spionage',spn.solved,null],['bericht','Laatste Bericht',ber,BCASES.length],['dossier','Dossiermap',dos,DOSSIERS.length],['stad','Stadsplattegrond',STCASES.filter(c=>{const s=std.cases[c.id];return s&&s.done}).length,STCASES.length],['tv','Tv-dossier',TVCASES.filter(c=>{const s=tvd.cases[c.id];return s&&(s.won||s.best)}).length,TVCASES.length],['tijdlijn','De Tijdlijn',TLCASES.filter(c=>{const s=tld.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,TLCASES.length],['verhoor','Het Verhoor',VHCASES.filter(c=>{const s=vhd.cases[c.id];return s&&s.done&&s.won}).length,VHCASES.length],['casino','Casino-escape',CSCASES.filter(c=>{const s=csd.cases[c.id];return s&&s.fin&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,CSCASES.length],['team','Teamzaak',RLCASES.filter(c=>{const s=rld.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,RLCASES.length],['brieven','Brievenreeks',BRCASES.filter(c=>{const s=brd.cases[c.id];return s&&s.done&&s.won}).length,BRCASES.length],['databank','Politiedatabase',DBCASES.filter(c=>{const s=dbd.cases[c.id];return s&&s.done&&c.qs.every((q,i)=>s.ans[i]===q.a)}).length,DBCASES.length]];
   const total=rows.reduce((a,r)=>a+r[2],0),streak=Math.max(m.streak||0,km.streak||0,lh.streak||0,spn.streak||0);
   const B=[['eerste','Eerste zaak','Los je eerste zaak op.',total,1],['tien','Volhouder','Los 10 zaken op.',total,10],['vijftig','Veteraan','Los 50 zaken op.',total,50],['honderd','Legende','Los 100 zaken op.',total,100],
    ['logicus','Logicus','10 keer Moorddossier opgelost.',m.solved,10],['meester','Meesterbrein','Niveau 5 vrijgespeeld in Moorddossier.',m.solved,40],
@@ -6510,6 +7019,11 @@ const HELP=[
   steps:['Open een zaak en lees de <b>Melding</b>.','Zoom in met twee vingers of met de knoppen + en −. Sleep om rond te kijken.','Lees de vraag en tik op de plek op de kaart waar het gebeurt.','Goed? Dan komt er een rode cirkel en krijg je de volgende vraag.','Na de laatste vraag weet je wie het was.'],
   tips:['Let op kleding: een gele jas of een rode paraplu valt op, ook van ver.','Volg één persoon door de stad. Waar ging die eerder heen?','Zoom goed in: veel dingen zijn klein.'],
   extra:()=>`${STCASES.length} ${STCASES.length===1?'zaak':'zaken'} op één plattegrond.`},
+ {g:'tv',name:'Tv-dossier',insp:'Moordonderzoek als echt politiedossier · eigen spel voor op de tv, alleen of samen',
+  what:'Een groot moordonderzoek dat aanvoelt als een echt politiedossier. Je cast je telefoon naar de tv. Daar staan de melding, de plaats delict, de verdachten en de verhoren. Elke speler krijgt via een QR-code of een link een eigen geheim dossier op zijn telefoon.',
+  steps:['Kies een zaak en tik op <b>Speel op de tv</b>, of op <b>Alleen spelen</b>.','Lees de melding en bekijk de foto’s van de plaats delict.','Ga naar <b>Spelers</b>: iedereen scant een QR-code. Vrienden op afstand krijgen een link.','Luister de verhoren en vertel elkaar wat er in jullie geheime dossiers staat.','Open <b>Envelop B</b> als jullie alle verhoren gehoord hebben.','Bij <b>Beschuldig</b> stemt iedereen op zijn telefoon. Kies samen het motief en het doorslaggevende bewijs.'],
+  tips:['Leg de tijden uit de verhoren naast de tijden in de dossiers.','Iedereen heeft een stukje van de puzzel. Lees je dossier hardop voor.','Wil je het spannend? Kies bij de melding een timer van 1 of 2 uur.'],
+  extra:()=>`${TVCASES.length} ${TVCASES.length===1?'zaak':'zaken'}, elk 60 tot 90 minuten.`},
  {g:'tijdlijn',name:'De Tijdlijn',insp:'Tijdlijnpuzzel · eigen spel: reken de tijden uit en vind wie de gelegenheid had',
   what:'Je krijgt losse gebeurtenissen van één avond. Bij sommige staat de tijd, bij andere reken je hem uit (‘tien minuten na de storing’). Zet alles op de juiste tijd. Daarna zie je in een overzicht wie er tijdens de moord geen alibi had.',
   steps:['Open een zaak en lees de <b>Melding</b>.','Kies bij elke kaart een tijd. De kaarten schuiven vanzelf op volgorde.','Tik op <b>Controleer</b>. Goede kaarten worden groen en blijven staan, foute worden rood.','Staat alles goed, dan zie je per persoon waar die was, met het moment van de moord in rood.','Wijs de dader aan met drie vragen. Fout? Dan krijg je nog één poging.'],
@@ -6552,7 +7066,7 @@ function setTab(t){st.tab=t;save();renderPanes();window.scrollTo({top:0})}
 function renderPanes(){
   const t=st.tab||'zaak';
   const g=game,M=g==='murdle';
-  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';$('pBericht').hidden=g!=='bericht';$('pDossier').hidden=g!=='dossier';$('pDatabank').hidden=g!=='databank';$('pBrieven').hidden=g!=='brieven';$('pTeam').hidden=g!=='team';$('pCasino').hidden=g!=='casino';$('pVerhoor').hidden=g!=='verhoor';$('pTijdlijn').hidden=g!=='tijdlijn';if(g==='tijdlijn'&&!$('pTijdlijn').innerHTML)renderTijdlijn();$('pStad').hidden=g!=='stad';if(g==='stad')renderStad();if(g==='verhoor'&&!$('pVerhoor').innerHTML)renderVerhoor();if(g==='casino'&&!$('pCasino').innerHTML)renderCasino();if(g==='team'&&!$('pTeam').innerHTML)renderTeam();if(g==='brieven'&&!$('pBrieven').innerHTML)renderBrieven();if(g==='databank'&&!$('pDatabank').innerHTML)renderDatabank();if(g==='dossier'&&!$('pDossier').innerHTML)renderDossier();if(g==='bericht'&&!$('pBericht').innerHTML)renderBericht();if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
+  $('pZaak').hidden=!M||t!=='zaak';$('pTips').hidden=!M||t!=='tips';$('pOpl').hidden=!M||t!=='opl';$('pVerhaal').hidden=g!=='speur';$('pKoud').hidden=g!=='koud';$('pKamer').hidden=g!=='kamer';$('pLandhuis').hidden=g!=='landhuis';$('pSpion').hidden=g!=='spion';$('pBericht').hidden=g!=='bericht';$('pDossier').hidden=g!=='dossier';$('pDatabank').hidden=g!=='databank';$('pBrieven').hidden=g!=='brieven';$('pTeam').hidden=g!=='team';$('pCasino').hidden=g!=='casino';$('pVerhoor').hidden=g!=='verhoor';$('pTijdlijn').hidden=g!=='tijdlijn';if(g==='tijdlijn'&&!$('pTijdlijn').innerHTML)renderTijdlijn();$('pStad').hidden=g!=='stad';if(g==='stad')renderStad();$('pTv').hidden=g!=='tv';if(g==='tv')renderTv();if(g==='verhoor'&&!$('pVerhoor').innerHTML)renderVerhoor();if(g==='casino'&&!$('pCasino').innerHTML)renderCasino();if(g==='team'&&!$('pTeam').innerHTML)renderTeam();if(g==='brieven'&&!$('pBrieven').innerHTML)renderBrieven();if(g==='databank'&&!$('pDatabank').innerHTML)renderDatabank();if(g==='dossier'&&!$('pDossier').innerHTML)renderDossier();if(g==='bericht'&&!$('pBericht').innerHTML)renderBericht();if(g==='spion'&&!$('pSpion').innerHTML)spStart();if(g==='landhuis'&&!$('pLandhuis').innerHTML)lhStart();if(g==='kamer'&&!$('pKamer').innerHTML)kmStart();$('pUitleg').hidden=g!=='uitleg';$('helpBtn').setAttribute('aria-pressed',g==='uitleg');if(g==='uitleg')renderUitleg();
   document.querySelector('.tabs').hidden=!M;const H=g==='home',GB=document.querySelector(`.games [data-g="${g}"] b`);document.querySelector('.games').hidden=!(H||gmOpen)||g==='uitleg'||g==='pas';document.querySelector('.games').classList.toggle('drop',!H);$('homeTitle').hidden=!H;$('nextUp').hidden=!H;if(H)nuRender();$('gameBar').hidden=H||g==='uitleg'||g==='pas';$('gbCur').innerHTML=GB?GB.innerHTML:'';$('gbMenu').textContent=gmOpen?'✕ Sluit':'☰ Spellen';$('gbMenu').setAttribute('aria-expanded',gmOpen);$('helpBtn').textContent=g==='uitleg'?'← Terug':'? Uitleg';{const pb=$('pasBtn');pb.classList.toggle('pasbadge',g!=='pas');pb.innerHTML=g==='pas'?'← Terug':PASBADGE}$('pPas').hidden=g!=='pas';if(g==='pas')renderPas();document.querySelector('footer').hidden=!M;document.querySelector('.top .controls').hidden=!M;$('lvLine').hidden=!M;$('stats').hidden=!M;
   document.querySelectorAll('.games button').forEach(b=>b.setAttribute('aria-selected',b.dataset.g===g));
   if(g==='speur'&&!$('pVerhaal').innerHTML)renderStory();if(g==='koud'&&!$('pKoud').innerHTML)renderKoud();
@@ -6659,7 +7173,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261104104651';
+const APPV='20261104112756';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

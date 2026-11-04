@@ -779,7 +779,7 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .tl-track{position:relative;height:14px;background:#eee;border-radius:7px}.tl-w{position:absolute;top:-4px;bottom:-4px;background:rgba(192,57,43,.22);border-left:2px dashed #c0392b;border-right:2px dashed #c0392b}.tl-track i{position:absolute;top:0;bottom:0;background:#2e8b57;border-radius:7px}.tl-lane small{grid-column:2;font-size:11px;color:var(--muted)}
 .tl-axis{position:absolute;left:106px;right:10px;bottom:4px;height:14px}.tl-axis span{position:absolute;transform:translateX(-50%);font:600 10px var(--cond);color:var(--muted)}.tl-card{border-left:6px solid #7d3c98}
 .helpbtn.pasbadge{padding:0;border:0;background:none;box-shadow:none;min-height:0;line-height:0;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35));transition:transform .15s}.helpbtn.pasbadge:hover,.helpbtn.pasbadge:focus-visible{transform:scale(1.08) rotate(-4deg)}.helpbtn.pasbadge:active{transform:scale(.96)}
-.st-q{background:var(--card,#fbf9f3);border:2px solid #1c1f22;border-radius:12px;padding:10px 12px;margin:8px 0}.st-q span{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#c2321f;font-weight:700}.st-q b{font-size:17px}.st-mapbox{position:relative;height:64vh;min-height:360px;overflow:hidden;border:2px solid #1c1f22;border-radius:12px;background:#d8d3c6;touch-action:none;user-select:none;-webkit-user-select:none}.st-map{transform-origin:0 0;will-change:transform}.st-map svg{width:100%;height:100%;display:block}.st-zoom{position:absolute;right:8px;top:8px;display:flex;flex-direction:column;gap:6px}.st-zoom .btn{width:40px;height:40px;padding:0;font-size:20px;background:#fbf9f3}.st-found{margin:10px 0;padding-left:20px}.st-found li{margin:6px 0}
+.st-q{background:var(--card,#fbf9f3);border:2px solid #1c1f22;border-radius:12px;padding:10px 12px;margin:8px 0}.st-q span{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#c2321f;font-weight:700}.st-q b{font-size:17px}.st-mapbox{position:relative;height:64vh;min-height:360px;overflow:hidden;border:2px solid #1c1f22;border-radius:12px;background:#d8d3c6;touch-action:none;user-select:none;-webkit-user-select:none}.st-map{transform-origin:0 0;will-change:transform}.st-map svg{width:100%;height:100%;display:block}.st-zoom{position:absolute;right:8px;top:8px;display:flex;flex-direction:column;gap:6px}.st-zoom .btn{width:40px;height:40px;padding:0;font-size:20px;background:#fbf9f3}.st-tip{margin:6px 0 0;font-size:15px;background:#fff6d6;border-left:4px solid #f0b850;padding:4px 8px}.st-q .btn{margin-top:6px}.st-cardimg{position:relative;margin:-4px 0 8px;border:2px solid #1c1f22;border-radius:8px;overflow:hidden;background:#d8d3c6}.st-crop{display:block;width:100%;height:auto;aspect-ratio:150/110}.st-nr{position:absolute;left:8px;top:8px;background:#c2321f;color:#fff;font-weight:800;font-size:14px;border-radius:6px;padding:2px 8px}.st-stars{color:#e0a020;letter-spacing:1px}.st-qimg{margin:6px 0;border:2px solid #1c1f22;border-radius:8px;overflow:hidden;background:#d8d3c6}.st-qimg small{display:block;text-align:center;font-weight:700;font-size:12px;padding:3px;background:#1c1f22;color:#fff;text-transform:uppercase;letter-spacing:.06em}.st-crop.big{max-height:200px;width:100%}.st-lens{position:absolute;width:150px;height:150px;border-radius:50%;overflow:hidden;border:5px solid #2a2b2a;box-shadow:0 6px 16px rgba(0,0,0,.45),inset 0 0 0 2px #9a978f;background:#d8d3c6;pointer-events:none;z-index:3}.st-lens svg{width:100%;height:100%;display:block}.st-zoom .btn.on{background:#1c1f22;color:#fff}.st-lphint{position:absolute;left:8px;bottom:8px;margin:0;background:rgba(28,31,34,.85);color:#fff;font-size:12px;padding:4px 8px;border-radius:6px;pointer-events:none}.st-found{margin:10px 0;padding-left:20px}.st-found li{margin:6px 0}
 .nu-box{display:grid;grid-template-columns:118px 1fr;gap:12px;align-items:center;width:100%;text-align:left;background:#14213a;color:#eef1f4;border:2px solid #0b1424;border-radius:14px;padding:10px;margin:6px 0 14px;cursor:pointer;box-shadow:0 4px 0 #0b1424}.nu-box .kicker{color:#f0b850}.nu-box b{display:block;font-size:17px;line-height:1.2;margin:2px 0 4px}.nu-box small{display:block;opacity:.85;font-size:13px}.nu-box em{font-style:normal;font-weight:800;color:#f0b850}.nu-art{width:100%;height:auto;display:block}.nu-list{display:flex;flex-wrap:wrap;gap:4px;margin:2px 0 6px}.nu-list i{font-style:normal;font-size:12px;font-weight:700;background:#f0b850;color:#1c1f22;border-radius:20px;padding:2px 8px}.nu-box.wiggle .nu-art{animation:nuw .5s}@keyframes nuw{25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
 </style>
 </head>
@@ -5411,9 +5411,9 @@ function stBase(){if(STMAP)return STMAP;const r=stRng(4417),out=[];const P=a=>ou
  for(const [x,y,c,rt] of cars)P(STO.car(x,y,c,rt));
  for(const [x,y,c] of [[220,1700,'#3a6ab8'],[1250,1720,'#e0b020'],[700,1760,'#6a6a72']])P(STO.boat(x,y,c));
  // drukte: wandelaars op straten en pleinen
- const spots=[];for(let i=0;i<170;i++){const t=r();let x,y;if(t<.3){x=r()*STW;y=[410,1250,1610,870,770][Math.floor(r()*5)]+r()*14-7}else if(t<.55){x=[410,810,1210,20][Math.floor(r()*4)]+r()*16-8;y=70+r()*1540}else if(t<.75){x=450+r()*320;y=460+r()*290}else if(t<.9){x=850+r()*320;y=1300+r()*290}else{x=50+r()*320;y=270+r()*100}
+ const spots=[];for(let i=0;i<260;i++){const t=r();let x,y;if(t<.3){x=r()*STW;y=[410,1250,1610,870,770][Math.floor(r()*5)]+r()*14-7}else if(t<.55){x=[410,810,1210,20][Math.floor(r()*4)]+r()*16-8;y=70+r()*1540}else if(t<.75){x=450+r()*320;y=460+r()*290}else if(t<.9){x=850+r()*320;y=1300+r()*290}else{x=50+r()*320;y=270+r()*100}
    if(y>780&&y<860&&!(Math.abs(x-410)<26||Math.abs(x-810)<26||Math.abs(x-1210)<26))continue;if(Math.hypot(x-1010,y-1500)<120)continue;spots.push([x,y])}
- const fill=spots.filter(([x,y])=>!STCASES.some(c=>c.steps.some(s=>Math.hypot(s.x-x,s.y-y)<70)));
+ const fill=spots.filter(([x,y])=>!STCASES.some(c=>c.steps.some(s=>Math.hypot(s.x-x,s.y-y)<70))&&!STEGP.some(([a,b])=>Math.hypot(a-x,b-y)<45));
  for(const [x,y] of fill){const L=stLk({f:r()<.5,skin:TSKIN[Math.floor(r()*TSKIN.length)],hc:THC[Math.floor(r()*THC.length)],top:TTOP[Math.floor(r()*TTOP.length)],legs:TLEG[Math.floor(r()*TLEG.length)],glasses:r()<.15,ph:r()*3});L.hair=L.f?['long','bun','bob'][Math.floor(r()*3)]:['short','curly','bald'][Math.floor(r()*3)];L.beard=!L.f&&r()<.2;
    if(r()<.12)L.hat=['cap','fedora'][Math.floor(r()*2)];P(stFig(L,x,y,{s:.2,flip:r()<.5,item:r()<.15?STI.bag:r()<.1?STI.phone:''}))}
  return STMAP=rlColor(()=>out.join(''))}
@@ -5485,32 +5485,72 @@ const STCASES=[
 const STADKEY='md-stad';
 let std=store.get(STADKEY)||{cur:null,cases:{}};if(!std.cases)std={cur:null,cases:{}};
 const saveSt=()=>store.set(STADKEY,std);
-const stState=id=>(std.cases[id]=std.cases[id]||{start:false,step:0,found:[],miss:0,done:false,notes:''});
+const stState=id=>(std.cases[id]=std.cases[id]||{start:false,step:0,found:[],miss:0,done:false,notes:'',hints:0,hs:{}});
 let stView={k:1,tx:0,ty:0},stMsg='';
 function stGo(c){std.cur=c;stMsg='';stView={k:1,tx:0,ty:0};saveSt();renderStad();window.scrollTo({top:0})}
-function stCasesSvg(){return rlColor(()=>STCASES.map(c=>c.draw()).join(''))}
+
+// kleine bijverhaaltjes overal in de stad (geen zaak, wel leuk om te vinden)
+const STI2={
+ dog:`<g transform="translate(50 -6)"><ellipse cx="0" cy="-12" rx="16" ry="8" fill="#a8743e" stroke="#222" stroke-width="2"/><circle cx="16" cy="-18" r="7" fill="#a8743e" stroke="#222" stroke-width="2"/><path d="M-12 -6v8M10 -6v8M-16 -14l-8 -6" stroke="#222" stroke-width="3"/><path d="M22 -20q10 -2 14 4" stroke="#c8302a" stroke-width="5" fill="none"/></g>`,
+ balloon:`<path d="M29 -53q10 -40 4 -90" stroke="#555" stroke-width="1.6" fill="none"/><ellipse cx="34" cy="-160" rx="14" ry="18" fill="#e83a7a" stroke="#222" stroke-width="2"/>`,
+ rod:`<path d="M29 -53L120 -140" stroke="#5a3a1a" stroke-width="3"/><path d="M120 -140q6 40 2 90" stroke="#888" stroke-width="1.2" fill="none"/>`,
+ brush:`<path d="M29 -53l20 -20" stroke="#5a3a1a" stroke-width="4"/><circle cx="51" cy="-75" r="4" fill="#3a6ab8"/>`,
+ guitar:`<g transform="translate(10 -60) rotate(-35)"><ellipse cx="0" cy="0" rx="14" ry="18" fill="#c8823a" stroke="#222" stroke-width="2"/><rect x="-3" y="-60" width="6" height="44" fill="#5a3a1a"/><circle cx="0" cy="0" r="4" fill="#222"/></g>`,
+ plant:`<g transform="translate(36 -80)"><rect x="-8" y="0" width="16" height="16" fill="#b8604a" stroke="#222"/><circle cx="0" cy="-14" r="20" fill="#4f9a4a" stroke="#2f5a2a" stroke-width="2"/><circle cx="-14" cy="-30" r="12" fill="#5fb05a"/><circle cx="14" cy="-30" r="12" fill="#5fb05a"/></g>`,
+ paper:`<rect x="-30" y="-80" width="60" height="36" fill="#f3efe6" stroke="#555" stroke-width="2"/><path d="M-24 -72h48M-24 -64h48M-24 -56h30" stroke="#999" stroke-width="2"/>`,
+ bread:`<path d="M29 -53l18 22" stroke="#d8b06a" stroke-width="6" stroke-linecap="round"/>`,
+ ball:`<circle cx="60" cy="-6" r="9" fill="#fff" stroke="#222" stroke-width="2"/><path d="M55 -9l5 3 5 -3" stroke="#222" stroke-width="2" fill="none"/>`,
+ bouquet:`<g transform="translate(34 -60)"><path d="M0 0l-6 -16M0 0l0 -18M0 0l6 -16" stroke="#3a7a3a" stroke-width="3"/><circle cx="-7" cy="-20" r="6" fill="#e83a7a"/><circle cx="0" cy="-23" r="6" fill="#fff"/><circle cx="7" cy="-20" r="6" fill="#f2c21a"/></g>`};
+const STEG=[
+ ()=>`${STO.stall(470,500,'#c8823a')}${stFig(stLk({top:'#f3efe6',hat:'chef',skin:TSKIN[1]}),452,492,{s:.2,item:STI.shout})}${stFig(stLk({f:true,top:'#3a8ac8'}),500,492,{s:.16,flip:true})}<g transform="translate(486 512) scale(.2)">${STI2.dog}</g>`,
+ ()=>`<path d="M690 428q4 -4 8 0" stroke="#f2d24a" stroke-width="3" fill="none"/>${stFig(stLk({top:'#8a6a3a',hc:THC[5],hair:'bald'}),708,430,{s:.2,rot:-70})}`,
+ ()=>`<g transform="translate(1030 770)"><path d="M-10 0l10 -40 10 40M0 -40v-4" stroke="#5a3a1a" stroke-width="2"/><rect x="-14" y="-44" width="28" height="22" fill="#fff" stroke="#555"/><path d="M-10 -30q8 -8 20 0" stroke="#6f9fb8" stroke-width="3" fill="none"/><circle cx="6" cy="-38" r="3" fill="#f2c21a"/></g>${stFig(stLk({top:'#c8302a',hat:'fedora',beard:true,hc:THC[5]}),1060,772,{s:.2,flip:true,item:STI2.brush})}`,
+ ()=>`${stFig(stLk({f:true,top:'#f2c21a',hair:'bob',hc:THC[6]}),1000,1340,{s:.15,item:STI2.balloon.replace('-160','-210').replace('-90','-150')})}${stFig(stLk({f:true,top:'#5a6a8a'}),1018,1338,{s:.2,flip:true,item:STI.shout})}`,
+ ()=>`${stFig(stLk({top:'#2a7a5a',hat:'cap',beard:true,hc:THC[5]}),1100,1634,{s:.2,item:STI2.rod})}${STO.bin(1080,1634,'')}`,
+ ()=>`${STO.bench(1070,1590)}${stFig(stLk({f:true,top:'#e83a7a',hair:'long',hc:THC[3]}),1062,1584,{s:.2})}${stFig(stLk({top:'#3a6ab8',hc:THC[1]}),1080,1584,{s:.2,flip:true,item:STI2.bouquet})}`,
+ ()=>`${stFig(stLk({f:true,top:'#7a3b32',hair:'bun',hc:THC[5],glasses:true}),330,362,{s:.2,item:STI.bag})}${stFig(stLk({top:'#26282a',hat:'cap',hc:THC[7]}),312,366,{s:.2,item:`<path d="M29 -53l14 -6" stroke="#222" stroke-width="3"/><rect x="40" y="-66" width="12" height="9" fill="#c8302a"/>`})}`,
+ ()=>`${STO.ladderLean(650,1222)}${stFig(stLk({top:'#2a9aa8',hat:'cap'}),655,1180,{s:.18,item:STI.sponge})}`,
+ ()=>`${stFig(stLk({top:'#9a5ac8',hair:'curly',hc:THC[0],skin:TSKIN[4]}),745,530,{s:.2,item:STI2.guitar})}<ellipse cx="770" cy="532" rx="9" ry="4" fill="#26282a"/>${[0,1,2].map(i=>stFig(stLk({f:i%2===0,top:TTOP[i+2]}),718+i*14,560,{s:.16,flip:true})).join('')}`,
+ ()=>`${STO.tree(1000,610,1.3)}<g transform="translate(996 574) scale(.18)"><ellipse cx="0" cy="0" rx="14" ry="10" fill="#333"/><circle cx="12" cy="-8" r="8" fill="#333"/><path d="M8 -15l3 -6 3 6M14 -15l3 -6 3 6" fill="#333"/></g>${STO.ladderLean(1018,624)}${stFig(stLk({top:'#c8302a',hat:'police',legs:'#26282a'}),1024,596,{s:.18})}`,
+ ()=>`${stFig(stLk({f:true,top:'#ffffff',hair:'long',hc:THC[4]}),1286,660,{s:.2,item:STI2.bouquet})}${stFig(stLk({top:'#1c1c1c',hc:THC[1]}),1304,660,{s:.2,flip:true})}${[0,1,2,3].map(i=>`<circle cx="${1270+i*12}" cy="${630-i%2*6}" r="2.4" fill="${['#e83a7a','#f2c21a','#3a8ac8','#fff'][i]}"/>`).join('')}`,
+ ()=>`${stFig(stLk({top:'#4f9a4a',hc:THC[2]}),1210,290,{s:.2,item:STI2.plant})}<g transform="translate(1210 296)"><circle cx="-8" cy="0" r="7" fill="none" stroke="#222" stroke-width="2"/><circle cx="10" cy="0" r="7" fill="none" stroke="#222" stroke-width="2"/></g>`,
+ ()=>`${STO.bench(600,1450)}${stFig(stLk({top:'#8a6a3a',hc:THC[5],beard:true}),600,1444,{s:.2,rot:-80,item:STI2.paper})}<text x="612" y="1420" font-size="12" fill="#3a6ab8" font-family="Arial" font-weight="700">z z</text>`,
+ ()=>`${[0,1,2,3].map(i=>stFig(stLk({f:i===1,top:['#c8302a','#f2c21a','#3a6ab8','#2f9a3a'][i],hair:i===1?'bob':'short'}),170+i*28,600+(i%2)*20,{s:.15,flip:i%2===1})).join('')}<circle cx="236" cy="630" r="4" fill="#fff" stroke="#222"/>`,
+ ()=>`${stFig(stLk({f:true,top:'#c86aa8',hair:'bun',hc:THC[5]}),1040,1446,{s:.2,item:STI2.bread})}${[0,1,2].map(i=>`<g transform="translate(${1010+i*10} ${1462+i*4})"><ellipse cx="0" cy="0" rx="5" ry="3" fill="#f3efe6" stroke="#555"/><circle cx="4" cy="-3" r="2.4" fill="#3a8a3a"/><path d="M6 -3l3 1" stroke="#f2a020" stroke-width="1.6"/></g>`).join('')}`,
+ ()=>`${stFig(stLk({top:'#5a5a62',hc:THC[0],glasses:true}),1034,1264,{s:.2,item:STI.shout})}<path d="M1018 1258q-4 6 0 10" stroke="#555" stroke-width="2" fill="none"/>`];
+function stEggs(){return STEG.map(f=>f()).join('')}
+
+const STEGP=[[470,500],[700,428],[1045,770],[1008,1338],[1100,1634],[1070,1590],[320,362],[652,1200],[745,540],[1005,600],[1295,655],[1210,290],[600,1445],[210,610],[1030,1450],[1034,1264]];
+function stCasesSvg(){return rlColor(()=>stEggs()+STCASES.map(c=>c.draw()).join(''))}
+const stStars=l=>'★'.repeat({Instap:1,Gemiddeld:2,Moeilijk:3}[l]||2)+'☆'.repeat(3-({Instap:1,Gemiddeld:2,Moeilijk:3}[l]||2));
+const stCrop=(t,cls='st-crop')=>`<svg viewBox="${t.x-75} ${t.y-55} 150 110" class="${cls}" aria-hidden="true"><use href="#stAll"/></svg>`;
+let stLoupe=false;
 let STCS='';
 function renderStad(){const P=$('pStad');
-  if(!std.cur){P.innerHTML=`<h2 class="bigtitle" style="font-size:clamp(30px,9.5vw,62px)">Stadsplattegrond</h2>${PENCIL}<p class="lead">Eén grote, drukke stad. Overal gebeurt iets. Bij elke zaak krijg je vragen: zoek op de plattegrond waar het gebeurde en tik erop. Zoom in met twee vingers of met de knoppen. Sommige mensen zie je op meer plekken terug.</p>
-    <div class="caselist">${STCASES.map(c=>{const s=stState(c.id);return `<article class="casecard st-card"><span class="kicker">Zaak ${c.nr} · ${c.level}</span><h3>${c.title}</h3><p>${c.blurb}</p>
+  if(!std.cur){P.innerHTML=`<h2 class="bigtitle" style="font-size:clamp(30px,9.5vw,62px)">Stadsplattegrond</h2>${PENCIL}<p class="lead">Eén grote, drukke stad. Overal gebeurt iets, en lang niet alles hoort bij een zaak. Elke zaakkaart begint met een plaatje: zoek die plek op de plattegrond. Daarna volg je de mensen terug en vooruit in de tijd, vraag voor vraag. Zoom in met twee vingers of gebruik de loep.</p>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><g id="stAll">${stBase()}${STCS||(STCS=stCasesSvg())}</g></svg>
+    <div class="caselist">${STCASES.map(c=>{const s=stState(c.id);return `<article class="casecard st-card"><div class="st-cardimg">${stCrop(c.steps[0])}<span class="st-nr">${c.nr}</span></div><span class="kicker">Zaak ${c.nr} · <span class="st-stars" title="${c.level}">${stStars(c.level)}</span></span><h3>${c.title}</h3><p>${c.blurb}</p>
      <div class="controls"><span class="hint">${s.done?'Opgelost':s.start?`${s.found.length}/${c.steps.length} plekken`:'Nog niet begonnen'}</span><button class="btn ${s.done?'':'primary'} small" type="button" data-stcase="${c.id}">${s.done?'Teruglezen':s.start?'Verder':'Start'}</button></div></article>`}).join('')}</div>`;
    P.querySelectorAll('[data-stcase]').forEach(b=>b.onclick=()=>stGo(b.dataset.stcase));saveSt();return}
   const C=STCASES.find(c=>c.id===std.cur);if(!C)return stGo(null);const s=stState(C.id);
-  const head=`<button class="btn small backbtn" id="stList" type="button">← Alle zaken</button><div class="storyhead"><span class="kicker">Zaak ${C.nr} · ${C.level}</span><h3>${C.title}</h3>${filmBtn('stad',C.id)}${s.done?endBtn('stad',C.id):''}</div>`;
+  const head=`<button class="btn small backbtn" id="stList" type="button">← Alle zaken</button><div class="storyhead"><span class="kicker">Zaak ${C.nr} · <span class="st-stars">${stStars(C.level)}</span></span><h3>${C.title}</h3>${filmBtn('stad',C.id)}${s.done?endBtn('stad',C.id):''}</div>`;
   if(!s.start){P.innerHTML=`${head}<article class="sheet letter"><header><span>Melding</span><b>${C.title}</b></header><div class="sheet-body"><p>${C.intro}</p><p>Zoek de plekken op de plattegrond. Tik op de juiste plek om verder te gaan.</p></div></article><div class="controls"><button class="btn primary" id="stIn2" type="button">Naar de plattegrond</button></div>`;
     $('stList').onclick=()=>stGo(null);$('stIn2').onclick=()=>{const go=()=>{s.start=true;saveSt();renderStad()};if(!filmSeen('stad',C.id))storyFilm('stad',C.id,go);else go()};return}
   if(!STCS)STCS=stCasesSvg();
   const marks=s.found.map(i=>{const t=C.steps[i];return `<g transform="translate(${t.x} ${t.y})"><circle r="${t.r}" fill="none" stroke="#c2321f" stroke-width="5" opacity=".9"/><circle cx="${t.r*.7}" cy="${-t.r*.7}" r="13" fill="#c2321f"/><text x="${t.r*.7}" y="${-t.r*.7+5}" font-size="15" font-weight="800" text-anchor="middle" fill="#fff" font-family="Arial">${i+1}</text></g>`}).join('');
   const cur=!s.done&&C.steps[s.step];
-  P.innerHTML=`${head}<div class="st-q">${s.done?`<b>Zaak opgelost.</b> ${s.miss} keer mis getikt.`:`<span>Vraag ${s.step+1} van ${C.steps.length}</span><b>${cur.q}</b>`}${stMsg?`<p class="msg">${stMsg}</p>`:''}</div>
-   <div class="st-mapbox" id="stBox"><div class="st-map" id="stMapI"><svg viewBox="0 0 ${STW} ${STH}" xmlns="http://www.w3.org/2000/svg">${FDEFS}${stBase()}${STCS}${marks}</svg></div>
-    <div class="st-zoom"><button type="button" class="btn small" id="stZin" aria-label="Inzoomen">+</button><button type="button" class="btn small" id="stZout" aria-label="Uitzoomen">−</button><button type="button" class="btn small" id="stZ0" aria-label="Hele kaart">⤢</button></div></div>
+  P.innerHTML=`${head}<div class="st-q">${s.done?`<b>Zaak opgelost.</b> ${s.miss} keer mis getikt, ${s.hints||0} ${(s.hints||0)===1?'tip':'tips'} gebruikt.`:`<span>Vraag ${s.step+1} van ${C.steps.length}</span>${s.step===0?`<div class="st-qimg">${stCrop(cur,'st-crop big')}<small>Zoek deze plek op de plattegrond</small></div>`:''}<b>${cur.q}</b>${(()=>{const n=(s.hs||{})[s.step]||0;return `${n>=1?`<p class="st-tip">💡 Tip 1: kijk ${cur.h1||stZone(cur.x,cur.y)}.</p>`:''}${n>=2?`<p class="st-tip">💡 Tip 2: de kaart is naar de goede buurt gezoomd. Zoek in het midden.</p>`:''}${n<2?`<button class="btn small" id="stTip" type="button">💡 ${n?'Nog een tip':'Tip'}</button>`:''}`})()}`}${stMsg?`<p class="msg">${stMsg}</p>`:''}</div>
+   <div class="st-mapbox" id="stBox"><div class="st-map" id="stMapI"><svg viewBox="0 0 ${STW} ${STH}" xmlns="http://www.w3.org/2000/svg">${FDEFS}<g id="stAll">${stBase()}${STCS}</g>${marks}</svg></div><div class="st-lens" id="stLens" hidden><svg viewBox="0 0 100 100"><use href="#stAll"/></svg></div>
+    <div class="st-zoom"><button type="button" class="btn small" id="stZin" aria-label="Inzoomen">+</button><button type="button" class="btn small" id="stZout" aria-label="Uitzoomen">−</button><button type="button" class="btn small" id="stZ0" aria-label="Hele kaart">⤢</button><button type="button" class="btn small ${stLoupe?'on':''}" id="stLp" aria-label="Loep" aria-pressed="${stLoupe}">🔍</button></div>${stLoupe?'<p class="st-lphint">Loep aan: sleep met je vinger. Tik om te kiezen.</p>':''}</div>
    <ol class="st-found">${s.found.map(i=>`<li><b>${C.steps[i].q}</b><br>${C.steps[i].ok}</li>`).join('')}</ol>
    ${s.done?`<h4 class="solh">Wat er gebeurde</h4><div class="verdict"><p>${C.story}</p></div><div class="controls"><button class="btn" id="stReset" type="button">Zaak opnieuw spelen</button></div>`:''}
    <section class="notes"><label for="stNotes"><b>Notitieblok</b></label><textarea id="stNotes" rows="3" placeholder="Wat zie je waar?"></textarea></section>`;
   const on=(id,f)=>{const el=$(id);if(el)el.onclick=f};
   $('stNotes').value=s.notes||'';$('stNotes').oninput=e=>{s.notes=e.target.value;saveSt()};on('stList',()=>stGo(null));
   on('stReset',()=>{std.cases[C.id]={start:true,step:0,found:[],miss:0,done:false,notes:s.notes||''};stMsg='';saveSt();renderStad()});
+  on('stTip',()=>{s.hs=s.hs||{};const n=(s.hs[s.step]||0)+1;s.hs[s.step]=n;s.hints=(s.hints||0)+1;stMsg='';saveSt();
+    if(n>=2){const t=C.steps[s.step];renderStad();const box=$('stBox');if(box){const W=box.clientWidth,H=box.clientHeight,k=2.6;stView={k,tx:W/2-(t.x+(t.x%37)-18)/STW*W*k,ty:H/2-(t.y+(t.y%41)-20)/STW*W*k};}renderStad();const b=$('stBox');if(b)b.scrollIntoView({block:'nearest',behavior:'smooth'});return}
+    renderStad()});
   stPanZoom(C,s)}
 function stPanZoom(C,s){const box=$('stBox'),inner=$('stMapI');if(!box)return;const W=box.clientWidth,H=box.clientHeight,MH=W*STH/STW;
   const clamp=()=>{const k=stView.k;stView.tx=Math.min(0,Math.max(W-W*k,stView.tx));stView.ty=Math.min(0,Math.max(H-MH*k,stView.ty));if(MH*k<H)stView.ty=(H-MH*k)/2};
@@ -5518,14 +5558,28 @@ function stPanZoom(C,s){const box=$('stBox'),inner=$('stMapI');if(!box)return;co
   const zoomAt=(f,cx,cy)=>{const k0=stView.k,k=Math.max(1,Math.min(10,k0*f));stView.tx=cx-(cx-stView.tx)*k/k0;stView.ty=cy-(cy-stView.ty)*k/k0;stView.k=k;apply()};
   inner.style.width=W+'px';inner.style.height=MH+'px';apply();
   $('stZin').onclick=()=>zoomAt(1.6,W/2,H/2);$('stZout').onclick=()=>zoomAt(1/1.6,W/2,H/2);$('stZ0').onclick=()=>{stView={k:1,tx:0,ty:0};apply()};
+  const lens=$('stLens'),lsv=lens&&lens.querySelector('svg');
+  $('stLp').onclick=()=>{stLoupe=!stLoupe;renderStad()};
+  const showLens=(cx,cy)=>{if(!lens)return;const mx=(cx-stView.tx)/stView.k/W*STW,my=(cy-stView.ty)/stView.k/W*STW,span=Math.max(14,140/(W/STW*stView.k)/2.6);
+    lsv.setAttribute('viewBox',`${mx-span/2} ${my-span/2} ${span} ${span}`);lens.style.left=(cx-75)+'px';lens.style.top=Math.max(-40,cy-190)+'px';lens.hidden=false};
   const pts=new Map();let moved=0,last=null,pinch=null;
-  box.onpointerdown=e=>{box.setPointerCapture(e.pointerId);pts.set(e.pointerId,[e.clientX,e.clientY]);moved=0;last=[e.clientX,e.clientY];if(pts.size===2){const [a,b]=[...pts.values()];pinch={d:Math.hypot(a[0]-b[0],a[1]-b[1])}}};
+  box.onpointerdown=e=>{if(e.target.closest('.st-zoom'))return;box.setPointerCapture(e.pointerId);pts.set(e.pointerId,[e.clientX,e.clientY]);moved=0;last=[e.clientX,e.clientY];if(stLoupe){const R2=box.getBoundingClientRect();showLens(e.clientX-R2.left,e.clientY-R2.top)}if(pts.size===2){const [a,b]=[...pts.values()];pinch={d:Math.hypot(a[0]-b[0],a[1]-b[1])}}};
   box.onpointermove=e=>{if(!pts.has(e.pointerId))return;const p=[e.clientX,e.clientY];pts.set(e.pointerId,p);const R=box.getBoundingClientRect();
     if(pts.size===2&&pinch){const [a,b]=[...pts.values()],d=Math.hypot(a[0]-b[0],a[1]-b[1]);zoomAt(d/pinch.d,(a[0]+b[0])/2-R.left,(a[1]+b[1])/2-R.top);pinch.d=d;moved+=10;return}
+    if(stLoupe&&pts.size===1){const R2=box.getBoundingClientRect();moved+=Math.abs(p[0]-(last||p)[0])+Math.abs(p[1]-(last||p)[1]);last=p;showLens(p[0]-R2.left,p[1]-R2.top);return}
     if(last){stView.tx+=p[0]-last[0];stView.ty+=p[1]-last[1];moved+=Math.abs(p[0]-last[0])+Math.abs(p[1]-last[1]);last=p;apply()}};
-  box.onpointerup=box.onpointercancel=e=>{pts.delete(e.pointerId);if(pts.size<2)pinch=null;if(pts.size===1)last=[...pts.values()][0];else last=null;
+  box.onpointerup=box.onpointercancel=e=>{if(lens)lens.hidden=true;if(stLoupe&&e.type==='pointerup'&&pts.has(e.pointerId)&&pts.size===1){pts.delete(e.pointerId);const R=box.getBoundingClientRect(),mx=(e.clientX-R.left-stView.tx)/stView.k/W*STW,my=(e.clientY-R.top-stView.ty)/stView.k/W*STW;if(moved<8)stTap(C,s,mx,my);return}pts.delete(e.pointerId);if(pts.size<2)pinch=null;if(pts.size===1)last=[...pts.values()][0];else last=null;
     if(e.type==='pointerup'&&moved<8&&!e.target.closest('.st-zoom')&&pts.size===0){const R=box.getBoundingClientRect(),mx=(e.clientX-R.left-stView.tx)/stView.k/W*STW,my=(e.clientY-R.top-stView.ty)/stView.k/W*STW;stTap(C,s,mx,my)}};
   box.onwheel=e=>{e.preventDefault();const R=box.getBoundingClientRect();zoomAt(e.deltaY<0?1.2:1/1.2,e.clientX-R.left,e.clientY-R.top)}}
+// tips bij de Stadsplattegrond: tip 1 = welk deel van de stad, tip 2 = de kaart zoomt naar die buurt
+function stZone(x,y){if(y<70)return 'bij het spoor, op het perron van het station';if(y>1640)return 'in het water van de haven';if(y>=1580)return 'op de kade bij de haven';
+ if((y>=780&&y<=852)||(y>=755&&y<=885&&[410,810,1210].some(v=>Math.abs(v-x)<75))){const br=[[410,'westelijke'],[810,'middelste'],[1210,'oostelijke']].sort((p,q)=>Math.abs(p[0]-x)-Math.abs(q[0]-x))[0];return `langs de gracht, bij de ${br[1]} brug`}
+ const c=x<410?0:x<810?1:x<1210?2:3,r=y<410?0:y<780?1:y<1250?2:3;
+ const N={'0,0':'bij het station','1,1':'op de markt','2,3':'in het stadspark','3,1':'bij de kerk','2,0':'bij de ijzerwarenwinkel','1,2':'bij de apotheek','3,2':'bij de bank','0,3':'bij de garage','0,2':'bij de school'}[`${c},${r}`];
+ const onRoad=[40,380,440,780,840,1180,1240,1380].some(v=>Math.abs(x-v)<35)||[70,380,440,760,880,1220,1280,1600].some(v=>Math.abs(y-v)<35);
+ const dir=(y<800?'in het noorden':'in het zuiden')+' van de stad, '+(x<700?'aan de westkant':'aan de oostkant');
+ return N?`${N}${onRoad?' (op straat ervoor of ernaast)':''}`:`in een woonblok ${dir}`}
+
 function stTap(C,s,mx,my){if(s.done)return;const t=C.steps[s.step];
   if(Math.hypot(mx-t.x,my-t.y)<=t.r){s.found.push(s.step);s.step++;stMsg='';if(s.step>=C.steps.length){s.done=true;const x=store.get('md-stad-stats')||{solved:0,streak:0};x.solved++;store.set('md-stad-stats',x);saveSt();renderStad();setTimeout(()=>endFilm('stad',C.id),700);return}saveSt();renderStad()}
   else{s.miss++;stMsg=pick(['Hier zie je niets bijzonders voor deze vraag.','Nee, dat is het niet. Zoek verder.','Kijk nog eens goed rond. Zoom in!'],Math.random);saveSt();const q=document.querySelector('.st-q');if(q){const m=q.querySelector('.msg');if(m)m.textContent=stMsg;else q.insertAdjacentHTML('beforeend',`<p class="msg">${stMsg}</p>`)}}}
@@ -6574,7 +6628,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261103221845';
+const APPV='20261104091542';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

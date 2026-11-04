@@ -953,6 +953,54 @@ body.tv-lock{overflow:hidden}
 .tv-pick small{font-size:16px;color:#5a5348}.tv-pick[aria-pressed=true]{border-color:#b3241b;box-shadow:0 0 0 4px #b3241b,0 8px 20px rgba(0,0,0,.4)}
 .tv-pick .tv-mugsvg{width:150px}
 .tv-docs .tv-stamp{font-size:13px;top:12px;right:14px}.tv-docs h3{padding-right:130px}
+/* VIP-afstandsbediening */
+.tv-vip{background:#e0a640;color:#151716;border-radius:12px;padding:10px 14px;font-weight:700;margin:6px 0 12px}
+.tv-rgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.tv-rc{font:700 14px system-ui;padding:10px 8px;border-radius:12px;border:2px solid var(--rule);background:var(--card);color:var(--ink);cursor:pointer}
+.tv-rc.big{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 4px;font-size:12px}.tv-rc.big i{font-style:normal;font-size:24px}
+.tv-rc[aria-pressed=true]{background:#e0a640;border-color:#e0a640;color:#151716}
+.tv-rc.wide{display:block;width:100%;margin-top:10px;padding:16px;font-size:17px}.tv-rc.primary{background:#c2321f;border-color:#c2321f;color:#fff}
+.tv-rctx{margin-top:14px;background:var(--card);border:1.5px solid var(--rule);border-radius:16px;padding:14px}.tv-rctx h3{margin:0 0 8px;font-family:'Zilla Slab',serif}.tv-rctx h4{margin:12px 0 6px}
+.tv-rrow{display:flex;flex-wrap:wrap;gap:8px}.tv-rrow .tv-rc{flex:1 1 40%}
+/* startscherm van /tv/ */
+.tv-home{padding:50px 70px;gap:30px;color:#f3efe6}
+.tv-hlogo{display:flex;align-items:center;gap:26px}.tv-hlogo svg{width:110px;height:110px}
+.tv-hlogo h1{margin:0;font:900 84px 'Barlow Condensed',sans-serif;letter-spacing:6px;line-height:1}.tv-hlogo h1 span{color:#e0a640}.tv-hlogo p{margin:6px 0 0;font-size:26px;opacity:.85}
+.tv-hcases{display:grid;grid-template-columns:2.2fr 1fr;gap:30px;flex:1;min-height:0;position:relative;z-index:1}
+.tv-hcase{display:grid;grid-template-columns:330px 1fr;gap:30px;background:#f6f1e4;color:#1d1a16;padding:26px;box-shadow:0 18px 40px rgba(0,0,0,.45);align-items:center}
+.tv-hcase .polaroid{width:100%;max-width:none;margin:0}.tv-hcase h2{font:800 46px 'Zilla Slab',serif;margin:10px 0}.tv-hcase p{margin:0 0 10px;font-size:22px}.tv-hcase small{font:500 18px system-ui;color:#5a5348}
+.tv-hcase.soon{display:flex;flex-direction:column;justify-content:center;gap:10px;background:transparent;border:4px dashed #6a5a48;color:#d8cfbf;box-shadow:none;text-align:center}.tv-hcase.soon b{font:800 32px 'Zilla Slab',serif}.tv-hcase.soon span{font-size:20px}
+.tv-row.left{justify-content:flex-start}
+.tv-hfoot{text-align:center;font:500 24px system-ui;margin:0;position:relative;z-index:1}.tv-hfoot b{color:#f2c21a}
+.tv-btn:focus-visible,.tv-nav button:focus-visible{outline:5px solid #f2c21a;outline-offset:3px}
+/* kale pagina's zonder app eromheen */
+body.kiosk .wrap>*:not(#pTv){display:none!important}
+body.kiosk #pTv{display:block!important}
+body.kiosk-join{--page:#151716;--card:#222524;--ink:#f3efe6;--muted:#aaa59a;--rule:#3a3d3b;background:#151716!important;color:#f3efe6}
+body.kiosk-join .wrap{max-width:560px}
+body.kiosk-join .tv-jp .bigtitle{color:#f3efe6}
+.tv-klogo{display:flex;align-items:center;justify-content:center;gap:10px;margin:8px 0 0}.tv-klogo svg{width:42px;height:42px}.tv-klogo b{font:900 26px 'Barlow Condensed',sans-serif;letter-spacing:3px}.tv-klogo b span{color:#e0a640}
+body.kiosk-join #tvJC{background:#f6f1e4;color:#151716;border-color:#e0a640}
+body.kiosk-join .tv-jform .btn.primary{font-size:22px;padding:16px}
+.tv-ptabs{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:1fr}
+.tv-ptabs button{font-size:11.5px;padding:9px 1px;line-height:1.25}
+.tv-note{background:var(--card);border:1.5px solid var(--rule);border-left:6px solid #9a968c;border-radius:12px;padding:10px 12px;margin:10px 0}
+.tv-note.tvn-v{border-left-color:#c2321f}.tv-note.tvn-o{border-left-color:#2f9a4a}
+.tv-nh{display:flex;align-items:center;gap:10px}.tv-nh .tv-mugsvg{width:54px;border-radius:8px}.tv-nh span{display:flex;flex-direction:column}.tv-nh small{color:var(--muted)}
+.tv-nst{display:flex;gap:6px;margin:8px 0}.tv-nst button{flex:1;font:600 12.5px system-ui;padding:8px 2px;border-radius:999px;border:1.5px solid var(--rule);background:transparent;color:var(--ink)}
+.tv-nst button[aria-pressed=true]{background:var(--ink);color:var(--page)}
+.tv-note textarea,.tv-nfree{width:100%;box-sizing:border-box;font:15px/1.4 system-ui;padding:8px 10px;border-radius:10px;border:1.5px solid var(--rule);background:var(--page);color:var(--ink);resize:vertical}
+/* geheime tips */
+.tv-ronde{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;height:100%}
+.tv-rleft{display:flex;flex-direction:column;gap:18px;align-items:flex-start}
+.tv-rdots{display:flex;gap:12px}.tv-rdots span{width:54px;height:54px;border-radius:50%;border:3px solid #e0a640;color:#e0a640;display:flex;align-items:center;justify-content:center;font:800 26px 'Barlow Condensed',sans-serif}.tv-rdots span.on{background:#e0a640;color:#151716}
+.tv-rule{font-size:21px;padding:20px 24px}.tv-rule b{font-family:'Zilla Slab',serif}
+.tv-rright{display:flex;flex-direction:column;gap:12px;overflow:auto;padding-right:6px}
+.tv-tip{font-size:21px;padding:20px 24px 14px}.tv-tip p{margin:0;padding-right:110px}
+.tv-secret{background:#c2321f;color:#fff;border-radius:12px;padding:12px 14px;margin:8px 0 12px;font-size:15px}
+.tv-badge{display:inline-block;min-width:18px;height:18px;border-radius:9px;background:#c2321f;color:#fff;font:700 11px/18px system-ui;font-style:normal;text-align:center;margin-left:2px}
+.tv-pbody .tv-tip p{font-size:17px;padding-right:90px}
+.tv-jsm{color:var(--muted);font-size:13px;margin-top:-6px}
 </style>
 </head>
 <body>
@@ -1954,7 +2002,7 @@ const CASES=[
   epilogue:'‘Wiebe,’ zegt Inspecteur Snoek, ‘u zette 4.000 euro in op Jelmer de Vries. Als Sietse verloor, kreeg u 20.000 euro. Maar Sietse lag op kop, met hulp van zijn sponsor. Toen u ontdekte dat hij afsneed, besloot u dat hij niet mocht winnen. Na uw eerste radiogesprek, om 12:20, liep u met uw rode thermosfles over het ijs naar de tent. Daar kreeg u ruzie met Sietse, en sloeg u toe. Om 12:31 zat u weer in uw bus, precies op tijd voor het tweede gesprek. De fles liet u in de sneeuw vallen. Een gestolen fles, zou u zeggen.’ Wiebe laat zijn hoofd zakken. Die avond wint Jelmer de Vries de Elfstedentocht. Het wedkantoor betaalt niets uit. En Kingma krijgt een flinke boete, en verkoopt zijn kaas voortaan op een eerlijke manier.'}
 
 ];
-let game=/[?&](tv=|join)/.test(location.search)?'tv':store.get('md-game')==='pas'?'pas':'home',gmOpen=false;
+let game=window.MDKIOSK||/[?&](tv=|join)/.test(location.search)?'tv':store.get('md-game')==='pas'?'pas':'home',gmOpen=false;
 function setGame(g){game=g;gmOpen=false;store.set('md-game',g);renderPanes();window.scrollTo({top:0})}
 const STKEY='md-speur';
 let sp=store.get(STKEY);
@@ -6634,9 +6682,13 @@ const TVCASES=[{id:'lepel',nr:'01',title:'Het laatste gerecht',level:'Gemiddeld'
  lies:{yfke:'Vertelt de waarheid. Haar bericht was boos, maar de cafébon en de wifi van De Kater bewijzen dat ze tot na 01:00 in het café zat.',lennert:'Liegt: “Ik ben meteen naar huis gefietst en niet teruggekomen.” Zijn pasje opende om 23:41 de achterdeur en zijn telefoon zat van 23:38 tot 23:57 op de wifi van het restaurant.',annemijn:'Vertelt de waarheid. De deurbelcamera ziet haar om 21:52 thuiskomen en de deur gaat pas om 08:10 weer open.',olof:'Vertelt de waarheid. De taxibon zegt 22:52. Zijn opmerking over de wijn was een belangrijke tip: de fles was nep.'},
  breaker:'Het pasjeslog van de achterdeur: Lennert klokte om 23:14 uit, maar zijn eigen pasje opende de deur om 23:41, midden in het tijdstip van overlijden.',
  solTimeline:[['21:47','Ferre mailt Annemijn: hij weet wie de wijn steelt'],['23:14','Lennert klokt uit en zet zijn fiets in de steeg'],['23:38','zijn telefoon zit weer op de wifi van het restaurant'],['23:41','zijn pasje opent de achterdeur'],['± 23:45','Ferre betrapt hem; de klap met de nep-magnum'],['23:56','achterdeur gaat van binnen open'],['23:58','Lennert fietst weg met een tas vol flessen']],
+ rounds:[{t:'De eerste uren',tips:['Schoonmaker Sjaak: “Toen ik om 00:39 binnenkwam, stond de achterdeur op een kier.”','Een buurvrouw in de steeg hoorde rond kwart voor twaalf glas breken.','Aan de kapstok in de keuken hangt een sommelierschort met verse rode vlekken.','Ferre had die week ruzie met de visleverancier over een rekening.']},
+  {t:'Na de verhoren',tips:['Yfke heeft geen pasje meer: Ferre nam het in toen hij haar die middag ontsloeg.','In het kluisje van Lennert ligt een rol etiketten “Château Montrésor 1990” en een kurkenpers.','Annemijn belde om 23:05 een vriendin met de vaste telefoon thuis. Het gesprek duurde 40 minuten.','Olof zette om 23:30 al een slechte recensie online, vanuit de trein.']},
+  {t:'Het laatste spoor',tips:['De fietsenmaker herkent de zwarte fiets met de rode krat op de camerabeelden: die is van Lennert.','In de container achter het restaurant ligt een lege wijndoos van 3 liter goedkope rode wijn.','In de agenda van Ferre staat: “maandag 09:00 – politiebureau”.','Een vaste gast zegt dat Ferre vaak tegen zijn personeel schreeuwde.']}],
  answer:'lennert',weapon:'een magnumfles wijn',place:'de keuken',
  tips:['Leg de verhoren naast de dossiers. Wie zegt iets dat niet klopt met de tijden?','Kijk naar de pasjeslog van de achterdeur en naar de wifi van het restaurant. Wie kwam er na 23:14 nog binnen?','Waarom zou iemand een dure fles stukslaan waar goedkope wijn in zit? Kijk in de administratie wie de flessen verkocht.'],
  story:`Sommelier Lennert Schaapveld verkocht de dure magnumflessen Château Montrésor 1990 stiekem via een veilingsite. In de wijnkelder zette hij flessen terug met goedkope wijn erin, zodat niemand een leeg vak zag. Ferre ontdekte het en mailde zijn vrouw dat hij maandag naar de politie ging. Na sluitingstijd klokte Lennert om 23:14 uit en liet zijn fiets in de steeg staan. Om 23:41 kwam hij met zijn pasje terug om de laatste echte flessen op te halen. Ferre betrapte hem in de keuken. Lennert sloeg hem met een van de nep-magnums neer en vluchtte om 23:58 met een tas vol flessen.`}];
+const MDK=window.MDKIOSK||'';
 
 PP.stove=()=>`${R(-52,-74,104,74,PK.P)}${R(-54,-82,108,9,PK.D)}${R(-40,-58,80,44,PK.K)}${R(-34,-52,68,30,PK.D)}${R(-30,-62,60,3,PK.W)}${[-36,-12,12,36].map(x=>`<circle cx="${x}" cy="-67" r="3.6" fill="${PK.K}"/>`).join('')}<path d="M-34 -86h26M8 -86h26" stroke="${PK.K}" stroke-width="3.4" stroke-linecap="round"/>`;
 PP.shards=()=>`<ellipse cx="0" cy="-3" rx="44" ry="7" fill="#6e1220" opacity=".85"/>${[[-30,-6],[-12,-3],[8,-8],[26,-4],[36,-9]].map(([x,y],i)=>`<path d="M${x} ${y}l${6+i%3*3} -${4+i%2*5}l${3+i} ${7}z" fill="#2f5a34" stroke="#1a3320" stroke-width=".8"/>`).join('')}<path d="M-6 -4q10 -14 22 -6l-4 6z" fill="#2f5a34" stroke="#1a3320"/>`;
@@ -6648,7 +6700,7 @@ const tvC=id=>TVCASES.find(c=>c.id===id);
 const tvEsc=t=>String(t||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 // rol op de telefoon: via de link (?tv=zaak&r=KAMER&p=1.3) of alleen spelen in de app
 let TVQ=null,TVJOIN=null;try{const u0=new URLSearchParams(location.search);if(u0.has('join'))TVJOIN={code:(u0.get('c')||u0.get('join')||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,4),err:'',busy:false};}catch(e){}
-try{const u=new URLSearchParams(location.search);if(u.get('tv')){TVQ={id:u.get('tv'),r:(u.get('r')||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,4),p:(u.get('p')||'').split('.').map(Number).filter(n=>n>=1&&n<=4),join:u.get('j')==='1'};if(TVQ.join){const sv=store.get('md-tv-join');if(sv&&sv.r===TVQ.r){TVQ.n=sv.n;TVQ.p=sv.p||TVQ.p;TVQ.spec=!sv.n}}}}catch(e){}
+try{const u=new URLSearchParams(location.search);if(u.get('tv')){TVQ={id:u.get('tv'),r:(u.get('r')||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,4),p:(u.get('p')||'').split('.').map(Number).filter(n=>n>=1&&n<=4),join:u.get('j')==='1',rc:u.get('rc')==='1'};if(TVQ.join){const sv=store.get('md-tv-join');if(sv&&sv.r===TVQ.r){TVQ.n=sv.n;TVQ.p=sv.p||TVQ.p;TVQ.spec=!sv.n}}}}catch(e){}
 let tvPh={tab:'dos',open:null,vote:null,sent:false,online:'',reveal:null,tip:0};
 let tvHost=null,tvStage=null,tvScr='melding',tvBig=null,tvPeerPh=null;
 const TVLIB={peer:['https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js','Peer']};
@@ -6691,16 +6743,34 @@ async function tvHostStart(C){const s=tvS(C.id);if(!s.room){s.room=tvRoom();save
  try{const P=await tvLib('peer');const peer=new P('mdtv-'+s.room.toLowerCase());tvHost.peer=peer;
   peer.on('open',()=>{tvHost.status='online';tvStageRender()});
   peer.on('error',e=>{if(e&&e.type==='unavailable-id'){peer.destroy();s.room=tvRoom();saveTv();tvHost=null;tvHostStart(C).then(tvStageRender)}else if(tvHost){tvHost.status='offline';tvStageRender()}});
-  peer.on('connection',c=>{tvHost.conns.push(c);c.on('data',d=>tvOnData(C,c,d));c.on('close',()=>{tvHost.conns=tvHost.conns.filter(x=>x!==c);const p=tvHost.players[c.peer];if(p)p.gone=true;tvStageRender()})});
+  peer.on('connection',c=>{tvHost.conns.push(c);c.on('data',d=>tvOnData(C,c,d));c.on('close',()=>{tvHost.conns=tvHost.conns.filter(x=>x!==c);const p=tvHost.players[c.peer];if(p)p.gone=true;tvVipFix(C,tvS(C.id));tvStageRender()})});
  }catch(e){tvHost.status='offline'}tvStageRender()}
 function tvOnData(C,c,d){if(!d||!tvHost)return;const s=tvS(C.id);
- if(d.t==='hi'){const pl={name:String(d.name||'Speler').slice(0,20),slots:d.slots||[],uid:d.uid,join:!!d.join,at:Date.now()};tvHost.players[c.peer]=pl;if(d.join)tvAssign(C,s,c,pl);tvSend(c,{t:'state',phase:tvScr,reveal:s.reveal||null,env:!!s.envOpen})}
+ if(d.t==='hi'){const pl={name:String(d.name||'Speler').slice(0,20),slots:d.slots||[],uid:d.uid,join:!!d.join,at:Date.now()};tvHost.players[c.peer]=pl;if(d.rc){pl.rc=true;pl.join=false;tvSend(c,{t:'slot',id:C.id,p:[],n:0,rc:true})}else{if(d.join)tvAssign(C,s,c,pl);tvSendTips(C,s,c,pl.uid)}tvSend(c,{t:'state',phase:tvScr,reveal:s.reveal||null,env:!!s.envOpen})}
+ if(d.t==='cmd'){const pl=tvHost.players[c.peer];if(pl&&pl.rc)tvCmd(d.a,d.v);return}
  if(d.t==='vote'&&C.suspects.some(x=>x.id===d.s)){tvHost.votes[d.uid||c.peer]={name:String(d.name||'Speler').slice(0,20),s:d.s};s.votes=tvHost.votes;saveTv();tvSend(c,{t:'ok'})}
  tvStageRender()}
 function tvAssign(C,s,c,pl){s.assign=s.assign||{};const sp=TVSPLIT[s.np||4];let i=s.assign[pl.uid];
  if(i==null||i>=sp.length){const used=new Set(Object.entries(s.assign).filter(([u,v])=>u!==pl.uid&&Object.values(tvHost.players).some(p=>p.uid===u&&!p.gone)).map(([u,v])=>v));i=-1;for(let k=0;k<sp.length;k++)if(!used.has(k)){i=k;break}s.assign[pl.uid]=i;saveTv()}
- pl.slots=i>=0?sp[i]:[];pl.n=i+1;tvSend(c,{t:'slot',id:C.id,p:pl.slots,n:i+1})}
+ pl.slots=i>=0?sp[i]:[];pl.n=i+1;tvVipFix(C,s);tvSend(c,{t:'slot',id:C.id,p:pl.slots,n:i+1})}
+function tvVipFix(C,s){}
 function tvReassign(C,s){if(!tvHost)return;s.assign={};saveTv();tvHost.conns.slice().sort((a,b)=>((tvHost.players[a.peer]||{}).at||0)-((tvHost.players[b.peer]||{}).at||0)).forEach(c=>{const pl=tvHost.players[c.peer];if(pl&&pl.join&&!pl.gone)tvAssign(C,s,c,pl)})}
+// ---- rondes met geheime tips: elke telefoon krijgt andere aanwijzingen ----
+function tvLive(){return tvHost?tvHost.conns.map(c=>[c,tvHost.players[c.peer]]).filter(([c,p])=>p&&!p.gone&&!p.rc).sort((a,b)=>a[1].at-b[1].at):[]}
+function tvTipsFor(s,uid){const out=[];Object.entries(s.given||{}).forEach(([r,g])=>(g[uid]||[]).forEach(i=>out.push([+r,i])));return out}
+function tvSendTips(C,s,c,uid){tvSend(c,{t:'tips',room:s.room,round:s.round||0,list:tvTipsFor(s,uid).map(([r,i])=>[r,i,C.rounds[r].tips[i]])})}
+function tvNextRound(C,s){const r=s.round||0;if(r>=C.rounds.length)return;s.round=r+1;s.given=s.given||{};const live=tvLive(),g={};
+ if(!s.tvsolo&&live.length){const ids=[...new Set(live.map(x=>x[1].uid))];C.rounds[r].tips.forEach((t,i)=>{const u=ids[i%ids.length];(g[u]=g[u]||[]).push(i)})}
+ s.given[r]=g;saveTv();live.forEach(([c,p])=>tvSendTips(C,s,c,p.uid));try{tvBeep&&tvBeep()}catch(e){}tvStageRender()}
+function tvScrRonde(C,s){const r=s.round||0,R0=C.rounds,next=r<R0.length,live=tvLive(),solo=s.tvsolo;
+ const cur=r?R0[r-1]:null,g=r?(s.given||{})[r-1]||{}:{};
+ return `<div class="tv-ronde"><div class="tv-rleft"><p class="tv-mono" style="color:#e0a640">GEHEIME TIPS</p><h2 class="tv-h2" style="text-align:left">${r?`Ronde ${r} · ${cur.t}`:'Nog geen ronde gestart'}</h2>
+  <div class="tv-rdots">${R0.map((x,i)=>`<span class="${i<r?'on':''}">${i+1}</span>`).join('')}</div>
+  ${solo?'':`<div class="tv-paper tv-rule"><b>Spelregel</b><p>Elke ronde krijgt iedereen <b>andere, geheime tips</b> op zijn telefoon. Je mag je scherm <b>niet laten zien</b>. Vertel in je eigen woorden wat je weet. Niet elke tip is belangrijk!</p></div>`}
+  ${next?`<button type="button" class="tv-btn primary" id="tvRound">📨 ${r?'Start ronde '+(r+1):'Start ronde 1'}: ${R0[r].t}</button>`:`<p class="tv-sub" style="text-align:left">Alle rondes zijn gespeeld. Tijd om te beschuldigen!</p>`}</div>
+  <div class="tv-rright">${solo?(r?R0.slice(0,r).map((x,ri)=>x.tips.map(t=>`<article class="tv-paper tv-tip">${tvStamp('RONDE '+(ri+1))}<p>${t}</p></article>`).join('')).join(''):'<p class="tv-sub">Start een ronde om de tips te zien.</p>')
+   :r?`<h3 class="tv-sub" style="text-align:left;margin:0 0 10px">Wie heeft er een tip?</h3>${live.length?live.map(([c,p])=>{const n=(g[p.uid]||[]).length;return `<div class="tv-slot ${n?'in':''}"><span class="tv-sn">${p.n||'·'}</span><span class="tv-sw"><b>${tvEsc(p.name)}</b><small>${n?`${n} geheime ${n===1?'tip':'tips'} · vertel wat je weet!`:'deze ronde geen tip · luister goed'}</small></span>${n?'<i>📨</i>':''}</div>`}).join(''):'<p class="tv-sub">Er zijn nog geen telefoons verbonden.</p>'}`
+   :`<p class="tv-sub" style="text-align:left">Er zijn ${C.rounds.length} rondes met elk ${C.rounds[0].tips.length} tips. De tips worden verdeeld over alle telefoons die meedoen.</p>`}</div></div>`}
 function tvSend(c,m){try{c.open&&c.send(m)}catch(e){}}
 function tvBroadcast(m){if(tvHost)tvHost.conns.forEach(c=>tvSend(c,m))}
 function tvTally(C){const s=tvS(C.id),n={};C.suspects.forEach(x=>n[x.id]=0);if(s.tvsolo){if(s.pick&&n[s.pick]!=null)n[s.pick]=1;return n}Object.values(tvHost?tvHost.votes:s.votes||{}).forEach(v=>{if(n[v.s]!=null)n[v.s]++});Object.entries(s.manual||{}).forEach(([k,v])=>{if(n[k]!=null)n[k]+=v});return n}
@@ -6711,18 +6781,19 @@ function tvOpenStage(C,solo){tvd.cur=C.id;const s0=tvS(C.id);s0.tvsolo=!!solo;sa
  tvStage.hidden=false;document.body.classList.add('tv-lock');
  try{const r=document.documentElement;(r.requestFullscreen||r.webkitRequestFullscreen||(()=>{})).call(r);screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape').catch(()=>{})}catch(e){}
  if(!solo)tvHostStart(C);tvStageRender()}
-function tvCloseStage(){tvStop();if(tvStage)tvStage.hidden=true;document.body.classList.remove('tv-lock');try{if(document.fullscreenElement)document.exitFullscreen();screen.orientation&&screen.orientation.unlock&&screen.orientation.unlock()}catch(e){}renderTv()}
+function tvCloseStage(){tvStop();if(MDK==='tv'){tvScr='home';tvBig=null;tvStageRender();return}if(tvStage)tvStage.hidden=true;document.body.classList.remove('tv-lock');try{if(document.fullscreenElement)document.exitFullscreen();screen.orientation&&screen.orientation.unlock&&screen.orientation.unlock()}catch(e){}renderTv()}
 function tvFit(){if(!tvStage||tvStage.hidden)return;const el=tvStage.querySelector('.tv-16');if(!el)return;const k=Math.min(innerWidth/1600,innerHeight/900);el.style.transform=`translate(-50%,-50%) scale(${k})`;tvStage.classList.toggle('portrait',innerHeight>innerWidth*1.1)}
-const TVSCR=[['melding','Melding'],['pd','Plaats delict'],['verd','Verdachten'],['verh','Verhoren'],['env','Envelop B'],['spel','Spelers'],['stem','Beschuldig']];
+const TVSCR=[['melding','Melding'],['pd','Plaats delict'],['verd','Verdachten'],['verh','Verhoren'],['ronde','Geheime tips'],['env','Envelop B'],['spel','Spelers'],['stem','Beschuldig']];
 const tvScrList=s=>s.tvsolo?TVSCR.map(x=>x[0]==='spel'?['dos','Dossiers']:x):TVSCR;
-function tvStageRender(){if(!tvStage||tvStage.hidden)return;const C=tvC(tvd.cur);if(!C)return;const s=tvS(C.id);s.scr=tvScr;saveTv();
- const body=({melding:tvScrMelding,pd:tvScrPd,verd:tvScrVerd,verh:tvScrVerh,env:tvScrEnv,spel:tvScrSpel,dos:tvScrDos,stem:tvScrStem,onth:tvScrOnth,opl:tvScrOpl}[tvScr]||tvScrMelding)(C,s);
+function tvStageRender(){if(!tvStage||tvStage.hidden)return;if(tvScr==='home')return tvHomeRender();const C=tvC(tvd.cur);if(!C)return;const s=tvS(C.id);s.scr=tvScr;saveTv();
+ const body=({melding:tvScrMelding,pd:tvScrPd,verd:tvScrVerd,verh:tvScrVerh,env:tvScrEnv,ronde:tvScrRonde,spel:tvScrSpel,dos:tvScrDos,stem:tvScrStem,onth:tvScrOnth,opl:tvScrOpl}[tvScr]||tvScrMelding)(C,s);
  const np=tvHost?Object.values(tvHost.players).filter(p=>!p.gone).length:0;
  tvStage.innerHTML=`<div class="tv-16"><header class="tv-top"><span class="tv-logo">${PASBADGE}<b>TV-DOSSIER</b><i>Zaak ${C.nr} · ${C.title}</i></span><span class="tv-room">${s.tmode?`<b class="tv-clock ${s.trun?'':'pause'}" id="tvClock">⏱ ${tvClock(s)}</b> · `:''}${s.tvsolo?'🕵️ Alleen op de tv':`${s.room?`Kamer <b>${s.room}</b>`:''} · ${np} ${np===1?'telefoon':'telefoons'} · <i class="${tvHost&&tvHost.status==='online'?'on':''}">${tvHost?tvHost.status:''}</i>`}</span></header>
   <main class="tv-main">${body}</main>
   <nav class="tv-nav">${tvScrList(s).map(([k,n])=>`<button type="button" data-scr="${k}" aria-pressed="${tvScr===k}">${n}</button>`).join('')}<button type="button" class="tv-x" data-scr="x">✕ Sluit</button></nav></div><p class="tv-rot">Draai je telefoon dwars voor het tv-beeld 📱↻</p>`;
  tvStage.querySelectorAll('[data-scr]').forEach(b=>b.onclick=()=>{const k=b.dataset.scr;tvStop();tvBig=null;if(k==='x')return tvCloseStage();tvScr=k;tvBroadcast({t:'state',phase:k,reveal:tvS(C.id).reveal||null});tvStageRender()});
- tvWire(C,s);tvFit();tvTickStart()}
+ tvWire(C,s);tvFit();tvTickStart();tvHS(C,s)}
+function tvHS(C,s){if(!tvHost)return;tvBroadcast({t:'hs',scr:tvScr,big:tvBig,play:tvSay.on?tvSay.id:null,env:!!s.envOpen,mot:s.mot||null,key:s.key||null,tm:s.tmode||0,trun:!!s.trun,np:s.np||4,rev:s.reveal||null,ok:s.reveal?s.reveal.pick===C.answer:null,tip:s.tipN||0,round:s.round||0,rounds:C.rounds.length})}
 function tvScrMelding(C,s){return `<div class="tv-desk"><article class="tv-paper tv-rot1">${tvStamp('POLITIE · VERTROUWELIJK')}${C.melding}<span class="tv-clip"></span></article>
  <aside class="tv-paper tv-strip tv-rot2"><h3>Tijdlijn</h3><ol class="tv-tl">${C.timeline.map(([t,w])=>`<li><b>${t}</b><span>${w}</span></li>`).join('')}</ol><p class="tv-hand">Wie was er tussen 23:20 en 00:00 in het restaurant?</p><div class="tv-chal"><b>Uitdaging</b>${[[0,'Geen timer'],[60,'1 uur'],[120,'2 uur']].map(([m,n])=>`<button type="button" data-tm="${m}" aria-pressed="${(s.tmode||0)===m}">${n}</button>`).join('')}${s.tmode?`<button type="button" id="tvPause">${s.trun?'⏸ Pauze':'▶ Verder'}</button>`:''}</div></aside></div>`}
 function tvScrPd(C){if(tvBig!=null){const i=tvBig;return `<div class="tv-zoom">${polaroid(C.photos[i][0],C.photos[i][1],'tv-pz')}<div class="tv-paper tv-note"><h3>Foto ${i+1}</h3><p>${C.photoNotes[i]}</p><button type="button" class="tv-btn" data-big="-1">← Terug naar het bord</button></div></div>`}
@@ -6738,7 +6809,7 @@ function tvScrSpel(C,s){const n=s.np||4,sp=TVSPLIT[n],pls=tvHost?Object.values(t
   <div class="tv-jrow"><div class="tv-qr big" data-jqr="1"></div><div><p class="tv-jgo small">Of scan de QR-code. Speel je op afstand? Stuur de link naar je vrienden.</p><button type="button" class="tv-btn" id="tvJShare">🔗 Stuur link</button></div></div></div>
  <div class="tv-jr"><div class="tv-np">Spelers ${[1,2,3,4].map(k=>`<button type="button" data-np="${k}" aria-pressed="${k===n}">${k}</button>`).join('')}</div>
   ${sp.map((sl,i)=>{const p=who(i);return `<div class="tv-slot ${p?'in':''}"><span class="tv-sn">${i+1}</span><span class="tv-sw"><b>${p?tvEsc(p.name):'wacht op speler…'}</b><small>${sl.map(k=>`${C.secret[k-1].ic} ${C.secret[k-1].t}`).join(' · ')}</small></span>${p?'<i>✓</i>':''}</div>`}).join('')}
-  ${pls.filter(p=>!p.join||p.n===0).length?`<p class="tv-jgo small">Ook mee: ${pls.filter(p=>!p.join||p.n===0).map(p=>tvEsc(p.name)).join(', ')}</p>`:''}
+  ${pls.filter(p=>!p.rc&&(!p.join||p.n===0)).length?`<p class="tv-jgo small">Ook mee: ${pls.filter(p=>!p.rc&&(!p.join||p.n===0)).map(p=>tvEsc(p.name)).join(', ')}</p>`:''}${pls.filter(p=>p.rc).length?`<p class="tv-jgo small">📺 Bediening: ${pls.filter(p=>p.rc).map(p=>tvEsc(p.name)).join(', ')}</p>`:`<p class="tv-jgo small">Tip: een tablet of extra telefoon kan de tv bedienen. Kies op de meedoe-pagina voor <b>Alleen de tv bedienen</b>.</p>`}
   <p class="tv-jst">${tvHost&&tvHost.status==='online'?'🟢 Kamer is open':tvHost&&tvHost.status==='offline'?'🔴 Geen live verbinding. Doe mee met de losse links of tel de stemmen met de hand.':'🟡 Kamer openen…'}</p></div></div>`}
 function tvScrDos(C,s){const k=typeof tvBig==='string'&&/^d\d$/.test(tvBig)?+tvBig[1]:-1;
  if(k>=0){const D=C.secret[k];return `<div class="tv-dosv"><h2 class="tv-h2">${D.ic} ${D.t}</h2><div class="tv-docs n${D.docs.length}">${D.docs.map((d,i)=>`<article class="tv-paper ${i%2?'tv-rot2':'tv-rot1'}">${tvStamp('VERTROUWELIJK')}<h3>${d.t}</h3>${d.h}</article>`).join('')}</div><div class="tv-row"><button type="button" class="tv-btn" data-big="">← Alle dossiers</button>${k<C.secret.length-1?`<button type="button" class="tv-btn primary" data-big="d${k+1}">Volgend dossier →</button>`:''}</div></div>`}
@@ -6776,30 +6847,38 @@ function tvWire(C,s){const q=sel=>tvStage.querySelectorAll(sel),one=id=>tvStage.
  const pa=one('tvPause');if(pa)pa.onclick=()=>{if(s.trun){s.tacc=(s.tacc||0)+Date.now()-s.tstart;s.trun=false}else{s.tstart=Date.now();s.trun=true}saveTv();tvStageRender()};
  const en=one('tvEnv');if(en)en.onclick=()=>{s.envOpen=true;saveTv();tvBroadcast({t:'env'});tvStageRender()};
  const op=one('tvOpl');if(op)op.onclick=()=>{tvScr='opl';tvStageRender()};
+ const rd=one('tvRound');if(rd)rd.onclick=()=>tvNextRound(C,s);
  const tp=one('tvTip');if(tp)tp.onclick=()=>{s.tipN=(s.tipN||0)+1;saveTv();tvStageRender()};
  const cl=one('tvClr');if(cl)cl.onclick=()=>{s.manual={};s.votes={};if(tvHost)tvHost.votes={};saveTv();tvBroadcast({t:'state',phase:'stem',reveal:null,clear:true});tvStageRender()};
  const rv=one('tvRev');if(rv)rv.onclick=()=>{const n=tvTally(C),best=Object.entries(n).sort((a,b)=>b[1]-a[1]),top=best.filter(x=>x[1]===best[0][1]);
   if(top.length>1){rv.textContent='Gelijkspel! Overleg nog even.';return}if(!s.mot||!s.key){rv.textContent='Kies eerst het motief en het bewijs';return}s.reveal={pick:best[0][0],mot:s.mot,key:s.key};if(s.trun){s.tacc=(s.tacc||0)+Date.now()-s.tstart;s.trun=false}tvFinish(C,s,best[0][0]===C.answer);tvScr='onth';tvBroadcast({t:'state',phase:'onth',reveal:s.reveal});tvStageRender()};
  const ag=one('tvAgain');if(ag)ag.onclick=()=>{s.reveal=null;s.manual={};s.votes={};s.pick=null;s.done=false;if(tvHost)tvHost.votes={};saveTv();tvScr='stem';tvBroadcast({t:'state',phase:'stem',reveal:null,clear:true});tvStageRender()};
  const gv=one('tvGive');if(gv)gv.onclick=()=>{tvFinish(C,s,false);tvScr='opl';tvStageRender()};
- const fl=one('tvFilm');if(fl)fl.onclick=()=>{tvCloseStage();endFilm('tv',C.id)}}
+ const fl=one('tvFilm');if(fl)fl.onclick=()=>{if(MDK!=='tv')tvCloseStage();endFilm('tv',C.id)}}
 function tvFinish(C,s,ok){if(s.done&&s.won)return;s.done=true;s.won=ok;s.tries=(s.tries||0)+1;if(ok&&s.reveal)s.stars=Math.max(s.stars||0,tvStars(C,s.reveal));saveTv()}
 
 // ---------- telefoon van de speler (en alleen spelen) ----------
 function tvPhoneJoin(C){if(!TVQ||!TVQ.r||tvPeerPh)return;tvPh.online='verbinden…';tvPeerPh={};
  tvLib('peer').then(P=>{const peer=new P();tvPeerPh.peer=peer;const to=setTimeout(()=>{if(tvPh.online!=='online'){tvPh.online='offline';renderTv()}},9000);
   peer.on('open',()=>{const c=peer.connect('mdtv-'+TVQ.r.toLowerCase(),{reliable:true});tvPeerPh.c=c;
-   c.on('open',()=>{clearTimeout(to);tvPh.online='online';c.send({t:'hi',uid:tvUid(),name:tvName(),slots:TVQ.p,join:!!TVQ.join});renderTv()});
+   c.on('open',()=>{clearTimeout(to);tvPh.online='online';c.send({t:'hi',uid:tvUid(),name:tvName(),slots:TVQ.p,join:!!TVQ.join&&!TVQ.rc,rc:!!TVQ.rc});renderTv()});
    tvPhWire(c)});
   peer.on('error',()=>{clearTimeout(to);tvPh.online='offline';renderTv()})}).catch(()=>{tvPh.online='offline';renderTv()})}
+const tvNotes=id=>{const A=store.get('md-tv-notes')||{},N=A[id]||{};N.sus=N.sus||{};return N};
+const tvNotesSave=(id,N)=>{const A=store.get('md-tv-notes')||{};A[id]=N;store.set('md-tv-notes',A)};
+function tvPhRender(){const a=document.activeElement,P=$('pTv');if(a&&/TEXTAREA|INPUT/.test(a.tagName)&&P&&P.contains(a)){tvPh.dirty=true;return}renderTv()}
 function tvPhWire(c){
-   c.on('data',d=>{if(d&&d.t==='slot'){TVQ.p=d.p||[];TVQ.n=d.n;TVQ.spec=!d.n;store.set('md-tv-join',{id:TVQ.id,r:TVQ.r,p:TVQ.p,n:TVQ.n,t:Date.now()});renderTv();return}if(!d)return;if(d.t==='ok'){tvPh.sent=true;renderTv()}if(d.t==='env'){tvPh.env=true;renderTv()}if(d.t==='state'){if(d.env)tvPh.env=true;if(d.clear){tvPh.sent=false;tvPh.vote=null}tvPh.reveal=d.reveal||null;if(d.reveal)tvPh.tab='stem';renderTv()}});
-   c.on('close',()=>{tvPh.online='offline';renderTv()})}
+   c.on('data',d=>{if(d&&d.t==='tips'){const old=(store.get('md-tv-tips')||{});const prev=old.room===d.room?(old.list||[]).length:0;store.set('md-tv-tips',{room:d.room,round:d.round,list:d.list});if(d.list.length>prev){tvPh.newTips=d.list.length-prev;try{navigator.vibrate&&navigator.vibrate([80,60,80])}catch(e){}}tvPhRender();return}if(d&&d.t==='hs'){tvPh.hs=d;if(TVQ&&TVQ.rc)tvPhRender();return}if(d&&d.t==='slot'){TVQ.p=d.p||[];TVQ.n=d.n;TVQ.spec=!d.n;TVQ.rc=!!d.rc;store.set('md-tv-join',{id:TVQ.id,r:TVQ.r,p:TVQ.p,n:TVQ.n,t:Date.now()});tvPhRender();return}if(!d)return;if(d.t==='ok'){tvPh.sent=true;tvPhRender()}if(d.t==='env'){tvPh.env=true;tvPhRender()}if(d.t==='state'){if(d.env)tvPh.env=true;if(d.clear){tvPh.sent=false;tvPh.vote=null}tvPh.reveal=d.reveal||null;if(d.reveal&&!(TVQ&&TVQ.rc))tvPh.tab='stem';tvPhRender()}});
+   c.on('close',()=>{tvPh.online='offline';tvPhRender()})}
 const tvName=()=>{const n=store.get('md-tv-name');if(n)return n;const ps=store.get(PASKEY)||{};return (ps.name||'').trim()||'Rechercheur'};
-function tvPhone(C,solo){const P=$('pTv'),slots=solo?[1,2,3,4]:TVQ.spec?[]:TVQ.p.length?TVQ.p:[1,2,3,4],s=tvS(C.id);
- const tabs=[['dos','📁 Mijn dossier'],['verh','🎧 Verhoren'],['zaak','🗂 De zaak'],['stem','🗳 Stem']];
+function tvPhone(C,solo){if(!solo&&TVQ&&TVQ.rc){const P=$('pTv');P.innerHTML=`<div class="storyhead"><span class="kicker">Tv-dossier · kamer ${TVQ.r} · bediening</span><h3>${C.title}</h3></div>${tvRemote(C)}<p class="hint">${tvPh.online==='offline'?'Geen verbinding met de tv. <button type="button" class="btn small" id="tvRetry">Opnieuw verbinden</button>':''}</p>`;P.querySelectorAll('[data-rc]').forEach(b=>b.onclick=()=>tvRc(b.dataset.rc,b.dataset.v));const rt=$('tvRetry');if(rt)rt.onclick=()=>{try{tvPeerPh&&tvPeerPh.peer&&tvPeerPh.peer.destroy()}catch(e){}tvPeerPh=null;renderTv()};return}const P=$('pTv'),slots=solo?[1,2,3,4]:TVQ.spec?[]:TVQ.p.length?TVQ.p:[1,2,3,4],s=tvS(C.id);
+ const tabs=[['dos','📁 Mijn dossier'],['verh','🎧 Verhoren'],['tips',`🕵️ Tips${tvPh.newTips?` <i class="tv-badge">${tvPh.newTips}</i>`:''}`],['zaak','🗂 De zaak'],['not','📝 Notities'],['stem','🗳 Stem']];
  let body='';
- if(tvPh.tab==='dos'&&!slots.length)body=`<div class="tv-paper tv-doc"><h4>Alle dossiers zijn al vergeven</h4><p>Je doet mee als extra rechercheur. Luister de verhoren, bekijk de zaak en stem mee met de groep.</p></div>`;
+ if(tvPh.tab==='tips'){tvPh.newTips=0;if(solo){const r=s.round||0;body=`<p class="hint">Elke ronde komen er nieuwe tips bij. Niet elke tip is belangrijk.</p>${C.rounds.slice(0,r).map((R0,ri)=>`<h3 class="tv-ph3">Ronde ${ri+1} · ${R0.t}</h3>${R0.tips.map(t=>`<article class="tv-paper tv-doc tv-tip">${tvStamp('GEHEIM')}<p>${t}</p></article>`).join('')}`).join('')}${r<C.rounds.length?`<button type="button" class="btn primary" id="tvSRound">📨 Open ronde ${r+1}: ${C.rounds[r].t}</button>`:'<p class="hint">Alle rondes zijn open.</p>'}`}
+  else{const T=store.get('md-tv-tips')||{},mine=T.room===(TVQ&&TVQ.r)?T.list||[]:[];body=`<div class="tv-secret">🤫 <b>Niet laten zien!</b> Deze tips zijn alleen voor jou. Vertel de anderen in je eigen woorden wat je weet.</div>${mine.length?[...mine].reverse().map(([r,i,t])=>`<article class="tv-paper tv-doc tv-tip">${tvStamp('RONDE '+(r+1))}<p>${tvEsc(t)}</p></article>`).join(''):`<p class="hint">${T.round?'Deze ronde heb jij geen tip gekregen. Luister goed naar de anderen.':'Nog geen tips. De VIP start de rondes op de tv.'}</p>`}`}}
+ else if(tvPh.tab==='not'){const N=tvNotes(C.id);body=`<p class="hint">Je eigen notitieboekje. Alleen jij ziet dit, ook als je de pagina ververst.</p>${C.suspects.map(S=>{const n=N.sus[S.id]||{};return `<div class="tv-note tvn-${n.st||"q"}"><div class="tv-nh">${tvMug(S,54)}<span><b>${S.name}</b><small>${S.role}</small></span></div><div class="tv-nst">${[['q','❔ Twijfel'],['v','🔴 Verdacht'],['o','🟢 Onschuldig']].map(([k,l])=>`<button type="button" data-nst="${S.id}" data-v="${k}" aria-pressed="${(n.st||'q')===k}">${l}</button>`).join('')}</div><textarea data-ntx="${S.id}" rows="2" placeholder="Alibi, motief, wat klopt er niet?">${tvEsc(n.t||'')}</textarea></div>`}).join('')}<h3 class="tv-ph3">Vrije notities</h3><textarea class="tv-nfree" id="tvNFree" rows="7" placeholder="Tijden, vragen, ideeën…">${tvEsc(N.free||'')}</textarea>`}
+ else if(tvPh.tab==='bed')body=tvRemote(C);
+ else if(tvPh.tab==='dos'&&!slots.length)body=`<div class="tv-paper tv-doc"><h4>Alle dossiers zijn al vergeven</h4><p>Je doet mee als extra rechercheur. Luister de verhoren, bekijk de zaak en stem mee met de groep.</p></div>`;
  else if(tvPh.tab==='dos')body=`<p class="hint">${solo?'Je speelt alleen: je hebt alle vier de dossiers.':'Dit dossier is alleen voor jou. Lees het goed en vertel de anderen wat je ziet. Laat je telefoon niet zomaar zien!'}</p>${slots.map(k=>{const D=C.secret[k-1];return `<details class="tv-fold" ${slots.length===1?'open':''}><summary><span class="tv-tab">${D.ic} ${D.t}</span><small>${D.docs.length} stukken</small></summary>${D.docs.map(d=>`<article class="tv-paper tv-doc">${tvStamp('VERTROUWELIJK')}<h4>${d.t}</h4>${d.h}</article>`).join('')}</details>`}).join('')}`;
  if(tvPh.tab==='verh'){const S=C.suspects.find(x=>x.id===tvPh.open);
   body=S?`<button type="button" class="btn small backbtn" data-tvo="">← Alle verhoren</button><div class="tv-phcam">${tvMug(S,150)}<span><b>${S.name}</b>${S.role}</span></div><button type="button" class="btn primary" id="tvPPlay">${tvSay.on&&tvSay.id===S.id?'⏸ Stop':'▶ Luister het verhoor'}</button><div class="tv-paper tv-pvbox ph" id="tvPv">${tvTranscript(S,tvSay.on&&tvSay.id===S.id?tvSay.i:-1)}</div>`
@@ -6816,6 +6895,11 @@ function tvPhone(C,solo){const P=$('pTv'),slots=solo?[1,2,3,4]:TVQ.spec?[]:TVQ.p
  P.innerHTML=`${solo?'<button class="btn small backbtn" id="tvBack" type="button">← Terug</button>':''}<div class="storyhead"><span class="kicker">Tv-dossier · zaak ${C.nr}${solo?' · alleen':TVQ&&TVQ.r?` · kamer ${TVQ.r}${TVQ.n?` · speler ${TVQ.n}`:''}`:''}</span><h3>${C.title}</h3></div>
   <div class="tv-ptabs" role="tablist">${tabs.map(([k,n])=>`<button type="button" role="tab" data-tvt="${k}" aria-selected="${tvPh.tab===k}">${n}</button>`).join('')}</div><div class="tv-pbody">${body}</div>`;
  const on=(id,f)=>{const e=$(id);if(e)e.onclick=f};
+ P.querySelectorAll('[data-nst]').forEach(b=>b.onclick=()=>{const N=tvNotes(C.id),k=b.dataset.nst;N.sus[k]=N.sus[k]||{};N.sus[k].st=b.dataset.v;tvNotesSave(C.id,N);renderTv()});
+ P.querySelectorAll('[data-ntx]').forEach(t=>t.oninput=()=>{const N=tvNotes(C.id),k=t.dataset.ntx;N.sus[k]=N.sus[k]||{};N.sus[k].t=t.value.slice(0,2000);tvNotesSave(C.id,N)});
+ {const fr=$('tvNFree');if(fr)fr.oninput=()=>{const N=tvNotes(C.id);N.free=fr.value.slice(0,6000);tvNotesSave(C.id,N)}}
+ P.querySelectorAll('textarea,input').forEach(t=>t.addEventListener('blur',()=>{if(tvPh.dirty){tvPh.dirty=false;setTimeout(()=>{const a=document.activeElement;if(!(a&&/TEXTAREA|INPUT/.test(a.tagName)))renderTv()},50)}}));
+ P.querySelectorAll('[data-rc]').forEach(b=>b.onclick=()=>tvRc(b.dataset.rc,b.dataset.v));
  on('tvBack',()=>{tvStop();tvPh.solo=false;renderTv()});
  P.querySelectorAll('[data-tvt]').forEach(b=>b.onclick=()=>{tvStop();tvPh.tab=b.dataset.tvt;renderTv();window.scrollTo({top:0})});
  P.querySelectorAll('[data-tvo]').forEach(b=>b.onclick=()=>{tvStop();tvPh.open=b.dataset.tvo||null;renderTv()});
@@ -6830,33 +6914,37 @@ function tvPhone(C,solo){const P=$('pTv'),slots=solo?[1,2,3,4]:TVQ.spec?[]:TVQ.p
  on('tvSOpl',()=>{tvPh.opl=true;renderTv()});
  on('tvOplX',()=>{tvPh.opl=false;renderTv()});
  on('tvRetry',()=>{try{tvPeerPh&&tvPeerPh.peer&&tvPeerPh.peer.destroy()}catch(e){}tvPeerPh=null;renderTv()});
+ on('tvSRound',()=>{s.round=Math.min(C.rounds.length,(s.round||0)+1);saveTv();renderTv()});
  on('tvPTip',()=>{tvPh.tip=(tvPh.tip||0)+1;renderTv()});
  on('tvSFilm',()=>endFilm('tv',C.id));on('tvSGive',()=>{tvFinish(C,s,false);tvPh.opl=true;renderTv()});
  on('tvSAgain',()=>{s.reveal=null;s.done=false;saveTv();tvPh.vote=null;renderTv()})}
 
 // ---------- meedoen met een kamercode (zoals bij partyspellen op de tv) ----------
 function tvJoinScreen(){const P=$('pTv'),J=TVJOIN;
- P.innerHTML=`<div class="tv-jp"><p class="kicker">Tv-dossier</p><h2 class="bigtitle" style="font-size:clamp(40px,13vw,72px)">Doe mee</h2><p class="lead">Vul de code in die op de tv staat.</p>
+ P.innerHTML=`<div class="tv-jp">${MDK?`<p class="tv-klogo">${PASBADGE}<b>MOORDDOSSIER <span>TV</span></b></p>`:'<p class="kicker">Tv-dossier</p>'}<h2 class="bigtitle" style="font-size:clamp(40px,13vw,72px)">Doe mee</h2><p class="lead">Vul de code in die op de tv staat.</p>
   <form id="tvJF" class="tv-jform"><label>Kamercode<input id="tvJC" maxlength="4" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABCD" value="${tvEsc(J.code)}"></label>
   <label>Jouw naam<input id="tvJN" maxlength="20" autocomplete="nickname" placeholder="Naam" value="${tvEsc(store.get('md-tv-name')||((store.get(PASKEY)||{}).name||''))}"></label>
-  <button class="btn primary" type="submit" ${J.busy?'disabled':''}>${J.busy?'Verbinden…':'Doe mee'}</button><p class="msg" id="tvJM">${J.err||''}</p></form>
-  <button type="button" class="btn small" id="tvJX">← Terug naar de app</button></div>`;
+  <button class="btn primary" type="submit" ${J.busy?'disabled':''}>${J.busy?'Verbinden…':'Doe mee'}</button><button class="btn" type="button" id="tvJRC" ${J.busy?'disabled':''}>📺 Alleen de tv bedienen</button><small class="tv-jsm">Voor een tablet of extra telefoon op tafel. Dit apparaat speelt niet mee.</small><p class="msg" id="tvJM">${J.err||''}</p></form>
+  ${MDK?'':'<button type="button" class="btn small" id="tvJX">← Terug naar de app</button>'}</div>`;
  const ci=$('tvJC');ci.oninput=()=>{ci.value=ci.value.toUpperCase().replace(/[^A-Z]/g,'').slice(0,4)};
- $('tvJX').onclick=()=>{TVJOIN=null;try{history.replaceState(null,'',location.pathname)}catch(e){}renderTv()};
+ if($('tvJX'))$('tvJX').onclick=()=>{TVJOIN=null;try{history.replaceState(null,'',location.pathname)}catch(e){}renderTv()};
  $('tvJF').onsubmit=e=>{e.preventDefault();const code=ci.value,nm=$('tvJN').value.trim().slice(0,20);if(code.length!==4){J.err='De code heeft 4 letters.';return tvJoinScreen()}if(!nm){J.err='Vul je naam in.';return tvJoinScreen()}
-  store.set('md-tv-name',nm);J.code=code;J.err='';J.busy=true;tvJoinScreen();tvJoinGo(code,nm)}}
-function tvJoinGo(code,nm){const J=TVJOIN,fail=m=>{J.busy=false;J.err=m;try{peer&&peer.destroy()}catch(e){}if(TVJOIN&&!TVQ)tvJoinScreen()};let peer=null,done=false;
+  store.set('md-tv-name',nm);J.code=code;J.err='';J.busy=true;tvJoinScreen();tvJoinGo(code,nm)}
+ $('tvJRC').onclick=()=>{const code=ci.value,nm=$('tvJN').value.trim().slice(0,20)||'Bediening';if(code.length!==4){J.err='De code heeft 4 letters.';return tvJoinScreen()}J.code=code;J.err='';J.busy=true;tvJoinScreen();tvJoinGo(code,nm,true)}}
+function tvJoinGo(code,nm,rc){const J=TVJOIN,fail=m=>{J.busy=false;J.err=m;try{peer&&peer.destroy()}catch(e){}if(TVJOIN&&!TVQ)tvJoinScreen()};let peer=null,done=false;
  const to=setTimeout(()=>{if(!done)fail('Geen verbinding met de tv. Staat het spel open op het scherm Spelers?')},12000);
  tvLib('peer').then(Pc=>{peer=new Pc();peer.on('error',e=>{clearTimeout(to);fail(e&&e.type==='peer-unavailable'?'Deze kamer bestaat niet. Kijk goed naar de code op de tv.':'Geen verbinding. Probeer het nog eens.')});
   peer.on('open',()=>{const c=peer.connect('mdtv-'+code.toLowerCase(),{reliable:true});
-   c.on('open',()=>c.send({t:'hi',uid:tvUid(),name:nm,slots:[],join:true}));
+   c.on('open',()=>c.send({t:'hi',uid:tvUid(),name:nm,slots:[],join:!rc,rc:!!rc}));
    c.on('data',function first(d){if(!d||d.t!=='slot'||done)return;done=true;clearTimeout(to);c.off&&c.off('data',first);
-    TVQ={id:d.id,r:code,p:d.p||[],n:d.n,spec:!d.n,join:true};store.set('md-tv-join',{id:d.id,r:code,p:TVQ.p,n:d.n,t:Date.now()});
+    TVQ={id:d.id,r:code,p:d.p||[],n:d.n,spec:!d.n,join:true,rc:!!d.rc};store.set('md-tv-join',{id:d.id,r:code,p:TVQ.p,n:d.n,t:Date.now()});
     tvPeerPh={peer,c};tvPh={tab:'dos',open:null,vote:null,sent:false,online:'online',reveal:null,tip:0};tvPhWire(c);TVJOIN=null;
-    try{history.replaceState(null,'',`${location.pathname}?tv=${d.id}&r=${code}&p=${TVQ.p.join('.')}&j=1`)}catch(e){}renderTv();window.scrollTo({top:0})})})}).catch(()=>{clearTimeout(to);fail('Geen internet. Probeer het opnieuw.')})}
+    try{history.replaceState(null,'',`${location.pathname}?tv=${d.id}&r=${code}&p=${TVQ.p.join('.')}&j=1${TVQ.rc?'&rc=1':''}`)}catch(e){}renderTv();window.scrollTo({top:0})})})}).catch(()=>{clearTimeout(to);fail('Geen internet. Probeer het opnieuw.')})}
 
 // ---------- het spel in de app ----------
 function renderTv(){const P=$('pTv');if(!P)return;
+ if(MDK==='tv')return tvKioskTv();
+ if(MDK==='join'&&!TVQ&&!TVJOIN){let c0='';try{c0=(new URLSearchParams(location.search).get('c')||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,4)}catch(e){}TVJOIN={code:c0,err:'',busy:false}}
  if(TVJOIN&&!TVQ)return tvJoinScreen();
  if(TVQ){const C=tvC(TVQ.id);if(!C){P.innerHTML=`<p class="lead">Deze zaak bestaat niet (meer). Vraag de host om een nieuwe link.</p>`;return}tvPhoneJoin(C);return tvPhone(C,false)}
  const C=tvC(tvd.cur);
@@ -6877,6 +6965,47 @@ function renderTv(){const P=$('pTv');if(!P)return;
  $('tvGoSolo').onclick=()=>{const go=()=>{tvPh={tab:'dos',open:null,vote:null,sent:false,online:'',reveal:null,tip:0,solo:true};renderTv();window.scrollTo({top:0})};if(!filmSeen('tv',C.id))storyFilm('tv',C.id,go);else go()};
  const rs=$('tvReset');if(rs)rs.onclick=()=>{const keep=tvS(C.id);tvd.cases[C.id]={room:keep.room,np:keep.np,best:keep.won||keep.best||false};saveTv();renderTv()};
  const fb=P.querySelector('.filmbtn');}
+
+// ---------- eigen webpagina's: /tv/ (groot scherm) en /join/ (telefoon als controller) ----------
+if(MDK)document.body.classList.add('kiosk','kiosk-'+MDK);
+function tvEnsureStage(){if(!tvStage){tvStage=document.createElement('div');tvStage.className='tv-ov';tvStage.setAttribute('role','dialog');tvStage.setAttribute('aria-label','Tv-scherm');document.body.appendChild(tvStage);addEventListener('resize',tvFit)}tvStage.hidden=false;document.body.classList.add('tv-lock')}
+function tvKioskTv(){const P=$('pTv');if(P)P.innerHTML='';if(!tvStage||tvStage.hidden){tvEnsureStage();tvScr='home';tvStageRender()}}
+function tvHomeRender(){const url=tvJoinUrl('').replace(/^https?:\/\//,'');
+ tvStage.innerHTML=`<div class="tv-16 tv-home"><div class="tv-hlogo">${PASBADGE}<div><h1>MOORDDOSSIER <span>TV</span></h1><p>Echte moordzaken voor op het grote scherm. Jullie telefoons zijn de controllers.</p></div></div>
+ <div class="tv-hcases">${TVCASES.map(c=>{const s=tvS(c.id);return `<article class="tv-hcase"><div class="tv-hpic">${polaroid(c.photos[0][0],c.photos[0][1])}</div><div class="tv-htxt"><span class="tv-cfold"><i>ZAAK ${c.nr}</i></span><h2>${c.title}</h2><p>${c.blurb}</p><small>${c.players} · ${c.time} · ${c.level}${s.done?(s.won?' · ✅ opgelost':' · gesloten'):''}</small>
+  <div class="tv-row left"><button type="button" class="tv-btn primary" data-hc="${c.id}" data-solo="0">👥 Samen spelen</button><button type="button" class="tv-btn" data-hc="${c.id}" data-solo="1">🕵️ Alleen spelen</button></div></div></article>`}).join('')}
+  <article class="tv-hcase soon"><b>Nieuwe zaken volgen</b><span>Elke zaak is een avondvullend onderzoek.</span></article></div>
+ <p class="tv-hfoot">Spelers doen mee via <b>${url}</b> met de kamercode die je zo te zien krijgt.</p></div>`;
+ tvStage.querySelectorAll('[data-hc]').forEach(b=>b.onclick=()=>{const C=tvC(b.dataset.hc),solo=b.dataset.solo==='1';tvd.cur=C.id;saveTv();
+  const go=()=>{tvOpenStage(C,solo);if(!solo){tvScr='spel';tvStageRender()}};if(!filmSeen('tv',C.id))storyFilm('tv',C.id,go);else go()});
+ tvFit();const f=tvStage.querySelector('[data-hc]');if(f)try{f.focus({preventScroll:true})}catch(e){}}
+// toetsen op het grote scherm: 1-7 kiest een scherm, PageUp/PageDown of [ ] bladert, Esc gaat terug
+addEventListener('keydown',e=>{if(MDK!=='tv'||!tvStage||tvStage.hidden||tvScr==='home'||/INPUT|TEXTAREA/.test((e.target||{}).tagName||''))return;const C=tvC(tvd.cur);if(!C)return;const L=tvScrList(tvS(C.id)),i=L.findIndex(x=>x[0]===tvScr);
+ let to=null;if(/^[1-8]$/.test(e.key))to=L[+e.key-1];else if(e.key==='PageDown'||e.key===']')to=L[(i+1)%L.length];else if(e.key==='PageUp'||e.key==='[')to=L[(i-1+L.length)%L.length];else if(e.key==='Escape'){tvStop();tvBig=null;tvScr='home';tvStageRender();return}
+ if(to){e.preventDefault();tvCmd('scr',to[0])}});
+// opdracht van de VIP-telefoon: we drukken op dezelfde knop als op het scherm
+function tvCmd(a,v){if(!tvStage||tvStage.hidden)return false;const q=sel=>tvStage.querySelector(sel),esc=x=>String(x==null?'':x).replace(/["\\]/g,''),click=el=>{if(el){el.click();return true}return false};
+ if(a==='scr')return click(q(`[data-scr="${esc(v)}"]`));
+ if(a==='big'){if(v===''||v==null)return click(q('[data-big=""]'))||click(q('[data-big="-1"]'));if(click(q(`[data-big="${esc(v)}"]`)))return true;if(click(q('[data-big=""]'))||click(q('[data-big="-1"]')))return click(q(`[data-big="${esc(v)}"]`));return false}
+ const ids={round:'tvRound',play:'tvPlay',env:'tvEnv',rev:'tvRev',opl:'tvOpl',again:'tvAgain',give:'tvGive',film:'tvFilm',tip:'tvTip',pause:'tvPause',clr:'tvClr'};
+ if(ids[a])return click(q('#'+ids[a]));
+ const at={mot:'data-mot',key:'data-key',tm:'data-tm',np:'data-np'};if(at[a])return click(q(`[${at[a]}="${esc(v)}"]`));return false}
+function tvRc(a,v){const c=tvPeerPh&&tvPeerPh.c;if(c&&c.open){c.send({t:'cmd',a,v});try{navigator.vibrate&&navigator.vibrate(15)}catch(e){}}else{tvPh.online='offline';renderTv()}}
+function tvRemote(C){const h=tvPh.hs;if(!h)return `<p class="hint">📺 Jij bedient de tv. Wachten op het tv-scherm…</p>`;
+ const B=(a,v,l,on,cls='')=>`<button type="button" class="tv-rc ${cls}" data-rc="${a}" data-v="${v==null?'':v}" aria-pressed="${!!on}">${l}</button>`;
+ const L=[['spel','👥','Spelers'],['melding','🚨','Melding'],['pd','📸','Plaats delict'],['verd','🧑','Verdachten'],['verh','🎧','Verhoren'],['ronde','📨','Geheime tips'],['env','✉️','Envelop B'],['stem','⚖️','Beschuldig']];
+ const sc=h.scr;let ctx='',t='';
+ if(sc==='spel'){t='Wie doen er mee?';ctx=`<p class="hint">Iedereen binnen? Tik op <b>Melding</b> om het onderzoek te starten.</p><div class="tv-rrow">${[1,2,3,4].map(k=>B('np',k,k+(k===1?' speler':' spelers'),h.np===k)).join('')}</div>`}
+ if(sc==='melding'){t='Melding';ctx=`<p class="hint">Uitdaging: speel met een timer.</p><div class="tv-rrow">${[[0,'Geen timer'],[60,'1 uur'],[120,'2 uur']].map(([m,n])=>B('tm',m,n,h.tm===m)).join('')}${h.tm?B('pause','',h.trun?'⏸ Pauze':'▶ Verder'):''}</div>`}
+ if(sc==='pd'){t='Plaats delict';ctx=`<div class="tv-rrow">${C.photos.map((p,i)=>B('big',i,'📷 Foto '+(i+1),h.big===i)).join('')}</div>${h.big!=null?B('big','','← Terug naar het bord','', 'wide'):''}`}
+ if(sc==='verd'){t='Verdachten';ctx=`<p class="hint">De vier verdachten staan op de tv.</p>`}
+ if(sc==='verh'){t='Verhoren';ctx=`<div class="tv-rrow">${C.suspects.map(S=>B('big',S.id,S.name.split(' ')[0],h.big===S.id)).join('')}</div>${typeof h.big==='string'&&h.big?B('play','',h.play?'⏸ Stop het verhoor':'▶ Speel af op de tv',h.play,'wide primary')+B('big','','← Alle verhoren','', 'wide'):''}`}
+ if(sc==='ronde'){t='Geheime tips';ctx=h.round<h.rounds?`<p class="hint">${h.round?`Ronde ${h.round} is bezig. Heeft iedereen verteld wat hij weet?`:'Start de eerste ronde. Iedereen krijgt dan een geheime tip.'}</p>${B('round','','📨 Start ronde '+(h.round+1),'', 'wide primary')}`:'<p class="hint">Alle rondes zijn gespeeld.</p>'}
+ if(sc==='env'){t='Envelop B';ctx=h.env?`<p class="hint">De envelop is open. Het nieuwe bewijs staat op de tv.</p>`:`<p class="hint">${C.envelope.when}</p>${B('env','','🔓 Verbreek het zegel','', 'wide primary')}`}
+ if(sc==='stem'){t='Beschuldig';ctx=`<p class="hint">Iedereen stemt in het tabblad 🗳 Stem. Kies samen het motief en het bewijs.</p><h4>Waarom?</h4><div class="tv-rrow">${C.motives.map(([k,n])=>B('mot',k,n,h.mot===k)).join('')}</div><h4>Doorslaggevend bewijs</h4><div class="tv-rrow">${C.keys.map(([k,n])=>B('key',k,n,h.key===k)).join('')}</div>${h.tip<C.tips.length?B('tip','','💡 Tip '+(h.tip+1)+' op de tv','', 'wide'):''}${B('rev','','🔒 Onthul de dader','', 'wide primary')}${B('clr','','Stemmen wissen','', 'wide')}`}
+ if(sc==='onth'){t='Uitspraak';ctx=h.ok?B('opl','','📜 De volledige oplossing','', 'wide primary'):B('again','','↺ Nog eens overleggen','', 'wide')+B('give','','Toon de oplossing','', 'wide')}
+ if(sc==='opl'){t='Oplossing';ctx=B('film','','🎬 Speel het filmpje af','', 'wide primary')}
+ return `<div class="tv-remote"><p class="tv-vip">📺 Afstandsbediening · jij bedient de tv</p><div class="tv-rgrid">${L.map(([k,i,n])=>B('scr',k,`<i>${i}</i>${n}`,sc===k,'big')).join('')}</div><div class="tv-rctx"><h3>${t}</h3>${ctx}</div></div>`}
 
 SCR.tv={
  lepel:[['t','Het laatste gerecht','gerecht','Tv-dossier · zaak 01'],['s','Restaurant De Vergulde Lepel',['night',['cafe',150,178,1.1,'DE VERGULDE LEPEL'],['moon',250,40,1]],'Zaterdagavond. Het restaurant aan de Lindengracht is net dicht.'],['s','De keuken · 00:41',['wall',['stove',120,182,1.25],['shards',212,186,1.1],['marker',262,190,1,1]],'De schoonmaker vindt chef-kok Ferre Hoogwerf naast het fornuis.'],['s','Vier mensen',['dark',['bottle',150,160,1.3]],'Een sous-chef, een sommelier, zijn vrouw en een criticus. Eén van hen liegt.'],['e','Wie sloeg de chef neer?','Start het onderzoek']]};
@@ -7255,7 +7384,7 @@ function start(data){
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 </script>
 <script>
-const APPV='20261104124039';
+const APPV='20261104144037';
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 // Nieuwe versie online? Dan herladen zodra de app weer in beeld komt. Voortgang staat in localStorage en blijft bewaard.
 function checkNew(){fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APPV){if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});let done='';try{done=sessionStorage.getItem('md-reload')||''}catch(e){}if(done===j.v)return;try{sessionStorage.setItem('md-reload',j.v)}catch(e){}setTimeout(()=>location.reload(),400)}}).catch(()=>{})}

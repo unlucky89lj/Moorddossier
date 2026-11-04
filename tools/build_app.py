@@ -13,6 +13,7 @@ head=f'''<!doctype html>
 <title>Moorddossier</title>
 <meta name="description" content="Logische moordpuzzels: lees de aanwijzingen, vul het rooster in en ontmasker de dader.">
 <meta name="theme-color" content="#C2321F">
+<meta name="color-scheme" content="light dark">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">

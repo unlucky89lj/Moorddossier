@@ -7,6 +7,7 @@
 <script>window.onerror=function(m,u,l){try{if(document.getElementById("mdErr"))return;var d=document.createElement("div");d.id="mdErr";d.style.cssText="position:fixed;left:0;right:0;bottom:0;background:#c2321f;color:#fff;padding:12px 16px;font:16px/1.4 sans-serif;z-index:9999";d.textContent="Deze browser kan Moorddossier niet goed laden ("+m+", regel "+l+"). Gebruik een laptop, tablet of telefoon en cast naar de tv.";(document.body||document.documentElement).appendChild(d)}catch(e){}};</script>
 <meta name="description" content="Logische moordpuzzels: lees de aanwijzingen, vul het rooster in en ontmasker de dader.">
 <meta name="theme-color" content="#151716">
+<meta name="color-scheme" content="light dark">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -18,7 +19,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Caveat:wght@600&family=Zilla+Slab:wght@500;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <style>
 /* Layout: puzzelboekpagina — kop met verhaal, grijze band met kaarten, aanwijzingen, rooster naast Wie/Wat/Waar */
-:root{
+:root{color-scheme:light dark;
   --page:#EEEFEA; --band:#CDD0C8; --card:#FBFBF8; --ink:#1C1F22; --muted:#5E635F; --rule:#9EA39C; --red:#C2321F; --ok:#2E6A49;
   --cond:"Barlow Condensed","Arial Narrow",sans-serif;
   --slab:"Zilla Slab","Rockwell",Georgia,serif;
@@ -12090,7 +12091,8 @@ function tvFit() {
   if (!tvStage || tvStage.hidden) return;
   const el = tvStage.querySelector(".tv-16");
   if (!el) return;
-  const k = Math.min(innerWidth / 1600, innerHeight / 900);
+  const de = document.documentElement, vv = window.visualViewport, W = Math.min(innerWidth, de.clientWidth || innerWidth, vv ? vv.width : innerWidth), H2 = Math.min(innerHeight, de.clientHeight || innerHeight, vv ? vv.height : innerHeight);
+  const k = Math.min(W / 1600, H2 / 900) * (window.MDKIOSK === "tv" ? 0.96 : 1);
   el.style.transform = "translate(-50%,-50%) scale(".concat(k, ")");
   tvStage.classList.toggle("portrait", innerHeight > innerWidth * 1.1);
 }

@@ -1051,6 +1051,27 @@ body.kiosk-join .tv-jform .btn.primary{font-size:22px;padding:16px}
 .tv-eigr{display:flex;grid-gap:6px;gap:6px}.tv-eigr input{flex:1;min-width:0;font:600 17px system-ui,sans-serif;padding:10px 12px;border-radius:10px;border:2px solid #9a948a;background:#fffdf6;color:#1d1a16}
 .tv-eigr button{white-space:nowrap}.tv-eigr button[aria-pressed=true]{background:#5a3a6a;color:#fff;border-color:#5a3a6a}
 .tv-eerr{color:#e86a55;font-weight:700}
+/* ---- extra's per spel (v89) ---- */
+#clues .clue.hl{background:#fff2b8;outline:2px solid #e2a93e;border-radius:6px}
+.sp-ap{margin:12px 0;padding:12px 14px;border-radius:12px;background:var(--band);border-left:5px solid var(--red)}.sp-ap div{display:flex;flex-wrap:wrap;grid-gap:8px;gap:8px;margin:8px 0}.sp-ap small{color:var(--muted)}.sp-ap p{margin:6px 0 0}
+.kd-lensbar{display:flex;align-items:center;grid-gap:10px;gap:10px;flex-wrap:wrap;margin:8px 0}.kd-lensbar small{color:var(--muted)}
+.kd-lenshost{position:relative;display:block}.kd-lens{position:absolute;width:150px;height:150px;border-radius:50%;overflow:hidden;border:4px solid #3a2a1a;box-shadow:0 6px 18px rgba(0,0,0,.45),inset 0 0 18px rgba(0,0,0,.35);pointer-events:none;z-index:5;background:#ddd}.kd-lens svg{position:absolute;max-width:none}
+.b-live{position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:300;background:#1e1f22;color:#f3f3f3;border-radius:16px;padding:10px 16px;box-shadow:0 8px 26px rgba(0,0,0,.4);display:flex;flex-direction:column;grid-gap:2px;gap:2px;min-width:260px;max-width:92vw;animation:bLin .35s ease-out}.b-live b{font:700 13px system-ui;color:#9fd0ff}.b-live.out{opacity:0;transition:opacity .7s}
+@keyframes bLin{from{transform:translate(-50%,-30px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+.pb-ov{position:fixed;top:0;right:0;bottom:0;left:0;top:0;right:0;bottom:0;left:0;z-index:400;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center}
+.pb-board{position:relative;background:#b58a55 radial-gradient(#c49a62 1px,transparent 1.5px);background-size:14px 14px;border:10px solid #5a3a1a;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.5);overflow:hidden;touch-action:none}
+.pb-top{position:absolute;left:0;right:0;top:0;display:flex;grid-gap:10px;gap:10px;align-items:center;padding:8px 10px;background:rgba(40,25,10,.75);color:#fff3dc;z-index:3}.pb-top span{flex:1;font-size:13px}
+.pb-str{position:absolute;left:0;top:0;pointer-events:none;z-index:1}
+.pb-card{position:absolute;width:140px;min-height:44px;background:#fffdf3;color:#222;padding:14px 10px 8px;font:600 13px/1.25 system-ui;box-shadow:0 3px 8px rgba(0,0,0,.35);transform:rotate(-1.5deg);cursor:grab;z-index:2;user-select:none}.pb-card:nth-child(odd){transform:rotate(1.5deg)}.pb-card i{position:absolute;left:62px;top:-6px;width:14px;height:14px;border-radius:50%;background:#c2321f;box-shadow:0 2px 2px rgba(0,0,0,.4)}.pb-card.sel{outline:3px solid #e2a93e}
+.br-wheel{margin:14px 0;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:10px 14px}.br-wheel summary{font-weight:800;cursor:pointer}.br-wrow{display:flex;flex-wrap:wrap;grid-gap:14px;gap:14px;align-items:center;margin-top:8px}.br-wrow svg text{font:700 11px 'Courier New',monospace}.br-wrow svg .o{fill:#3a2a1a}.br-wrow svg .n{fill:#b5221a}.br-wrow svg .k{font-size:22px;fill:#3a2a1a}.br-wrow svg .ks{font-size:8px;fill:#6a5a4a}.br-wtest input{font:600 15px 'Courier New',monospace;padding:6px 8px;width:100%;margin-top:4px}.br-wtest b{display:block;font:700 16px 'Courier New',monospace;margin-top:6px;letter-spacing:1px}
+.rl-talk{display:flex;flex-direction:column;grid-gap:6px;gap:6px;margin:0 0 10px}.rl-talk p{display:flex;grid-gap:8px;gap:8px;align-items:center;margin:0}.rl-talk .br-av{width:36px;height:36px;flex:none}.rl-talk span{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:7px 11px;font-size:14px;line-height:1.35}.rl-talk span b{display:block;font-size:12px;color:var(--red)}
+.cs-wheelbox{display:flex;flex-direction:column;align-items:center;grid-gap:8px;gap:8px;margin:0 0 12px}.cs-wheel{width:200px;height:200px}.cs-rot{transform-origin:100px 100px}
+.cs-card{position:relative;cursor:pointer}.cs-back{position:absolute;top:0;right:0;bottom:0;left:0;border-radius:inherit;background:repeating-linear-gradient(45deg,#7a1a1a 0 6px,#5a1010 6px 12px);border:3px solid #f3e6c8;transition:opacity .35s,transform .35s;transform-origin:center}.cs-card.up .cs-back{opacity:0;transform:scaleX(0)}
+.vh-tone{display:flex;flex-wrap:wrap;grid-gap:6px;gap:6px;align-items:center;margin:0 0 10px}.vh-tone span{font-weight:700;margin-right:4px}.vh-tone button{border:2px solid var(--rule);background:var(--card);color:var(--ink);border-radius:20px;padding:6px 12px;font:600 14px system-ui;cursor:pointer}.vh-tone button[aria-checked=true]{background:var(--ink);color:var(--page);border-color:var(--ink)}.vh-tone small{flex-basis:100%;color:var(--muted)}
+.tl-alibi{margin:0 0 14px;padding:12px 14px;border-radius:12px;background:var(--band)}.tl-alibi h4{margin:0 0 6px}.tl-aopts{display:flex;flex-wrap:wrap;grid-gap:6px;gap:6px;margin:8px 0}.tl-alibi .ok{color:var(--ok);font-weight:700}.tl-alibi .bad{color:var(--red);font-weight:700}.tl-alibi button.ok{outline:2px solid var(--ok)}.tl-alibi button.bad{outline:2px solid var(--red)}
+.st-night svg{filter:brightness(.7) saturate(.75) hue-rotate(195deg)}.st-dark{position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none;z-index:4}
+#stBox{position:relative}
+@media (max-width:600px){.pb-top span{display:none}.pb-top b{flex:1;font-size:14px}}
 </style>
 </head>
 <body>
@@ -9542,7 +9563,7 @@ function renderVerhoor() {
     if (!S || !S.lie || s.adm.includes(S.adm) || s.done) return "";
     return '<button type="button" class="vh-conf" data-conf="'.concat(sid, '">⚡ Confronteer</button>');
   };
-  P.innerHTML = "".concat(head, '<div class="vh-room"><div class="vh-top"><span class="vh-cof" title="Koffie over">☕ <b>').concat(s.cof, '</b></span><span class="vh-stress"><i style="width:').concat(s.stress, "%;background:").concat(stressCol, '"></i></span><span class="vh-sl">Spanning</span></div>\n    ').concat(vhFace(C2, s), '<div class="vh-say ').concat(last[0] === "s" ? "" : "me", '"><b>').concat(last[0] === "s" ? C2.suspect.split(" ")[0] : "Let op", ":</b> ").concat(last[1], "</div></div>\n   ").concat(s.done ? '<div class="verdict '.concat(s.won ? "" : "bad", '"><p><b>').concat(s.won ? "Bekentenis!" : "Het verhoor is voorbij.", "</b> ").concat(s.won ? "Je prikte alle ".concat(C2.need.length, " leugens door en hield nog ").concat(s.cof, " koffie over.") : "Zijn advocaat komt binnen. Jelte zegt geen woord meer.", '</p></div><h4 class="solh">Wat er gebeurde</h4><div class="verdict"><p>').concat(C2.story, '</p></div><div class="controls"><button class="btn" id="vhReset" type="button">Opnieuw verhoren</button></div>') : s.pick ? '<section class="vh-pick"><h4>Welk bewijs laat zien dat dit niet klopt?</h4><p class="vh-quote">“'.concat(C2.st[s.pick].t, "”</p>").concat(C2.ev.map(([id, t, d]) => '<button type="button" class="vh-ev" data-ev="'.concat(id, '"><b>').concat(t, "</b><span>").concat(d, "</span></button>")).join(""), '<div class="controls"><button class="btn small" id="vhNo" type="button">Toch niet</button></div></section>') : '<section class="vh-qs"><h4>Stel een vraag <small>(kost 1 ☕)</small></h4>'.concat(avail.length ? avail.map((q) => '<button type="button" class="vh-q" data-q="'.concat(q.id, '">').concat(q.q, "</button>")).join("") : '<p class="hint">Geen nieuwe vragen. Kijk of je een uitspraak kunt confronteren met je bewijs.</p>', "</section>"), '\n   <section class="vh-log"><h4>Wat hij zei</h4>').concat(s.asked.map((qid) => {
+  P.innerHTML = "".concat(head, '<div class="vh-room"><div class="vh-top"><span class="vh-cof" title="Koffie over">☕ <b>').concat(s.cof, '</b></span><span class="vh-stress"><i style="width:').concat(s.stress, "%;background:").concat(stressCol, '"></i></span><span class="vh-sl">Spanning</span></div>\n    ').concat(vhFace(C2, s), '<div class="vh-say ').concat(last[0] === "s" ? "" : "me", '"><b>').concat(last[0] === "s" ? C2.suspect.split(" ")[0] : "Let op", ":</b> ").concat(last[1], "</div></div>\n   ").concat(s.done ? '<div class="verdict '.concat(s.won ? "" : "bad", '"><p><b>').concat(s.won ? "Bekentenis!" : "Het verhoor is voorbij.", "</b> ").concat(s.won ? "Je prikte alle ".concat(C2.need.length, " leugens door en hield nog ").concat(s.cof, " koffie over.") : "Zijn advocaat komt binnen. Jelte zegt geen woord meer.", '</p></div><h4 class="solh">Wat er gebeurde</h4><div class="verdict"><p>').concat(C2.story, '</p></div><div class="controls"><button class="btn" id="vhReset" type="button">Opnieuw verhoren</button></div>') : s.pick ? '<section class="vh-pick"><h4>Welk bewijs laat zien dat dit niet klopt?</h4><p class="vh-quote">“'.concat(C2.st[s.pick].t, "”</p>").concat(C2.ev.map(([id, t, d]) => '<button type="button" class="vh-ev" data-ev="'.concat(id, '"><b>').concat(t, "</b><span>").concat(d, "</span></button>")).join(""), '<div class="controls"><button class="btn small" id="vhNo" type="button">Toch niet</button></div></section>') : '<section class="vh-qs"><div class="vh-tone" role="radiogroup" aria-label="Jouw toon"><span>Jouw toon</span>'.concat([["zacht", "🤝 Rustig"], ["normaal", "😐 Neutraal"], ["hard", "👊 Hard"]].map(([k, l]) => '<button type="button" role="radio" data-tone="'.concat(k, '" aria-checked="').concat((s.tone || "normaal") === k, '">').concat(l, "</button>")).join(""), "<small>").concat((s.tone || "normaal") === "zacht" ? "Rustig: een foute confrontatie kost maar 1 ☕, maar de druk loopt langzaam op." : (s.tone || "normaal") === "hard" ? "Hard: veel druk, maar duw je te hard, dan klapt hij dicht." : "Neutraal: de gewone aanpak.", "</small></div><h4>Stel een vraag <small>(kost 1 ☕)</small></h4>").concat(avail.length ? avail.map((q) => '<button type="button" class="vh-q" data-q="'.concat(q.id, '">').concat(q.q, "</button>")).join("") : '<p class="hint">Geen nieuwe vragen. Kijk of je een uitspraak kunt confronteren met je bewijs.</p>', "</section>"), '\n   <section class="vh-log"><h4>Wat hij zei</h4>').concat(s.asked.map((qid) => {
     const q = C2.qs.find((x) => x.id === qid), S = C2.st[q.st], ad = S.adm && s.adm.includes(S.adm);
     return '<div class="vh-st '.concat(ad ? "broken" : "", '"><p class="vh-qq">').concat(q.q, "</p><p>“").concat(S.t, "”</p>").concat(ad ? '<p class="vh-adm">⚡ Doorgeprikt: “'.concat(C2.adm[S.adm], "”</p>") : stmtBtn(q.st), "</div>");
   }).join("") || '<p class="hint">Nog niets gevraagd.</p>', '</section>\n   <section class="vh-evs"><h4>Jouw bewijs</h4>').concat(C2.ev.map(([id, t, d]) => '<details class="stmt"><summary><b>'.concat(t, '</b></summary><div class="doc"><p>').concat(d, "</p></div></details>")).join(""), '</section>\n   <section class="notes"><label for="vhNotes"><b>Notitieblok</b></label><textarea id="vhNotes" rows="3" placeholder="Welke tijden kloppen niet?"></textarea></section>');
@@ -9583,11 +9604,26 @@ function renderVerhoor() {
       return true;
     }
   };
+  P.querySelectorAll("[data-tone]").forEach((b) => b.onclick = () => {
+    s.tone = b.dataset.tone;
+    saveVh();
+    renderVerhoor();
+  });
   P.querySelectorAll("[data-q]").forEach((b) => b.onclick = () => {
+    const tn = s.tone || "normaal";
+    if (tn === "hard" && s.stress >= 60 && Math.random() < 0.35) {
+      s.log.push(["s", pick(["Ik zeg niks meer. Niet zo tegen mij.", "Zonder advocaat praat ik niet. Rustig aan.", "Schreeuwen helpt je niet. Volgende."], Math.random)]);
+      s.stress = Math.max(0, s.stress - 10);
+      s.mood = "angry";
+      if (spend(1)) return;
+      saveVh();
+      renderVerhoor();
+      return;
+    }
     const q = C2.qs.find((x) => x.id === b.dataset.q);
     s.asked.push(q.id);
     s.log.push(["s", C2.st[q.st].t]);
-    s.stress = Math.min(100, s.stress + 3);
+    s.stress = Math.min(100, s.stress + (tn === "zacht" ? 1 : tn === "hard" ? 7 : 3));
     s.mood = moodOf();
     if (spend(1)) return;
     saveVh();
@@ -9609,7 +9645,7 @@ function renderVerhoor() {
     s.pick = null;
     if (b.dataset.ev === S.lie) {
       s.adm.push(S.adm);
-      s.stress = Math.min(100, s.stress + 22);
+      s.stress = Math.min(100, s.stress + ((s.tone || "normaal") === "zacht" ? 16 : (s.tone || "normaal") === "hard" ? 28 : 22));
       s.mood = moodOf();
       s.log.push(["s", C2.adm[S.adm]]);
       if (C2.need.every((a) => s.adm.includes(a))) {
@@ -9622,7 +9658,7 @@ function renderVerhoor() {
       s.stress = Math.max(0, s.stress - 8);
       s.mood = "smug";
       s.log.push(["s", pick(["Ha. En wat bewijst dat dan? Niks.", "Daar heb ik niks mee te maken. Volgende vraag.", "Is dit alles wat je hebt?"], Math.random)]);
-      if (spend(2)) return;
+      if (spend((s.tone || "normaal") === "zacht" ? 1 : 2)) return;
     }
     saveVh();
     renderVerhoor();
@@ -15045,6 +15081,466 @@ function pasAvEditor(a) {
   return '<section class="hb av-ed" id="avEd"><h4>Kies je personage</h4><div class="av-wrap"><div class="av-big">'.concat(avSvg(a, "-40 -150 80 152"), '</div><div class="av-ctl">\n   <b>Ik ben</b>').concat(opt("f", [[0, "Man"], [1, "Vrouw"]]), "\n   <b>Huidskleur</b>").concat(sw("skin", TSKIN), "\n   <b>Kapsel</b>").concat(opt("hair", AVHAIR[a.f ? 1 : 0]), "\n   <b>Haarkleur</b>").concat(sw("hc", THC), "\n   <b>Hoofddeksel</b>").concat(opt("hat", AVHAT), '\n   <b>Extra</b><div class="av-opt"><button type="button" class="btn small" data-av="glasses" data-v="t" aria-pressed="').concat(!!a.glasses, '">Bril</button>').concat(a.f ? "" : '<button type="button" class="btn small" data-av="beard" data-v="t" aria-pressed="'.concat(!!a.beard, '">Baard</button>'), "</div>\n   <b>Jas</b>").concat(sw("top", TTOP), '\n   <div class="controls"><button class="btn primary small" id="avDone" type="button">Klaar</button><button class="btn small" id="avRand" type="button">🎲 Verras me</button></div></div></div></section>');
 }
 let avOpen = false;
+let mdAC = null;
+function mdSnd(k) {
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    mdAC = mdAC || new AC();
+    const ac = mdAC, t = ac.currentTime, o = ac.createOscillator(), g = ac.createGain();
+    o.connect(g);
+    g.connect(ac.destination);
+    if (k === "tick") {
+      o.type = "square";
+      o.frequency.value = 1800;
+      g.gain.setValueAtTime(0.05, t);
+      g.gain.exponentialRampToValueAtTime(1e-4, t + 0.03);
+      o.start(t);
+      o.stop(t + 0.035);
+    } else if (k === "flip") {
+      o.type = "triangle";
+      o.frequency.setValueAtTime(500, t);
+      o.frequency.exponentialRampToValueAtTime(1400, t + 0.07);
+      g.gain.setValueAtTime(0.08, t);
+      g.gain.exponentialRampToValueAtTime(1e-4, t + 0.09);
+      o.start(t);
+      o.stop(t + 0.1);
+    } else if (k === "ding") {
+      o.type = "sine";
+      o.frequency.value = 880;
+      g.gain.setValueAtTime(0.12, t);
+      g.gain.exponentialRampToValueAtTime(1e-4, t + 0.6);
+      o.start(t);
+      o.stop(t + 0.62);
+    } else if (k === "buzz") {
+      o.type = "sawtooth";
+      o.frequency.value = 140;
+      g.gain.setValueAtTime(0.06, t);
+      g.gain.exponentialRampToValueAtTime(1e-4, t + 0.25);
+      o.start(t);
+      o.stop(t + 0.26);
+    }
+  } catch (e) {
+  }
+}
+const mdWrap = (name, after) => {
+  const f = window[name];
+  if (typeof f !== "function") return;
+  window[name] = function() {
+    const r = f.apply(this, arguments);
+    try {
+      after.apply(this, arguments);
+    } catch (e) {
+    }
+    return r;
+  };
+};
+const mdQ = (sel, root) => (root || document).querySelector(sel), mdQA = (sel, root) => Array.prototype.slice.call((root || document).querySelectorAll(sel));
+function mdGridHint(k) {
+  if (!k || typeof C === "undefined" || !C.clues) return;
+  const [b, a, c] = k.split(":"), T = b === "ws" ? ["[w".concat(a, "]"), "[s".concat(c, "]")] : b === "ls" ? ["[l".concat(a, "]"), "[s".concat(c, "]")] : ["[w".concat(a, "]"), "[l".concat(c, "]")];
+  mdQA("#clues .clue").forEach((li) => li.classList.remove("hl"));
+  let n = 0;
+  C.clues.forEach((t, i) => {
+    if (T.some((x) => t.indexOf(x) >= 0)) {
+      const li = mdQ('#clues [data-i="'.concat(i, '"]'));
+      if (li) {
+        li.classList.add("hl");
+        n++;
+      }
+    }
+  });
+  const m = mdQ("#gridMsg");
+  if (m) m.innerHTML = "🔎 Bij ".concat(tok(T[0]), " en ").concat(tok(T[1]), " klopt een vakje niet. ").concat(n ? "Lees de gemarkeerde aanwijzingen nog eens." : "Denk aan wat je kunt uitsluiten.");
+  const f = mdQ("#clues .clue.hl");
+  if (f) f.scrollIntoView({ block: "nearest", behavior: "smooth" });
+}
+mdWrap("renderStory", function() {
+  if (!sp || !sp.cur) return;
+  const CS = CASES.find((c2) => c2.id === sp.cur);
+  if (!CS) return;
+  const s = cstate(CS.id), v = s.view, c = CS.ch[v];
+  if (!c || !c.hints || c.hints.length < 2) return;
+  const art = mdQ("#pVerhaal .chapter"), doc = art && mdQ(".doc", art);
+  if (!doc) return;
+  s.ap = s.ap || {};
+  const k = s.ap[v], solved = s.solved.includes(v);
+  const box = document.createElement("div");
+  box.className = "sp-ap";
+  if (!k && !solved) {
+    box.innerHTML = '<b>Hoe pak je dit hoofdstuk aan?</b><div><button type="button" class="btn small" data-spap="plek">🔎 Eerst de plek doorzoeken</button><button type="button" class="btn small" data-spap="praat">🗣️ Eerst iemand ondervragen</button></div><small>Je keuze bepaalt wat je als eerste ontdekt.</small>';
+  } else if (k) {
+    box.innerHTML = k === "plek" ? "<b>🔎 Wat je opviel op de plek</b><p>".concat(c.hints[0], "</p>") : "<b>🗣️ Wat je collega opmerkte</b><p>".concat(c.hints[1], "</p>");
+  } else return;
+  doc.parentNode.insertBefore(box, doc);
+  mdQA("[data-spap]", box).forEach((bt) => bt.onclick = () => {
+    s.ap[v] = bt.dataset.spap;
+    saveS();
+    renderStory();
+  });
+});
+let kdLens = false;
+mdWrap("renderKoud", function() {
+  const P = $("pKoud");
+  if (!P || !kd || !kd.cur) return;
+  const ph = mdQA(".polaroid .ph svg, .ck-photo svg, figure svg", P).filter((x) => x.getBoundingClientRect().width > 80);
+  if (!ph.length) return;
+  const bar = document.createElement("div");
+  bar.className = "kd-lensbar";
+  bar.innerHTML = '<button type="button" class="btn small" id="kdLensB" aria-pressed="'.concat(kdLens, '">🔍 Vergrootglas ').concat(kdLens ? "aan" : "uit", "</button><small>Zet het aan en beweeg over een foto. Kleine sporen zie je pas als je goed kijkt.</small>");
+  const first = ph[0].closest("figure") || ph[0];
+  first.parentNode.insertBefore(bar, first);
+  $("kdLensB").onclick = () => {
+    kdLens = !kdLens;
+    renderKoud();
+  };
+  if (!kdLens) return;
+  ph.forEach((svg) => {
+    const host = svg.parentNode;
+    host.classList.add("kd-lenshost");
+    const lens = document.createElement("div");
+    lens.className = "kd-lens";
+    lens.hidden = true;
+    const cl = svg.cloneNode(true);
+    cl.removeAttribute("width");
+    lens.appendChild(cl);
+    host.appendChild(lens);
+    const mv = (e) => {
+      const r = svg.getBoundingClientRect(), x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left, y = (e.touches ? e.touches[0].clientY : e.clientY) - r.top;
+      if (x < 0 || y < 0 || x > r.width || y > r.height) {
+        lens.hidden = true;
+        return;
+      }
+      const Z = 2.6, L = 150;
+      lens.hidden = false;
+      lens.style.left = x - L / 2 + "px";
+      lens.style.top = y - L / 2 + "px";
+      cl.style.width = r.width * Z + "px";
+      cl.style.height = r.height * Z + "px";
+      cl.style.left = -x * Z + L / 2 + "px";
+      cl.style.top = -y * Z + L / 2 + "px";
+    };
+    host.addEventListener("mousemove", mv);
+    host.addEventListener("touchmove", (e) => {
+      mv(e);
+      e.preventDefault();
+    }, { passive: false });
+    host.addEventListener("mouseleave", () => lens.hidden = true);
+    host.addEventListener("touchend", () => lens.hidden = true);
+  });
+});
+let bLive = [], bLiveN = 0;
+const BLIVE = ["Onbekend nummer: Wie zit er aan deze telefoon?", "Onbekend nummer: Ik zie dat je online bent.", "Batterij bijna leeg · 9%", "Onbekend nummer: Leg hem neer. Nu.", "Gemiste oproep · Onbekend nummer", "Onbekend nummer: Je weet niet waar je aan begint."];
+mdWrap("renderBericht", function() {
+  bLive.forEach(clearTimeout);
+  bLive = [];
+  if (!bd || !bd.cur) return;
+  const s = bstate(bd.cur);
+  if (!s || !s.unlocked && !s.open && !s.un) return;
+  if (s.acc) return;
+  const show = () => {
+    if (game !== "bericht" || !bd.cur) return;
+    const P = $("pBericht");
+    if (!P) return;
+    const t = BLIVE[bLiveN++ % BLIVE.length];
+    const el = document.createElement("div");
+    el.className = "b-live";
+    el.innerHTML = "<b>📩 Nieuw bericht</b><span>".concat(t, "</span>");
+    P.appendChild(el);
+    mdSnd("buzz");
+    try {
+      navigator.vibrate && navigator.vibrate([60, 40, 60]);
+    } catch (e) {
+    }
+    setTimeout(() => el.classList.add("out"), 5200);
+    setTimeout(() => el.remove(), 6e3);
+  };
+  [4e4, 11e4, 22e4].forEach((ms) => bLive.push(setTimeout(show, ms)));
+});
+const PBKEY = "md-prikbord";
+let pbSel = null;
+function pbOpen(C2) {
+  const A = store.get(PBKEY) || {}, B = A[C2.id] = A[C2.id] || { pos: {}, links: [] };
+  const save2 = () => store.set(PBKEY, A);
+  const ov = document.createElement("div");
+  ov.className = "pb-ov";
+  const draw = () => {
+    const W = Math.min(900, innerWidth - 20), H2 = Math.max(520, innerHeight - 60), TOP = W < 600 ? 66 : 60, cols = W < 600 ? 2 : 4;
+    const items = C2.docs.map((d, i) => {
+      const p = B.pos[i] || [10 + i % cols * (W - 160) / Math.max(1, cols - 1), TOP + 12 + Math.floor(i / cols) * 86];
+      if (p[1] < TOP) p[1] = TOP;
+      B.pos[i] = p;
+      return { i, t: d.t + (d.n ? " · " + String(d.n).replace(/<[^>]+>/g, "") : ""), p };
+    });
+    ov.innerHTML = '<div class="pb-board" style="width:'.concat(W, "px;height:").concat(H2, 'px"><div class="pb-top"><b>📌 Prikbord · ').concat(C2.title, '</b><span>Sleep de kaartjes. Tik op twee kaartjes om ze met een touwtje te verbinden of los te maken.</span><button type="button" class="btn small" id="pbX">Sluit</button></div>\n   <svg class="pb-str" width="').concat(W, '" height="').concat(H2, '">').concat(B.links.map(([a, b]) => {
+      const A1 = B.pos[a], B1 = B.pos[b];
+      if (!A1 || !B1) return "";
+      return '<line x1="'.concat(A1[0] + 70, '" y1="').concat(A1[1] + 14, '" x2="').concat(B1[0] + 70, '" y2="').concat(B1[1] + 14, '" stroke="#b5221a" stroke-width="2.4"/>');
+    }).join(""), "</svg>\n   ").concat(items.map((x) => '<div class="pb-card '.concat(pbSel === x.i ? "sel" : "", '" data-pb="').concat(x.i, '" style="left:').concat(x.p[0], "px;top:").concat(x.p[1], 'px"><i></i><b>').concat(x.t, "</b></div>")).join(""), "</div>");
+    ov.querySelector("#pbX").onclick = () => {
+      ov.remove();
+      pbSel = null;
+    };
+    mdQA("[data-pb]", ov).forEach((el) => {
+      let sx, sy, ox, oy, moved = false;
+      const i = +el.dataset.pb;
+      el.onpointerdown = (e) => {
+        sx = e.clientX;
+        sy = e.clientY;
+        ox = B.pos[i][0];
+        oy = B.pos[i][1];
+        moved = false;
+        el.setPointerCapture(e.pointerId);
+      };
+      el.onpointermove = (e) => {
+        if (sx == null) return;
+        const dx = e.clientX - sx, dy = e.clientY - sy;
+        if (Math.abs(dx) + Math.abs(dy) > 5) moved = true;
+        if (moved) {
+          B.pos[i] = [Math.max(0, Math.min(W - 150, ox + dx)), Math.max(TOP, Math.min(H2 - 40, oy + dy))];
+          el.style.left = B.pos[i][0] + "px";
+          el.style.top = B.pos[i][1] + "px";
+        }
+      };
+      el.onpointerup = () => {
+        sx = null;
+        if (moved) {
+          save2();
+          draw();
+          return;
+        }
+        if (pbSel == null) {
+          pbSel = i;
+          draw();
+          return;
+        }
+        if (pbSel !== i) {
+          const k = B.links.findIndex(([a, b]) => a === pbSel && b === i || a === i && b === pbSel);
+          if (k >= 0) B.links.splice(k, 1);
+          else B.links.push([pbSel, i]);
+          save2();
+          mdSnd("flip");
+        }
+        pbSel = null;
+        draw();
+      };
+    });
+  };
+  document.body.appendChild(ov);
+  draw();
+}
+mdWrap("renderDossier", function() {
+  if (!dd || !dd.cur) return;
+  const C2 = DOSSIERS.find((c) => c.id === dd.cur);
+  if (!C2 || !C2.docs) return;
+  const s = dstate(C2.id);
+  if (!s || !s.start && !s.open && !(s.seen && s.seen.length)) return;
+  const P = $("pDossier"), h = mdQ(".storyhead", P);
+  if (!h || mdQ("#pbOpen", P)) return;
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = "btn small";
+  b.id = "pbOpen";
+  b.textContent = "📌 Prikbord";
+  h.appendChild(b);
+  b.onclick = () => pbOpen(C2);
+});
+mdWrap("renderDatabank", function() {
+  if (!dbd || !dbd.cur) return;
+  const q = $("dbQ");
+  if (!q) return;
+  const C2 = DBCASES.find((c) => c.id === dbd.cur), s = dbState(C2.id), W = /* @__PURE__ */ new Set();
+  const txt = [C2.brief].concat(C2.recs.filter((r) => s.seen.includes(r.id)).map((r) => r.title + " " + r.sub + " " + (r.html || r.body || ""))).join(" ").replace(/<[^>]+>/g, " ");
+  (txt.match(/\b[A-Z]{1,3}-\d{2,3}-[A-Z]{1,3}\b|\b\d{2}-[A-Z]{2,3}-\d{1,2}\b|\b06[- ]?\d{8}\b|\b[A-ZÀ-Ý][a-zà-ÿ]+ [A-ZÀ-Ý][a-zà-ÿ]+\b|\b[A-ZÀ-Ý][a-zà-ÿ]+(straat|weg|laan|plein|kade|dijk)\s?\d*\b/g) || []).forEach((w) => W.add(w.trim()));
+  let dl = $("dbSug");
+  if (!dl) {
+    dl = document.createElement("datalist");
+    dl.id = "dbSug";
+    q.parentNode.appendChild(dl);
+  }
+  dl.innerHTML = [...W].slice(0, 60).map((w) => '<option value="'.concat(w.replace(/"/g, ""), '">')).join("");
+  q.setAttribute("list", "dbSug");
+});
+let brWheel = 3;
+function brWheelHtml() {
+  const A = "ABCDEFGHIJKLMNOPQRSTUVWXYZ", k = (brWheel % 26 + 26) % 26;
+  const ring = (r, f, cls) => A.split("").map((ch, i) => {
+    const a = i / 26 * Math.PI * 2 - Math.PI / 2, x = 110 + Math.cos(a) * r, y = 110 + Math.sin(a) * r;
+    return '<text x="'.concat(x.toFixed(1), '" y="').concat((y + 4).toFixed(1), '" text-anchor="middle" class="').concat(cls, '">').concat(f(i), "</text>");
+  }).join("");
+  return '<details class="br-wheel" open><summary>🔐 Decodeerschijf</summary><div class="br-wrow"><svg viewBox="0 0 220 220" width="220" height="220"><circle cx="110" cy="110" r="104" fill="#f3e6c8" stroke="#8a6a3a" stroke-width="2"/><circle cx="110" cy="110" r="78" fill="#e6d2a6" stroke="#8a6a3a"/><circle cx="110" cy="110" r="52" fill="#f3e6c8" stroke="#8a6a3a"/>\n  '.concat(ring(91, (i) => A[i], "o")).concat(ring(65, (i) => A[(i + k) % 26], "n"), '<text x="110" y="106" text-anchor="middle" class="k">+').concat(k, '</text><text x="110" y="124" text-anchor="middle" class="ks">verschuiving</text><path d="M110 4l-5 10h10z" fill="#b5221a"/></svg>\n  <div><p>Buitenring = gewone letter, binnenring = geheime letter. Draai tot de verschuiving klopt.</p><div class="controls"><button type="button" class="btn small" data-brw="-1">↺ −1</button><button type="button" class="btn small" data-brw="1">↻ +1</button></div>\n  <p class="br-wtest"><label>Ontcijfer: <input id="brWIn" autocomplete="off" spellcheck="false" placeholder="geheime tekst"></label><b id="brWOut"></b></p></div></div></details>');
+}
+mdWrap("renderBrieven", function() {
+  if (!brd || !brd.cur) return;
+  const kb = mdQ("#pBrieven .kbody");
+  if (!kb) return;
+  const C2 = BRCASES.find((c) => c.id === brd.cur), s = brState(C2.id);
+  if (s.ep >= C2.eps.length || !["bijlagen", "chat"].includes(s.tab)) return;
+  const w = document.createElement("div");
+  w.innerHTML = brWheelHtml();
+  kb.appendChild(w);
+  const upd = () => {
+    const A = "ABCDEFGHIJKLMNOPQRSTUVWXYZ", k = (brWheel % 26 + 26) % 26, i = $("brWIn");
+    if (!i) return;
+    $("brWOut").textContent = i.value.toUpperCase().replace(/[A-Z]/g, (ch) => A[(A.indexOf(ch) - k + 26) % 26]);
+  };
+  mdQA("[data-brw]", w).forEach((b) => b.onclick = () => {
+    const v = $("brWIn").value;
+    brWheel += +b.dataset.brw;
+    mdSnd("tick");
+    w.innerHTML = brWheelHtml();
+    wire2();
+    $("brWIn").value = v;
+    upd();
+  });
+  const wire2 = () => {
+    mdQA("[data-brw]", w).forEach((b) => b.onclick = () => {
+      const v = $("brWIn").value;
+      brWheel += +b.dataset.brw;
+      mdSnd("tick");
+      w.innerHTML = brWheelHtml();
+      wire2();
+      $("brWIn").value = v;
+      upd();
+    });
+    $("brWIn").oninput = upd;
+  };
+  wire2();
+});
+const RLTALK = [
+  [["hack", "Laat mij maar eerst. Computers liegen niet, mensen wel."], ["slot", "Computers gaan anders ook prima op slot, Zara."]],
+  [["bio", "Niets aanraken voordat ik foto’s heb gemaakt."], ["hack", "Tobias, je klinkt als mijn moeder."]],
+  [["slot", "Elke deur heeft een zwakke plek. Ook die van de dader."], ["bio", "Mooi gezegd, Mo. Nu nog bewijzen."]],
+  [["hack", "Ik weet al wie het is."], ["bio", "Niet zo snel. Eerst alle sporen, dan pas een naam."]],
+  [["bio", "Dit spoor klopt niet met het verhaal van de verdachte."], ["slot", "Dan heeft iemand gelogen. Altijd hetzelfde liedje."]],
+  [["slot", "Nog één slot en ik ben tevreden."], ["hack", "Jij bent nooit tevreden, Mo."]]
+];
+mdWrap("renderTeam", function() {
+  if (!rld || !rld.cur) return;
+  const C2 = RLCASES.find((c) => c.id === rld.cur), s = rlState(C2.id);
+  if (!s.start || s.done || (s.tab || "plaats") !== "plaats") return;
+  const box = mdQ("#pTeam .rl-scenebox");
+  if (!box) return;
+  const L = RLTALK[(s.found.length + (s.role === "hack" ? 0 : s.role === "bio" ? 2 : 4)) % RLTALK.length], R2 = (k) => RLROLES.find((r) => r[0] === k);
+  const el = document.createElement("div");
+  el.className = "rl-talk";
+  el.innerHTML = L.map(([k, t]) => "<p>".concat(brAvatar(R2(k)[1]), "<span><b>").concat(R2(k)[1].split(" ")[0], "</b>").concat(t, "</span></p>")).join("");
+  box.parentNode.insertBefore(el, box);
+});
+function csWheel() {
+  let seg = "";
+  for (let i = 0; i < 37; i++) {
+    const n = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26][i], a0 = i / 37 * Math.PI * 2, a1 = (i + 1) / 37 * Math.PI * 2, c = n === 0 ? "#1f7a3a" : CSRED.has(n) ? "#b5221a" : "#1a1a1a";
+    seg += '<path d="M100 100L'.concat(100 + Math.sin(a0) * 90, " ").concat(100 - Math.cos(a0) * 90, "A90 90 0 0 1 ").concat(100 + Math.sin(a1) * 90, " ").concat(100 - Math.cos(a1) * 90, 'Z" fill="').concat(c, '" stroke="#d9b45a" stroke-width=".6"/><text x="').concat(100 + Math.sin((a0 + a1) / 2) * 78, '" y="').concat(103 - Math.cos((a0 + a1) / 2) * 78, '" font-size="7" fill="#fff" text-anchor="middle" transform="rotate(').concat((a0 + a1) / 2 * 180 / Math.PI, " ").concat(100 + Math.sin((a0 + a1) / 2) * 78, " ").concat(100 - Math.cos((a0 + a1) / 2) * 78, ')">').concat(n, "</text>");
+  }
+  return '<div class="cs-wheelbox"><svg viewBox="0 0 200 200" class="cs-wheel"><circle cx="100" cy="100" r="98" fill="#5a3a1a"/><g class="cs-rot">'.concat(seg, '<circle cx="100" cy="100" r="48" fill="#3a2410" stroke="#d9b45a" stroke-width="2"/><circle cx="100" cy="100" r="10" fill="#d9b45a"/></g><circle class="cs-ball" cx="100" cy="16" r="4.5" fill="#fafafa"/></svg><button type="button" class="btn small" data-csspin="1">🎡 Draai aan het wiel</button></div>');
+}
+document.addEventListener("click", (e) => {
+  const sp2 = e.target.closest && e.target.closest("[data-csspin]");
+  if (sp2) {
+    const box = sp2.closest(".cs-wheelbox"), g = box.querySelector(".cs-rot"), deg = 1440 + Math.floor(Math.random() * 360);
+    g.style.transition = "none";
+    g.style.transform = "rotate(0deg)";
+    void g.getBoundingClientRect();
+    g.style.transition = "transform 4.2s cubic-bezier(.12,.6,.15,1)";
+    g.style.transform = "rotate(".concat(deg, "deg)");
+    let n = 0;
+    const tick = () => {
+      if (n > 34) return mdSnd("ding");
+      mdSnd("tick");
+      n++;
+      setTimeout(tick, 40 + n * n * 2.6);
+    };
+    tick();
+    return;
+  }
+  const cd = e.target.closest && e.target.closest(".cs-card");
+  if (cd && cd.closest("#pCasino")) {
+    cd.classList.toggle("up");
+    mdSnd("flip");
+  }
+});
+mdWrap("renderCasino", function() {
+  mdQA("#pCasino .cs-grid").forEach((g) => {
+    if (!g.previousElementSibling || !g.previousElementSibling.classList.contains("cs-wheelbox")) g.insertAdjacentHTML("beforebegin", csWheel());
+  });
+  mdQA("#pCasino .cs-cards .cs-card").forEach((c) => {
+    if (!c.querySelector(".cs-back")) {
+      c.insertAdjacentHTML("beforeend", '<span class="cs-back" aria-hidden="true"></span>');
+    }
+  });
+  const cc = mdQ("#pCasino .cs-cards");
+  if (cc && !mdQ(".cs-cardtip", cc.parentNode)) cc.insertAdjacentHTML("afterend", '<p class="hint cs-cardtip">Tik op een kaart om hem om te draaien.</p>');
+});
+function tlAlibiQ(C2) {
+  if (!C2.lanes || C2.lanes.length < 2) return null;
+  const ans = C2.qs[0].o[C2.qs[0].a] || "", cand = C2.lanes.filter((l) => l[1] && l[1].length && ans.indexOf(l[0]) < 0);
+  if (!cand.length) return null;
+  const h = (x) => {
+    let s = 0;
+    for (const ch of C2.id) s = s * 31 + ch.charCodeAt(0) >>> 0;
+    return s + x;
+  }, L = cand[h(0) % cand.length], iv = L[1][h(1) % L[1].length], t = iv[0] + (iv[1] - iv[0]) * 0.5, fm = (v) => "".concat(String(Math.floor(v)).padStart(2, "0"), ":").concat(String(Math.round(v % 1 * 60)).padStart(2, "0"));
+  const opts = [...new Set(C2.lanes.map((l) => (l[1] || []).map((x) => x[2])).reduce((a, b) => a.concat(b), []))].filter(Boolean);
+  return { who: L[0], t: fm(t), a: iv[2], o: opts.length > 1 ? opts : [iv[2], "onbekend"] };
+}
+mdWrap("renderTijdlijn", function() {
+  if (!tld || !tld.cur) return;
+  const C2 = TLCASES.find((c) => c.id === tld.cur), s = tlState(C2.id);
+  if (!s.start || (s.tab || "tijd") !== "mensen") return;
+  const Q = tlAlibiQ(C2);
+  if (!Q) return;
+  const kb = mdQ("#pTijdlijn .kbody");
+  if (!kb) return;
+  s.alibi = s.alibi || {};
+  const got = s.alibi[C2.id];
+  const el = document.createElement("section");
+  el.className = "tl-alibi";
+  el.innerHTML = "<h4>🕵️ Alibi-check</h4><p>Controleer ook een tweede persoon. <b>Wat deed ".concat(Q.who, " om ").concat(Q.t, '?</b></p><div class="tl-aopts">').concat(Q.o.map((o) => '<button type="button" class="btn small '.concat(got === o ? o === Q.a ? "ok" : "bad" : "", '" data-tla="').concat(o.replace(/"/g, ""), '">').concat(o, "</button>")).join(""), "</div>").concat(got ? '<p class="'.concat(got === Q.a ? "ok" : "bad", '">').concat(got === Q.a ? "✓ Klopt. Dit alibi houdt stand." : "✗ Kijk nog eens naar de balk van " + Q.who + " in de tijdlijn.", "</p>") : "");
+  kb.insertBefore(el, kb.firstChild);
+  mdQA("[data-tla]", el).forEach((b) => b.onclick = () => {
+    s.alibi[C2.id] = b.dataset.tla;
+    saveTl();
+    mdSnd(b.dataset.tla === Q.a ? "ding" : "buzz");
+    renderTijdlijn();
+  });
+});
+let stNight = false;
+mdWrap("renderStad", function() {
+  const box = $("stBox");
+  if (!box) return;
+  const z = mdQ(".st-zoom", box.parentNode) || mdQ(".st-zoom");
+  if (z && !mdQ("#stNightB", z)) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "btn small";
+    b.id = "stNightB";
+    b.textContent = stNight ? "☀️ Dag" : "🌙 Nacht";
+    b.setAttribute("aria-pressed", stNight);
+    z.appendChild(b);
+    b.onclick = () => {
+      stNight = !stNight;
+      renderStad();
+    };
+  }
+  if (!stNight) return;
+  box.classList.add("st-night");
+  const ov = document.createElement("div");
+  ov.className = "st-dark";
+  box.appendChild(ov);
+  const set = (x, y) => {
+    ov.style.background = "radial-gradient(circle at ".concat(x, "px ").concat(y, "px, rgba(255,236,190,.06) 0, rgba(255,236,190,.04) 70px, rgba(6,10,26,.9) 125px)");
+  };
+  const r0 = box.getBoundingClientRect();
+  set(r0.width / 2, r0.height / 2);
+  const mv = (e) => {
+    const r = box.getBoundingClientRect(), p = e.touches ? e.touches[0] : e;
+    set(p.clientX - r.left, p.clientY - r.top);
+  };
+  box.addEventListener("mousemove", mv);
+  box.addEventListener("touchmove", mv, { passive: true });
+  box.addEventListener("touchstart", mv, { passive: true });
+});
 function renderPas() {
   const D = pasData(), R2 = RANKS[D.ri], N = RANKS[D.ri + 1], ps = D.ps, got = D.B.filter((b) => ps.earned[b[0]]).length;
   const pct = N ? Math.round((D.total - R2[0]) / (N[0] - R2[0]) * 100) : 100;
@@ -15652,11 +16148,17 @@ function wire() {
   };
   $("check").onclick = () => {
     let wrong = 0, filled = 0;
+    const wk = [];
     for (const [k, v] of Object.entries(st.marks)) {
       filled++;
-      if (v === "v" !== truth(k)) wrong++;
+      if (v === "v" !== truth(k)) {
+        wrong++;
+        wk.push(k);
+      }
     }
-    $("gridMsg").textContent = !filled ? "Het rooster is nog leeg." : wrong ? "".concat(wrong, " vakje").concat(wrong > 1 ? "s kloppen" : " klopt", " niet.") : "Alles wat je hebt ingevuld klopt.";
+    $("gridMsg").innerHTML = !filled ? "Het rooster is nog leeg." : wrong ? "".concat(wrong, " vakje").concat(wrong > 1 ? "s kloppen" : " klopt", ' niet. <button class="btn small" id="gridHint" type="button">🔎 Speurneus-hint</button>') : "Alles wat je hebt ingevuld klopt.";
+    const gh = $("gridHint");
+    if (gh) gh.onclick = () => mdGridHint(wk[Math.floor(Math.random() * wk.length)]);
   };
   $("accuseBtn").onclick = () => {
     if (st.done) return;

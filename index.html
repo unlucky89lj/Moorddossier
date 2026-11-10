@@ -6102,7 +6102,7 @@ const TSKIN = ["#f3cba8", "#ebba94", "#dca47c", "#c88a62", "#a8704b", "#7d5236"]
 const THC = ["#2a1d15", "#4a2f1c", "#6b4527", "#a0703a", "#d6b25e", "#a3a39c", "#b5502c", "#1f1a17"];
 const TTOP = ["#4f6475", "#7a3b32", "#3f5a45", "#4a4f6b", "#8a6a3a", "#5f6468", "#2f3a4a", "#6b3f5c", "#8a4f2a"];
 const TLEG = ["#2b2f36", "#3a3a3c", "#45403a", "#26303d", "#4b4237"];
-const TFEM = new Set("inge geertje klaartje froukje aukje mieke corrie hiske karlijn ida afke sjoukje marrit antje klaske dieuwke renske grietje minke annerieke elsbeth dorien neeltje yfke annemijn ariane baukje clementia leonoor josefien jantje eva-lotte linde mientje marlou rosanne selma hedwig quinty gijsje lidewij rowena dirkje annelot jozefien floortje odilia wilmijn nynke djoeke evelien margreet femke-lot vera jildou hinke lize dineke mirabella wendolien silke mariska aleida fenneke mirte jorien hennie saartje agnes truida yvette quirine kirsten liselot annegien marijke imke leonie isaura wieteke rosalie ottelien dorine celine tessel marga henriëtte ylva margje annabel gonda fabienne riet lucienne mirella hanneke selina wendela nadine petronella jitske desirée desiree elodie rinske femmy brecht liesje ingeborg annemoon rixt celeste lotus jolanda ankie sabine adelheid bertha mirthe dewi noortje robin hendrika marlies cornelia tjitske fleur willemijn romy ottilie noa hilde zara juul gonnie saar fien isabella rosalind trui clementine fenna lieke merel femke esmee noor yara camille greta hanna lies marie margaretha lola jikke sterre isolde hendrikje annie liesbeth mevrouw juffrouw barones tante oma zuster moeder dochter zus weduwe mevr anouk ria lotte samira sanne mila lisa eva sophie anneke wilma agatha wilhelmina charlotte ilse esra ingrid marieke femke anna emma julia sara fleur iris noor tess linda petra ellen karin monique yvonne joke truus greet mien els annet margriet hanna saskia nadia fatima yara lieke jet roos kim naomi vera isa nina lena amira julia marloes ilona sylvia gerda bep dora fenna hilde jolien lieve maud nienke romy sanna tamara ymke zoë zoe evi demi sharon anja astrid carla dewi esther floor gwen hester ines jasmijn kiki liza mirjam nora olga pien rosa selma trees ursula veerle wendy aaltje aafke birgit cato daphne elise frida gea heleen joyce kaat loes maaike nelleke odette patricia rianne silvia tineke willemijn yasmin hannelore yolanthe philippa albertine gerdien rozemarijn wanda ietje mareike philomena quirien femmie trijntje annabella godelieve constance jolein geesje coosje".split(" "));
+const TFEM = new Set("hester nienke christa dorette herma inge geertje klaartje froukje aukje mieke corrie hiske karlijn ida afke sjoukje marrit antje klaske dieuwke renske grietje minke annerieke elsbeth dorien neeltje yfke annemijn ariane baukje clementia leonoor josefien jantje eva-lotte linde mientje marlou rosanne selma hedwig quinty gijsje lidewij rowena dirkje annelot jozefien floortje odilia wilmijn nynke djoeke evelien margreet femke-lot vera jildou hinke lize dineke mirabella wendolien silke mariska aleida fenneke mirte jorien hennie saartje agnes truida yvette quirine kirsten liselot annegien marijke imke leonie isaura wieteke rosalie ottelien dorine celine tessel marga henriëtte ylva margje annabel gonda fabienne riet lucienne mirella hanneke selina wendela nadine petronella jitske desirée desiree elodie rinske femmy brecht liesje ingeborg annemoon rixt celeste lotus jolanda ankie sabine adelheid bertha mirthe dewi noortje robin hendrika marlies cornelia tjitske fleur willemijn romy ottilie noa hilde zara juul gonnie saar fien isabella rosalind trui clementine fenna lieke merel femke esmee noor yara camille greta hanna lies marie margaretha lola jikke sterre isolde hendrikje annie liesbeth mevrouw juffrouw barones tante oma zuster moeder dochter zus weduwe mevr anouk ria lotte samira sanne mila lisa eva sophie anneke wilma agatha wilhelmina charlotte ilse esra ingrid marieke femke anna emma julia sara fleur iris noor tess linda petra ellen karin monique yvonne joke truus greet mien els annet margriet hanna saskia nadia fatima yara lieke jet roos kim naomi vera isa nina lena amira julia marloes ilona sylvia gerda bep dora fenna hilde jolien lieve maud nienke romy sanna tamara ymke zoë zoe evi demi sharon anja astrid carla dewi esther floor gwen hester ines jasmijn kiki liza mirjam nora olga pien rosa selma trees ursula veerle wendy aaltje aafke birgit cato daphne elise frida gea heleen joyce kaat loes maaike nelleke odette patricia rianne silvia tineke willemijn yasmin hannelore yolanthe philippa albertine gerdien rozemarijn wanda ietje mareike philomena quirien femmie trijntje annabella godelieve constance jolein geesje coosje".split(" "));
 const TTITLE = {
   Baron: { hat: "top", mono: 1, f: 0, hair: "short" },
   Mevrouw: { f: 1, hair: "bun", pearls: 1 },
@@ -15095,6 +15095,318 @@ SCREND.tv = Object.assign(SCREND.tv || {}, {
   sleutels: [["t", "Zo is het gebeurd", "gebeurd", "Twee sleutels"], ["s", "De sleutelservice", ["day", ["key", 150, 160, 1.4]], "Christiaan liet drie weken eerder een kopie van de sleutel maken."], ["s", "Het archief", ["dark", ["shelf", 150, 170, 1.1]], "Hij sloeg Minke en deed de deur van buiten op slot.", { hit: "metaal", act: "strike", x: 150 }], ["x", "Christiaan Knotveld", "een zware perforator", "het archief"]],
   glas: [["t", "Zo is het gebeurd", "gebeurd", "Het alibi van glas"], ["s", "Paal 9 · 19:39", ["day", ["umbrella", 150, 170, 1]], "Dolf maakte de foto van de zonsondergang en reed meteen weg."], ["s", "De loods", ["dark", ["shed", 150, 170, 1]], "Hij sloeg Wout met de lier en postte daarna de foto.", { hit: "metaal", act: "strike", x: 150 }], ["x", "Dolf Peelmeer", "een zware lier", "de loods"]]
 });
+TVCASES.push(
+  {
+    id: "wijnkelder",
+    nr: "13",
+    title: "Dood in de wijnkelder",
+    level: "Makkelijk",
+    time: "20 tot 30 minuten",
+    players: "1 tot 10 spelers",
+    date: "20-11",
+    blurb: "Een wijnhandelaar ligt dood tussen zijn eigen flessen. In het dure rek zijn zes plekken leeg.",
+    melding: '<p class="tv-mono">MELDING 112 · VRIJDAG 20 NOVEMBER · 21:52</p><p><b>Hester Tiendeman</b> komt thuis van het koor. In de kelder van <b>Wijnhandel Tiendeman</b> vindt ze haar man <b>Allard Tiendeman</b> (66). Hij leeft niet meer.</p><p>Hij is geslagen met een grote magnumfles. De schouwarts: <b>tussen 20:30 en 21:15</b> overleden.</p><p>Drie mensen hadden een reden om ruzie met Allard te maken. Wie was er in de kelder?</p>',
+    question: "Wie was er tussen 20:30 en 21:15 in de kelder?",
+    victim: "Allard Tiendeman</b> (66), wijnhandelaar, woonde boven zijn winkel",
+    photos: [[["dark", ["shelf", 150, 170, 1.1]], "1 · de wijnkelder"], [["night", ["door", 150, 170, 1.1]], "2 · de steeg achter de winkel"], [["desk", ["letter", 150, 170, 1.2]], "3 · het bureau in de winkel"]],
+    real: ["kelder", "steeg", "bureau"],
+    markers: [["1 · kapotte magnumfles", "2 · zes lege plekken in het dure rek"], ["3 · achterdeur, niet op slot", "4 · natte bandensporen van een scooter"], ["5 · voorraadlijst met zes kruisjes"]],
+    photoNotes: ["Allard lag onder aan het rek. Naast hem ligt een kapotte magnumfles. In het rek met dure wijn zijn zes plekken leeg.", "De achterdeur van de winkel komt uit in een smalle steeg. Hij is niet op slot. In de modder staan sporen van een scooter.", "Op het bureau ligt de voorraadlijst. Bij zes dure flessen staat een kruisje."],
+    timeline: [["18:05", "de winkel gaat dicht"], ["19:30", "Hester gaat naar het koor"], ["20:30 – 21:15", "tijdstip van overlijden"], ["21:50", "Hester vindt Allard in de kelder"], ["21:52", "melding bij 112"]],
+    suspects: [
+      {
+        id: "eelco",
+        name: "Eelco Ommerkamp",
+        role: "buurman, heeft een eetcafé",
+        motive: "Moet Allard nog € 6.000 betalen.",
+        f: 0,
+        voice: [0.9, 1.02],
+        look: { skin: "#e2b896", hc: "#3a2a1a", hair: "short", eyes: "#3a2a1a", top: "chef", tc: "#f0f0f0", age: 48, beard: "full", jaw: 5 },
+        v: [["R", "U moet Allard nog geld betalen."], ["S", "Zesduizend euro, voor wijn. Ik betaal het in delen. Hij was altijd geduldig."], ["R", "Waar was u vrijdagavond?"], ["S", "In mijn eigen keuken, naast de winkel. Het was druk. Alle tafels zaten vol."], ["R", "Bent u nog buiten geweest?"], ["S", "Om tien voor negen even roken in de steeg, met mijn kok. Toen stond er een groene scooter bij de achterdeur van Allard."]]
+      },
+      {
+        id: "krijn",
+        name: "Krijn Vlasbloem",
+        role: "medewerker van de wijnhandel",
+        motive: "Er verdwenen dure flessen.",
+        f: 0,
+        voice: [1.04, 1.06],
+        look: { skin: "#efcdb4", hc: "#c89a5a", hair: "curly", eyes: "#4a6a8a", top: "shirt", tc: "#2a5a3a", age: 31 },
+        v: [["R", "Hoe laat ging u vrijdag naar huis?"], ["S", "Om zes uur. Ik heb afgesloten en ben de hele avond thuis gebleven."], ["R", "Er missen zes dure flessen uit de kelder."], ["S", "Echt? Dat wist ik niet. Misschien verkocht en niet opgeschreven."], ["R", "Wie heeft een sleutel van het dure rek?"], ["S", "Allard. En ik, voor als hij er niet is."], ["R", "Wat deed u tussen half negen en kwart over negen?"], ["S", "Op de bank liggen, met een pizza en een film."]],
+        lie: [1, 7]
+      },
+      {
+        id: "nienke",
+        name: "Nienke Tiendeman",
+        role: "dochter",
+        motive: "Wilde dat haar vader de zaak verkocht.",
+        f: 1,
+        voice: [1.12, 1.04],
+        look: { f: 1, skin: "#f0cdb6", hc: "#8a5a2a", hair: "long", eyes: "#4a5a6a", top: "blouse", tc: "#6a2a3a", age: 35 },
+        v: [["R", "U wilde dat uw vader de zaak verkocht."], ["S", "Hij is zesenzestig. Hij werkt zich kapot. Een grote wijnketen bood veel geld."], ["R", "Waar was u vrijdagavond?"], ["S", "In Utrecht, op een etentje van mijn werk. Tot een uur of tien."], ["R", "Wist u dat er flessen weg waren?"], ["S", "Papa belde me woensdag. Hij zei: ik denk dat iemand van mij steelt. Hij wilde nog niet zeggen wie."]]
+      }
+    ],
+    secret: [
+      { t: "Forensisch dossier", ic: "🔬", docs: [
+        { t: "Sectierapport", h: "<p><b>Doodsoorzaak:</b> een klap met een magnumfles.</p><p><b>Tijdstip van overlijden:</b> tussen 20:30 en 21:15.</p>" },
+        { t: "Schoenafdruk", h: "<p>In de gemorste wijn op de keldertrap staat de afdruk van een <b>sportschoen, maat 44</b>.</p><p>De afdruk loopt naar de <b>achterdeur</b>.</p>" }
+      ] },
+      { t: "Winkel en kelder", ic: "🍷", docs: [
+        { t: "Voorraadlijst", h: '<p class="tv-hand">“Zes dure flessen weg uit het kleine rek. Alleen Krijn en ik hebben die sleutel. Vrijdag vragen.”</p>' },
+        { t: "Alarmkastje", h: '<table class="tv-t"><tr><th>Tijd</th><th>Wat</th></tr><tr><td>18:05</td><td>alarm aan · code K. Vlasbloem</td></tr><tr><td>20:28</td><td>alarm uit · code A. Tiendeman</td></tr><tr><td><b>20:43</b></td><td><b>achterdeur open</b></td></tr><tr><td><b>21:02</b></td><td><b>achterdeur open en dicht</b></td></tr></table>' },
+        { t: "Sleutels", h: "<p>Van de achterdeur van de winkel zijn twee sleutels: één van <b>Allard</b> en één van <b>Krijn</b>. Hester en Nienke hebben alleen een sleutel van de voordeur boven.</p>" }
+      ] },
+      { t: "Camera’s en telefoons", ic: "📱", docs: [
+        { t: "Camera van de bakker", h: "<p>De bakker heeft een camera in de steeg.</p><p><b>20:43</b> · een man op een <b>groene scooter</b> met een zwarte helm stopt bij de achterdeur van de wijnhandel.</p><p><b>21:02</b> · hij rijdt hard weg.</p>" },
+        { t: "Telefoon van Allard", h: "<p>20:20 · Allard belt <b>Krijn</b>. Het gesprek duurt vier minuten.</p><p>20:28 · Allard zet het alarm uit en gaat naar de kelder.</p>" },
+        { t: "Pizzabon", h: "<p>Bezorgd om <b>19:30</b> bij K. Vlasbloem, thuis. Eén pizza.</p><p>Na de pizza laat de bon niets meer zien.</p>" }
+      ] },
+      { t: "Getuigen", ic: "🗣️", docs: [
+        { t: "De kok van het eetcafé", h: "<p>“Eelco en ik stonden om tien voor negen te roken in de steeg. Er stond een groene scooter bij de achterdeur. Binnen hoorden we glas breken.”</p>" },
+        { t: "Het koor", h: "<p>De dirigent: “Hester zong mee van half acht tot twintig voor tien. Ze is niet weggeweest.”</p>" },
+        { t: "Het etentje in Utrecht", h: "<p>Rekening van het restaurant: <b>21:12</b>, twaalf personen. Collega’s: “Nienke bleef tot tien uur.”</p><p>Utrecht ligt anderhalf uur rijden van de winkel.</p>" }
+      ] }
+    ],
+    rounds: [
+      { t: "De eerste indruk", tips: ["Allard telde op vrijdagavond altijd de voorraad in de kelder.", "Krijn werkt al vier jaar in de wijnhandel.", "Eelco moet Allard nog € 6.000 betalen voor wijn.", "Nienke wil dat haar vader de zaak verkoopt aan een grote wijnketen.", "Hester zingt elke vrijdagavond in het koor.", "De achterdeur van de winkel komt uit in een smalle steeg."] },
+      { t: "Nieuwe sporen", tips: ["Krijn rijdt op een groene scooter met een zwarte helm.", "Krijn heeft schoenmaat 44.", "Alleen Allard en Krijn hebben een sleutel van de achterdeur.", "Het eetcafé van Eelco zat vrijdag vol. Hij stond de hele avond in de keuken, op één rookpauze na.", "Iemand bood deze week zes dure flessen te koop aan op internet."] }
+    ],
+    motives: [["verkoop", "De verkoop van de zaak"], ["flessen", "Allard ontdekte de gestolen flessen"], ["schuld", "De schuld van € 6.000"]],
+    motive: "flessen",
+    keys: [["koor", "Het koor van Hester"], ["etentje", "Het etentje in Utrecht"], ["scooter", "Groene scooter in de steeg om 20:43"]],
+    key: "scooter",
+    lies: { eelco: "Vertelt de waarheid. Hij stond in zijn keuken en zag om tien voor negen juist de scooter van de dader.", krijn: "Liegt: “Ik ben de hele avond thuis gebleven.” Om 20:43 stond zijn groene scooter bij de achterdeur, en alleen hij en Allard hebben een sleutel van die deur.", nienke: "Vertelt de waarheid. Ze zat in Utrecht op een etentje." },
+    breaker: "De camera van de bakker: om 20:43 stopt een groene scooter bij de achterdeur. Alleen Krijn heeft naast Allard een sleutel van die deur, en Krijn rijdt op een groene scooter.",
+    solTimeline: [["18:05", "Krijn sluit de winkel af"], ["19:30", "Krijn krijgt thuis een pizza"], ["20:20", "Allard belt Krijn over de flessen"], ["20:28", "Allard zet het alarm uit en gaat naar de kelder"], ["20:43", "Krijn komt op zijn scooter door de steeg"], ["± 20:50", "ruzie; de klap met de magnumfles"], ["21:02", "Krijn rijdt hard weg"], ["21:50", "Hester vindt Allard"]],
+    answer: "krijn",
+    weapon: "een magnumfles",
+    place: "de wijnkelder",
+    tips: ["Wie heeft er een sleutel van de achterdeur?", "Kijk naar de camera van de bakker. Wie rijdt op een groene scooter?", "Krijn zegt dat hij de hele avond thuis was. Klopt dat met de tijden?"],
+    story: "Krijn Vlasbloem stal zes dure flessen uit het rek en bood ze op internet te koop aan. Allard ontdekte het en belde hem om 20:20. Om 20:43 kwam Krijn op zijn groene scooter door de steeg en ging met zijn sleutel door de achterdeur naar binnen. In de kelder kregen ze ruzie. Krijn sloeg Allard met een magnumfles. Om 21:02 reed hij hard weg en zei later dat hij de hele avond thuis op de bank lag."
+  },
+  {
+    id: "studio",
+    nr: "14",
+    title: "Stilte in de studio",
+    level: "Gemiddeld",
+    time: "45 tot 75 minuten",
+    players: "1 tot 10 spelers",
+    date: "08-10",
+    blurb: "Een radiopresentator belooft live groot nieuws. Hij zet een lange plaat op. Daarna blijft het stil.",
+    melding: '<p class="tv-mono">MELDING 112 · DONDERDAG 8 OKTOBER · 22:33</p><p>Producer <b>Christa Ditterhof</b> vindt presentator <b>Wichert Brouwershaven</b> (57) dood in de studio van de lokale omroep <b>Radio Waalkant</b>.</p><p>Om 22:14 zei hij live: <i>“Na deze plaat heb ik groot nieuws. Over onze eigen omroep.”</i> Na de plaat bleef het stil.</p><p>Hij is geslagen met een zware microfoonstandaard.</p>',
+    question: "Wie was er in de studio tijdens die lange plaat?",
+    victim: "Wichert Brouwershaven</b> (57), presentator van het live programma Nachtpraat",
+    photos: [[["desk", ["radio", 150, 170, 1.3]], "1 · de studio"], [["wall", ["stairs", 150, 170, 1.2]], "2 · het trappenhuis"], [["dark", ["car", 150, 170, 1]], "3 · de parkeergarage"], [["dark", ["shelf", 150, 170, 1.1]], "4 · het archief van de omroep"]],
+    real: ["kantoor", "trap", "parkeer", "archief"],
+    markers: [["1 · zware microfoonstandaard", "2 · draaitafel: de plaat is afgelopen"], ["3 · natte voetstappen op de trap"], ["4 · slagboom met pasjeslezer", "5 · natte bandensporen op plek 7"], ["6 · lege map “Reclame 2026”"]],
+    photoNotes: ["Wichert lag naast de tafel met de microfoons. De zware standaard ligt op de vloer. De plaat is afgelopen; de naald tikt in de laatste groef.", "Op de trap van de parkeergarage naar de studio staan natte voetstappen. Het regende die avond.", "In de parkeergarage onder het pand hangt een slagboom met een pasjeslezer. Er staat nog één auto, van een buurman. Op plek 7 staan natte bandensporen, maar die plek is leeg.", "In het archief ligt een lege map met de naam “Reclame 2026”."],
+    timeline: [["21:00", "Nachtpraat begint, live"], ["21:50", "Wichert krijgt een boze sms"], ["22:14", "Wichert belooft groot nieuws en zet een lange plaat op"], ["22:22", "de plaat is afgelopen; daarna stilte"], ["22:31", "Christa vindt Wichert"], ["22:33", "melding bij 112"]],
+    suspects: [
+      {
+        id: "christa",
+        name: "Christa Ditterhof",
+        role: "producer",
+        motive: "Wichert wilde een andere producer.",
+        f: 1,
+        voice: [1.1, 1.04],
+        look: { f: 1, skin: "#efc8b0", hc: "#2a1a12", hair: "bob", eyes: "#3a5a4a", top: "blouse", tc: "#2a4a6a", age: 41, glasses: "#2a2a2a" },
+        v: [["R", "Waar was u toen het stil werd?"], ["S", "In de kantine, beneden. Ik belde met mijn zus. Bij een lange plaat kan dat."], ["R", "Wanneer merkte u de stilte?"], ["S", "Pas toen ik om half elf terugkwam. In de kantine staat de radio uit."], ["R", "Wichert wilde een andere producer."], ["S", "Dat zei hij elk jaar. Hij meende het nooit."], ["R", "Wat was dat grote nieuws?"], ["S", "Geen idee. Hij deed er de hele week geheimzinnig over."]]
+      },
+      {
+        id: "koen",
+        name: "Koen Lijnzaad",
+        role: "technicus",
+        motive: "Wichert klaagde steeds over hem.",
+        f: 0,
+        voice: [1.02, 1.08],
+        look: { skin: "#e8c0a4", hc: "#6a4a2a", hair: "short", eyes: "#4a6a5a", top: "shirt", tc: "#3a3a4a", age: 29, beard: "stubble" },
+        v: [["R", "Waar was u vanavond?"], ["S", "Bij de zendmast buiten het dorp. Er was een storing. Ik was er van vijf voor tien tot tien voor elf."], ["R", "Wichert klaagde over u."], ["S", "Over elke storing, ja. Maar de apparatuur is dertig jaar oud. Daar kan ik niks aan doen."], ["R", "Wanneer ging u weg uit het gebouw?"], ["S", "Rond half tien, met mijn bus uit de garage."]]
+      },
+      {
+        id: "zeno",
+        name: "Zeno Hooglander",
+        role: "stationsmanager",
+        motive: "Beheert het geld van de omroep.",
+        f: 0,
+        voice: [0.86, 0.98],
+        look: { skin: "#e2b896", hc: "#9a9690", hair: "receding", eyes: "#5a6a7a", top: "tweed", tc: "#5a5a5a", age: 52, glasses: "#6a4a2a", jaw: 4 },
+        v: [["R", "Waar was u vanavond?"], ["S", "Thuis. De hele avond. Ik luister altijd naar Nachtpraat vanuit mijn stoel."], ["R", "Wat hoorde u?"], ["S", "Om kwart over tien zei Wichert dat hij groot nieuws had. Over onze omroep."], ["R", "Hoe gaat het met de omroep?"], ["S", "Goed. We hebben meer reclames dan ooit."], ["R", "Heeft u een pasje van de parkeergarage?"], ["S", "Natuurlijk. Plek 7 is van mij. Maar ik ben er vanavond niet geweest."]],
+        lie: [1, 7]
+      },
+      {
+        id: "dorette",
+        name: "Dorette Melkhorst",
+        role: "oud-presentator",
+        motive: "Werd vorig jaar ontslagen; Wichert kreeg haar programma.",
+        f: 1,
+        voice: [1.16, 1.02],
+        look: { f: 1, skin: "#c89874", hc: "#1a1412", hair: "curly", eyes: "#2a1a12", top: "vest", tc: "#8a2a4a", age: 46, earring: 1 },
+        v: [["R", "U stuurde Wichert een boze sms."], ["S", "Ja. Hij heeft mijn programma afgepakt. Ik had twee glazen wijn op. Dom."], ["R", "Waar was u vanavond?"], ["S", "In het karaokecafé aan de andere kant van de stad. Ik zong twee keer. Mijn vrienden hebben het gefilmd."], ["R", "Hoe laat zong u?"], ["S", "Om kwart over tien en vlak voor half elf. Vraag het maar na."]]
+      }
+    ],
+    secret: [
+      { t: "Forensisch dossier", ic: "🔬", docs: [
+        { t: "Sectierapport", h: "<p><b>Doodsoorzaak:</b> een klap met de zware microfoonstandaard.</p><p><b>Tijdstip van overlijden:</b> tussen 22:00 en 23:00.</p>" },
+        { t: "De opname", h: "<p>22:14 · Wichert praat voor het laatst. Hij zet een plaat op van <b>8 minuten en 20 seconden</b>.</p><p>22:22 · de plaat is afgelopen. Daarna: stilte tot 22:31. Dan hoor je Christa gillen.</p>" },
+        { t: "Voetstappen", h: "<p>De natte voetstappen op de trap zijn van <b>herenschoenen, maat 45</b>. Ze gaan naar boven én weer naar beneden.</p>" }
+      ] },
+      { t: "Het gebouw", ic: "📻", docs: [
+        { t: "Pasjes parkeergarage", h: '<table class="tv-t"><tr><th>Tijd</th><th>Pas</th><th>Wat</th></tr><tr><td>21:35</td><td>K. Lijnzaad</td><td>uit</td></tr><tr><td><b>22:09</b></td><td><b>Z. Hooglander</b></td><td><b>in</b></td></tr><tr><td><b>22:27</b></td><td><b>Z. Hooglander</b></td><td><b>uit</b></td></tr></table>' },
+        { t: "Camera trappenhuis", h: "<p><b>22:12</b> · een man in een <b>lange grijze jas met een hoed</b> loopt de trap op. Zijn gezicht is niet te zien.</p><p><b>22:24</b> · dezelfde man rent de trap af.</p>" },
+        { t: "Uitleenlijst archief", h: "<p>Map “Reclame 2026” · geleend door <b>W. Brouwershaven</b> op dinsdag. Niet teruggebracht.</p>" }
+      ] },
+      { t: "Telefoons", ic: "📱", docs: [
+        { t: "Sms aan Wichert", h: "<p>21:50 · van <b>Dorette</b>: “Jij krijgt nog wel wat je verdient.”</p>" },
+        { t: "Kantine", h: "<p>Telefoon Christa: 22:10 – 22:29 · gesprek met haar zus.</p><p>De camera in de kantine ziet haar van <b>22:11 tot 22:30</b> aan tafel zitten.</p>" },
+        { t: "De zendmast", h: "<p>Deur van het huisje bij de zendmast: open om <b>21:56</b> met de code van K. Lijnzaad, dicht om <b>22:48</b>.</p><p>De zendmast staat twintig minuten rijden buiten het dorp.</p>" }
+      ] },
+      { t: "Getuigen", ic: "🗣️", docs: [
+        { t: "Karaokecafé", h: "<p>Filmpjes van vrienden: Dorette zingt om <b>22:15</b> en om <b>22:26</b>.</p><p>Het café is twintig minuten rijden van de omroep.</p>" },
+        { t: "Een luisteraar", h: "<p>“Om 22:25 belde ik naar de studio over de stilte. Niemand nam op.”</p>" },
+        { t: "De buurman van Zeno", h: "<p>“De auto van Zeno stond om tien uur niet op zijn oprit. Rond kwart voor elf kwam hij thuis. Hij was nat van de regen.”</p>" }
+      ] }
+    ],
+    envelope: { t: "Envelop B · de usb-stick", when: "Open pas als jullie alle verhoren gehoord hebben.", h: "<p>In het handschoenenkastje van de auto van Zeno ligt een usb-stick met een briefje: “<b>Voor de uitzending – W.B.</b>”</p><p>Op de stick: bankafschriften. In twee jaar ging <b>€ 42.000</b> aan reclamegeld naar een rekening op naam van <b>Z. Hooglander</b>.</p>" },
+    rounds: [
+      { t: "De omroep", tips: ["Nachtpraat is elke donderdag live, van negen tot elf.", "Bij een plaat van ruim acht minuten kan de presentator even weglopen.", "Wichert zocht vorige week iets op in het archief van de omroep.", "Dorette werd vorig jaar ontslagen. Wichert kreeg haar programma.", "Plek 7 in de parkeergarage is van de stationsmanager."] },
+      { t: "Na de verhoren", tips: ["Koen deed die avond onderhoud aan de zendmast buiten het dorp.", "Christa belt elke donderdag in de pauze met haar zus.", "Zeno draagt altijd een lange grijze jas en een hoed.", "Zeno heeft schoenmaat 45.", "De omroep had dit jaar meer reclames, maar minder reclamegeld op de bank.", "Het regende die avond vanaf kwart voor tien."] }
+    ],
+    motives: [["ontslag", "Haar ontslag vorig jaar"], ["storing", "De klachten over de storingen"], ["producer", "Een nieuwe producer"], ["reclame", "Wichert ontdekte het verdwenen reclamegeld"]],
+    motive: "reclame",
+    keys: [["sms", "De boze sms van 21:50"], ["garage", "Pasje om 22:09 + grijze jas op de trap"], ["kantine", "De camera in de kantine"], ["mast", "De deur van de zendmast"]],
+    key: "garage",
+    lies: { christa: "Vertelt de waarheid. Ze zat in de kantine en belde met haar zus.", koen: "Vertelt de waarheid. Hij was bij de zendmast.", zeno: "Liegt: “Ik ben er vanavond niet geweest.” Zijn pasje ging om 22:09 de garage in en om 22:27 eruit. Om 22:12 liep hij in zijn grijze jas de trap op.", dorette: "Vertelt de waarheid. Ze stuurde een boze sms, maar ze stond te zingen in het karaokecafé." },
+    breaker: "Het pasje van Zeno: om 22:09 de garage in, om 22:27 eruit. Precies in die tijd loopt een man in een lange grijze jas de trap op en weer af. Zeno zegt dat hij de hele avond thuis was.",
+    solTimeline: [["21:50", "Dorette stuurt een boze sms"], ["22:09", "Zeno rijdt de parkeergarage in"], ["22:12", "Zeno loopt in zijn grijze jas de trap op"], ["22:14", "Wichert zet de lange plaat op"], ["± 22:18", "ruzie over het reclamegeld; de klap met de standaard"], ["22:24", "Zeno rent de trap af met de usb-stick"], ["22:27", "Zeno rijdt de garage uit"], ["22:31", "Christa vindt Wichert"]],
+    answer: "zeno",
+    weapon: "een zware microfoonstandaard",
+    place: "de studio",
+    tips: ["Wie kon er tussen 22:14 en 22:31 in de studio zijn?", "Kijk naar de pasjes van de parkeergarage. Van wie is plek 7?", "Wie draagt een lange grijze jas, en wie zegt dat hij thuis was?"],
+    story: "Stationsmanager Zeno Hooglander stak in twee jaar € 42.000 aan reclamegeld in zijn eigen zak. Wichert ontdekte het in het archief en wilde het live vertellen. Zeno wist dat Wichert in het archief had gezocht en reed naar de omroep om hem tegen te houden. Om 22:09 reed hij de garage in en liep in zijn grijze jas de trap op. Tijdens de lange plaat kregen ze ruzie. Zeno sloeg Wichert met de microfoonstandaard, pakte de usb-stick en rende om 22:24 de trap af. Daarna zei hij dat hij de hele avond thuis naar de radio had geluisterd."
+  },
+  {
+    id: "warmte",
+    nr: "15",
+    title: "Een te warme kamer",
+    level: "Expert",
+    time: "90 tot 120 minuten",
+    players: "2 tot 10 spelers",
+    date: "24-02",
+    blurb: "Een zuinige muntenverzamelaar ligt dood in zijn woonkamer. De verwarming staat op 28 graden. Dat deed hij nooit.",
+    melding: '<p class="tv-mono">MELDING 112 · WOENSDAG 24 FEBRUARI · 23:20</p><p>Een buurman ziet dat de voordeur van woonboerderij <b>De Hooiberg</b> op een kier staat. Binnen vindt hij muntenverzamelaar <b>Luitzen Zonnevanck</b> (68) dood in de woonkamer. Hij is geslagen met een bronzen boekensteun.</p><p>In de kamer is het <b>bloedheet</b>. De schouwarts meet om 23:40 de temperatuur van het lichaam en zegt: <b>tussen 21:00 en 22:00</b>.</p><p>Twee mensen liegen. Geen hulptips.</p>',
+    question: "Wanneer is Luitzen écht overleden?",
+    victim: "Luitzen Zonnevanck</b> (68), muntenverzamelaar, woonde alleen op De Hooiberg",
+    photos: [[["wall", ["armchair", 150, 170, 1.1]], "1 · de woonkamer"], [["desk", ["letter", 150, 170, 1.2]], "2 · het bureau van Luitzen"], [["grass", ["door", 150, 170, 1.1]], "3 · de achterdeur"], [["dark", ["car", 150, 170, 1]], "4 · de auto van Imre"]],
+    real: ["woonkamer", "bureau", "tuin", "parkeer"],
+    markers: [["1 · bronzen boekensteun", "2 · thermostaat: 28 graden"], ["3 · agenda, open bij maandag", "4 · twee koffiekopjes"], ["5 · fietsspoor bij de achterdeur"], ["6 · kiezels en modder in de banden"]],
+    photoNotes: ["Luitzen lag op het kleed voor de bank. De bronzen boekensteun ligt op het kleed. De thermostaat aan de muur staat op 28 graden.", "Op het bureau ligt de agenda, open bij maandag. Op het tafeltje ernaast staan twee koffiekopjes.", "Bij de achterdeur staat in de modder het spoor van een fiets.", "De auto van Imre staat in de parkeergarage onder zijn kantoor. In de banden zitten kiezels en modder, net als op het erf van De Hooiberg."],
+    timeline: [["18:45", "Luitzen stuurt zijn oud-tuinman een bericht"], ["19:44", "Luitzen leest een bericht van zijn neef"], ["21:00 – 22:00", "tijdstip van overlijden volgens de schouwarts"], ["23:15", "de buurman vindt Luitzen"], ["23:20", "melding bij 112"]],
+    suspects: [
+      {
+        id: "reitse",
+        name: "Reitse Zonnevanck",
+        role: "neef en erfgenaam",
+        motive: "Erft de boerderij en de munten.",
+        f: 0,
+        voice: [0.98, 1.04],
+        look: { skin: "#efcdb4", hc: "#8a6a3a", hair: "short", eyes: "#4a6a8a", top: "vest", tc: "#3a4a5a", age: 42, beard: "stubble" },
+        v: [["R", "U erft alles van uw oom."], ["S", "Dat weet ik. Maar ik had liever mijn oom gehouden. Hij was als een vader voor me."], ["R", "Waar was u vanavond?"], ["S", "Tot half negen op de ouderavond van mijn zoon. Daarna thuis, alleen. Mijn vrouw was weg."], ["R", "Heeft u uw oom vandaag gesproken?"], ["S", "Ik stuurde hem om kwart over zeven een bericht dat ik morgen zou bellen. Hij heeft het gelezen."]]
+      },
+      {
+        id: "herma",
+        name: "Herma Graafsma",
+        role: "huishoudelijke hulp",
+        motive: "Heeft schulden.",
+        f: 1,
+        voice: [1.1, 1],
+        look: { f: 1, skin: "#efc8b0", hc: "#b88a4a", hair: "bun", eyes: "#5a6a5a", top: "shirt", tc: "#4a7a6a", age: 39 },
+        v: [["R", "Wanneer was u voor het laatst bij Luitzen?"], ["S", "Gisterochtend. Ik maak schoon op dinsdag en vrijdag. Vanavond ben ik er niet geweest."], ["R", "Waar was u vanavond?"], ["S", "Bij volleybal, van half acht tot negen uur. Daarna ben ik meteen naar huis gefietst."], ["R", "Heeft u een sleutel?"], ["S", "Van de achterdeur, ja. Voor als ik kom schoonmaken."], ["R", "Hoe was Luitzen als baas?"], ["S", "Streng, maar eerlijk. Hij telde elke week zijn munten."]],
+        lie: [1, 3]
+      },
+      {
+        id: "ulbe",
+        name: "Ulbe Ravelinck",
+        role: "muntenhandelaar",
+        motive: "Luitzen noemde hem een oplichter.",
+        f: 0,
+        voice: [0.88, 0.98],
+        look: { skin: "#e2b896", hc: "#3a2a1a", hair: "receding", eyes: "#3a2a1a", top: "tweed", tc: "#4a3a2a", age: 63, beard: "full", glasses: "#2a2a2a", jaw: 5 },
+        v: [["R", "Luitzen zei dat u hem nepmunten had verkocht."], ["S", "Hij vergiste zich. Ik had ze laten keuren. Ik heb hem de rapporten gestuurd."], ["R", "Waar was u vanavond?"], ["S", "Tot kwart voor negen in mijn winkel. Daarna alleen thuis."], ["R", "Heeft u Luitzen vanavond nog gesproken?"], ["S", "Ik belde hem om kwart over acht. Hij nam niet op. Dat was niets voor hem."]]
+      },
+      {
+        id: "imre",
+        name: "Imre Kampstede",
+        role: "beheerder van zijn geld",
+        motive: "Beheert al tien jaar het geld van Luitzen.",
+        f: 0,
+        voice: [0.96, 1.06],
+        look: { skin: "#efcdb4", hc: "#2a2420", hair: "short", eyes: "#4a5a6a", top: "shirt", tc: "#e8e8f0", age: 47, glasses: "#1a1a1a" },
+        v: [["R", "U beheert het geld van Luitzen."], ["S", "Al tien jaar. Hij was een lastige, maar trouwe klant."], ["R", "Waar was u vanavond?"], ["S", "Tot half negen thuis. Toen ben ik naar de pubquiz in café De Zwaan gegaan. Tot half elf."], ["R", "Wanneer zag u Luitzen voor het laatst?"], ["S", "Vorige maand, voor een kop koffie. Vandaag niet."], ["R", "Wist u dat hij een afspraak had met een accountant?"], ["S", "Hij praatte nooit met mij over zijn afspraken."]],
+        lie: [3, 5]
+      },
+      {
+        id: "feije",
+        name: "Feije Hazewinkel",
+        role: "oud-tuinman",
+        motive: "Kreeg vorige maand ontslag.",
+        f: 0,
+        voice: [1.02, 1.02],
+        look: { skin: "#c8946a", hc: "#d8b878", hair: "curly", eyes: "#4a6a5a", top: "shirt", tc: "#5a6a2a", age: 33 },
+        v: [["R", "Luitzen ontsloeg u vorige maand."], ["S", "Ja. Hij vond me te duur. Jammer, maar ik heb genoeg ander werk."], ["R", "Waar was u vanavond?"], ["S", "Op de spoedeisende hulp. Mijn dochter brak haar pols bij het turnen. We waren er van kwart over zeven tot na negenen."], ["R", "Stuurde Luitzen u nog een bericht?"], ["S", "Om kwart voor zeven. Of ik zaterdag toch de heg wilde snoeien. Raar, na dat ontslag."]]
+      }
+    ],
+    secret: [
+      { t: "Forensisch dossier", ic: "🔬", docs: [
+        { t: "Sectierapport", h: "<p><b>Doodsoorzaak:</b> een klap met een bronzen boekensteun.</p><p>Temperatuur van het lichaam gemeten om 23:40. <b>Gerekend met een gewone kamer van 20 graden:</b> overleden tussen 21:00 en 22:00.</p>" },
+        { t: "Afkoelen", h: "<p>In een warme kamer koelt een lichaam veel langzamer af.</p><p>Bij <b>28 graden</b> ligt het echte tijdstip ongeveer <b>anderhalf uur eerder</b> dan de som met 20 graden.</p>" },
+        { t: "Twee kopjes", h: "<p>Op het tafeltje staan twee kopjes koffie. In het ene zit nog een bodem. Het andere is <b>schoongeveegd</b>: geen vingerafdrukken.</p>" }
+      ] },
+      { t: "Het huis", ic: "🏠", docs: [
+        { t: "Thermostaat", h: '<table class="tv-t"><tr><th>Tijd</th><th>Stand</th><th>Hoe</th></tr><tr><td>06:30</td><td>19°</td><td>schema</td></tr><tr><td>18:00</td><td>20°</td><td>schema</td></tr><tr><td><b>19:52</b></td><td><b>28°</b></td><td><b>met de hand, op het paneel in de kamer</b></td></tr><tr><td>23:30</td><td>19°</td><td>agent</td></tr></table>' },
+        { t: "De vitrine", h: "<p>In de vitrine in de hal ligt een <b>gouden dukaat uit 1724</b>. Op het glas staan verse vingerafdrukken van <b>H. Graafsma</b>.</p><p>Er ontbreekt niets.</p>" },
+        { t: "Agenda van Luitzen", h: '<p class="tv-hand">“Maandag 10:00 · accountant. Alle papieren van Imre meenemen!”</p>' }
+      ] },
+      { t: "Pinnen en telefoons", ic: "💳", docs: [
+        { t: "Tankstation Dorpsstraat", h: "<p><b>19:31</b> · € 45 benzine · pas van <b>I. Kampstede</b>.</p><p>Het tankstation is drie minuten rijden van De Hooiberg.</p>" },
+        { t: "Telefoon van Luitzen", h: "<p>18:45 · bericht aan Feije verstuurd.</p><p>19:15 · bericht van Reitse binnen · <b>gelezen om 19:44</b>.</p><p>20:15 · gemiste oproep van Ulbe. Daarna wordt niets meer gelezen.</p>" },
+        { t: "Pubquiz café De Zwaan", h: "<p>Het team van I. Kampstede schreef zich in om <b>20:55</b> en speelde mee tot <b>22:30</b>. Dertig mensen zagen hem.</p>" }
+      ] },
+      { t: "Getuigen", ic: "👂", docs: [
+        { t: "De buurman", h: "<p>“Om 21:20 stond de fiets van Herma bij de achterdeur. Om half tien was hij weg. Om kwart over elf zag ik dat de voordeur op een kier stond.”</p>" },
+        { t: "Drie alibi’s", h: "<p>Reitse: ouderavond op school van 19:00 tot 20:30, volgens de juf.</p><p>Feije: spoedeisende hulp van 19:15 tot 21:05, volgens het ziekenhuis.</p><p>Ulbe: camera in zijn winkel, van 19:00 tot 20:45 achter de toonbank.</p>" },
+        { t: "Volleybal", h: "<p>De trainer: “Herma trainde van half acht tot negen uur. Daarna fietste ze weg.”</p>" }
+      ] }
+    ],
+    envelope: { t: "Envelop B · de accountant", when: "Open pas als jullie alle verhoren gehoord hebben.", h: "<p>Brief van een accountant aan Luitzen: “Op uw verzoek hebben we gekeken. Van de rekening die <b>Imre Kampstede</b> voor u beheert, is in twee jaar <b>€ 310.000</b> verdwenen. Graag tot maandag 10:00.”</p>" },
+    rounds: [
+      { t: "De boerderij", tips: ["Luitzen woonde alleen op woonboerderij De Hooiberg.", "Luitzen was zuinig. De verwarming ging nooit hoger dan 20 graden.", "De thermostaat kun je bedienen met een app of met het paneel in de kamer.", "De voordeur valt alleen goed dicht als je hem hard dichttrekt."] },
+      { t: "Na de verhoren", tips: ["Reitse erft de boerderij en de munten.", "Ulbe verkocht Luitzen vorig jaar twee munten. Luitzen dacht dat ze nep waren.", "Herma heeft schulden. Ze leende geld bij haar zus.", "Feije kreeg vorige maand ontslag van Luitzen."] },
+      { t: "Het laatste spoor", tips: ["Herma kocht vandaag om 16:10 bij de lommerd een gouden dukaat uit 1724 terug.", "Imre beheert al tien jaar het geld van Luitzen.", "Wie laat op de avond een alibi heeft, hoeft er vroeg op de avond nog geen te hebben.", "Het tankstation aan de Dorpsstraat ligt niet op de weg van Imre naar huis."] }
+    ],
+    motives: [["erfenis", "De erfenis"], ["nep", "De nepmunten"], ["schuld", "De schulden van Herma"], ["geld", "Luitzen ontdekte het verdwenen geld"], ["ontslag", "Het ontslag van de tuinman"]],
+    motive: "geld",
+    keys: [["fiets", "De fiets bij de achterdeur om 21:20"], ["quiz", "De pubquiz"], ["warm", "Thermostaat op 28 graden om 19:52 + tankbon om 19:31"], ["munt", "De dukaat in de vitrine"]],
+    key: "warm",
+    lies: { reitse: "Vertelt de waarheid. Hij zat tot half negen op de ouderavond.", herma: "Liegt ook, maar is onschuldig: “Vanavond ben ik er niet geweest.” Ze kwam om 21:20 via de achterdeur een gouden dukaat terugleggen die ze had verpand. Ze ging niet de kamer in. Luitzen was toen al anderhalf uur dood.", ulbe: "Vertelt de waarheid. Hij stond in zijn winkel en belde om 20:15 tevergeefs.", imre: "Liegt: “Tot half negen thuis.” Om 19:31 tankte hij drie minuten van De Hooiberg. Om 19:52 zette hij de verwarming op 28 graden, zodat het leek alsof Luitzen pas tussen negen en tien stierf, toen hij op de quiz zat.", feije: "Vertelt de waarheid. Hij zat met zijn dochter op de spoedeisende hulp." },
+    breaker: "De combinatie: om 19:52 zette iemand in de kamer de verwarming op 28 graden. Bij 28 graden ligt het echte tijdstip anderhalf uur eerder: tussen 19:30 en 20:30. Luitzen las om 19:44 nog een bericht en nam om 20:15 niet meer op. Imre tankte om 19:31 vlak bij de boerderij; zijn alibi begint pas om 20:55.",
+    solTimeline: [["18:45", "Luitzen stuurt Feije een bericht"], ["19:31", "Imre tankt aan de Dorpsstraat"], ["± 19:35", "Imre komt bij De Hooiberg; koffie"], ["19:44", "Luitzen leest het bericht van Reitse"], ["± 19:50", "ruzie over het geld; de klap met de boekensteun"], ["19:52", "Imre zet de verwarming op 28 graden en veegt zijn kopje schoon"], ["20:55", "Imre schrijft zich in bij de pubquiz"], ["21:20", "Herma legt stiekem de dukaat terug"], ["23:15", "de buurman vindt Luitzen"]],
+    answer: "imre",
+    weapon: "een bronzen boekensteun",
+    place: "de woonkamer",
+    tips: [],
+    story: "Imre Kampstede beheerde al tien jaar het geld van Luitzen Zonnevanck en stal in twee jaar € 310.000. Luitzen liet een accountant kijken en had maandag een afspraak. Imre tankte om 19:31 vlak bij de boerderij en dronk koffie met Luitzen. Ze kregen ruzie en Imre sloeg hem met een bronzen boekensteun. Om 19:52 zette hij de verwarming op 28 graden. Zo koelde het lichaam langzaam af en leek het alsof Luitzen pas tussen negen en tien stierf. Toen zat Imre op de pubquiz. Herma loog ook: ze kwam om 21:20 stiekem een gouden dukaat terugleggen die ze had verpand."
+  }
+);
+SCR.tv = Object.assign(SCR.tv || {}, {
+  wijnkelder: [["t", "Dood in de wijnkelder", "wijnkelder", "Tv-dossier · zaak 13"], ["s", "Wijnhandel Tiendeman", ["night", ["house", 150, 170, 1.1]], "Een oude wijnwinkel in de binnenstad. Allard woont erboven."], ["s", "21:50", ["dark", ["shelf", 150, 170, 1.1], ["bottle", 215, 185, 0.9]], "Hester komt thuis van het koor. Ze vindt haar man in de kelder."], ["e", "Wie kwam er vanavond in de kelder?", "Start het onderzoek"]],
+  studio: [["t", "Stilte in de studio", "studio", "Tv-dossier · zaak 14"], ["s", "Radio Waalkant", ["night", ["house", 150, 170, 1.1]], "Een kleine omroep in een oud pand. Elke donderdag is Nachtpraat live."], ["s", "22:14", ["desk", ["radio", 150, 170, 1.3]], "Wichert belooft groot nieuws en zet een lange plaat op. Daarna blijft het stil."], ["e", "Wat gebeurde er tijdens die plaat?", "Start het onderzoek"]],
+  warmte: [["t", "Een te warme kamer", "kamer", "Tv-dossier · zaak 15"], ["s", "Woonboerderij De Hooiberg", ["night", ["house", 150, 170, 1.1]], "Een oude boerderij aan de rand van het dorp."], ["s", "23:15", ["wall", ["armchair", 150, 170, 1.1]], "De buurman vindt Luitzen. In de kamer is het bloedheet."], ["e", "Hoe laat stierf Luitzen écht?", "Start het onderzoek"]]
+});
+SCREND.tv = Object.assign(SCREND.tv || {}, {
+  wijnkelder: [["t", "Zo is het gebeurd", "gebeurd", "Dood in de wijnkelder"], ["s", "De steeg · 20:43", ["night", ["door", 150, 170, 1.1]], "Krijn kwam op zijn groene scooter en ging door de achterdeur naar binnen."], ["s", "De kelder", ["dark", ["shelf", 150, 170, 1.1]], "Allard wist van de gestolen flessen. Krijn sloeg toe.", { hit: "metaal", act: "strike", x: 150 }], ["x", "Krijn Vlasbloem", "een magnumfles", "de wijnkelder"]],
+  studio: [["t", "Zo is het gebeurd", "gebeurd", "Stilte in de studio"], ["s", "De garage · 22:09", ["dark", ["car", 150, 170, 1]], "Zeno parkeerde op plek 7 en liep in zijn grijze jas de trap op."], ["s", "De studio", ["desk", ["radio", 150, 170, 1.2]], "Wichert wist van het reclamegeld. Zeno sloeg toe tijdens de lange plaat.", { hit: "metaal", act: "strike", x: 150 }], ["x", "Zeno Hooglander", "een zware microfoonstandaard", "de studio"]],
+  warmte: [["t", "Zo is het gebeurd", "gebeurd", "Een te warme kamer"], ["s", "De Dorpsstraat · 19:31", ["night", ["car", 150, 170, 1]], "Imre tankte vlak bij de boerderij en reed naar Luitzen."], ["s", "De woonkamer", ["wall", ["armchair", 150, 170, 1.1]], "Imre sloeg toe en zette daarna de verwarming op 28 graden.", { hit: "metaal", act: "strike", x: 150 }], ["x", "Imre Kampstede", "een bronzen boekensteun", "de woonkamer"]]
+});
 const TVTPL = {
   feest: {
     title: "Het verjaardagsfeest",
@@ -16839,7 +17151,7 @@ function start(data) {
 }
 ((_b = (_a = window.claude) == null ? void 0 : _a.hot) == null ? void 0 : _b.ready) ? window.claude.hot.ready(start) : start((_e = (_d = (_c = window.claude) == null ? void 0 : _c.hot) == null ? void 0 : _d.data) != null ? _e : {});
 </script>
-<script>const APPV = "20261110042239";
+<script>const APPV = "20261110053636";
 if ("serviceWorker" in navigator) {
   addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {
   }));

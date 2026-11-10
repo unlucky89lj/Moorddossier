@@ -6808,6 +6808,88 @@ function fmAct(fx, u) {
   }
   return { svg: "", bx: 150, by: 105 };
 }
+const FMWHY = {
+  "speur/veiling": [["v", "Dit testament is vervalst, Pander!"], ["a", "Bewijs dat maar eens."], ["v", "De Zwarte Parel is nooit van jou geweest."], ["a", "Vanavond wel…"]],
+  "speur/wadoog": [["v", "Ik heb gezien wat je doet, Maarten."], ["a", "Je hebt niks gezien."], ["v", "Ik sein het naar de wal. Iedereen gaat het weten."], ["a", "Niet als ik je tegenhoud."]],
+  "speur/ravensteyn": [["a", "Het zilver in de kast is al lang namaak."], ["a", "Als Willem het merkt, ben ik alles kwijt. Eén pil is genoeg."]],
+  "speur/elfsteden": [["v", "Wiebe, je hebt op een ander gewed!"], ["a", "Rij gewoon langzamer. Dan krijg jij ook wat."], ["v", "Nooit. Ik zeg het tegen de jury."], ["a", "Dat dacht ik niet."]],
+  "speur/dropfabriek": [["v", "Dit is geen zoethout. Dit is goedkoop poeder!"], ["a", "Niemand proeft het verschil."], ["v", "€ 18.000, Engelbert. Morgen ga ik naar de politie."], ["a", "Morgen is te laat."]],
+  "speur/dierentuin": [["v", "Fokko! Wat doe je met die eieren?"], ["a", "Weet je wat die opbrengen? € 3.000 per stuk."], ["v", "Ik bel de directeur. Nu meteen."], ["a", "Leg die telefoon weg!"]],
+  "koud/sluis": [["v", "Jij haalt het geld uit de kassa, Dennis."], ["a", "Wie zegt dat?"], ["v", "Alleen jij werkt op donderdag en zaterdag. Ik weet het nu."], ["a", "Dan weet je te veel."]],
+  "koud/reiger": [["a", "Een half miljoen van de verzekering, Erik."], ["v", "Ik teken niks meer, Maurits. Ga weg."], ["a", "Dat hoeft ook niet meer."]],
+  "koud/kade": [["v", "Jij krijgt geld om artikelen tegen te houden!"], ["a", "Sophie, zet die laptop uit."], ["v", "Morgen staat het in de krant. Met jouw naam."], ["a", "Er komt geen morgen."]],
+  "koud/vuurwerk": [["v", "Er is € 12.000 weg uit de feestkas, Wim."], ["a", "Een rekenfout. Meer niet."], ["v", "Ik bel nu het bestuur."], ["a", "Hang op, Gert."]],
+  "koud/tuin": [["v", "Je krijgt niks meer, Ruud. Ik verander mijn testament."], ["a", "Na alles wat ik voor je gedaan heb?"], ["v", "Maandag ga ik naar de notaris."], ["a", "Daar kom je niet meer."]],
+  "bericht/mila": [["v", "Jij bent het, Kevin? Niet Thijs?"], ["a", "Geef me die telefoon, Mila."], ["v", "Morgen gaat alles over de omkoping naar de krant."], ["a", "Niet als jij er niet meer bent."]],
+  "bericht/manege": [["v", "Ik zag je met die spuit bij Duchess!"], ["a", "Je hebt het verkeerd gezien, Iris."], ["v", "Je wilt het verzekeringsgeld. Ik zeg het tegen iedereen."], ["a", "Kom eens hier."]],
+  "bericht/kluis": [["v", "Ik stop ermee, Fenna. Je hebt € 38.000 opgenomen."], ["a", "Dat geld was ook van mij."], ["v", "Ik ga het aangeven."], ["a", "Nee, Jeroen. Dat doe je niet."]],
+  "bericht/volkstuin": [["v", "Er is € 6.400 weg uit de clubkas, Rozemarijn."], ["a", "Ik leg het terug, echt waar."], ["v", "Op de ledenvergadering vertel ik alles."], ["a", "Daar kom je niet."]],
+  "bericht/koor": [["v", "Dat lied is van mij, Ansfried!"], ["a", "Niemand gelooft je, Cornald."], ["v", "Ik vertel het morgen aan de jury."], ["a", "Dan moet ik je stilhouden."]],
+  "brieven/ate": [["a", "€ 18.400 schuld… Opa heeft genoeg geld."], ["a", "Eén slaappil in plaats van zijn gele pil. Niemand die het ziet."]],
+  "brieven/vuurtoren": [["v", "Wat zit er in die pakketten, Jorien?"], ["a", "Bemoei je er niet mee, Siebren."], ["v", "Ik bel de kustwacht."], ["a", "Dat had je niet moeten zeggen."]],
+  "brieven/kwekerij": [["a", "Vader ontdekt de verwisselde labels."], ["a", "Een beetje onkruidgif in zijn thee. Dan haalt hij de notaris niet."]],
+  "brieven/schaakclub": [["a", "Evelien weet van de zetten die ik doorstuurde."], ["a", "Een slaapmiddel in haar koffie, dan komt ze nooit bij het bestuur."]],
+  "brieven/ansicht": [["v", "Dit beeldje is nep, Sjabbe!"], ["a", "Je ziet het verkeerd, Barthel."], ["v", "Ik haal de politie erbij."], ["a", "Niet zo hard…"]],
+  "brieven/orgel": [["v", "Jij haalt geld uit de collectezak, Arnoud!"], ["a", "Een paar briefjes van honderd. Wat maakt het uit?"], ["v", "Zondag vertel ik het de hele kerk."], ["a", "Zondag ben jij er niet meer."]],
+  "brieven/bakkerij": [["a", "Gerolt wil zijn deel niet verkopen."], ["a", "De gaskraan van de oven open. Morgenvroeg bakt hij zoals altijd."]],
+  "brieven/circus": [["a", "Zolang Mirabella er is, word ik nooit directeur."], ["a", "Een paar sneetjes in het touw. Bij de laatste voorstelling breekt het."]],
+  "brieven/zeilmaker": [["v", "Ik heb een foto van die motoren, Mariska."], ["a", "Geef me die camera."], ["v", "Nee! Die gaat naar de politie."], ["a", "Dan ga jij het water in."]],
+  "brieven/kruidentuin": [["a", "Het huis gaat naar Mirte. Niet naar mij."], ["a", "Vingerhoedskruid door de munt. Oma merkt het niet."]],
+  "databank/hartman": [["v", "Je haalt al een jaar geld uit de zaak, Gerard."], ["a", "Ruben, laten we rustig praten."], ["v", "Er valt niks te praten. Ik ga naar de politie."], ["a", "Dat denk ik niet."]],
+  "databank/antiek": [["v", "Die kast is nep, Coert. Ik wil mijn geld terug."], ["a", "Verkocht is verkocht."], ["v", "Dan zie ik je bij de rechter."], ["a", "Zo ver komt het niet."]],
+  "databank/sporthal": [["v", "€ 3.800, Rowena. Ik heb het bestuur gemaild."], ["a", "Waarom heb je dat gedaan?"], ["v", "Omdat het geld van de club is."], ["a", "Je had je mond moeten houden."]],
+  "databank/garage": [["v", "Je hebt nooit rechten gestudeerd, Diederik!"], ["a", "Wie zegt dat?"], ["v", "De universiteit. Morgen weet iedereen het."], ["a", "Morgen niet."]],
+  "databank/pakket": [["v", "Nee, Emiel. Je krijgt geen geld meer van me."], ["a", "Tante, ik heb het echt nodig."], ["v", "Ga weg. Nu."], ["a", "Dan pak ik het zelf."]],
+  "databank/boerderij": [["v", "Ik verkoop de boerderij niet, Gosse."], ["a", "Vader, ik heb dat geld nodig!"], ["v", "Zolang ik leef, blijft de grond van ons."], ["a", "Zolang je leeft…"]],
+  "databank/ziekenhuis": [["v", "Jouw onderzoek is verzonnen, Fabian."], ["a", "Ludolf, dat mag je niet doen."], ["v", "De commissie heeft mijn mail al."], ["a", "Dan maak ik het zelf af."]],
+  "databank/haven": [["v", "Wat zit er in die container, Ansgar?"], ["a", "Niks waar jij je mee moet bemoeien."], ["v", "De douane komt morgen. Ik vertel het ze."], ["a", "Mischa, wacht…"]],
+  "databank/tennis": [["v", "Waarom is mijn levensverzekering verhoogd?"], ["a", "Voor de zekerheid, schat."], ["v", "Ik bel morgen de verzekering."], ["a", "Daar heb je geen tijd meer voor."]],
+  "databank/bieb": [["v", "De atlas is niet te koop, Casimir."], ["a", "Ik bied je het dubbele."], ["v", "Nee. Ga alsjeblieft weg."], ["a", "Dan neem ik hem zo mee."]],
+  "databank/golf": [["v", "€ 52.000 weg uit de contributiekas, Constance!"], ["a", "Lieuwe, ik betaal het terug."], ["v", "Morgen hoort het bestuur het."], ["a", "Het bestuur hoort niks."]],
+  "dossier/drukkerij": [["v", "IdW Advies… Dat ben jij, Ilse."], ["a", "Drink je koffie, Arnold."], ["v", "Veertien maanden… Ik voel me zo suf."], ["a", "Dat is de bedoeling."]],
+  "dossier/museum": [["v", "Dit is een kopie, Ariane. Waar is het echte stuk?"], ["a", "Theodoor, hou je erbuiten."], ["v", "Ik meld het morgen bij de directie."], ["a", "Daar kom je niet meer."]],
+  "dossier/ijsbaan": [["v", "Ik gelast de toertocht af, Tsjalle."], ["a", "Al mijn geld zit in die tent!"], ["v", "Het ijs is te dun. Het gaat niet door."], ["a", "Dan moet jij weg."]],
+  "dossier/hotelsuite": [["a", "Raymond weet dat ik steel. Morgen ontslaat hij me."], ["a", "Een paar pillen in zijn champagne. Het lijkt wel op zelfmoord."]],
+  "dossier/radiozender": [["a", "Bonifaas maakt mijn carrière kapot."], ["a", "Een ander glas water. Midden in de quiz stopt zijn hart."]],
+  "dossier/kasteeltuin": [["v", "Ik heb het doosje gevonden, Eva-Lotte."], ["a", "Geef het terug, Haye."], ["v", "Die robijnen gaan terug naar het kasteel."], ["a", "Nee. Die zijn van mij."]],
+  "dossier/treinreis": [["v", "Morgen in Zürich verander ik mijn testament."], ["a", "En ik krijg bijna niets?"], ["v", "Je hebt gehoord wat ik zei. Ga weg."], ["a", "Dat had u niet moeten doen."]],
+  "dossier/wijngaard": [["a", "Vader verkoopt nooit. Zo raak ik alles kwijt."], ["a", "De ventilator uit. In de kelder stikt hij vanzelf."]],
+  "dossier/observatorium": [["v", "Ik heb de komeet als eerste gezien, Bartholomeus!"], ["a", "Niemand gelooft een assistent."], ["v", "Mijn notities bewijzen het."], ["a", "Die prijs is van mij."]],
+  "stad/paraplu": [["v", "Waar is mijn geld, Rinus?"], ["a", "Ik heb het niet, Huib. Echt niet."], ["v", "Dan haal ik het zelf bij je thuis."], ["a", "Dat ga je niet doen."]],
+  "stad/kandelaar": [["v", "Wie is daar? Wat doe jij in de kerk?"], ["a", "Stil, koster."], ["v", "Ik bel de politie!"], ["a", "Niet doen…"]],
+  "stad/thee": [["a", "De slaappillen van tante, opgelost in haar thee."], ["a", "Nog één kopje, tante. Daarna slaapt u lekker."]],
+  "stad/haven": [["v", "Jij steelt al weken mijn vis, Barend-Jan!"], ["a", "Bewijs het maar."], ["v", "Ik zie je hier staan. Ik ga naar de havenmeester."], ["a", "Daar kom je niet."]],
+  "stad/bank": [["v", "Wie bent u? We zijn gesloten."], ["a", "Doe de deur open."], ["v", "Ik druk op de alarmknop!"], ["a", "Te laat."]],
+  "tv/lepel": [["v", "Lennert, deze flessen zijn bijgevuld!"], ["a", "Niemand proeft het verschil."], ["v", "Ik vertel het morgen aan de baas."], ["a", "Dat doe je niet, Ferre."]],
+  "tv/trap": [["v", "Nee, Benno. Je krijgt geen geld meer."], ["a", "Opa, ik zit diep in de schulden!"], ["v", "Dan los je dat zelf maar op."], ["a", "Dat doe ik ook."]],
+  "tv/overwerk": [["v", "Ik heb de directie gemaild, Ype. Over het geld."], ["a", "Froukje, trek die mail terug."], ["v", "Nee. Donderdag weet iedereen het."], ["a", "Donderdag niet."]],
+  "tv/nachthaven": [["v", "Wat liggen die sigaretten in de loods, Wybren?"], ["a", "Die zijn niet van mij."], ["v", "Ik bel de douane. Nu."], ["a", "Leg die telefoon neer, Nout."]],
+  "tv/parkeer": [["v", "Ik bel dinsdag mijn advocaat over jou, Tijs."], ["a", "Jildert, we kunnen dit regelen."], ["v", "Er valt niks meer te regelen."], ["a", "Dan regel ik het zo."]],
+  "tv/botenloods": [["v", "Wat doe je bij de kluis, Auke?"], ["a", "Gabe… je bent vroeg."], ["v", "Ik bel de politie!"], ["a", "Nee, dat doe je niet."]],
+  "tv/badhuis": [["v", "Niek? Hoe kom jij binnen?"], ["a", "Met mijn eigen sleutel, Marrit."], ["v", "Ga weg, of ik roep om hulp."], ["a", "Niemand hoort je hier."]],
+  "tv/zeezicht": [["v", "Elmer, waarom sta jij in de tuin?"], ["a", "We moeten praten, Rogier."], ["v", "Er valt niks te praten. Morgen weet iedereen het."], ["a", "Dat dacht ik niet."]],
+  "tv/klok": [["v", "Hylke, wat doe jij hier zo laat?"], ["a", "Ik kom het nog één keer vragen."], ["v", "Het antwoord blijft nee."], ["a", "Dan is het zo."]],
+  "tv/sleutels": [["v", "Christiaan? Hoe kom jij in mijn kantoor?"], ["a", "Ik heb al weken een sleutel, Minke."], ["v", "Ik meld dit morgen!"], ["a", "Morgen niet."]],
+  "tv/glas": [["v", "Dolf, ik weet wat je hebt gedaan."], ["a", "Hou je erbuiten, Wout."], ["v", "Ik ga naar de politie."], ["a", "Niet vanavond."]],
+  "tv/wijnkelder": [["v", "Ik weet van de gestolen flessen, Krijn."], ["a", "Allard, ik betaal alles terug."], ["v", "Te laat. Ik heb de politie al gebeld."], ["a", "Dan moet ik snel zijn."]],
+  "tv/studio": [["v", "Jij steekt het reclamegeld in je zak, Zeno!"], ["a", "Wichert, niet zo hard. We zijn bijna live."], ["v", "Na de lange plaat vertel ik het in de uitzending."], ["a", "Daar kom je niet aan toe."]],
+  "tv/warmte": [["v", "Imre? Wat kom jij hier doen?"], ["a", "Luitzen, ik wil die grond. Nu."], ["v", "Nooit. Ga van mijn erf af."], ["a", "Dan wordt het anders geregeld."]]
+};
+let FMKEY = null;
+function fmKeyOf(script) {
+  if (!FMKEY) {
+    FMKEY = /* @__PURE__ */ new Map();
+    for (const g of Object.keys(SCREND)) for (const k2 of Object.keys(SCREND[g])) FMKEY.set(SCREND[g][k2], g + "/" + k2);
+  }
+  let k = FMKEY.get(script);
+  if (!k) {
+    for (const g of Object.keys(SCREND)) for (const kk of Object.keys(SCREND[g])) if (SCREND[g][kk] === script) {
+      k = g + "/" + kk;
+      FMKEY.set(script, k);
+    }
+  }
+  return k || "";
+}
 function fmAtmos(u) {
   let h = '<defs><linearGradient id="fmRay" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3d6" stop-opacity=".22"/><stop offset="1" stop-color="#fff3d6" stop-opacity="0"/></linearGradient></defs>';
   [[30, 0, 70], [95, 0, 46], [170, 0, 60]].forEach(([x, y, w], i) => {
@@ -6825,7 +6907,7 @@ const fmDof = (Z, inner) => {
   return v < 0.15 ? inner : '<filter id="fmDof" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="'.concat(v.toFixed(2), '"/></filter><g filter="url(#fmDof)">').concat(inner, "</g>");
 };
 const fmMood = (k, mood) => Object.assign({}, lookOf(k), { mood });
-function fmPre(sc, u, PL) {
+function fmPre(sc, u, PL, WK) {
   const [, chap, spec, txt, fx] = sc, act = fx.act, s = fx.s || 0.6, E = FM.ease, lerp = (a, b, p) => a + (b - a) * p;
   let A, V, dir = 1, wp = null, vlk = ACTVIC;
   if (act === "strike") {
@@ -6850,7 +6932,7 @@ function fmPre(sc, u, PL) {
     V = null;
   }
   const poison = act === "poison";
-  const L = fx.why || (poison ? [["a", "Als hij gaat praten, ben ik alles kwijt."], ["a", "Een paar druppels. Niemand die het merkt."]] : [["v", "Ik weet wat je gedaan hebt!"], ["a", "Hou je mond. Niemand gelooft je."], ["v", "Morgen vertel ik alles aan de politie."], ["a", "Dat ga je niet doen…"]]);
+  const L = fx.why || FMWHY[WK] || (poison ? [["a", "Als hij gaat praten, ben ik alles kwijt."], ["a", "Een paar druppels. Niemand die het merkt."]] : [["v", "Ik weet wat je gedaan hebt!"], ["a", "Hou je mond. Niemand gelooft je."], ["v", "Morgen vertel ik alles aan de politie."], ["a", "Dat ga je niet doen…"]]);
   const IN = 1.3, per = poison ? 1.6 : 1.05, TL = IN + L.length * per, GRAB = Math.min(PL - 0.25, TL + 0.45);
   const walk = E(FM.clamp(u / IN)), side = A[0] > (V ? V[0] : 150) ? 1 : -1, ax = lerp(A[0] + side * 120, A[0], walk), bob = u < IN ? Math.abs(Math.sin(u * 9)) * 2.2 : 0;
   const li = u < IN ? -1 : Math.min(L.length - 1, Math.floor((u - IN) / per)), cur = li >= 0 && u < TL ? L[li] : null;
@@ -6893,14 +6975,25 @@ function fmPre(sc, u, PL) {
   const world = fmDof(Z, drawScene(spec)) + (V ? act === "drown" ? FM.G(V[0], V[1] - 4, s, '<g transform="rotate(90)">'.concat(fmSil(vm), "</g>")) + '<rect x="'.concat(V[0] - 66, '" y="').concat(V[1] - 2, '" width="132" height="8" fill="#6f7a80" opacity=".55"/>') : fmFig(V[0], V[1], s * 0.96, 0, 1, vm) : "") + fmFig(ax, A[1] - bob, s, 0, 1, am) + weapon + extra + (fx.rain ? FM.rain(u) : "");
   let bub = "";
   if (cur) {
-    const h = head(cur[0]), bx = (h[0] - cx) * Z + 150, by = (h[1] - cy) * Z + 100 - 30, t = cur[1], w = Math.min(170, 22 + t.length * 4.3), lines = t.length > 34 ? [t.slice(0, t.lastIndexOf(" ", 34)), t.slice(t.lastIndexOf(" ", 34) + 1)] : [t], H2 = 10 + lines.length * 10, X = FM.clamp(bx - w / 2, 6, 294 - w), Y = FM.clamp(by - H2, 18, 150), k = E(FM.seg(u, IN + li * per, IN + li * per + 0.18)), think = poison;
+    const h = head(cur[0]), bx = (h[0] - cx) * Z + 150, by = (h[1] - cy) * Z + 100 - 30, t = cur[1], w = Math.min(180, 24 + Math.min(32, t.length) * 4.4), lines = (() => {
+      const out = [];
+      let cur2 = "";
+      t.split(" ").forEach((w2) => {
+        if ((cur2 + " " + w2).trim().length > 32 && cur2) {
+          out.push(cur2);
+          cur2 = w2;
+        } else cur2 = (cur2 + " " + w2).trim();
+      });
+      if (cur2) out.push(cur2);
+      return out;
+    })(), H2 = 10 + lines.length * 10, X = FM.clamp(bx - w / 2, 6, 294 - w), Y = FM.clamp(by - H2, 18, 150), k = E(FM.seg(u, IN + li * per, IN + li * per + 0.18)), think = poison || L.every((l) => l[0] === "a");
     bub = '<g opacity="'.concat(k, '"><rect x="').concat(X, '" y="').concat(Y, '" width="').concat(w, '" height="').concat(H2, '" rx="').concat(think ? H2 / 2 : 6, '" fill="#fffdf6" stroke="#1d1a16" stroke-width="1"/>').concat(think ? '<circle cx="'.concat(FM.clamp(bx, X + 8, X + w - 8), '" cy="').concat(Y + H2 + 5, '" r="2.6" fill="#fffdf6" stroke="#1d1a16" stroke-width=".8"/><circle cx="').concat(FM.clamp(bx, X + 8, X + w - 8) + 3, '" cy="').concat(Y + H2 + 11, '" r="1.6" fill="#fffdf6" stroke="#1d1a16" stroke-width=".8"/>') : '<path d="M'.concat(FM.clamp(bx, X + 10, X + w - 10) - 5, " ").concat(Y + H2 - 0.5, 'l5 8 4-8z" fill="#fffdf6" stroke="#1d1a16" stroke-width="1"/><path d="M').concat(FM.clamp(bx, X + 10, X + w - 10) - 4.5, " ").concat(Y + H2 - 1, 'h8.5" stroke="#fffdf6" stroke-width="2"/>'), "\n   ").concat(lines.map((ln, i) => '<text x="'.concat(X + w / 2, '" y="').concat(Y + 13 + i * 10, '" text-anchor="middle" font-size="8" font-family="Arial" font-weight="700" fill="').concat(cur[0] === "a" ? "#9a1c12" : "#1d1a16", '">').concat(ln, "</text>")).join(""), "</g>");
   }
   const bars = '<rect width="300" height="15" fill="#000"/><rect y="185" width="300" height="15" fill="#000"/>';
   const rot = cur ? cur[0] === "a" ? -3.5 : 3 : 0, sh = cur && li === L.length - 1 ? Math.sin(u * 70) * 1.4 : 0;
   return { chap, stage: FM.svg('<g transform="translate('.concat((150 + sh).toFixed(2), " ").concat((100 + sh * 0.6).toFixed(2), ") rotate(").concat(rot, ") scale(").concat(Z.toFixed(3), ") translate(").concat((-cx).toFixed(2), " ").concat((-cy).toFixed(2), ')">').concat(world, "</g>").concat(fmAtmos(u)).concat(bars).concat(bub)), fade: u < 0.5 ? 1 - u / 0.5 : 0, cap: "" };
 }
-function fmCine(sc, XW, XV, XR) {
+function fmCine(sc, XW, XV, XR, WK) {
   const [, chap, spec, txt, fx] = sc, act = fx.act, HT = act === "fall" ? 3.15 : act === "poison" ? 2.8 : 2.2, SL = 1.8, PRE = 0.4, POST = 0.3, T1 = HT - PRE, SPAN = PRE + POST, PL = fx.pre === false ? 0 : 6.4, d = PL + Math.max(6, 1.6 + txt.length / 24) + (fx.hit ? 1 : 0) + 1.5 + (SL - SPAN), HTR = PL + T1 + PRE * SL / SPAN;
   const at = (u) => u < T1 ? u : u < T1 + SL ? T1 + (u - T1) * SPAN / SL : u - (SL - SPAN);
   const E = FM.ease, lerp = (a, b, p) => a + (b - a) * p;
@@ -6909,7 +7002,7 @@ function fmCine(sc, XW, XV, XR) {
       ACTWHO = XW;
       ACTVIC = XV;
       ACTWPN = XR ? XR[2] : "";
-      return fmPre(sc, u0, PL);
+      return fmPre(sc, u0, PL, WK);
     }
     const u = u0 - PL;
     const uu = at(u);
@@ -6979,7 +7072,7 @@ function fmStory(script, ok = true) {
       const [, who, how, where, mono] = sc;
       return fmFinale({ who, how, where, mono, ok });
     }
-    if (k === "s" && sc[4] && sc[4].act && sc[4].cine !== false && !matchMedia("(prefers-reduced-motion: reduce)").matches) return fmCine(sc, XW, XV, XR);
+    if (k === "s" && sc[4] && sc[4].act && sc[4].cine !== false && !matchMedia("(prefers-reduced-motion: reduce)").matches) return fmCine(sc, XW, XV, XR, fmKeyOf(script));
     if (k === "s") {
       const [, chap, spec, txt, fx = {}] = sc, act = fx.act, HT = act === "fall" ? 3.15 : act === "poison" ? 2.8 : 2.2, d = Math.max(6, 1.6 + txt.length / 24) + (fx.hit ? 1 : 0) + (act ? 1.5 : 0);
       return { d, rain: !!fx.rain, sfx: fx.hit ? [[HT, "hit", fx.hit === true ? "hout" : fx.hit === "duw" ? "plant" : fx.hit]] : [], f: (u) => {
@@ -15745,7 +15838,7 @@ function tvGen(p) {
   SCREND.tv = SCREND.tv || {};
   const sp2 = T.fx.spec;
   SCR.tv[id] = [["t", T.title, T.title.split(" ").pop(), "Tv-dossier · eigen zaak"], ["s", T.title, sp2[2], T.blurb], ["s", fm(hm(w1) + 11), sp2[0], "".concat(V, " wordt gevonden in ").concat(T.place, ".")], ["e", "Wie van jullie was het?", "Start het onderzoek"]];
-  SCREND.tv[id] = [["t", "Zo is het gebeurd", "gebeurd", T.title], ["s", fm(hm(d0)), sp2[1], "".concat(C0.n, " glipt weg uit ").concat(C0.spot, ".")], ["s", T.place.replace(/^\w/, (c) => c.toUpperCase()), sp2[0], "".concat(C0.n, " slaat toe met ").concat(T.weapon, "."), { hit: "metaal", act: "strike", x: 150 }], ["x", C0.n, T.weapon, T.place]];
+  SCREND.tv[id] = [["t", "Zo is het gebeurd", "gebeurd", T.title], ["s", fm(hm(d0)), sp2[1], "".concat(C0.n, " glipt weg uit ").concat(C0.spot, ".")], ["s", T.place.replace(/^\w/, (c) => c.toUpperCase()), sp2[0], "".concat(C0.n, " slaat toe met ").concat(T.weapon, "."), { hit: "metaal", act: "strike", x: 150, why: [["v", "".concat(first(C0), "! Ik weet waarom je hier bent.")], ["a", "Hou je mond, ".concat(V.split(" ")[0], ".")], ["v", "Straks vertel ik het aan iedereen hier."], ["a", "Dat ga je niet doen…"]] }], ["x", C0.n, T.weapon, T.place]];
   return C2;
 }
 const s0 = (x) => x.charAt(0).toUpperCase() + x.slice(1);

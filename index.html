@@ -6195,7 +6195,16 @@ function toonBody(L) {
   tbEnsure();
   const S = L.skin, H2 = L.hc, T = L.top, G = L.legs, O = "#1a1412", bl = (FILMT + L.ph) % 3.4 < 0.13, F = tbHead(L), Sd = tbSh(S, -0.32), Td = tbSh(T, -0.3);
   const arm = (sx) => {
-    const c = sx > 0 ? Td : T;
+    const c = sx > 0 ? Td : T, hp = sx > 0 ? L.hand : L.hand2;
+    if (hp) {
+      const x0 = 22 * sx, y0 = -94;
+      let dx = hp[0] - x0, dy = hp[1] - y0;
+      const dl = Math.hypot(dx, dy) || 1, k = Math.min(1, 44 / dl);
+      dx *= k;
+      dy *= k;
+      const hx = x0 + dx, hy = y0 + dy, bend = Math.max(0, 22 - dl / 2) * 0.9, ex = x0 + dx / 2 + -dy / dl * bend * sx, ey = y0 + dy / 2 + dx / dl * bend * sx + 4, pth = "M".concat(x0, " ").concat(y0, "Q").concat(ex.toFixed(1), " ").concat(ey.toFixed(1), " ").concat(hx.toFixed(1), " ").concat(hy.toFixed(1));
+      return '<path d="'.concat(pth, '" stroke="').concat(tbSh(c, -0.45), '" stroke-width="11" stroke-linecap="round" fill="none"/><path d="').concat(pth, '" stroke="').concat(c, '" stroke-width="8.6" stroke-linecap="round" fill="none"/><circle cx="').concat(hx.toFixed(1), '" cy="').concat(hy.toFixed(1), '" r="4.8" fill="').concat(sx > 0 ? tbSh(S, -0.12) : S, '"/><circle cx="').concat(hx.toFixed(1), '" cy="').concat(hy.toFixed(1), '" r="4.8" fill="url(#tbBall)"/>');
+    }
     return '<path d="M'.concat(22 * sx, " -94Q").concat(31 * sx, " -78 ").concat(29 * sx, ' -57" stroke="').concat(tbSh(c, -0.45), '" stroke-width="11" stroke-linecap="round" fill="none"/><path d="M').concat(22 * sx, " -94Q").concat(31 * sx, " -78 ").concat(29 * sx, ' -57" stroke="').concat(c, '" stroke-width="8.6" stroke-linecap="round" fill="none"/><path d="M').concat(21 * sx - 1.6 * sx, " -92Q").concat(29 * sx - 2 * sx, " -78 ").concat(27 * sx - 2 * sx, ' -60" stroke="#fff" stroke-opacity="').concat(sx < 0 ? 0.2 : 0.08, '" stroke-width="2.2" stroke-linecap="round" fill="none"/><circle cx="').concat(29 * sx, '" cy="-53" r="4.8" fill="').concat(sx > 0 ? tbSh(S, -0.12) : S, '"/><circle cx="').concat(29 * sx, '" cy="-53" r="4.8" fill="url(#tbBall)"/>');
   };
   const legs = L.f ? '<rect x="-10" y="-16" width="5" height="13" fill="'.concat(S, '"/><rect x="5" y="-16" width="5" height="13" fill="').concat(Sd, '"/><path d="M-21 -54L-25 -14Q0 -9 25 -14L21 -54Z" fill="').concat(T, '"/><path d="M-21 -54L-25 -14Q0 -9 25 -14L21 -54Z" fill="url(#tbLeg)"/><path d="M-25 -14Q0 -9 25 -14" stroke="').concat(tbSh(T, -0.4), '" stroke-width="1.2" fill="none"/>') : '<path d="M-20 -54L-18 -5H-2L0 -38 2 -5H18L20 -54Z" fill="'.concat(G, '"/><path d="M-20 -54L-18 -5H-2L0 -38 2 -5H18L20 -54Z" fill="url(#tbLeg)"/><path d="M0 -38V-50" stroke="#000" stroke-opacity=".25" stroke-width="1"/>');
@@ -6764,9 +6773,11 @@ const WPD = (() => {
     thermos: '<rect x="-2" y="-8" width="4" height="8" fill="#00000000"/><rect x="-6" y="-42" width="12" height="34" rx="4" fill="url(#wpRed)" '.concat(st2, '/><rect x="-4" y="-48" width="8" height="7" rx="1.5" fill="#26282a" ').concat(st2, "/>"),
     loep: '<rect x="-2" y="-16" width="4" height="18" fill="url(#wpIron)" '.concat(st2, '/><ellipse cx="0" cy="-2" rx="7" ry="3" fill="url(#wpIron)" ').concat(st2, '/><circle cx="0" cy="-26" r="10" fill="#c8e4ec" opacity=".75" stroke="url(#wpGold)" stroke-width="3"/>'),
     trommel: '<rect x="-2" y="-8" width="4" height="8" fill="#00000000"/><rect x="-12" y="-36" width="24" height="26" rx="3" fill="url(#wpBronze)" '.concat(st2, '/><path d="M-12 -28h24M-12 -20h24" stroke="#c9a24a" stroke-width="1.4"/>'),
+    pistool: '<path d="M1 -9h9l3 13h-7z" fill="#3a2a20" '.concat(st2, '/><path d="M3 -5h5M4 -2h5" stroke="#5a4232" stroke-width=".8"/><path d="M0 -6a3.4 3.4 0 0 0 5 1" fill="none" stroke="#1c1f22" stroke-width="1.2"/><rect x="-3" y="-21" width="6" height="22" rx="1.2" fill="#3b3f44" ').concat(st2, '/><rect x="-3" y="-21" width="2" height="22" fill="#6a7078" opacity=".7"/><rect x="-1.2" y="-23" width="2.4" height="2.4" fill="#1c1f22"/><path d="M-3 -15h6M-3 -12.5h6M-3 -10h6" stroke="#22262a" stroke-width=".6"/>'),
+    schaar: '<circle cx="-4" cy="2" r="4" fill="none" stroke="#b33a2a" stroke-width="2.2"/><circle cx="4" cy="2" r="4" fill="none" stroke="#b33a2a" stroke-width="2.2"/><path d="M-2 -2l3 -30l2 2zM2 -2l-3 -30l-2 2z" fill="url(#wpSteel)" '.concat(st2, "/>"),
     club: '<rect x="-3.5" y="-34" width="7" height="36" rx="2.5" fill="#2a2b2a" stroke="#9a978f" stroke-width="1.5"/>'
   };
-  const MAP = [["kandelaar", "kandelaar"], ["spade", "spade"], ["schop", "spade"], ["halter", "halter"], ["moker", "moker"], ["veilinghamer", "hamer"], ["hamer", "hamer"], ["moersleutel", "sleutel"], ["wielsleutel", "sleutel"], ["sleepkoppeling", "sleepkoppeling"], ["champagnekoeler", "koeler"], ["champagnefles", "fles"], ["magnumfles", "fles"], ["fles", "fles"], ["thermos", "thermos"], ["beker", "beker"], ["trofee", "beker"], ["prijs", "beker"], ["asbak", "rond"], ["loodje", "rond"], ["presse", "rond"], ["karaf", "vaas"], ["vaas", "vaas"], ["bijl", "bijl"], ["zaklamp", "zaklamp"], ["lamp", "zaklamp"], ["strijkbout", "strijkbout"], ["pan", "pan"], ["brandblusser", "blusser"], ["stopwatch", "stopwatch"], ["beeldje", "beeld"], ["anker", "anker"], ["mes", "mes"], ["staaf", "staaf"], ["stempel", "stempel"], ["typemachine", "typemachine"], ["perforator", "perforator"], ["boekensteun", "boekensteun"], ["maquette", "maquette"], ["standaard", "standaard"], ["kassalade", "lade"], ["lotentrommel", "trommel"], ["munt-trommel", "trommel"], ["trommel", "trommel"], ["pot", "pot"], ["vijzel", "pot"], ["zwengel", "zwengel"], ["hoefijzer", "hoefijzer"], ["haardroger", "haardroger"], ["ijsschep", "ijsschep"], ["kikker", "kikker"], ["broodvorm", "broodvorm"], ["goudstaaf", "goudstaaf"], ["loep", "loep"]];
+  const MAP = [["pistool", "pistool"], ["revolver", "pistool"], ["schaar", "schaar"], ["dolk", "mes"], ["kandelaar", "kandelaar"], ["spade", "spade"], ["schop", "spade"], ["halter", "halter"], ["moker", "moker"], ["veilinghamer", "hamer"], ["hamer", "hamer"], ["moersleutel", "sleutel"], ["wielsleutel", "sleutel"], ["sleepkoppeling", "sleepkoppeling"], ["champagnekoeler", "koeler"], ["champagnefles", "fles"], ["magnumfles", "fles"], ["fles", "fles"], ["thermos", "thermos"], ["beker", "beker"], ["trofee", "beker"], ["prijs", "beker"], ["asbak", "rond"], ["loodje", "rond"], ["presse", "rond"], ["karaf", "vaas"], ["vaas", "vaas"], ["bijl", "bijl"], ["zaklamp", "zaklamp"], ["lamp", "zaklamp"], ["strijkbout", "strijkbout"], ["pan", "pan"], ["brandblusser", "blusser"], ["stopwatch", "stopwatch"], ["beeldje", "beeld"], ["anker", "anker"], ["mes", "mes"], ["staaf", "staaf"], ["stempel", "stempel"], ["typemachine", "typemachine"], ["perforator", "perforator"], ["boekensteun", "boekensteun"], ["maquette", "maquette"], ["standaard", "standaard"], ["kassalade", "lade"], ["lotentrommel", "trommel"], ["munt-trommel", "trommel"], ["trommel", "trommel"], ["pot", "pot"], ["vijzel", "pot"], ["zwengel", "zwengel"], ["hoefijzer", "hoefijzer"], ["haardroger", "haardroger"], ["ijsschep", "ijsschep"], ["kikker", "kikker"], ["broodvorm", "broodvorm"], ["goudstaaf", "goudstaaf"], ["loep", "loep"]];
   return { defs, W, pick: (t) => {
     t = String(t || "").toLowerCase();
     const m = MAP.find(([k]) => t.includes(k));
@@ -6776,14 +6787,93 @@ const WPD = (() => {
 function fmClub(x, y, ang) {
   return '<g transform="translate('.concat(x, " ").concat(y, ") rotate(").concat(ang, ')">').concat(WPD.defs).concat(WPD.pick(ACTWPN), "</g>");
 }
+const WPSTYLE = [
+  ["pistool", "schiet"],
+  ["revolver", "schiet"],
+  ["mes", "steek"],
+  ["dolk", "steek"],
+  ["schaar", "steek"],
+  ["veilinghamer", "slaan"],
+  ["hamer", "slaan"],
+  ["moersleutel", "slaan"],
+  ["wielsleutel", "slaan"],
+  ["stempel", "slaan"],
+  ["perforator", "slaan"],
+  ["stopwatch", "slaan"],
+  ["loep", "slaan"],
+  ["hoefijzer", "slaan"],
+  ["haardroger", "slaan"],
+  ["thermos", "slaan"],
+  ["ijsschep", "slaan"],
+  ["bijl", "hak"],
+  ["spade", "hak"],
+  ["schop", "hak"],
+  ["moker", "hak"],
+  ["anker", "hak"],
+  ["champagnekoeler", "smijt"],
+  ["champagnefles", "breek"],
+  ["magnumfles", "breek"],
+  ["fles", "breek"],
+  ["karaf", "breek"],
+  ["vaas", "breek"],
+  ["glazen", "breek"],
+  ["halter", "smijt"],
+  ["typemachine", "smijt"],
+  ["trommel", "smijt"],
+  ["pot", "smijt"],
+  ["vijzel", "smijt"],
+  ["broodvorm", "smijt"],
+  ["goudstaaf", "smijt"],
+  ["kassalade", "smijt"],
+  ["maquette", "smijt"],
+  ["brandblusser", "smijt"],
+  ["beeld", "smijt"],
+  ["boekensteun", "smijt"],
+  ["asbak", "smijt"],
+  ["trofee", "smijt"],
+  ["beker", "smijt"],
+  ["strijkbout", "smijt"]
+];
+const wpStyle = (t) => {
+  t = String(t || "").toLowerCase();
+  const m = WPSTYLE.find(([k]) => t.includes(k));
+  return m ? m[1] : "zwaai";
+};
+const WPK = {
+  zwaai: [[0, 29, -53, -20], [1, 29, -53, -20], [1.65, -4, -114, -112], [1.82, -6, -116, -118], [2.2, 60, -96, 96, 1], [2.5, 48, -72, 150], [3.4, 32, -60, 120]],
+  slaan: [[0, 29, -53, -20], [1, 29, -53, -20], [1.6, 14, -136, -62], [1.85, 12, -137, -72], [2.2, 58, -100, 84, 1], [2.38, 52, -108, 52], [3.4, 32, -62, 10]],
+  hak: [[0, 29, -53, -20], [1, 29, -53, -20], [1.75, 10, -136, -14], [1.95, 9, -137, -24], [2.2, 58, -90, 102, 1], [2.6, 54, -64, 150], [3.4, 40, -58, 150]],
+  smijt: [[0, 29, -53, -20], [1, 14, -74, 0], [1.8, 10, -136, 0], [1.97, 10, -137, -6], [2.2, 58, -102, 42, 1], [2.6, 56, -74, 70], [3.4, 44, -62, 80]],
+  breek: [[0, 29, -53, -20], [1, 29, -53, -20], [1.6, 14, -136, -58], [1.85, 12, -137, -70], [2.2, 58, -102, 82, 1], [2.5, 50, -90, 60], [3.4, 32, -62, 20]],
+  steek: [[0, 29, -53, 150], [1, 29, -53, 150], [1.7, 4, -74, 90, 0, -4], [1.95, 2, -76, 90, 0, -6], [2.2, 66, -88, 90, 1, 16], [2.65, 62, -86, 90, 0, 16], [3.4, 30, -60, 120, 0, 6]],
+  schiet: [[0, 29, -53, 170], [1, 29, -53, 170], [1.6, 60, -100, 90, 0, -18], [2.15, 60, -100, 90, 0, -18], [2.2, 57, -108, 74, 1, -20], [2.4, 60, -100, 90, 0, -18], [3.4, 60, -100, 90, 0, -18], [4.2, 32, -60, 150, 0, -18]]
+};
+function wpPose(st2, t) {
+  const K = WPK[st2] || WPK.zwaai;
+  let i = 0;
+  while (i < K.length - 2 && t >= K[i + 1][0]) i++;
+  const a = K[i], b = K[i + 1], q = FM.clamp((t - a[0]) / Math.max(0.01, b[0] - a[0])), p = b[4] ? q * q * q : FM.ease(q), L = (j, d = 0) => (a[j] == null ? d : a[j]) + ((b[j] == null ? d : b[j]) - (a[j] == null ? d : a[j])) * p;
+  let hx = L(1), hy = L(2);
+  {
+    const dx = hx - 22, dy = hy + 94, dl = Math.hypot(dx, dy);
+    if (dl > 43) {
+      hx = 22 + dx * 43 / dl;
+      hy = -94 + dy * 43 / dl;
+    }
+  }
+  const two = st2 === "hak" || st2 === "smijt" || st2 === "zwaai" && /club|staaf|standaard|kandelaar/.test(String(ACTWPN).toLowerCase());
+  return { hx, hy, ang: L(3), dx: L(5), hand2: two ? [hx - (st2 === "smijt" ? 12 : 5), hy + (st2 === "smijt" ? 0 : 7)] : null };
+}
 function fmFig(x, y, s, rot = 0, op = 1, lk = ACTVIC) {
   return FM.G(x, y, s, '<g transform="rotate('.concat(rot, ')">').concat(fmSil(lk), "</g>"), 'opacity="'.concat(op, '"'));
 }
 function fmAct(fx, u) {
   const a = fx.act, s = fx.s || 0.6;
   if (a === "strike") {
-    const x = fx.x || 150, g = fx.g || 192, st2 = FM.ease(FM.seg(u, 0.6, 1.6)), cx = x - 80 + st2 * 36, ang = u < 1.6 ? -20 - FM.seg(u, 1, 1.6) * 60 : u < 2.2 ? -80 + FM.ease(FM.seg(u, 1.6, 2.2)) * 150 : 70, fall = FM.ease(FM.seg(u, 2.3, 3));
-    return { svg: fmFig(cx, g, s, 0, 1, ACTWHO) + fmClub(cx + 24 * s, g - 62 * s, ang) + fmFig(x + 18 + fall * 16, g - fall * 4, s * 0.96, fall * 84), bx: x + 12, by: g - 70 * s, ax: cx, ay: g - 108 * s };
+    const x = fx.x || 150, g = fx.g || 192, ws = fx.wstyle || wpStyle(ACTWPN), P = wpPose(ws, u), cx = ws === "schiet" ? x - 96 : x - 80 + FM.ease(FM.seg(u, 0.6, 1.6)) * 36 + P.dx * s, fall = FM.ease(FM.seg(u, 2.3, 3)), gx = cx + P.hx * s, gy = g + P.hy * s;
+    const who = Object.assign({}, lookOf(ACTWHO), { hand: [P.hx, P.hy], hand2: P.hand2 }), shot = ws === "schiet", broke = ws === "breek" && u > 2.2;
+    const wpn = broke ? "" : fmClub(gx, gy, P.ang), R2 = P.ang * Math.PI / 180, mz = [gx + Math.sin(R2) * (shot ? 22 : 30), gy - Math.cos(R2) * (shot ? 22 : 30)];
+    return { svg: fmFig(cx, g, s, 0, 1, who) + wpn + fmFig(x + 18 + fall * (shot ? 22 : 16), g - fall * 4, s * 0.96, fall * 84), bx: shot || ws === "steek" ? x + 14 : x + 12, by: shot || ws === "steek" ? g - 82 * s : g - 70 * s, ax: cx, ay: g - 108 * s, ws, gx, gy, ang: P.ang, mz };
   }
   if (a === "fall") {
     const [tx, ty] = fx.top, [bx, by] = fx.bottom, push = FM.ease(FM.seg(u, 1.5, 2.1)), f = FM.seg(u, 2.15, 3.15), dir = Math.sign(bx - tx) || 1;
@@ -6909,11 +6999,12 @@ const fmMood = (k, mood) => Object.assign({}, lookOf(k), { mood });
 function fmPre(sc, u, PL, WK) {
   const [, chap, spec, txt, fx] = sc, act = fx.act, s = fx.s || 0.6, E = FM.ease, lerp = (a, b, p) => a + (b - a) * p;
   let A, V, dir = 1, wp = null, vlk = ACTVIC;
+  const WS = act === "strike" ? fx.wstyle || wpStyle(ACTWPN) : "";
   if (act === "strike") {
     const x = fx.x || 150, g = fx.g || 192;
-    A = [x - 80, g];
+    A = [WS === "schiet" ? x - 96 : x - 80, g];
     V = [x + 18, g];
-    wp = [x - 104, g - 3, 84];
+    wp = [A[0] - 24, g - 3, 84];
   } else if (act === "fall") {
     const [tx, ty] = fx.top, [bx] = fx.bottom;
     dir = Math.sign(bx - tx) || 1;
@@ -6957,7 +7048,8 @@ function fmPre(sc, u, PL, WK) {
   let weapon = "";
   if (wp) {
     const g = E(FM.seg(u, GRAB, GRAB + 0.5)), hx = ax + 24 * s, hy = A[1] - 62 * s;
-    weapon = fmClub(lerp(wp[0], hx, g), lerp(wp[1], hy, g), lerp(wp[2], -20, g));
+    const r0 = WS ? WPK[WS][0] : null, hx2 = r0 ? ax + r0[1] * s : hx, hy2 = r0 ? A[1] + r0[2] * s : hy;
+    weapon = fmClub(lerp(wp[0], hx2, g), lerp(wp[1], hy2, g), lerp(wp[2], r0 ? r0[3] : -20, g));
     if (u > TL && u < GRAB) weapon += '<circle cx="'.concat(wp[0] + 6, '" cy="').concat(wp[1] - 4, '" r="').concat(2 + Math.sin(u * 14) * 1.2, '" fill="#fff" opacity=".8"/>');
   }
   let extra = "";
@@ -6993,10 +7085,10 @@ function fmPre(sc, u, PL, WK) {
   return { chap, stage: FM.svg('<g transform="translate('.concat((150 + sh).toFixed(2), " ").concat((100 + sh * 0.6).toFixed(2), ") rotate(").concat(rot, ") scale(").concat(Z.toFixed(3), ") translate(").concat((-cx).toFixed(2), " ").concat((-cy).toFixed(2), ')">').concat(world, "</g>").concat(fmAtmos(u)).concat(bars).concat(bub)), fade: u < 0.5 ? 1 - u / 0.5 : 0, cap: "" };
 }
 function fmCine(sc, XW, XV, XR, WK) {
-  const [, chap, spec, txt, fx] = sc, act = fx.act, HT = act === "fall" ? 3.15 : act === "poison" ? 2.8 : 2.2, SL = 1.8, PRE = 0.4, POST = 0.3, T1 = HT - PRE, SPAN = PRE + POST, PL = fx.pre === false ? 0 : 6.4, d = PL + Math.max(6, 1.6 + txt.length / 24) + (fx.hit ? 1 : 0) + 1.5 + (SL - SPAN), HTR = PL + T1 + PRE * SL / SPAN;
+  const [, chap, spec, txt, fx] = sc, act = fx.act, WS = act === "strike" ? fx.wstyle || wpStyle(XR ? XR[2] : "") : "", HT = act === "fall" ? 3.15 : act === "poison" ? 2.8 : 2.2, SL = 1.8, PRE = 0.4, POST = 0.3, T1 = HT - PRE, SPAN = PRE + POST, PL = fx.pre === false ? 0 : 6.4, d = PL + Math.max(6, 1.6 + txt.length / 24) + (fx.hit ? 1 : 0) + 1.5 + (SL - SPAN), HTR = PL + T1 + PRE * SL / SPAN;
   const at = (u) => u < T1 ? u : u < T1 + SL ? T1 + (u - T1) * SPAN / SL : u - (SL - SPAN);
   const E = FM.ease, lerp = (a, b, p) => a + (b - a) * p;
-  return { d, rain: !!fx.rain, sfx: (fx.hit ? [[HTR, "hit", fx.hit === true ? "hout" : fx.hit === "duw" ? "plant" : fx.hit]] : []).concat([[PL + T1 + 0.05, "click"]]), f: (u0) => {
+  return { d, rain: !!fx.rain, sfx: (fx.hit ? [[HTR, "hit", WS === "breek" ? "glas" : WS === "schiet" ? "metaal" : fx.hit === true ? "hout" : fx.hit === "duw" ? "plant" : fx.hit]] : []).concat([[PL + T1 + 0.05, "click"]]), f: (u0) => {
     if (u0 < PL) {
       ACTWHO = XW;
       ACTVIC = XV;
@@ -7009,7 +7101,7 @@ function fmCine(sc, XW, XV, XR, WK) {
     ACTVIC = fmMood(XV, uu > HT ? "broken" : "nervous");
     ACTWPN = XR ? XR[2] : "";
     const A = fmAct(fx, uu), ax = A.ax == null ? A.bx - 40 : A.ax, ay = A.ay == null ? A.by - 20 : A.ay, ix = A.ix == null ? A.bx : A.ix, iy = A.iy == null ? A.by : A.iy, mx = (ax + ix) / 2, my = (ay + iy) / 2 + 18;
-    const px = A.bx, py = A.by, K = act === "fall" ? [[0, 1.04, 150, 100, "e"], [0.75, 1.35, mx, my + 20, "e"], [1.4, 1.9, ax, ay + 34, "c"], [2.05, 1.6, ix, iy + 20, "e"], [HT - 0.1, 1.55, px, py - 34, "e"], [HT + 0.3, 1.7, px, py - 34, "e"], [HT + 1.1, 1, 150, 100, "e"], [HT + 6, 1.08, 150, 108, "e"], [99, 1.08, 150, 108, "e"]] : act === "poison" ? [[0, 1.04, 150, 100, "e"], [1.2, 1.6, px, py, "e"], [HT - 0.5, 2.6, px, py - 6, "c"], [HT + 0.3, 2.2, px, py, "e"], [HT + 1.1, 1.3, px, py, "e"], [HT + 6, 1.7, px, py - 6, "e"], [99, 1.7, px, py - 6, "e"]] : [[0, 1.04, 150, 100, "e"], [0.75, 1.5, mx, my, "e"], [HT - 0.55, 2.7, ax, ay + 6, "c"], [HT - 0.12, 2.15, px, py, "e"], [HT + 0.3, 2.35, px, py, "e"], [HT + 1.1, 1.3, mx, my + 4, "e"], [HT + 6, 1.6, px, py - 4, "e"], [99, 1.6, px, py - 4, "e"]];
+    const px = A.bx, py = A.by, K = act === "fall" ? [[0, 1.04, 150, 100, "e"], [0.75, 1.35, mx, my + 20, "e"], [1.4, 1.9, ax, ay + 34, "c"], [2.05, 1.6, ix, iy + 20, "e"], [HT - 0.1, 1.55, px, py - 34, "e"], [HT + 0.3, 1.7, px, py - 34, "e"], [HT + 1.1, 1, 150, 100, "e"], [HT + 6, 1.08, 150, 108, "e"], [99, 1.08, 150, 108, "e"]] : act === "poison" ? [[0, 1.04, 150, 100, "e"], [1.2, 1.6, px, py, "e"], [HT - 0.5, 2.6, px, py - 6, "c"], [HT + 0.3, 2.2, px, py, "e"], [HT + 1.1, 1.3, px, py, "e"], [HT + 6, 1.7, px, py - 6, "e"], [99, 1.7, px, py - 6, "e"]] : [[0, 1.04, 150, 100, "e"], [0.75, 1.5, mx, my, "e"], [HT - 0.55, /^(hak|smijt|slaan|breek)$/.test(WS) ? 2.25 : 2.7, ax, /^(hak|smijt|slaan|breek)$/.test(WS) ? ay - 16 : ay + 6, "c"], [HT - 0.12, 2.15, px, py, "e"], [HT + 0.3, 2.35, px, py, "e"], [HT + 1.1, 1.3, mx, my + 4, "e"], [HT + 6, 1.6, px, py - 4, "e"], [99, 1.6, px, py - 4, "e"]];
     let i = 0;
     while (i < K.length - 2 && uu >= K[i + 1][0]) i++;
     const a = K[i], b = K[i + 1], p = b[4] === "c" ? 0 : E(FM.clamp((uu - a[0]) / Math.max(0.01, b[0] - a[0])));
@@ -7024,7 +7116,42 @@ function fmCine(sc, XW, XV, XR, WK) {
     cy = FM.clamp(cy, hh, 200 - hh);
     const ip = FM.seg(uu, HT, HT + 0.55), shk = uu > HT && uu < HT + 0.55 ? (1 - ip) * 5 : 0, sx = Math.sin(u * 97) * shk, sy = Math.cos(u * 83) * shk;
     let fxs = "";
-    if (uu > HT && uu < HT + 0.8) {
+    const spark = WS !== "schiet" && WS !== "steek" && WS !== "breek";
+    if (WS === "schiet" && A.mz) {
+      const [mx0, my0] = A.mz, R2 = A.ang * Math.PI / 180, ux = Math.sin(R2), uy = -Math.cos(R2);
+      if (uu > HT - 0.02 && uu < HT + 0.14) {
+        const q = FM.seg(uu, HT - 0.02, HT + 0.14), r = (1 - q) * 14 + 4;
+        fxs += '<g transform="translate('.concat(mx0.toFixed(1), " ").concat(my0.toFixed(1), ") rotate(").concat(A.ang - 90, ')"><path d="M0 0L').concat(r * 1.6, " -").concat(r * 0.35, "L").concat(r * 0.9, " 0L").concat(r * 1.6, " ").concat(r * 0.35, "Z M0 0L").concat(r * 0.6, " -").concat(r * 0.8, "L").concat(r * 0.5, " 0L").concat(r * 0.6, " ").concat(r * 0.8, 'Z" fill="#ffe27a" stroke="#fff6d8" stroke-width=".8" opacity="').concat((1 - q).toFixed(2), '"/><circle r="').concat((r * 0.45).toFixed(1), '" fill="#fff"/></g>');
+        fxs += '<path d="M'.concat((mx0 + ux * 8).toFixed(1), " ").concat((my0 + uy * 8).toFixed(1), "L").concat((px - 2).toFixed(1), " ").concat(py.toFixed(1), '" stroke="#fff3c0" stroke-width="').concat((1.6 * (1 - q)).toFixed(2), '" opacity="').concat((1 - q).toFixed(2), '"/>');
+      }
+      if (uu > HT && uu < HT + 2.4) {
+        const q = FM.seg(uu, HT, HT + 2.4);
+        for (let j = 0; j < 5; j++) {
+          const t = FM.clamp(q * 1.4 - j * 0.08);
+          if (t > 0 && t < 1) fxs += '<circle cx="'.concat((mx0 + ux * 4 + j * 2 + Math.sin(uu * 3 + j) * 3).toFixed(1), '" cy="').concat((my0 - t * 34 - j * 3).toFixed(1), '" r="').concat((3 + t * 9).toFixed(1), '" fill="#d8d4cc" opacity="').concat((0.45 * (1 - t)).toFixed(2), '"/>');
+        }
+      }
+    }
+    if (WS === "breek" && uu > HT && uu < HT + 1.4) {
+      const q = uu - HT;
+      for (let j = 0; j < 16; j++) {
+        const an = -Math.PI * (0.1 + FM.rnd(j + 2) * 0.95), v = 40 + FM.rnd(j + 5) * 70, x = px + Math.cos(an) * v * q, y = py + Math.sin(an) * v * q + 120 * q * q, r = 1.6 + FM.rnd(j + 8) * 2.6, rt = q * 600 * (FM.rnd(j) - 0.5);
+        if (y < 205) fxs += '<path d="M0 -'.concat(r, "L").concat(r * 0.8, " ").concat(r * 0.7, "L-").concat(r * 0.7, " ").concat(r * 0.4, 'Z" transform="translate(').concat(x.toFixed(1), " ").concat(y.toFixed(1), ") rotate(").concat(rt.toFixed(0), ')" fill="').concat(["#bfe3c8", "#eafff2", "#7fb08a", "#d5f0ff"][j % 4], '" stroke="#fff" stroke-width=".3" opacity="').concat((1 - q / 1.4).toFixed(2), '"/>');
+      }
+      if (q < 0.4) fxs += '<circle cx="'.concat(px, '" cy="').concat(py, '" r="').concat((5 + q * 50).toFixed(1), '" fill="#eafff2" opacity="').concat((0.5 * (1 - q / 0.4)).toFixed(2), '"/>');
+    }
+    if (WS === "steek" && uu > HT && uu < HT + 0.5) {
+      const q = FM.seg(uu, HT, HT + 0.5);
+      fxs += '<path d="M'.concat(px - 10, " ").concat(py - 12, "Q").concat(px + 6, " ").concat(py, " ").concat(px - 10, " ").concat(py + 12, '" stroke="#fff" stroke-width="').concat((2.4 * (1 - q)).toFixed(2), '" fill="none" opacity="').concat((1 - q).toFixed(2), '"/>');
+    }
+    if (WS === "smijt" && uu > HT && uu < HT + 1.2) {
+      const q = FM.seg(uu, HT, HT + 1.2);
+      for (let j = 0; j < 7; j++) {
+        const an = Math.PI * (1.05 + j * 0.13);
+        fxs += '<circle cx="'.concat((px + Math.cos(an) * q * 30).toFixed(1), '" cy="').concat((py + Math.sin(an) * q * 18).toFixed(1), '" r="').concat((4 + q * 10).toFixed(1), '" fill="#cfc6b6" opacity="').concat((0.4 * (1 - q)).toFixed(2), '"/>');
+      }
+    }
+    if (spark && uu > HT && uu < HT + 0.8) {
       const q = FM.seg(uu, HT, HT + 0.8);
       for (let j = 0; j < 16; j++) {
         const an = FM.rnd(j) * Math.PI * 2, len = 10 + FM.rnd(j + 9) * 26, r0 = q * len, r1 = r0 + 4 + 6 * (1 - q);
@@ -7032,7 +7159,7 @@ function fmCine(sc, XW, XV, XR, WK) {
       }
       fxs += '<circle cx="'.concat(px, '" cy="').concat(py, '" r="').concat((4 + q * 22).toFixed(1), '" fill="none" stroke="#fff" stroke-width="').concat((2 * (1 - q)).toFixed(2), '" opacity="').concat((1 - q).toFixed(2), '"/>');
     }
-    if (uu > HT - 0.35 && uu < HT) {
+    if (WS !== "schiet" && uu > HT - 0.35 && uu < HT) {
       const q = FM.seg(uu, HT - 0.35, HT);
       for (let j = 0; j < 5; j++) {
         const yy = ay + 8 + j * 6;
@@ -7041,11 +7168,11 @@ function fmCine(sc, XW, XV, XR, WK) {
     }
     const bl = fx.hit && fx.hit !== "duw" && uu > HT ? fmBlood(uu - HT, A.bx, A.by) : "";
     let ghost = "";
-    if (act === "strike" && uu > 1.6 && uu < HT + 0.05) {
+    if (act === "strike" && WS !== "schiet" && uu > 1.9 && uu < HT + 0.05) {
       const x = fx.x || 150, g = fx.g || 192, s = fx.s || 0.6;
       for (let k = 1; k <= 4; k++) {
-        const t = uu - k * 0.035, an = t < 1.6 ? -80 : t < 2.2 ? -80 + FM.ease(FM.seg(t, 1.6, 2.2)) * 150 : 70, cxx = x - 80 + FM.ease(FM.seg(t, 0.6, 1.6)) * 36;
-        ghost += '<g opacity="'.concat((0.32 - k * 0.06).toFixed(2), '">').concat(fmClub(cxx + 24 * s, g - 62 * s, an), "</g>");
+        const t = uu - k * 0.035, P = wpPose(WS, t), cxx = x - 80 + FM.ease(FM.seg(t, 0.6, 1.6)) * 36 + P.dx * s;
+        ghost += '<g opacity="'.concat((0.32 - k * 0.06).toFixed(2), '">').concat(fmClub(cxx + P.hx * s, g + P.hy * s, P.ang), "</g>");
       }
     }
     const world = fmDof(Z, drawScene(spec)) + ghost + A.svg + bl + fxs + (fx.rain ? FM.rain(u) : "") + (fx.snow ? FM.rain(u * 0.25, 0.5) : "");
@@ -7053,7 +7180,7 @@ function fmCine(sc, XW, XV, XR, WK) {
     return {
       chap,
       stage: FM.svg('<g transform="translate('.concat((150 + sx).toFixed(2), " ").concat((100 + sy).toFixed(2), ") rotate(").concat(rot, ") scale(").concat(Z.toFixed(3), ") translate(").concat((-cx).toFixed(2), " ").concat((-cy).toFixed(2), ')">').concat(world, "</g>").concat(fmAtmos(u)).concat(bars).concat(slow)),
-      flash: uu > HT ? Math.max(0, 0.85 - FM.seg(uu, HT, HT + 0.18) * 0.85) : 0,
+      flash: uu > HT ? Math.max(0, (WS === "schiet" ? 0.45 : 0.85) - FM.seg(uu, HT, HT + 0.18) * (WS === "schiet" ? 0.45 : 0.85)) : 0,
       red: fx.hit && uu > HT ? Math.max(0, 0.5 - FM.seg(uu, HT, HT + 0.8) * 0.5) : 0,
       cap: uu > HT + 0.9 ? FM.type(txt, u0, PL + HTR - PL + 0.9 + 0.2, 34) : ""
     };
@@ -17406,7 +17533,7 @@ function start(data) {
 }
 ((_b = (_a = window.claude) == null ? void 0 : _a.hot) == null ? void 0 : _b.ready) ? window.claude.hot.ready(start) : start((_e = (_d = (_c = window.claude) == null ? void 0 : _c.hot) == null ? void 0 : _d.data) != null ? _e : {});
 </script>
-<script>const APPV = "20261110083036";
+<script>const APPV = "20261110095839";
 if ("serviceWorker" in navigator) {
   addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {
   }));

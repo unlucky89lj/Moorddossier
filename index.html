@@ -1099,10 +1099,6 @@ body.kiosk-join .tv-jform .btn.primary{font-size:22px;padding:16px}
     <button role="tab" type="button" data-g="dossier"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="1.5" fill="currentColor"/><path d="M2.5 6.5L12 14l9.5-7.5" fill="none" stroke="var(--card)" stroke-width="1.6"/><circle cx="12" cy="14" r="2.6" fill="var(--red)" stroke="var(--card)" stroke-width="1"/></svg>Dossiermap</b><span>Enveloppen vol bewijs</span></button>
     <button role="tab" type="button" data-g="databank"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="1.5" fill="currentColor"/><rect x="4" y="6" width="16" height="9" fill="var(--card)"/><circle cx="11" cy="10.5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M13 12.5l2.6 2.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 20h8M12 17v3" stroke="currentColor" stroke-width="2"/></svg>Politiedatabase</b><span>Zoek zelf in het systeem</span></button>
     <button role="tab" type="button" data-g="brieven"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-6 9 6v11H3z" fill="currentColor"/><path d="M3 9l9 6 9-6" fill="none" stroke="var(--card)" stroke-width="1.6"/><path d="M8 18h8" stroke="var(--card)" stroke-width="1.6"/></svg>Brievenreeks</b><span>Brieven, puzzels en een chat</span></button>
-    <button role="tab" type="button" data-g="team"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="3" fill="currentColor"/><circle cx="17" cy="8" r="3" fill="currentColor"/><circle cx="12" cy="6" r="3.4" fill="currentColor"/><path d="M1 20c0-4 3-6 6-6s6 2 6 6zM11 20c0-4 3-6 6-6s6 2 6 6z" fill="currentColor"/><path d="M5 21c0-5 3-7 7-7s7 2 7 7z" fill="currentColor"/></svg>Teamzaak</b><span>Drie specialisten, één zaak</span></button>
-    <button role="tab" type="button" data-g="casino"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4" fill="currentColor"/><circle cx="8" cy="8" r="1.7" fill="var(--card)"/><circle cx="16" cy="16" r="1.7" fill="var(--card)"/><circle cx="12" cy="12" r="1.7" fill="var(--card)"/><circle cx="16" cy="8" r="1.7" fill="var(--card)"/><circle cx="8" cy="16" r="1.7" fill="var(--card)"/></svg>Casino-escape</b><span>Ontsnap en wijs de dader aan</span></button>
-    <button role="tab" type="button" data-g="verhoor"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v4" stroke="currentColor" stroke-width="2"/><path d="M7 6h10l-2 4H9z" fill="currentColor"/><circle cx="12" cy="15" r="3.4" fill="currentColor"/><path d="M5 23c0-4 3-6 7-6s7 2 7 6z" fill="currentColor"/></svg>Het Verhoor</b><span>Prik de leugens door</span></button>
-    <button role="tab" type="button" data-g="tijdlijn"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18" stroke="currentColor" stroke-width="2.4"/><circle cx="6" cy="12" r="2.6" fill="currentColor"/><circle cx="12" cy="12" r="2.6" fill="currentColor"/><circle cx="18" cy="12" r="2.6" fill="currentColor"/><path d="M6 4v5M12 15v5M18 4v5" stroke="currentColor" stroke-width="2"/></svg>De Tijdlijn</b><span>Wie had de gelegenheid?</span></button>
     <button role="tab" type="button" data-g="stad"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5l6-2 6 2 6-2v16l-6 2-6-2-6 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 3v16M15 5v16" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="9" r="2.2" fill="currentColor"/></svg>Stadsplattegrond</b><span>Zoek het in de drukke stad</span></button>
     <button role="tab" type="button" data-g="tv"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="13" rx="2" fill="currentColor"/><rect x="4" y="7" width="16" height="9" rx="1" fill="var(--card)"/><path d="M8 21h8M12 18v3M8 2l4 3 4-3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M11 9.5v4l3.4-2z" fill="currentColor"/></svg>Tv-dossier</b><span>Samen op de tv, met QR-codes</span></button>
   </div>
@@ -2628,7 +2624,9 @@ const CASES = [
   }
 ];
 let game = window.MDKIOSK || /[?&](tv=|join)/.test(location.search) ? "tv" : store.get("md-game") === "pas" ? "pas" : "home", gmOpen = false;
+const GHIDE = /* @__PURE__ */ new Set(["team", "casino", "verhoor", "tijdlijn"]);
 function setGame(g) {
+  if (GHIDE.has(g)) g = "home";
   game = g;
   gmOpen = false;
   store.set("md-game", g);
@@ -10812,7 +10810,7 @@ function nuRender() {
   let body, extra = "";
   if (S.open) {
     const hits = nuScore(S.key, S.plan), pk = v.picks[S.key];
-    body = '<span class="kicker">'.concat(S.live ? "Nu nieuw" : "Deze week nieuw", "</span><b>").concat(S.plan.reduce((a, p) => a + p[1], 0), ' nieuwe zaken</b><span class="nu-list">').concat(S.plan.map(([g, n]) => '<i class="'.concat(pk && pk.includes(g) ? "hit" : "", '">').concat(NU_NAMES[g] || g).concat(n > 1 ? " ×".concat(n) : "", "</i>")).join(""), "</span><small>").concat(S.live ? "Staat online. Open de app opnieuw als je ze nog niet ziet." : "Online: ".concat(dag(S.rel), " in de ochtend"), "</small>");
+    body = '<span class="kicker">'.concat(S.live ? "Nu nieuw" : "Deze week nieuw", "</span><b>").concat(S.plan.filter(([g]) => !GHIDE.has(g)).reduce((a, p) => a + p[1], 0), ' nieuwe zaken</b><span class="nu-list">').concat(S.plan.filter(([g]) => !GHIDE.has(g)).map(([g, n]) => '<i class="'.concat(pk && pk.includes(g) ? "hit" : "", '">').concat(NU_NAMES[g] || g).concat(n > 1 ? " ×".concat(n) : "", "</i>")).join(""), "</span><small>").concat(S.live ? "Staat online. Open de app opnieuw als je ze nog niet ziet." : "Online: ".concat(dag(S.rel), " in de ochtend"), "</small>");
     if (pk) extra = '<p class="nu-res '.concat(hits >= 3 ? "win" : "", '">🔮 Jouw voorspelling: ').concat(pk.map((g) => NU_NAMES[g]).join(", "), " · <b>").concat(hits, " van 3 goed</b>").concat(hits >= 3 ? " · Badge: Helderziende rechercheur!" : "", "</p>");
   } else {
     const pk = v.picks[S.key], cr = v.crack[S.key];
@@ -15930,7 +15928,7 @@ function pasData() {
       const s = dbd.cases[c.id];
       return s && s.done && c.qs.every((q, i) => s.ans[i] === q.a);
     }).length, DBCASES.length]
-  ];
+  ].filter((r) => !GHIDE.has(r[0]));
   const total = rows.reduce((a, r) => a + r[2], 0), streak = Math.max(m.streak || 0, km.streak || 0, lh.streak || 0, spn.streak || 0);
   const B = [
     ["eerste", "Eerste zaak", "Los je eerste zaak op.", total, 1],
@@ -16812,7 +16810,7 @@ const HELP = [
   }
 ];
 function renderUitleg() {
-  $("pUitleg").innerHTML = '<h2 class="bigtitle">Uitleg</h2>'.concat(PENCIL, '\n   <p class="lead">In deze app zitten ').concat(HELP.length, ' spellen. Hier lees je hoe ze werken. Komt er een nieuw spel bij, dan staat de uitleg hier ook.</p>\n   <p class="hint">Tik op een onderdeel om het open te klappen.</p>\n   <details class="helpcard hd"><summary><span class="hs-ic">i</span><span class="hs-t"><h3>Goed om te weten</h3><span class="kicker">Voortgang, offline, updates</span></span></summary><div class="hd-body"><ul>\n    <li>Je voortgang, scores en notities worden bewaard op dit toestel. Je hebt geen account nodig.</li>\n    <li>Bij <b>Pas</b> bovenaan zie je je rang, je badges en hoeveel zaken je per spel hebt opgelost. Daar maak je ook een <b>back-up</b> van je voortgang.</li>\n    <li>Na een opgeloste zaak zie je een filmpje van hoe het gebeurde. Bij een nieuwe verhaalzaak begint het met een openingsfilmpje. Met ▶ kijk je het opnieuw.</li>\n    <li>Na de eerste keer werkt de app ook zonder internet.</li>\n    <li>Nieuwe versies komen er vanzelf in. De app ververst zichzelf als je hem opent.</li>\n    <li>Met <b>? Uitleg</b> bovenaan kom je hier. Met <b>← Terug</b> ga je weer naar je spel.</li></ul></div></details>\n   ').concat(HELP.map((h) => {
+  $("pUitleg").innerHTML = '<h2 class="bigtitle">Uitleg</h2>'.concat(PENCIL, '\n   <p class="lead">In deze app zitten ').concat(HELP.length, ' spellen. Hier lees je hoe ze werken. Komt er een nieuw spel bij, dan staat de uitleg hier ook.</p>\n   <p class="hint">Tik op een onderdeel om het open te klappen.</p>\n   <details class="helpcard hd"><summary><span class="hs-ic">i</span><span class="hs-t"><h3>Goed om te weten</h3><span class="kicker">Voortgang, offline, updates</span></span></summary><div class="hd-body"><ul>\n    <li>Je voortgang, scores en notities worden bewaard op dit toestel. Je hebt geen account nodig.</li>\n    <li>Bij <b>Pas</b> bovenaan zie je je rang, je badges en hoeveel zaken je per spel hebt opgelost. Daar maak je ook een <b>back-up</b> van je voortgang.</li>\n    <li>Na een opgeloste zaak zie je een filmpje van hoe het gebeurde. Bij een nieuwe verhaalzaak begint het met een openingsfilmpje. Met ▶ kijk je het opnieuw.</li>\n    <li>Na de eerste keer werkt de app ook zonder internet.</li>\n    <li>Nieuwe versies komen er vanzelf in. De app ververst zichzelf als je hem opent.</li>\n    <li>Met <b>? Uitleg</b> bovenaan kom je hier. Met <b>← Terug</b> ga je weer naar je spel.</li></ul></div></details>\n   ').concat(HELP.filter((h) => !GHIDE.has(h.g)).map((h) => {
     const ic = document.querySelector('.games [data-g="'.concat(h.g, '"] .gi'));
     return '<details class="helpcard hd"><summary><span class="hs-ic">'.concat(ic ? ic.outerHTML : "", '</span><span class="hs-t"><h3>').concat(h.name, '</h3><span class="kicker">').concat(h.insp, '</span></span></summary><div class="hd-body"><p>').concat(h.what, "</p>\n     <h4>Zo speel je</h4><ol>").concat(h.steps.map((x) => "<li>".concat(x, "</li>")).join(""), "</ol>\n     <h4>Tips</h4><ul>").concat(h.tips.map((x) => "<li>".concat(x, "</li>")).join(""), '</ul>\n     <p class="hint">').concat(h.extra(), '</p>\n     <div class="controls"><button class="btn primary small" type="button" data-play="').concat(h.g, '">Speel ').concat(h.name, "</button></div></div></details>");
   }).join(""), '\n   <article class="casecard soon"><span class="kicker">Binnenkort</span><h3>Nieuwe spellen</h3><p>Er komen nog meer spellen en zaken bij. Elk nieuw spel krijgt hier zijn eigen uitleg. Heb je een idee voor een spel? Laat het weten.</p></article>');
@@ -16848,6 +16846,10 @@ function setTab(t) {
 }
 function renderPanes() {
   const t = st.tab || "zaak";
+  if (GHIDE.has(game)) {
+    game = "home";
+    store.set("md-game", "home");
+  }
   const g = game, M = g === "murdle";
   $("pZaak").hidden = !M || t !== "zaak";
   $("pTips").hidden = !M || t !== "tips";
@@ -17151,7 +17153,7 @@ function start(data) {
 }
 ((_b = (_a = window.claude) == null ? void 0 : _a.hot) == null ? void 0 : _b.ready) ? window.claude.hot.ready(start) : start((_e = (_d = (_c = window.claude) == null ? void 0 : _c.hot) == null ? void 0 : _d.data) != null ? _e : {});
 </script>
-<script>const APPV = "20261110053636";
+<script>const APPV = "20261110072534";
 if ("serviceWorker" in navigator) {
   addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {
   }));

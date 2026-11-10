@@ -1,0 +1,40 @@
+{
+ "reveal": "2026-11-16T19:00:00+01:00",
+ "release": "2026-11-17T06:00:00+01:00",
+ "planEnc": "Nj8QUldERFJZWRMaXzkeaxBdQkRVDx0EMEhpElZZXkJYSEMUQVZvHGkUXkFUWEMUQVZvHGkUXkVQSRMaXDkeaxBSTEVQT1BYBkYeAW9r",
+ "lock": {
+  "q": "Ik ben een getal van vier verschillende cijfers. Mijn eerste cijfer is het aantal poten van een spin, mijn laatste cijfer is de helft daarvan, en mijn twee middelste cijfers vormen samen het aantal kaarten in een kaartspel zonder jokers.",
+  "hint": "Een spin heeft acht poten, en een kaartspel zonder jokers heeft vier kleuren van dertien kaarten.",
+  "early": "U1pHUA=="
+ },
+ "prev": {
+  "reveal": "2026-11-09T19:00:00+01:00",
+  "release": "2026-11-10T06:00:00+01:00",
+  "plan": [
+   [
+    "stad",
+    2
+   ],
+   [
+    "bericht",
+    2
+   ],
+   [
+    "speur",
+    2
+   ],
+   [
+    "casino",
+    2
+   ],
+   [
+    "verhoor",
+    1
+   ],
+   [
+    "databank",
+    1
+   ]
+  ]
+ }
+}

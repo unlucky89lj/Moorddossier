@@ -6784,13 +6784,13 @@ function fmAct(fx, u) {
   const a = fx.act, s = fx.s || 0.6;
   if (a === "strike") {
     const x = fx.x || 150, g = fx.g || 192, st2 = FM.ease(FM.seg(u, 0.6, 1.6)), cx = x - 80 + st2 * 36, ang = u < 1.6 ? -20 - FM.seg(u, 1, 1.6) * 60 : u < 2.2 ? -80 + FM.ease(FM.seg(u, 1.6, 2.2)) * 150 : 70, fall = FM.ease(FM.seg(u, 2.3, 3));
-    return { svg: fmFig(cx, g, s, 0, 1, ACTWHO) + fmClub(cx + 24 * s, g - 62 * s, ang) + fmFig(x + 18 + fall * 16, g - fall * 4, s * 0.96, fall * 84), bx: x + 12, by: g - 70 * s };
+    return { svg: fmFig(cx, g, s, 0, 1, ACTWHO) + fmClub(cx + 24 * s, g - 62 * s, ang) + fmFig(x + 18 + fall * 16, g - fall * 4, s * 0.96, fall * 84), bx: x + 12, by: g - 70 * s, ax: cx, ay: g - 108 * s };
   }
   if (a === "fall") {
     const [tx, ty] = fx.top, [bx, by] = fx.bottom, push = FM.ease(FM.seg(u, 1.5, 2.1)), f = FM.seg(u, 2.15, 3.15), dir = Math.sign(bx - tx) || 1;
     const vx = u < 2.15 ? tx + push * 4 * dir : tx + (bx - tx) * f, vy = u < 2.15 ? ty : ty + (by - ty) * f * f - Math.sin(f * Math.PI) * 12, rot = u < 2.15 ? push * 12 * dir : f * 450 * dir;
     const club = fx.club ? fmClub(tx - 22 * dir + 24 * s, ty - 62 * s, u < 1.5 ? -30 : u < 2.1 ? -30 + FM.seg(u, 1.5, 2.1) * 110 : 80) : "";
-    return { svg: fmFig(tx - 24 * dir + push * 8 * dir, ty, s, 0, 1, ACTWHO) + club + fmFig(vx, vy, s, rot), bx, by: by - 8 };
+    return { svg: fmFig(tx - 24 * dir + push * 8 * dir, ty, s, 0, 1, ACTWHO) + club + fmFig(vx, vy, s, rot), bx, by: by - 8, ax: tx - 24 * dir, ay: ty - 108 * s, ix: tx, iy: ty - 70 * s };
   }
   if (a === "drown") {
     const x = fx.x || 150, y = fx.y || 150, push = FM.ease(FM.seg(u, 1.2, 2.2)), sink = FM.seg(u, 2.2, 3.6);
@@ -6799,7 +6799,7 @@ function fmAct(fx, u) {
       const t = u - 2.3 - i * 0.25;
       if (t > 0 && t < 1.2) bub += '<circle cx="'.concat(x - 20 + i * 8, '" cy="').concat(y - 6 - t * 30, '" r="').concat(2 + i % 3, '" fill="none" stroke="').concat(PK.W, '" stroke-width="1.2" opacity="').concat(1 - t / 1.2, '"/>');
     }
-    return { svg: FM.G(x, y - 4 + sink * 8, s, '<g transform="rotate(90)">'.concat(fmSil(ACTVIC), "</g>"), 'opacity="'.concat(1 - sink * 0.6, '"')) + '<rect x="'.concat(x - 66, '" y="').concat(y - 2, '" width="132" height="8" fill="#6f7a80" opacity=".55"/>') + fmFig(x + 52, y + 20, s, -28 * push, 1, ACTWHO) + bub, bx: x, by: y };
+    return { svg: FM.G(x, y - 4 + sink * 8, s, '<g transform="rotate(90)">'.concat(fmSil(ACTVIC), "</g>"), 'opacity="'.concat(1 - sink * 0.6, '"')) + '<rect x="'.concat(x - 66, '" y="').concat(y - 2, '" width="132" height="8" fill="#6f7a80" opacity=".55"/>') + fmFig(x + 52, y + 20, s, -28 * push, 1, ACTWHO) + bub, bx: x, by: y, ax: x + 52, ay: y + 20 - 108 * s };
   }
   if (a === "poison") {
     const x = fx.x || 60, y = fx.y || 172, slump = FM.ease(FM.seg(u, 2.8, 3.6)), drink = FM.seg(u, 1, 2);
@@ -6807,6 +6807,58 @@ function fmAct(fx, u) {
     return { svg: FM.G(x, y, s, '<g transform="rotate('.concat(slump * 38, ' 0 -30)">').concat(fmSil(ACTVIC), "</g>")) + FM.G(x + 22 * s, gy, 0.6, PP.glass()), bx: x, by: y - 60 };
   }
   return { svg: "", bx: 150, by: 105 };
+}
+function fmCine(sc, XW, XV, XR) {
+  const [, chap, spec, txt, fx] = sc, act = fx.act, HT = act === "fall" ? 3.15 : act === "poison" ? 2.8 : 2.2, SL = 1.8, PRE = 0.4, POST = 0.3, T1 = HT - PRE, SPAN = PRE + POST, d = Math.max(6, 1.6 + txt.length / 24) + (fx.hit ? 1 : 0) + 1.5 + (SL - SPAN), HTR = T1 + PRE * SL / SPAN;
+  const at = (u) => u < T1 ? u : u < T1 + SL ? T1 + (u - T1) * SPAN / SL : u - (SL - SPAN);
+  const E = FM.ease, lerp = (a, b, p) => a + (b - a) * p;
+  return { d, rain: !!fx.rain, sfx: (fx.hit ? [[HTR, "hit", fx.hit === true ? "hout" : fx.hit === "duw" ? "plant" : fx.hit]] : []).concat([[T1 + 0.05, "click"]]), f: (u) => {
+    const uu = at(u);
+    ACTWHO = XW;
+    ACTVIC = XV;
+    ACTWPN = XR ? XR[2] : "";
+    const A = fmAct(fx, uu), ax = A.ax == null ? A.bx - 40 : A.ax, ay = A.ay == null ? A.by - 20 : A.ay, ix = A.ix == null ? A.bx : A.ix, iy = A.iy == null ? A.by : A.iy, mx = (ax + ix) / 2, my = (ay + iy) / 2 + 18;
+    const px = A.bx, py = A.by, K = act === "fall" ? [[0, 1.04, 150, 100, "e"], [0.75, 1.35, mx, my + 20, "e"], [1.4, 1.9, ax, ay + 34, "c"], [2.05, 1.6, ix, iy + 20, "e"], [HT - 0.1, 1.55, px, py - 34, "e"], [HT + 0.3, 1.7, px, py - 34, "e"], [HT + 1.1, 1, 150, 100, "e"], [HT + 6, 1.08, 150, 108, "e"], [99, 1.08, 150, 108, "e"]] : act === "poison" ? [[0, 1.04, 150, 100, "e"], [1.2, 1.6, px, py, "e"], [HT - 0.5, 2.6, px, py - 6, "c"], [HT + 0.3, 2.2, px, py, "e"], [HT + 1.1, 1.3, px, py, "e"], [HT + 6, 1.7, px, py - 6, "e"], [99, 1.7, px, py - 6, "e"]] : [[0, 1.04, 150, 100, "e"], [0.75, 1.5, mx, my, "e"], [HT - 0.55, 2.7, ax, ay + 6, "c"], [HT - 0.12, 2.15, px, py, "e"], [HT + 0.3, 2.35, px, py, "e"], [HT + 1.1, 1.3, mx, my + 4, "e"], [HT + 6, 1.6, px, py - 4, "e"], [99, 1.6, px, py - 4, "e"]];
+    let i = 0;
+    while (i < K.length - 2 && uu >= K[i + 1][0]) i++;
+    const a = K[i], b = K[i + 1], p = b[4] === "c" ? 0 : E(FM.clamp((uu - a[0]) / Math.max(0.01, b[0] - a[0])));
+    let Z = lerp(a[1], b[1], p), cx = lerp(a[2], b[2], p), cy = lerp(a[3], b[3], p);
+    if (b[4] === "c" && uu >= b[0] - 0.18) {
+      Z = b[1];
+      cx = b[2];
+      cy = b[3];
+    }
+    const hw = 150 / Z, hh = 100 / Z;
+    cx = FM.clamp(cx, hw, 300 - hw);
+    cy = FM.clamp(cy, hh, 200 - hh);
+    const ip = FM.seg(uu, HT, HT + 0.55), shk = uu > HT && uu < HT + 0.55 ? (1 - ip) * 5 : 0, sx = Math.sin(u * 97) * shk, sy = Math.cos(u * 83) * shk;
+    let fxs = "";
+    if (uu > HT && uu < HT + 0.8) {
+      const q = FM.seg(uu, HT, HT + 0.8);
+      for (let j = 0; j < 16; j++) {
+        const an = FM.rnd(j) * Math.PI * 2, len = 10 + FM.rnd(j + 9) * 26, r0 = q * len, r1 = r0 + 4 + 6 * (1 - q);
+        fxs += '<path d="M'.concat((px + Math.cos(an) * r0).toFixed(1), " ").concat((py + Math.sin(an) * r0).toFixed(1), "L").concat((px + Math.cos(an) * r1).toFixed(1), " ").concat((py + Math.sin(an) * r1).toFixed(1), '" stroke="').concat(j % 3 ? "#ffd27a" : "#fff6d8", '" stroke-width="').concat((1.4 * (1 - q) + 0.3).toFixed(2), '" stroke-linecap="round" opacity="').concat((1 - q).toFixed(2), '"/>');
+      }
+      fxs += '<circle cx="'.concat(px, '" cy="').concat(py, '" r="').concat((4 + q * 22).toFixed(1), '" fill="none" stroke="#fff" stroke-width="').concat((2 * (1 - q)).toFixed(2), '" opacity="').concat((1 - q).toFixed(2), '"/>');
+    }
+    if (uu > HT - 0.35 && uu < HT) {
+      const q = FM.seg(uu, HT - 0.35, HT);
+      for (let j = 0; j < 5; j++) {
+        const yy = ay + 8 + j * 6;
+        fxs += '<path d="M'.concat(ax - 30 + q * 20, " ").concat(yy, "h").concat(18 + j * 3, '" stroke="#fff" stroke-width=".8" opacity="').concat((0.5 * (1 - Math.abs(q - 0.5) * 2)).toFixed(2), '" stroke-linecap="round"/>');
+      }
+    }
+    const bl = fx.hit && fx.hit !== "duw" && uu > HT ? fmBlood(uu - HT, A.bx, A.by) : "";
+    const world = drawScene(spec) + A.svg + bl + fxs + (fx.rain ? FM.rain(u) : "") + (fx.snow ? FM.rain(u * 0.25, 0.5) : "");
+    const bh = 15 * (1 - FM.seg(uu, HT + 1, HT + 1.9)), bars = bh > 0.2 ? '<rect width="300" height="'.concat(bh.toFixed(1), '" fill="#000"/><rect y="').concat((200 - bh).toFixed(1), '" width="300" height="').concat(bh.toFixed(1), '" fill="#000"/>') : "", slow = u > T1 && u < T1 + SL ? '<text x="292" y="15" text-anchor="end" font-size="7" font-family="Arial" font-weight="700" fill="#fff" opacity=".75" letter-spacing="1">● SLOW MOTION</text>' : "";
+    return {
+      chap,
+      stage: FM.svg('<g transform="translate('.concat((150 + sx).toFixed(2), " ").concat((100 + sy).toFixed(2), ") scale(").concat(Z.toFixed(3), ") translate(").concat((-cx).toFixed(2), " ").concat((-cy).toFixed(2), ')">').concat(world, "</g>").concat(bars).concat(slow)),
+      flash: uu > HT ? Math.max(0, 0.85 - FM.seg(uu, HT, HT + 0.18) * 0.85) : 0,
+      red: fx.hit && uu > HT ? Math.max(0, 0.5 - FM.seg(uu, HT, HT + 0.8) * 0.5) : 0,
+      cap: FM.type(txt, u, 0.7)
+    };
+  } };
 }
 function fmStory(script, ok = true) {
   const XR = script.find((r) => r[0] === "x"), XW = XR ? XR[1] : "dader", XV = "slachtoffer " + ((script[0] || [])[3] || "");
@@ -6820,6 +6872,7 @@ function fmStory(script, ok = true) {
       const [, who, how, where, mono] = sc;
       return fmFinale({ who, how, where, mono, ok });
     }
+    if (k === "s" && sc[4] && sc[4].act && sc[4].cine !== false && !matchMedia("(prefers-reduced-motion: reduce)").matches) return fmCine(sc, XW, XV, XR);
     if (k === "s") {
       const [, chap, spec, txt, fx = {}] = sc, act = fx.act, HT = act === "fall" ? 3.15 : act === "poison" ? 2.8 : 2.2, d = Math.max(6, 1.6 + txt.length / 24) + (fx.hit ? 1 : 0) + (act ? 1.5 : 0);
       return { d, rain: !!fx.rain, sfx: fx.hit ? [[HT, "hit", fx.hit === true ? "hout" : fx.hit === "duw" ? "plant" : fx.hit]] : [], f: (u) => {

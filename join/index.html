@@ -6808,11 +6808,91 @@ function fmAct(fx, u) {
   }
   return { svg: "", bx: 150, by: 105 };
 }
+function fmPre(sc, u, PL) {
+  const [, chap, spec, txt, fx] = sc, act = fx.act, s = fx.s || 0.6, E = FM.ease, lerp = (a, b, p) => a + (b - a) * p;
+  let A, V, dir = 1, wp = null, vlk = ACTVIC;
+  if (act === "strike") {
+    const x = fx.x || 150, g = fx.g || 192;
+    A = [x - 80, g];
+    V = [x + 18, g];
+    wp = [x - 104, g - 3, 84];
+  } else if (act === "fall") {
+    const [tx, ty] = fx.top, [bx] = fx.bottom;
+    dir = Math.sign(bx - tx) || 1;
+    A = [tx - 24 * dir, ty];
+    V = [tx, ty];
+    if (fx.club) wp = [tx - 24 * dir - 22, ty - 3, 84];
+  } else if (act === "drown") {
+    const x = fx.x || 150, y = fx.y || 150;
+    A = [x + 52, y + 20];
+    V = [x, y];
+    var VB = "bath";
+  } else {
+    const x = fx.x || 60, y = fx.y || 172;
+    A = [x + 70, y];
+    V = null;
+  }
+  const poison = act === "poison";
+  const L = fx.why || (poison ? [["a", "Als hij gaat praten, ben ik alles kwijt."], ["a", "Een paar druppels. Niemand die het merkt."]] : [["v", "Ik weet wat je gedaan hebt!"], ["a", "Hou je mond. Niemand gelooft je."], ["v", "Morgen vertel ik alles aan de politie."], ["a", "Dat ga je niet doen…"]]);
+  const IN = 1.3, per = poison ? 1.6 : 1.05, TL = IN + L.length * per, GRAB = Math.min(PL - 0.25, TL + 0.45);
+  const walk = E(FM.clamp(u / IN)), side = A[0] > (V ? V[0] : 150) ? 1 : -1, ax = lerp(A[0] + side * 120, A[0], walk), bob = u < IN ? Math.abs(Math.sin(u * 9)) * 2.2 : 0;
+  const li = u < IN ? -1 : Math.min(L.length - 1, Math.floor((u - IN) / per)), cur = li >= 0 && u < TL ? L[li] : null;
+  const head = (w) => w === "v" && V ? act === "drown" ? [V[0] + 112 * s, V[1] - 4] : [V[0], V[1] - 112 * s] : [ax, A[1] - 112 * s];
+  let Z = 1.04, cx = 150, cy = 100;
+  if (u >= IN && u < TL && cur) {
+    const h = head(cur[0]);
+    Z = 2;
+    cx = h[0] + (cur[0] === "v" ? -14 : 14) * side;
+    cy = h[1] + 18;
+  } else if (u >= TL && wp && u < GRAB + 0.6) {
+    Z = 2.4;
+    cx = wp[0] + 10;
+    cy = wp[1] - 24;
+  } else if (u >= TL) {
+    Z = 1.5;
+    cx = V ? (ax + V[0]) / 2 : ax;
+    cy = A[1] - 60 * s;
+  }
+  const hw = 150 / Z, hh = 100 / Z;
+  cx = FM.clamp(cx, hw, 300 - hw);
+  cy = FM.clamp(cy, hh, 200 - hh);
+  let weapon = "";
+  if (wp) {
+    const g = E(FM.seg(u, GRAB, GRAB + 0.5)), hx = ax + 24 * s, hy = A[1] - 62 * s;
+    weapon = fmClub(lerp(wp[0], hx, g), lerp(wp[1], hy, g), lerp(wp[2], -20, g));
+    if (u > TL && u < GRAB) weapon += '<circle cx="'.concat(wp[0] + 6, '" cy="').concat(wp[1] - 4, '" r="').concat(2 + Math.sin(u * 14) * 1.2, '" fill="#fff" opacity=".8"/>');
+  }
+  let extra = "";
+  if (poison) {
+    const pr = FM.seg(u, TL, PL - 0.3);
+    if (pr > 0 && pr < 1) {
+      for (let j = 0; j < 4; j++) {
+        const t = (pr * 4 + j * 0.25) % 1;
+        extra += '<circle cx="'.concat((V ? V[0] : A[0] - 70) + 22 * s + 2, '" cy="').concat(A[1] - 70 * s - 20 + t * 16, '" r="1.3" fill="#7bd36a" opacity="').concat(1 - t, '"/>');
+      }
+    }
+  }
+  const world = drawScene(spec) + (V ? act === "drown" ? FM.G(V[0], V[1] - 4, s, '<g transform="rotate(90)">'.concat(fmSil(ACTVIC), "</g>")) + '<rect x="'.concat(V[0] - 66, '" y="').concat(V[1] - 2, '" width="132" height="8" fill="#6f7a80" opacity=".55"/>') : fmFig(V[0], V[1], s * 0.96, 0) : "") + fmFig(ax, A[1] - bob, s, 0, 1, ACTWHO) + weapon + extra + (fx.rain ? FM.rain(u) : "");
+  let bub = "";
+  if (cur) {
+    const h = head(cur[0]), bx = (h[0] - cx) * Z + 150, by = (h[1] - cy) * Z + 100 - 30, t = cur[1], w = Math.min(170, 22 + t.length * 4.3), lines = t.length > 34 ? [t.slice(0, t.lastIndexOf(" ", 34)), t.slice(t.lastIndexOf(" ", 34) + 1)] : [t], H2 = 10 + lines.length * 10, X = FM.clamp(bx - w / 2, 6, 294 - w), Y = FM.clamp(by - H2, 18, 150), k = E(FM.seg(u, IN + li * per, IN + li * per + 0.18)), think = poison;
+    bub = '<g opacity="'.concat(k, '"><rect x="').concat(X, '" y="').concat(Y, '" width="').concat(w, '" height="').concat(H2, '" rx="').concat(think ? H2 / 2 : 6, '" fill="#fffdf6" stroke="#1d1a16" stroke-width="1"/>').concat(think ? '<circle cx="'.concat(FM.clamp(bx, X + 8, X + w - 8), '" cy="').concat(Y + H2 + 5, '" r="2.6" fill="#fffdf6" stroke="#1d1a16" stroke-width=".8"/><circle cx="').concat(FM.clamp(bx, X + 8, X + w - 8) + 3, '" cy="').concat(Y + H2 + 11, '" r="1.6" fill="#fffdf6" stroke="#1d1a16" stroke-width=".8"/>') : '<path d="M'.concat(FM.clamp(bx, X + 10, X + w - 10) - 5, " ").concat(Y + H2 - 0.5, 'l5 8 4-8z" fill="#fffdf6" stroke="#1d1a16" stroke-width="1"/><path d="M').concat(FM.clamp(bx, X + 10, X + w - 10) - 4.5, " ").concat(Y + H2 - 1, 'h8.5" stroke="#fffdf6" stroke-width="2"/>'), "\n   ").concat(lines.map((ln, i) => '<text x="'.concat(X + w / 2, '" y="').concat(Y + 13 + i * 10, '" text-anchor="middle" font-size="8" font-family="Arial" font-weight="700" fill="').concat(cur[0] === "a" ? "#9a1c12" : "#1d1a16", '">').concat(ln, "</text>")).join(""), "</g>");
+  }
+  const bars = '<rect width="300" height="15" fill="#000"/><rect y="185" width="300" height="15" fill="#000"/>';
+  return { chap, stage: FM.svg('<g transform="translate(150 100) scale('.concat(Z.toFixed(3), ") translate(").concat((-cx).toFixed(2), " ").concat((-cy).toFixed(2), ')">').concat(world, "</g>").concat(bars).concat(bub)), fade: u < 0.5 ? 1 - u / 0.5 : 0, cap: FM.type(txt, u, 0.7) };
+}
 function fmCine(sc, XW, XV, XR) {
-  const [, chap, spec, txt, fx] = sc, act = fx.act, HT = act === "fall" ? 3.15 : act === "poison" ? 2.8 : 2.2, SL = 1.8, PRE = 0.4, POST = 0.3, T1 = HT - PRE, SPAN = PRE + POST, d = Math.max(6, 1.6 + txt.length / 24) + (fx.hit ? 1 : 0) + 1.5 + (SL - SPAN), HTR = T1 + PRE * SL / SPAN;
+  const [, chap, spec, txt, fx] = sc, act = fx.act, HT = act === "fall" ? 3.15 : act === "poison" ? 2.8 : 2.2, SL = 1.8, PRE = 0.4, POST = 0.3, T1 = HT - PRE, SPAN = PRE + POST, PL = fx.pre === false ? 0 : 6.4, d = PL + Math.max(6, 1.6 + txt.length / 24) + (fx.hit ? 1 : 0) + 1.5 + (SL - SPAN), HTR = PL + T1 + PRE * SL / SPAN;
   const at = (u) => u < T1 ? u : u < T1 + SL ? T1 + (u - T1) * SPAN / SL : u - (SL - SPAN);
   const E = FM.ease, lerp = (a, b, p) => a + (b - a) * p;
-  return { d, rain: !!fx.rain, sfx: (fx.hit ? [[HTR, "hit", fx.hit === true ? "hout" : fx.hit === "duw" ? "plant" : fx.hit]] : []).concat([[T1 + 0.05, "click"]]), f: (u) => {
+  return { d, rain: !!fx.rain, sfx: (fx.hit ? [[HTR, "hit", fx.hit === true ? "hout" : fx.hit === "duw" ? "plant" : fx.hit]] : []).concat([[PL + T1 + 0.05, "click"]]), f: (u0) => {
+    if (u0 < PL) {
+      ACTWHO = XW;
+      ACTVIC = XV;
+      ACTWPN = XR ? XR[2] : "";
+      return fmPre(sc, u0, PL);
+    }
+    const u = u0 - PL;
     const uu = at(u);
     ACTWHO = XW;
     ACTVIC = XV;
@@ -6856,7 +6936,7 @@ function fmCine(sc, XW, XV, XR) {
       stage: FM.svg('<g transform="translate('.concat((150 + sx).toFixed(2), " ").concat((100 + sy).toFixed(2), ") scale(").concat(Z.toFixed(3), ") translate(").concat((-cx).toFixed(2), " ").concat((-cy).toFixed(2), ')">').concat(world, "</g>").concat(bars).concat(slow)),
       flash: uu > HT ? Math.max(0, 0.85 - FM.seg(uu, HT, HT + 0.18) * 0.85) : 0,
       red: fx.hit && uu > HT ? Math.max(0, 0.5 - FM.seg(uu, HT, HT + 0.8) * 0.5) : 0,
-      cap: FM.type(txt, u, 0.7)
+      cap: FM.type(txt, u0, 0.7)
     };
   } };
 }

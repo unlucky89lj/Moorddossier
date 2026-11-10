@@ -6807,6 +6807,23 @@ function fmAct(fx, u) {
   }
   return { svg: "", bx: 150, by: 105 };
 }
+function fmAtmos(u) {
+  let h = '<defs><linearGradient id="fmRay" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3d6" stop-opacity=".22"/><stop offset="1" stop-color="#fff3d6" stop-opacity="0"/></linearGradient></defs>';
+  [[30, 0, 70], [95, 0, 46], [170, 0, 60]].forEach(([x, y, w], i) => {
+    const o = 0.55 + 0.45 * Math.sin(u * 0.9 + i * 2);
+    h += '<path d="M'.concat(x, " ").concat(y, "h").concat(w, "l").concat(120 + w, " 200h-").concat(w * 1.6, 'z" fill="url(#fmRay)" opacity="').concat(o.toFixed(2), '"/>');
+  });
+  for (let j = 0; j < 22; j++) {
+    const x = (FM.rnd(j) * 320 + u * (6 + FM.rnd(j + 3) * 10)) % 320 - 10, y = (FM.rnd(j + 7) * 200 + Math.sin(u * 0.8 + j) * 6 + 200) % 200, r = 0.5 + FM.rnd(j + 11) * 1.1;
+    h += '<circle cx="'.concat(x.toFixed(1), '" cy="').concat(y.toFixed(1), '" r="').concat(r.toFixed(2), '" fill="#fff6e0" opacity="').concat((0.25 + FM.rnd(j + 5) * 0.35).toFixed(2), '"/>');
+  }
+  return h;
+}
+const fmDof = (Z, inner) => {
+  const v = FM.clamp((Z - 1.45) * 1.6, 0, 2.2);
+  return v < 0.15 ? inner : '<filter id="fmDof" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="'.concat(v.toFixed(2), '"/></filter><g filter="url(#fmDof)">').concat(inner, "</g>");
+};
+const fmMood = (k, mood) => Object.assign({}, lookOf(k), { mood });
 function fmPre(sc, u, PL) {
   const [, chap, spec, txt, fx] = sc, act = fx.act, s = fx.s || 0.6, E = FM.ease, lerp = (a, b, p) => a + (b - a) * p;
   let A, V, dir = 1, wp = null, vlk = ACTVIC;
@@ -6871,14 +6888,16 @@ function fmPre(sc, u, PL) {
       }
     }
   }
-  const world = drawScene(spec) + (V ? act === "drown" ? FM.G(V[0], V[1] - 4, s, '<g transform="rotate(90)">'.concat(fmSil(ACTVIC), "</g>")) + '<rect x="'.concat(V[0] - 66, '" y="').concat(V[1] - 2, '" width="132" height="8" fill="#6f7a80" opacity=".55"/>') : fmFig(V[0], V[1], s * 0.96, 0) : "") + fmFig(ax, A[1] - bob, s, 0, 1, ACTWHO) + weapon + extra + (fx.rain ? FM.rain(u) : "");
+  const vm = fmMood(ACTVIC, u >= TL ? "nervous" : cur && cur[0] === "v" ? "angry" : ""), am = fmMood(ACTWHO, cur && cur[0] === "a" || u >= TL ? "angry" : "");
+  const world = fmDof(Z, drawScene(spec)) + (V ? act === "drown" ? FM.G(V[0], V[1] - 4, s, '<g transform="rotate(90)">'.concat(fmSil(vm), "</g>")) + '<rect x="'.concat(V[0] - 66, '" y="').concat(V[1] - 2, '" width="132" height="8" fill="#6f7a80" opacity=".55"/>') : fmFig(V[0], V[1], s * 0.96, 0, 1, vm) : "") + fmFig(ax, A[1] - bob, s, 0, 1, am) + weapon + extra + (fx.rain ? FM.rain(u) : "");
   let bub = "";
   if (cur) {
     const h = head(cur[0]), bx = (h[0] - cx) * Z + 150, by = (h[1] - cy) * Z + 100 - 30, t = cur[1], w = Math.min(170, 22 + t.length * 4.3), lines = t.length > 34 ? [t.slice(0, t.lastIndexOf(" ", 34)), t.slice(t.lastIndexOf(" ", 34) + 1)] : [t], H2 = 10 + lines.length * 10, X = FM.clamp(bx - w / 2, 6, 294 - w), Y = FM.clamp(by - H2, 18, 150), k = E(FM.seg(u, IN + li * per, IN + li * per + 0.18)), think = poison;
     bub = '<g opacity="'.concat(k, '"><rect x="').concat(X, '" y="').concat(Y, '" width="').concat(w, '" height="').concat(H2, '" rx="').concat(think ? H2 / 2 : 6, '" fill="#fffdf6" stroke="#1d1a16" stroke-width="1"/>').concat(think ? '<circle cx="'.concat(FM.clamp(bx, X + 8, X + w - 8), '" cy="').concat(Y + H2 + 5, '" r="2.6" fill="#fffdf6" stroke="#1d1a16" stroke-width=".8"/><circle cx="').concat(FM.clamp(bx, X + 8, X + w - 8) + 3, '" cy="').concat(Y + H2 + 11, '" r="1.6" fill="#fffdf6" stroke="#1d1a16" stroke-width=".8"/>') : '<path d="M'.concat(FM.clamp(bx, X + 10, X + w - 10) - 5, " ").concat(Y + H2 - 0.5, 'l5 8 4-8z" fill="#fffdf6" stroke="#1d1a16" stroke-width="1"/><path d="M').concat(FM.clamp(bx, X + 10, X + w - 10) - 4.5, " ").concat(Y + H2 - 1, 'h8.5" stroke="#fffdf6" stroke-width="2"/>'), "\n   ").concat(lines.map((ln, i) => '<text x="'.concat(X + w / 2, '" y="').concat(Y + 13 + i * 10, '" text-anchor="middle" font-size="8" font-family="Arial" font-weight="700" fill="').concat(cur[0] === "a" ? "#9a1c12" : "#1d1a16", '">').concat(ln, "</text>")).join(""), "</g>");
   }
   const bars = '<rect width="300" height="15" fill="#000"/><rect y="185" width="300" height="15" fill="#000"/>';
-  return { chap, stage: FM.svg('<g transform="translate(150 100) scale('.concat(Z.toFixed(3), ") translate(").concat((-cx).toFixed(2), " ").concat((-cy).toFixed(2), ')">').concat(world, "</g>").concat(bars).concat(bub)), fade: u < 0.5 ? 1 - u / 0.5 : 0, cap: FM.type(txt, u, 0.7) };
+  const rot = cur ? cur[0] === "a" ? -3.5 : 3 : 0, sh = cur && li === L.length - 1 ? Math.sin(u * 70) * 1.4 : 0;
+  return { chap, stage: FM.svg('<g transform="translate('.concat((150 + sh).toFixed(2), " ").concat((100 + sh * 0.6).toFixed(2), ") rotate(").concat(rot, ") scale(").concat(Z.toFixed(3), ") translate(").concat((-cx).toFixed(2), " ").concat((-cy).toFixed(2), ')">').concat(world, "</g>").concat(fmAtmos(u)).concat(bars).concat(bub)), fade: u < 0.5 ? 1 - u / 0.5 : 0, cap: "" };
 }
 function fmCine(sc, XW, XV, XR) {
   const [, chap, spec, txt, fx] = sc, act = fx.act, HT = act === "fall" ? 3.15 : act === "poison" ? 2.8 : 2.2, SL = 1.8, PRE = 0.4, POST = 0.3, T1 = HT - PRE, SPAN = PRE + POST, PL = fx.pre === false ? 0 : 6.4, d = PL + Math.max(6, 1.6 + txt.length / 24) + (fx.hit ? 1 : 0) + 1.5 + (SL - SPAN), HTR = PL + T1 + PRE * SL / SPAN;
@@ -6893,8 +6912,8 @@ function fmCine(sc, XW, XV, XR) {
     }
     const u = u0 - PL;
     const uu = at(u);
-    ACTWHO = XW;
-    ACTVIC = XV;
+    ACTWHO = fmMood(XW, "angry");
+    ACTVIC = fmMood(XV, uu > HT ? "broken" : "nervous");
     ACTWPN = XR ? XR[2] : "";
     const A = fmAct(fx, uu), ax = A.ax == null ? A.bx - 40 : A.ax, ay = A.ay == null ? A.by - 20 : A.ay, ix = A.ix == null ? A.bx : A.ix, iy = A.iy == null ? A.by : A.iy, mx = (ax + ix) / 2, my = (ay + iy) / 2 + 18;
     const px = A.bx, py = A.by, K = act === "fall" ? [[0, 1.04, 150, 100, "e"], [0.75, 1.35, mx, my + 20, "e"], [1.4, 1.9, ax, ay + 34, "c"], [2.05, 1.6, ix, iy + 20, "e"], [HT - 0.1, 1.55, px, py - 34, "e"], [HT + 0.3, 1.7, px, py - 34, "e"], [HT + 1.1, 1, 150, 100, "e"], [HT + 6, 1.08, 150, 108, "e"], [99, 1.08, 150, 108, "e"]] : act === "poison" ? [[0, 1.04, 150, 100, "e"], [1.2, 1.6, px, py, "e"], [HT - 0.5, 2.6, px, py - 6, "c"], [HT + 0.3, 2.2, px, py, "e"], [HT + 1.1, 1.3, px, py, "e"], [HT + 6, 1.7, px, py - 6, "e"], [99, 1.7, px, py - 6, "e"]] : [[0, 1.04, 150, 100, "e"], [0.75, 1.5, mx, my, "e"], [HT - 0.55, 2.7, ax, ay + 6, "c"], [HT - 0.12, 2.15, px, py, "e"], [HT + 0.3, 2.35, px, py, "e"], [HT + 1.1, 1.3, mx, my + 4, "e"], [HT + 6, 1.6, px, py - 4, "e"], [99, 1.6, px, py - 4, "e"]];
@@ -6928,14 +6947,22 @@ function fmCine(sc, XW, XV, XR) {
       }
     }
     const bl = fx.hit && fx.hit !== "duw" && uu > HT ? fmBlood(uu - HT, A.bx, A.by) : "";
-    const world = drawScene(spec) + A.svg + bl + fxs + (fx.rain ? FM.rain(u) : "") + (fx.snow ? FM.rain(u * 0.25, 0.5) : "");
-    const bh = 15 * (1 - FM.seg(uu, HT + 1, HT + 1.9)), bars = bh > 0.2 ? '<rect width="300" height="'.concat(bh.toFixed(1), '" fill="#000"/><rect y="').concat((200 - bh).toFixed(1), '" width="300" height="').concat(bh.toFixed(1), '" fill="#000"/>') : "", slow = u > T1 && u < T1 + SL ? '<text x="292" y="15" text-anchor="end" font-size="7" font-family="Arial" font-weight="700" fill="#fff" opacity=".75" letter-spacing="1">● SLOW MOTION</text>' : "";
+    let ghost = "";
+    if (act === "strike" && uu > 1.6 && uu < HT + 0.05) {
+      const x = fx.x || 150, g = fx.g || 192, s = fx.s || 0.6;
+      for (let k = 1; k <= 4; k++) {
+        const t = uu - k * 0.035, an = t < 1.6 ? -80 : t < 2.2 ? -80 + FM.ease(FM.seg(t, 1.6, 2.2)) * 150 : 70, cxx = x - 80 + FM.ease(FM.seg(t, 0.6, 1.6)) * 36;
+        ghost += '<g opacity="'.concat((0.32 - k * 0.06).toFixed(2), '">').concat(fmClub(cxx + 24 * s, g - 62 * s, an), "</g>");
+      }
+    }
+    const world = fmDof(Z, drawScene(spec)) + ghost + A.svg + bl + fxs + (fx.rain ? FM.rain(u) : "") + (fx.snow ? FM.rain(u * 0.25, 0.5) : "");
+    const bh = 15 * (1 - FM.seg(uu, HT + 1, HT + 1.9)), bars = bh > 0.2 ? '<rect width="300" height="'.concat(bh.toFixed(1), '" fill="#000"/><rect y="').concat((200 - bh).toFixed(1), '" width="300" height="').concat(bh.toFixed(1), '" fill="#000"/>') : "", slow = "", rot = i === 1 ? 2.5 : i === 2 ? -4 : i === 3 || i === 4 ? 3 : 0;
     return {
       chap,
-      stage: FM.svg('<g transform="translate('.concat((150 + sx).toFixed(2), " ").concat((100 + sy).toFixed(2), ") scale(").concat(Z.toFixed(3), ") translate(").concat((-cx).toFixed(2), " ").concat((-cy).toFixed(2), ')">').concat(world, "</g>").concat(bars).concat(slow)),
+      stage: FM.svg('<g transform="translate('.concat((150 + sx).toFixed(2), " ").concat((100 + sy).toFixed(2), ") rotate(").concat(rot, ") scale(").concat(Z.toFixed(3), ") translate(").concat((-cx).toFixed(2), " ").concat((-cy).toFixed(2), ')">').concat(world, "</g>").concat(fmAtmos(u)).concat(bars).concat(slow)),
       flash: uu > HT ? Math.max(0, 0.85 - FM.seg(uu, HT, HT + 0.18) * 0.85) : 0,
       red: fx.hit && uu > HT ? Math.max(0, 0.5 - FM.seg(uu, HT, HT + 0.8) * 0.5) : 0,
-      cap: FM.type(txt, u0, 0.7)
+      cap: uu > HT + 0.9 ? FM.type(txt, u0, PL + HTR - PL + 0.9 + 0.2, 34) : ""
     };
   } };
 }
@@ -17286,7 +17313,7 @@ function start(data) {
 }
 ((_b = (_a = window.claude) == null ? void 0 : _a.hot) == null ? void 0 : _b.ready) ? window.claude.hot.ready(start) : start((_e = (_d = (_c = window.claude) == null ? void 0 : _c.hot) == null ? void 0 : _d.data) != null ? _e : {});
 </script>
-<script>const APPV = "20261110080830";
+<script>const APPV = "20261110081525";
 if ("serviceWorker" in navigator) {
   addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {
   }));

@@ -754,6 +754,10 @@ footer{font:500 13px var(--cond);color:var(--muted);letter-spacing:.03em}
 .lhenv.open .lhenv-flap{transform:rotateX(180deg)}.lhenv.open .lhenv-seal{opacity:0}
 .tok:has(svg.wreal){background:#f6efe0;box-shadow:inset 0 0 0 2px var(--ink)}.tok svg.wreal{width:88%;height:88%}
 .lhpr-ic{width:34px;height:34px;display:block}.lhpr-ic svg{width:100%;height:100%}.lhb-ric{width:26px;height:26px;flex:none;display:block;margin:0 auto 2px}.lhb-rooms .lhb-room{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px 2px}.lhb-rooms .lhb-room b{font:700 11px/1.1 var(--cond)!important;letter-spacing:0!important;overflow-wrap:normal}.lhb-ric svg{width:100%;height:100%}
+.lhboard>h2,.lhboard>h4,.lhboard>.lhb-sum,.lhb-steps li b{color:#1c1f22}.lhboard>.hint,.lhb-steps li span{color:#3a3f45}.lhboard>h2{border-bottom-color:#1c1f22}.lhb-steps em{color:#b4600f}.lhb-steps em.ok{color:#1d7a48}.lhb-steps em.ok,.lhb-steps em{font-weight:700}
+.lhb-rooms{grid-gap:6px!important;gap:6px!important;border:0!important;background:none!important}.lhb-rooms .lhb-room{border:1.5px solid var(--rule)!important;border-radius:12px;background:var(--page)!important;color:var(--ink);padding:8px 4px!important;grid-gap:4px;gap:4px;min-height:auto}.lhb-rooms .lhb-room b{font:600 12.5px/1.15 var(--cond)!important;text-transform:none!important;letter-spacing:0!important;color:var(--ink);text-align:center}
+.lhb-rooms .lhb-ric{width:46px;height:46px;border-radius:50%;background:#f6f0e2;padding:7px;box-sizing:border-box;margin:0 auto}
+.nu-res{color:#1c1f22}.nu-res b{color:#1c1f22}
 .kric{display:inline-block;width:22px;height:22px;vertical-align:-6px;margin-right:3px}.kric svg{width:100%;height:100%}
 .cs-bar{display:flex;align-items:center;grid-gap:10px;gap:10px;flex-wrap:wrap;margin-bottom:8px}.cs-clock{background:var(--ink);color:#ffd85a;border-radius:999px;padding:4px 12px;font:700 15px var(--cond)}
 .cs-inv{display:flex;grid-gap:6px;gap:6px;flex-wrap:wrap}.cs-inv span{background:#fff6d8;border:2px solid #c9a24a;border-radius:10px;padding:3px 8px;font:600 13px var(--cond)}.cs-inv em{color:var(--muted);font-size:13px}
@@ -11203,7 +11207,7 @@ function nuRender() {
     if (nuPanel === "slot" && S.lock) extra += '<div class="nu-panel"><p><b>Het slot heeft vier cijfers.</b> '.concat(S.lock.q, "</p>").concat(S.lock.hint ? "<details><summary>Tip</summary><p>".concat(S.lock.hint, "</p></details>") : "", '<form class="db-form" id="nuForm"><input id="nuCode" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="····" aria-label="Code"><button class="btn primary" type="submit">Open</button></form><p class="msg" id="nuMsg"></p></div>');
     if (S.prev) {
       const h = nuScore(S.prev.key, S.prev.plan);
-      extra += '<p class="nu-res">Vorige week: '.concat(S.prev.plan.map(([g, n]) => "".concat(NU_NAMES[g] || g).concat(n > 1 ? " ×".concat(n) : "")).join(", ")).concat(h != null ? " · jouw voorspelling: <b>".concat(h, " van 3 goed</b>") : "", "</p>");
+      extra += '<p class="nu-res">Vorige week: '.concat(S.prev.plan.filter(([g]) => !GHIDE.has(g)).map(([g, n]) => "".concat(NU_NAMES[g] || g).concat(n > 1 ? " ×".concat(n) : "")).join(", ")).concat(h != null ? " · jouw voorspelling: <b>".concat(h, " van 3 goed</b>") : "", "</p>");
     }
   }
   el.innerHTML = '<div class="nu-box '.concat(S.open ? "open" : "", '">').concat(nuFolder(S.open), '<span class="nu-txt">').concat(body, "</span></div>").concat(extra);
@@ -17533,7 +17537,7 @@ function start(data) {
 }
 ((_b = (_a = window.claude) == null ? void 0 : _a.hot) == null ? void 0 : _b.ready) ? window.claude.hot.ready(start) : start((_e = (_d = (_c = window.claude) == null ? void 0 : _c.hot) == null ? void 0 : _d.data) != null ? _e : {});
 </script>
-<script>const APPV = "20261110095839";
+<script>const APPV = "20261111203518";
 if ("serviceWorker" in navigator) {
   addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {
   }));

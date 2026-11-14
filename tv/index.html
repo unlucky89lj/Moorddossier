@@ -1077,6 +1077,7 @@ body.kiosk-join .tv-jform .btn.primary{font-size:22px;padding:16px}
 #stBox{position:relative}
 @media (max-width:600px){.pb-top span{display:none}.pb-top b{flex:1;font-size:14px}}
 /* [ECHTE-ZAAK-2] */
+.ec-cases{display:flex;grid-gap:6px;gap:6px;overflow-x:auto;padding:2px 0 10px}.ec-cases button{flex:none;border:2px solid var(--rule);background:var(--card);color:var(--ink);border-radius:20px;padding:7px 12px;font:700 14px var(--cond);cursor:pointer}.ec-cases button[aria-selected=true]{border-color:var(--red);color:var(--red)}
 .cam-box{background:#111;border-radius:10px;padding:10px;color:#ddd}.cam-box .hint{color:#bbb;margin:6px 0 0}
 .cam-scr svg{width:100%;height:auto;display:block;border-radius:4px;filter:grayscale(1) contrast(1.15) brightness(.95)}
 .cam-ctl{display:flex;grid-gap:8px;gap:8px;align-items:center;margin-top:8px}.cam-ctl input{flex:1;min-width:0;accent-color:#ec6a55}.cam-ctl select{background:#222;color:#eee;border:1px solid #555;border-radius:8px;padding:6px;font-size:15px}
@@ -17331,7 +17332,7 @@ const HELP = [
     what: "Een moordzaak die gebaseerd is op een echte zaak. Namen, plaatsen en tijden zijn veranderd. Je leest het dossier (ook om te printen), zoekt zelf op internet in de app en overlegt met inspecteur Floor Nijdam via de chat. Zij stuurt nieuwe enveloppen als je verder komt.",
     steps: ["Open <b>Dossier</b> en lees envelop A. Met <b>Print het dossier</b> krijg je het op papier of als pdf.", "Ga naar <b>Rechercheur</b> en beantwoord de vragen van Floor. Bij een goed antwoord krijg je nieuwe stukken.", "Zoek bij <b>Internet</b> naar namen, plaatsen en adressen uit het dossier.", "Weet je het? Ga naar <b>Oplossen</b>: wie, waarom en welk bewijs."],
     tips: ["Leg de tijden uit de verklaringen naast elkaar.", "Vergelijk gezichten op foto’s op internet met de mensen uit het dossier.", "Kom je vast te zitten? Tik in de chat op Tip."],
-    extra: () => "1 zaak, ongeveer 60 tot 90 minuten."
+    extra: () => "".concat(ECVIS.length, " ").concat(ECVIS.length === 1 ? "zaak" : "zaken", ", elk ongeveer 60 tot 90 minuten.")
   },
   {
     g: "tijdlijn",
@@ -17387,10 +17388,12 @@ const ECLOOK = {
   floor: { f: 1, skin: "#d8a47e", hc: "#2a1c14", hair: "bun", eyes: "#3a2a1a", top: "blouse", tc: "#1c2a44", age: 44 }
 };
 const ecMug = (k, w = 64, extra) => TF(__spreadProps(__spreadValues(__spreadValues({}, ECLOOK[k]), extra || {}), { alt: "" })).replace('class="rf tf"', 'class="rf ec-mug" width="'.concat(w, '"'));
-const ECASE = {
+const ECASES = [];
+let ECASE = {
   id: "bruid",
   title: "De bruid in het bad",
   based: "Gebaseerd op een echte zaak uit Engeland (1912 tot 1914). Namen, plaatsen en tijden zijn veranderd.",
+  unit: "Recherche Dijkmonde",
   intro: "Dinsdagavond 6 oktober 2026. In Dijkmonde wordt Lieneke Wagemaker (33) dood gevonden in haar bad. Ze was negen weken getrouwd. De arts denkt aan een ongeluk: flauwgevallen. Haar zus Tamar gelooft daar niks van. Inspecteur Floor Nijdam vraagt jou om mee te kijken.",
   env: { A: "Envelop A · De avond zelf", B: "Envelop B · Sectie en verklaringen", C: "Envelop C · Het oude dossier" },
   docs: [
@@ -17419,7 +17422,7 @@ const ECASE = {
     "kalverda-kunsthandel.nl": { t: "Kalverda Kunsthandel", kw: "riemer kalverda kunsthandel kunsthandelaar kunst", h: '<div class="ws-biz"><h4>Kalverda Kunsthandel</h4><p>🚧 Deze website is nog in aanbouw.</p><p>Over mij: ik ben Riemer en ik reis veel voor mijn werk. Ik koop en verkoop schilderijen.</p><small>Online sinds: 3 juli 2026 · Geen adres · Geen foto\'s</small></div>' },
     "zangeslust-koor.nl": { t: "Koor Zangeslust Dijkmonde", kw: "koor zangeslust tamar repetitie dorpskerk zingen agenda", h: () => '<div class="ws-biz"><h4>🎵 Koor Zangeslust · Dijkmonde</h4><p><b>Agenda:</b> dinsdag 6 oktober 2026, 19:30 – 21:30 repetitie in de Dorpskerk.</p><div class="ws-post"><small>Verslag · 7 oktober</small><p>Fijne repetitie gisteren! Op de foto (genomen om 20:15) de alten, met Tamar vooraan.</p><figure>'.concat(ecMug("tamar", 96), "<figcaption>De alten, dinsdag 6 oktober, 20:15</figcaption></figure></div></div>") },
     "verhuur-kooijman.nl": { t: "Verhuur Kooijman", kw: "kooijman thorwald verhuur huisbaas ketel onderhoud lindelaan", h: '<div class="ws-biz"><h4>Verhuur Kooijman</h4><p>Wij verhuren woningen aan de Lindelaan en de Kerkstraat.</p><p><b>Onderhoud cv-ketels:</b> elke eerste dinsdag van de maand, 19:30 – 20:30. De monteur werkt dan in de kelder.</p><p>Kantoor: Kerkstraat 3 (hier hangen ook de reservesleutels).</p></div>' },
-    "veiligverzekerd-polis.nl": { t: "VeiligVerzekerd · Mijn polis", kw: "verzekering verzekeraar polis veiligverzekerd levensverzekering", form: 1 }
+    "veiligverzekerd-polis.nl": { t: "VeiligVerzekerd · Mijn polis", kw: "verzekering verzekeraar polis veiligverzekerd levensverzekering", form: { title: "🛡️ VeiligVerzekerd · Mijn polis", label: "Polisnummer", ph: "Polisnummer, bijv. VV-00-00000", btn: "Bekijk", no: "Dit polisnummer kennen wij niet. Controleer het nummer op uw brief.", ok: { "VV2648817": '<table class="ec-tab"><tr><td>Soort</td><td>Overlijdensrisicoverzekering</td></tr><tr><td>Verzekerde</td><td>L. Wagemaker</td></tr><tr><td>Verzekerd bedrag</td><td><b>€ 250.000</b></td></tr><tr><td>Begunstigde</td><td><b>R. Kalverda (echtgenoot)</b></td></tr><tr><td>Afgesloten</td><td>1 september 2026, op verzoek van R. Kalverda</td></tr><tr><td>Status</td><td>Melding overlijden ontvangen 7-10-2026 · uitkering in behandeling</td></tr></table>' } } }
   },
   stages: [
     { say: ["Hoi, ik ben inspecteur Floor Nijdam.", "De arts zegt: ongeluk. Lieneke viel flauw in bad. Haar zus Tamar gelooft dat niet. Ik eigenlijk ook niet.", "Lees eerst envelop A in het dossier. Dan een vraag: hoe laat ging Riemer volgens zichzelf de deur uit?"], opts: ["19:30", "19:40", "19:52", "20:06"], ok: 1, tip: "Kijk in de verklaring van Riemer.", good: ["Klopt, 19:40. Volgens hem ging Lieneke toen net in bad."] },
@@ -17480,9 +17483,12 @@ function ecPage(url) {
     }
     return { t: "Zoekmachien", h: '<div class="ws-search"><div class="ws-logo">Zoek<span>machien</span></div><form id="ecQ"><input id="ecQi" type="search" value="'.concat(ecEsc(q), '" placeholder="Zoek op het internet" aria-label="Zoekwoorden" autocomplete="off"><button class="btn small primary" type="submit">Zoek</button></form>').concat(res).concat(q ? "" : '<p class="ws-none">Tip: zoek op namen, plaatsen of dingen die je in het dossier leest.</p>', "</div>") };
   }
-  if (u === "veiligverzekerd-polis.nl" || u.startsWith("veiligverzekerd-polis.nl/?p=")) {
-    const p = decodeURIComponent(u.split("p=")[1] || "").toUpperCase().replace(/[^A-Z0-9]/g, ""), okp = p === "VV2648817";
-    return { t: "VeiligVerzekerd · Mijn polis", h: '<div class="ws-biz ws-ins"><h4>🛡️ VeiligVerzekerd · Mijn polis</h4><form id="ecP"><input id="ecPi" placeholder="Polisnummer, bijv. VV-00-00000" value="'.concat(ecEsc(p ? u.split("p=")[1] : ""), '" aria-label="Polisnummer" autocomplete="off"><button class="btn small primary" type="submit">Bekijk</button></form>').concat(p ? okp ? '<table class="ec-tab"><tr><td>Soort</td><td>Overlijdensrisicoverzekering</td></tr><tr><td>Verzekerde</td><td>L. Wagemaker</td></tr><tr><td>Verzekerd bedrag</td><td><b>€ 250.000</b></td></tr><tr><td>Begunstigde</td><td><b>R. Kalverda (echtgenoot)</b></td></tr><tr><td>Afgesloten</td><td>1 september 2026, op verzoek van R. Kalverda</td></tr><tr><td>Status</td><td>Melding overlijden ontvangen 7-10-2026 · uitkering in behandeling</td></tr></table>' : '<p class="ws-none">Dit polisnummer kennen wij niet. Controleer het nummer op uw brief.</p>' : "", "</div>") };
+  {
+    const fk = Object.keys(ECASE.sites).find((k) => ECASE.sites[k].form && (u === k || u.startsWith(k + "/?p=")));
+    if (fk) {
+      const F = ECASE.sites[fk].form, raw = decodeURIComponent(u.split("p=")[1] || ""), p = raw.toUpperCase().replace(/[^A-Z0-9]/g, ""), hit = F.ok[p];
+      return { t: ECASE.sites[fk].t, h: '<div class="ws-biz ws-ins"><h4>'.concat(F.title, '</h4><form id="ecP" data-site="').concat(fk, '"><input id="ecPi" placeholder="').concat(ecEsc(F.ph || ""), '" value="').concat(ecEsc(raw), '" aria-label="').concat(ecEsc(F.label || "Invoer"), '" autocomplete="off"><button class="btn small primary" type="submit">').concat(F.btn || "Zoek", "</button></form>").concat(p ? hit || '<p class="ws-none">'.concat(F.no || "Niets gevonden.", "</p>") : "", "</div>") };
+    }
   }
   const s = ECASE.sites[u];
   if (s) return { t: s.t, h: typeof s.h === "function" ? s.h() : s.h };
@@ -17498,8 +17504,8 @@ function ecOpenDoc(id) {
     S.seen.push(id);
     ecSave();
   }
-  if (d.kind === "cam") return ecOpenCam();
-  if (d.kind === "phone") return ecOpenPhone();
+  if (d.kind === "cam") return ecOpenCam(d);
+  if (d.kind === "phone") return ecOpenPhone(d);
   const ov = document.createElement("div");
   ov.className = "ec-ov";
   ov.setAttribute("role", "dialog");
@@ -17587,13 +17593,19 @@ function renderEcht() {
     body = '<div class="ec-br"><div class="ec-bar"><button type="button" class="ec-bb" id="ecBack" aria-label="Terug" '.concat(S.hist.length ? "" : "disabled", '>‹</button><button type="button" class="ec-bb" id="ecHome" aria-label="Zoekmachine">⌂</button><form id="ecU"><input id="ecUi" value="').concat(ecEsc(S.url), '" aria-label="Webadres" autocomplete="off" autocapitalize="off" spellcheck="false"></form></div><div class="ec-site">').concat(pg.h, "</div></div>");
   } else if (tab === "chat") {
     const sg = C2.stages[S.stage];
-    body = '<div class="ec-chat"><div class="ec-chead">'.concat(ecMug("floor", 44), '<div><b>Insp. Floor Nijdam</b><small>Recherche Dijkmonde · online</small></div></div><div class="ec-msgs" id="ecMsgs">').concat(S.chat.map(([w, t]) => '<div class="ec-m ec-'.concat(w, '">').concat(ecEsc(t), "</div>")).join(""), "</div>").concat(sg ? '<div class="ec-opts">'.concat(sg.opts.map((o, i) => '<button type="button" class="ec-opt" data-ans="'.concat(i, '">').concat(ecEsc(o), "</button>")).join(""), '<button type="button" class="ec-opt ec-tipb" id="ecTip">💡 Tip</button></div>') : '<p class="hint">Floor wacht op jouw oplossing bij “Oplossen”.</p>', "</div>");
+    body = '<div class="ec-chat"><div class="ec-chead">'.concat(ecMug("floor", 44), "<div><b>Insp. Floor Nijdam</b><small>").concat(C2.unit || "Recherche", ' · online</small></div></div><div class="ec-msgs" id="ecMsgs">').concat(S.chat.map(([w, t]) => '<div class="ec-m ec-'.concat(w, '">').concat(ecEsc(t), "</div>")).join(""), "</div>").concat(sg ? '<div class="ec-opts">'.concat(sg.opts.map((o, i) => '<button type="button" class="ec-opt" data-ans="'.concat(i, '">').concat(ecEsc(o), "</button>")).join(""), '<button type="button" class="ec-opt ec-tipb" id="ecTip">💡 Tip</button></div>') : '<p class="hint">Floor wacht op jouw oplossing bij “Oplossen”.</p>', "</div>");
   } else {
     const pick2 = (nm, list, cur) => '<div class="ec-pick" role="radiogroup">'.concat(list.map(([id, t, r]) => '<button type="button" class="ec-pk '.concat(cur === id ? "on" : "", '" data-').concat(nm, '="').concat(id, '" aria-pressed="').concat(cur === id, '">').concat(ECLOOK[id] ? ecMug(id, 40) : "", "<span>").concat(t).concat(r ? "<small>".concat(r, "</small>") : "", "</span></button>")).join(""), "</div>");
-    if (S.won) body = '<div class="ec-won"><span class="kicker">Zaak opgelost'.concat(S.tries > 1 ? " · ".concat(S.tries, " pogingen") : "", "</span><h4>Het was Riemer Kalverda</h4><p>").concat(C2.story, '</p><div class="controls"><button class="btn primary" type="button" id="ecFilm">▶ Bekijk hoe het gebeurde</button><button class="btn small" type="button" id="ecReset">Speel opnieuw</button></div><p class="hint">').concat(C2.based, "</p></div>").concat(C2.real ? '<details class="ec-real" open><summary>📜 '.concat(C2.real.t, "</summary>").concat(C2.real.h, "</details>") : "");
+    if (S.won) body = '<div class="ec-won"><span class="kicker">Zaak opgelost'.concat(S.tries > 1 ? " · ".concat(S.tries, " pogingen") : "", "</span><h4>Het was ").concat((C2.sus.find((x) => x[0] === C2.ans) || [])[1], "</h4><p>").concat(C2.story, '</p><div class="controls"><button class="btn primary" type="button" id="ecFilm">▶ Bekijk hoe het gebeurde</button><button class="btn small" type="button" id="ecReset">Speel opnieuw</button></div><p class="hint">').concat(C2.based, "</p></div>").concat(C2.real ? '<details class="ec-real" open><summary>📜 '.concat(C2.real.t, "</summary>").concat(C2.real.h, "</details>") : "");
     else body = '<p class="hint">Je mag altijd een poging doen. Weet je het nog niet zeker? Vraag Floor om hulp bij “Rechercheur”.</p><h4 class="ec-h">Wie deed het?</h4>'.concat(pick2("esu", C2.sus, S.pS), '<h4 class="ec-h">Waarom?</h4>').concat(pick2("emo", C2.mot, S.pM), '<h4 class="ec-h">Welk bewijs laat het zien?</h4>').concat(pick2("eke", C2.key, S.pK), '<div class="controls"><button class="btn primary" type="button" id="ecSolve" ').concat(S.pS && S.pM && S.pK ? "" : "disabled", '>Beschuldig</button></div><p id="ecRes" class="ec-res" aria-live="polite">').concat(S.lastMiss || "", "</p>");
   }
-  P.innerHTML = '<div class="storyhead"><span class="kicker">Echte zaak · '.concat(C2.based.split(".")[0], "</span><h3>").concat(C2.title, "</h3>").concat(tab === "dossier" ? "<p>".concat(C2.intro, "</p>") : "", '</div><nav class="ec-tabs" role="tablist">').concat(tabs.map(([k, t]) => '<button type="button" role="tab" data-etab="'.concat(k, '" aria-selected="').concat(tab === k, '">').concat(t, "</button>")).join(""), '</nav><div class="ec-body">').concat(body, "</div>");
+  P.innerHTML = (ECVIS.length > 1 ? '<div class="ec-cases" role="tablist" aria-label="Kies een zaak">'.concat(ECVIS.map((c) => '<button type="button" role="tab" data-ecase="'.concat(c.id, '" aria-selected="').concat(c === ECASE, '">').concat((ECS[c.id] || {}).won ? "✓ " : "").concat(c.hidden ? "👁 voorbeeld · " : "").concat(c.title, "</button>")).join(""), "</div>") : "") + '<div class="storyhead"><span class="kicker">Echte zaak · '.concat(C2.based.split(".")[0], "</span><h3>").concat(C2.title, "</h3>").concat(tab === "dossier" ? "<p>".concat(C2.intro, "</p>") : "", '</div><nav class="ec-tabs" role="tablist">').concat(tabs.map(([k, t]) => '<button type="button" role="tab" data-etab="'.concat(k, '" aria-selected="').concat(tab === k, '">').concat(t, "</button>")).join(""), '</nav><div class="ec-body">').concat(body, "</div>");
+  P.querySelectorAll("[data-ecase]").forEach((b) => b.onclick = () => {
+    ECASE = ECVIS.find((c) => c.id === b.dataset.ecase) || ECASE;
+    store.set("md-echt-cur", ECASE.id);
+    renderEcht();
+    window.scrollTo({ top: 0 });
+  });
   P.querySelectorAll("[data-etab]").forEach((b) => b.onclick = () => {
     S.tab = b.dataset.etab;
     if (S.tab === "chat") S.newc = 0;
@@ -17635,7 +17647,7 @@ function renderEcht() {
   const pf = $("ecP");
   if (pf) pf.onsubmit = (e) => {
     e.preventDefault();
-    ecGo("veiligverzekerd-polis.nl/?p=" + encodeURIComponent($("ecPi").value.trim()), false);
+    ecGo(pf.dataset.site + "/?p=" + encodeURIComponent($("ecPi").value.trim()), false);
   };
   P.querySelectorAll("[data-ans]").forEach((b) => b.onclick = () => ecAnswer(+b.dataset.ans));
   const tp = $("ecTip");
@@ -17694,54 +17706,49 @@ ECASE.real = { t: "De echte zaak: de bruiden in het bad (Engeland, 1912 tot 1915
 ECASE.docs.splice(
   ECASE.docs.findIndex((d) => d.id === "wilco") + 1,
   0,
-  { id: "cam", env: "B", kind: "cam", t: "Camerabeelden supermarkt", h: '<p class="ec-mono">CAMERA 02 · INGANG SUPERMARKT DORPSPLEIN · 06-10-2026</p><p>Stills uit de beelden (19:54:30 tot 19:58:30):</p><table class="ec-tab"><tr><td>19:55:56</td><td>Een man in een donkerblauwe trui loopt snel naar de ingang. Hij kijkt achterom. Zijn mouwen zijn opgerold.</td></tr><tr><td>19:56:10</td><td>Een vrouw met een kinderwagen gaat naar binnen.</td></tr><tr><td>19:58:12</td><td>De man komt naar buiten met een klein tasje en loopt snel weg.</td></tr></table><p>In de app kun je de beelden zelf afspelen.</p>' },
-  { id: "tel2", env: "C", kind: "phone", t: "Telefoon van Riemer (in beslag genomen)", h: '<p class="ec-mono">DIGITALE RECHERCHE · TELEFOON R. KALVERDA</p><p><b>Zoekgeschiedenis</b></p><table class="ec-tab"><tr><td>23-09</td><td>hoe lang duurt uitbetaling overlijdensrisicoverzekering</td></tr><tr><td>30-09</td><td>flauwvallen in bad ongeluk</td></tr><tr><td>01-10</td><td>hoe lang is een standaard bad</td></tr><tr><td>07-10</td><td>enkele reis Lissabon</td></tr></table><p><b>Berichten</b></p><table class="ec-tab"><tr><td>04-10 21:02</td><td>Aan onbekend nummer: “Bijna klaar hier. Over twee weken ben ik weg.”</td></tr><tr><td>06-10 17:40</td><td>Aan Lieneke: “Neem vanavond lekker een warm bad, schat. Ik zorg voor je ❤️”</td></tr></table><p><b>Map ‘Verwijderd’</b>: een foto uit 2023 van Riemer met een donkerharige vrouw. Op de achtergrond een spandoek: “Gefeliciteerd Ramon &amp; Annick”.</p>' }
+  { id: "cam", env: "B", kind: "cam", cam: { label: "SUPERMARKT", name: "CAM 02 · INGANG", date: "06-10-2026", start: 19 * 3600 + 54 * 60 + 30, dur: 240, hint: "Camera 02 bij de ingang van de supermarkt, 19:54:30 tot 19:58:30. Kijk goed hoe laat Riemer binnenkomt.", ev: [{ n: "Riemer Kalverda", in: [56, 86], out: [222, 238], dir: 1, bag: 1 }, { n: "voorbijganger moeder", in: [104, 124], out: [180, 196], dir: -1, pram: 1 }, { n: "voorbijganger man", in: [128, 168], pass: 1 }] }, t: "Camerabeelden supermarkt", h: '<p class="ec-mono">CAMERA 02 · INGANG SUPERMARKT DORPSPLEIN · 06-10-2026</p><p>Stills uit de beelden (19:54:30 tot 19:58:30):</p><table class="ec-tab"><tr><td>19:55:56</td><td>Een man in een donkerblauwe trui loopt snel naar de ingang. Hij kijkt achterom. Zijn mouwen zijn opgerold.</td></tr><tr><td>19:56:10</td><td>Een vrouw met een kinderwagen gaat naar binnen.</td></tr><tr><td>19:58:12</td><td>De man komt naar buiten met een klein tasje en loopt snel weg.</td></tr></table><p>In de app kun je de beelden zelf afspelen.</p>' },
+  { id: "tel2", env: "C", kind: "phone", phone: { owner: "Telefoon R. Kalverda", chats: [{ who: "Onbekend nummer", m: [[1, "Bijna klaar hier. Over twee weken ben ik weg.", "4 okt 21:02"], [0, "Goed. Zelfde plan als vorige keer?", "4 okt 21:10"], [1, "Ja.", "4 okt 21:11"]] }, { who: "Lieneke ❤️", m: [[1, "Neem vanavond lekker een warm bad, schat. Ik zorg voor je ❤️", "6 okt 17:40"], [0, "Jij bent echt de liefste 😘", "6 okt 17:42"]] }], zoek: [["23 sep", "hoe lang duurt uitbetaling overlijdensrisicoverzekering"], ["30 sep", "flauwvallen in bad ongeluk"], ["1 okt", "hoe lang is een standaard bad"], ["5 okt", "supermarkt dorpsplein openingstijden"], ["7 okt", "enkele reis Lissabon"]], fotos: [{ a: "riemer", cap: "1 sep 2026 · selfie" }, { doc: "VEILIG<br>VERZEKERD<br><small>polis VV-26-48817</small>", cap: "1 sep 2026 · foto van een document" }, { del: 1, a: "riemer", b: "annick", extra: { glasses: "#2a2420", beard: "stubble" }, cap: "14 jan 2023 · spandoek op de achtergrond: “Gefeliciteerd Ramon &amp; Annick”" }] }, t: "Telefoon van Riemer (in beslag genomen)", h: '<p class="ec-mono">DIGITALE RECHERCHE · TELEFOON R. KALVERDA</p><p><b>Zoekgeschiedenis</b></p><table class="ec-tab"><tr><td>23-09</td><td>hoe lang duurt uitbetaling overlijdensrisicoverzekering</td></tr><tr><td>30-09</td><td>flauwvallen in bad ongeluk</td></tr><tr><td>01-10</td><td>hoe lang is een standaard bad</td></tr><tr><td>07-10</td><td>enkele reis Lissabon</td></tr></table><p><b>Berichten</b></p><table class="ec-tab"><tr><td>04-10 21:02</td><td>Aan onbekend nummer: “Bijna klaar hier. Over twee weken ben ik weg.”</td></tr><tr><td>06-10 17:40</td><td>Aan Lieneke: “Neem vanavond lekker een warm bad, schat. Ik zorg voor je ❤️”</td></tr></table><p><b>Map ‘Verwijderd’</b>: een foto uit 2023 van Riemer met een donkerharige vrouw. Op de achtergrond een spandoek: “Gefeliciteerd Ramon &amp; Annick”.</p>' }
 );
-ECASE.camEv = [{ k: "riemer", in: [56, 86], out: [222, 238], dir: 1 }, { k: "mom", in: [104, 124], out: [180, 196], dir: -1, pram: 1 }, { k: "man2", in: [128, 140], out: [150, 168], dir: 1, pass: 1 }];
-function ecCamSvg(t) {
-  const T0 = 19 * 3600 + 54 * 60 + 30, ts = T0 + Math.floor(t), hh = String(Math.floor(ts / 3600)).padStart(2, "0"), mm = String(Math.floor(ts / 60) % 60).padStart(2, "0"), ss = String(ts % 60).padStart(2, "0");
-  const door = [206, 64, 64, 96];
+function ecCamSvg(K, t) {
+  const ts = K.start + Math.floor(t), hh = String(Math.floor(ts / 3600) % 24).padStart(2, "0"), mm = String(Math.floor(ts / 60) % 60).padStart(2, "0"), ss = String(ts % 60).padStart(2, "0"), DX = 238;
   let figs = "";
-  const fig = (x, y, k, flip, sc) => '<g transform="translate('.concat(x.toFixed(1), " ").concat(y, ") scale(").concat(flip ? -sc : sc, " ").concat(sc, ')">').concat(toonBody(k === "riemer" ? __spreadValues(__spreadValues({}, lookOf("Riemer Kalverda")), {}) : k === "mom" ? lookOf("voorbijganger moeder") : lookOf("voorbijganger man")), "</g>");
-  ECASE.camEv.forEach((e) => {
-    let x = null, y = 168, op = 1;
+  (K.ev || []).forEach((e) => {
+    let x = null, op = 1;
     if (e.pass) {
-      if (t >= e.in[0] && t <= e.out[1]) {
-        const q = (t - e.in[0]) / (e.out[1] - e.in[0]);
-        x = -20 + q * 340;
+      if (t >= e.in[0] && t <= e.in[1]) {
+        const q = (t - e.in[0]) / (e.in[1] - e.in[0]);
+        x = e.dir < 0 ? 340 - q * 360 : -20 + q * 340;
       }
     } else {
       if (t >= e.in[0] && t <= e.in[1]) {
         const q = (t - e.in[0]) / (e.in[1] - e.in[0]);
-        x = e.dir > 0 ? -20 + q * (238 + 20) : 340 - q * (340 - 238);
+        x = e.dir > 0 ? -20 + q * (DX + 20) : 340 - q * (340 - DX);
         if (q > 0.85) op = 1 - (q - 0.85) / 0.15;
-      } else if (t >= e.out[0] && t <= e.out[1]) {
+      } else if (e.out && t >= e.out[0] && t <= e.out[1]) {
         const q = (t - e.out[0]) / (e.out[1] - e.out[0]);
-        x = 238 + q * (e.dir > 0 ? 110 : -260);
+        x = DX + q * (e.dir > 0 ? 110 : -260);
         if (q < 0.15) op = q / 0.15;
       }
     }
-    if (x !== null) {
-      figs += '<g opacity="'.concat(op.toFixed(2), '">').concat(fig(x, y, e.k, e.dir < 0, 0.62)).concat(e.pram ? '<g transform="translate('.concat((x - 26).toFixed(1), ' 150)"><rect x="-14" y="-8" width="28" height="16" rx="6" fill="#555"/><circle cx="-9" cy="12" r="5" fill="#222"/><circle cx="9" cy="12" r="5" fill="#222"/></g>') : "").concat(e.k === "riemer" && t > e.out[0] ? '<rect x="'.concat((x + 12).toFixed(1), '" y="122" width="10" height="12" rx="2" fill="#ddd"/>') : "", "</g>");
-    }
+    if (x !== null) figs += '<g opacity="'.concat(op.toFixed(2), '"><g transform="translate(').concat(x.toFixed(1), " 168) scale(").concat(e.dir < 0 ? -0.62 : 0.62, ' .62)">').concat(toonBody(lookOf(e.n)), "</g>").concat(e.pram ? '<g transform="translate('.concat((x - 26).toFixed(1), ' 150)"><rect x="-14" y="-8" width="28" height="16" rx="6" fill="#555"/><circle cx="-9" cy="12" r="5" fill="#222"/><circle cx="9" cy="12" r="5" fill="#222"/></g>') : "").concat(e.bag && e.out && t > e.out[0] ? '<rect x="'.concat((x + 12).toFixed(1), '" y="122" width="10" height="12" rx="2" fill="#ddd"/>') : "", "</g>");
   });
-  const open = ECASE.camEv.some((e) => !e.pass && (t > e.in[1] - 6 && t < e.in[1] + 2 || t > e.out[0] - 2 && t < e.out[0] + 6)) ? 1 : 0;
-  return '<svg viewBox="0 0 320 180" class="cam-svg" role="img" aria-label="Camerabeelden ingang supermarkt, '.concat(hh, ":").concat(mm, ":").concat(ss, '"><defs><pattern id="camN" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="2" fill="#000" opacity=".18"/></pattern></defs><rect width="320" height="180" fill="#3a3f44"/><rect y="0" width="320" height="120" fill="#5b6268"/><rect x="170" y="20" width="140" height="100" fill="#70787e"/><rect x="').concat(door[0], '" y="').concat(door[1] - 10, '" width="').concat(door[2], '" height="66" fill="#1e2428"/><rect x="').concat(door[0] - open * 20, '" y="').concat(door[1] - 10, '" width="32" height="66" fill="#9fb0ba" opacity=".55"/><rect x="').concat(door[0] + 32 + open * 20, '" y="').concat(door[1] - 10, '" width="32" height="66" fill="#9fb0ba" opacity=".55"/><rect x="180" y="26" width="120" height="14" fill="#2c3236"/><text x="240" y="37" text-anchor="middle" font-size="9" fill="#cfd5d9" font-family="monospace">SUPERMARKT</text><rect x="0" y="120" width="320" height="60" fill="#4a5055"/><path d="M0 150H320" stroke="#666" stroke-dasharray="10 8"/>').concat(figs, '<rect width="320" height="180" fill="url(#camN)"/><text x="8" y="14" font-size="9" fill="#fff" font-family="monospace">CAM 02 · INGANG</text><text x="312" y="14" text-anchor="end" font-size="9" fill="#fff" font-family="monospace">06-10-2026 ').concat(hh, ":").concat(mm, ":").concat(ss, '</text><circle cx="10" cy="24" r="3" fill="#e33" opacity="').concat(Math.floor(t * 2) % 2 ? 1 : 0.2, '"/></svg>');
+  const open = (K.ev || []).some((e) => !e.pass && (t > e.in[1] - 6 && t < e.in[1] + 2 || e.out && t > e.out[0] - 2 && t < e.out[0] + 6)) ? 1 : 0;
+  return '<svg viewBox="0 0 320 180" class="cam-svg" role="img" aria-label="Camerabeelden, '.concat(hh, ":").concat(mm, ":").concat(ss, '"><defs><pattern id="camN" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="2" fill="#000" opacity=".18"/></pattern></defs><rect width="320" height="180" fill="#3a3f44"/><rect width="320" height="120" fill="#5b6268"/><rect x="170" y="20" width="140" height="100" fill="#70787e"/><rect x="206" y="54" width="64" height="66" fill="#1e2428"/><rect x="').concat(206 - open * 20, '" y="54" width="32" height="66" fill="#9fb0ba" opacity=".55"/><rect x="').concat(238 + open * 20, '" y="54" width="32" height="66" fill="#9fb0ba" opacity=".55"/><rect x="180" y="26" width="120" height="14" fill="#2c3236"/><text x="240" y="37" text-anchor="middle" font-size="9" fill="#cfd5d9" font-family="monospace">').concat(K.label || "", '</text><rect y="120" width="320" height="60" fill="#4a5055"/><path d="M0 150H320" stroke="#666" stroke-dasharray="10 8"/>').concat(figs, '<rect width="320" height="180" fill="url(#camN)"/><text x="8" y="14" font-size="9" fill="#fff" font-family="monospace">').concat(K.name || "CAM", '</text><text x="312" y="14" text-anchor="end" font-size="9" fill="#fff" font-family="monospace">').concat(K.date || "", " ").concat(hh, ":").concat(mm, ":").concat(ss, '</text><circle cx="10" cy="24" r="3" fill="#e33" opacity="').concat(Math.floor(t * 2) % 2 ? 1 : 0.2, '"/></svg>');
 }
-function ecOpenCam() {
-  const ov = document.createElement("div");
+function ecOpenCam(d) {
+  const K = d.cam, ov = document.createElement("div");
   ov.className = "ec-ov";
   ov.setAttribute("role", "dialog");
   ov.setAttribute("aria-modal", "true");
-  ov.setAttribute("aria-label", "Camerabeelden");
+  ov.setAttribute("aria-label", d.t);
   let t = 0, play = false, rate = 10, raf = 0, last = 0;
-  const MAX = 240;
-  ov.innerHTML = '<div class="ec-ovc"><div class="cam-box"><div class="cam-scr" id="camScr"></div><div class="cam-ctl"><button class="btn small primary" type="button" id="camPlay">▶ Afspelen</button><input type="range" id="camPos" min="0" max="'.concat(MAX, '" step="1" value="0" aria-label="Spoel door de beelden"><select id="camRate" aria-label="Snelheid"><option value="1">1×</option><option value="5">5×</option><option value="10" selected>10×</option><option value="30">30×</option></select></div><p class="hint">Camera 02 bij de ingang van de supermarkt, 19:54:30 tot 19:58:30. Kijk goed hoe laat Riemer binnenkomt.</p></div><div class="controls"><button class="btn" type="button" id="camClose">Sluit</button></div></div>');
+  const MAX = K.dur || 240;
+  ov.innerHTML = '<div class="ec-ovc"><div class="cam-box"><div class="cam-scr" id="camScr"></div><div class="cam-ctl"><button class="btn small primary" type="button" id="camPlay">▶ Afspelen</button><input type="range" id="camPos" min="0" max="'.concat(MAX, '" step="1" value="0" aria-label="Spoel door de beelden"><select id="camRate" aria-label="Snelheid"><option value="1">1×</option><option value="5">5×</option><option value="10" selected>10×</option><option value="30">30×</option></select></div><p class="hint">').concat(K.hint || "", '</p></div><div class="controls"><button class="btn" type="button" id="camClose">Sluit</button></div></div>');
   document.body.appendChild(ov);
   document.body.style.overflow = "hidden";
   const scr = ov.querySelector("#camScr"), pos = ov.querySelector("#camPos"), pb = ov.querySelector("#camPlay");
   const draw = () => {
-    scr.innerHTML = ecCamSvg(t);
+    scr.innerHTML = ecCamSvg(K, t);
     pos.value = Math.floor(t);
   };
   const loop = (ts) => {
@@ -17787,17 +17794,18 @@ function ecOpenCam() {
   draw();
   pb.focus();
 }
-function ecOpenPhone() {
-  const ov = document.createElement("div");
+function ecOpenPhone(d) {
+  const P = d.phone, ov = document.createElement("div");
   ov.className = "ec-ov";
   ov.setAttribute("role", "dialog");
   ov.setAttribute("aria-modal", "true");
-  ov.setAttribute("aria-label", "Telefoon van Riemer");
+  ov.setAttribute("aria-label", d.t);
   let tab = "msg";
-  const photo = (a, b, cap2, extra) => '<figure class="ph-photo"><div class="ph-pic">'.concat(ecMug(a, 72, extra)).concat(b ? ecMug(b, 72) : "", "</div><figcaption>").concat(cap2, "</figcaption></figure>");
-  const body = () => tab === "msg" ? '<div class="ph-chat"><div class="ph-who">Onbekend nummer</div><div class="ph-m me">Bijna klaar hier. Over twee weken ben ik weg.<small>4 okt 21:02</small></div><div class="ph-m">Goed. Zelfde plan als vorige keer?<small>4 okt 21:10</small></div><div class="ph-m me">Ja.<small>4 okt 21:11</small></div><div class="ph-who">Lieneke ❤️</div><div class="ph-m me">Neem vanavond lekker een warm bad, schat. Ik zorg voor je ❤️<small>6 okt 17:40</small></div><div class="ph-m">Jij bent echt de liefste 😘<small>6 okt 17:42</small></div></div>' : tab === "zoek" ? '<div class="ph-list">'.concat([["23 sep", "hoe lang duurt uitbetaling overlijdensrisicoverzekering"], ["30 sep", "flauwvallen in bad ongeluk"], ["1 okt", "hoe lang is een standaard bad"], ["5 okt", "supermarkt dorpsplein openingstijden"], ["7 okt", "enkele reis Lissabon"]].map(([d, q]) => '<div class="ph-q">🔍 <span>'.concat(q, "</span><small>").concat(d, "</small></div>")).join(""), "</div>") : '<div class="ph-grid">'.concat(photo("riemer", null, "1 sep 2026 · selfie"), '<figure class="ph-photo"><div class="ph-pic ph-doc">VEILIG<br>VERZEKERD<br><small>polis VV-26-48817</small></div><figcaption>1 sep 2026 · foto van een document</figcaption></figure><div class="ph-del">🗑️ Map ‘Verwijderd’ (1 foto)</div>').concat(photo("riemer", "annick", "14 jan 2023 · spandoek op de achtergrond: “Gefeliciteerd Ramon &amp; Annick”", { glasses: "#2a2420", beard: "stubble" }), "</div>");
+  const photo = (f) => f.doc ? '<figure class="ph-photo"><div class="ph-pic ph-doc">'.concat(f.doc, "</div><figcaption>").concat(f.cap, "</figcaption></figure>") : '<figure class="ph-photo"><div class="ph-pic">'.concat(f.a ? ecMug(f.a, 72, f.extra) : "").concat(f.b ? ecMug(f.b, 72) : "", "</div><figcaption>").concat(f.cap, "</figcaption></figure>");
+  const fotos = P.fotos || [], keep = fotos.filter((f) => !f.del), del = fotos.filter((f) => f.del);
+  const body = () => tab === "msg" ? '<div class="ph-chat">'.concat((P.chats || []).map((c) => '<div class="ph-who">'.concat(c.who, "</div>").concat(c.m.map(([me, tx, tm]) => '<div class="ph-m '.concat(me ? "me" : "", '">').concat(tx, "<small>").concat(tm || "", "</small></div>")).join(""))).join(""), "</div>") : tab === "zoek" ? '<div class="ph-list">'.concat((P.zoek || []).map(([dd2, q]) => '<div class="ph-q">🔍 <span>'.concat(q, "</span><small>").concat(dd2, "</small></div>")).join(""), "</div>") : '<div class="ph-grid">'.concat(keep.map(photo).join("")).concat(del.length ? '<div class="ph-del">🗑️ Map ‘Verwijderd’ ('.concat(del.length, " ").concat(del.length === 1 ? "foto" : "foto’s", ")</div>").concat(del.map(photo).join("")) : "", "</div>");
   const render2 = () => {
-    ov.innerHTML = '<div class="ec-ovc"><div class="ph-frame"><div class="ph-top"><span>21:47</span><b>Telefoon R. Kalverda</b><span>🔋</span></div><nav class="ph-tabs">'.concat([["msg", "Berichten"], ["zoek", "Zoekgeschiedenis"], ["foto", "Foto’s"]].map(([k, n]) => '<button type="button" data-pt="'.concat(k, '" aria-selected="').concat(tab === k, '">').concat(n, "</button>")).join(""), '</nav><div class="ph-body">').concat(body(), '</div></div><div class="controls"><button class="btn" type="button" id="phClose">Sluit</button></div></div>');
+    ov.innerHTML = '<div class="ec-ovc"><div class="ph-frame"><div class="ph-top"><span>21:47</span><b>'.concat(P.owner || d.t, '</b><span>🔋</span></div><nav class="ph-tabs">').concat([["msg", "Berichten"], ["zoek", "Zoekgeschiedenis"], ["foto", "Foto’s"]].map(([k, n]) => '<button type="button" data-pt="'.concat(k, '" aria-selected="').concat(tab === k, '">').concat(n, "</button>")).join(""), '</nav><div class="ph-body">').concat(body(), '</div></div><div class="controls"><button class="btn" type="button" id="phClose">Sluit</button></div></div>');
     ov.querySelectorAll("[data-pt]").forEach((b) => b.onclick = () => {
       tab = b.dataset.pt;
       render2();
@@ -17816,6 +17824,16 @@ function ecOpenPhone() {
   document.body.style.overflow = "hidden";
   render2();
 }
+ECASES.push(ECASE);
+const ECPV = (() => {
+  try {
+    return new URLSearchParams(location.search).get("echtvoorbeeld");
+  } catch (e) {
+    return null;
+  }
+})(), ECVIS = ECASES.filter((c) => !c.hidden || c.id === ECPV);
+ECASE = ECVIS.find((c) => c.id === ECPV) || ECVIS.find((c) => c.id === store.get("md-echt-cur")) || ECVIS[ECVIS.length - 1];
+if (ECPV && ECASE.id === ECPV && !window.MDKIOSK) game = "echt";
 function renderPanes() {
   const t = st.tab || "zaak";
   if (GHIDE.has(game)) {

@@ -1076,6 +1076,64 @@ body.kiosk-join .tv-jform .btn.primary{font-size:22px;padding:16px}
 .st-night svg{filter:brightness(.7) saturate(.75) hue-rotate(195deg)}.st-dark{position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none;z-index:4}
 #stBox{position:relative}
 @media (max-width:600px){.pb-top span{display:none}.pb-top b{flex:1;font-size:14px}}
+/* [ECHTE-ZAAK] */
+.ec-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-gap:4px;gap:4px;margin:12px 0 10px;position:sticky;top:0;z-index:3;background:var(--page);padding:4px 0}
+.ec-tabs button{border:2px solid var(--ink);background:var(--card);color:var(--ink);border-radius:10px;padding:8px 2px;font:700 13px/1.1 var(--cond);cursor:pointer;position:relative}
+.ec-tabs button[aria-selected=true]{background:var(--ink);color:var(--page)}
+.ec-dot{position:absolute;top:4px;right:6px;width:9px;height:9px;border-radius:50%;background:var(--red)}
+.ec-body{display:flex;flex-direction:column;grid-gap:10px;gap:10px}
+.ec-print{display:flex;flex-wrap:wrap;align-items:center;grid-gap:8px;gap:8px}.ec-print small{color:var(--muted);flex:1 1 200px}
+.ec-envbox{background:#c9a66b;border-radius:6px 14px 14px 14px;padding:10px;color:#2a2010;box-shadow:0 3px 0 #8a6d43}
+.ec-envbox h4{margin:0 0 8px;font:800 15px var(--cond);letter-spacing:.04em;text-transform:uppercase}
+.ec-envbox.locked{background:#b9ad98;box-shadow:0 3px 0 #857a68}.ec-envbox.locked .hint{color:#3a3226;margin:0}
+.ec-docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));grid-gap:6px;gap:6px}
+.ec-card{display:flex;align-items:center;grid-gap:8px;gap:8px;text-align:left;background:#fffdf3;color:#1c1f22;border:0;border-radius:6px;padding:8px;font:600 13.5px/1.2 var(--cond);cursor:pointer;box-shadow:0 1px 2px #0003;min-height:52px}
+.ec-card.seen{opacity:.72}.ec-card .ec-ic{font-size:22px}.ec-card svg{flex:none;border-radius:50%}
+.ec-ov{position:fixed;top:0;right:0;bottom:0;left:0;background:#000a;z-index:60;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:16px}
+.ec-ovc{width:100%;max-width:560px;margin:auto 0}
+.ec-doc{background:repeating-linear-gradient(#fffdf3 0 27px,#e3eaf1 27px 28px);color:#1c1f22;border-radius:4px;padding:16px 18px;box-shadow:0 6px 18px #0006;font-size:16px;line-height:1.5}
+.ec-doc p{margin:0 0 10px}.ec-doc b{color:#111}
+.ec-dh{display:flex;align-items:center;grid-gap:10px;gap:10px;border-bottom:2px solid #1c1f22;margin-bottom:10px;padding-bottom:6px}.ec-dh h4{flex:1;margin:0;font:800 18px/1.15 var(--cond)}
+.ec-env{flex:none;width:26px;height:26px;border-radius:50%;background:#c0392b;color:#fff;font:800 14px/26px var(--cond);text-align:center}
+.ec-mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;letter-spacing:.04em;color:#555!important}
+.ec-bon{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.45;background:#fff;border:1px dashed #999;padding:10px;max-width:270px;margin:0 auto 10px}
+.ec-note{font-size:14px;color:#444}.ec-img{width:100%;height:auto;border-radius:4px;margin-bottom:8px}
+.ec-tab{width:100%;border-collapse:collapse;font-size:15px}.ec-tab td{border-bottom:1px solid #c9ced4;padding:5px 4px;vertical-align:top}.ec-tab td:first-child{white-space:nowrap;font-weight:700;padding-right:10px}
+.ec-br{border:2px solid var(--ink);border-radius:12px;overflow:hidden;background:#fff;color:#1c1f22}
+.ec-bar{display:flex;grid-gap:6px;gap:6px;align-items:center;background:#e4e7ea;padding:6px}.ec-bar form{flex:1;min-width:0}
+.ec-bar input{width:100%;box-sizing:border-box;border:0;border-radius:18px;padding:8px 12px;font:15px ui-monospace,Menlo,monospace;background:#fff;color:#1c1f22}
+.ec-bb{border:0;background:#fff;color:#1c1f22;width:34px;height:34px;border-radius:50%;font-size:20px;line-height:1;cursor:pointer;flex:none}.ec-bb:disabled{opacity:.35}
+.ec-site{padding:14px;min-height:300px;font-size:15.5px;line-height:1.45}.ec-site p{margin:0 0 9px}.ec-site a{color:#1a56b0;text-decoration:underline;cursor:pointer}
+.ec-site h4{margin:4px 0 8px;font:800 21px/1.15 Georgia,serif}.ec-site small{color:#666}
+.ec-site figure{margin:10px 0;text-align:center}.ec-site figcaption{font-size:13px;color:#555}.ec-site figure svg{border-radius:8px;background:#dfe5ea}
+.ws-search{display:flex;flex-direction:column;grid-gap:10px;gap:10px}.ws-logo{font:800 30px Georgia,serif;text-align:center;color:#1a56b0;margin:8px 0}.ws-logo span{color:#c0392b}
+.ws-search form,.ws-ins form{display:flex;grid-gap:6px;gap:6px}.ws-search input,.ws-ins input{flex:1;min-width:0;border:2px solid #9aa3ad;border-radius:20px;padding:9px 12px;font-size:16px;background:#fff;color:#1c1f22}
+.ws-res{display:block;padding:8px 2px;border-bottom:1px solid #e1e4e8;text-decoration:none!important}.ws-res small{display:block;color:#2a7a3a!important;font-size:12.5px}.ws-res b{color:#1a56b0;font-size:17px}
+.ws-none{color:#666;font-size:14px}
+.ws-brand{font:900 22px Georgia,serif;border-bottom:3px double #1c1f22;margin-bottom:6px;letter-spacing:.02em}
+.ws-forum .ws-brand,.ws-biz h4{font-family:var(--cond)}.ws-post{border:1px solid #dde1e5;border-radius:8px;padding:10px;margin:8px 0;background:#fafbfc}
+.ws-cm{font-size:14px;background:#eef1f4;border-radius:8px;padding:6px 8px;margin-top:6px}
+.ws-prof{display:flex;grid-gap:10px;gap:10px;align-items:center;margin-bottom:6px}.ws-prof b{display:block;font-size:18px}.ws-prof svg{border-radius:50%;background:#dfe5ea}
+.ws-404{text-align:center;padding:30px 0}.ws-404 b{font:900 54px var(--cond);color:#c0392b}
+.ec-chat{border:2px solid var(--ink);border-radius:14px;overflow:hidden;background:#e9e3d8;display:flex;flex-direction:column}
+.ec-chead{display:flex;grid-gap:10px;gap:10px;align-items:center;background:#1c2a44;color:#fff;padding:8px 10px}.ec-chead b{display:block}.ec-chead small{opacity:.8}.ec-chead svg{border-radius:50%;background:#2c3c58}
+.ec-msgs{display:flex;flex-direction:column;grid-gap:6px;gap:6px;padding:10px;max-height:52vh;overflow:auto}
+.ec-m{max-width:84%;padding:8px 11px;border-radius:14px;font-size:15.5px;line-height:1.35;color:#1c1f22;animation:ecIn .25s ease-out}
+.ec-f{background:#fff;align-self:flex-start;border-bottom-left-radius:4px}.ec-m.ec-m{}.ec-chat .ec-m:not(.ec-f):not(.ec-n){background:#cfe9c4;align-self:flex-end;border-bottom-right-radius:4px}
+.ec-n{align-self:center;background:#f0b850;font-weight:700;font-size:13.5px;max-width:95%}
+@keyframes ecIn{from{opacity:0;transform:translateY(6px)}}
+.ec-opts{display:flex;flex-direction:column;grid-gap:6px;gap:6px;padding:10px;background:#d8d1c3}
+.ec-opt{border:2px solid #1c2a44;background:#fff;color:#1c2a44;border-radius:18px;padding:9px 12px;font:600 14.5px/1.25 var(--cond);text-align:left;cursor:pointer}.ec-tipb{align-self:flex-start;background:#f0b850;border-color:#f0b850}
+.ec-h{margin:8px 0 4px;font:800 15px var(--cond);text-transform:uppercase;letter-spacing:.05em}
+.ec-pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));grid-gap:6px;gap:6px}
+.ec-pk{display:flex;align-items:center;grid-gap:8px;gap:8px;border:2px solid var(--rule);background:var(--card);color:var(--ink);border-radius:12px;padding:8px;text-align:left;font:600 14px/1.2 var(--cond);cursor:pointer}
+.ec-pk small{display:block;color:var(--muted);font-weight:500}.ec-pk.on{border-color:var(--red);box-shadow:0 0 0 2px var(--red) inset}.ec-pk svg{flex:none;border-radius:50%;background:#dfe5ea}
+.ec-res{font-weight:700;color:var(--red);min-height:1em}
+.ec-won{background:var(--card);border:2px solid var(--ok);border-radius:14px;padding:14px}.ec-won h4{font:800 22px var(--cond);margin:4px 0 8px}
+#ecPrint{display:none}
+@media print{body.ec-printing>*:not(#ecPrint){display:none!important}body.ec-printing{background:#fff!important}body.ec-printing #ecPrint{display:block!important}#ecPrint,#ecPrint *{color:#111!important}#ecPrint .ec-env{color:#fff!important}
+ .ep-page{page-break-after:always;break-after:page;padding:0 4mm}.ep-page .ec-doc{font-size:14pt}.ep-page .ec-dh h4{font-size:18pt}.ep-page .ec-doc{box-shadow:none;background:#fff;border:1px solid #999}
+ .ep-cover h1,.ep-env h1{font:800 32px Georgia,serif;margin-top:30mm}.ep-env{text-align:center}.ep-env h1{margin-top:80mm;border:4px double #000;padding:10mm}}
 </style>
 </head>
 <body>
@@ -1106,6 +1164,7 @@ body.kiosk-join .tv-jform .btn.primary{font-size:22px;padding:16px}
     <button role="tab" type="button" data-g="brieven"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-6 9 6v11H3z" fill="currentColor"/><path d="M3 9l9 6 9-6" fill="none" stroke="var(--card)" stroke-width="1.6"/><path d="M8 18h8" stroke="var(--card)" stroke-width="1.6"/></svg>Brievenreeks</b><span>Brieven, puzzels en een chat</span></button>
     <button role="tab" type="button" data-g="stad"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5l6-2 6 2 6-2v16l-6 2-6-2-6 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 3v16M15 5v16" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="9" r="2.2" fill="currentColor"/></svg>Stadsplattegrond</b><span>Zoek het in de drukke stad</span></button>
     <button role="tab" type="button" data-g="tv"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="13" rx="2" fill="currentColor"/><rect x="4" y="7" width="16" height="9" rx="1" fill="var(--card)"/><path d="M8 21h8M12 18v3M8 2l4 3 4-3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M11 9.5v4l3.4-2z" fill="currentColor"/></svg>Tv-dossier</b><span>Samen op de tv, met QR-codes</span></button>
+    <button role="tab" type="button" data-g="echt"><b><svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6h7l2 2h11v12H2z" fill="currentColor"/><circle cx="13" cy="13.5" r="3.6" fill="none" stroke="var(--card)" stroke-width="1.8"/><path d="M15.6 16.1l2.6 2.6" stroke="var(--card)" stroke-width="2" stroke-linecap="round"/></svg>Echte zaak</b><span>Dossier, internet en een rechercheur</span></button>
   </div>
   <div class="stats" id="stats"></div>
 
@@ -1177,6 +1236,7 @@ body.kiosk-join .tv-jform .btn.primary{font-size:22px;padding:16px}
   <section class="pane" id="pTijdlijn" hidden></section>
   <section class="pane" id="pStad" hidden></section>
   <section class="pane" id="pTv" hidden></section>
+  <section class="pane" id="pEcht" hidden></section>
   <section class="pane" id="pUitleg" hidden></section>
   <section class="pane" id="pPas" hidden></section>
 
@@ -6105,7 +6165,7 @@ const TSKIN = ["#f3cba8", "#ebba94", "#dca47c", "#c88a62", "#a8704b", "#7d5236"]
 const THC = ["#2a1d15", "#4a2f1c", "#6b4527", "#a0703a", "#d6b25e", "#a3a39c", "#b5502c", "#1f1a17"];
 const TTOP = ["#4f6475", "#7a3b32", "#3f5a45", "#4a4f6b", "#8a6a3a", "#5f6468", "#2f3a4a", "#6b3f5c", "#8a4f2a"];
 const TLEG = ["#2b2f36", "#3a3a3c", "#45403a", "#26303d", "#4b4237"];
-const TFEM = new Set("hester nienke christa dorette herma inge geertje klaartje froukje aukje mieke corrie hiske karlijn ida afke sjoukje marrit antje klaske dieuwke renske grietje minke annerieke elsbeth dorien neeltje yfke annemijn ariane baukje clementia leonoor josefien jantje eva-lotte linde mientje marlou rosanne selma hedwig quinty gijsje lidewij rowena dirkje annelot jozefien floortje odilia wilmijn nynke djoeke evelien margreet femke-lot vera jildou hinke lize dineke mirabella wendolien silke mariska aleida fenneke mirte jorien hennie saartje agnes truida yvette quirine kirsten liselot annegien marijke imke leonie isaura wieteke rosalie ottelien dorine celine tessel marga henriëtte ylva margje annabel gonda fabienne riet lucienne mirella hanneke selina wendela nadine petronella jitske desirée desiree elodie rinske femmy brecht liesje ingeborg annemoon rixt celeste lotus jolanda ankie sabine adelheid bertha mirthe dewi noortje robin hendrika marlies cornelia tjitske fleur willemijn romy ottilie noa hilde zara juul gonnie saar fien isabella rosalind trui clementine fenna lieke merel femke esmee noor yara camille greta hanna lies marie margaretha lola jikke sterre isolde hendrikje annie liesbeth mevrouw juffrouw barones tante oma zuster moeder dochter zus weduwe mevr anouk ria lotte samira sanne mila lisa eva sophie anneke wilma agatha wilhelmina charlotte ilse esra ingrid marieke femke anna emma julia sara fleur iris noor tess linda petra ellen karin monique yvonne joke truus greet mien els annet margriet hanna saskia nadia fatima yara lieke jet roos kim naomi vera isa nina lena amira julia marloes ilona sylvia gerda bep dora fenna hilde jolien lieve maud nienke romy sanna tamara ymke zoë zoe evi demi sharon anja astrid carla dewi esther floor gwen hester ines jasmijn kiki liza mirjam nora olga pien rosa selma trees ursula veerle wendy aaltje aafke birgit cato daphne elise frida gea heleen joyce kaat loes maaike nelleke odette patricia rianne silvia tineke willemijn yasmin hannelore yolanthe philippa albertine gerdien rozemarijn wanda ietje mareike philomena quirien femmie trijntje annabella godelieve constance jolein geesje coosje".split(" "));
+const TFEM = new Set("lieneke tamar marlous annick floor hester nienke christa dorette herma inge geertje klaartje froukje aukje mieke corrie hiske karlijn ida afke sjoukje marrit antje klaske dieuwke renske grietje minke annerieke elsbeth dorien neeltje yfke annemijn ariane baukje clementia leonoor josefien jantje eva-lotte linde mientje marlou rosanne selma hedwig quinty gijsje lidewij rowena dirkje annelot jozefien floortje odilia wilmijn nynke djoeke evelien margreet femke-lot vera jildou hinke lize dineke mirabella wendolien silke mariska aleida fenneke mirte jorien hennie saartje agnes truida yvette quirine kirsten liselot annegien marijke imke leonie isaura wieteke rosalie ottelien dorine celine tessel marga henriëtte ylva margje annabel gonda fabienne riet lucienne mirella hanneke selina wendela nadine petronella jitske desirée desiree elodie rinske femmy brecht liesje ingeborg annemoon rixt celeste lotus jolanda ankie sabine adelheid bertha mirthe dewi noortje robin hendrika marlies cornelia tjitske fleur willemijn romy ottilie noa hilde zara juul gonnie saar fien isabella rosalind trui clementine fenna lieke merel femke esmee noor yara camille greta hanna lies marie margaretha lola jikke sterre isolde hendrikje annie liesbeth mevrouw juffrouw barones tante oma zuster moeder dochter zus weduwe mevr anouk ria lotte samira sanne mila lisa eva sophie anneke wilma agatha wilhelmina charlotte ilse esra ingrid marieke femke anna emma julia sara fleur iris noor tess linda petra ellen karin monique yvonne joke truus greet mien els annet margriet hanna saskia nadia fatima yara lieke jet roos kim naomi vera isa nina lena amira julia marloes ilona sylvia gerda bep dora fenna hilde jolien lieve maud nienke romy sanna tamara ymke zoë zoe evi demi sharon anja astrid carla dewi esther floor gwen hester ines jasmijn kiki liza mirjam nora olga pien rosa selma trees ursula veerle wendy aaltje aafke birgit cato daphne elise frida gea heleen joyce kaat loes maaike nelleke odette patricia rianne silvia tineke willemijn yasmin hannelore yolanthe philippa albertine gerdien rozemarijn wanda ietje mareike philomena quirien femmie trijntje annabella godelieve constance jolein geesje coosje".split(" "));
 const TTITLE = {
   Baron: { hat: "top", mono: 1, f: 0, hair: "short" },
   Mevrouw: { f: 1, hair: "bun", pearls: 1 },
@@ -6886,6 +6946,7 @@ function fmAct(fx, u) {
     const club = fx.club ? fmClub(tx - 22 * dir + 24 * s, ty - 62 * s, u < 1.5 ? -30 : u < 2.1 ? -30 + FM.seg(u, 1.5, 2.1) * 110 : 80) : "";
     return { svg: fmFig(tx - 24 * dir + push * 8 * dir, ty, s, 0, 1, ACTWHO) + club + fmFig(vx, vy, s, rot), bx, by: by - 8, ax: tx - 24 * dir, ay: ty - 108 * s, ix: tx, iy: ty - 70 * s };
   }
+  if (a === "drown" && fx.tub) return fmTubAct(fx, u);
   if (a === "drown") {
     const x = fx.x || 150, y = fx.y || 150, push = FM.ease(FM.seg(u, 1.2, 2.2)), sink = FM.seg(u, 2.2, 3.6);
     let bub = "";
@@ -7001,6 +7062,63 @@ const fmDof = (Z, inner) => {
   return v < 0.15 ? inner : '<filter id="fmDof" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="'.concat(v.toFixed(2), '"/></filter><g filter="url(#fmDof)">').concat(inner, "</g>");
 };
 const fmMood = (k, mood) => Object.assign({}, lookOf(k), { mood });
+function fmTub(fx, p, o) {
+  o = o || {};
+  const s = fx.s || 0.62, sv = s * 0.95, bx = fx.x || 160, g = fx.g || 180, BL = 128 * s, BD = 52 * s, rimY = g - 6 * s - BD, wy = rimY - 12 * s, xl = bx - BL / 2, xr = bx + BL / 2, L = 132 * sv, th = (45 + 80 * p) * Math.PI / 180, Cx = bx + 4 * s - 8 * s * p, Cy = rimY + 7 + 2 * s * p, sn = Math.sin(th), cs = Math.cos(th), dA = L / 2 - 8 * sv, dH = 112 * sv - L / 2, ank = [Cx - dA * sn, Cy + dA * cs], head = [Cx + dH * sn, Cy - dH * cs], u = o.u || 0, AX = xl - 7 * s;
+  let tiles = "";
+  for (let x = -20; x < 320; x += 14) tiles += '<path d="M'.concat(x, " ").concat(g - 100, "V").concat(g, '" stroke="#9fb3bb" stroke-width=".6" opacity=".55"/>');
+  for (let y = g - 100; y < g; y += 14) tiles += '<path d="M-20 '.concat(y, 'H320" stroke="#9fb3bb" stroke-width=".6" opacity=".55"/>');
+  let floor = "";
+  for (let i = 0; i < 24; i++) for (let j = 0; j < 3; j++) if ((i + j) % 2) floor += '<rect x="'.concat(-20 + i * 14, '" y="').concat(g + j * 9, '" width="14" height="9" fill="#55606a" opacity=".55"/>');
+  const back = '<rect x="-20" y="'.concat(g - 100, '" width="340" height="100" fill="#dfe9ec"/><rect x="-20" y="').concat(g - 100, '" width="340" height="100" fill="url(#fmRay)" opacity=".0"/>').concat(tiles, '<rect x="-20" y="').concat(g, '" width="340" height="30" fill="#8a949c"/>').concat(floor) + '<rect x="'.concat(xr + 18 * s, '" y="').concat(g - 74 * s, '" width="').concat(26 * s, '" height="2" fill="#888"/><path d="M').concat(xr + 20 * s, " ").concat(g - 73 * s, "h").concat(22 * s, "v").concat(30 * s, "h-").concat(22 * s, 'z" fill="#c0392b" opacity=".85"/><path d="M').concat(xr + 20 * s, " ").concat(g - 73 * s, "h").concat(22 * s, '" stroke="#7a2318" stroke-width="2"/>') + '<path d="M'.concat(xl, " ").concat(wy, "H").concat(xr, "V").concat(rimY + BD - 6 * s, "Q").concat(xr, " ").concat(rimY + BD, " ").concat(xr - 8 * s, " ").concat(rimY + BD, "H").concat(xl + 8 * s, "Q").concat(xl, " ").concat(rimY + BD, " ").concat(xl, " ").concat(rimY + BD - 6 * s, 'Z" fill="#b9c6cc"/>');
+  const vic = '<clipPath id="fmTubC"><rect x="-20" y="-60" width="340" height="'.concat((rimY + BD - 3 + 60).toFixed(1), '"/></clipPath><g clip-path="url(#fmTubC)"><g transform="translate(').concat(Cx.toFixed(2), " ").concat(Cy.toFixed(2), ") rotate(").concat((th * 180 / Math.PI).toFixed(2), ") translate(0 ").concat((L / 2).toFixed(2), ") scale(").concat(sv, ')">').concat(fmSil(o.vlk || ACTVIC), "</g></g>");
+  const wave = Math.sin(u * 3) * 0.8;
+  let wpath = "M".concat(xl, " ").concat(wy + wave);
+  for (let x = xl; x <= xr; x += 6) wpath += "L".concat(x.toFixed(1), " ").concat((wy + Math.sin(x * 0.25 + u * 4) * 0.7 * (o.calm ? 0.4 : 1) + wave * 0.3).toFixed(2));
+  const water = '<path d="'.concat(wpath, "L").concat(xr, " ").concat(rimY + 2, "H").concat(xl, 'Z" fill="#5fa8c8" opacity=".86"/><path d="').concat(wpath, '" stroke="#e8f6fb" stroke-width="1.1" fill="none" opacity=".85"/>');
+  const panel = '<path d="M'.concat(xl - 3 * s, " ").concat(rimY, "H").concat(xr + 3 * s, "V").concat(rimY + BD - 8 * s, "Q").concat(xr + 3 * s, " ").concat(rimY + BD, " ").concat(xr - 9 * s, " ").concat(rimY + BD, "H").concat(xl + 9 * s, "Q").concat(xl - 3 * s, " ").concat(rimY + BD, " ").concat(xl - 3 * s, " ").concat(rimY + BD - 8 * s, 'Z" fill="#f7f8f6" stroke="#6b7378" stroke-width="1.6"/><path d="M').concat(xl + 6 * s, " ").concat(rimY + 5 * s, "Q").concat(bx, " ").concat(rimY + 9 * s, " ").concat(xr - 6 * s, " ").concat(rimY + 5 * s, '" stroke="#fff" stroke-width="2" opacity=".9" fill="none"/><rect x="').concat(xl - 5 * s, '" y="').concat(rimY - 2.5 * s, '" width="').concat(BL + 10 * s, '" height="').concat(4.5 * s, '" rx="2" fill="#e9ecea" stroke="#6b7378" stroke-width="1.2"/><circle cx="').concat(xl + 10 * s, '" cy="').concat(g - 3 * s, '" r="').concat(4 * s, '" fill="#7a6a3a"/><circle cx="').concat(xr - 10 * s, '" cy="').concat(g - 3 * s, '" r="').concat(4 * s, '" fill="#7a6a3a"/>');
+  return { back, vic, water, panel, head, ank, AX, g, s, wy, rimY, xl, xr, bx };
+}
+function fmTubAct(fx, u) {
+  const E = FM.ease, lerp = (a, b, t) => a + (b - a) * t, HT = 2.2;
+  let p = u < 1.6 ? 0 : u < HT ? 0.45 * Math.pow(FM.seg(u, 1.6, HT), 1.8) : u < 2.8 ? 0.45 + 0.55 * E(FM.seg(u, HT, 2.8)) : u < 4.4 ? 1 : 1 - 0.25 * E(FM.seg(u, 4.4, 5.2));
+  const T = fmTub(fx, p, { u, calm: u > 4.5 }), s = T.s, reach = E(FM.seg(u, 1, 1.6)) * (1 - E(FM.seg(u, 4.4, 5))), back = E(FM.seg(u, 4.7, 5.6));
+  const ax = T.AX - back * 10 * s, rot = 8 * reach + 6 * Math.min(p, 1) * (u < 4.4 ? 1 : 1 - back);
+  const tgt = (dx) => [(T.ank[0] - ax) / s + dx, (T.ank[1] - T.g) / s];
+  const r0 = [29, -53], l0 = [-29, -53], t1 = tgt(2), t2 = tgt(-4), hand = [lerp(r0[0], t1[0], reach), lerp(r0[1], t1[1], reach)], hand2 = [lerp(l0[0], t2[0], reach), lerp(l0[1], t2[1], reach)];
+  const am = Object.assign({}, ACTWHO, { hand, hand2 });
+  let fxs = "";
+  const hx = T.head[0];
+  if (u > HT - 0.05 && u < HT + 1.3) {
+    const t = u - HT;
+    for (let i = 0; i < 18; i++) {
+      const vx = (FM.rnd(i) * 2 - 1) * 46, vy = -40 - FM.rnd(i + 9) * 70, x = hx - 6 + vx * t, y = T.wy + vy * t + 150 * t * t;
+      if (y < T.g + 4) fxs += '<circle cx="'.concat(x.toFixed(1), '" cy="').concat(y.toFixed(1), '" r="').concat((1 + FM.rnd(i + 3) * 1.6).toFixed(2), '" fill="#d7eef7" opacity="').concat((1 - t / 1.3).toFixed(2), '"/>');
+    }
+    for (let k = 0; k < 2; k++) {
+      const tt = t - k * 0.25;
+      if (tt > 0) fxs += '<ellipse cx="'.concat(hx - 4, '" cy="').concat(T.wy + 1, '" rx="').concat((4 + tt * 30).toFixed(1), '" ry="').concat((1 + tt * 3).toFixed(1), '" fill="none" stroke="#fff" stroke-width="1" opacity="').concat(Math.max(0, 0.9 - tt * 0.8).toFixed(2), '"/>');
+    }
+  }
+  if (u > HT + 0.1 && u < HT + 1.8) {
+    const t = u - HT - 0.1;
+    for (let i = 0; i < 3; i++) {
+      const y = T.rimY + t * 22 + i * 4;
+      if (y < T.g - 2) fxs += '<path d="M'.concat(T.xr - 10 * s - i * 14, " ").concat(T.rimY, "V").concat(y.toFixed(1), '" stroke="#8cc6dd" stroke-width="1.4" opacity="').concat((1 - t / 1.8).toFixed(2), '"/>');
+    }
+  }
+  if (u > HT + 0.2 && u < HT + 3.4) {
+    for (let i = 0; i < 8; i++) {
+      const t = u - HT - 0.2 - i * 0.33;
+      if (t > 0 && t < 0.9) {
+        const y = T.rimY - t * (T.rimY - T.wy) / 0.9;
+        fxs += '<circle cx="'.concat((hx - 8 + FM.rnd(i) * 10).toFixed(1), '" cy="').concat(y.toFixed(1), '" r="').concat((1 + FM.rnd(i + 4)).toFixed(2), '" fill="none" stroke="#fff" stroke-width=".8" opacity="').concat((1 - t / 0.9).toFixed(2), '"/>');
+      }
+    }
+  }
+  const svg = T.back + T.vic + T.water + T.panel + fmFig(ax, T.g, s, rot, 1, am) + fxs;
+  return { svg, bx: hx, by: T.wy, ax, ay: T.g - 108 * s, ix: hx, iy: T.wy };
+}
 function fmPre(sc, u, PL, WK) {
   const [, chap, spec, txt, fx] = sc, act = fx.act, s = fx.s || 0.6, E = FM.ease, lerp = (a, b, p) => a + (b - a) * p;
   let A, V, dir = 1, wp = null, vlk = ACTVIC;
@@ -7016,6 +7134,10 @@ function fmPre(sc, u, PL, WK) {
     A = [tx - 24 * dir, ty];
     V = [tx, ty];
     if (fx.club) wp = [tx - 24 * dir - 22, ty - 3, 84];
+  } else if (act === "drown" && fx.tub) {
+    var TB = fmTub(fx, 0, { u });
+    A = [TB.AX, TB.g];
+    V = [TB.bx, TB.g];
   } else if (act === "drown") {
     const x = fx.x || 150, y = fx.y || 150;
     A = [x + 52, y + 20];
@@ -7031,7 +7153,7 @@ function fmPre(sc, u, PL, WK) {
   const IN = 1.3, per = poison ? 1.6 : 1.05, TL = IN + L.length * per, GRAB = Math.min(PL - 0.25, TL + 0.45);
   const walk = E(FM.clamp(u / IN)), side = A[0] > (V ? V[0] : 150) ? 1 : -1, ax = lerp(A[0] + side * 120, A[0], walk), bob = u < IN ? Math.abs(Math.sin(u * 9)) * 2.2 : 0;
   const li = u < IN ? -1 : Math.min(L.length - 1, Math.floor((u - IN) / per)), cur = li >= 0 && u < TL ? L[li] : null;
-  const head = (w) => w === "v" && V ? act === "drown" ? [V[0] + 112 * s, V[1] - 4] : [V[0], V[1] - 112 * s] : [ax, A[1] - 112 * s];
+  const head = (w) => w === "v" && V ? typeof TB !== "undefined" && TB ? [TB.head[0], TB.head[1] + 4] : act === "drown" ? [V[0] + 112 * s, V[1] - 4] : [V[0], V[1] - 112 * s] : [ax, A[1] - 112 * s];
   let Z = 1.04, cx = 150, cy = 100;
   if (u >= IN && u < TL && cur) {
     const h = head(cur[0]);
@@ -7068,7 +7190,10 @@ function fmPre(sc, u, PL, WK) {
     }
   }
   const vm = fmMood(ACTVIC, u >= TL ? "nervous" : cur && cur[0] === "v" ? "angry" : ""), am = fmMood(ACTWHO, cur && cur[0] === "a" || u >= TL ? "angry" : "");
-  const world = fmDof(Z, drawScene(spec)) + (V ? act === "drown" ? FM.G(V[0], V[1] - 4, s, '<g transform="rotate(90)">'.concat(fmSil(vm), "</g>")) + '<rect x="'.concat(V[0] - 66, '" y="').concat(V[1] - 2, '" width="132" height="8" fill="#6f7a80" opacity=".55"/>') : fmFig(V[0], V[1], s * 0.96, 0, 1, vm) : "") + fmFig(ax, A[1] - bob, s, 0, 1, am) + weapon + extra + (fx.rain ? FM.rain(u) : "");
+  const world = fmDof(Z, drawScene(spec)) + (typeof TB !== "undefined" && TB ? (() => {
+    const T2 = fmTub(fx, 0, { u, vlk: vm, calm: 1 });
+    return T2.back + T2.vic + T2.water + T2.panel;
+  })() : V ? act === "drown" ? FM.G(V[0], V[1] - 4, s, '<g transform="rotate(90)">'.concat(fmSil(vm), "</g>")) + '<rect x="'.concat(V[0] - 66, '" y="').concat(V[1] - 2, '" width="132" height="8" fill="#6f7a80" opacity=".55"/>') : fmFig(V[0], V[1], s * 0.96, 0, 1, vm) : "") + fmFig(ax, A[1] - bob, s, 0, 1, am) + weapon + extra + (fx.rain ? FM.rain(u) : "");
   let bub = "";
   if (cur) {
     const h = head(cur[0]), bx = (h[0] - cx) * Z + 150, by = (h[1] - cy) * Z + 100 - 30, t = cur[1], w = Math.min(180, 24 + Math.min(32, t.length) * 4.4), lines = (() => {
@@ -7121,7 +7246,7 @@ function fmCine(sc, XW, XV, XR, WK) {
     cy = FM.clamp(cy, hh, 200 - hh);
     const ip = FM.seg(uu, HT, HT + 0.55), shk = uu > HT && uu < HT + 0.55 ? (1 - ip) * 5 : 0, sx = Math.sin(u * 97) * shk, sy = Math.cos(u * 83) * shk;
     let fxs = "";
-    const spark = WS !== "schiet" && WS !== "steek" && WS !== "breek";
+    const spark = WS !== "schiet" && WS !== "steek" && WS !== "breek" && !fx.tub;
     if (WS === "schiet" && A.mz) {
       const [mx0, my0] = A.mz, R2 = A.ang * Math.PI / 180, ux = Math.sin(R2), uy = -Math.cos(R2);
       if (uu > HT - 0.02 && uu < HT + 0.14) {
@@ -17185,6 +17310,15 @@ const HELP = [
     extra: () => "".concat(TVCASES.length, " ").concat(TVCASES.length === 1 ? "zaak" : "zaken", ", elk 60 tot 90 minuten.")
   },
   {
+    g: "echt",
+    name: "Echte zaak",
+    insp: "Moordonderzoek gebaseerd op een echte zaak · met papieren dossier, nepwebsites en een rechercheur in de chat",
+    what: "Een moordzaak die gebaseerd is op een echte zaak. Namen, plaatsen en tijden zijn veranderd. Je leest het dossier (ook om te printen), zoekt zelf op internet in de app en overlegt met inspecteur Floor Nijdam via de chat. Zij stuurt nieuwe enveloppen als je verder komt.",
+    steps: ["Open <b>Dossier</b> en lees envelop A. Met <b>Print het dossier</b> krijg je het op papier of als pdf.", "Ga naar <b>Rechercheur</b> en beantwoord de vragen van Floor. Bij een goed antwoord krijg je nieuwe stukken.", "Zoek bij <b>Internet</b> naar namen, plaatsen en adressen uit het dossier.", "Weet je het? Ga naar <b>Oplossen</b>: wie, waarom en welk bewijs."],
+    tips: ["Leg de tijden uit de verklaringen naast elkaar.", "Vergelijk gezichten op foto’s op internet met de mensen uit het dossier.", "Kom je vast te zitten? Tik in de chat op Tip."],
+    extra: () => "1 zaak, ongeveer 60 tot 90 minuten."
+  },
+  {
     g: "tijdlijn",
     name: "De Tijdlijn",
     insp: "Tijdlijnpuzzel · eigen spel: reken de tijden uit en vind wie de gelegenheid had",
@@ -17229,6 +17363,315 @@ function setTab(t) {
   renderPanes();
   window.scrollTo({ top: 0 });
 }
+const ECLOOK = {
+  riemer: { skin: "#e2b596", hc: "#3a2a1c", hair: "short", eyes: "#3f7a3a", top: "shirt", tc: "#5a2a2a", age: 38, jaw: 5 },
+  lieneke: { f: 1, skin: "#f0cdb4", hc: "#b0703a", hair: "long", eyes: "#4a6a8a", top: "blouse", tc: "#3a6a6a", age: 33 },
+  tamar: { f: 1, skin: "#efc6ac", hc: "#5a3a22", hair: "bob", eyes: "#4a5a3a", top: "blouse", tc: "#6a3a5a", age: 37, earring: 1 },
+  thorwald: { skin: "#e6b89a", hc: "#a8a49c", hair: "receding", eyes: "#5a6a7a", top: "vest", tc: "#3a4a3a", age: 61, beard: "full", jaw: 6 },
+  wilco: { skin: "#c58c64", hc: "#1f1712", hair: "curly", eyes: "#3a2a1a", top: "shirt", tc: "#2a4a8a", age: 35, beard: "stubble" },
+  floor: { f: 1, skin: "#d8a47e", hc: "#2a1c14", hair: "bun", eyes: "#3a2a1a", top: "blouse", tc: "#1c2a44", age: 44 }
+};
+const ecMug = (k, w = 64, extra) => TF(__spreadProps(__spreadValues(__spreadValues({}, ECLOOK[k]), extra || {}), { alt: "" })).replace('class="rf tf"', 'class="rf ec-mug" width="'.concat(w, '"'));
+const ECASE = {
+  id: "bruid",
+  title: "De bruid in het bad",
+  based: "Gebaseerd op een echte zaak uit Engeland (1912 tot 1914). Namen, plaatsen en tijden zijn veranderd.",
+  intro: "Dinsdagavond 6 oktober 2026. In Dijkmonde wordt Lieneke Wagemaker (33) dood gevonden in haar bad. Ze was negen weken getrouwd. De arts denkt aan een ongeluk: flauwgevallen. Haar zus Tamar gelooft daar niks van. Inspecteur Floor Nijdam vraagt jou om mee te kijken.",
+  env: { A: "Envelop A · De avond zelf", B: "Envelop B · Sectie en verklaringen", C: "Envelop C · Het oude dossier" },
+  docs: [
+    { id: "pv", env: "A", t: "Proces-verbaal van de melding", h: '<p class="ec-mono">POLITIE · DIJKMONDE · PV 2026-10-06-117</p><p><b>Dinsdag 6 oktober 2026, 20:09 uur.</b> Melder: <b>Riemer Kalverda</b> (38), Lindelaan 14-2, Dijkmonde.</p><p>Melding: “Mijn vrouw ligt onder water in het bad. Ze ademt niet.”</p><p>20:16 ambulance ter plaatse. <b>Lieneke Wagemaker</b> (33) om 20:31 overleden verklaard.</p><p>Geen braaksporen. De voordeur zat op slot. De echtgenoot is erg overstuur. De dienstdoende arts denkt aan een ongeluk: flauwgevallen in bad.</p>' },
+    { id: "riemer", env: "A", t: "Verklaring Riemer Kalverda (echtgenoot)", face: "riemer", h: "<p>“Lieneke had hoofdpijn. Ik zei: neem een warm bad. Ze liet het bad vollopen.</p><p><b>Om 19:40 ben ik de deur uit gegaan</b> om eieren en tomaten te halen. Toen ging ze net in bad. De bakker was dicht, dus ik heb nog wat rondgelopen en ben naar de supermarkt gegaan.</p><p>Om 20:06 was ik terug. Ze lag onder water. Ik heb haar eruit getrokken en 112 gebeld.</p><p>Ze viel de laatste tijd vaker flauw. Daar ben ik nog met haar voor naar de dokter geweest.”</p>" },
+    { id: "buur", env: "A", t: "Verklaring buurvrouw van beneden (14-1)", h: "<p>“Om ongeveer half acht hoorde ik boven het bad vollopen. De leidingen zijn oud, je hoort alles.</p><p>Mijn serie begint om 19:45. <b>Een paar minuten later, rond 19:48, hoorde ik één keer hard gespetter</b>, alsof er in één keer veel water bewoog. Daarna was het stil. Geen geschreeuw, geen gestommel.</p><p>Ik dacht er niet over na. Pas toen de ambulance kwam, schrok ik.”</p>" },
+    { id: "bon", env: "A", t: "Kassabon (in de jaszak van Riemer)", h: '<div class="ec-bon"><b>SUPERMARKT DORPSPLEIN</b><br>Dijkmonde<br>--------------------------<br>6 EIEREN ........... 2,19<br>TOMATEN 500G ....... 1,49<br>--------------------------<br>TOTAAL ............. 3,68<br>PIN<br><br>DI 06-10-2026 &nbsp; <b>19:58</b><br>KASSA 2</div><p class="ec-note">Notitie politie: lopen van Lindelaan 14 naar de supermarkt duurt 4 minuten.</p>' },
+    { id: "bad", env: "A", t: "Fotoverslag badkamer", h: '<svg viewBox="0 0 300 150" class="ec-img" role="img" aria-label="Schets van de badkuip met maten"><rect x="0" y="0" width="300" height="150" fill="#e9eef0"/><rect x="40" y="40" width="220" height="70" rx="30" fill="#fff" stroke="#556" stroke-width="3"/><rect x="52" y="50" width="196" height="50" rx="22" fill="#bcd9e6"/><path d="M52 122h196" stroke="#c0392b" stroke-width="2"/><path d="M52 116v12M248 116v12" stroke="#c0392b" stroke-width="2"/><text x="150" y="140" text-anchor="middle" font-size="13" fill="#c0392b" font-family="sans-serif">binnenkant 1,52 m</text><circle cx="232" cy="75" r="5" fill="#889"/></svg><p>Badkuip: <b>binnenkant 1,52 meter</b> lang. Vol tot 5 cm onder de rand.</p><p>Op de vloer veel water en twee natte handdoeken. Geen bloed, geen kapotte spullen.</p><p>Lieneke was <b>1,74 meter</b> lang.</p>' },
+    { id: "brief", env: "A", t: "Brief van de verzekeraar (keukenla)", h: '<p class="ec-mono">VEILIGVERZEKERD · Postbus 400 · Utrecht</p><p>Geachte mevrouw Wagemaker,</p><p>Hierbij ontvangt u uw nieuwe overlijdensrisicoverzekering.</p><p>Polisnummer: <b>VV-26-48817</b><br>Ingangsdatum: 1 september 2026</p><p>U kunt uw polis altijd bekijken op <b>veiligverzekerd-polis.nl</b>.</p><p>Met vriendelijke groet,<br>Afdeling Polissen</p>' },
+    { id: "arts", env: "A", t: "Aantekening huisarts", h: '<p class="ec-mono">HUISARTSENPRAKTIJK DIJKMONDE · 22-09-2026</p><p>Mevrouw L. Wagemaker komt <b>samen met haar man</b>. Haar man vertelt dat ze vaak flauwvalt.</p><p>Mevrouw zelf zegt dat ze zich goed voelt en nooit iets merkt.</p><p>Onderzoek: bloeddruk goed, hart goed, geen afwijkingen.</p><p>Advies: terugkomen als het vaker gebeurt.</p>' },
+    { id: "tel", env: "A", t: "Telefoon van Lieneke", h: '<table class="ec-tab"><tr><td>19:05 – 19:11</td><td>Gesprek met Tamar (zus)</td></tr><tr><td>19:36</td><td>App aan Tamar: “Ga zo in bad. Riemer doet raar lief vandaag 😅”</td></tr><tr><td>20:09</td><td>Riemer belt met zijn eigen telefoon 112</td></tr></table>' },
+    { id: "trouw", env: "A", t: "Gegevens huwelijk", h: "<p>Getrouwd op <b>8 augustus 2026</b> in Dijkmonde.</p><p>Ze kenden elkaar vier maanden. Riemer kwam in juli in Dijkmonde wonen.</p><p>Eerdere woonplaatsen: onbekend. Volgens Riemer “reisde hij veel voor zijn werk als kunsthandelaar”.</p>" },
+    { id: "sectie", env: "B", t: "Sectierapport", h: '<p class="ec-mono">NEDERLANDS FORENSISCH INSTITUUT · SECTIE 26-1188</p><p>Doodsoorzaak: <b>verdrinking</b>.</p><p>Geen alcohol, geen medicijnen, geen gif. Hart en hersenen gezond: <b>geen aanwijzing voor flauwvallen of epilepsie</b>.</p><p>Geen wonden aan hoofd of armen. Wel <b>twee kleine, verse drukplekken net boven beide enkels</b>.</p><p>Tijdstip van overlijden: tussen 19:40 en 20:00.</p>' },
+    { id: "thorwald", env: "B", t: "Verklaring Thorwald Kooijman (huisbaas)", face: "thorwald", h: "<p>“Ik verhuur het pand. Elke eerste dinsdag van de maand doe ik onderhoud aan de ketel in de kelder. Ik was daar van half acht tot kwart over acht.</p><p><b>Om 19:52 kwam Riemer de trap af.</b> Zijn mouwen waren opgerold en <b>zijn armen waren nat tot de ellebogen</b>. Hij zei niks en liep snel naar buiten.</p><p>Ik heb een reservesleutel van alle woningen, maar die hangt in mijn kantoor aan de Kerkstraat.”</p>" },
+    { id: "tamar", env: "B", t: "Verklaring Tamar Wagemaker (zus)", face: "tamar", h: "<p>“Lieneke was kerngezond. Ze viel nooit flauw.</p><p>Ik vond Riemer vreemd. Hij wilde nooit op de foto en vertelde niks over vroeger.</p><p>Om 19:05 belde ik haar, ze klonk vrolijk. Daarna ging ik naar de <b>koorrepetitie, van half acht tot half tien</b>.</p><p>Ja, we hadden ruzie gehad over het huis van onze moeder. Maar dat was al lang opgelost.”</p>" },
+    { id: "wilco", env: "B", t: "Verklaring Wilco Achterhof (ex-vriend)", face: "wilco", h: '<p>“Ik was boos dat ze zo snel trouwde, dat geef ik toe. Ik heb een boze reactie onder haar foto gezet.</p><p>Maar dinsdagavond werkte ik: nachtdienst bij het distributiecentrum.”</p><table class="ec-tab"><tr><td>Prikklok in</td><td>17:56</td></tr><tr><td>Pauze</td><td>22:00 – 22:30 (kantine)</td></tr><tr><td>Prikklok uit</td><td>02:04</td></tr></table>' },
+    { id: "olden", env: "C", t: "Opgevraagd dossier Oldenmarke (2023)", h: '<p class="ec-mono">POLITIE OLDENMARKE · 14-03-2023</p><p><b>Annick Kleefstra</b> (29) verdronken in bad. Drie maanden getrouwd met <b>Ramon Klinkhamer</b> (35), “kunsthandelaar”.</p><p>Kort ervoor noteerde de huisarts “flauwtes”, op verzoek van de echtgenoot. Uitkering levensverzekering: <b>€ 180.000</b> aan de echtgenoot. Daarna vertrok hij onbekend waarheen.</p><p><b>12-10-2026:</b> vingerafdrukken van Ramon Klinkhamer vergeleken met die van Riemer Kalverda: <b>het is dezelfde man</b>.</p>' },
+    { id: "patho", env: "C", t: "Rapport van de patholoog", h: "<p>Het bad is 1,52 m, Lieneke was 1,74 m. Als iemand in zo'n kort bad flauwvalt, zakt het lichaam iets weg, maar <b>het hoofd blijft tegen de rand boven water</b>. Verdrinken door een flauwte is dan bijna onmogelijk.</p><p>Proef met een vrijwilliger: als je iemand die in bad ligt <b>plotseling bij de enkels omhoog trekt</b>, schiet het hoofd onder water en stroomt er water in neus en keel. De persoon raakt binnen seconden buiten bewustzijn. Er is geen tijd om te vechten.</p><p>Dat past bij: geen strijd, de drukplekken boven beide enkels en het ene harde gespetter om 19:48.</p>" },
+    { id: "verz", env: "C", t: "Telefoonnotitie verzekeraar", h: '<p class="ec-mono">VEILIGVERZEKERD · KLANTENSERVICE</p><p><b>7 oktober 2026, 09:12.</b> De heer R. Kalverda belt over polis VV-26-48817.</p><p>Vraag van de klant: “Hoe snel wordt het geld uitbetaald? Ik ga waarschijnlijk verhuizen.”</p><p>Medewerker: melding overlijden genoteerd, uitkering in behandeling.</p>' }
+  ],
+  sites: {
+    "dagblad-oostkust.nl/2026/vrouw-dood-in-bad": { t: "Dagblad Oostkust", kw: "lieneke wagemaker dijkmonde verdronken bad badkuip lindelaan vrouw dood ongeluk", h: '<div class="ws-news"><div class="ws-brand">Dagblad Oostkust</div><small>7 oktober 2026 · Regio</small><h4>Vrouw (33) dood gevonden in bad</h4><p>DIJKMONDE – Een vrouw van 33 is dinsdagavond dood gevonden in het bad van haar woning aan de Lindelaan. Haar man vond haar toen hij terugkwam van boodschappen.</p><p>De politie gaat voorlopig uit van een ongeluk. “Ze was flauwgevallen,” zegt een buurman.</p></div>' },
+    "dagblad-oostkust.nl/2023/oldenmarke-verdronken": { t: "Dagblad Oostkust", kw: "oldenmarke verdronken bad badkuip kunsthandelaar annick ramon vrouw dood flauw 2023", h: () => '<div class="ws-news"><div class="ws-brand">Dagblad Oostkust</div><small>15 maart 2023 · Regio</small><h4>Jonge vrouw verdronken in bad</h4><p>OLDENMARKE – Annick K. (29) is dinsdag verdronken in het bad van haar woning. Haar man Ramon K. (35), kunsthandelaar, vond haar toen hij terugkwam van de supermarkt.</p><p>“Ze viel de laatste tijd vaak flauw,” vertelt hij. Het stel was pas drie maanden getrouwd.</p><figure>'.concat(ecMug("riemer", 110, { glasses: "#2a2420", beard: "stubble" }), "<figcaption>Ramon K. bij de herdenking</figcaption></figure></div>") },
+    "rouwhoek.nl/forum/831": { t: "Rouwhoek · forum", kw: "marlous ravenstijn rowan kolkman brakelo verdronken bad badkuip kunsthandelaar zus forum verzekering bruiloft 2021 groene ogen", h: () => '<div class="ws-forum"><div class="ws-brand">rouwhoek.nl · forum · Zussen</div><h4>Is dit bij iemand anders ook gebeurd?</h4><div class="ws-post"><b>zusvanMarlous</b> <small>4 januari 2022</small><p>Mijn zus Marlous Ravenstijn verdronk in juni 2021 in bad in Brakelo, vier maanden na haar trouwen met <b>Rowan Kolkman</b>. Hij zei dat ze vaak flauwviel. Twee weken later had hij het geld van haar levensverzekering en was hij verdwenen.</p><p>Hij noemde zich kunsthandelaar en had opvallend groene ogen. Hier de enige foto van de bruiloft:</p><figure>'.concat(ecMug("riemer", 110, { beard: "full" }), '<figcaption>Rowan op de bruiloft, 2021</figcaption></figure></div><div class="ws-post"><b>Annet_63</b> <small>16 maart 2023</small><p>Wat vreselijk. In de krant stond net iets wat hier erg op lijkt: <a data-url="dagblad-oostkust.nl/2023/oldenmarke-verdronken">een vrouw in Oldenmarke</a>.</p></div></div>') },
+    "kiekjesboek.nl/lieneke.wagemaker": { t: "Kiekjesboek · Lieneke Wagemaker", kw: "lieneke wagemaker riemer kalverda wilco achterhof getrouwd bruiloft verzekering dokter profiel", h: () => '<div class="ws-social"><div class="ws-prof">'.concat(ecMug("lieneke", 56), '<div><b>Lieneke Wagemaker</b><small>Dijkmonde · apothekersassistente</small></div></div>\n  <div class="ws-post"><small>8 augustus 2026</small><p>GETROUWD!! 💍 Riemer wil nooit op de foto, dus alleen onze handen 😄</p><div class="ws-cm"><b>Wilco Achterhof:</b> Na vier maanden al? Jij bent gek. Dit gaat fout.</div><div class="ws-cm"><b>Tamar Wagemaker:</b> Gefeliciteerd zusje ❤️</div></div>\n  <div class="ws-post"><small>2 september 2026</small><p>Riemer heeft van alles voor ons geregeld, zelfs een verzekering. Wat een zorgzame man ❤️</p></div>\n  <div class="ws-post"><small>22 september 2026</small><p>Naar de dokter geweest omdat Riemer denkt dat ik flauwval. Dokter: niks aan de hand 🤷‍♀️ Ik voel me top!</p></div></div>') },
+    "kalverda-kunsthandel.nl": { t: "Kalverda Kunsthandel", kw: "riemer kalverda kunsthandel kunsthandelaar kunst", h: '<div class="ws-biz"><h4>Kalverda Kunsthandel</h4><p>🚧 Deze website is nog in aanbouw.</p><p>Over mij: ik ben Riemer en ik reis veel voor mijn werk. Ik koop en verkoop schilderijen.</p><small>Online sinds: 3 juli 2026 · Geen adres · Geen foto\'s</small></div>' },
+    "zangeslust-koor.nl": { t: "Koor Zangeslust Dijkmonde", kw: "koor zangeslust tamar repetitie dorpskerk zingen agenda", h: () => '<div class="ws-biz"><h4>🎵 Koor Zangeslust · Dijkmonde</h4><p><b>Agenda:</b> dinsdag 6 oktober 2026, 19:30 – 21:30 repetitie in de Dorpskerk.</p><div class="ws-post"><small>Verslag · 7 oktober</small><p>Fijne repetitie gisteren! Op de foto (genomen om 20:15) de alten, met Tamar vooraan.</p><figure>'.concat(ecMug("tamar", 96), "<figcaption>De alten, dinsdag 6 oktober, 20:15</figcaption></figure></div></div>") },
+    "verhuur-kooijman.nl": { t: "Verhuur Kooijman", kw: "kooijman thorwald verhuur huisbaas ketel onderhoud lindelaan", h: '<div class="ws-biz"><h4>Verhuur Kooijman</h4><p>Wij verhuren woningen aan de Lindelaan en de Kerkstraat.</p><p><b>Onderhoud cv-ketels:</b> elke eerste dinsdag van de maand, 19:30 – 20:30. De monteur werkt dan in de kelder.</p><p>Kantoor: Kerkstraat 3 (hier hangen ook de reservesleutels).</p></div>' },
+    "veiligverzekerd-polis.nl": { t: "VeiligVerzekerd · Mijn polis", kw: "verzekering verzekeraar polis veiligverzekerd levensverzekering", form: 1 }
+  },
+  stages: [
+    { say: ["Hoi, ik ben inspecteur Floor Nijdam.", "De arts zegt: ongeluk. Lieneke viel flauw in bad. Haar zus Tamar gelooft dat niet. Ik eigenlijk ook niet.", "Lees eerst envelop A in het dossier. Dan een vraag: hoe laat ging Riemer volgens zichzelf de deur uit?"], opts: ["19:30", "19:40", "19:52", "20:06"], ok: 1, tip: "Kijk in de verklaring van Riemer.", good: ["Klopt, 19:40. Volgens hem ging Lieneke toen net in bad."] },
+    { say: ["Wat hoorde de buurvrouw van beneden rond 19:48?"], opts: ["Een deur die dichtsloeg", "Eén keer hard gespetter in het bad", "Geschreeuw", "Niets"], ok: 1, tip: "De buurvrouw weet de tijd door haar serie.", good: ["Dus om 19:48 gebeurde er iets in dat bad. Maar Riemer zegt dat hij toen al weg was.", "Ik stuur je envelop B: de sectie en drie nieuwe verklaringen."], unlock: "B" },
+    { say: ["Lees envelop B. Was Riemer om 19:52 nog in het gebouw?"], opts: ["Nee, hij was al bij de supermarkt", "Ja, de huisbaas zag hem met natte armen de trap af komen", "Ja, Tamar zag hem bij de deur"], ok: 1, tip: "Lees de verklaring van de huisbaas.", good: ["Precies. Riemer liegt over de tijd. En met natte armen tot de ellebogen…", "Maar een leugen is nog geen moord. Laten we eerst de anderen uitsluiten."] },
+    { say: ["Waar was Tamar tussen half acht en half tien? Kun je dat ergens controleren?"], opts: ["Thuis, alleen", "Bij de koorrepetitie, dat staat op de site van het koor", "Bij Lieneke"], ok: 1, tip: "Zoek op internet naar het koor. Gebruik de zoekmachine.", good: ["Mooi. Tamar staat op de koorfoto van 20:15. En Wilco stond volgens de prikklok de hele avond op zijn werk.", "De huisbaas zat in de kelder, maar zijn sleutel hing in zijn kantoor en hij had geen enkele reden."] },
+    { say: ["Tamar zei dat Riemer nooit over vroeger praat. Zoek eens op internet: is er eerder zoiets gebeurd?"], opts: ["Nee, niks gevonden", "Ja: in 2021 en 2023 verdronken ook vrouwen in bad, kort na hun trouwen met een kunsthandelaar", "Ja: Riemer is eerder gescheiden"], ok: 1, tip: "Zoek op “verdronken bad” of “kunsthandelaar”. Vergelijk de gezichten op de foto’s met Riemer.", good: ["Dit is groot. Andere naam, dezelfde groene ogen, dezelfde dood.", "Ik heb het dossier uit Oldenmarke opgevraagd en een patholoog gebeld. Envelop C ligt voor je klaar."], unlock: "C" },
+    { say: ["Laatste vraag voor je de zaak oplost: wat schoot Riemer op met de dood van Lieneke?"], opts: ["Hij kreeg haar huis", "Hij kreeg € 250.000 van de levensverzekering", "Niets, hij hield van haar"], ok: 1, tip: "Vul het polisnummer uit de brief van de verzekeraar in op veiligverzekerd-polis.nl.", good: ["Dat is het motief. Je weet nu genoeg.", "Ga naar “Oplossen” en zeg wie het deed, waarom, en welk bewijs het laat zien. Succes!"] }
+  ],
+  wrong: ["Hmm, dat klopt niet met wat ik lees. Kijk nog eens goed.", "Weet je het zeker? Volgens mij staat er iets anders in het dossier.", "Nee, dat denk ik niet. Lees het nog één keer."],
+  sus: [["riemer", "Riemer Kalverda", "echtgenoot"], ["tamar", "Tamar Wagemaker", "zus"], ["thorwald", "Thorwald Kooijman", "huisbaas"], ["wilco", "Wilco Achterhof", "ex-vriend"], ["niemand", "Niemand", "het was een ongeluk"]],
+  ans: "riemer",
+  mot: [["jaloers", "Jaloezie om Wilco"], ["huis", "Ruzie over het huis van moeder"], ["geld", "Geld: de levensverzekering van € 250.000"], ["huur", "Een ruzie over de huur"]],
+  motA: "geld",
+  key: [["bon", "De kassabon van 19:58"], ["enkel", "Kort bad + drukplekken boven de enkels: hij trok haar aan haar enkels onder water"], ["reactie", "De boze reactie van Wilco"], ["sleutel", "De reservesleutel van de huisbaas"]],
+  keyA: "enkel",
+  story: 'Riemer Kalverda heette eerder Rowan Kolkman en Ramon Klinkhamer. Elke keer trouwde hij snel, sloot hij een levensverzekering af en nam hij zijn vrouw mee naar de dokter, zodat het leek of ze vaak flauwviel. Op 6 oktober liet hij Lieneke een bad nemen. Om 19:48 trok hij haar bij haar enkels onder water: één keer gespetter, geen strijd. Met natte armen liep hij om 19:52 de trap af, kocht om 19:58 eieren voor een bonnetje en "vond" haar om 20:06. Het korte bad, de drukplekken en de twee eerdere vrouwen verraadden hem.',
+  film: [
+    ["t", "Zo is het gebeurd", "gebeurd", "De bruid in het bad"],
+    ["s", "Augustus 2026", ["day", ["house", 150, 165, 1.1]], "Riemer trouwde met Lieneke. Drie weken later sloot hij een verzekering af: € 250.000."],
+    ["s", "22 september", ["wall", ["table", 150, 175, 1]], "Hij nam haar mee naar de dokter. Zo leek het of ze vaak flauwviel."],
+    ["s", "6 oktober · 19:48", ["wall"], "Lieneke lag in bad. Riemer trok haar aan haar enkels onder water. Ze kon niet eens vechten.", { hit: "duw", act: "drown", tub: 1, x: 160, g: 180, s: 0.62, why: [["v", "Je doet zo lief vandaag, Riemer."], ["a", "Alles voor jou, schat."], ["v", "Kom je zo bij me zitten?"], ["a", "Dit is de laatste keer. Daarna ben ik weg."]] }],
+    ["s", "19:58", ["night", ["door", 150, 170, 1]], "Hij kocht snel eieren en tomaten. Zo had hij een bonnetje voor zijn alibi."],
+    ["x", "Riemer Kalverda", "zijn eigen handen", "de badkamer"]
+  ]
+};
+let ECS = store.get("md-echt") || {};
+function ecSt() {
+  const c = ECASE.id;
+  if (!ECS[c]) ECS[c] = { tab: "dossier", stage: 0, chat: ECASE.stages[0].say.map((t) => ["f", t]), env: ["A"], seen: [], url: "zoekmachien.nl", hist: [], won: false, tries: 0, newc: 1 };
+  return ECS[c];
+}
+function ecSave() {
+  store.set("md-echt", ECS);
+}
+function ecEsc(s) {
+  return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+}
+function ecNorm(u) {
+  return String(u || "").trim().toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/+$/, "");
+}
+function ecPage(url) {
+  const S = ecSt(), u = ecNorm(url);
+  if (u === "" || u === "zoekmachien.nl" || u.startsWith("zoekmachien.nl/?q=") || u.startsWith("zoekmachien.nl?q=")) {
+    const q = decodeURIComponent(u.split("q=")[1] || "").trim();
+    let res = "";
+    if (q) {
+      const words = q.toLowerCase().replace(/[^a-zà-ÿ0-9 ]/g, " ").split(/\s+/).filter((w) => w.length > 2);
+      const hits = Object.entries(ECASE.sites).map(([k, s2]) => {
+        const kw = s2.kw.split(" ");
+        let sc = 0;
+        words.forEach((w) => {
+          if (kw.some((x) => x === w || w.length > 4 && x.startsWith(w.slice(0, 5)))) sc++;
+        });
+        return [k, s2, sc];
+      }).filter((x) => x[2] > 0).sort((a, b) => b[2] - a[2]);
+      res = hits.length ? hits.map(([k, s2]) => '<a class="ws-res" data-url="'.concat(k, '"><small>').concat(k, "</small><b>").concat(s2.t, "</b></a>")).join("") : '<p class="ws-none">Geen resultaten voor “'.concat(ecEsc(q), "”. Probeer andere woorden, bijvoorbeeld een naam of plaats.</p>");
+    }
+    return { t: "Zoekmachien", h: '<div class="ws-search"><div class="ws-logo">Zoek<span>machien</span></div><form id="ecQ"><input id="ecQi" type="search" value="'.concat(ecEsc(q), '" placeholder="Zoek op het internet" aria-label="Zoekwoorden" autocomplete="off"><button class="btn small primary" type="submit">Zoek</button></form>').concat(res).concat(q ? "" : '<p class="ws-none">Tip: zoek op namen, plaatsen of dingen die je in het dossier leest.</p>', "</div>") };
+  }
+  if (u === "veiligverzekerd-polis.nl" || u.startsWith("veiligverzekerd-polis.nl/?p=")) {
+    const p = decodeURIComponent(u.split("p=")[1] || "").toUpperCase().replace(/[^A-Z0-9]/g, ""), okp = p === "VV2648817";
+    return { t: "VeiligVerzekerd · Mijn polis", h: '<div class="ws-biz ws-ins"><h4>🛡️ VeiligVerzekerd · Mijn polis</h4><form id="ecP"><input id="ecPi" placeholder="Polisnummer, bijv. VV-00-00000" value="'.concat(ecEsc(p ? u.split("p=")[1] : ""), '" aria-label="Polisnummer" autocomplete="off"><button class="btn small primary" type="submit">Bekijk</button></form>').concat(p ? okp ? '<table class="ec-tab"><tr><td>Soort</td><td>Overlijdensrisicoverzekering</td></tr><tr><td>Verzekerde</td><td>L. Wagemaker</td></tr><tr><td>Verzekerd bedrag</td><td><b>€ 250.000</b></td></tr><tr><td>Begunstigde</td><td><b>R. Kalverda (echtgenoot)</b></td></tr><tr><td>Afgesloten</td><td>1 september 2026, op verzoek van R. Kalverda</td></tr><tr><td>Status</td><td>Melding overlijden ontvangen 7-10-2026 · uitkering in behandeling</td></tr></table>' : '<p class="ws-none">Dit polisnummer kennen wij niet. Controleer het nummer op uw brief.</p>' : "", "</div>") };
+  }
+  const s = ECASE.sites[u];
+  if (s) return { t: s.t, h: typeof s.h === "function" ? s.h() : s.h };
+  return { t: "Niet gevonden", h: '<div class="ws-404"><b>404</b><p>Deze pagina bestaat niet: '.concat(ecEsc(u), '</p><p class="ws-none">Controleer het adres, of gebruik <a data-url="zoekmachien.nl">Zoekmachien</a>.</p></div>') };
+}
+function ecDocHTML(d) {
+  return '<article class="ec-doc"><div class="ec-dh"><span class="ec-env">'.concat(d.env, "</span><h4>").concat(d.t, "</h4>").concat(d.face ? ecMug(d.face, 54) : "", "</div>").concat(d.h, "</article>");
+}
+function ecOpenDoc(id) {
+  const d = ECASE.docs.find((x) => x.id === id), S = ecSt();
+  if (!d) return;
+  if (!S.seen.includes(id)) {
+    S.seen.push(id);
+    ecSave();
+  }
+  const ov = document.createElement("div");
+  ov.className = "ec-ov";
+  ov.setAttribute("role", "dialog");
+  ov.setAttribute("aria-modal", "true");
+  ov.setAttribute("aria-label", d.t);
+  ov.innerHTML = '<div class="ec-ovc">'.concat(ecDocHTML(d), '<div class="controls"><button class="btn primary" type="button">Sluit</button></div></div>');
+  const close = () => {
+    ov.remove();
+    document.body.style.overflow = "";
+    renderEcht();
+  };
+  ov.querySelector("button").onclick = close;
+  ov.onclick = (e) => {
+    if (e.target === ov) close();
+  };
+  ov.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+  document.body.appendChild(ov);
+  document.body.style.overflow = "hidden";
+  ov.querySelector("button").focus();
+}
+function ecPrint() {
+  let el = document.getElementById("ecPrint");
+  if (el) el.remove();
+  el = document.createElement("div");
+  el.id = "ecPrint";
+  const cover = '<section class="ep-page ep-cover"><p class="ec-mono">POLITIE · RECHERCHE · VERTROUWELIJK</p><h1>'.concat(ECASE.title, "</h1><p>").concat(ECASE.intro, "</p><p><i>").concat(ECASE.based, "</i></p><p><b>Zo speel je:</b> open envelop A. Envelop B en C open je pas als inspecteur Floor Nijdam dat zegt (in de app, bij “Rechercheur”). Websites zoek je op in de app bij “Internet”.</p></section>");
+  el.innerHTML = cover + ["A", "B", "C"].map((e) => '<section class="ep-page ep-env"><h1>'.concat(ECASE.env[e], "</h1>").concat(e === "A" ? "<p>Open deze envelop als eerste.</p>" : "<p><b>NIET OPENEN</b> tot de rechercheur het zegt.</p>", "</section>") + ECASE.docs.filter((d) => d.env === e).map((d) => '<section class="ep-page">'.concat(ecDocHTML(d), "</section>")).join("")).join("");
+  document.body.appendChild(el);
+  document.body.classList.add("ec-printing");
+  const done = () => {
+    document.body.classList.remove("ec-printing");
+    el.remove();
+    window.removeEventListener("afterprint", done);
+  };
+  window.addEventListener("afterprint", done);
+  setTimeout(() => {
+    try {
+      window.print();
+    } catch (e) {
+      done();
+    }
+  }, 60);
+}
+function ecAnswer(i) {
+  const S = ecSt(), sg = ECASE.stages[S.stage];
+  if (!sg) return;
+  S.chat.push(["m", sg.opts[i]]);
+  if (i === sg.ok) {
+    sg.good.forEach((t) => S.chat.push(["f", t]));
+    if (sg.unlock && !S.env.includes(sg.unlock)) {
+      S.env.push(sg.unlock);
+      S.chat.push(["n", "📁 ".concat(ECASE.env[sg.unlock], " staat nu in je dossier.")]);
+    }
+    S.stage++;
+    const nx = ECASE.stages[S.stage];
+    if (nx) nx.say.forEach((t) => S.chat.push(["f", t]));
+  } else {
+    S.chat.push(["f", ECASE.wrong[S.chat.length % ECASE.wrong.length]]);
+  }
+  ecSave();
+  renderEcht();
+}
+function ecGo(url, push = true) {
+  const S = ecSt();
+  if (push && S.url !== url) S.hist.push(S.url);
+  S.url = url;
+  ecSave();
+  renderEcht();
+}
+function renderEcht() {
+  const P = $("pEcht");
+  if (!P) return;
+  const S = ecSt(), C2 = ECASE, tab = S.tab;
+  const tabs = [["dossier", "📁 Dossier"], ["web", "🌐 Internet"], ["chat", "💬 Rechercheur".concat(S.newc ? ' <i class="ec-dot" aria-label="nieuw bericht"></i>' : "")], ["opl", "⚖️ Oplossen"]];
+  let body = "";
+  if (tab === "dossier") {
+    body = '<div class="ec-print"><button class="btn" type="button" id="ecPr">🖨️ Print het dossier</button><small>Print het op papier of bewaar het als pdf. Envelop B en C krijgen een voorblad “niet openen”.</small></div>' + ["A", "B", "C"].map((e) => {
+      const open = S.env.includes(e), ds = C2.docs.filter((d) => d.env === e);
+      return '<section class="ec-envbox '.concat(open ? "" : "locked", '"><h4>').concat(open ? "📂" : "🔒", " ").concat(C2.env[e], "</h4>").concat(open ? '<div class="ec-docs">'.concat(ds.map((d) => '<button type="button" class="ec-card '.concat(S.seen.includes(d.id) ? "seen" : "", '" data-doc="').concat(d.id, '">').concat(d.face ? ecMug(d.face, 38) : '<span class="ec-ic">📄</span>', "<span>").concat(d.t, "</span></button>")).join(""), "</div>") : '<p class="hint">Inspecteur Floor Nijdam stuurt deze envelop als je verder bent in het onderzoek.</p>', "</section>");
+    }).join("");
+  } else if (tab === "web") {
+    const pg = ecPage(S.url);
+    body = '<div class="ec-br"><div class="ec-bar"><button type="button" class="ec-bb" id="ecBack" aria-label="Terug" '.concat(S.hist.length ? "" : "disabled", '>‹</button><button type="button" class="ec-bb" id="ecHome" aria-label="Zoekmachine">⌂</button><form id="ecU"><input id="ecUi" value="').concat(ecEsc(S.url), '" aria-label="Webadres" autocomplete="off" autocapitalize="off" spellcheck="false"></form></div><div class="ec-site">').concat(pg.h, "</div></div>");
+  } else if (tab === "chat") {
+    const sg = C2.stages[S.stage];
+    body = '<div class="ec-chat"><div class="ec-chead">'.concat(ecMug("floor", 44), '<div><b>Insp. Floor Nijdam</b><small>Recherche Dijkmonde · online</small></div></div><div class="ec-msgs" id="ecMsgs">').concat(S.chat.map(([w, t]) => '<div class="ec-m ec-'.concat(w, '">').concat(ecEsc(t), "</div>")).join(""), "</div>").concat(sg ? '<div class="ec-opts">'.concat(sg.opts.map((o, i) => '<button type="button" class="ec-opt" data-ans="'.concat(i, '">').concat(ecEsc(o), "</button>")).join(""), '<button type="button" class="ec-opt ec-tipb" id="ecTip">💡 Tip</button></div>') : '<p class="hint">Floor wacht op jouw oplossing bij “Oplossen”.</p>', "</div>");
+  } else {
+    const pick2 = (nm, list, cur) => '<div class="ec-pick" role="radiogroup">'.concat(list.map(([id, t, r]) => '<button type="button" class="ec-pk '.concat(cur === id ? "on" : "", '" data-').concat(nm, '="').concat(id, '" aria-pressed="').concat(cur === id, '">').concat(ECLOOK[id] ? ecMug(id, 40) : "", "<span>").concat(t).concat(r ? "<small>".concat(r, "</small>") : "", "</span></button>")).join(""), "</div>");
+    if (S.won) body = '<div class="ec-won"><span class="kicker">Zaak opgelost'.concat(S.tries > 1 ? " · ".concat(S.tries, " pogingen") : "", "</span><h4>Het was Riemer Kalverda</h4><p>").concat(C2.story, '</p><div class="controls"><button class="btn primary" type="button" id="ecFilm">▶ Bekijk hoe het gebeurde</button><button class="btn small" type="button" id="ecReset">Speel opnieuw</button></div><p class="hint">').concat(C2.based, "</p></div>");
+    else body = '<p class="hint">Je mag altijd een poging doen. Weet je het nog niet zeker? Vraag Floor om hulp bij “Rechercheur”.</p><h4 class="ec-h">Wie deed het?</h4>'.concat(pick2("esu", C2.sus, S.pS), '<h4 class="ec-h">Waarom?</h4>').concat(pick2("emo", C2.mot, S.pM), '<h4 class="ec-h">Welk bewijs laat het zien?</h4>').concat(pick2("eke", C2.key, S.pK), '<div class="controls"><button class="btn primary" type="button" id="ecSolve" ').concat(S.pS && S.pM && S.pK ? "" : "disabled", '>Beschuldig</button></div><p id="ecRes" class="ec-res" aria-live="polite">').concat(S.lastMiss || "", "</p>");
+  }
+  P.innerHTML = '<div class="storyhead"><span class="kicker">Echte zaak · '.concat(C2.based.split(".")[0], "</span><h3>").concat(C2.title, "</h3>").concat(tab === "dossier" ? "<p>".concat(C2.intro, "</p>") : "", '</div><nav class="ec-tabs" role="tablist">').concat(tabs.map(([k, t]) => '<button type="button" role="tab" data-etab="'.concat(k, '" aria-selected="').concat(tab === k, '">').concat(t, "</button>")).join(""), '</nav><div class="ec-body">').concat(body, "</div>");
+  P.querySelectorAll("[data-etab]").forEach((b) => b.onclick = () => {
+    S.tab = b.dataset.etab;
+    if (S.tab === "chat") S.newc = 0;
+    ecSave();
+    renderEcht();
+  });
+  P.querySelectorAll("[data-doc]").forEach((b) => b.onclick = () => ecOpenDoc(b.dataset.doc));
+  const pr = $("ecPr");
+  if (pr) pr.onclick = ecPrint;
+  P.querySelectorAll(".ec-site [data-url]").forEach((a) => {
+    a.href = "#";
+    a.onclick = (e) => {
+      e.preventDefault();
+      ecGo(a.dataset.url);
+    };
+  });
+  const bk = $("ecBack");
+  if (bk) bk.onclick = () => {
+    const S2 = ecSt();
+    if (S2.hist.length) {
+      S2.url = S2.hist.pop();
+      ecSave();
+      renderEcht();
+    }
+  };
+  const hm = $("ecHome");
+  if (hm) hm.onclick = () => ecGo("zoekmachien.nl");
+  const uf = $("ecU");
+  if (uf) uf.onsubmit = (e) => {
+    e.preventDefault();
+    ecGo(ecNorm($("ecUi").value) || "zoekmachien.nl");
+  };
+  const qf = $("ecQ");
+  if (qf) qf.onsubmit = (e) => {
+    e.preventDefault();
+    const q = $("ecQi").value.trim();
+    ecGo("zoekmachien.nl/?q=" + encodeURIComponent(q));
+  };
+  const pf = $("ecP");
+  if (pf) pf.onsubmit = (e) => {
+    e.preventDefault();
+    ecGo("veiligverzekerd-polis.nl/?p=" + encodeURIComponent($("ecPi").value.trim()), false);
+  };
+  P.querySelectorAll("[data-ans]").forEach((b) => b.onclick = () => ecAnswer(+b.dataset.ans));
+  const tp = $("ecTip");
+  if (tp) tp.onclick = () => {
+    const S2 = ecSt();
+    S2.chat.push(["m", "Kun je me een tip geven?"], ["f", C2.stages[S2.stage].tip]);
+    ecSave();
+    renderEcht();
+  };
+  const ms = $("ecMsgs");
+  if (ms) ms.scrollTop = ms.scrollHeight;
+  P.querySelectorAll("[data-esu]").forEach((b) => b.onclick = () => {
+    S.pS = b.dataset.esu;
+    ecSave();
+    renderEcht();
+  });
+  P.querySelectorAll("[data-emo]").forEach((b) => b.onclick = () => {
+    S.pM = b.dataset.emo;
+    ecSave();
+    renderEcht();
+  });
+  P.querySelectorAll("[data-eke]").forEach((b) => b.onclick = () => {
+    S.pK = b.dataset.eke;
+    ecSave();
+    renderEcht();
+  });
+  const sv = $("ecSolve");
+  if (sv) sv.onclick = () => {
+    S.tries = (S.tries || 0) + 1;
+    const a = S.pS === C2.ans, m = S.pM === C2.motA, k = S.pK === C2.keyA;
+    if (a && m && k) {
+      S.won = true;
+      S.lastMiss = "";
+      ecSave();
+      renderEcht();
+      if (typeof fmPlay === "function") setTimeout(() => fmPlay(fmStory(C2.film)), 300);
+    } else {
+      S.lastMiss = "".concat([a, m, k].filter(Boolean).length, " van de 3 goed. ").concat(!a ? "De officier gelooft niet dat die persoon het deed. " : "").concat(a && !m ? "De dader klopt, maar het motief niet. " : "").concat(a && m && !k ? "Dader en motief kloppen, maar dit bewijs is niet sterk genoeg. " : "", "Lees het dossier nog eens of vraag Floor om een tip.");
+      ecSave();
+      renderEcht();
+    }
+  };
+  const fb = $("ecFilm");
+  if (fb) fb.onclick = () => fmPlay(fmStory(C2.film));
+  const rs = $("ecReset");
+  if (rs) rs.onclick = () => {
+    if (confirm("Deze zaak opnieuw beginnen? Je voortgang in deze zaak gaat verloren.")) {
+      delete ECS[C2.id];
+      ecSave();
+      renderEcht();
+    }
+  };
+}
 function renderPanes() {
   const t = st.tab || "zaak";
   if (GHIDE.has(game)) {
@@ -17257,6 +17700,8 @@ function renderPanes() {
   if (g === "stad") renderStad();
   $("pTv").hidden = g !== "tv";
   if (g === "tv") renderTv();
+  $("pEcht").hidden = g !== "echt";
+  if (g === "echt") renderEcht();
   if (g === "verhoor" && !$("pVerhoor").innerHTML) renderVerhoor();
   if (g === "casino" && !$("pCasino").innerHTML) renderCasino();
   if (g === "team" && !$("pTeam").innerHTML) renderTeam();

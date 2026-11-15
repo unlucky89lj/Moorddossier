@@ -1151,6 +1151,11 @@ body.kiosk-join .tv-jform .btn.primary{font-size:22px;padding:16px}
  .ep-page{page-break-after:always;break-after:page;padding:0 4mm}.ep-page .ec-doc{font-size:14pt}.ep-page .ec-dh h4{font-size:18pt}.ep-page .ec-doc{box-shadow:none;background:#fff;border:1px solid #999}
  .ep-cover h1,.ep-env h1{font:800 32px Georgia,serif;margin-top:30mm}.ep-env{text-align:center}.ep-env h1{margin-top:80mm;border:4px double #000;padding:10mm}}
 /* [FAMILIEARCHIEF] */
+.fa-hand{font-family:'Segoe Script','Brush Script MT','Lucida Handwriting','Snell Roundhand',cursive!important;font-size:18px!important;color:#2a2a5a!important;letter-spacing:.01em}
+.fa-plain{margin-top:6px;border:0;background:transparent;color:#7a5a2a;font:600 13px var(--cond);cursor:pointer;padding:4px 0;text-decoration:underline}
+.fa-weekres .btn{color:#2a2118;border-color:#2a2118}.fa-weekres{margin:12px 0;padding:10px;border:2px dashed #b8892e;border-radius:8px}.fa-weekres p{text-align:center!important;margin:4px 0}
+.fa-sub2{margin:0 0 8px;font-size:14px;color:#5a4a36}.fa-treebox{overflow-x:auto;background:linear-gradient(#efe6cf,#e2d4b0);border-radius:6px;padding:6px}.fa-tree{width:100%;height:auto;display:block}
+
 .fa-rules{background:var(--paper);color:#2a2118;border-radius:6px;padding:10px 14px;font:15px/1.45 Georgia,serif}.fa-rules ol{margin:6px 0 0;padding-left:20px}.fa-rules li{margin:4px 0}
 .fa-turn{display:flex;align-items:center;justify-content:space-between;grid-gap:8px;gap:8px;margin:10px 0;background:#0004;border-radius:10px;padding:8px 12px;font-size:16px}.fa-turn b{color:#f0c060}
 .fa-pl{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));grid-gap:8px;gap:8px}.fa-plc{background:var(--paper);color:#2a2118;border-radius:6px;padding:10px;text-align:center;display:flex;flex-direction:column;grid-gap:4px;gap:4px;align-items:center}.fa-plc b{font:700 17px Georgia,serif}.fa-plc small{color:#7a6650}.fa-plc.out{opacity:.45}
@@ -16519,6 +16524,7 @@ function pasData() {
     ["reeks", "Op dreef", "Een reeks van 5 op rij in één spel.", streak, 5],
     ["helder", "Helderziende rechercheur", "Voorspel 3 van 3 spellen van de week goed.", typeof nuPerfect === "function" ? nuPerfect() : 0, 1],
     ["slotkraker", "Slotkraker", "Kraak het slot van het geheime dossier.", typeof nuCracks === "function" ? nuCracks() : 0, 1],
+    ["stamboom", "Stamboomspeurder", "Vind 5 voorouders in Het Familiearchief.", typeof FAS !== "undefined" && FAS.album ? FAS.album.length : 0, 5],
     ["alleskunner", "Alleskunner", "In elk spel minstens één zaak opgelost.", rows.filter((r) => r[2] > 0).length, rows.length]
   ];
   const ps = store.get(PASKEY) || { earned: {} };
@@ -17899,6 +17905,7 @@ const FA = {
   OS: { wever: "linnenwever", molenaar: "korenmolenaar", smid: "hoefsmid", schipper: "beurtschipper", boer: "landbouwer", bakker: "broodbakker" },
   K: ["Hervormde kerk", "Rooms-Katholieke kerk", "Doopsgezinde kerk", "Lutherse kerk"],
   LV: [["Beginner", "20 tot 30 minuten"], ["Gemiddeld", "30 tot 45 minuten"], ["Gevorderd", "45 tot 60 minuten"]],
+  NICK: { Aaltje: "Aal", Alida: "Lida", Barendina: "Dina", Diewertje: "Diew", Engeltje: "Engel", Femmigje: "Fem", Fenneken: "Fenna", Hilletje: "Hil", Janna: "Jans", Jacoba: "Coba", Lammigje: "Lam", Marrigje: "Mar", Mechteld: "Mecht", Pietertje: "Piet", Stijntje: "Stien", Swaantje: "Swaan", Teuntje: "Teun", Wendelina: "Lina", Willempje: "Mien", Everdina: "Dina", Harmina: "Mina", Lubbigje: "Lub", Roelofje: "Roel", Wichertje: "Wich", Gerritje: "Griet", Berendje: "Bertje", Jentje: "Jen", Aagje: "Aag", Fokje: "Fok", Hiltje: "Hil", Elsje: "Els", Wiepkje: "Wiep" },
   SEAL: { rec: ["Archief", "Origineel register of volkstelling. Altijd waar."], der: ["Afgeleid", "Overgeschreven of samengevat. Waar, maar soms een jaar ernaast."], ger: ["Gerucht", "Familieverhaal of brief. Kan waar zijn, maar ook niet."] }
 };
 TFEM && FA.F.forEach((n) => TFEM.add(n.toLowerCase()));
@@ -17911,7 +17918,7 @@ function faRng(seed) {
     return ((t ^ t >>> 14) >>> 0) / 4294967296;
   };
 }
-function faGen(seed, lv) {
+function faGen(seed, lv, x) {
   const R2 = faRng(seed), pick2 = (a) => a[Math.floor(R2() * a.length)], shuf = (a) => {
     a = a.slice();
     for (let i = a.length - 1; i > 0; i--) {
@@ -17927,13 +17934,13 @@ function faGen(seed, lv) {
     do {
       D[aStar] = aStar === "b" ? Math.floor(R2() * 5) : pick2(vals[aStar]);
     } while (D[aStar] === T[aStar]);
-    const same = (x, y) => KEYS.every((k) => x[k] === y[k]), cands = [T, D];
+    const same = (x2, y) => KEYS.every((k) => x2[k] === y[k]), cands = [T, D];
     while (cands.length < 12) {
       const c = __spreadValues({}, T), n = 1 + Math.floor(R2() * 3);
       shuf(KEYS).slice(0, n).forEach((k) => {
         c[k] = k === "b" ? Math.floor(R2() * 5) : pick2(vals[k]);
       });
-      if (!cands.some((x) => same(x, c))) cands.push(c);
+      if (!cands.some((x2) => same(x2, c))) cands.push(c);
     }
     const F = shuf(FA.F).slice(0, 12), S = shuf(FA.S), Mn = shuf(FA.M);
     const people = shuf(cands.map((c, i) => __spreadProps(__spreadValues({}, c), { i })));
@@ -17949,42 +17956,60 @@ function faGen(seed, lv) {
     docs.push({
       id: "vt",
       seal: "rec",
+      arg: [t.v, t.o],
       t: "Volkstelling 1840",
       src: "Gemeente ".concat(lv === 2 ? "▒▒▒▒" + t.v.slice(-3) : t.v),
       q: "Huishouden nr. ".concat(12 + Math.floor(R2() * 80), ": de vrouw des huizes staat vermeld als <b>vrouw van een ").concat(occTxt(t.o), "</b>."),
       p: (c) => c.v === t.v && c.o === t.o,
       note: lv === 2 ? "Een deel van de bladzijde is verbrand. Alleen het einde van de plaatsnaam is nog te lezen." : ""
     });
-    if (lv < 2) docs.push({ id: "kr", seal: "rec", t: "Kerkregister", src: "Trouwboek", q: "Getrouwd in de <b>".concat(t.k, "</b>."), p: (c) => c.k === t.k });
+    if (lv < 2) docs.push({ id: "kr", seal: "rec", t: "Kerkregister", src: "Trouwboek", q: "Getrouwd in de <b>".concat(t.k, "</b>."), p: (c) => c.k === t.k, arg: t.k });
     else {
       const no = shuf(K.filter((k) => k !== t.k));
-      docs.push({ id: "kr", seal: "rec", t: "Kerkregister", src: "Brief van de dominee", q: "Zij is <b>niet</b> getrouwd in de ".concat(no[0], " en ook <b>niet</b> in de ").concat(no[1], "."), p: (c) => c.k !== no[0] && c.k !== no[1] });
+      docs.push({ id: "kr", seal: "rec", t: "Kerkregister", src: "Brief van de dominee", q: "Zij is <b>niet</b> getrouwd in de ".concat(no[0], " en ook <b>niet</b> in de ").concat(no[1], "."), p: (c) => c.k !== no[0] && c.k !== no[1], arg: [no[0], no[1]] });
       docs.push({ id: "kr2", seal: "rec", t: "Doopboek", src: "Doopregister van haar eerste kind", q: "Het eerste kind werd gedoopt door een <b>".concat(t.k.includes("Rooms") ? "pastoor" : "dominee", "</b>, in dezelfde kerk waar de moeder getrouwd was."), p: (c) => c.k.includes("Rooms") === t.k.includes("Rooms") });
     }
-    docs.push({ id: "bi", seal: "der", t: "Index begraafregister", src: "Overgeschreven lijst", q: "Overleden in <b>".concat(dy, "</b>, <b>").concat(age, " jaar</b> oud."), p: (c) => Math.abs((FA.B[c.b][0] + FA.B[c.b][1]) / 2 - (dy - age)) <= 2.5, note: "Een index is overgeschreven: de leeftijd kan een jaar afwijken." });
+    const byP = (c) => Math.abs((FA.B[c.b][0] + FA.B[c.b][1]) / 2 - t.by) <= 2.5;
+    if (lv < 2) docs.push({ id: "bi", seal: "der", t: "Index begraafregister", src: "Overgeschreven lijst", q: "Overleden in <b>".concat(dy, "</b>, <b>").concat(age, " jaar</b> oud."), p: byP, arg: t.by, note: "Een index is overgeschreven: de leeftijd kan een jaar afwijken." });
+    else {
+      const dn = pick2(["Geesken", "Hendrina", "Jansje", "Mettje"]), dby = t.by + 19 + Math.floor(R2() * 8);
+      docs.push({ id: "do", seal: "der", t: "Overlijdensbericht van haar dochter", src: "Courant, 1890 · drie generaties", q: "“Heden overleed onze moeder en grootmoeder ".concat(dn, ", geboren in <b>").concat(dby, "</b>. Haar moeder was toen <b>").concat(dby - t.by, " jaar</b> oud.”"), p: byP, arg: t.by, note: "Reken terug: in welk jaar werd de moeder geboren?" });
+    }
     docs.push({ id: "kt", seal: "der", t: "Krantenbericht", src: "Courant, 1846", q: "“Te koop: een kist met huisraad, af te halen bij de weduwe van een ".concat(occTxt(t.o), " te <b>").concat(lv === 2 ? pick2(V.filter((v) => v !== t.v)) + " of " + t.v : t.v, "</b>.”"), p: lv === 2 ? ((c) => true) : ((c) => c.v === t.v) });
+    if (x) {
+      const oK = pick2(K.filter((k) => k !== t.k)), oV = pick2(V.filter((v) => v !== t.v)), oO = pick2(O.filter((o) => o !== t.o));
+      docs.push({ id: "ng", seal: "rec", t: "Lidmatenboek", src: "Ledenlijst van de ".concat(oK), q: "Haar naam komt <b>niet</b> voor in de ledenlijst van de ".concat(oK, "."), p: (c) => c.k !== oK, arg: oK });
+      docs.push({ id: "ab", seal: "der", t: "Adresboek 1855", src: "Bewoners van ".concat(oV), q: "In het adresboek van <b>".concat(oV, "</b> staat zij <b>niet</b>."), p: (c) => c.v !== oV, arg: oV });
+      docs.push({ id: "gb", seal: "rec", t: "Gildeboek", src: "Ledenlijst van het gilde", q: "Haar man was <b>geen ".concat(oO, "</b>: hij staat niet in dat gildeboek."), p: (c) => c.o !== oO, arg: oO });
+    }
     const rumor = (k) => k === "b" ? "dat ze in ".concat(FA.B[d.b][0] + 2, " geboren was") : k === "o" ? "dat haar man ".concat(/^[aeiou]/.test(d.o) ? "een" : "een", " ").concat(d.o, " was") : k === "k" ? "dat ze in de ".concat(d.k, " getrouwd is") : "dat ze uit ".concat(d.v, " kwam");
     const trueR = pick2(KEYS.filter((k) => k !== aStar)), rumorT = (k) => k === "b" ? "dat ze rond ".concat(t.by, " geboren was") : k === "o" ? "dat haar man ".concat(t.o, " was") : k === "k" ? "dat ze in de ".concat(t.k, " getrouwd is") : "dat ze in ".concat(t.v, " woonde");
     docs.push({ id: "fb", seal: "ger", t: "Familiebrief", src: "Brief van een achternicht, 1902", q: "“Grootmoeder zei altijd ".concat(rumor(aStar), ".”"), p: (c) => true, lie: 1 });
-    docs.push({ id: "bb", seal: "ger", t: "Familiebijbel", src: "Aantekening voorin", q: "In een oud handschrift: “Ze vertelde ".concat(rumorT(trueR), ".”"), p: (c) => true });
-    const rel = docs.filter((x) => x.seal !== "ger");
-    const left = people.filter((c) => rel.every((x) => x.p(c)));
+    docs.push({ id: "bb", seal: "ger", t: "Familiebijbel", src: "Aantekening voorin", q: lv >= 1 ? "In een oud handschrift: “Iedereen noemde haar <b>".concat(FA.NICK[t.fn] || t.fn, "</b>.”") : "In een oud handschrift: “Ze vertelde ".concat(rumorT(trueR), ".”"), p: (c) => true, nick: lv >= 1 ? 1 : 0 });
+    const rel = docs.filter((x2) => x2.seal !== "ger");
+    const left = people.filter((c) => rel.every((x2) => x2.p(c)));
     if (left.length !== 1 || left[0] !== t) continue;
     let trio = null;
     for (let a = 0; a < rel.length && !trio; a++) for (let b = a + 1; b < rel.length && !trio; b++) for (let e = b + 1; e < rel.length && !trio; e++) {
       const s = [rel[a], rel[b], rel[e]];
-      if (people.filter((c) => s.every((x) => x.p(c))).length === 1) trio = s.map((x) => x.id);
+      if (people.filter((c) => s.every((x2) => x2.p(c))).length === 1) trio = s.map((x2) => x2.id);
     }
     if (!trio) continue;
     const client = pick2(FA.C), cl = t.ln;
     const letter = "<p>Beste onderzoeker,</p><p>Mijn naam is ".concat(client, " ").concat(S[13], ". Ik zoek een voorouder van mij: een vrouw die ruim tweehonderd jaar geleden in het heuvelland leefde. Haar meisjesnaam weten we niet zeker. In de familie gaat het verhaal ").concat(rumor(aStar), ".</p><p>Er zijn twaalf vrouwen die het kunnen zijn. Kunt u uitzoeken wie van hen mijn voorouder is? Bewijs het alstublieft met echte stukken: familieverhalen hebben we al genoeg.</p><p>Met vriendelijke groet,<br><i>").concat(client, "</i></p>");
-    return { seed, lv, people: people.map((p) => ({ fn: p.fn, ln: p.ln, man: p.man, b: p.b, by: p.by, o: p.o, k: p.k, v: p.v })), ans: ti, dec: di, docs: shuf(docs).map((x) => ({ id: x.id, seal: x.seal, t: x.t, src: x.src, q: x.q, note: x.note || "", lie: x.lie || 0 })), trio, aStar, dy, age, letter, V, O };
+    return { seed, lv, x: x ? 1 : 0, people: people.map((p) => ({ fn: p.fn, ln: p.ln, man: p.man, b: p.b, by: p.by, o: p.o, k: p.k, v: p.v })), ans: ti, dec: di, docs: shuf(docs).map((d2) => ({ id: d2.id, seal: d2.seal, t: d2.t, src: d2.src, q: d2.q, note: d2.note || "", lie: d2.lie || 0, arg: d2.arg === void 0 ? null : d2.arg, nick: d2.nick || 0 })), trio, aStar, dy, age, letter, V, O };
   }
   return null;
 }
 function faPred(C2, id) {
   const t = C2.people[C2.ans], d = C2.docs.find((x) => x.id === id);
   if (!d || d.seal === "ger") return null;
+  const A = d.arg;
+  if (id === "do" || id === "bi" && A != null) return (c) => Math.abs((FA.B[c.b][0] + FA.B[c.b][1]) / 2 - A) <= 2.5;
+  if (id === "ng") return (c) => c.k !== A;
+  if (id === "ab") return (c) => c.v !== A;
+  if (id === "gb") return (c) => c.o !== A;
+  if (id === "kr" && A != null) return Array.isArray(A) ? ((c) => c.k !== A[0] && c.k !== A[1]) : ((c) => c.k === A);
   if (id === "vt") return (c) => c.v === t.v && c.o === t.o;
   if (id === "bi") return (c) => Math.abs((FA.B[c.b][0] + FA.B[c.b][1]) / 2 - (C2.dy - C2.age)) <= 2.5;
   if (id === "kt") return C2.lv === 2 ? ((c) => true) : ((c) => c.v === t.v);
@@ -18011,9 +18036,9 @@ function faToday(lv) {
   const d = /* @__PURE__ */ new Date();
   return (d.getFullYear() * 1e4 + (d.getMonth() + 1) * 100 + d.getDate()) * 10 + lv;
 }
-function faMake(seed, lv) {
+function faMake(seed, lv, x) {
   let C2 = null;
-  for (let k = 0; !C2 && k < 20; k++) C2 = faGen(seed + k * 7919, lv);
+  for (let k = 0; !C2 && k < 20; k++) C2 = faGen(seed + k * 7919, lv, x);
   if (C2) C2.seed = seed;
   return C2;
 }
@@ -18025,31 +18050,32 @@ function faDeal(C2, N) {
   });
   return H2;
 }
-function faNew(seed, lv, mode, n) {
-  const C2 = faMake(seed, lv);
-  FAS.cur = { C: C2, tab: "tafel", x: [], marks: {}, seen: [], pick: null, proof: [], tries: 0, won: false, mode: mode || "solo", n: n || 1, out: [], turn: 0, who: null, winner: null };
+function faNew(seed, lv, mode, n, wk) {
+  const C2 = faMake(seed, lv, mode === "samen" ? 1 : 0);
+  FAS.cur = { C: C2, tab: "tafel", x: [], marks: {}, seen: [], pick: null, proof: [], tries: 0, won: false, mode: mode || "solo", n: n || 1, out: [], turn: 0, who: null, winner: null, wk: wk || null, plain: [], t0: Date.now() };
   faSave();
 }
 const FAPH = (() => {
   try {
     const v = new URLSearchParams(location.search).get("fa");
     if (!v) return null;
-    const [s, l, n, p] = v.split(".").map(Number);
+    const [s, l, n, p, x] = v.split(".").map(Number);
     if (!(n >= 2 && n <= 5 && p >= 1 && p <= n && l >= 0 && l <= 2)) return null;
-    return { s, l, n, p };
+    return { s, l, n, p, x: x ? 1 : 0 };
   } catch (e) {
     return null;
   }
 })();
 if (FAPH && !window.MDKIOSK) game = "archief";
-function faDocHTML(d, n) {
-  return '<article class="fa-doc fa-d-'.concat(d.seal, '"><header>').concat(n != null ? '<span class="fa-n">'.concat(n, "</span>") : "", "<b>").concat(d.t, "</b>").concat(faSeal(d.seal), "</header><small>").concat(d.src, "</small><p>").concat(d.q, "</p>").concat(d.note ? '<p class="fa-note">'.concat(d.note, "</p>") : "", "</article>");
+function faDocHTML(d, n, lv, plain2) {
+  const hand = lv >= 1 && d.seal === "rec" && !plain2;
+  return '<article class="fa-doc fa-d-'.concat(d.seal, '"><header>').concat(n != null ? '<span class="fa-n">'.concat(n, "</span>") : "", "<b>").concat(d.t, "</b>").concat(faSeal(d.seal), "</header><small>").concat(d.src, '</small><p class="').concat(hand ? "fa-hand" : "", '">').concat(d.q, "</p>").concat(lv >= 1 && d.seal === "rec" ? '<button type="button" class="fa-plain" data-plain="'.concat(d.id, '">').concat(plain2 ? "✒️ Oud handschrift" : "🔤 Gewone letters", "</button>") : "").concat(d.note ? '<p class="fa-note">'.concat(d.note, "</p>") : "", "</article>");
 }
 function faUrl(C2, n, p) {
-  return location.origin + location.pathname.replace(/(tv|join)\/?(index\.html)?$/, "") + "?fa=".concat(C2.seed, ".").concat(C2.lv, ".").concat(n, ".").concat(p);
+  return location.origin + location.pathname.replace(/(tv|join)\/?(index\.html)?$/, "") + "?fa=".concat(C2.seed, ".").concat(C2.lv, ".").concat(n, ".").concat(p).concat(C2.x ? ".1" : "");
 }
 function renderFaPhone(P) {
-  const Q = FAPH, C2 = faMake(Q.s, Q.l), key = [Q.s, Q.l, Q.n, Q.p].join("."), ST = store.get("md-archief-ph") || {}, M = ST[key] || (ST[key] = { x: [], ask: null });
+  const Q = FAPH, C2 = faMake(Q.s, Q.l, Q.x), key = [Q.s, Q.l, Q.n, Q.p, Q.x].join("."), ST = store.get("md-archief-ph") || {}, M = ST[key] || (ST[key] = { x: [], ask: null });
   const sv = () => store.set("md-archief-ph", ST);
   const H2 = faDeal(C2, Q.n)[Q.p - 1].map((id) => C2.docs.find((d) => d.id === id)), num = (id) => C2.docs.findIndex((d) => d.id === id) + 1;
   let ans = "";
@@ -18060,7 +18086,14 @@ function renderFaPhone(P) {
     });
     ans = '<div class="fa-ans '.concat(hit.length ? "ja" : "nee", '"><b>').concat(hit.length ? "JA" : "NEE", "</b> · ").concat(hit.length ? "jouw stuk “".concat(hit[0].t, "” sluit ").concat(c.fn, " ").concat(c.ln, " uit. Zeg eerlijk “ja”, maar laat het stuk niet zien.") : "geen van jouw stukken sluit ".concat(c.fn, " ").concat(c.ln, " uit. Zeg eerlijk “nee”."), "</div>");
   }
-  P.innerHTML = '<div class="fa-wrap"><div class="storyhead"><span class="kicker">Het Familiearchief · samen spelen · '.concat(FA.LV[C2.lv][0], "</span><h3>Speler ").concat(Q.p, " van ").concat(Q.n, '</h3><p>Dit zijn jouw <b>geheime stukken</b>. Laat ze aan niemand zien. Beschuldigen doe je op het grote scherm.</p></div><div class="fa-body"><h4 class="fa-h">Jouw geheime stukken</h4><div class="fa-docs">').concat(H2.map((d) => faDocHTML(d, num(d.id))).join(""), '</div>\n <h4 class="fa-h">Iemand vraagt je naar een kandidaat?</h4><p class="fa-sub">Kies haar. De app zegt of een van jouw stukken haar uitsluit.</p><select id="faAsk" class="fa-sel"><option value="">Kies een kandidaat…</option>').concat(C2.people.map((c, i) => '<option value="'.concat(i, '" ').concat(M.ask === i ? "selected" : "", ">").concat(c.fn, " ").concat(c.ln, "</option>")).join(""), "</select>").concat(ans, '\n <h4 class="fa-h">Jouw kladblok (').concat(12 - M.x.length, ' over)</h4><div class="fa-mini">').concat(C2.people.map((c, i) => '<button type="button" class="fa-mc '.concat(M.x.includes(i) ? "off" : "", '" data-mx="').concat(i, '" aria-pressed="').concat(M.x.includes(i), '">').concat(faFace(c, 40), "<span><b>").concat(c.fn, " ").concat(c.ln, "</b><small>").concat(FA.B[c.b][0], "–").concat(String(FA.B[c.b][1]).slice(2), " · ").concat(c.o, " · ").concat(c.k.replace(" kerk", ""), " · ").concat(c.v, "</small></span></button>")).join(""), "</div></div></div>");
+  P.innerHTML = '<div class="fa-wrap"><div class="storyhead"><span class="kicker">Het Familiearchief · samen spelen · '.concat(FA.LV[C2.lv][0], "</span><h3>Speler ").concat(Q.p, " van ").concat(Q.n, '</h3><p>Dit zijn jouw <b>geheime stukken</b>. Laat ze aan niemand zien. Beschuldigen doe je op het grote scherm.</p></div><div class="fa-body"><h4 class="fa-h">Jouw geheime stukken</h4><div class="fa-docs">').concat(H2.map((d) => faDocHTML(d, num(d.id), C2.lv, (M.plain || []).includes(d.id))).join(""), '</div>\n <h4 class="fa-h">Iemand vraagt je naar een kandidaat?</h4><p class="fa-sub">Kies haar. De app zegt of een van jouw stukken haar uitsluit.</p><select id="faAsk" class="fa-sel"><option value="">Kies een kandidaat…</option>').concat(C2.people.map((c, i) => '<option value="'.concat(i, '" ').concat(M.ask === i ? "selected" : "", ">").concat(c.fn, " ").concat(c.ln, "</option>")).join(""), "</select>").concat(ans, '\n <h4 class="fa-h">Jouw kladblok (').concat(12 - M.x.length, ' over)</h4><div class="fa-mini">').concat(C2.people.map((c, i) => '<button type="button" class="fa-mc '.concat(M.x.includes(i) ? "off" : "", '" data-mx="').concat(i, '" aria-pressed="').concat(M.x.includes(i), '">').concat(faFace(c, 40), "<span><b>").concat(c.fn, " ").concat(c.ln, "</b><small>").concat(FA.B[c.b][0], "–").concat(String(FA.B[c.b][1]).slice(2), " · ").concat(c.o, " · ").concat(c.k.replace(" kerk", ""), " · ").concat(c.v, "</small></span></button>")).join(""), "</div></div></div>");
+  P.querySelectorAll("[data-plain]").forEach((b) => b.onclick = () => {
+    M.plain = M.plain || [];
+    const id = b.dataset.plain;
+    M.plain = M.plain.includes(id) ? M.plain.filter((x) => x !== id) : M.plain.concat(id);
+    sv();
+    renderFaPhone(P);
+  });
   $("faAsk").onchange = (e) => {
     M.ask = e.target.value === "" ? null : +e.target.value;
     sv();
@@ -18092,6 +18125,17 @@ function faPlayers(n, cb) {
   document.body.appendChild(ov);
   document.body.style.overflow = "hidden";
 }
+function faTree(al) {
+  const L = al.slice(-15), per = 3, R2 = Math.ceil(L.length / per), W = 360, H2 = 20 + R2 * 150 + 90;
+  let br = "", nodes = "";
+  L.forEach((a, i) => {
+    const r = Math.floor(i / per), inRow = Math.min(per, L.length - r * per), j = i % per, x = W * (j + 0.5) / inRow, y = 20 + r * 150;
+    br += '<path d="M'.concat(W / 2, " ").concat(y + 175, " Q").concat((x + W / 2) / 2, " ").concat(y + 150, " ").concat(x, " ").concat(y + 118, '" stroke="#7a5a32" stroke-width="5" fill="none" stroke-linecap="round"/>');
+    nodes += '<g transform="translate('.concat((x - 45).toFixed(1), " ").concat(y, ')"><rect width="90" height="118" rx="4" fill="#f6efdc" stroke="#8a6a3a"/><g transform="translate(10 6)">').concat(faFace(a, 70).replace('width="70"', 'width="70" height="72"'), '</g><text x="45" y="92" text-anchor="middle" font-size="10.5" font-family="Georgia,serif" fill="#2a2118">').concat(a.fn, " ").concat(a.ln, '</text><text x="45" y="106" text-anchor="middle" font-size="9.5" fill="#7a6650">').concat(a.by, "–").concat(a.dy, "</text></g>");
+  });
+  const trunk = '<path d="M'.concat(W / 2 - 22, " ").concat(H2, " Q").concat(W / 2 - 6, " ").concat(H2 - 60, " ").concat(W / 2 - 8, " 150 L").concat(W / 2 + 8, " 150 Q").concat(W / 2 + 6, " ").concat(H2 - 60, " ").concat(W / 2 + 22, " ").concat(H2, 'Z" fill="#6b4a2a"/>');
+  return '<div class="fa-treebox"><svg viewBox="0 0 '.concat(W, " ").concat(H2, '" class="fa-tree" role="img" aria-label="Stamboom met ').concat(L.length, ' voorouders">').concat(trunk).concat(br).concat(nodes, '<text x="').concat(W / 2, '" y="').concat(H2 - 8, '" text-anchor="middle" font-size="13" font-family="Georgia,serif" fill="#f6efdc">jij</text></svg></div>');
+}
 function renderArchief() {
   const P = $("pArchief");
   if (!P) return;
@@ -18109,11 +18153,11 @@ function renderArchief() {
   };
   let body = "";
   if (tab === "tafel") body = '<details class="fa-letter" '.concat(S.seen.includes("brief") ? "" : "open", '><summary>✉️ De brief van de klant</summary><div class="fa-paper">').concat(C2.letter, '</div></details><p class="fa-sub">Twaalf kandidaten. Tik op een kaart om haar om te draaien als ze afvalt. Nog over: <b>').concat(12 - S.x.length, '</b></p><div class="fa-grid">').concat(C2.people.map(card).join(""), "</div>");
-  else if (tab === "archief" && SAM) body = '<div class="fa-legend">'.concat(["rec", "der", "ger"].map((s) => "<div>".concat(faSeal(s), "<small>").concat(FA.SEAL[s][1], "</small></div>")).join(""), '</div><p class="fa-sub">Op tafel liggen alleen de familieverhalen. De archiefstukken zijn <b>geheim</b>: ieder heeft er een paar op zijn eigen telefoon (zie Spelers).</p><div class="fa-docs">').concat(C2.docs.map((d, n) => d.seal === "ger" ? faDocHTML(d, n + 1) : "").join(""), "</div>");
+  else if (tab === "archief" && SAM) body = '<div class="fa-legend">'.concat(["rec", "der", "ger"].map((s) => "<div>".concat(faSeal(s), "<small>").concat(FA.SEAL[s][1], "</small></div>")).join(""), '</div><p class="fa-sub">Op tafel liggen alleen de familieverhalen. De archiefstukken zijn <b>geheim</b>: ieder heeft er een paar op zijn eigen telefoon (zie Spelers).</p><div class="fa-docs">').concat(C2.docs.map((d, n) => d.seal === "ger" ? faDocHTML(d, n + 1, C2.lv) : "").join(""), "</div>");
   else if (tab === "spelers") {
     const tn = alive.length ? alive[S.turn % alive.length] : null;
     body = '<div class="fa-rules"><b>Zo speel je samen</b><ol><li>Wie aan de beurt is, vraagt één andere speler: “Sluit een van jouw stukken <i>naam</i> uit?” Die zegt eerlijk ja of nee (zijn telefoon helpt), maar laat het stuk niet zien.</li><li>Of je beschuldigt: noem de voorouder bij <b>Zegel</b> en laat drie stukken zien als bewijs. Fout? Dan lig je eruit.</li><li>Wie als eerste de voorouder bewijst, wint.</li></ol></div>'.concat(tn != null && !S.winner && S.winner !== 0 ? '<div class="fa-turn">Aan de beurt: <b>Speler '.concat(tn + 1, '</b><button class="btn small primary" type="button" id="faTurn">Volgende beurt</button></div>') : "", '<div class="fa-pl">').concat([...Array(S.n).keys()].map((i) => '<div class="fa-plc '.concat(S.out.includes(i) ? "out" : "", '"><b>Speler ').concat(i + 1, "</b>").concat(S.out.includes(i) ? "<small>Ligt eruit</small>" : "<small>".concat(H2[i].length, " geheime ").concat(H2[i].length === 1 ? "stuk" : "stukken", "</small>"), '<div class="fa-qr">').concat(typeof tvQrSvg === "function" ? tvQrSvg(faUrl(C2, S.n, i + 1)) : "", '</div><button type="button" class="btn small" data-peek="').concat(i, '">Bekijk hier (niet spieken)</button></div>')).join(""), "</div>");
-  } else if (tab === "archief") body = '<div class="fa-legend">'.concat(["rec", "der", "ger"].map((s) => "<div>".concat(faSeal(s), "<small>").concat(FA.SEAL[s][1], "</small></div>")).join(""), '</div><div class="fa-docs">').concat(C2.docs.map((d, n) => '<article class="fa-doc fa-d-'.concat(d.seal, '"><header><span class="fa-n">').concat(n + 1, "</span><b>").concat(d.t, "</b>").concat(faSeal(d.seal), "</header><small>").concat(d.src, "</small><p>").concat(d.q, "</p>").concat(d.note ? '<p class="fa-note">'.concat(d.note, "</p>") : "").concat(C2.lv === 0 && d.seal !== "ger" ? '<button type="button" class="fa-help" data-fh="'.concat(d.id, '">Streep weg wie hier niet bij past</button>') : "", "</article>")).join(""), "</div>");
+  } else if (tab === "archief") body = '<div class="fa-legend">'.concat(["rec", "der", "ger"].map((s) => "<div>".concat(faSeal(s), "<small>").concat(FA.SEAL[s][1], "</small></div>")).join(""), '</div><div class="fa-docs">').concat(C2.docs.map((d, n) => faDocHTML(d, n + 1, C2.lv, (S.plain || []).includes(d.id)).replace(/<\/article>$/, "".concat(C2.lv === 0 && d.seal !== "ger" ? '<button type="button" class="fa-help" data-fh="'.concat(d.id, '">Streep weg wie hier niet bij past</button>') : "", "</article>"))).join(""), "</div>");
   else if (tab === "form") body = '<p class="fa-sub">Onderzoeksformulier. Tik op een vakje: ✗ = past niet bij dit stuk, ✓ = past wel.</p><div class="fa-scroll"><table class="fa-tab"><thead><tr><th>Kandidaat</th>'.concat(C2.docs.map((d, n) => '<th title="'.concat(d.t, '">').concat(n + 1, '<br><span class="fa-dot fa-').concat(d.seal, '"></span></th>')).join(""), "</tr></thead><tbody>").concat(C2.people.map((p, i) => '<tr class="'.concat(S.x.includes(i) ? "off" : "", '"><th>').concat(p.fn, " ").concat(p.ln, "</th>").concat(C2.docs.map((d) => {
     const k = i + "." + d.id, v = S.marks[k] || "";
     return '<td><button type="button" data-fm="'.concat(k, '" aria-label="').concat(p.fn, ", stuk ").concat(d.t, ": ").concat(v === "x" ? "past niet" : v === "v" ? "past" : "leeg", '">').concat(v === "x" ? "✗" : v === "v" ? "✓" : "", "</button></td>");
@@ -18121,10 +18165,10 @@ function renderArchief() {
   else {
     if (S.won || SAM && !alive.length) {
       const t = C2.people[C2.ans], d = C2.people[C2.dec];
-      body = '<div class="fa-open"><div class="fa-envl">Verzegelde oplossing · geopend</div>'.concat(SAM ? '<p class="fa-win">'.concat(S.winner != null ? "🏆 Speler ".concat(S.winner + 1, " wint!") : "Niemand heeft het bewezen.", "</p>") : "", '<div class="fa-portrait">').concat(faFace(t, 150), "</div><h4>").concat(t.fn, " ").concat(t.ln, '</h4><p class="fa-years">').concat(t.by, " – ").concat(C2.dy, " · ").concat(t.v, "</p><p>").concat(t.fn, " werd rond ").concat(t.by, " geboren en woonde in ").concat(t.v, ". Ze trouwde in de ").concat(t.k, " met ").concat(t.man, ", ").concat(FA.OS[t.o], ". Ze stierf in ").concat(C2.dy, ", ").concat(C2.age, " jaar oud.</p><p>De familie dacht ").concat(C2.letter.match(/het verhaal (dat .+?)\./)[1], ". Maar dat klopte bij ").concat(d.fn, " ").concat(d.ln, ', niet bij haar. De archieven logen niet.</p><div class="controls"><button class="btn primary" type="button" id="faNext">Nieuwe zaak</button></div></div>');
+      body = '<div class="fa-open"><div class="fa-envl">Verzegelde oplossing · geopend</div>'.concat(SAM ? '<p class="fa-win">'.concat(S.winner != null ? "🏆 Speler ".concat(S.winner + 1, " wint!") : "Niemand heeft het bewezen.", "</p>") : "", '<div class="fa-portrait">').concat(faFace(t, 150), "</div><h4>").concat(t.fn, " ").concat(t.ln, '</h4><p class="fa-years">').concat(t.by, " – ").concat(C2.dy, " · ").concat(t.v, "</p><p>").concat(t.fn, " werd rond ").concat(t.by, " geboren en woonde in ").concat(t.v, ". Ze trouwde in de ").concat(t.k, " met ").concat(t.man, ", ").concat(FA.OS[t.o], ". Ze stierf in ").concat(C2.dy, ", ").concat(C2.age, " jaar oud.</p><p>De familie dacht ").concat(C2.letter.match(/het verhaal (dat .+?)\./)[1], ". Maar dat klopte bij ").concat(d.fn, " ").concat(d.ln, ", niet bij haar. De archieven logen niet.</p>").concat(S.wk ? '<div class="fa-weekres"><b>Zaak van week '.concat(S.wk, "</b><p>Opgelost in ").concat(S.tries, " ").concat(S.tries === 1 ? "poging" : "pogingen", ", ").concat(((m) => m + (m === 1 ? " minuut" : " minuten"))(Math.max(1, Math.round(((S.tEnd || Date.now()) - S.t0) / 6e4))), '.</p><button class="btn small" type="button" id="faShare">Deel je resultaat</button><span id="faShareMsg" class="fa-sub"></span></div>') : "", '<div class="controls"><button class="btn primary" type="button" id="faNext">Nieuwe zaak</button></div></div>');
     } else body = "".concat(SAM ? '<h4 class="fa-h">Wie beschuldigt?</h4><div class="fa-lv">'.concat(alive.map((i) => '<button type="button" data-who="'.concat(i, '" aria-pressed="').concat(S.who === i, '">Speler ').concat(i + 1, "</button>")).join(""), "</div>") : "", '<p class="fa-sub">Noem de voorouder en leg <b>drie stukken</b> als bewijs. Alleen archief en afgeleide stukken tellen: een gerucht is geen bewijs.</p><h4 class="fa-h">Wie is het?</h4><select id="faWho" class="fa-sel"><option value="">Kies een kandidaat…</option>').concat(C2.people.map((p, i) => '<option value="'.concat(i, '" ').concat(S.pick === i ? "selected" : "", ">").concat(p.fn, " ").concat(p.ln).concat(S.x.includes(i) ? " (afgestreept)" : "", "</option>")).join(""), '</select><h4 class="fa-h">Bewijs (').concat(S.proof.length, '/3)</h4><div class="fa-proof">').concat(C2.docs.map((d, n) => '<button type="button" class="fa-pd '.concat(S.proof.includes(d.id) ? "on" : "", '" data-fp="').concat(d.id, '" aria-pressed="').concat(S.proof.includes(d.id), '"><span class="fa-n">').concat(n + 1, "</span>").concat(d.t, '<span class="fa-dot fa-').concat(d.seal, '"></span></button>')).join(""), '</div><div class="controls"><button class="btn primary" type="button" id="faGo" ').concat(S.pick != null && S.proof.length === 3 && (!SAM || S.who != null) ? "" : "disabled", '>Breek het zegel</button></div><p class="fa-res" aria-live="polite">').concat(S.msg || "", "</p>");
   }
-  P.innerHTML = '<div class="fa-wrap"><div class="storyhead"><span class="kicker">Het Familiearchief · '.concat(FA.LV[C2.lv][0], " · ").concat(FA.LV[C2.lv][1], '</span><h3>Vind de voorouder</h3></div><div class="fa-top"><div class="fa-lv" role="radiogroup" aria-label="Niveau">').concat(FA.LV.map((l, i) => '<button type="button" data-flv="'.concat(i, '" aria-pressed="').concat(C2.lv === i, '">').concat(l[0], "</button>")).join(""), '</div><div class="fa-lv" role="radiogroup" aria-label="Speelwijze"><button type="button" data-fmode="solo" aria-pressed="').concat(!SAM, '">👤 Alleen</button><button type="button" data-fmode="samen" aria-pressed="').concat(SAM, '">👥 Samen').concat(SAM ? " (".concat(S.n, ")") : "", '</button></div><button type="button" class="btn small" id="faAlb">📖 Album (').concat(FAS.album.length, ')</button></div><nav class="fa-tabs" role="tablist">').concat(tabs.map(([k, n]) => '<button type="button" role="tab" data-ftab="'.concat(k, '" aria-selected="').concat(tab === k, '">').concat(n, "</button>")).join(""), '</nav><div class="fa-body">').concat(body, "</div></div>");
+  P.innerHTML = '<div class="fa-wrap"><div class="storyhead"><span class="kicker">Het Familiearchief · '.concat(S.wk ? "Zaak van week ".concat(S.wk, " · ") : "").concat(FA.LV[C2.lv][0], " · ").concat(FA.LV[C2.lv][1], '</span><h3>Vind de voorouder</h3></div><div class="fa-top"><div class="fa-lv" role="radiogroup" aria-label="Niveau">').concat(FA.LV.map((l, i) => '<button type="button" data-flv="'.concat(i, '" aria-pressed="').concat(C2.lv === i, '">').concat(l[0], "</button>")).join(""), '</div><div class="fa-lv" role="radiogroup" aria-label="Speelwijze"><button type="button" data-fmode="solo" aria-pressed="').concat(!SAM, '">👤 Alleen</button><button type="button" data-fmode="samen" aria-pressed="').concat(SAM, '">👥 Samen').concat(SAM ? " (".concat(S.n, ")") : "", '</button></div><button type="button" class="btn small" id="faWeek">🏆 Zaak van de week</button><button type="button" class="btn small" id="faAlb">📖 Album (').concat(FAS.album.length, ')</button></div><nav class="fa-tabs" role="tablist">').concat(tabs.map(([k, n]) => '<button type="button" role="tab" data-ftab="'.concat(k, '" aria-selected="').concat(tab === k, '">').concat(n, "</button>")).join(""), '</nav><div class="fa-body">').concat(body, "</div></div>");
   P.querySelectorAll("[data-ftab]").forEach((b) => b.onclick = () => {
     S.tab = b.dataset.ftab;
     faSave();
@@ -18165,6 +18209,13 @@ function renderArchief() {
     b.textContent = "✓ Weggestreept op de tafel";
     b.disabled = true;
   });
+  P.querySelectorAll("[data-plain]").forEach((b) => b.onclick = () => {
+    S.plain = S.plain || [];
+    const id = b.dataset.plain;
+    S.plain = S.plain.includes(id) ? S.plain.filter((x) => x !== id) : S.plain.concat(id);
+    faSave();
+    renderArchief();
+  });
   P.querySelectorAll("[data-fmode]").forEach((b) => b.onclick = () => {
     const m = b.dataset.fmode;
     if (m === "solo") {
@@ -18198,7 +18249,7 @@ function renderArchief() {
     ov.setAttribute("aria-label", "Geheime stukken speler " + (i + 1));
     let shown = false;
     const draw = () => {
-      ov.innerHTML = '<div class="ec-ovc"><div class="fa-album"><h4>Speler '.concat(i + 1, "</h4>").concat(shown ? '<div class="fa-docs">'.concat(H2[i].map((id) => faDocHTML(C2.docs.find((d) => d.id === id), C2.docs.findIndex((d) => d.id === id) + 1)).join(""), "</div>") : "<p>Alleen speler " + (i + 1) + ' mag kijken. De anderen kijken weg.</p><div class="controls"><button class="btn primary" type="button" id="faShow">Ik ben speler ' + (i + 1) + ", laat zien</button></div>", '</div><div class="controls"><button class="btn" type="button" id="faPx">Sluit</button></div></div>');
+      ov.innerHTML = '<div class="ec-ovc"><div class="fa-album"><h4>Speler '.concat(i + 1, "</h4>").concat(shown ? '<div class="fa-docs">'.concat(H2[i].map((id) => faDocHTML(C2.docs.find((d) => d.id === id), C2.docs.findIndex((d) => d.id === id) + 1, C2.lv, true)).join(""), "</div>") : "<p>Alleen speler " + (i + 1) + ' mag kijken. De anderen kijken weg.</p><div class="controls"><button class="btn primary" type="button" id="faShow">Ik ben speler ' + (i + 1) + ", laat zien</button></div>", '</div><div class="controls"><button class="btn" type="button" id="faPx">Sluit</button></div></div>');
       const sh = ov.querySelector("#faShow");
       if (sh) sh.onclick = () => {
         shown = true;
@@ -18244,7 +18295,12 @@ function renderArchief() {
       if (left.length === 1) {
         S.won = true;
         S.msg = "";
+        S.tEnd = Date.now();
         if (SAM) S.winner = S.who;
+        if (S.wk) {
+          FAS.weeks = FAS.weeks || {};
+          FAS.weeks[S.wk] = { tries: S.tries, min: Math.max(1, Math.round((S.tEnd - S.t0) / 6e4)) };
+        }
         FAS.solved++;
         FAS.album.push({ fn: C2.people[C2.ans].fn, ln: C2.people[C2.ans].ln, by: C2.people[C2.ans].by, dy: C2.dy, v: C2.people[C2.ans].v, lv: C2.lv });
         if (typeof mdSnd === "function") mdSnd("ding");
@@ -18268,6 +18324,27 @@ function renderArchief() {
     renderArchief();
     window.scrollTo({ top: 0 });
   };
+  const wb = $("faWeek");
+  if (wb) wb.onclick = () => {
+    const d = /* @__PURE__ */ new Date(), j = new Date(d.getFullYear(), 0, 1), wk = Math.ceil(((d - j) / 864e5 + j.getDay() + 1) / 7);
+    faNew(d.getFullYear() * 1e3 + wk * 7 + 3, 1, "solo", 1, wk);
+    renderArchief();
+    window.scrollTo({ top: 0 });
+  };
+  const shb = $("faShare");
+  if (shb) shb.onclick = async () => {
+    const t = "🔎 Het Familiearchief · zaak van week ".concat(S.wk, ": voorouder gevonden in ").concat(S.tries, " ").concat(S.tries === 1 ? "poging" : "pogingen", " (").concat(Math.max(1, Math.round(((S.tEnd || Date.now()) - S.t0) / 6e4)), " min). Lukt het jou ook? ").concat(location.origin + location.pathname);
+    try {
+      if (navigator.share) {
+        await navigator.share({ text: t });
+        return;
+      }
+      await navigator.clipboard.writeText(t);
+      $("faShareMsg").textContent = " Gekopieerd!";
+    } catch (e) {
+      $("faShareMsg").textContent = " " + t;
+    }
+  };
   const ab = $("faAlb");
   if (ab) ab.onclick = () => {
     const ov = document.createElement("div");
@@ -18275,7 +18352,7 @@ function renderArchief() {
     ov.setAttribute("role", "dialog");
     ov.setAttribute("aria-modal", "true");
     ov.setAttribute("aria-label", "Familiealbum");
-    ov.innerHTML = '<div class="ec-ovc"><div class="fa-album"><h4>📖 Familiealbum</h4>'.concat(FAS.album.length ? '<div class="fa-alg">'.concat(FAS.album.map((a) => "<figure>".concat(faFace(a, 90), "<figcaption><b>").concat(a.fn, " ").concat(a.ln, "</b><br>").concat(a.by, " – ").concat(a.dy, "<br>").concat(a.v, "</figcaption></figure>")).join(""), "</div>") : "<p>Nog leeg. Elke voorouder die je vindt, komt hier.</p>", '</div><div class="controls"><button class="btn" type="button">Sluit</button></div></div>');
+    ov.innerHTML = '<div class="ec-ovc"><div class="fa-album"><h4>📖 Familiealbum</h4><p class="fa-sub2">'.concat(FAS.album.length, " ").concat(FAS.album.length === 1 ? "voorouder" : "voorouders", " gevonden").concat(FAS.album.length < 5 ? " · nog ".concat(5 - FAS.album.length, " voor de badge <b>Stamboomspeurder</b>") : " · badge <b>Stamboomspeurder</b> verdiend!", "</p>").concat(FAS.album.length ? faTree(FAS.album) : "<p>Nog leeg. Elke voorouder die je vindt, komt hier in je stamboom.</p>", '</div><div class="controls"><button class="btn" type="button">Sluit</button></div></div>');
     ov.querySelector("button").onclick = () => {
       ov.remove();
       document.body.style.overflow = "";

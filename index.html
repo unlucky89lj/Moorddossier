@@ -1151,6 +1151,18 @@ body.kiosk-join .tv-jform .btn.primary{font-size:22px;padding:16px}
  .ep-page{page-break-after:always;break-after:page;padding:0 4mm}.ep-page .ec-doc{font-size:14pt}.ep-page .ec-dh h4{font-size:18pt}.ep-page .ec-doc{box-shadow:none;background:#fff;border:1px solid #999}
  .ep-cover h1,.ep-env h1{font:800 32px Georgia,serif;margin-top:30mm}.ep-env{text-align:center}.ep-env h1{margin-top:80mm;border:4px double #000;padding:10mm}}
 /* [FAMILIEARCHIEF] */
+.fa-tv{--ink:#f3ead2;--muted:#cdbfa4;--card:#2a1d14;--rule:#6a5038;--page:#1e150e;color:#f3ead2;font-size:20px}
+.fa-tvbar{display:flex;align-items:center;grid-gap:20px;gap:20px;padding:14px 26px 8px}.fa-tvbar b{font:700 32px Georgia,serif;color:#f0c060}.fa-tvbar span{margin-left:auto;font-size:18px;opacity:.75}
+.fa-tvscroll{flex:1;overflow:auto;padding:0 26px 26px}
+.fa-tv .storyhead h3{font-size:44px;color:#f3ead2}.fa-tv .storyhead .kicker{font-size:17px;color:#f2a58f}.fa-tv .fa-top .btn,.fa-tv .fa-top button{font-size:18px!important;padding:9px 14px!important}.fa-tv .fa-top .btn{color:#f3ead2;border-color:#cdbfa4}
+.fa-tv .fa-grid{grid-template-columns:repeat(6,minmax(0,1fr));grid-gap:12px;gap:12px}.fa-tv .fa-card b{font-size:19px}.fa-tv .fa-card dl{font-size:15px}
+.fa-tv .fa-docs{grid-template-columns:repeat(3,minmax(0,1fr))}.fa-tv .fa-doc p{font-size:19px}.fa-tv .fa-doc header b{font-size:19px}
+.fa-tv .fa-pl{grid-template-columns:repeat(5,minmax(0,1fr))}.fa-tv .fa-qr{width:170px}.fa-tv .fa-proof{grid-template-columns:repeat(4,minmax(0,1fr))}
+.fa-tv .fa-tabs button,.fa-tv .fa-lv button{font-size:19px;padding:10px 6px}.fa-tv .fa-paper{font-size:19px}.fa-tv .fa-sub{font-size:18px}
+.fa-tv button:focus,.fa-tv select:focus,.fa-tv summary:focus{outline:5px solid #f0c060!important;outline-offset:3px;position:relative;z-index:2}
+.kiosk-tv .ec-ov{z-index:100000}
+.fa-tvhome{background:#b8892e!important;color:#1c140a!important}
+
 .fa-hand{font-family:'Segoe Script','Brush Script MT','Lucida Handwriting','Snell Roundhand',cursive!important;font-size:18px!important;color:#2a2a5a!important;letter-spacing:.01em}
 .fa-plain{margin-top:6px;border:0;background:transparent;color:#7a5a2a;font:600 13px var(--cond);cursor:pointer;padding:4px 0;text-decoration:underline}
 .fa-weekres .btn{color:#2a2118;border-color:#2a2118}.fa-weekres{margin:12px 0;padding:10px;border:2px dashed #b8892e;border-radius:8px}.fa-weekres p{text-align:center!important;margin:4px 0}
@@ -13501,6 +13513,7 @@ const tvScrList = (s, C2) => (s.tvsolo ? TVSCR.map((x) => x[0] === "spel" ? ["do
 function tvStageRender() {
   if (!tvStage || tvStage.hidden) return;
   if (tvScr === "home") return tvHomeRender();
+  if (tvScr === "archief") return faTv();
   if (tvScr === "eigen") return tvEigenTv();
   const C2 = tvC(tvd.cur);
   if (!C2) return;
@@ -14363,7 +14376,7 @@ function tvEigenTv() {
 }
 function tvHomeRender() {
   const url = tvJoinUrl("").replace(/^https?:\/\//, "");
-  tvStage.innerHTML = '<div class="tv-16 tv-home"><div class="tv-hlogo">'.concat(PASBADGE, '<div><h1>MOORDDOSSIER <span>TV</span></h1><p>Echte moordzaken voor op het grote scherm. Jullie telefoons zijn de controllers.</p></div></div>\n <div class="tv-hlvl"><button type="button" class="tv-eigbtn" id="tvEig">🎉 Eigen zaak met vrienden</button>').concat(["Alle", "Makkelijk", "Gemiddeld", "Moeilijk", "Expert"].map((l) => '<button type="button" data-hl="'.concat(l, '" aria-pressed="').concat((tvHomeLv || "Alle") === l, '">').concat(l === "Alle" ? "Alle zaken" : "".concat("⭐".repeat(TVLV[l]), " ").concat(l), "</button>")).join(""), '</div>\n <div class="tv-hgrid">').concat(TVCASES.filter((c) => !tvHomeLv || tvHomeLv === "Alle" || c.level === tvHomeLv).map((c) => {
+  tvStage.innerHTML = '<div class="tv-16 tv-home"><div class="tv-hlogo">'.concat(PASBADGE, '<div><h1>MOORDDOSSIER <span>TV</span></h1><p>Echte moordzaken voor op het grote scherm. Jullie telefoons zijn de controllers.</p></div></div>\n <div class="tv-hlvl"><button type="button" class="tv-eigbtn" id="tvEig">🎉 Eigen zaak met vrienden</button><button type="button" class="tv-eigbtn fa-tvhome" id="tvFA">🌳 Familiearchief</button>').concat(["Alle", "Makkelijk", "Gemiddeld", "Moeilijk", "Expert"].map((l) => '<button type="button" data-hl="'.concat(l, '" aria-pressed="').concat((tvHomeLv || "Alle") === l, '">').concat(l === "Alle" ? "Alle zaken" : "".concat("⭐".repeat(TVLV[l]), " ").concat(l), "</button>")).join(""), '</div>\n <div class="tv-hgrid">').concat(TVCASES.filter((c) => !tvHomeLv || tvHomeLv === "Alle" || c.level === tvHomeLv).map((c) => {
     const s = tvS(c.id);
     return '<article class="tv-hmini"><div>'.concat(tvPhoto(c, 0), '</div><div><span class="tv-cfold"><i>ZAAK ').concat(c.nr, '</i></span> <span class="tv-lv">').concat(tvLv(c), "</span>").concat(c.tag ? ' <span class="tv-tag">'.concat(c.tag, "</span>") : "", "<h2>").concat(c.title, "</h2><p>").concat(c.blurb, "</p><small>").concat(c.level, " · ").concat(c.time, " · ").concat(c.players).concat(s.done ? s.won ? " · ✅ opgelost" : " · gesloten" : "", '</small>\n  <div class="tv-row left" style="margin-top:0"><button type="button" class="tv-btn primary" data-hc="').concat(c.id, '" data-solo="0">👥 Samen</button><button type="button" class="tv-btn" data-hc="').concat(c.id, '" data-solo="1">🕵️ Alleen</button></div></div></article>');
   }).join(""), '</div>\n <p class="tv-hfoot">Spelers doen mee via <b>').concat(url, "</b> met de kamercode die je zo te zien krijgt.</p></div>");
@@ -14375,6 +14388,13 @@ function tvHomeRender() {
     const e = tvStage.querySelector("#tvEig");
     if (e) e.onclick = () => {
       tvScr = "eigen";
+      tvStageRender();
+    };
+  }
+  {
+    const e = tvStage.querySelector("#tvFA");
+    if (e) e.onclick = () => {
+      tvScr = "archief";
       tvStageRender();
     };
   }
@@ -14400,7 +14420,7 @@ function tvHomeRender() {
   }
 }
 addEventListener("keydown", (e) => {
-  if (MDK !== "tv" || !tvStage || tvStage.hidden || tvScr === "home" || /INPUT|TEXTAREA/.test((e.target || {}).tagName || "")) return;
+  if (MDK !== "tv" || !tvStage || tvStage.hidden || tvScr === "home" || tvScr === "archief" || /INPUT|TEXTAREA/.test((e.target || {}).tagName || "")) return;
   const C2 = tvC(tvd.cur);
   if (!C2) return;
   const L = tvScrList(tvS(C2.id), C2), i = L.findIndex((x) => x[0] === tvScr);
@@ -18135,9 +18155,26 @@ function faTree(al) {
   const trunk = '<path d="M'.concat(W / 2 - 22, " ").concat(H2, " Q").concat(W / 2 - 6, " ").concat(H2 - 60, " ").concat(W / 2 - 8, " 150 L").concat(W / 2 + 8, " 150 Q").concat(W / 2 + 6, " ").concat(H2 - 60, " ").concat(W / 2 + 22, " ").concat(H2, 'Z" fill="#6b4a2a"/>');
   return '<div class="fa-treebox"><svg viewBox="0 0 '.concat(W, " ").concat(H2, '" class="fa-tree" role="img" aria-label="Stamboom met ').concat(L.length, ' voorouders">').concat(trunk).concat(br).concat(nodes, '<text x="').concat(W / 2, '" y="').concat(H2 - 8, '" text-anchor="middle" font-size="13" font-family="Georgia,serif" fill="#f6efdc">jij</text></svg></div>');
 }
+let FATGT = null, FAFOC = null;
 function renderArchief() {
-  const P = $("pArchief");
+  const P = FATGT && FATGT.isConnected ? FATGT : $("pArchief");
   if (!P) return;
+  if (P === FATGT) {
+    const a = document.activeElement;
+    if (a && P.contains(a)) {
+      const at = [...a.attributes].find((x) => /^data-|^id$/.test(x.name));
+      FAFOC = at ? "[" + at.name + '="' + at.value + '"]' : null;
+    }
+  }
+  setTimeout(() => {
+    if (P === FATGT && FAFOC) {
+      const e = P.querySelector(FAFOC) || P.querySelector("button");
+      if (e && (document.activeElement === document.body || !P.contains(document.activeElement))) try {
+        e.focus({ preventScroll: true });
+      } catch (_) {
+      }
+    }
+  }, 0);
   if (FAPH) return renderFaPhone(P);
   if (!FAS.cur) faNew(faToday(FAS.lv || 0), FAS.lv || 0);
   const S = FAS.cur, C2 = S.C, SAM = S.mode === "samen";
@@ -18360,6 +18397,62 @@ function renderArchief() {
     document.body.style.overflow = "hidden";
   };
 }
+function faTv() {
+  tvStage.innerHTML = '<div class="tv-16 fa-tv"><div class="fa-tvbar"><button type="button" class="tv-btn" id="faTvBack">← Terug</button><b>🌳 Het Familiearchief</b><span>Pijltjes: kiezen · OK: tikken · Terug: vorige</span></div><div class="fa-tvscroll" id="faTvBox"></div></div>';
+  FATGT = tvStage.querySelector("#faTvBox");
+  renderArchief();
+  tvStage.querySelector("#faTvBack").onclick = () => {
+    FATGT = null;
+    tvScr = "home";
+    tvStageRender();
+  };
+  tvFit();
+  const f = FATGT.querySelector("[data-ftab]");
+  if (f) try {
+    f.focus({ preventScroll: true });
+  } catch (e) {
+  }
+}
+function faSpatial(e) {
+  if (!FATGT || !FATGT.isConnected || document.querySelector(".ec-ov")) return;
+  const k = e.key, tg = (e.target || {}).tagName || "", dir = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[k];
+  if (k === "Escape" || k === "Backspace" && !/INPUT|SELECT|TEXTAREA/.test(tg)) {
+    e.preventDefault();
+    FATGT = null;
+    tvScr = "home";
+    tvStageRender();
+    return;
+  }
+  if (!dir || /SELECT|INPUT|TEXTAREA/.test(tg)) return;
+  const box = tvStage.querySelector(".fa-tv");
+  if (!box) return;
+  const els = [...box.querySelectorAll("button:not([disabled]),select,summary,a[href]")].filter((x) => x.offsetParent !== null), cur = document.activeElement;
+  if (!box.contains(cur)) {
+    e.preventDefault();
+    if (els[0]) els[0].focus();
+    return;
+  }
+  const r0 = cur.getBoundingClientRect(), cx = r0.left + r0.width / 2, cy = r0.top + r0.height / 2;
+  let best = null, bd2 = 1e9;
+  els.forEach((x) => {
+    if (x === cur) return;
+    const r = x.getBoundingClientRect(), dx = r.left + r.width / 2 - cx, dy = r.top + r.height / 2 - cy, along = dx * dir[0] + dy * dir[1];
+    if (along <= 4) return;
+    const side = Math.abs(dx * dir[1] + dy * dir[0]), d = along + side * 2.2;
+    if (d < bd2) {
+      bd2 = d;
+      best = x;
+    }
+  });
+  if (best) {
+    e.preventDefault();
+    best.focus({ preventScroll: true });
+    best.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }
+}
+addEventListener("keydown", (e) => {
+  if (window.MDKIOSK === "tv" && typeof tvScr !== "undefined" && tvScr === "archief") faSpatial(e);
+});
 function renderPanes() {
   const t = st.tab || "zaak";
   if (GHIDE.has(game)) {
@@ -18673,7 +18766,7 @@ function start(data) {
 }
 ((_b = (_a = window.claude) == null ? void 0 : _a.hot) == null ? void 0 : _b.ready) ? window.claude.hot.ready(start) : start((_e = (_d = (_c = window.claude) == null ? void 0 : _c.hot) == null ? void 0 : _d.data) != null ? _e : {});
 </script>
-<script>const APPV = "20261115164253";
+<script>const APPV = "20261115170507";
 if ("serviceWorker" in navigator) {
   addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {
   }));

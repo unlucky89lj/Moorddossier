@@ -18050,7 +18050,7 @@ function faDeal(C2, N) {
   return H2;
 }
 function faNew(seed, lv, mode, n, wk) {
-  const C2 = faMake(seed, lv, mode === "samen" ? 1 : 0);
+  const C2 = faMake(seed, lv, mode === "samen" || lv === 2 ? 1 : 0);
   FAS.cur = { C: C2, tab: "tafel", x: [], marks: {}, seen: [], pick: null, proof: [], tries: 0, won: false, mode: mode || "solo", n: n || 1, out: [], turn: 0, who: null, winner: null, wk: wk || null, plain: [], t0: Date.now() };
   faSave();
 }
@@ -18673,7 +18673,7 @@ function start(data) {
 }
 ((_b = (_a = window.claude) == null ? void 0 : _a.hot) == null ? void 0 : _b.ready) ? window.claude.hot.ready(start) : start((_e = (_d = (_c = window.claude) == null ? void 0 : _c.hot) == null ? void 0 : _d.data) != null ? _e : {});
 </script>
-<script>const APPV = "20261115124257";
+<script>const APPV = "20261115164253";
 if ("serviceWorker" in navigator) {
   addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {
   }));

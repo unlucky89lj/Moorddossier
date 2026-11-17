@@ -6894,7 +6894,7 @@ const TSKIN = ["#f3cba8", "#ebba94", "#dca47c", "#c88a62", "#a8704b", "#7d5236"]
 const THC = ["#2a1d15", "#4a2f1c", "#6b4527", "#a0703a", "#d6b25e", "#a3a39c", "#b5502c", "#1f1a17"];
 const TTOP = ["#4f6475", "#7a3b32", "#3f5a45", "#4a4f6b", "#8a6a3a", "#5f6468", "#2f3a4a", "#6b3f5c", "#8a4f2a"];
 const TLEG = ["#2b2f36", "#3a3a3c", "#45403a", "#26303d", "#4b4237"];
-const TFEM = new Set("berendina annefleur bregje clasina dieneke elske florentine dorothea josien harmke inez juultje hermien koosje klasina janke ike marjolein leontien nicolien lieske nolda machteld liane priscilla suzanna sientje yolande lieneke tamar marlous annick floor hester nienke christa dorette herma inge geertje klaartje froukje aukje mieke corrie hiske karlijn ida afke sjoukje marrit antje klaske dieuwke renske grietje minke annerieke elsbeth dorien neeltje yfke annemijn ariane baukje clementia leonoor josefien jantje eva-lotte linde mientje marlou rosanne selma hedwig quinty gijsje lidewij rowena dirkje annelot jozefien floortje odilia wilmijn nynke djoeke evelien margreet femke-lot vera jildou hinke lize dineke mirabella wendolien silke mariska aleida fenneke mirte jorien hennie saartje agnes truida yvette quirine kirsten liselot annegien marijke imke leonie isaura wieteke rosalie ottelien dorine celine tessel marga henriëtte ylva margje annabel gonda fabienne riet lucienne mirella hanneke selina wendela nadine petronella jitske desirée desiree elodie rinske femmy brecht liesje ingeborg annemoon rixt celeste lotus jolanda ankie sabine adelheid bertha mirthe dewi noortje robin hendrika marlies cornelia tjitske fleur willemijn romy ottilie noa hilde zara juul gonnie saar fien isabella rosalind trui clementine fenna lieke merel femke esmee noor yara camille greta hanna lies marie margaretha lola jikke sterre isolde hendrikje annie liesbeth mevrouw juffrouw barones tante oma zuster moeder dochter zus weduwe mevr anouk ria lotte samira sanne mila lisa eva sophie anneke wilma agatha wilhelmina charlotte ilse esra ingrid marieke femke anna emma julia sara fleur iris noor tess linda petra ellen karin monique yvonne joke truus greet mien els annet margriet hanna saskia nadia fatima yara lieke jet roos kim naomi vera isa nina lena amira julia marloes ilona sylvia gerda bep dora fenna hilde jolien lieve maud nienke romy sanna tamara ymke zoë zoe evi demi sharon anja astrid carla dewi esther floor gwen hester ines jasmijn kiki liza mirjam nora olga pien rosa selma trees ursula veerle wendy aaltje aafke birgit cato daphne elise frida gea heleen joyce kaat loes maaike nelleke odette patricia rianne silvia tineke willemijn yasmin hannelore yolanthe philippa albertine gerdien rozemarijn wanda ietje mareike philomena quirien femmie trijntje annabella godelieve constance jolein geesje coosje".split(" "));
+const TFEM = new Set("wietske anneloes dinanda roosmarijn madelon berendina annefleur bregje clasina dieneke elske florentine dorothea josien harmke inez juultje hermien koosje klasina janke ike marjolein leontien nicolien lieske nolda machteld liane priscilla suzanna sientje yolande lieneke tamar marlous annick floor hester nienke christa dorette herma inge geertje klaartje froukje aukje mieke corrie hiske karlijn ida afke sjoukje marrit antje klaske dieuwke renske grietje minke annerieke elsbeth dorien neeltje yfke annemijn ariane baukje clementia leonoor josefien jantje eva-lotte linde mientje marlou rosanne selma hedwig quinty gijsje lidewij rowena dirkje annelot jozefien floortje odilia wilmijn nynke djoeke evelien margreet femke-lot vera jildou hinke lize dineke mirabella wendolien silke mariska aleida fenneke mirte jorien hennie saartje agnes truida yvette quirine kirsten liselot annegien marijke imke leonie isaura wieteke rosalie ottelien dorine celine tessel marga henriëtte ylva margje annabel gonda fabienne riet lucienne mirella hanneke selina wendela nadine petronella jitske desirée desiree elodie rinske femmy brecht liesje ingeborg annemoon rixt celeste lotus jolanda ankie sabine adelheid bertha mirthe dewi noortje robin hendrika marlies cornelia tjitske fleur willemijn romy ottilie noa hilde zara juul gonnie saar fien isabella rosalind trui clementine fenna lieke merel femke esmee noor yara camille greta hanna lies marie margaretha lola jikke sterre isolde hendrikje annie liesbeth mevrouw juffrouw barones tante oma zuster moeder dochter zus weduwe mevr anouk ria lotte samira sanne mila lisa eva sophie anneke wilma agatha wilhelmina charlotte ilse esra ingrid marieke femke anna emma julia sara fleur iris noor tess linda petra ellen karin monique yvonne joke truus greet mien els annet margriet hanna saskia nadia fatima yara lieke jet roos kim naomi vera isa nina lena amira julia marloes ilona sylvia gerda bep dora fenna hilde jolien lieve maud nienke romy sanna tamara ymke zoë zoe evi demi sharon anja astrid carla dewi esther floor gwen hester ines jasmijn kiki liza mirjam nora olga pien rosa selma trees ursula veerle wendy aaltje aafke birgit cato daphne elise frida gea heleen joyce kaat loes maaike nelleke odette patricia rianne silvia tineke willemijn yasmin hannelore yolanthe philippa albertine gerdien rozemarijn wanda ietje mareike philomena quirien femmie trijntje annabella godelieve constance jolein geesje coosje".split(" "));
 const TTITLE = {
   Baron: { hat: "top", mono: 1, f: 0, hair: "short" },
   Mevrouw: { f: 1, hair: "bun", pearls: 1 },
@@ -16726,6 +16726,319 @@ SCREND.tv = Object.assign(SCREND.tv || {}, {
   wijnkelder: [["t", "Zo is het gebeurd", "gebeurd", "Dood in de wijnkelder"], ["s", "De steeg · 20:43", ["night", ["door", 150, 170, 1.1]], "Krijn kwam op zijn groene scooter en ging door de achterdeur naar binnen."], ["s", "De kelder", ["dark", ["shelf", 150, 170, 1.1]], "Allard wist van de gestolen flessen. Krijn sloeg toe.", { hit: "metaal", act: "strike", x: 150 }], ["x", "Krijn Vlasbloem", "een magnumfles", "de wijnkelder"]],
   studio: [["t", "Zo is het gebeurd", "gebeurd", "Stilte in de studio"], ["s", "De garage · 22:09", ["dark", ["car", 150, 170, 1]], "Zeno parkeerde op plek 7 en liep in zijn grijze jas de trap op."], ["s", "De studio", ["desk", ["radio", 150, 170, 1.2]], "Wichert wist van het reclamegeld. Zeno sloeg toe tijdens de lange plaat.", { hit: "metaal", act: "strike", x: 150 }], ["x", "Zeno Hooglander", "een zware microfoonstandaard", "de studio"]],
   warmte: [["t", "Zo is het gebeurd", "gebeurd", "Een te warme kamer"], ["s", "De Dorpsstraat · 19:31", ["night", ["car", 150, 170, 1]], "Imre tankte vlak bij de boerderij en reed naar Luitzen."], ["s", "De woonkamer", ["wall", ["armchair", 150, 170, 1.1]], "Imre sloeg toe en zette daarna de verwarming op 28 graden.", { hit: "metaal", act: "strike", x: 150 }], ["x", "Imre Kampstede", "een bronzen boekensteun", "de woonkamer"]]
+});
+TVCASES.push(
+  {
+    id: "coulisse",
+    nr: "16",
+    title: "Sneeuw in de coulissen",
+    level: "Moeilijk",
+    time: "75 tot 90 minuten",
+    players: "2 tot 10 spelers",
+    date: "13-03",
+    blurb: "Première in de schouwburg. In de pauze test de regisseur de sneeuwmachine hoog boven het toneel. Hij komt niet meer naar beneden.",
+    melding: '<p class="tv-mono">MELDING 112 · VRIJDAG 13 MAART · 21:29</p><p>In <b>Stadsschouwburg Hoogmeer</b> is de première van het winterstuk <i>De lange winter</i>. Na de pauze vindt inspiciënt <b>Ries Takkenberg</b> regisseur <b>Everard Toorenvliet</b> (61) onder de loopbrug achter het toneel. Hij is acht meter naar beneden gevallen.</p><p>De schouwarts: overleden <b>in de pauze, tussen 21:05 en 21:25</b>. Op zijn arm zit een verse blauwe plek van een harde greep. Dit was geen ongeluk.</p><p>Vijf mensen hadden een reden om ruzie met Everard te maken. Twee van hen liegen.</p>',
+    question: "Wie was er in de pauze op de loopbrug?",
+    victim: "Everard Toorenvliet</b> (61), regisseur van Stadsschouwburg Hoogmeer",
+    photos: [[["wall", ["stairs", 150, 170, 1.2]], "1 · de wenteltrap naar de loopbrug"], [["night", ["door", 150, 170, 1.1]], "2 · de artiesteningang"], [["desk", ["money", 150, 170, 1.2]], "3 · het kantoor van de zakelijk leider"], [["dark", ["shelf", 150, 170, 1.1]], "4 · het archief van de kassa"]],
+    real: ["trap", "steeg", "kantoor", "archief"],
+    markers: [["1 · bril van Everard", "2 · papiersneeuw op de vloer"], ["3 · peuk met lippenstift", "4 · camera boven de deur"], ["5 · kluis, open"], ["6 · map “Kassa premières”"]],
+    photoNotes: ["Everard lag onder aan de wenteltrap, onder de loopbrug. Zijn bril ligt een paar meter verder. Overal op de vloer ligt witte papiersneeuw.", "Bij de artiesteningang ligt een verse peuk met rode lippenstift. Boven de deur hangt een camera.", "In het kantoor van de zakelijk leider staat de kluis open. Er ligt contant geld in.", "In het archief staat de map “Kassa premières”. Er zijn bladzijden uit gescheurd."],
+    timeline: [["20:00", "de première begint"], ["21:05", "begin van de pauze"], ["21:05 – 21:25", "tijdstip van overlijden"], ["21:25", "einde van de pauze"], ["21:27", "Ries vindt Everard"], ["21:29", "melding bij 112"]],
+    suspects: [
+      {
+        id: "roosmarijn",
+        name: "Roosmarijn Valkenier",
+        role: "hoofdrolspeelster",
+        motive: "Everard zocht een nieuwe hoofdrolspeelster.",
+        f: 1,
+        voice: [1.16, 1.02],
+        look: { f: 1, skin: "#f0cdb6", hc: "#7a1a12", hair: "long", eyes: "#3a5a4a", top: "blouse", tc: "#8a1a2a", age: 38, earring: 1 },
+        v: [["R", "Waar was u in de pauze?"], ["S", "In mijn kleedkamer. De hele pauze. Ik moest me omkleden voor de sneeuwscène."], ["R", "Everard zocht een nieuwe hoofdrolspeelster."], ["S", "Dat zei hij om mij scherp te houden. Ik ben de beste die hij heeft."], ["R", "Heeft iemand u in de kleedkamer gezien?"], ["S", "Nee. In de pauze wil ik alleen zijn. Dat weet iedereen hier."], ["R", "Rookt u?"], ["S", "Nooit op een speelavond. Dat is slecht voor mijn stem."]],
+        lie: [1, 7]
+      },
+      {
+        id: "ries",
+        name: "Ries Takkenberg",
+        role: "inspiciënt",
+        motive: "Everard gaf hem de schuld van een ongeluk met het decor.",
+        f: 0,
+        voice: [0.9, 1],
+        look: { skin: "#e2b896", hc: "#5a4a3a", hair: "receding", eyes: "#4a5a6a", top: "shirt", tc: "#1c1d22", age: 55, beard: "full", jaw: 4 },
+        v: [["R", "Wat doet een inspiciënt in de pauze?"], ["S", "Ik zit aan mijn tafel naast het toneel. Ik geef de bellen voor het publiek en houd de klok in de gaten."], ["R", "Heeft u Everard gezien?"], ["S", "Om vijf over negen liep hij langs. Hij zei: ik ga de sneeuwmachine nog even testen. Dat deed hij altijd."], ["R", "Hoorde u iets?"], ["S", "In de pauze is het herrie achter het toneel. Het decor wordt omgebouwd. Ik hoorde niets."], ["R", "Everard gaf u de schuld van het ongeluk met het decor."], ["S", "Vorige maand viel er een lamp. Het was niet mijn fout. Dat staat in het rapport."]]
+      },
+      {
+        id: "jens",
+        name: "Jens Oudegeest",
+        role: "invaller",
+        motive: "Everard wilde hem ontslaan.",
+        f: 0,
+        voice: [1.06, 1.08],
+        look: { skin: "#efcdb4", hc: "#d8b878", hair: "curly", eyes: "#4a6a8a", top: "vest", tc: "#6a4a2a", age: 27 },
+        v: [["R", "Waar was u in de pauze?"], ["S", "In de grimeerkamer. De visagiste plakte mijn baard voor het tweede bedrijf."], ["R", "Hoe lang duurt dat?"], ["S", "Een kwartier, twintig minuten. Ik mocht niet bewegen."], ["R", "Everard wilde u ontslaan."], ["S", "Na deze reeks. Ik vergat twee keer mijn tekst. Dat was eerlijk."], ["R", "Zag u iemand in de gang?"], ["S", "Om tien over negen ging de deur van de gang open en dicht. Ik zag alleen een donker pak."]]
+      },
+      {
+        id: "sweder",
+        name: "Sweder Kortenhorst",
+        role: "zakelijk leider",
+        motive: "Beheert het geld van de schouwburg.",
+        f: 0,
+        voice: [0.92, 1.04],
+        look: { skin: "#efcdb4", hc: "#2a2420", hair: "short", eyes: "#3a4a6a", top: "tweed", tc: "#1c2a4a", age: 49, glasses: "#2a2a2a", jaw: 4 },
+        v: [["R", "Waar was u in de pauze?"], ["S", "In de foyer, bij de sponsors. De hele pauze. Ik heb handen geschud en koffie gedronken."], ["R", "Bent u achter het toneel geweest?"], ["S", "Nee. Daar heb ik niets te zoeken. Dat is de wereld van de artiesten."], ["R", "Hoe gaat het met de kaartverkoop?"], ["S", "Uitstekend. Alle premières zijn uitverkocht."], ["R", "Waarom staat de kluis in uw kantoor open?"], ["S", "Die zet ik open voor de kassa. Daar is niets vreemds aan."]],
+        lie: [1, 3]
+      },
+      {
+        id: "madelon",
+        name: "Madelon Spiegelenburg",
+        role: "ex-vrouw van Everard",
+        motive: "Everard wilde minder alimentatie betalen.",
+        f: 1,
+        voice: [1.04, 0.96],
+        look: { f: 1, skin: "#efc8b0", hc: "#b8b0a8", hair: "bun", eyes: "#4a5a6a", top: "blouse", tc: "#3a2a5a", age: 60, glasses: "#6a4a2a" },
+        v: [["R", "U was in de zaal vanavond."], ["S", "Op rij vijf. Ik ga naar elke première van Everard. Ook na de scheiding."], ["R", "Waar was u in de pauze?"], ["S", "Ik heb een ijsje gehaald in de foyer en ben weer gaan zitten. Mijn knie is slecht. Ik loop niet veel."], ["R", "Everard wilde minder alimentatie betalen."], ["S", "Dat wilde hij al jaren. Daar hebben we advocaten voor."], ["R", "Zag u nog iets in de foyer?"], ["S", "De zakelijk leider stond eerst bij de sponsors. Later niet meer."]]
+      }
+    ],
+    secret: [
+      { t: "Forensisch dossier", ic: "🔬", docs: [
+        { t: "Sectierapport", h: "<p><b>Doodsoorzaak:</b> een val van acht meter.</p><p><b>Tijdstip van overlijden:</b> tussen 21:05 en 21:25.</p><p>Op zijn bovenarm zit een verse blauwe plek van een harde greep.</p>" },
+        { t: "De loopbrug", h: "<p>De leuning is <b>1,10 meter</b> hoog. Je valt er niet zomaar overheen.</p><p>Aan de leuning zitten vezels van een <b>donkerblauw pak</b>.</p>" },
+        { t: "Papiersneeuw", h: "<p>De papiersneeuw komt alleen uit de machine op de loopbrug.</p><p>Na de test lag er sneeuw <b>op de loopbrug en eronder</b>. In de foyer, de kleedkamers en de grimeerkamer lag geen sneeuw.</p>" }
+      ] },
+      { t: "Het gebouw", ic: "🎭", docs: [
+        { t: "Pasjes en camera", h: '<table class="tv-t"><tr><th>Tijd</th><th>Wie</th><th>Wat</th></tr><tr><td>21:06</td><td>E. Toorenvliet</td><td>pasje · deur gang achter toneel</td></tr><tr><td>21:08</td><td>R. Valkenier</td><td>camera · artiesteningang naar buiten</td></tr><tr><td><b>21:10</b></td><td><b>S. Kortenhorst</b></td><td><b>pasje · deur gang achter toneel</b></td></tr><tr><td><b>21:19</b></td><td><b>S. Kortenhorst</b></td><td><b>pasje · deur gang naar foyer</b></td></tr><tr><td>21:22</td><td>R. Valkenier</td><td>camera · artiesteningang naar binnen</td></tr></table>' },
+        { t: "Sneeuwmachine", h: "<p>Logboek van de machine op de loopbrug:</p><p>21:12 · test aan</p><p><b>21:15 · uit met de noodknop</b></p><p>Everard zette de machine na een test altijd gewoon uit, nooit met de noodknop.</p>" },
+        { t: "Plattegrond", h: "<p>De foyer ligt aan de voorkant. Achter het toneel kom je alleen via de <b>deur van de gang</b>, met een pasje.</p><p>De wenteltrap naar de loopbrug begint achter het decor. Vanaf de tafel van de inspiciënt zie je hem niet.</p>" }
+      ] },
+      { t: "De kassa", ic: "🎟️", docs: [
+        { t: "Kassalijst", h: '<table class="tv-t"><tr><th>Premières dit seizoen</th><th></th></tr><tr><td>Stoelen in de zaal</td><td>620</td></tr><tr><td>Kaarten verkocht volgens de kassa</td><td>620</td></tr><tr><td>Geld op de bank gestort</td><td><b>voor 540 kaarten</b></td></tr></table>' },
+        { t: "Mail van Everard", h: "<p>Aan het bestuur, 12 maart: “Ik heb de kassalijsten zelf geteld. Er missen elke avond tachtig kaarten. <b>Maandag praat ik met Sweder.</b>”</p>" },
+        { t: "De kluis", h: "<p>In de kluis in het kantoor van <b>S. Kortenhorst</b> ligt € 4.200 contant geld, zonder bon.</p><p>Alleen de zakelijk leider heeft de code.</p>" }
+      ] },
+      { t: "Getuigen", ic: "👂", docs: [
+        { t: "De visagiste", h: "<p>“Jens zat van tien over negen tot vijf voor half tien in mijn stoel. Met lijm op zijn kin. Hij is niet opgestaan.”</p>" },
+        { t: "Een sponsor", h: "<p>“De zakelijk leider stond om tien over negen bij ons. Hij zei: ik moet even iets regelen. Pas om twintig over negen kwam hij terug. Hij streek steeds over zijn kraag.”</p>" },
+        { t: "Het café tegenover", h: "<p>De ober: “Om kwart over negen zat er een vrouw in een lange jas buiten te roken. Rode lippenstift. Ze tekende een papier van een man van een ander theater. Om twintig over negen rende ze terug.”</p>" }
+      ] }
+    ],
+    envelope: { t: "Envelop B · het colbert", when: "Open pas als jullie alle verhoren gehoord hebben.", h: "<p>In de kraag van het donkerblauwe colbert van <b>Sweder Kortenhorst</b> zitten snippers <b>papiersneeuw</b>.</p><p>In zijn binnenzak zitten de bladzijden die uit de map “Kassa premières” zijn gescheurd.</p>" },
+    rounds: [
+      { t: "De première", tips: ["De pauze duurde van 21:05 tot 21:25.", "In het tweede bedrijf sneeuwt het op het toneel. De sneeuw komt uit een machine op de loopbrug.", "Everard testte in elke pauze zelf de sneeuwmachine.", "De deur naar de gang achter het toneel gaat alleen open met een pasje."] },
+      { t: "Na de verhoren", tips: ["Roosmarijn kreeg een aanbod van een theater in een andere stad. Haar contract hier loopt nog twee jaar.", "Madelon pinde om 21:12 in de foyer voor een ijsje. De zaalwacht zag haar vanaf 21:14 weer op rij vijf.", "De bellen voor het publiek gingen om 21:15 en 21:20. Die geef je met de hand, aan de tafel van de inspiciënt.", "Sweder draagt vanavond een donkerblauw pak."] },
+      { t: "Het laatste spoor", tips: ["Sweder beheert de kassa en brengt het geld zelf naar de bank.", "Papiersneeuw plakt overal aan: aan haar, aan kragen en aan schoenen.", "Jens draagt voor het tweede bedrijf een bruin pak.", "Wie stiekem wil vertrekken, liegt soms over iets anders dan een moord."] }
+    ],
+    motives: [["rol", "Een nieuwe hoofdrolspeelster"], ["decor", "Het ongeluk met het decor"], ["ontslag", "Het ontslag van de invaller"], ["kaarten", "Everard ontdekte het verdwenen kaartgeld"], ["alimentatie", "De alimentatie"]],
+    motive: "kaarten",
+    keys: [["camera", "De camera bij de artiesteningang"], ["ijsje", "Het ijsje in de pauze"], ["pasje", "Pasje van 21:10 tot 21:19 achter het toneel + papiersneeuw in zijn kraag"], ["bel", "De bellen voor het publiek"]],
+    key: "pasje",
+    lies: { roosmarijn: "Liegt ook, maar is onschuldig: “In mijn kleedkamer. De hele pauze.” Ze ging om 21:08 via de artiesteningang naar buiten en tekende in het café een contract met een ander theater. Om 21:22 was ze terug.", ries: "Vertelt de waarheid. Hij gaf om 21:15 en 21:20 de bellen aan zijn tafel naast het toneel.", jens: "Vertelt de waarheid. Hij zat in de grimeerkamer bij de visagiste.", sweder: "Liegt: “In de foyer, bij de sponsors. De hele pauze.” Zijn pasje opende om 21:10 de deur achter het toneel en om 21:19 de deur terug. In zijn kraag zat papiersneeuw, en die lag alleen bij de loopbrug.", madelon: "Vertelt de waarheid. Ze haalde een ijsje en zat daarna weer op rij vijf." },
+    breaker: "De pasjes samen met de papiersneeuw: Sweder ging om 21:10 achter het toneel en kwam om 21:19 terug. Om 21:15 ging de sneeuwmachine uit met de noodknop. Papiersneeuw lag alleen bij de loopbrug, en die zat in zijn kraag. Roosmarijn loog ook, maar zij zat toen buiten in het café.",
+    solTimeline: [["21:05", "de pauze begint"], ["21:06", "Everard gaat achter het toneel naar de loopbrug"], ["21:08", "Roosmarijn glipt naar buiten, naar het café"], ["21:10", "Sweder gaat met zijn pasje achter het toneel"], ["21:12", "Everard test de sneeuwmachine"], ["± 21:15", "ruzie over het kaartgeld; de duw; de noodknop"], ["21:19", "Sweder is terug in de foyer"], ["21:22", "Roosmarijn is terug binnen"], ["21:27", "Ries vindt Everard"]],
+    answer: "sweder",
+    weapon: "een duw van de loopbrug",
+    place: "de loopbrug",
+    tips: ["Twee mensen zeggen dat ze binnen bleven. Wie ging echt ergens anders heen?", "Kijk naar de pasjes en naar de papiersneeuw."],
+    story: "Zakelijk leider Sweder Kortenhorst verkocht elke première tachtig kaarten buiten de boeken om en hield het geld zelf. Everard telde de kassalijsten na en wilde maandag met hem praten. In de pauze zei Sweder tegen de sponsors dat hij iets moest regelen. Om 21:10 ging hij met zijn pasje achter het toneel en klom naar de loopbrug, waar Everard de sneeuwmachine testte. Ze kregen ruzie. Sweder greep Everard bij zijn arm en duwde hem over de leuning. Om 21:19 was hij terug in de foyer, met papiersneeuw in zijn kraag. Roosmarijn loog ook: zij tekende in de pauze stiekem een contract met een ander theater."
+  },
+  {
+    id: "steiger",
+    nr: "17",
+    title: "Stil water bij de steiger",
+    level: "Makkelijk",
+    time: "20 tot 30 minuten",
+    players: "1 tot 10 spelers",
+    date: "04-06",
+    blurb: "Een sloepenverhuurder drijft tussen zijn eigen boten. Op zijn laptop staat een mail die hij nooit heeft verstuurd.",
+    melding: '<p class="tv-mono">MELDING 112 · DONDERDAG 4 JUNI · 20:42</p><p>Een kanovaarder ziet iets drijven bij <b>Sloepenverhuur De Lisdodde</b> aan het Biezenmeer. Het is de eigenaar, <b>Wopke Biezenveld</b> (58). Hij leeft niet meer.</p><p>Hij is verdronken. Op zijn achterhoofd zit een bult. De schouwarts: <b>tussen 19:30 en 20:15</b> overleden.</p><p>Drie mensen hadden een reden om ruzie met Wopke te maken. Wie was er op de steiger?</p>',
+    question: "Wie was er tussen 19:30 en 20:15 op de steiger?",
+    victim: "Wopke Biezenveld</b> (58), eigenaar van Sloepenverhuur De Lisdodde",
+    photos: [[["water", ["boat", 150, 160, 1]], "1 · de steiger"], [["dark", ["boat", 150, 170, 1]], "2 · de botenloods"], [["desk", ["laptop", 150, 170, 1.2]], "3 · het kantoortje"]],
+    real: ["haven", "loods", "kantoor"],
+    markers: [["1 · pet van Wopke in het water", "2 · natte afdrukken van grote laarzen"], ["3 · sloep met een gat, op de bok"], ["4 · laptop met een mail", "5 · fototoestel"]],
+    photoNotes: ["Wopke dreef tussen de sloepen. Zijn pet ligt nog in het water. Op de planken van de steiger staan natte afdrukken van grote laarzen.", "In de botenloods staat een sloep met een gat in de bodem op de bok.", "In het kantoortje staat de laptop van Wopke open. Ernaast ligt zijn fototoestel."],
+    timeline: [["18:55", "Wopke schrijft een mail"], ["19:00", "de verhuur gaat dicht"], ["19:30 – 20:15", "tijdstip van overlijden"], ["20:40", "een kanovaarder vindt Wopke"], ["20:42", "melding bij 112"]],
+    suspects: [
+      {
+        id: "wietske",
+        name: "Wietske Biezenveld",
+        role: "zus en mede-eigenaar",
+        motive: "Wil de verhuur verkopen.",
+        f: 1,
+        voice: [1.1, 1.02],
+        look: { f: 1, skin: "#f0cdb6", hc: "#c89a5a", hair: "bob", eyes: "#4a6a8a", top: "vest", tc: "#2a5a6a", age: 54 },
+        v: [["R", "U wilt de verhuur verkopen."], ["S", "Er is een koper. Een goede prijs. Wopke wilde niet. Daar hadden we vaak ruzie over."], ["R", "Waar was u vanavond?"], ["S", "Bij de bingo in het dorpshuis. Van zeven tot negen. Ik won zelfs een ronde."], ["R", "Had Wopke problemen met iemand?"], ["S", "Met de buurman van de camping. Wopke zei: er komt vies water uit hun pijp. Hij maakte foto’s."]]
+      },
+      {
+        id: "arnout",
+        name: "Arnout Dennenkamp",
+        role: "eigenaar van de camping ernaast",
+        motive: "Wopke wilde hem aangeven bij de gemeente.",
+        f: 0,
+        voice: [0.88, 1],
+        look: { skin: "#e2b896", hc: "#3a2a1a", hair: "short", eyes: "#3a2a1a", top: "shirt", tc: "#4a6a2a", age: 51, beard: "stubble", jaw: 5 },
+        v: [["R", "U heeft de camping naast de verhuur."], ["S", "Al vijftien jaar. Wopke en ik zijn goede buren."], ["R", "Wopke stuurde u om 19:35 een sms."], ["S", "Ik heb hem gelezen. Maar ik had het druk."], ["R", "Waar was u vanavond?"], ["S", "In de kantine van de camping. De hele avond. Ik ben niet bij de steiger geweest."], ["R", "Wopke schreef een mail aan de gemeente."], ["S", "Geen idee waarover. Hij klaagde altijd wel ergens over."]],
+        lie: 5
+      },
+      {
+        id: "luca",
+        name: "Luca Heistee",
+        role: "medewerker van de verhuur",
+        motive: "Kreeg op zijn kop om een kapotte sloep.",
+        f: 0,
+        voice: [1.08, 1.08],
+        look: { skin: "#c8946a", hc: "#1a1412", hair: "curly", eyes: "#2a1a12", top: "shirt", tc: "#e8b030", age: 20 },
+        v: [["R", "Wopke was boos op u."], ["S", "Om de sloep. Ik voer op de stenen. Hij haalde het van mijn loon af."], ["R", "Waar was u vanavond?"], ["S", "In het dorp bij de snackbar, met drie vrienden. Van half acht tot negen."], ["R", "Wanneer zag u Wopke voor het laatst?"], ["S", "Om zeven uur, toen ik naar huis ging. Hij zat op de steiger met zijn fototoestel."]]
+      }
+    ],
+    secret: [
+      { t: "Forensisch dossier", ic: "🔬", docs: [
+        { t: "Sectierapport", h: "<p><b>Doodsoorzaak:</b> verdronken.</p><p>De bult op zijn achterhoofd komt van de rand van de steiger. Hij viel achterover in het water.</p><p><b>Tijdstip van overlijden:</b> tussen 19:30 en 20:15.</p>" },
+        { t: "Sporen op de steiger", h: "<p>De natte afdrukken zijn van <b>laarzen, maat 46</b>.</p><p>Op het pad naar de steiger staan de sporen van een <b>golfkarretje</b>.</p>" }
+      ] },
+      { t: "De verhuur", ic: "⛵", docs: [
+        { t: "De mail op de laptop", h: "<p>Niet verstuurd · 18:55 · aan de gemeente:</p><p>“De camping van <b>A. Dennenkamp</b> pompt al weken vies water in het meer. Foto’s zitten erbij. <b>Morgen stuur ik dit.</b>”</p>" },
+        { t: "Het fototoestel", h: "<p>18:20 · drie foto’s van een pijp achter de camping. Er komt bruin water uit, het meer in.</p>" },
+        { t: "Sms van Wopke", h: "<p>19:35 · aan <b>Arnout</b>: “Kom maar praten. Ik zit op de steiger. Maar morgen gaat de mail eruit.”</p>" }
+      ] },
+      { t: "Camping en dorp", ic: "🏕️", docs: [
+        { t: "Camera bij de slagboom", h: "<p>De camera van de camping kijkt naar het pad naar de steiger.</p><p><b>19:44</b> · het golfkarretje van de camping rijdt naar de steiger.</p><p><b>20:02</b> · het karretje komt hard terug.</p>" },
+        { t: "De barman van de kantine", h: "<p>“Arnout ging om twintig voor acht weg met het golfkarretje. Om vijf over acht was hij terug. Hij trok meteen andere laarzen aan.”</p>" },
+        { t: "Bon van de snackbar", h: "<p>19:40 · vier keer patat en vier cola · betaald met de pas van <b>L. Heistee</b>.</p>" }
+      ] },
+      { t: "Getuigen", ic: "🗣️", docs: [
+        { t: "De kanovaarder", h: "<p>“Om twintig voor negen zag ik iets drijven tussen de sloepen. Ik heb meteen gebeld.”</p>" },
+        { t: "Het dorpshuis", h: "<p>De leider van de bingo: “Wietske was er van zeven tot negen. Om tien voor acht won ze de tweede ronde.”</p>" },
+        { t: "De vrienden van Luca", h: "<p>“Luca zat van half acht tot negen bij ons aan de snackbar. Hij is niet weggeweest.”</p>" }
+      ] }
+    ],
+    rounds: [
+      { t: "De verhuur", tips: ["Wopke verhuurt al twintig jaar sloepen op het meer.", "Wietske is de zus van Wopke. De helft van de verhuur is van haar.", "Naast de verhuur ligt een grote camping.", "Op de camping rijden ze rond in golfkarretjes.", "Van de camping naar de steiger is vijf minuten met het golfkarretje."] },
+      { t: "Nieuwe sporen", tips: ["Arnout heeft schoenmaat 46 en draagt altijd laarzen.", "Luca liet vorige week een sloep op de stenen lopen.", "Wietske wil de verhuur verkopen. Wopke wilde dat niet.", "Het water bij de camping is de laatste weken bruin.", "Op donderdag is er altijd bingo in het dorpshuis.", "Na zeven uur rijdt alleen de baas van de camping nog in het golfkarretje."] }
+    ],
+    motives: [["verkoop", "De verkoop van de verhuur"], ["sloep", "De kapotte sloep"], ["water", "Wopke wilde hem aangeven voor het vieze water"]],
+    motive: "water",
+    keys: [["kar", "Het golfkarretje bij de steiger om 19:44"], ["bingo", "De bingo in het dorpshuis"], ["bon", "De bon van de snackbar"]],
+    key: "kar",
+    lies: { wietske: "Vertelt de waarheid. Ze zat bij de bingo in het dorpshuis.", arnout: "Liegt: “Ik ben niet bij de steiger geweest.” Om 19:44 reed het golfkarretje van de camping naar de steiger, en de barman zegt dat Arnout toen weg was.", luca: "Vertelt de waarheid. Hij zat met zijn vrienden bij de snackbar." },
+    breaker: "De camera bij de slagboom: om 19:44 rijdt het golfkarretje van de camping naar de steiger en om 20:02 terug. De barman zegt dat Arnout precies toen weg was. Arnout zegt dat hij de hele avond in de kantine zat.",
+    solTimeline: [["18:20", "Wopke fotografeert de pijp van de camping"], ["18:55", "Wopke schrijft de mail aan de gemeente"], ["19:00", "Luca gaat naar huis"], ["19:35", "Wopke stuurt Arnout een sms"], ["19:40", "Arnout verlaat de kantine"], ["19:44", "het golfkarretje rijdt naar de steiger"], ["± 19:50", "ruzie op de steiger; de duw in het water"], ["20:02", "het golfkarretje rijdt terug"], ["20:05", "Arnout trekt andere laarzen aan"], ["20:40", "de kanovaarder vindt Wopke"]],
+    answer: "arnout",
+    weapon: "een duw in het water",
+    place: "de steiger",
+    tips: ["Wie wist dat Wopke vanavond op de steiger zat?", "Kijk naar de camera bij de slagboom. Wie rijdt daar ’s avonds in het golfkarretje?", "Arnout zegt dat hij in de kantine bleef. Wat zegt de barman?"],
+    story: "Campingbaas Arnout Dennenkamp pompte al weken vies water in het meer. Wopke maakte foto’s en schreef een mail aan de gemeente. Om 19:35 stuurde hij Arnout een sms: kom maar praten, morgen gaat de mail eruit. Arnout reed om 19:44 in het golfkarretje naar de steiger. Ze kregen ruzie en Arnout duwde Wopke het water in. Wopke stootte zijn hoofd tegen de steiger en verdronk. Om 20:02 reed Arnout terug, trok andere laarzen aan en zei later dat hij de hele avond in de kantine zat."
+  },
+  {
+    id: "pakjes",
+    nr: "18",
+    title: "Dood op pakjesavond",
+    level: "Gemiddeld",
+    time: "45 tot 75 minuten",
+    players: "1 tot 10 spelers",
+    date: "05-12",
+    tag: "🎁 Pakjesavond",
+    blurb: "De hele familie pakt cadeautjes uit bij opa, de banketbakker. Hij gaat even zijn gedichten halen en komt niet terug.",
+    melding: '<p class="tv-mono">MELDING 112 · ZATERDAG 5 DECEMBER · 20:44</p><p>Het is pakjesavond bij de familie <b>Kloosterhuis</b>, in het huis naast hun banketbakkerij. <b>Anneloes Kloosterhuis</b> brengt haar vader een beker chocolademelk. Ze vindt banketbakker <b>Wiebrand Kloosterhuis</b> (72) dood in zijn werkkamer.</p><p>Hij is geslagen met de <b>koperen vijzel</b> van zijn bureau. De schouwarts: <b>tussen 20:10 en 20:40</b>.</p><p>Iedereen zat bij de pakjes. Toch was er iemand in de werkkamer.</p>',
+    question: "Wie verliet tussen 20:10 en 20:40 de woonkamer?",
+    victim: "Wiebrand Kloosterhuis</b> (72), banketbakker, eigenaar van Banketbakkerij Kloosterhuis",
+    photos: [[["wall", ["fireplace", 150, 170, 1]], "1 · de woonkamer"], [["desk", ["letter", 150, 170, 1.2]], "2 · de werkkamer"], [["grass", ["shed", 150, 170, 1]], "3 · de schuur in de tuin"], [["wall", ["pot", 150, 170, 1.2]], "4 · de keuken"]],
+    real: ["woonkamer", "bureau", "tuin", "keuken"],
+    markers: [["1 · telefoon op een statief", "2 · stapel rood cadeaupapier"], ["3 · koperen vijzel", "4 · gouden glitter op de vloer"], ["5 · voetsporen naar de schuur"], ["6 · pan met chocolademelk"]],
+    photoNotes: ["In de woonkamer liggen overal pakjes en rood papier. Op een statief staat een telefoon die het uitpakken filmde.", "Wiebrand lag naast zijn bureau. De koperen vijzel ligt op de vloer. Er ligt gouden glitter op het kleed.", "In het natte gras staan voetsporen van het huis naar de schuur en terug.", "In de keuken staat een pan chocolademelk. Het aanrecht ligt vol schone bekers."],
+    timeline: [["19:00", "de pakjesavond begint"], ["19:45", "er wordt hard op de deur geklopt: een zak met pakjes"], ["20:10", "Wiebrand gaat zijn gedichten halen"], ["20:10 – 20:40", "tijdstip van overlijden"], ["20:40", "Anneloes vindt haar vader"], ["20:44", "melding bij 112"]],
+    suspects: [
+      {
+        id: "anneloes",
+        name: "Anneloes Kloosterhuis",
+        role: "dochter",
+        motive: "Wilde dat haar vader de bakkerij verkocht.",
+        f: 1,
+        voice: [1.12, 1.04],
+        look: { f: 1, skin: "#f0cdb6", hc: "#8a5a2a", hair: "long", eyes: "#4a6a5a", top: "vest", tc: "#8a1a2a", age: 44 },
+        v: [["R", "Hoe vond u uw vader?"], ["S", "Om twintig voor negen bracht ik hem chocolademelk. Hij lag naast zijn bureau."], ["R", "Waar was u daarvoor?"], ["S", "In de keuken, met de kinderen. Chocolademelk maken en afwassen. Een half uur."], ["R", "U wilde dat hij de bakkerij verkocht."], ["S", "Hij is tweeënzeventig. Hij stond elke dag om vier uur op. Ik maakte me zorgen."], ["R", "Was er iets vreemds aan hem vanavond?"], ["S", "Hij was stil. Hij zei: na vanavond moet ik met iemand een hartig woordje spreken."]]
+      },
+      {
+        id: "bavo",
+        name: "Bavo Speelderman",
+        role: "schoonzoon",
+        motive: "Moest Wiebrand nog € 15.000 terugbetalen.",
+        f: 0,
+        voice: [0.94, 1.02],
+        look: { skin: "#e8c0a4", hc: "#6a4a2a", hair: "short", eyes: "#4a6a8a", top: "shirt", tc: "#2a4a3a", age: 46, beard: "full" },
+        v: [["R", "U ging de kamer uit."], ["S", "Om kwart over acht, naar de schuur. Ik had een poppenhuis voor mijn dochter gemaakt."], ["R", "Hoe lang was u weg?"], ["S", "Tien minuten. Het ding is zwaar en het was donker."], ["R", "U moet Wiebrand nog geld terugbetalen."], ["S", "Vijftienduizend euro. Hij zei: rustig aan, jongen. Hij deed er nooit moeilijk over."], ["R", "Zag u iemand in de gang?"], ["S", "Nee. Ik ging door de keuken naar buiten. De gang zag ik niet."]]
+      },
+      {
+        id: "guus",
+        name: "Guus Kloosterhuis",
+        role: "neef van Wiebrand",
+        motive: "Doet de kas van de bakkerij.",
+        f: 0,
+        voice: [1.02, 1.06],
+        look: { skin: "#efcdb4", hc: "#c89a5a", hair: "short", eyes: "#5a6a7a", top: "vest", tc: "#c8a030", age: 31, glasses: "#2a2a2a" },
+        v: [["R", "U doet de kas van de bakkerij."], ["S", "Al twee jaar. Oom Wiebrand vertrouwde me helemaal."], ["R", "Bent u vanavond de kamer uit geweest?"], ["S", "Alleen even naar de wc. Twee minuten. Daarna zat ik weer bij de pakjes."], ["R", "Uw oom stuurde u gisteren een bericht."], ["S", "Over de drukte in december. Hoeveel speculaas we nog moeten bakken."], ["R", "Welk pakje had u voor uw tante?"], ["S", "Een sjaal. In mooi papier."]],
+        lie: [3, 5]
+      },
+      {
+        id: "dinanda",
+        name: "Dinanda Zandhuizen",
+        role: "buurvrouw",
+        motive: "Had ruzie met Wiebrand over een nieuwe schutting.",
+        f: 1,
+        voice: [1.02, 0.98],
+        look: { f: 1, skin: "#c89874", hc: "#d0ccc4", hair: "curly", eyes: "#2a1a12", top: "blouse", tc: "#2a3a6a", age: 67, glasses: "#6a2a2a" },
+        v: [["R", "U klopte vanavond op de deur."], ["S", "Om kwart voor acht. Dat doe ik al twintig jaar voor de familie. Zak op de stoep, hard kloppen, weg."], ["R", "En daarna?"], ["S", "Naar huis. Mijn eigen kleinkinderen kwamen om acht uur."], ["R", "U had ruzie over de schutting."], ["S", "Hij wilde een schutting van twee meter. Dan zit ik in het donker. Maar daar praat je over."], ["R", "Zag u nog iets vanuit uw huis?"], ["S", "Om kwart over acht ging het licht aan in zijn schuur. Daar liep Bavo met iets groots."]]
+      }
+    ],
+    secret: [
+      { t: "Forensisch dossier", ic: "🔬", docs: [
+        { t: "Sectierapport", h: "<p><b>Doodsoorzaak:</b> een klap met de koperen vijzel.</p><p><b>Tijdstip van overlijden:</b> tussen 20:10 en 20:40.</p>" },
+        { t: "Glitter", h: "<p>Op het kleed in de werkkamer en op de vijzel zit <b>gouden glitter</b>, zoals van cadeaupapier.</p>" },
+        { t: "Vingerafdrukken", h: "<p>De vijzel is schoongeveegd.</p><p>Op de deurklink van de werkkamer zit een vage afdruk, met een beetje <b>gouden glitter</b> erin.</p>" }
+      ] },
+      { t: "Het huis", ic: "🏠", docs: [
+        { t: "Plattegrond", h: "<p>Vanuit de woonkamer kom je in de gang. Daar zitten de <b>wc</b> en de <b>werkkamer</b> naast elkaar.</p><p>De keuken ligt aan de achterkant. Via de keuken loop je de tuin in, naar de schuur.</p>" },
+        { t: "Het filmpje van het uitpakken", h: '<table class="tv-t"><tr><th>Tijd</th><th>Wat zie je</th></tr><tr><td>20:05</td><td>Anneloes gaat naar de keuken</td></tr><tr><td>20:10</td><td>Wiebrand: “Ik haal even mijn gedichten.”</td></tr><tr><td><b>20:12</b></td><td><b>Guus: “Even naar de wc.”</b></td></tr><tr><td>20:15</td><td>Bavo pakt een zaklamp en gaat naar de keuken</td></tr><tr><td>20:25</td><td>Bavo komt terug met een groot pakje</td></tr><tr><td><b>20:29</b></td><td><b>Guus komt terug en gaat zitten</b></td></tr></table>' },
+        { t: "Het cadeaupapier", h: "<p>Bijna alle pakjes zitten in <b>rood papier</b>.</p><p>Eén pakje zit in <b>goud glitterpapier</b>: de sjaal van Guus voor zijn tante.</p>" }
+      ] },
+      { t: "De bakkerij", ic: "🥐", docs: [
+        { t: "Het kasboek", h: '<table class="tv-t"><tr><th>November</th><th></th></tr><tr><td>In de kassa volgens de bonnetjes</td><td>€ 31.400</td></tr><tr><td>Op de bank gestort</td><td><b>€ 22.400</b></td></tr></table>' },
+        { t: "Wie doet de kas?", h: "<p>Elke avond telt <b>Guus</b> de kassa en brengt hij het geld naar de bank. Vroeger deed Wiebrand dat zelf.</p>" },
+        { t: "Telefoon van Wiebrand", h: "<p>3 december · hij zoekt op: “kassa geld verdwenen wat moet ik doen”.</p><p>4 december · bericht aan <b>Guus</b>: “Na pakjesavond moeten we praten. <b>Over de kas.</b>”</p>" }
+      ] },
+      { t: "Getuigen", ic: "👂", docs: [
+        { t: "De kleinkinderen", h: "<p>“Mama was de hele tijd met ons in de keuken. We maakten chocolademelk en deden de afwas.”</p>" },
+        { t: "Deurbel van Dinanda", h: "<p>De camera van haar deurbel: <b>19:50</b> Dinanda komt thuis. <b>20:01</b> haar kleinkinderen komen binnen.</p><p>Daarna gaat de voordeur niet meer open tot 22:10.</p>" },
+        { t: "De vrouw van Wiebrand", h: "<p>“Guus zei rond tien over acht: even naar de wc. Het duurde zo lang dat we zonder hem verder gingen met uitpakken.”</p>" }
+      ] }
+    ],
+    envelope: { t: "Envelop B · het gedicht", when: "Open pas als jullie alle verhoren gehoord hebben.", h: '<p>Onder het bureau ligt een verfrommeld gedicht in het handschrift van Wiebrand:</p><p class="tv-hand">“Voor Guus, die de centen telt, zo fijn,<br>maar waarom moet de kas steeds lichter zijn?<br>Na deze avond praten wij samen,<br>anders hoort de hele familie de namen.”</p>' },
+    rounds: [
+      { t: "De pakjesavond", tips: ["De familie viert elk jaar pakjesavond bij Wiebrand, naast de bakkerij.", "Om 19:45 klopte de buurvrouw hard op de deur en zette een zak met pakjes op de stoep.", "Bij ieder pakje hoort een gedicht. Wie een pakje krijgt, leest het hardop voor.", "Wiebrand schreef zijn gedichten altijd zelf, in zijn werkkamer.", "De koperen vijzel stond als versiering op het bureau van Wiebrand.", "Anneloes filmt het uitpakken elk jaar met haar telefoon op een statief."] },
+      { t: "Na de verhoren", tips: ["Guus doet sinds twee jaar de kas van de bakkerij.", "Wiebrand leende Bavo vorig jaar € 15.000.", "Anneloes wil dat haar vader stopt met werken en de bakkerij verkoopt.", "Dinanda en Wiebrand hadden ruzie over een nieuwe schutting.", "Bavo maakte zelf een poppenhuis voor zijn dochter en verstopte het in de schuur."] }
+    ],
+    motives: [["verkoop", "De verkoop van de bakkerij"], ["kas", "Wiebrand ontdekte het verdwenen geld uit de kas"], ["schutting", "Ruzie over de nieuwe schutting"], ["lening", "De lening van € 15.000"]],
+    motive: "kas",
+    keys: [["schuur", "Bavo in de schuur"], ["klop", "De klop op de deur om 19:45"], ["keuken", "De chocolademelk in de keuken"], ["film", "Het filmpje: Guus weg van 20:12 tot 20:29 + gouden glitter in de werkkamer"]],
+    key: "film",
+    lies: { anneloes: "Vertelt de waarheid. Ze stond met de kinderen in de keuken.", bavo: "Vertelt de waarheid. Hij haalde het poppenhuis uit de schuur; Dinanda zag hem daar.", guus: "Liegt: “Alleen even naar de wc. Twee minuten.” Op het filmpje is hij weg van 20:12 tot 20:29. In de werkkamer ligt gouden glitter, en alleen zijn pakje zat in goud glitterpapier.", dinanda: "Vertelt de waarheid. Haar deurbel laat zien dat ze vanaf 19:50 thuis was." },
+    breaker: "Het filmpje van het uitpakken: Guus was van 20:12 tot 20:29 weg, niet twee minuten. In de werkkamer en op de deurklink zit gouden glitter, en alleen het pakje van Guus zat in goud glitterpapier.",
+    solTimeline: [["19:45", "Dinanda klopt op de deur en gaat naar huis"], ["20:05", "Anneloes gaat met de kinderen naar de keuken"], ["20:10", "Wiebrand gaat naar zijn werkkamer"], ["20:12", "Guus zegt dat hij naar de wc gaat"], ["± 20:15", "ruzie over de kas; de klap met de vijzel"], ["20:15", "Bavo gaat via de keuken naar de schuur"], ["20:25", "Bavo komt terug met het poppenhuis"], ["20:29", "Guus gaat weer bij de pakjes zitten"], ["20:40", "Anneloes vindt haar vader"]],
+    answer: "guus",
+    weapon: "een koperen vijzel",
+    place: "de werkkamer",
+    tips: ["Wie verliet tussen 20:10 en 20:40 de woonkamer?", "Bekijk het filmpje van het uitpakken. Hoe lang was iedereen weg?", "In welk papier zat het pakje van Guus?"],
+    story: "Guus Kloosterhuis deed de kas van de bakkerij en stak in november € 9.000 in zijn eigen zak. Wiebrand had het door en schreef er zelfs een gedicht over. Op pakjesavond ging Wiebrand om 20:10 zijn gedichten halen. Twee minuten later zei Guus dat hij naar de wc ging, maar hij liep de werkkamer in. Ze kregen ruzie en Guus sloeg zijn oom met de koperen vijzel. Hij veegde de vijzel schoon, maar de gouden glitter van zijn eigen cadeaupapier bleef achter. Om 20:29 ging hij weer bij de pakjes zitten en zei dat hij maar twee minuten weg was geweest."
+  }
+);
+SCR.tv = Object.assign(SCR.tv || {}, {
+  coulisse: [["t", "Sneeuw in de coulissen", "coulissen", "Tv-dossier · zaak 16"], ["s", "Stadsschouwburg Hoogmeer", ["night", ["house", 150, 170, 1.1]], "Première van het winterstuk De lange winter. Alle stoelen zijn bezet."], ["s", "21:27", ["dark", ["stage", 150, 185, 1]], "Na de pauze vindt de inspiciënt de regisseur onder de loopbrug."], ["e", "Wie was er in de pauze op de loopbrug?", "Start het onderzoek"]],
+  steiger: [["t", "Stil water bij de steiger", "steiger", "Tv-dossier · zaak 17"], ["s", "Sloepenverhuur De Lisdodde", ["water", ["boat", 150, 150, 1.1]], "Een kleine verhuur aan het meer. Naast de steiger ligt een grote camping."], ["s", "20:40", ["dusk", ["boat", 150, 165, 1]], "Een kanovaarder ziet iets drijven tussen de sloepen."], ["e", "Wie was er vanavond op de steiger?", "Start het onderzoek"]],
+  pakjes: [["t", "Dood op pakjesavond", "pakjesavond", "Tv-dossier · zaak 18"], ["s", "Banketbakkerij Kloosterhuis", ["night", ["house", 150, 170, 1.1]], "Elk jaar viert de familie pakjesavond bij opa Wiebrand, naast de bakkerij."], ["s", "20:40", ["desk", ["letter", 150, 170, 1.2]], "Anneloes brengt haar vader chocolademelk. Hij ligt naast zijn bureau."], ["e", "Wie verliet de kamer tijdens het uitpakken?", "Start het onderzoek"]]
+});
+SCREND.tv = Object.assign(SCREND.tv || {}, {
+  coulisse: [["t", "Zo is het gebeurd", "gebeurd", "Sneeuw in de coulissen"], ["s", "De foyer · 21:10", ["wall", ["bar", 150, 170, 1]], "Sweder zei tegen de sponsors dat hij iets moest regelen. Met zijn pasje ging hij achter het toneel."], ["s", "De loopbrug", ["dark", ["railing", 150, 90, 1], ["stage", 150, 205, 0.8]], "Everard wist van het kaartgeld. Bij de sneeuwmachine kreeg hij een duw.", { hit: "duw", act: "fall", top: [150, 88], bottom: [205, 192], s: 0.36, why: [["v", "Sweder? Wat doe jij hier boven?"], ["a", "We moeten praten. Over die kassalijsten."], ["v", "Ik heb ze zelf geteld. Maandag weet het bestuur alles."], ["a", "Dat gaat niet gebeuren, Everard."]] }], ["x", "Sweder Kortenhorst", "een duw van de loopbrug", "de loopbrug"]],
+  steiger: [["t", "Zo is het gebeurd", "gebeurd", "Stil water bij de steiger"], ["s", "De slagboom · 19:44", ["dusk", ["car", 150, 170, 1]], "Arnout reed in het golfkarretje van de camping naar de steiger."], ["s", "De steiger", ["water", ["boat", 220, 150, 0.9]], "Wopke wilde hem aangeven. Eén duw, en Wopke lag in het water.", { hit: "duw", act: "drown", x: 150, y: 142, s: 0.42, why: [["v", "Morgen gaat de mail naar de gemeente, Arnout."], ["a", "Dan gaat mijn camping dicht. Doe dat niet."], ["v", "Kijk zelf maar. Het water is bruin."], ["a", "Jij stuurt helemaal niets meer."]] }], ["x", "Arnout Dennenkamp", "een duw in het water", "de steiger"]],
+  pakjes: [["t", "Zo is het gebeurd", "gebeurd", "Dood op pakjesavond"], ["s", "De woonkamer · 20:12", ["wall", ["fireplace", 150, 170, 1]], "Guus zei dat hij even naar de wc ging. Hij liep de werkkamer in."], ["s", "De werkkamer", ["desk", ["letter", 150, 170, 1.2]], "Wiebrand wist van de kas. Guus sloeg toe met de koperen vijzel.", { hit: "metaal", act: "strike", x: 150, why: [["v", "Guus, ik heb de kas zelf geteld."], ["a", "Oom, ik kan het uitleggen. Echt."], ["v", "Negenduizend euro! Morgen hoort iedereen het."], ["a", "Niemand hoort het. Daar zorg ik wel voor."]] }], ["x", "Guus Kloosterhuis", "een koperen vijzel", "de werkkamer"]]
 });
 const TVTPL = {
   feest: {

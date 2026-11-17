@@ -2765,6 +2765,229 @@ const CASES = [
     epilogue: "‘Fokko,’ zegt Inspecteur Snoek, ‘om 15:20 zette u al vier schildpadeieren te koop, voor € 3.000 per stuk. Uw pas was helemaal niet kwijt. Om 18:41 ging u met de groene pas het reptielenhuis in om de eieren te halen. Maar Ewout was er nog. Hij zag de open broedmachine en pakte zijn telefoon. U sloeg hem met de zaklamp, en de klok viel van de muur: 18:49. Ewout kon nog net op zijn telefoon tikken, in morse, zoals hij dat ooit bij de padvinderij leerde. Daarna vroeg u Albertine om te zeggen dat u bij de pinguïns was.’ In Fokko’s rugzak vindt Snoek vier eieren, warm ingepakt in een handdoek. Ze gaan terug in de broedmachine. Een maand later kruipen er vier kleine stralenschildpadjes uit."
   }
 ];
+CASES.push(
+  {
+    id: "kaasmarkt",
+    title: "Met twee maten",
+    level: "Gemiddeld",
+    blurb: "Op de kaasmarkt van Bommeldam ligt de waagmeester dood naast de grote weegschaal. De avond ervoor stuurde hij Inspecteur Snoek een kaart vol getallen.",
+    intro: "Elke vrijdag is er kaasmarkt in Bommeldam. Dan liggen de gele kazen in lange rijen op het Waagplein, en dragen de kaasdragers ze op houten berries naar de Waag om ze te laten wegen. Op donderdagavond krijgt Inspecteur Snoek een kaart van een oude schoolvriend: waagmeester Ambrosius Clabbers. Er staan bijna alleen getallen op.",
+    ch: [
+      {
+        t: "Een kaart met getallen",
+        story: "Onder de getallen staat: ‘Weet je nog? Onze oude schoolcode. Kom morgen vroeg. A.’",
+        doc: () => '<p class="code">'.concat("HET GEWICHT KLOPT NIET".split(" ").map((w) => [...w].map((c) => ABC.indexOf(c) + 1).join("-")).join(" &nbsp;/&nbsp; "), "</p>"),
+        q: "Wat klopt er volgens Ambrosius niet?",
+        ans: ["GEWICHT"],
+        hints: ["Elk getal staat voor een letter. Kijk bij de getallencode in het handboek.", "A = 1, B = 2, C = 3. Het eerste woord is 8-5-20: HET."],
+        sol: "Er staat: HET GEWICHT KLOPT NIET.",
+        after: "Snoek neemt de eerste trein naar Bommeldam. Om tien voor acht staat hij op het Waagplein, maar er is al politie. Kaashandelaar Crispijn Akkerdaas sloeg om 07:42 alarm: in de Waag ligt Ambrosius Clabbers naast de grote weegschaal. Iemand heeft hem geslagen met een zwaar ijzeren weegloodje. Hij leeft niet meer."
+      },
+      {
+        t: "Het weegboek",
+        story: "Elke vrijdag begint Ambrosius om 06:00 met wegen, lang voordat de markt opengaat. Elke kaas kost hem precies 4 minuten: erop, wegen, opschrijven, eraf. Op de lessenaar ligt zijn weegboek.",
+        doc: "<table><tr><th>Weegboek vrijdag</th><th></th></tr><tr><td>Begonnen met wegen</td><td>06:00</td></tr><tr><td>Kazen gewogen en opgeschreven</td><td>17</td></tr><tr><td>Kaas nummer 18</td><td>ligt op de schaal, gewicht niet ingevuld</td></tr></table>",
+        q: "Hoe laat begon Ambrosius aan kaas nummer 18? (bijvoorbeeld 06:45)",
+        ans: ["0708", "708"],
+        hints: ["17 kazen van elk 4 minuten. Hoeveel minuten is dat samen?", "17 × 4 = 68 minuten. Dat is 1 uur en 8 minuten na 06:00."],
+        sol: "17 × 4 = 68 minuten, dus 1 uur en 8 minuten. 06:00 + 1:08 = 07:08.",
+        after: "Om 07:08 legde Ambrosius de achttiende kaas op de schaal. Verder is hij niet gekomen. Wie vóór de markt de Waag binnenkomt, zet zijn naam op de lijst bij de deur. Maar er is koffie over de lijst gegaan."
+      },
+      {
+        t: "De lijst bij de deur",
+        story: "Op de lijst staan drie namen: kaasboerin Berendina Aaftink, dragersvoorman Boudewijn Cramwinckel en kaashandelaar Crispijn Akkerdaas. Drie tijden zijn nog te lezen: 06:30, 07:05 en 07:40. Welke tijd bij wie hoort, is weggelopen. De schoonmaker van de Waag weet nog twee dingen.",
+        doc: "<ul><li>Boudewijn was niet de eerste.</li><li>Crispijn kwam later dan Boudewijn.</li><li>Elke tijd hoort bij precies één naam.</li></ul>",
+        q: "Wie tekende er om 07:05?",
+        ans: ["BOUDEWIJN", "CRAMWINCKEL"],
+        hints: ["Crispijn kwam later dan Boudewijn. Kan Crispijn dan de eerste zijn?", "Boudewijn en Crispijn waren allebei niet de eerste. Berendina kwam dus om 06:30."],
+        sol: "Boudewijn was niet de eerste, en Crispijn kwam na Boudewijn, dus ook hij was niet de eerste. Berendina tekende om 06:30, Boudewijn om 07:05 en Crispijn om 07:40.",
+        after: "Om 07:05, drie minuten voor de aanval, was dragersvoorman Boudewijn in de Waag. ‘Ik had gisteren ruzie met Ambrosius, dat klopt,’ zegt hij. ‘Over het loon van mijn dragers. Vanochtend kwam ik alleen zeggen dat we om acht uur beginnen. Hij stond kaas te wegen. Daarna ben ik naar het dragershuis gelopen om de bel te luiden.’"
+      },
+      {
+        t: "De dragersbel",
+        story: "Elke vrijdag luidt de voorman de bel van het dragershuis. Dan weten alle kaasdragers: witte kiel aan, het gaat beginnen. Half Bommeldam hoort hem.",
+        doc: '<p>De bel van het dragershuis luidde om <b>07:10</b>. Kaasboerin Berendina en drie dragers zagen Boudewijn aan het touw trekken.</p><p style="margin-top:10px">Van de Waag naar het dragershuis: <b>5 minuten lopen</b>.</p>',
+        q: "Stel dat Boudewijn om 07:08 nog in de Waag was. Hoe laat kon hij dan op zijn vroegst bij de bel zijn?",
+        ans: ["0713", "713"],
+        hints: ["Tel de looptijd op bij 07:08.", "07:08 plus 5 minuten."],
+        sol: "07:08 + 5 minuten = 07:13. Maar de bel luidde al om 07:10. Boudewijn moet de Waag dus uiterlijk om 07:05 hebben verlaten. Om 07:08 was hij er niet meer.",
+        after: "Boudewijn heeft een alibi. In de binnenzak van Ambrosius vindt Snoek een opschrijfboekje. Op de laatste bladzijde staat iets over een loodje, en een rij getallen van twee cijfers."
+      },
+      {
+        t: "Het opschrijfboekje",
+        story: "Ambrosius liet zijn loodjes nawegen bij de keuring in de stad. Wat hij daar hoorde, schreef hij in een code op.",
+        doc: () => '<p>Loodje ‘10 kilo’, nieuw sinds maart.<br>Nagewogen bij de keuring:</p><p class="code">'.concat(polybius("ELF"), "</p><p>kilo</p>"),
+        q: "Hoeveel kilo weegt het loodje echt?",
+        ans: ["ELF", "11"],
+        hints: ["Twee cijfers per letter: eerst de rij, dan de kolom. Kijk bij het vierkant van Polybius in het handboek.", "15 is rij 1, kolom 5: dat is een E."],
+        sol: "15 = E, 31 = L, 21 = F. Er staat ELF kilo.",
+        after: "Het loodje van ‘10 kilo’ weegt in het echt elf kilo. Op de oude weegschaal van de Waag ligt de kaas aan de ene kant en het loodje aan de andere. Een kaas die het loodje precies in evenwicht houdt, wordt opgeschreven als 10 kilo, maar weegt er elf. De boeren krijgen voor elke kaas één kilo te weinig betaald. Snoek kijkt naar het weegloodje naast Ambrosius. Het is het nieuwe loodje."
+      },
+      {
+        t: "Het kasboek",
+        story: "Wie heeft er voordeel van? De koper. In het kasboek van de Waag staat wie er vorige vrijdag kaas kocht.",
+        doc: "<table><tr><th>Koper</th><th>Kazen</th><th>Op de Waag</th><th>Prijs</th></tr><tr><td>Kaashandel Akkerdaas</td><td>40</td><td>10 kilo per kaas</td><td>€ 15 per kilo</td></tr><tr><td>Winkeltje op het plein</td><td>2</td><td>10 kilo per kaas</td><td>€ 15 per kilo</td></tr></table>",
+        q: "Elke kaas woog in het echt één kilo meer. Hoeveel euro aan kaas kreeg Kaashandel Akkerdaas vorige vrijdag gratis?",
+        ans: ["600"],
+        hints: ["Hoeveel kilo kaas kreeg de kaashandel in totaal te veel?", "40 kazen × 1 kilo = 40 kilo. En elke kilo kost € 15."],
+        sol: "40 × 1 kilo = 40 kilo te veel. 40 × € 15 = € 600. En dat elke vrijdag weer.",
+        after: "Zeshonderd euro per week. Berendina wordt rood van woede. ‘En wie gaf dat nieuwe loodje aan de Waag? Crispijn! Als cadeautje, zei hij.’ Crispijn haalt zijn schouders op. ‘Dat wist ik niet. En ik kwam pas om 07:40. Ik heb Ambrosius gevonden, ik heb zelf alarm geslagen!’ Dan steekt bakker Bendert Bolwerk zijn vinger op. Zijn bakkerij staat naast de Waag."
+      },
+      {
+        t: "Wie liegt?",
+        story: "Snoek zet drie verklaringen onder elkaar. Berendina stond vanaf 06:30 bij haar kraam, met zicht op de zijdeur van de Waag.",
+        doc: '<ul><li>Crispijn: ‘Ik ben vóór 07:40 niet op het Waagplein geweest.’</li><li>Bendert: ‘Om 07:00 zag ik Crispijn met zijn bakfiets bij de zijdeur van de Waag.’</li><li>Berendina: ‘Bendert spreekt de waarheid. Ik zag die bakfiets ook.’</li></ul><p style="margin-top:10px"><b>Precies één van hen drieën liegt.</b></p>',
+        q: "Wie liegt er?",
+        ans: ["CRISPIJN", "AKKERDAAS"],
+        hints: ["Crispijn en Bendert kunnen niet allebei gelijk hebben. Eén van die twee liegt dus.", "Stel dat Bendert liegt. Wat betekent dat voor Berendina? Hoeveel leugenaars heb je dan?"],
+        sol: "Crispijn en Bendert spreken elkaar tegen, dus één van hen liegt. Als Bendert liegt, liegt Berendina ook, en dan zijn het er twee. Dus liegt Crispijn.",
+        after: "Crispijn was al om 07:00 bij de Waag. Hij kwam binnen door de zijdeur, waar geen lijst ligt. Op het stuur van zijn bakfiets zitten roestbruine vegen, net als op het ijzeren weegloodje. Snoek vraagt iedereen naar de Waag te komen."
+      },
+      {
+        t: "De ontknoping",
+        story: "Tussen de stapels kaas tikt de klok van de Waag. Snoek slaat zijn notitieboekje open.",
+        doc: "<ul><li>Om 07:08 werd Ambrosius aangevallen, bij kaas nummer 18.</li><li>Boudewijn luidde om 07:10 de bel, 5 minuten lopen verderop.</li><li>Het nieuwe loodje weegt elf kilo in plaats van tien. Het is het wapen.</li><li>Wie het loodje gaf, kreeg elke vrijdag € 600 aan kaas gratis.</li><li>Iemand loog over waar hij om 07:00 was.</li></ul>",
+        q: "Wie vermoordde Ambrosius Clabbers?",
+        ans: ["CRISPIJN", "AKKERDAAS"],
+        hints: ["Wie gaf het loodje aan de Waag, en wie verdiende eraan?", "Wie loog over waar hij om 07:00 was?"],
+        sol: "Kaashandelaar Crispijn Akkerdaas gaf het valse loodje, verdiende eraan en loog over het moment dat hij bij de Waag kwam.",
+        after: ""
+      }
+    ],
+    culprit: "‘Het was <b>kaashandelaar Crispijn Akkerdaas</b>, met het <b>ijzeren weegloodje</b>, in de <b>Waag</b>!’",
+    epilogue: "‘Crispijn,’ zegt Inspecteur Snoek, ‘in maart gaf u de Waag een cadeautje: een nieuw loodje van tien kilo. Maar het woog er elf. Zo kreeg u elke vrijdag veertig kilo kaas die u niet betaalde, € 600 per week, van boeren als Berendina. Ambrosius liet het loodje nawegen en schreef mij een kaart. U hoorde dat hij bij de keuring was geweest. Vanochtend om 07:00 kwam u met uw bakfiets naar de zijdeur, om het loodje terug te pakken. Om 07:08 betrapte Ambrosius u, net toen hij kaas nummer 18 op de schaal legde. U sloeg hem met het loodje zelf. Daarna fietste u weg, en om 07:40 kwam u terug om netjes te tekenen en hem te vinden.’ Crispijn kijkt naar de roestvegen op zijn handen en zegt niets meer. Berendina en de andere boeren krijgen hun geld terug. En om elf uur begint de kaasmarkt toch nog, met een loodje dat precies tien kilo weegt."
+  },
+  {
+    id: "zweefvlieg",
+    title: "Buitenlanding",
+    level: "Gevorderd",
+    blurb: "Op een zomeravond ligt de voorzitter van een zweefvliegclub onder de oude uitkijktoren. Een week eerder vloog een clublid een record. Of toch niet?",
+    intro: "Op zweefvliegveld Bremhorst zweven op zomeravonden witte vliegtuigjes zonder motor boven de heide. Inspecteur Snoek heeft er net zijn eerste proefvlucht gemaakt, bij Zweefvliegclub De Kiekendief. Hij zit nog na te genieten in de startwagen aan het eind van het veld, als de radio kraakt. Het is voorzitter Claes Ceelen. Zijn stem valt steeds weg.",
+    ch: [
+      {
+        t: "Kraken op de radio",
+        story: "Vliegers spellen op de radio met woorden, zodat niemand letters door elkaar haalt. Dit is alles wat er doorkomt.",
+        doc: () => '<p class="code" style="font-size:21px;font-size:clamp(15px,4.4vw,21px);letter-spacing:.04em">'.concat([..."TOREN"].map((c) => NATO[c]).join(" … "), "</p><p>‘… kom … snel …’</p>"),
+        q: "Waar moet Snoek heen?",
+        ans: ["TOREN"],
+        hints: ["Elk woord staat voor één letter. Kijk bij het spelalfabet in het handboek.", "Tango is een T, Oscar is een O."],
+        sol: "Er staat TOREN: de oude houten uitkijktoren bij de hangar.",
+        after: "Snoek springt in de veldauto en rijdt over het gras naar de hangar, aan de andere kant van het veld. Onder aan de oude uitkijktoren ligt Claes Ceelen. Hij is van het bovenste platform gevallen, twaalf meter diep. Hij leeft niet meer. Het hek boven is hoog: daar val je niet zomaar overheen. Om zijn pols zit zijn vliegerhorloge."
+      },
+      {
+        t: "Het vliegerhorloge",
+        story: "Het horloge van Claes merkt het als hij valt, en schrijft dan de tijd op. Net als alle klokken in de luchtvaart staat het op UTC, de wereldtijd. In de zomer is het in Nederland 2 uur later dan UTC.",
+        doc: "<table><tr><th>Horloge Claes Ceelen</th><th></th></tr><tr><td>Laatste vlucht geland</td><td>16:58 UTC</td></tr><tr><td>Val gemeten</td><td>17:46 UTC</td></tr></table>",
+        q: "Hoe laat viel Claes, in Nederlandse tijd? (bijvoorbeeld 18:30)",
+        ans: ["1946"],
+        hints: ["In de zomer is het in Nederland later dan UTC. Moet je er iets bij doen of eraf halen?", "Tel 2 uur op bij 17:46."],
+        sol: "17:46 UTC + 2 uur = 19:46 Nederlandse tijd.",
+        after: "Om 19:46 viel Claes van de toren. Wie vloog er toen nog, en wie stond er op de grond? Op het krijtbord in de startwagen staat de startlijst van vanavond."
+      },
+      {
+        t: "De startlijst",
+        story: "Op het krijtbord schrijven ze bij elke vlucht de starttijd, en na de landing hoe lang de vlucht duurde.",
+        doc: "<table><tr><th>Piloot</th><th>Start</th><th>Duur</th></tr><tr><td>Bregje Altink</td><td>18:52</td><td>1 uur 10 min</td></tr><tr><td>Achim Boschloo</td><td>18:40</td><td>51 min</td></tr><tr><td>Clasina Brummelkamp, instructrice</td><td>19:05</td><td>35 min</td></tr><tr><td>Bouwe Cleijsen</td><td>19:30</td><td>25 min</td></tr></table>",
+        q: "Hoeveel van deze vier piloten waren er om 19:46 al geland?",
+        ans: ["2", "TWEE"],
+        hints: ["Reken voor iedereen uit hoe laat hij of zij landde.", "Bregje landde om 20:02. Hoe zit het met de andere drie?"],
+        sol: "Bregje landde om 20:02 en Bouwe om 19:55: zij zaten om 19:46 nog in de lucht. Achim landde om 19:31 en Clasina om 19:40. Dat zijn er twee.",
+        after: "Achim Boschloo en instructrice Clasina Brummelkamp stonden om 19:46 al op de grond. Lierist Boaz Abbink zat in de lier, die de vliegtuigjes met een lange kabel de lucht in trekt. Achims vriendin Annefleur Corsius stond achter de bar in de kantine. In de borstzak van Claes zit een notitieboekje. Op de laatste bladzijde staat een rij cijfers."
+      },
+      {
+        t: "Het notitieboekje",
+        story: "Claes schreef zijn geheime aantekeningen altijd in toetsjescode, zoals vroeger op zijn allereerste telefoon. Dit schreef hij vanmiddag op.",
+        doc: () => '<p class="code" style="font-size:20px;font-size:clamp(14px,4vw,20px)">'.concat(multitap("RECORD"), "<br>").concat(multitap("VALS"), "</p>"),
+        q: "Wat had Claes ontdekt? Wat schreef hij op?",
+        ans: ["VALS"],
+        hints: ["Kijk bij de telefoontoetsen in het handboek. Hoe vaak een cijfer er staat, bepaalt de letter.", "777 is drie keer de 7: dat is een R."],
+        sol: "Er staat RECORD VALS.",
+        after: "Vorige week zondag vloog Achim Boschloo een clubrecord: 500 kilometer op één dag, met een keerpunt boven het dorp Bosweide, en om 18:10 weer thuis op het veld. Met dat record mag hij mee met de nationale ploeg. Maar als voorzitter moest Claes het record nog goedkeuren. ‘Mijn logger heeft alles opgeslagen,’ zegt Achim. ‘Elke meter.’ Een logger is een kastje in het vliegtuig dat de hele vlucht bijhoudt. Snoek kijkt naar de drie aanhangers voor zweefvliegtuigen naast de hangar."
+      },
+      {
+        t: "De kilometerteller",
+        story: "Een zweefvliegtuig dat niet meer thuis kan komen, landt in een weiland: een buitenlanding. Dan haalt iemand het op met een lange aanhanger achter de auto. Claes schreef op zaterdag, de dag vóór het record, alle tellers op. Volgens het aanhangerboek is daarna niemand meer met een aanhanger op pad geweest.",
+        doc: "<table><tr><th>Aanhanger</th><th>Zaterdag</th><th>Nu</th></tr><tr><td>Wit</td><td>12.418 km</td><td>12.596 km</td></tr><tr><td>Blauw</td><td>8.305 km</td><td>8.305 km</td></tr><tr><td>Rood</td><td>20.177 km</td><td>20.177 km</td></tr></table>",
+        q: "De witte aanhanger haalde een vliegtuig op en bracht het terug naar het veld. Hoeveel kilometer van het veld stond dat vliegtuig?",
+        ans: ["89"],
+        hints: ["Hoeveel kilometer reed de witte aanhanger in totaal?", "12.596 − 12.418 = 178 kilometer. Maar dat is heen én terug."],
+        sol: "12.596 − 12.418 = 178 kilometer, heen en terug. Het vliegtuig stond dus 178 : 2 = 89 kilometer verderop.",
+        after: "Snoek kijkt op de kaart in de startwagen. Precies 89 kilometer van Bremhorst ligt Bosweide, het keerpunt van de recordvlucht. Daar is een vliegtuig niet weggevlogen, maar met de witte aanhanger opgehaald. ‘Van wie is die witte aanhanger?’ vraagt Snoek. Het blijft stil."
+      },
+      {
+        t: "Drie aanhangers",
+        story: "Achim, Bregje en Bouwe hebben elk een eigen aanhanger. Instructrice Clasina weet er wel iets van.",
+        doc: "<ul><li>De aanhanger van Bregje is niet wit.</li><li>Bouwe heeft geen witte en geen blauwe aanhanger.</li><li>Iedereen heeft precies één aanhanger.</li></ul>",
+        q: "Van wie is de witte aanhanger?",
+        ans: ["ACHIM", "BOSCHLOO"],
+        hints: ["Bouwe heeft geen witte en geen blauwe. Dan weet je zijn kleur al.", "Bouwe heeft de rode. Wit en blauw blijven over voor Bregje en Achim."],
+        sol: "Bouwe heeft de rode aanhanger. Bregje heeft de witte niet, dus de blauwe. De witte aanhanger is van Achim Boschloo.",
+        after: "‘Ja, hij is van mij,’ zegt Achim. ‘Maar ik heb hem vorige week uitgeleend. Ik vloog zelf netjes naar huis. Wie ermee gereden heeft, weet ik niet.’ Vorige week zondag waren er drie clubleden op het veld die zelf niet vlogen: Bregje, lierist Boaz en Annefleur."
+      },
+      {
+        t: "Wie reed er?",
+        story: "Eén van de drie reed die zondag met de witte aanhanger weg. Snoek hoort ze alle drie. Wie reed, liegt erover. De andere twee spreken de waarheid.",
+        doc: '<ul><li>Bregje: ‘Boaz heeft niet met de witte aanhanger gereden.’</li><li>Boaz: ‘Annefleur heeft met de witte aanhanger gereden.’</li><li>Annefleur: ‘Ik heb niet met de witte aanhanger gereden.’</li></ul><p style="margin-top:10px"><b>Alleen wie reed, liegt.</b></p>',
+        q: "Wie reed er met de witte aanhanger?",
+        ans: ["ANNEFLEUR", "CORSIUS"],
+        hints: ["Probeer het één voor één. Stel dat Bregje reed: dan liegt zij. Wat betekent dat voor Boaz?", "Als Boaz reed, liegt Bregje. Maar Bregje reed dan niet, dus zij moet de waarheid spreken. Dat kan niet. Wie blijft er over?"],
+        sol: "Reed Bregje, dan liegt zij, en dan reed Boaz ook: dat kan niet. Reed Boaz, dan liegt Bregje terwijl zij niet reed: kan ook niet. Reed Annefleur, dan spreken Bregje en Boaz de waarheid en liegt alleen Annefleur. Annefleur reed.",
+        after: "Annefleur begint te huilen. ‘Achim belde me vanuit een weiland bij Bosweide. Hij was buiten geland. Ik heb hem opgehaald. Thuis heeft hij aan zijn logger zitten knoeien. Hij zei dat het niemand pijn deed.’ Achim is wit weggetrokken. ‘Dat record is één ding,’ roept hij. ‘Maar Clasina stond om 19:46 ook op de grond! Zij en Claes hadden al maanden ruzie.’"
+      },
+      {
+        t: "Aan het eind van de baan",
+        story: "Clasina landde om 19:40 helemaal aan het verre eind van het veld, bij de lier. De hangar en de toren staan aan de andere kant. Snoek zet op een rij wat hij weet.",
+        doc: "<ul><li>19:43 · Clasina duwt haar vliegtuig van de baan, naast de lier. <i>(lierist Boaz zag het)</i></li><li>Van de lier naar de toren: <b>14 minuten lopen</b>.</li><li>Kassa kantine: Annefleur verkoopt iets om 19:44 en om 19:49. Van de kantine naar de toren: 3 minuten lopen.</li><li>Achim landde om 19:31 naast de hangar, vlak bij de toren.</li></ul>",
+        q: "Hoe laat kon Clasina op zijn vroegst bij de toren zijn? (bijvoorbeeld 19:30)",
+        ans: ["1957"],
+        hints: ["Om 19:43 stond ze nog bij de lier. Hoe lang moet ze dan nog lopen?", "19:43 plus 14 minuten."],
+        sol: "19:43 + 14 minuten = 19:57. Om 19:46 kon Clasina dus niet bij de toren zijn.",
+        after: "Clasina heeft een alibi. Annefleur ook: tussen haar twee verkopen zat maar 5 minuten, en heen en terug naar de toren kost er al 6, nog zonder de trap. Snoek vraagt iedereen naar de uitkijktoren te komen."
+      },
+      {
+        t: "De ontknoping",
+        story: "De zon zakt achter de heide. Onder de uitkijktoren slaat Snoek zijn notitieboekje open.",
+        doc: "<ul><li>Claes viel om 19:46 van de uitkijktoren. Het hek boven is hoog.</li><li>Alleen Achim en Clasina stonden toen al op de grond. Clasina was om 19:43 nog bij de lier, 14 minuten lopen verderop.</li><li>Claes had ontdekt dat het record vals was.</li><li>Bij het keerpunt, 89 kilometer verderop, werd een vliegtuig opgehaald met de witte aanhanger.</li><li>De witte aanhanger is van Achim.</li></ul>",
+        q: "Wie duwde Claes Ceelen van de toren?",
+        ans: ["ACHIM", "BOSCHLOO"],
+        hints: ["Wie stond om 19:46 op de grond, en kon ook echt bij de toren zijn?", "Wie verloor alles als Claes het record zou afkeuren?"],
+        sol: "Achim Boschloo stond om 19:46 op de grond, vlak bij de toren, had geen alibi en zijn record was vals.",
+        after: ""
+      }
+    ],
+    culprit: "‘Het was <b>piloot Achim Boschloo</b>, met <b>een duw</b>, van de <b>uitkijktoren</b>!’",
+    epilogue: "‘Achim,’ zegt Inspecteur Snoek, ‘vorige week zondag kwam u helemaal niet thuis. U landde buiten, in een weiland bij Bosweide, en Annefleur haalde u op met uw witte aanhanger. Thuis knoeide u met uw logger, zodat het leek alsof u om 18:10 netjes was teruggevlogen. Maar Claes las de kilometerteller van uw aanhanger, en schreef in zijn boekje: RECORD VALS. Vanavond landde u om 19:31 naast de hangar. U zag Claes de uitkijktoren op gaan en klom hem achterna. Boven zei hij dat hij het record ging afkeuren. Toen u op hem af kwam, riep hij mij nog op met zijn radio. Vlak daarna gaf u hem een duw.’ Achim kijkt naar zijn schoenen en zegt niets meer. Het record wordt uit de boeken geschrapt. En op zomeravonden zweven er boven Bremhorst weer witte vliegtuigjes, stil als vogels. Snoek heeft zijn tweede proefvlucht al geboekt."
+  }
+);
+Object.assign(SIMG, {
+  kaasmarkt: {
+    cover: ["day", ["cafe", 150, 172, 1, "WAAG"], ["kraam", 58, 180, 0.6], ["kraam", 242, 180, 0.6]],
+    ch: [
+      ["desk", ["envelope", 150, 172, 1.4]],
+      ["desk", ["books", 150, 175, 1.45]],
+      ["desk", ["note", 150, 188, 1.1], ["ink", 150, 120, 1, "06:30 · 07:05 · 07:40", 7.5]],
+      ["day", ["church", 150, 178, 1]],
+      ["desk", ["note", 150, 188, 1.1], ["ink", 150, 122, 1, "15 31 21", 14]],
+      ["desk", ["money", 150, 178, 1.8]],
+      ["day", ["cafe", 95, 172, 0.8, "BAKKERIJ"], ["bike", 225, 182, 0.75]],
+      ["wall", ["barrel", 95, 175, 0.9], ["barrel", 165, 175, 0.9], ["marker", 235, 190, 1, 1]]
+    ]
+  },
+  zweefvlieg: {
+    cover: ["dusk", ["shed", 95, 172, 0.9], ["tower", 225, 195, 0.75]],
+    ch: [
+      ["dusk", ["radio", 150, 170, 1.3]],
+      ["desk", ["phone", 150, 165, 1.3]],
+      ["wall", ["chalk", 150, 92, 1, "18:52 · 18:40 · 19:05 · 19:30", 24]],
+      ["desk", ["note", 150, 188, 1.1], ["ink", 150, 122, 1, "777 33 222", 13]],
+      ["day", ["car", 150, 172, 1.1]],
+      ["desk", ["key", 80, 165, 1], ["key", 150, 172, 1], ["key", 220, 165, 1]],
+      ["wall", ["bar", 150, 178, 0.9]],
+      ["dusk", ["binoculars", 150, 170, 1.3]],
+      ["dusk", ["tower", 150, 195, 1], ["marker", 240, 192, 1, 1]]
+    ]
+  }
+});
 let game = window.MDKIOSK || /[?&](tv=|join)/.test(location.search) ? "tv" : store.get("md-game") === "pas" ? "pas" : "home", gmOpen = false;
 const GHIDE = /* @__PURE__ */ new Set(["team", "casino", "verhoor", "tijdlijn"]);
 function setGame(g) {
@@ -3223,6 +3446,146 @@ const COLD = [
   }
 ];
 const KKEY = "md-koud";
+COLD.push(
+  {
+    id: "glasblazer",
+    nr: "006",
+    title: "Gloeiend ijzer",
+    level: "Moeilijk",
+    time: "60–90 min",
+    blurb: "Een meester-glasblazer ligt dood tussen de scherven van zijn laatste schaal. Gevallen in de hitte, dacht de politie. Maar wie valt er tegen gloeiend ijzer?",
+    rapport: '<p class="stamp-line">Proces-verbaal van bevinding · Zaaknummer 2011-1118-DV</p>\n   <p><b>Datum:</b> vrijdag 18 november 2011, 07:41<br><b>Plaats:</b> Glasblazerij Dommering, Glasweg 4, Dalmerveen</p>\n   <p>Om 07:32 belt leerling-glasblazer Fedde Egberts 112. In de werkplaats vindt hij meester-glasblazer <b>Everhard Dommering (63)</b>, eigenaar van de glasblazerij, op de vloer naast de werkbank bij de opwarmoven. Hij is overleden.</p>\n   <ul><li>De deur van de werkplaats was dicht, maar niet op slot. Het alarm stond niet aan.</li>\n   <li>Om het slachtoffer heen liggen de scherven van een grote blauwe schaal. Hij heeft een wond aan zijn linkerslaap.</li>\n   <li>De smeltoven en de opwarmoven hebben de hele nacht gebrand. In de werkplaats was het 31 graden.</li>\n   <li>Melding bij de meldkamer, donderdag 22:11: een bewoner van de Glasweg hoort bij de glasblazerij ‘een harde klap en brekend glas’. Om 22:30 rijdt een surveillancewagen langs. Er brandt licht in de werkplaats, verder is er niets te zien. De agenten rijden door.</li>\n   <li>Bij de verhoren op 18 november draagt galeriehouder Godert Eskes een verband om zijn rechterhand.</li>\n   <li>Van Dalmerveen naar Emmerstad is het 25 minuten rijden.</li></ul>\n   <p><b>Conclusie 2012:</b> een ongeluk. Dommering is in de hitte onwel geworden en met de schaal in zijn handen gevallen. Daarbij sloeg hij met zijn hoofd tegen de hete rand van de opwarmoven. Dossier gesloten.</p>\n   <p><b>2026:</b> het dossier is heropend. Het werkboek van Dommering en een paar bankafschriften zijn destijds nooit naast elkaar gelegd.</p>',
+    verhoren: [
+      { name: "Dieneke Dommering", role: "60, echtgenote", text: "<p>‘Ik werk als verpleegkundige in het ziekenhuis van Emmerstad. Donderdag had ik nachtdienst, om kwart voor tien ben ik begonnen. Everhard werkte die avond door aan de schaal voor het gemeentehuis. Dat deed hij vaker, als hij een grote opdracht had.</p><p>Wij hadden geen geldzorgen. Verzekeringen en zo regelde Everhard, daar weet ik helemaal niets van.’</p>" },
+      { name: "Elske Dommering", role: "34, dochter, glasblazer in de werkplaats", text: "<p>‘Om zes uur ben ik weggegaan, samen met Fedde. Ik ben thuisgebleven. Ik was moe en ben vroeg gaan slapen.</p><p>Papa en ik werkten fijn samen. Later zou ik de glasblazerij van hem overnemen. Dat was altijd het plan.’</p>" },
+      { name: "Fedde Egberts", role: "24, leerling-glasblazer, vond het slachtoffer", text: "<p>‘Om zes uur ben ik met Elske weggegaan. Ik heb de bus naar huis genomen, naar Gaasterveld, en daar heb ik de hele avond op de bank gezeten.</p><p>Glas meenemen? Nooit. Alles wat ik maak, maak ik hier, onder het oog van de meester. Hij heeft me alles geleerd.’</p>" },
+      { name: "Godert Eskes", role: "49, galeriehouder, verkoopt al twintig jaar het werk van Dommering", text: "<p>‘Donderdagavond zat ik in de schouwburg in Emmerstad. De voorstelling begon om kwart over acht en was om kwart voor elf afgelopen. Daarna ben ik naar huis gereden. Ik woon in Emmerstad.</p><p>Mijn hand? Die heb ik ’s middags verbrand aan een lamp, bij het ophangen van een nieuwe expositie. Everhard en ik waren vrienden. Zonder mijn galerie had niemand zijn werk gekend.’</p>" },
+      { name: "Folmer Gaastra", role: "47, glasblazer, heeft een eigen werkplaats aan de overkant", text: "<p>‘Ik was die avond thuis, alleen. Mijn huis ligt aan de achterkant, ik heb niets gehoord.</p><p>Die ruzie over mijn vaas? Een misverstand. Een golvende vaas is van niemand. Everhard zag overal na-apers.’</p>" },
+      { name: "Dries Grolleman", role: "58, oud-gezel, nu taxichauffeur", text: "<p>‘Vorig jaar ben ik ontslagen, na achttien jaar. Sindsdien ben ik daar niet meer geweest. Ik rijd niet eens meer door de Glasweg.</p><p>Donderdag reed ik gewoon mijn diensten in Emmerstad. Kijk maar in mijn rittenstaat.’</p>" }
+    ],
+    plan: '<svg viewBox="0 0 340 230" role="img" aria-label="Plattegrond van Glasblazerij Dommering">\n   <rect class="room" x="10" y="10" width="320" height="170" rx="4"/>\n   <rect class="obj" x="25" y="25" width="70" height="44"/><text x="60" y="51" text-anchor="middle">Smeltoven</text>\n   <circle class="obj" cx="140" cy="52" r="16"/><text x="140" y="28" text-anchor="middle" class="sm">Opwarmoven</text>\n   <rect class="obj" x="110" y="92" width="80" height="22"/><text x="150" y="107" text-anchor="middle" class="sm">Werkbank</text>\n   <path class="x" d="M196 112l10 10M206 112l-10 10"/>\n   <rect class="obj" x="18" y="92" width="12" height="70"/><text x="36" y="100" class="sm">Rek staven</text>\n   <rect class="obj" x="215" y="25" width="64" height="36"/><text x="247" y="47" text-anchor="middle" class="sm">Koeloven</text>\n   <rect class="obj" x="250" y="110" width="80" height="70" style="stroke-dasharray:4 3"/><text x="290" y="140" text-anchor="middle" class="sm">Kantoor</text>\n   <circle class="obj" cx="62" cy="152" r="9"/><text x="76" y="156" class="sm">Scherventon</text>\n   <path class="door" d="M160 180h50"/><text x="185" y="197" text-anchor="middle" class="sm">Deur</text>\n   <text x="170" y="222" text-anchor="middle" class="sm">Glasweg · aan de overkant: werkplaats Gaastra</text>\n   '.concat(mk(175, 128, 1)).concat(mk(165, 66, 2)).concat(mk(24, 175, 3)).concat(mk(298, 40, 4)).concat(mk(300, 165, 5)).concat(mk(235, 195, 6), "\n  </svg>"),
+    photos: [
+      "De werkbank naast de opwarmoven. Op de vloer de scherven van een grote blauwe schaal. Op de stalen rand van de werkbank zit geen bloed.",
+      "De opwarmoven. Door een ronde opening van 30 cm breed wordt het glas weer warm gemaakt. Het vuur brandt nog, ruim 1.000 graden.",
+      "Het rek met pontilstaven: ijzeren staven van 2 cm dik, waarmee het glas wordt vastgehouden. Er is plaats voor acht staven. Er staan er zeven.",
+      "De koeloven, waarin het glas langzaam afkoelt. Op het schermpje: ‘programma 1 · gestart 21:53’. Achter het ruitje staan twee vazen en een karaf.",
+      "Het kantoortje. Op het bureau ligt het werkboek van Dommering open. Ernaast een veilingcatalogus vol gele plakbriefjes.",
+      "De deur naar de Glasweg. Aan de overkant staat de werkplaats van Folmer Gaastra, donker. Verderop wonen mensen boven hun winkel."
+    ],
+    sectie: '<p class="stamp-line">Sectierapport · E. Dommering, 63 jaar</p>\n   <p><b>Doodsoorzaak:</b> schedelbreuk door een harde klap op de linkerslaap.</p>\n   <p>De wond is rond en ongeveer 2 cm breed. Rondom zit een smalle kring verbrande huid. In de wond zitten zwarte schilfers ijzeroxide, zoals die op heet ijzer ontstaan. Hij is geslagen met een rond ijzeren voorwerp dat op dat moment ruim 200 graden heet was.</p>\n   <p>De rand van de werkbank is recht en koud. De opening van de opwarmoven is 30 cm breed. Geen van beide past bij deze wond.</p>\n   <p><b>Tijdstip van overlijden:</b> tussen 21:30 en 23:30 (lichaamstemperatuur, rekening gehouden met de warme werkplaats).</p>\n   <p><b>Overig:</b> geen alcohol in het bloed. In 2011 werd de brandwond toegeschreven aan een val tegen de hete ovenrand.</p>',
+    bewijs: [
+      { t: "Geheugen van de koeloven", d: tbl(["Tijd", "Wat"], [["17:41", "deur open (40 sec)"], ["17:42", "programma 2 gestart"], ["21:52", "deur open (25 sec)"], ["21:53", "programma 1 gestart"]]) + '<p style="margin-top:8px">In de koeloven: twee vazen van Elske en een karaf met het merkteken van Everhard, nummer 1164. Alleen Everhard zet zijn eigen stukken in de koeloven.</p>' },
+      { t: "Melding meldkamer, donderdag 17 november", d: "<p>22:11 · Bewoner Glasweg: <i>‘Een harde klap en brekend glas, bij de glasblazerij.’</i><br>22:30 · Surveillance rijdt langs. Licht aan, geen bijzonderheden.</p>" },
+      { t: "Werkboek van Everhard (de laatste bladzijde)", d: tbl(["Nr.", "Stuk", "Datum"], [["1160", "vaas, groen", "3 nov"], ["1161", "schaal, amber", "7 nov"], ["1162", "vaas, blauw", "10 nov"], ["1163", "karaf", "15 nov"], ["1164", "karaf", "17 nov"]]) + '<p style="margin-top:8px">Elk uniek stuk krijgt een nummer en het merkteken van Everhard. Een hoger nummer dan 1164 bestaat niet.</p>' },
+      { t: "Veilingcatalogus, oktober 2011, met plakbriefjes van Everhard", d: tbl(["Kavel", "Omschrijving", "Ingebracht door", "Opbrengst"], [["212", "Dommering, unicum nr. 1171", "Galerie Eskes", "€ 2.400"], ["213", "Dommering, unicum nr. 1178", "Galerie Eskes", "€ 2.600"], ["240", "Dommering, unicum nr. 1185", "Galerie Eskes", "€ 3.100"]]) + '<p style="margin-top:8px"><i>‘Nooit gemaakt! Wie zet mijn naam op andermans glas? Ik bel Godert, dit moet hij uitleggen.’</i></p>' },
+      { t: "Schouwburg Emmerstad, donderdag 17 november", d: "<p>Toegangskaart rij 7, stoel 12, op naam van G. Eskes. <b>Gescand om 20:09.</b><br>Voorstelling 20:15–22:45, pauze 21:15–21:35. Na de pauze wordt er niet opnieuw gescand.</p>" },
+      { t: "Kentekenregistratie parkeergarage Schouwburgplein, Emmerstad", d: tbl(["Kenteken van", "In", "Uit"], [["G. Eskes", "19:58", "21:24"]]) },
+      { t: "Bankafschrift Godert Eskes (in 2012 opgevraagd bij een ander onderzoek)", d: tbl(["Datum", "Tijd", "Omschrijving", "Bedrag"], [["17-11", "12:40", "Lunchroom, Emmerstad", "€ 8,20"], ["17-11", "21:24", "Parkeergarage Schouwburgplein", "€ 4,50"], ["17-11", "22:38", "Dienstapotheek Dalmerveen", "€ 18,95"]]) + '<p style="margin-top:8px">Volgens de apotheek: één tube brandwondengel en steriel gaasverband.</p>' },
+      { t: "Toegangspas ziekenhuis Emmerstad en verzekeringspolis", d: "<p>Pas D. Dommering: <b>in 21:47</b>. Afgetekende controles op haar afdeling: 22:00, 22:15, 22:30, 23:00.</p><p>Levensverzekering E. Dommering, in april 2011 verhoogd naar € 400.000. Begunstigde: D. Dommering. Ondertekend door beide echtgenoten.</p>" },
+      { t: "Restaurantbon, Grote Markt Emmerstad", d: tbl(["Tijd", "Wat"], [["20:31", "tafel 6, 2 personen"], ["21:55", "2 × dessert"], ["22:18", "2 × koffie"], ["22:48", "betaald met pas F. Gaastra"]]) + '<p style="margin-top:8px">De ober: ‘Een man en een vrouw. Ze zaten de hele avond aan tafel, met tekeningen van een werkplaats.’</p><p>Huurcontract bedrijfspand ‘Atelier Gaastra &amp; Dommering’, ingang 1 januari 2012, ondertekend door Folmer Gaastra en Elske Dommering.</p>' },
+      { t: "Pizzabezorging Gaasterveld en advertentie", d: "<p>Afgeleverd 22:04, Kerkpad 3, Gaasterveld. Aangenomen en afgetekend door F. Egberts.</p><p>Advertentie op een verkoopsite: <i>‘Handgeblazen vazen, eigen werk, € 45.’</i> Verkoper: feddeglas.</p><p>Briefje van Everhard op het prikbord: <i>‘Weer 15 kilo kleurglas weg.’</i></p>" },
+      { t: "Rittenstaat taxi Dries Grolleman, donderdag 17 november", d: tbl(["Tijd", "Wat"], [["19:32–19:48", "stilstand, Glasweg 4, Dalmerveen"], ["20:40–21:10", "rit Emmerstad-Zuid – ziekenhuis"], ["21:58", "instap station Emmerstad"], ["22:26", "uitstap Emmerstad-Noord"]]) + '<p style="margin-top:8px">Brief van zijn advocaat aan Dommering, oktober: <i>‘Mijn cliënt heeft nog € 3.800 aan loon tegoed.’</i></p>' },
+      { t: "Brief van Everhard aan Folmer Gaastra (september 2011)", d: "<p><i>‘Folmer, jouw golfvaas is een kopie van mijn ontwerp uit 1998. Stop met de verkoop, of ik stap naar de rechter. Everhard.’</i></p>" },
+      { t: "Inventarislijst werkplaats", d: "<p>Pontilstaven, ijzer, doorsnee 2 cm: 8 stuks.<br><b>Bij de opruiming op 25 november 2011 lag één staaf in de opwarmoven.</b> Hij is omgesmolten met het oude glas.</p>" }
+    ],
+    opts: {
+      dader: ["Dieneke Dommering", "Elske Dommering", "Fedde Egberts", "Godert Eskes", "Folmer Gaastra", "Dries Grolleman"],
+      bewijs: ["De levensverzekering van Dieneke", "De parkeergarage: Godert reed om 21:24 al weg bij de schouwburg", "Het huurcontract van Elske en Folmer", "De advertentie van Fedde", "De bon van de dienstapotheek in Dalmerveen om 22:38", "De taxirit van Dries naar de Glasweg om 19:32"],
+      motief: ["Een levensverzekering van € 400.000", "Ontslag en achterstallig loon", "Everhard ontdekte dat er valse ‘Dommerings’ werden verkocht", "Gestolen kleurglas", "Een eigen werkplaats beginnen", "Een gekopieerd ontwerp"]
+    },
+    answer: { dader: 3, bewijs: [1, 4], motief: 2 },
+    solution: [
+      { t: "Geen val", p: "De wond is rond, 2 cm breed, verbrand en vol ijzerschilfers. De rand van de werkbank is recht en koud, de opening van de opwarmoven is 30 cm breed. Everhard werd geslagen met een rond stuk heet ijzer. In het rek ontbreekt precies zo’n staaf. Hij werd later in de opwarmoven teruggevonden." },
+      { t: "Het tijdstip", p: "Om 21:52 zette Everhard nog zelf zijn karaf nummer 1164 in de koeloven. Om 22:11 hoorde een buurman een klap en brekend glas: de schaal die uit zijn handen viel. Toen werd hij geslagen." },
+      { t: "Wie was om 22:11 ergens anders?", p: "Dieneke begon om 21:47 haar nachtdienst en tekende om 22:00 en 22:15 af in Emmerstad. Elske en Folmer zaten in Emmerstad in een restaurant en kregen om 22:18 koffie. Fedde tekende om 22:04 voor een pizza in Gaasterveld, twintig minuten verderop. Dries pikte om 21:58 een klant op bij het station van Emmerstad." },
+      { t: "Het gat in het alibi", p: "Godert zegt dat hij tot 22:45 in de schouwburg zat. Maar zijn kaartje werd alleen bij binnenkomst gescand, en zijn auto reed om 21:24, in de pauze, de parkeergarage uit. Met 25 minuten rijden was hij om 21:49 bij de glasblazerij." },
+      { t: "De verbrande hand", p: "Godert zegt dat hij zijn hand ’s middags verbrandde. Maar om 22:38 kocht hij brandwondengel bij de dienstapotheek in Dalmerveen, niet in Emmerstad. Hij verbrandde zijn hand aan de staaf, toen hij die in de opwarmoven stak om het bloed weg te branden." },
+      { t: "Het motief", p: "Galerie Eskes bracht ‘unica’ met de nummers 1171, 1178 en 1185 naar de veiling. Zulke nummers bestonden niet: Everhard was pas bij 1164. Godert verkocht vals glas onder zijn naam, en Everhard had het ontdekt." },
+      { t: "De andere leugens", p: "Dieneke tekende wel degelijk de verzekering. Elske zat niet thuis maar met Folmer in een restaurant, want samen wilden ze een eigen atelier beginnen. Fedde verkocht stiekem vazen van gestolen glas. Folmer verkocht een kopie van Everhards vaas. Dries stond die avond om half acht nog voor de deur, waarschijnlijk voor zijn loon. Maar niemand van hen kon om 22:11 in de werkplaats zijn." }
+    ],
+    verdict: "‘Het was <b>Godert Eskes</b>, met de <b>gloeiende pontilstaaf</b>, in de <b>glasblazerij</b>.’"
+  },
+  {
+    id: "ijskelder",
+    nr: "007",
+    title: "Zes centimeter sneeuw",
+    level: "Moeilijk",
+    time: "60–90 min",
+    blurb: "Een oude landheer wordt dood gevonden in de ijskelder van zijn landgoed, de grendel dicht. Een noodlottige vergissing van de tuinman, zei de politie. De sneeuw vertelt een ander verhaal.",
+    rapport: '<p class="stamp-line">Proces-verbaal van bevinding · Zaaknummer 2010-0110-DB</p>\n   <p><b>Datum:</b> zondag 10 januari 2010, 08:26<br><b>Plaats:</b> Landgoed Ganzenwaard, ijskelder in het park, Dorrebeek</p>\n   <p>Om 08:12 belt tuinman Ernst Eekhout 112. In de oude ijskelder van het landgoed vindt hij <b>Gustaaf Gansevoort (81)</b>, eigenaar van Ganzenwaard, onder aan de stenen trap. Hij is overleden.</p>\n   <ul><li>De zware eiken deur van de ijskelder was dicht. De ijzeren grendel aan de buitenkant zat dicht. Eekhout schoof hem open.</li>\n   <li>Naast het slachtoffer liggen de scherven van een fles port en een gedoofde stallantaarn. De ijskelder wordt gebruikt als wijnkelder; er hangt een klimaatlogger.</li>\n   <li>’s Nachts vroor het 9 graden. In de ijskelder was het 2 graden.</li>\n   <li>Zaterdagavond at de familie op Ganzenwaard, met rentmeester Gerjan Evenhuis. Volgens alle aanwezigen nam Evenhuis om 20:15 afscheid. Om 20:30 stond meneer Gansevoort op om zelf ‘de goede port’ uit de ijskelder te halen. Daarna heeft niemand hem nog levend gezien.</li>\n   <li>Aan tafel was er ruzie geweest. Iedereen dacht dat meneer daarna naar zijn eigen vleugel was gegaan, zoals hij vaker deed.</li>\n   <li>Auto’s: Gerwin Gansevoort parkeert in de koetsschuur. De rentmeester zet zijn auto altijd op de binnenplaats, naast de pomp. Florentine kwam met de trein, Ebbe op de fiets.</li>\n   <li>Van het huis naar de ijskelder is 5 minuten lopen, van het huis naar het dorp 15 minuten.</li></ul>\n   <p><b>Conclusie 2010:</b> een tragisch ongeluk. Meneer Gansevoort viel van de steile trap. De tuinman heeft bij zijn avondronde waarschijnlijk zonder te kijken de grendel dichtgeschoven. Meneer stierf in de nacht door onderkoeling. Dossier gesloten.</p>\n   <p><b>2026:</b> het dossier is heropend. De politiefoto’s van die zondagochtend zijn destijds nooit goed bekeken.</p>',
+    verhoren: [
+      { name: "Gerwin Gansevoort", role: "52, zoon", text: "<p>‘Na het eten ben ik naar de bibliotheek gegaan om te bellen, een zakelijk gesprek van een half uur. Daarna ben ik naar bed gegaan.</p><p>Ja, er lag een bod op het landgoed. Mijn vader wilde niet verkopen, dat was zijn goed recht. Daar hebben we nooit ruzie over gehad.’</p>" },
+      { name: "Florentine Gansevoort", role: "49, dochter", text: "<p>‘Na het eten ben ik naar mijn oude kamer gegaan, boven. Ik heb gelezen en ben vroeg gaan slapen. Ik heb niets gehoord.</p><p>Geld? Nee, ik had mijn vader nergens om gevraagd. Ik red me prima.’</p>" },
+      { name: "Ebbe Gansevoort", role: "23, kleinzoon, student", text: "<p>‘Ik ben meteen na het eten weggefietst naar het station. Ik moest de trein van 20:48 halen, terug naar Fennerdam. Opa heb ik na het eten niet meer gesproken.</p><p>Mijn studie gaat prima. Opa was er trots op.’</p>" },
+      { name: "Dorothea Fruytier", role: "58, huishoudster, woont op het landgoed", text: "<p>‘Na het eten heb ik afgeruimd. Toen meneer om half negen opstond voor de port, hoorde ik hem in de hal nog praten met Ebbe. Ebbe vroeg om geld, en meneer zei nee. Daarna heb ik vanuit de keuken mijn zus gebeld.</p><p>Rond kwart over negen hoorde ik iemand in de werkkamer van meneer. Ik dacht dat hij terug was en naar zijn vleugel ging. Daarom heb ik niet gezocht. Meneer was altijd tevreden over mij.’</p>" },
+      { name: "Ernst Eekhout", role: "63, tuinman, woont in het koetshuis", text: "<p>‘Ik was de hele avond thuis, televisie kijken. Om tien uur deed ik mijn ronde, zoals elke avond. De grendel van de ijskelder zat toen al dicht. Ik heb hem niet aangeraakt. Er lag nergens een spoor, het had net gesneeuwd.</p><p>De stok van meneer heb ik pas ’s ochtends zien liggen.’</p>" },
+      { name: "Gerjan Evenhuis", role: "57, rentmeester, beheert het landgoed al vijftien jaar", text: "<p>‘Om kwart over acht heb ik afscheid genomen, na het hoofdgerecht. Ik wilde thuis zijn voordat de wegen spekglad werden. Om half negen was ik thuis in Dorrebeek. Ik woon alleen.</p><p>De boeken van het landgoed kloppen tot op de cent. Meneer Gansevoort vertrouwde mij volledig.’</p>" }
+    ],
+    plan: '<svg viewBox="0 0 340 230" role="img" aria-label="Plattegrond van landgoed Ganzenwaard">\n   <rect class="room" x="10" y="10" width="320" height="200" rx="4"/>\n   <rect class="obj" x="35" y="25" width="130" height="66"/><text x="100" y="50" text-anchor="middle">Huis</text><text x="100" y="66" text-anchor="middle" class="sm">bibliotheek · keuken</text><text x="100" y="80" text-anchor="middle" class="sm">werkkamer · hal</text>\n   <rect class="obj" x="45" y="110" width="90" height="40" style="stroke-dasharray:4 3"/><text x="85" y="134" text-anchor="middle" class="sm">Binnenplaats</text>\n   <circle class="obj" cx="125" cy="120" r="4"/>\n   <rect class="obj" x="160" y="120" width="70" height="34"/><text x="195" y="141" text-anchor="middle" class="sm">Koetshuis</text>\n   <circle class="obj" cx="282" cy="62" r="24"/><text x="282" y="30" text-anchor="middle" class="sm">IJskelder</text>\n   <path class="x" d="M276 58l10 10M286 58l-10 10"/>\n   <path class="thin" d="M165 58L258 62" style="stroke-dasharray:3 3"/><text x="212" y="52" text-anchor="middle" class="sm">5 min</text>\n   <path class="thin" d="M225 120L270 84" style="stroke-dasharray:2 3"/>\n   <path class="door" d="M60 210h50"/><text x="85" y="224" text-anchor="middle" class="sm">Hek · naar het dorp (15 min)</text>\n   <text x="320" y="190" text-anchor="end" class="sm">→ boerderij buren</text>\n   '.concat(mk(268, 98, 1)).concat(mk(312, 62, 2)).concat(mk(30, 130, 3)).concat(mk(240, 128, 4)).concat(mk(178, 72, 5)).concat(mk(22, 58, 6), "\n  </svg>"),
+    photos: [
+      "De ingang van de ijskelder, zondagochtend. Een zware eiken deur in een heuvel, met aan de buitenkant een roestige ijzeren grendel. Naast de deur ligt de wandelstok van meneer, onder een laagje sneeuw.",
+      "Binnen: veertien steile stenen treden naar beneden. Onderaan de scherven van een fles port en een gedoofde stallantaarn. Aan de muur hangt de klimaatlogger.",
+      "De binnenplaats om 08:30. Overal ligt 6 cm sneeuw. Naast de pomp is een kale, droge rechthoek, zo groot als een auto. Er lopen bandensporen van de rechthoek naar het hek.",
+      "Het pad van het koetshuis naar de ijskelder. Eén spoor van laarzen, heen en terug. De afdrukken zijn scherp, er ligt geen sneeuw in.",
+      "De werkkamer van meneer Gansevoort. Op het bureau ligt zijn agenda open. De bladzijde van maandag 11 januari is eruit gescheurd.",
+      "De hal. Aan de kapstok ontbreken de jas en de sjaal van meneer. Op het tafeltje staat een dienblad met zes lege portglazen, klaar voor een toost."
+    ],
+    sectie: '<p class="stamp-line">Sectierapport · G. Gansevoort, 81 jaar</p>\n   <p><b>Doodsoorzaak:</b> onderkoeling.</p>\n   <p>Gebroken linkerheup en een kneuzing op het achterhoofd, door de val van de trap. Met deze heup kon hij de trap niet meer op.</p>\n   <p>Op de borst, net onder de sleutelbeenderen, zitten twee ronde blauwe plekken naast elkaar, elk zo groot als een handpalm. Ze zijn ontstaan vlak voor de val. Ze passen bij een harde duw met twee handen, van voren.</p>\n   <p><b>Tijdstip van overlijden:</b> zondagochtend tussen 02:00 en 06:00. Na de val heeft hij nog uren geleefd.</p>\n   <p><b>Overig:</b> twee glazen wijn, verder geen alcohol.</p>',
+    bewijs: [
+      { t: "Klimaatlogger wijnkelder (ijskelder)", d: tbl(["Tijd", "Deur", "Temperatuur"], [["18:00", "dicht", "2,0 °C"], ["20:41:10", "<b>open</b>", "2,1 °C"], ["20:43:55", "<b>dicht</b>", "4,6 °C"], ["21:00", "dicht", "3,0 °C"], ["22:00", "dicht", "2,2 °C"], ["08:09:30", "<b>open</b>", "2,0 °C"]]) + '<p style="margin-top:8px">Tussen 20:43:55 en 08:09:30 geen andere meldingen.</p>' },
+      { t: "Weerstation Dorrebeek, zaterdag 9 januari", d: "<p>Sneeuw van <b>19:40 tot 21:30</b>, in totaal 6 cm. Daarna droog en helder. Laagste temperatuur in de nacht: −9 °C.</p>" },
+      { t: "Proef met de grendel (2026)", d: "<p>De grendel is roestig en stroef. Er is 9 kilo kracht nodig om hem dicht te schuiven. Hij kan niet vanzelf dichtvallen, ook niet als de deur hard dichtslaat.</p>" },
+      { t: "Belgegevens Ganzenwaard (twee vaste lijnen)", d: tbl(["Lijn", "Begin", "Richting", "Duur"], [["Bibliotheek", "20:32", "uitgaand, projectbureau", "33 min"], ["Keuken", "20:38", "uitgaand, zus van D. Fruytier", "22 min"]]) },
+      { t: "Verklaring van de projectontwikkelaar", d: "<p><i>‘Ik sprak Gerwin van 20:32 tot 21:05, aan één stuk door. Hij las mij de nummers van de percelen voor, van de grote kaart in de bibliotheek.’</i></p><p>Bod op Landgoed Ganzenwaard: € 4,2 miljoen. Op 2 januari door Gustaaf Gansevoort afgewezen: <i>‘Zolang ik leef, niet.’</i></p>" },
+      { t: "Pinbetalingen dorpscafé Dorrebeek", d: tbl(["Tijd", "Bedrag", "Pas"], [["20:52", "€ 7,40", "F. Gansevoort"], ["22:08", "€ 11,20", "F. Gansevoort"]]) + '<p style="margin-top:8px">De cafébaas: ‘Ze kwam rond kwart voor negen binnen, helemaal onder de sneeuw. Lopend, zei ze.’</p><p>Brief van de bank aan Florentine, december 2009: <i>‘Uw schuld van € 60.000 is opeisbaar per 1 februari.’</i></p>' },
+      { t: "Factuur dierenarts, boerderij naast het landgoed", d: "<p>Spoedvisite kalving, zaterdag 9 januari. Aankomst 20:20, vertrek 21:40. <i>‘Geholpen door E. Eekhout.’</i></p><p>Arbeidscontract E. Eekhout: fulltime in dienst van Ganzenwaard. Een bijbaan is niet toegestaan.</p>" },
+      { t: "OV-chipkaart Ebbe Gansevoort en brief van de universiteit", d: tbl(["Datum", "Inchecken", "Uitchecken"], [["za 9-1", "Dorrebeek 20:41", "Fennerdam 21:33"]]) + '<p style="margin-top:8px">Van het landgoed naar station Dorrebeek is 10 minuten fietsen.</p><p>Universiteit Fennerdam: <i>‘E. Gansevoort is uitgeschreven per 1 september 2009.’</i></p>' },
+      { t: "Brief van Gustaaf aan Dorothea Fruytier, 4 januari", d: "<p><i>‘Beste Dorothea, na twintig jaar beëindig ik uw dienstverband per 1 april. Er verdwijnt te vaak zilver uit de kast.’</i></p>" },
+      { t: "Houtverkoop 2009", d: tbl(["Stuk", "Wat", "Bedrag"], [["Koopcontract, 3 maart 2009", "140 eiken uit het Ganzenbos, getekend G. Evenhuis namens het landgoed", "€ 86.000"], ["Jaarrekening landgoed 2009 (opgesteld door de rentmeester)", "opbrengst houtverkoop", "€ 12.000"]]) },
+      { t: "Brief van het accountantskantoor (in 2026 gevonden in hun archief)", d: "<p><i>‘Geachte heer Gansevoort, hierbij bevestigen wij uw afspraak op maandag 11 januari 2010 om 10:00. Onderwerp: de houtverkoop van 2009. Zoals u vroeg, zonder de rentmeester.’</i></p>" }
+    ],
+    opts: {
+      dader: ["Gerwin Gansevoort", "Florentine Gansevoort", "Ebbe Gansevoort", "Dorothea Fruytier", "Ernst Eekhout", "Gerjan Evenhuis"],
+      bewijs: ["Het bod van de projectontwikkelaar", "De schuld van Florentine", "De ontslagbrief van Dorothea", "De kale plek op de binnenplaats: de auto van Gerjan stond er tot na 21:30", "Het laarzenspoor van Ernst", "De ov-chipkaart van Ebbe"],
+      motief: ["Een bod van € 4,2 miljoen op het landgoed", "Een schuld van € 60.000", "Ontslag na twintig jaar", "Een stopgezette studie", "Gustaaf ontdekte dat er geld van de houtverkoop verdwenen was", "Een verboden bijbaan"]
+    },
+    answer: { dader: 5, bewijs: [3], motief: 4 },
+    solution: [
+      { t: "Geen ongeluk", p: "De blauwe plekken op zijn borst komen van een duw met twee handen, vlak voor de val. Zijn wandelstok lag buiten naast de deur: zonder stok liep Gustaaf nergens heen. En de grendel valt niet vanzelf dicht. Iemand duwde hem van de trap en schoof de grendel dicht." },
+      { t: "Het tijdstip", p: "De logger in de ijskelder ziet de deur maar één keer opengaan die avond: van 20:41:10 tot 20:43:55. Daarna pas weer om 08:09, toen de tuinman hem vond. In die drie minuten liep Gustaaf naar binnen en werd hij geduwd. Wie hem duwde, ging toen naar buiten en deed de deur dicht." },
+      { t: "Wie was om 20:42 ergens anders?", p: "Gerwin belde van 20:32 tot 21:05 vanaf de vaste lijn in de bibliotheek en las de kaart voor. Dorothea belde vanaf 20:38 vanuit de keuken. Ebbe checkte om 20:41 in op het station. Florentine pinde om 20:52 in het café, minstens twintig minuten lopen van de ijskelder. Ernst hielp van 20:20 tot 21:40 bij een kalving op de boerderij." },
+      { t: "De kale plek", p: "Gerjan zegt dat hij om 20:15 wegreed. Maar het sneeuwde van 19:40 tot 21:30. Was hij om 20:15 vertrokken, dan had er op zijn parkeerplek naast de pomp ook sneeuw gelegen. De plek was kaal en droog, en de bandensporen lagen bovenop de verse sneeuw. Zijn auto stond er dus nog toen het al was opgehouden met sneeuwen." },
+      { t: "Wat deed hij nog in het huis?", p: "Om kwart over negen hoorde Dorothea iemand in de werkkamer. Dat was niet Gustaaf, die lag toen al in de ijskelder. Daarna ontbrak in de agenda de bladzijde van maandag 11 januari: de afspraak bij de accountant." },
+      { t: "Het motief", p: "Gerjan verkocht 140 eiken voor € 86.000, maar in de jaarrekening die hij zelf opstelde stond maar € 12.000. Gustaaf had het ontdekt en zou maandag zonder hem naar de accountant gaan." },
+      { t: "De andere leugens", p: "Gerwin had wel ruzie met zijn vader over het bod. Florentine zat niet op haar kamer maar in het café, met een flinke schuld. Ebbe sprak opa wel, over geld, en was al gestopt met zijn studie. Dorothea zou ontslagen worden. Ernst zat niet voor de televisie maar werkte stiekem bij de buren. Zijn laarzenspoor is van 22:00, na de sneeuw. Maar niemand van hen kon om 20:42 bij de ijskelder zijn." }
+    ],
+    verdict: "‘Het was <b>Gerjan Evenhuis</b>, met <b>een duw en de grendel</b>, in de <b>ijskelder</b>.’"
+  }
+);
+Object.assign(CIMG, {
+  glasblazer: {
+    cover: ["night", ["shed", 150, 168, 1.3], ["moon", 250, 38, 0.6]],
+    photos: [
+      ["dark", ["workbench", 150, 170, 1], ["glass", 110, 118, 1.3], ["marker", 220, 190, 1, 1]],
+      ["dark", ["fireplace", 150, 172, 1.3]],
+      ["wall", ["toolrack", 150, 160, 1.1]],
+      ["wall", ["vitrine", 150, 160, 1.1], ["marker", 222, 186, 1, 4]],
+      ["wall", ["bureau", 150, 172, 1.1], ["books", 112, 112, 0.6]],
+      ["night", ["door", 150, 172, 1.1], ["shed", 245, 180, 0.6]]
+    ]
+  },
+  ijskelder: {
+    cover: ["ice", ["castle", 150, 175, 0.85], ["moon", 255, 36, 0.6]],
+    photos: [
+      ["ice", ["arch", 150, 190, 0.85], ["door", 150, 184, 1], ["cane", 192, 192, 0.8]],
+      ["dark", ["stairs", 150, 170, 1.4], ["bottle", 70, 190, 0.8], ["lantern", 235, 190, 1], ["marker", 110, 192, 1, 2]],
+      ["ice", ["house", 80, 168, 0.9], ["rug", 200, 186, 0.9], ["tracks", 200, 196, 0.6]],
+      ["ice", ["footprints", 150, 178, 1.4]],
+      ["wall", ["bureau", 150, 172, 1.1], ["letter", 100, 114, 0.4]],
+      ["wall", ["hooks", 95, 150, 0.8], ["tray", 205, 180, 1]]
+    ]
+  }
+});
 let kd = store.get(KKEY) || { cur: null, cases: {} };
 if (!kd.cases) kd = { cur: null, cases: {} };
 const saveK = () => store.set(KKEY, kd);
@@ -5221,6 +5584,130 @@ const BCASES = [
   }
 ];
 const BKEY = "md-bericht";
+BCASES.push(
+  {
+    id: "vlindertuin",
+    title: "Dood in de vlinderkas",
+    level: "Gemiddeld",
+    time: "45–60 min",
+    victim: "IJsbrand Hoogkamer",
+    code: "2308",
+    lock: { t: "08:10", d: "woensdag 22 april" },
+    apps: ["berichten", "bellen", "fotos", "fotoboek", "mail", "notities", "agenda", "erfcam", "gezond"],
+    blurb: "De eigenaar van een vlinderkas ligt dood in de vijver tussen de waterlelies. Duizelig geworden in de hitte, dacht iedereen. Maar wie kwam er na sluitingstijd nog langs?",
+    report: '<p class="stamp-line">Proces-verbaal van bevinding</p><p><b>Datum:</b> woensdag 22 april, 07:45<br><b>Plaats:</b> Vlinderkas Tropenhof, Heggerveen</p>\n  <p>Vrijwilliger Harmke Jellema vindt eigenaar <b>IJsbrand Hoogkamer (61)</b> in de vijver van de tropische kas. Hij is verdronken. Volgens de arts overleed hij dinsdagavond tussen 20:00 en 22:00. Het horloge om zijn pols is door het water kapotgegaan.</p>\n  <p>In de kas is het dag en nacht 30 graden. IJsbrand slikte pillen voor zijn bloeddruk en werd weleens duizelig. Zijn telefoon lag op de rand van de vijver, op slot.</p>\n  <p><b>Conclusie toen:</b> IJsbrand werd duizelig in de hitte en viel in de vijver. <b>Nu:</b> zijn telefoon ligt voor je.</p>',
+    extra: [
+      { t: "Verklaring van Harmke Jellema, vrijwilliger", d: "<p>‘IJsbrands code? “De verjaardag van Blauwtje”, zei hij altijd. Zo heette de eerste blauwe morpho die hier uit de pop kwam. Het bordje hangt bij de vijver.’</p><p>‘Ik ging dinsdag om kwart over vijf naar huis. Toen was hij nog heel vrolijk.’</p>" },
+      { t: "Foto van het bordje bij de vijver", d: "<p>Op het bordje staat: <b>Hier kwam op 23 augustus 2011 Blauwtje uit de pop, de allereerste blauwe morpho van Tropenhof.</b></p>", img: ["day", ["palm", 90, 172, 0.9], ["palm", 215, 172, 0.8]] }
+    ],
+    notifs: ["<b>Karsten</b> · Sorry, mijn bus wilde niet starten…", "<b>Josien</b> · Pap, denk je er nog over na?", "<b>Erfcamera</b> · 2 bewegingen gisteravond"],
+    chats: [
+      { name: "Karsten Immink", sub: "kweker, Immink Tropica", msgs: [["d", "dinsdag 14 april"], ["t", "09:10", "De nieuwe levering staat in de poppenkamer. De doos met het rode etiket is niet voor jou, die haal ik volgende week weer op."], ["m", "09:12", "Prima."], ["d", "dinsdag 21 april"], ["m", "20:02", "Karsten, ik heb jouw doos met het rode etiket opengemaakt. Zes poppen van de koningin-Alexandravogelvlinder. Ben je gek geworden?"], ["t", "20:04", "Niks doen. Ik kom eraan en leg alles uit."], ["m", "20:05", "Ik ben in de tropische kas. Maar morgen bel ik de inspectie, wat je ook zegt."], ["t", "21:36", "Sorry, mijn bus wilde niet starten. Ik kom morgenochtend, oké? Niks doen tot dan."]] },
+      { name: "Josien", sub: "dochter", msgs: [["d", "dinsdag 21 april"], ["t", "18:40", "Pap, Keimpe biedt nu € 850.000 voor de grond. Denk er nou eens over na."], ["m", "18:55", "Tropenhof is mijn levenswerk, Jos. Ik verkoop niet."], ["t", "18:56", "Je bent 61 en je hart is niet best. Ik maak me zorgen."], ["t", "20:20", "Ik begin zo aan mijn nachtdienst. Spreek je morgen."], ["d", "woensdag 22 april"], ["t", "07:58", "Pap, denk je er nog over na?"]] },
+      { name: "Keimpe Jagersma", sub: "buurman, tuincentrum", msgs: [["d", "maandag 20 april"], ["t", "16:30", "Wéér twee auto’s van jouw bezoekers voor mijn inrit. Ik ben er klaar mee."], ["m", "16:45", "Sorry Keimpe. Ik zet er een bord neer."], ["d", "dinsdag 21 april"], ["t", "19:41", "Ik heb ingesproken. Bel me terug."]] },
+      { name: "Harmke", sub: "vrijwilliger, gids", msgs: [["d", "dinsdag 21 april"], ["t", "17:12", "Ik ga naar huis! De poppenkamer is dicht, beloofd."], ["m", "17:14", "Top. Tot morgen om 8 uur."], ["d", "woensdag 22 april"], ["t", "07:30", "Ik ben er iets eerder. Zal ik de vlinders alvast voeren?"]] }
+    ],
+    calls: [["20:07", "uit", "Inspectie Natuurbescherming", "buiten kantoortijd"], ["19:40", "gemist", "Keimpe Jagersma", "voicemail"], ["18:58", "in", "Josien", "4 min"], ["ma 11:20", "uit", "Immink Tropica", "2 min"]],
+    voicemail: { from: "Keimpe", day: "di", time: "19:40", text: "IJsbrand, met Keimpe. Josien zegt dat je niet wilt verkopen. Denk daar goed over na, want met die parkeerplaats van jou stap ik naar de gemeente. Ik kom het je vanavond nog wel eens zeggen." },
+    photos: [
+      { img: ["wall", ["chest", 150, 175, 1.7]], t: "di 21 apr · 19:58", p: "Tropenhof, poppenkamer", note: "Een geopende doos met een rood etiket. Erin zes enorme, goudbruine poppen. Op het etiket staat een adres in Duitsland." },
+      { img: ["wall", ["books", 150, 170, 1.2]], t: "di 21 apr · 20:00", p: "Tropenhof, kantoor", note: "Een opengeslagen vlindergids. Bij de koningin-Alexandravogelvlinder staat: ‘Grootste vlinder ter wereld. Streng beschermd, handel verboden.’" },
+      { img: ["day", ["palm", 90, 172, 0.9], ["palm", 215, 172, 0.8]], t: "za 18 apr · 11:30", p: "Tropenhof, tropische kas", note: "De vijver met de waterlelies. Bijschrift: ‘Maar 50 centimeter diep, en toch moeten de kinderen er echt vanaf blijven.’" },
+      { img: ["day", ["glasswall", 150, 165, 1]], t: "ma 13 apr · 09:00", p: "Vlinderkas Tropenhof, Heggerveen" }
+    ],
+    feed: [
+      { who: "Karsten Immink", sub: "Immink Tropica", t: "di 21:50", text: "Avondje pech. Bus wilde niet starten, dan maar op de bank met het voetbal.", img: ["wall", ["sofa", 150, 170, 1]], cm: "Iwan: Niet starten? Ik reed om kwart over acht nog achter je bus aan op de Dijkweg, richting Tropenhof! (22:06)" },
+      { who: "Keimpe Jagersma", sub: "Tuincentrum Jagersma", t: "di 20:15", text: "Dorpsraad Heggerveen. Punt 1: de parkeerellende bij Tropenhof.", img: ["wall", ["longtable", 150, 172, 1]], cm: "Herre Kuipersma, voorzitter: Keimpe zat van acht tot half elf vooraan en heeft de hele avond gemopperd. (22:40)" },
+      { who: "Josien Hoogkamer", sub: "", t: "di 21:10", text: "Nachtdienst op de spoedeisende hulp. Eerst koffie!", img: ["wall", ["mug", 150, 150, 1.6]], cm: "Inez: Josien en ik draaien samen tot 7 uur. Geen moment rust gehad! (23:55)" },
+      { who: "Harmke Jellema", sub: "", t: "di 20:30", text: "Klaverjassen in café Het Klaverhuis. Ik sta voor!", img: ["dark", ["table", 150, 150, 1.3], ["card", 150, 98, 0.9]], cm: "Juultje: Harmke wint álles, van acht tot elf! (23:02)" },
+      { who: "Karsten Immink", sub: "Immink Tropica", t: "vr 3 apr", text: "Eindelijk onze nieuwe bus, met het logo van Immink Tropica erop: een grote blauwe vlinder!", img: ["day", ["car", 150, 175, 1.6]] }
+    ],
+    mail: [
+      { box: "Concepten", from: "Aan: Inspectie Natuurbescherming", t: "di 20:10", s: "Beschermde vlinders in levering van Immink Tropica", b: "Geachte inspectie, in de levering van mijn leverancier Karsten Immink (Immink Tropica) van 14 april vond ik vanavond een doos met zes poppen van de koningin-Alexandravogelvlinder. Deze soort is streng beschermd. Op de doos staat het adres van een verzamelaar in Duitsland. Morgenochtend bel ik u. IJsbrand Hoogkamer, Vlinderkas Tropenhof", att: "Bijlage: IMG_2204.jpg" },
+      { box: "Inbox", from: "Immink Tropica", t: "ma 13 apr", s: "Factuur levering 14 april", b: "40 poppen blauwe morpho, 30 poppen passiebloemvlinder, 20 poppen uilvlinder. Totaal € 640. Levering dinsdag in de poppenkamer." },
+      { box: "Inbox", from: "Gemeente Heggerveen", t: "vr 17 apr", s: "Klacht over parkeren", b: "Geachte heer Hoogkamer, wij ontvingen een klacht van uw buurman over auto’s van bezoekers voor de inrit van zijn tuincentrum. Wij vragen u een oplossing te zoeken." }
+    ],
+    notes: [{ t: "poppenkamer", b: "Doos met rood etiket van Karsten. ‘Niet voor ons’, zegt hij. Waarom dan bij ons bezorgd? Staat niet op de factuur.\nVanavond kijken.\nVogelvlinders: verzamelaars betalen € 2.500 per pop?!" }, { t: "kas", b: "Vijver: 50 cm diep. Hekje bij de waterlelies maken.\nBord voor de parkeerplaats (Keimpe!).\nPillen niet vergeten." }],
+    agenda: [["wo 22 apr", "09:00", "Inspectie bellen!"], ["wo 22 apr", "10:00", "Rondleiding schoolklas"], ["zo 26 apr", "12:00", "Verjaardag Josien"]],
+    erfcam: [["20:17", "Witte bestelbus met een grote blauwe vlinder op de zijkant rijdt de parkeerplaats op", ["dusk", ["car", 150, 178, 1.7]]], ["20:58", "Dezelfde witte bestelbus rijdt de parkeerplaats af", ["dusk", ["car", 190, 178, 1.4]]]],
+    erfnote: "De camera kijkt uit op de poort, de enige ingang van het terrein. IJsbrands eigen auto stond er al de hele dag. Verder geen bewegingen tussen 18:00 en 07:38, toen Harmke op de fiets aankwam.",
+    gezond: { steps: [["17:15–19:50", "1.840 stappen", "rondjes door de kassen"], ["19:51–20:06", "140 stappen", "poppenkamer en kantoor"], ["20:07–20:40", "210 stappen", "in de tropische kas"], ["20:41–07:45", "0 stappen", ""]], heart: [["20:05", "92"], ["20:25", "88"], ["20:36", "124"], ["20:40", "159"], ["20:41", "horloge meldt: onder water"], ["20:43", "geen meting meer"]] },
+    opts: {
+      dader: ["Keimpe Jagersma", "Harmke Jellema", "Josien Hoogkamer", "Een verzamelaar uit Duitsland", "Karsten Immink", "Een inbreker"],
+      bewijs: ["De voicemail van Keimpe", "De erfcamera: de witte bus met de blauwe vlinder, van 20:17 tot 20:58", "Het bod van € 850.000 op de grond", "De nachtdienst van Josien", "De klacht bij de gemeente", "Het bericht van Harmke om 07:30"],
+      motief: ["Ruzie over de parkeerplaats", "Een erfenis", "Een ruzie over de vlinders voeren", "IJsbrand zou de inspectie vertellen over zijn smokkel van beschermde vlinders", "Een onbetaalde factuur van € 640", "Jaloezie op de mooiste vlindertuin"]
+    },
+    answer: { dader: 4, bewijs: [1], motief: 3 },
+    solution: [
+      { t: "Geen duizeling", p: "Volgens zijn horloge ging IJsbrands hartslag om 20:36 omhoog naar 124 en om 20:40 naar 159, zoals bij een felle ruzie. Om 20:41 meldde het horloge water, om 20:43 stopte de meting. En in een vijver van 50 centimeter verdrink je niet zomaar." },
+      { t: "Karsten kwam wél", p: "Om 20:04 schreef Karsten: ‘Ik kom eraan.’ De erfcamera zag om 20:17 een witte bestelbus met een grote blauwe vlinder het terrein oprijden en om 20:58 weer wegrijden. Dat is het logo van Immink Tropica, zoals Karsten op 3 april zelf liet zien. Iwan reed om kwart over acht nog achter zijn bus aan." },
+      { t: "De smoes", p: "Om 21:36 schreef Karsten dat zijn bus niet wilde starten, en om 21:50 zette hij op Fotoboek dat hij thuis op de bank zat. Toen was IJsbrand al een uur dood." },
+      { t: "De anderen", p: "Keimpe zei dat hij langs zou komen, maar hij zat van acht tot half elf op de dorpsraad. Josien draaide een nachtdienst, Harmke ging om 17:12 naar huis en zat ’s avonds in café Het Klaverhuis. De camera zag verder niemand door de poort komen." },
+      { t: "Het motief", p: "In de doos met het rode etiket zaten zes poppen van de streng beschermde koningin-Alexandravogelvlinder. Ze stonden niet op de factuur. Verzamelaars betalen € 2.500 per pop. IJsbrand wilde om 09:00 de inspectie bellen. Karsten kwam ‘uitleggen’ en duwde hem in de vijver." }
+    ],
+    verdict: "‘Het was <b>Karsten Immink</b>, in de <b>vijver van de tropische kas</b>, om zijn <b>vlindersmokkel</b> geheim te houden.’"
+  },
+  {
+    id: "poppenkast",
+    title: "Aan een zijden draad",
+    level: "Moeilijk",
+    time: "60 min",
+    victim: "Hermien Jonkhout",
+    code: "0603",
+    lock: { t: "10:05", d: "zondag 15 november" },
+    apps: ["berichten", "bellen", "fotos", "fotoboek", "mail", "notities", "agenda", "slot"],
+    blurb: "De directeur van een marionettentheater ligt op het toneel, onder de speelbrug. Uitgegleden na de voorstelling, dacht iedereen. Maar de deuren zaten op slot, en haar telefoon weet wie een sleutel had.",
+    report: '<p class="stamp-line">Proces-verbaal van bevinding</p><p><b>Datum:</b> zondag 15 november, 09:40<br><b>Plaats:</b> Marionettentheater De Zwevende Draad, Klinkerveen</p>\n  <p>Technicus Ilco Hartgers vindt directeur <b>Hermien Jonkhout (63)</b> op het toneel, onder de speelbrug. Dat is een smalle brug, vier meter hoog, waar de spelers de marionetten aan hun draden bewegen. Ze is gevallen en overleden. Volgens de arts zaterdag tussen 22:00 en 23:30.</p>\n  <p>Zaterdag speelde het theater tot 21:15 de voorstelling ‘De Gestolen Maan’. Zondagochtend zaten de voordeur en de achterdeur op slot. Hermiens telefoon lag op de speelbrug, op slot.</p>\n  <p><b>Conclusie toen:</b> Hermien hing na de voorstelling de marionetten op en verloor op de smalle brug haar evenwicht. <b>Nu:</b> haar telefoon ligt voor je.</p>',
+    extra: [
+      { t: "Verklaring van Ilco Hartgers, technicus", d: "<p>‘Hermiens code? De dag van haar allereerste voorstelling, dag en maand. De affiche hangt in de foyer.’</p><p>‘Gevallen? Hermien liep al veertig jaar over die brug. Met haar ogen dicht.’</p>" },
+      { t: "Foto van de oude affiche in de foyer", d: "<p>Op de affiche staat: <b>De Zwevende Draad presenteert: De Wolf en het Wekkertje · première 6 maart 1985</b></p>", img: ["dark", ["stage", 150, 170, 1], ["moon", 250, 40, 0.5]] }
+    ],
+    notifs: ["<b>Hinderik</b> · Dan niet. Ik ga naar huis.", "<b>Ivar</b> · Slaap lekker. Maandag praten we.", "<b>Klasina</b> · Heb je de veiling gezien?"],
+    chats: [
+      { name: "Ivar Ibelings", sub: "poppenmaker, restaurateur", msgs: [["d", "dinsdag 13 oktober"], ["t", "11:00", "De drie Venetianen zijn terug uit mijn atelier. Als nieuw, al zeg ik het zelf."], ["m", "11:20", "Prachtig, Ivar. Dank je!"], ["d", "zaterdag 14 november"], ["m", "21:40", "Ivar, Klasina stuurde me een veiling in München. Daar worden onze Harlekijn, Colombina en de Dokter verkocht. Die in onze vitrine zijn nep."], ["t", "21:43", "Dat kan niet. Ik zit in Antwerpen op het poppenfestival. Laten we maandag praten."], ["m", "21:44", "Morgenochtend om 9 uur bel ik de politie en de verzekering."], ["t", "21:45", "Hermien, wacht nou even."], ["t", "23:52", "Slaap lekker. Maandag praten we."]] },
+      { name: "Hinderik Kapteijn", sub: "medeoprichter", msgs: [["d", "maandag 2 november"], ["m", "10:00", "Hinderik, je sleutel graag terug. Je zit niet meer in het bestuur."], ["t", "16:10", "Ligt in je brievenbus. Maar ik geef het niet op: dat pand moet verkocht worden."], ["d", "zaterdag 14 november"], ["t", "21:20", "Ik heb ingesproken."], ["t", "22:35", "Ik sta voor de deur. Doe open!"], ["t", "22:39", "Dan niet. Ik ga naar huis."]] },
+      { name: "Ilco", sub: "technicus", msgs: [["d", "zaterdag 14 november"], ["t", "21:30", "Decor staat. Ik ga naar De Vonk, we spelen om 22:00. Doe jij de achterdeur op slot?"], ["m", "21:31", "Doe ik. Ik hang de poppen nog op."], ["m", "22:14", "Ben jij nog in het theater? Ik hoor iemand op de trap naar de speelbrug."], ["t", "23:41", "Nee, ik sta al de hele avond in De Vonk. Alles goed?"], ["d", "zondag 15 november"], ["t", "09:20", "Ben er over tien minuten."]] },
+      { name: "Koosje Heuvelink", sub: "speelster", msgs: [["d", "vrijdag 13 november"], ["m", "15:00", "Koosje, volgend seizoen kan ik je geen contract geven. Het spijt me echt."], ["t", "15:30", "Na alles wat ik voor dit theater gedaan heb? Je hoort nog van me."], ["d", "zaterdag 14 november"], ["t", "21:20", "Mijn laatste voorstelling. Bedankt voor niks."]] },
+      { name: "Klasina Imhoff", sub: "vriendin, verzamelaar", msgs: [["d", "zaterdag 14 november"], ["t", "21:32", "Hermien, kijk eens naar deze veiling in München, volgende week. Zijn dat niet jullie Venetianen? Ik heb het je gemaild."], ["m", "21:38", "Dat zijn ze. Precies dezelfde scheur in de hoed van de Dokter."], ["d", "zondag 15 november"], ["t", "08:30", "Heb je de veiling gezien? Wat ga je doen?"]] }
+    ],
+    calls: [["22:36", "gemist", "Hinderik", "geen voicemail"], ["21:46", "uit", "Ivar Ibelings", "3 min"], ["21:18", "gemist", "Hinderik", "voicemail"], ["18:05", "in", "Ilco", "1 min"]],
+    voicemail: { from: "Hinderik", day: "za", time: "21:18", text: "Hermien, met Hinderik. Die projectontwikkelaar biedt nog steeds 1,4 miljoen voor het pand. Ik kom vanavond na de voorstelling langs, of je nou wilt of niet." },
+    photos: [
+      { img: ["dark", ["vitrine", 150, 168, 1.1]], t: "za 14 nov · 21:52", p: "De Zwevende Draad, foyer", note: "De vitrine met de drie Venetiaanse marionetten. Bijschrift: ‘Ze ruiken naar verse verf. Onder de kraag van de Harlekijn zit een stickertje: Atelier I.I., 2026.’" },
+      { img: ["dark", ["stairs", 160, 165, 1.2]], t: "za 14 nov · 22:12", p: "De Zwevende Draad, toneel", note: "Bijschrift: ‘Boven op de speelbrug brandt licht. Ik had het toch uitgedaan?’" },
+      { img: ["dark", ["stage", 150, 170, 1], ["lantern", 72, 82, 0.8]], t: "za 15 nov 2025 · 22:10", p: "Poppenfestival Antwerpen", note: "Bijschrift: ‘Met Ivar op het festival. Die gele lampion boven het podium!’" },
+      { img: ["night", ["cafe", 150, 172, 1, "THEATER"], ["moon", 250, 38, 0.6]], t: "ma 2 nov · 17:00", p: "De Zwevende Draad, Klinkerveen" }
+    ],
+    feed: [
+      { who: "Ivar Ibelings", sub: "Poppenmaker", t: "za 22:20", text: "Live vanaf het poppenfestival in Antwerpen! Wat een sfeer.", img: ["dark", ["stage", 150, 170, 1], ["lantern", 72, 82, 0.8]], cm: "Janke Kloosterboer: Leuk, Ivar! Maar is dat niet je foto van vorig jaar? Ik sta hier de hele avond bij de ingang en heb je nog niet gezien. (22:48)" },
+      { who: "Hinderik Kapteijn", sub: "", t: "za 22:45", text: "Voor een dichte deur bij mijn eigen theater. Na dertig jaar.", img: ["night", ["door", 150, 165, 1.1]] },
+      { who: "Ilco Hartgers", sub: "", t: "za 22:05", text: "Optreden in De Vonk met de band!", img: ["dark", ["stage", 150, 170, 1]], cm: "Ike Hazelhof: Ilco speelde tot middernacht, zonder pauze! (00:05)" },
+      { who: "Koosje Heuvelink", sub: "", t: "za 22:30", text: "Laatste voorstelling gespeeld. Nu proosten met vriendinnen in eetcafé De Kroonkurk.", img: ["dark", ["table", 150, 150, 1.3], ["glass", 120, 90, 1], ["glass", 180, 90, 1]] }
+    ],
+    mail: [
+      { box: "Inbox", from: "Klasina Imhoff", t: "za 21:35", s: "Fwd: Kunstveiling Huisman, München · kavel 47", b: "Kavel 47: drie Venetiaanse marionetten, rond 1780. Harlekijn, Colombina en de Dokter (met een kleine scheur in de hoed). Ingebracht door een Nederlandse restaurateur die anoniem wil blijven. Inzet € 120.000. Veiling op dinsdag 17 november." },
+      { box: "Inbox", from: "Atelier Ibelings", t: "di 13 okt", s: "Factuur restauratie", b: "Restauratie van drie Venetiaanse marionetten (Harlekijn, Colombina, de Dokter): schoonmaken, nieuwe draden, verf bijwerken. € 3.200." },
+      { box: "Inbox", from: "Bouwbedrijf Kerkhoven", t: "ma 9 nov", s: "Bod op het pand Kerkstraat 12", b: "Geachte mevrouw Jonkhout, wij herhalen ons bod van € 1,4 miljoen op het theaterpand. Uw medeoprichter, de heer Kapteijn, is enthousiast. Wij horen graag vóór 1 december van u." }
+    ],
+    notes: [{ t: "sleutels", b: "Achterdeur (slimme deur):\nsleutel 1 = ik\nsleutel 2 = Ilco\nsleutel 3 = Ivar (voor zijn reparaties)\nsleutel 4 = Hinderik. Op 2 november ingeleverd, ligt in mijn la.\nDe voordeur gaat alleen van binnenuit open." }, { t: "Venetianen", b: "Sinds de restauratie zijn ze anders. Te glanzend. De scheur in de hoed van de Dokter lijkt wel geschilderd.\nKlasina vragen, zij kent alle verzamelaars." }],
+    agenda: [["zo 15 nov", "09:00", "Politie en verzekering bellen"], ["ma 16 nov", "10:00", "Ivar, atelier"], ["di 17 nov", "14:00", "Veiling München, kavel 47"]],
+    slot: [["za 18:02", "Achterdeur ontgrendeld", "sleutel 1"], ["za 18:20", "Achterdeur ontgrendeld", "sleutel 2"], ["za 21:33", "Achterdeur vergrendeld", "sleutel 1"], ["za 22:09", "Achterdeur ontgrendeld", "sleutel 3"], ["za 22:26", "Achterdeur vergrendeld, van buitenaf", "sleutel 3"], ["za 22:35", "Er wordt aangebeld bij de voordeur", "niet opengedaan"], ["zo 09:33", "Achterdeur ontgrendeld", "sleutel 2"]],
+    opts: {
+      dader: ["Hinderik Kapteijn", "Ivar Ibelings", "Koosje Heuvelink", "Ilco Hartgers", "Klasina Imhoff", "Een verzamelaar uit München"],
+      bewijs: ["De voicemail van Hinderik", "Het bericht van Koosje: ‘Bedankt voor niks’", "Het slot: om 22:09 en 22:26 werd sleutel 3 gebruikt", "De factuur van de restauratie", "De post van Hinderik voor de dichte deur", "Ivars festivalfoto: dezelfde als Hermiens foto van vorig jaar"],
+      motief: ["Hij wilde het pand verkopen", "Ze kreeg geen nieuw contract", "Ruzie over een optreden met de band", "Jaloezie op haar collectie", "Een onbetaalde factuur", "Hermien had ontdekt dat hij de echte marionetten verving door namaak en liet veilen"]
+    },
+    answer: { dader: 1, bewijs: [2, 5], motief: 5 },
+    solution: [
+      { t: "Ze was niet alleen", p: "Om 22:12 fotografeerde Hermien de trap naar de speelbrug, waar licht brandde dat zij had uitgedaan. Om 22:14 schreef ze Ilco: ‘Ik hoor iemand op de trap naar de speelbrug.’ Daarna stuurde ze niets meer." },
+      { t: "Sleutel 3", p: "Hermien deed om 21:33 de achterdeur op slot. Om 22:09 ging hij open met sleutel 3, en om 22:26 werd hij met sleutel 3 van buitenaf weer op slot gedaan. Volgens Hermiens notities is sleutel 3 van Ivar." },
+      { t: "Antwerpen was een leugen", p: "Om 21:43 schreef Ivar dat hij op het poppenfestival in Antwerpen zat. Om 22:20 zette hij een ‘live’ foto online, met een gele lampion boven het podium. Precies dezelfde foto staat in Hermiens telefoon: van het festival van vorig jaar. Janke zag hem die avond niet bij de ingang." },
+      { t: "De anderen", p: "Hinderik zei dat hij zou komen, en dat deed hij ook: om 22:35 belde hij aan bij de voordeur. Maar zijn sleutel had hij ingeleverd en er werd niet opengedaan. Ilco speelde tot middernacht in De Vonk; zijn sleutel 2 werd pas zondag om 09:33 gebruikt. Koosje was boos, maar had geen sleutel." },
+      { t: "Het motief", p: "In oktober ‘restaureerde’ Ivar de drie Venetiaanse marionetten. Nu worden de echte in München geveild, ingebracht door een anonieme Nederlandse restaurateur, met een inzet van € 120.000. Om 09:00 zou Hermien de politie bellen. Ivar kwam met zijn sleutel binnen en duwde haar van de speelbrug." }
+    ],
+    verdict: "‘Het was <b>Ivar Ibelings</b>, met <b>een harde duw</b>, van de <b>speelbrug</b>.’"
+  }
+);
 let bd = store.get(BKEY) || { cur: null, cases: {} };
 if (!bd.cases) bd = { cur: null, cases: {} };
 const saveB = () => store.set(BKEY, bd);
@@ -6051,6 +6538,170 @@ DOSSIERS.slice(1).forEach((c, ci) => c.qs.forEach((q, qi) => {
   q.o = o;
 }));
 const DKEY = "md-dossier";
+DOSSIERS.push(
+  {
+    id: "kaarsenmakerij",
+    nr: "11",
+    title: "Het laatste lont",
+    level: "Gemiddeld",
+    time: "60 tot 90 minuten",
+    blurb: "Een kaarsenmaker ligt dood naast zijn wasbad, in een plas gestolde paarse was. Uitgegleden, zegt iedereen. Maar waarom zit er was óver het bloed op de gietvorm?",
+    cover: ["wall", ["kookketel", 150, 168, 1.1], ["candle", 225, 170, 1], ["marker", 95, 184, 1, 1]],
+    start: DSTART("overlijden M. Oonk, Kaarsenmakerij Oonk, Marktstraat 7, Lemsterhout", "<p>Dinsdagochtend 10 november is kaarsenmaker <b>Meindert Oonk</b> (67) dood gevonden in de gieterij van zijn eigen Kaarsenmakerij Oonk in Lemsterhout. Hij lag naast het grote wasbad, in een plas gestolde paarse was.</p><p>De eerste agent schreef ‘uitgegleden over gemorste was’. De patholoog en het lab zijn het daar niet mee eens. Ik ook niet.</p>"),
+    docs: [
+      { t: "Proces-verbaal", n: "Bevindingen in de gieterij", h: '<p class="mono">PROCES-VERBAAL VAN BEVINDING · dinsdag 10 november</p>\n   <p>Om 08:07 belde <b>Leontien Nauta</b>, leerling-kaarsenmaker. Wij waren er om 08:19.</p>\n   <ul><li>Het slachtoffer lag op zijn rug naast het wasbad. Het bad stond nog aan: <b>82 °C</b>, vol paarse was (de geur ‘Nachtroos’).</li>\n   <li>Onder zijn voeten: een plas gestolde paarse was met een glijspoor. Het leek alsof hij was uitgegleden.</li>\n   <li>Anderhalve meter verder lag een <b>koperen gietvorm</b> voor stompkaarsen (rond, 6 cm doorsnee, 3,2 kg). Over de vorm zat een dun laagje paarse was.</li>\n   <li>De achterdeur naar de steeg was dicht. Die deur valt vanzelf in het slot en gaat van buiten alleen open met een code.</li>\n   <li>Het alarm stond <b>niet</b> aan. Normaal zet Meindert het alarm als laatste aan.</li>\n   <li>Zijn jas hing nog aan de haak in de gang. Het licht in het kantoor boven was uit.</li></ul>' },
+      {
+        t: "Foto’s",
+        n: "Plaats delict",
+        photos: [
+          [["wall", ["kookketel", 150, 168, 1.1], ["marker", 90, 184, 1, 1]], "1 · het wasbad"],
+          [["desk", ["mug", 115, 165, 1.3], ["candle", 195, 160, 1], ["marker", 245, 184, 1, 2]], "2 · de gietvorm"],
+          [["night", ["door", 150, 172, 1], ["keycab", 220, 150, 0.6], ["marker", 95, 184, 1, 3]], "3 · de achterdeur"]
+        ],
+        h: "<p>Foto 1: het wasbad. Marker 1: de plek van het hoofd.</p><p>Foto 2: de koperen gietvorm, met een kaars uit dezelfde vorm ernaast. Op de ronde rand van de vorm: bloed, en daaroverheen een laagje was.</p><p>Foto 3: de achterdeur aan de steeg, met het codepaneel. Van binnen gaat de deur open met een klink, zonder code.</p>"
+      },
+      { t: "Sectierapport", n: "Sectie", h: '<p class="mono">NEDERLANDS FORENSISCH LAB · SECTIE NR. 3105</p>\n   <ul><li><b>Doodsoorzaak:</b> schedelletsel door één harde klap.</li>\n   <li>De wond zit <b>achter op het hoofd</b>, bovenaan. Het is een <b>ronde</b> wond van ongeveer 6 cm doorsnee.</li>\n   <li>De rand van het wasbad is recht en hoekig. Die past <b>niet</b> bij de wond. Een val op de vloer ook niet: dan zit de wond lager.</li>\n   <li>Geen afweerwonden. Hij is waarschijnlijk van achteren geslagen.</li>\n   <li>Tijdstip van overlijden: maandag 9 november tussen 19:30 en 21:00.</li></ul>' },
+      { t: "Plattegrond", n: "Kaarsenmakerij Oonk", h: DT(["Achterkant (steeg, géén camera)", ""], [
+        ["<b>Achterdeur</b> met codepaneel", "→ steeg naar de Marktstraat"],
+        ["<b>Gieterij</b>: wasbad, gietlijn, rek met gietvormen", "<b>Magazijn</b>: stearine, lonten, dozen"],
+        ["Gang met jassen", "Trap naar het kantoor (boven de winkel)"],
+        ["<b>Winkel en workshopruimte</b>: lange tafel om kaarsen te dippen", ""],
+        ["<b>Voordeur</b> → Marktstraat", "camera van de gemeente op de Marktstraat"]
+      ], "<p>Van de workshopruimte naar de gieterij: door de gang, ongeveer 15 seconden lopen. Van de gieterij hoor je in de winkel niets: de afzuiging maakt veel lawaai.</p>") },
+      { t: "Beveiliging", n: "Codes, achterdeur en camera, maandag", h: "<p><b>Persoonlijke codes achterdeur</b> (elke code is van één persoon; de beheerder kan een code wissen, maar niet bekijken):</p>\n   ".concat(DT(["Code", "Van"], [["1951", "M. Oonk"], ["0783", "M. Oonk (dochter)"], ["2290", "N. Lindhout"], ["0412", "L. Nauta"]]), "\n   <p><b>Logboek achterdeur, maandag 9 november</b></p>\n   ").concat(DT(["Tijd", "Wat"], [["16:58", "van binnen geopend"], ["17:02", "van binnen geopend"], ["19:52", "<b>open met code 0412</b>"], ["20:04", "<b>van binnen geopend</b>"], ["di 07:55", "open met code 0412"]]), "\n   <p><b>Camera Marktstraat (voorkant)</b></p>\n   ").concat(DT(["Tijd", "Wat"], [["18:45", "witte bestelbus ‘Meinema Was & Grondstoffen’ stopt voor de deur"], ["18:50 – 19:04", "twaalf vrouwen gaan de winkel in"], ["19:10", "de bestelbus rijdt weg"], ["21:35 – 21:43", "de twaalf vrouwen gaan naar buiten"], ["21:44", "een vrouw sluit de voordeur af en loopt weg"]])) },
+      { t: "Logboek", n: "Gietlijn, maandag", h: "<p>De gietlijn giet alleen zolang iemand het <b>voetpedaal</b> ingedrukt houdt. Laat je los, dan stopt hij.</p>\n   ".concat(DT(["Tijd", "Wat"], [["19:20", "start, partij ‘Nachtroos’ (paars)"], ["19:20 – 19:57", "elke 40 seconden een gietbeurt"], ["<b>19:57:40</b>", "<b>laatste gietbeurt, pedaal losgelaten</b>"], ["19:58 – di 08:19", "geen gietbeurten; wasbad blijft op 82 °C"]])) },
+      { t: "Telefoon", n: "Telefoon van Meindert Oonk, maandag", h: DT(["Tijd", "Wat", "Met"], [["17:41", "uitgaand, 2 min", "N. Lindhout"], ["19:25", "inkomend, 4 min", "Lieske Oonk (zus)"], ["20:30", "gemist", "Lieske Oonk"], ["21:15", "gemist", "Lieske Oonk"]], '<p class="hand note">Lieske Oonk: “Om half acht zei hij: ik wacht nog op iemand, om kwart voor acht, achterom. Daarna kom ik bij jou eten. Hij is nooit gekomen.”</p>') },
+      { t: "Verhoor", n: "Marjolein Oonk (41), dochter en mede-eigenaar", h: DQA([["U had maandagmiddag ruzie met uw vader?", "Ja, om half vijf. Ik wil groeien, een echte fabriek. Een grote keten wil met ons samenwerken. Papa wilde daar niks van weten."], ["Waar was u maandagavond?", "Ik gaf een workshop kaarsen dippen aan de vrouwenvereniging, van zeven tot half tien. In de winkel."], ["Bent u tussendoor weggeweest?", "Eén keer, rond tien over acht. Ik haalde een doos lonten uit het magazijn. Vijf minuten."], ["Zag u toen iets?", "De deur van de gieterij was dicht, het licht brandde. De gietlijn was stil. Ik dacht: papa drinkt koffie."], ["En daarna?", "Om 21:44 heb ik de voordeur afgesloten. Zijn jas hing er nog. Hij werkt vaak tot laat, dan gaat hij achterom."]]) },
+      { t: "Verhoor", n: "Niels Lindhout (34), gieter", h: DQA([["Wat doet u in de kaarsenmakerij?", "Ik giet al zes jaar. Ook de Nachtroos. Dat doen alleen Meindert en ik."], ["Waar ligt het recept van de Nachtroos?", "In de kluis. Maar na zes jaar ken ik het uit mijn hoofd."], ["Meindert belde u om 17:41. Waarover?", "Over het rooster voor dinsdag."], ["Waar was u maandagavond?", "Thuis in Meerbeek. Ik heb voetbal gekeken. Ik ben de hele avond niet weg geweest."], ["Kent u de code van Leontien?", "Nee. Waarom zou ik?"], ["Uw pinpas eindigt op 4417?", "…Ja. Hoezo?"]]) },
+      { t: "Verhoor", n: "Leontien Nauta (26), leerling-kaarsenmaker", h: DQA([["U vond hem.", "Om vijf over acht. Ik kwam om 07:55 binnen met mijn code. Eerst zag ik alleen de was op de vloer."], ["Op maandagavond werd uw code om 19:52 gebruikt.", "Dat kan niet! Ik zat toen in Groningen, bij een concert."], ["Giet u ook Nachtroos?", "Nee, nooit. Ik dip kaarsen en ik pak in. Aan de Nachtroos mogen alleen Meindert en Niels komen."], ["Hoorde u de ruzie van maandagmiddag?", "Ja. Marjolein schreeuwde: dan doe ik het zonder jou! En ze sloeg de deur dicht."]]) + '<p class="mono">GECONTROLEERD DOOR DE RECHERCHE</p><ul><li>Reiskaart L. Nauta: ingecheckt station Lemsterhout 18:31, uitgecheckt station Groningen <b>19:41</b>. Terug: ingecheckt Groningen 22:58.</li><li>E-ticket concert, poppodium in Groningen: gescand bij de ingang om <b>20:02</b>.</li></ul>' },
+      { t: "Verhoor", n: "Onno Meinema (58), wasleverancier", h: DQA([["Waarom was u maandag bij Meindert?", "Hij moest me nog € 18.400 betalen. Drie rekeningen. Ik was het zat."], ["Werd het ruzie?", "We hebben geschreeuwd, ja. Toen beloofde hij: vrijdag betaal ik alles."], ["Hoe laat ging u weg?", "Om tien over zeven. Hij zwaaide me uit bij de voordeur."], ["Heeft u een code voor de achterdeur?", "Nee. Ik kom altijd via de voordeur, met mijn bus voor de winkel."]]) },
+      { t: "Verhoor", n: "Nicolien Oosterlee (63), voorzitter vrouwenvereniging", h: DQA([["Was Marjolein de hele avond bij de workshop?", "Ja. Ze stond steeds bij ons aan de lange tafel. Alleen rond tien over acht liep ze even weg, om lonten te halen. Ze was zo terug."], ["Weet u dat zeker?", "Ik heb foto’s gemaakt voor ons clubblad. Kijk maar."]]) + DT(["Foto", "Tijd", "Wat staat erop"], [["1", "19:31", "iedereen aan tafel, Marjolein legt uit"], ["2", "19:50", "Marjolein dipt een kaars voor"], ["3", "19:58", "Marjolein helpt mevrouw Lenstra"], ["4", "20:03", "groepsfoto, Marjolein in het midden"], ["5", "20:21", "Marjolein knipt lonten"]]) },
+      { t: "Berichten", n: "Telefoon van Leontien Nauta, dinsdag 20 oktober", h: '<p class="mono">GESPREK MET: NIELS (GIETERIJ)</p>\n   <p><b>Leontien 21:12</b> Hoi! Kun jij morgen om 7 uur de zakken stearine aannemen? Ik ben er pas om 9.</p>\n   <p><b>Niels 21:14</b> Mijn code werkt niet meer sinds de nieuwe deur 🙄</p>\n   <p><b>Leontien 21:15</b> Neem de mijne maar: 0412. Niet tegen Meindert zeggen 😉</p>\n   <p><b>Niels 21:15</b> Top, doe ik 👍</p>\n   <p class="hand note">Niels kreeg op 22 oktober een nieuwe code (2290). Leontien heeft haar code nooit veranderd.</p>' },
+      { t: "Notitieboek", n: "Zakboekje van Meindert Oonk", h: '<p class="hand">Do 5 nov · Marjolein wil weer met een keten in zee. Nooit. Zolang ik leef niet.</p>\n   <p class="hand">Za 7 nov · Onno: rekeningen. Vrijdag betalen!</p>\n   <p class="hand">Ma 9 nov · In Zwolle een kaars ‘Nachtrozen’ van Kaarsenhuis Noorderhaven gekocht. Dezelfde geur als onze Nachtroos. Precies dezelfde. Dat recept ligt in de kluis en in het hoofd van wie hem giet. Lab laten vergelijken?</p>\n   <p class="hand">Ma 9 nov · N. vanavond 19:45, achterom. Eerst zelf vragen. Dan pas de politie.</p>' },
+      { t: "Bonnetje", n: "Gevonden in de jaszak van Niels Lindhout", h: '<p class="mono">CAFETARIA HET LEMSTERHOEKJE<br>Marktstraat 3 · Lemsterhout<br>ma 09-11 · 19:46<br>1 × cola · € 2,60<br>PIN · pas ****4417</p><p class="hand note">Het Lemsterhoekje ligt 40 meter van de steeg achter de kaarsenmakerij. Meerbeek ligt 12 km verderop.</p>' },
+      { t: "Lab", n: "Gietvorm en kaarsen", h: "<ul><li><b>Gietvorm:</b> op de ronde rand zit bloed van M. Oonk. De vorm past precies in de wond.</li>\n   <li>Over het bloed zit een <b>dunne laag paarse Nachtroos-was</b>: iemand heeft de vorm ná de klap in het warme wasbad gedompeld, waarschijnlijk om het bloed weg te krijgen.</li>\n   <li>In die laag was staat een duimafdruk. Was is maar een paar seconden zacht, dus de afdruk is gezet toen de vorm net uit het bad kwam. De afdruk is van <b>N. Lindhout</b>.</li>\n   <li><b>Kaars ‘Nachtrozen’ (Noorderhaven)</b> vergeleken met de Nachtroos van Oonk: dezelfde zeven geurstoffen, in precies dezelfde verhouding. Dat kan alleen met het recept.</li>\n   <li>Op het codepaneel van de achterdeur: alleen vegen, geen bruikbare afdrukken.</li></ul>" }
+    ],
+    qs: [
+      {
+        q: "Wie heeft Meindert Oonk vermoord?",
+        o: ["Marjolein Oonk", "Onno Meinema", "Leontien Nauta", "Niels Lindhout", "Niemand: hij gleed uit over de was"],
+        a: 3,
+        h: ["Wiens code ging om 19:52 open? En kon die persoon daar wel zijn?", "Leontien zat in Groningen. Wie kende haar code? Lees haar berichten."],
+        x: "Niels Lindhout. Hij kende de code van Leontien uit haar bericht, zijn bonnetje bewijst dat hij om 19:46 in de Marktstraat was in plaats van thuis, en zijn duim staat in de was op de gietvorm."
+      },
+      {
+        q: "Hoe kwam de dader binnen?",
+        o: ["Met de code van Leontien, die hij uit een bericht kende", "Door de voordeur, tussen de cursisten door", "Met zijn eigen code", "Meindert deed de achterdeur voor hem open"],
+        a: 0,
+        h: ["Kijk in het logboek van de achterdeur.", "Om 19:52: code 0412. Van wie is die, en wie wist hem nog meer?"],
+        x: "Om 19:52 ging de achterdeur open met code 0412, de code van Leontien. Leontien zat in Groningen. Niels kende de code: zij had hem op 20 oktober per bericht gestuurd."
+      },
+      {
+        q: "Waarmee werd Meindert gedood?",
+        o: ["Hij viel met zijn hoofd op de rand van het wasbad", "Een zak stearine", "Een koperen gietvorm", "Een kandelaar uit de winkel"],
+        a: 2,
+        h: ["Lees het sectierapport: welke vorm heeft de wond?", "Rond, 6 cm. Wat op de vloer heeft precies die maat?"],
+        x: "Met de koperen gietvorm van 6 cm. De wond is rond en zit achter op zijn hoofd. De rand van het wasbad is hoekig en past niet. De gemorste was moest het op een val laten lijken."
+      },
+      {
+        q: "Hoe laat werd Meindert aangevallen?",
+        o: ["19:10", "19:25", "19:46", "19:57"],
+        a: 3,
+        h: ["Om 19:25 belde hij nog met zijn zus. Wanneer stopte het werk?", "De gietlijn giet alleen als iemand het pedaal ingedrukt houdt."],
+        x: "Om 19:57. Toen liet Meindert het pedaal van de gietlijn los. Om 19:52 kwam Niels binnen, om 20:04 ging hij weer naar buiten. Marjolein stond op dat moment op de foto’s van 19:58 en 20:03."
+      },
+      {
+        q: "Waarom moest Meindert dood?",
+        o: ["Niels wilde de kaarsenmakerij erven", "Meindert had ontdekt dat Niels het geheime recept van de Nachtroos had verkocht", "Niels had nog € 18.400 van hem tegoed", "Meindert wilde Niels ontslaan na een ruzie met Marjolein"],
+        a: 1,
+        h: ["Lees het zakboekje van Meindert, maandag.", "Wie kende het recept uit zijn hoofd? En wat zegt het lab over de kaars van Noorderhaven?"],
+        x: "Kaarsenhuis Noorderhaven verkocht een kaars met precies het recept van de Nachtroos. Alleen Meindert en Niels kenden dat recept. Meindert wilde Niels er maandagavond mee confronteren en daarna naar de politie gaan."
+      }
+    ],
+    story: "Niels Lindhout verkocht het geheime recept van de Nachtroos aan Kaarsenhuis Noorderhaven. Maandag kocht Meindert Oonk hun kaars ‘Nachtrozen’ en rook het meteen. Om 17:41 belde hij Niels: kom vanavond om kwart voor acht achterom. Niels wachtte met een cola in Het Lemsterhoekje en ging om 19:52 naar binnen met de code van Leontien, die hij nog uit haar bericht kende. Om 19:57, terwijl Meindert aan de gietlijn stond, sloeg Niels hem van achteren met een koperen gietvorm. Hij goot was op de vloer, zodat het op uitglijden leek, en dompelde de vorm in het wasbad om het bloed weg te krijgen. Om 20:04 liep hij via de achterdeur weg. Maar in de warme was op de vorm bleef zijn duimafdruk staan."
+  },
+  {
+    id: "reddingsboot",
+    nr: "12",
+    title: "Laag water bij Molenduin",
+    level: "Gemiddeld",
+    time: "60 tot 90 minuten",
+    blurb: "De schipper van het reddingsstation ligt verdronken op de helling naar zee. Uitgegleden in het donker? Dan is het vreemd dat er zoet water in zijn longen zit.",
+    cover: ["water", ["boat", 150, 150, 1.2], ["marker", 90, 184, 1, 1]],
+    start: DSTART("overlijden M. Okkema, Reddingsstation Molenduin", "<p>Zondagochtend 25 oktober is <b>Mattijs Okkema</b> (52), schipper van het vrijwillige Reddingsstation Molenduin, dood gevonden op de helling waarover de reddingsboot te water gaat. Hij was verdronken.</p><p>Iedereen op het station denkt aan een ongeluk: na de oefening bleef hij alleen achter, het was donker en de helling is glad. Lees eerst het sectierapport, en kijk dan nog eens naar die helling.</p>"),
+    docs: [
+      { t: "Proces-verbaal", n: "Bevindingen bij de helling en in het boothuis", h: '<p class="mono">PROCES-VERBAAL VAN BEVINDING · zondag 25 oktober</p>\n   <p>Om 07:10 belde <b>Lolke Monnikhof</b>, die zijn hond uitliet op de dijk. Wij waren er om 07:24.</p>\n   <ul><li>Het slachtoffer lag op zijn buik halverwege de betonnen helling, net boven de waterlijn. Het water zakte al.</li>\n   <li>Hij droeg zijn werkkleding van het station, geen reddingsvest. Zijn oude opwindhorloge (niet waterdicht) stond stil op <b>00:21</b>. In het horloge zat water.</li>\n   <li>Op het zand naast de helling: <b>brede bandensporen</b> van het boothuis naar de helling en terug.</li>\n   <li><b>In het boothuis:</b> de vloer rond de spoelbak was nat, de dweil was nog nat. De spoelbak (zoet kraanwater om de motoren na een tocht schoon te spoelen) stond 15 cm lager dan de streep.</li>\n   <li>Naast de deur hing de rode brandblusser met een <b>deuk</b> in de onderkant.</li>\n   <li>De trekker die de boot naar zee duwt, stond in het boothuis. Er zat vers zand en zeewater aan de wielen.</li></ul>' },
+      {
+        t: "Foto’s",
+        n: "Helling en boothuis",
+        photos: [
+          [["water", ["railing", 150, 190, 1], ["marker", 150, 170, 1, 1]], "1 · de helling"],
+          [["dark", ["bath", 150, 170, 1], ["marker", 220, 184, 1, 2]], "2 · de spoelbak"],
+          [["mud", ["tracks", 150, 155, 1], ["marker", 235, 180, 1, 3]], "3 · bandensporen"]
+        ],
+        h: "<p>Foto 1: de helling naar zee. Marker 1: de plek van het slachtoffer.</p><p>Foto 2: de spoelbak in het boothuis. Marker 2: de natte vloer.</p><p>Foto 3: brede bandensporen in het zand, van het boothuis naar de helling. Ze passen bij de banden van de trekker.</p>"
+      },
+      { t: "Sectierapport", n: "Sectie", h: '<p class="mono">NEDERLANDS FORENSISCH LAB · SECTIE NR. 3188</p>\n   <ul><li><b>Doodsoorzaak:</b> verdrinking.</li>\n   <li>In de longen zit <b>zoet water</b>: geen zout, geen zeezand, geen algen uit zee. Wel <b>chloor</b> (kraanwater) en een spoor <b>motorolie</b>.</li>\n   <li>Links op het hoofd: een kneuzing van een harde klap, met kleine schilfers <b>rode verf</b>. Die klap maakte hem waarschijnlijk suf, maar was niet dodelijk.</li>\n   <li>Blauwe plekken in de nek, alsof iemand hem onder water hield.</li>\n   <li>Tijdstip van overlijden: tussen 23:30 en 01:30. Hij lag pas na zijn dood in zee.</li></ul>' },
+      { t: "Plattegrond", n: "Reddingsstation Molenduin", h: DT(["Boothuis (beneden)", "Kantine (boven)"], [
+        ["Reddingsboot op de trailer", "Keuken en bar"],
+        ["<b>Trekker</b> (duwt de boot over het strand naar zee)", "Tafel met laptop van het station"],
+        ["<b>Spoelbak</b> met zoet kraanwater, met een takel erboven", "Kluisje met de kas en het bootfonds"],
+        ["Rode brandblusser bij de deur", "Kleedkamer met droogpakken"],
+        ["<b>Loopdeur</b> met codeslot · <b>roldeur</b> naar de dijk", "Trap naar het boothuis"]
+      ], "<p>Van de roldeur naar de helling: 300 meter over het zand langs de dijk. De helling ligt op zee, niet aan zoet water. Op het station is de spoelbak de enige grote bak met zoet water; de douche in de kleedkamer heeft geen bak.</p>") },
+      { t: "Logboek", n: "Deuren boothuis, zaterdag op zondag", h: "<p>Het codeslot is oud: het onthoudt wanneer een deur opengaat, maar niet wie de code intikte. Alle bemanningsleden kennen dezelfde code.</p>\n   ".concat(DT(["Tijd", "Wat"], [["19:20", "loopdeur open (begin oefening)"], ["21:40", "roldeur dicht (boot terug)"], ["22:47", "loopdeur open en dicht (bemanning gaat naar huis)"], ["<b>00:11</b>", "<b>loopdeur open</b>"], ["01:10", "roldeur open"], ["01:29", "roldeur dicht"], ["<b>01:34</b>", "<b>loopdeur open en dicht</b>"]])) },
+      { t: "Logboek", n: "Trekker, GPS-kastje", h: "<p>Het kastje meet waar de trekker is en hoe lang de motor draait.</p>\n   ".concat(DT(["Tijd", "Wat"], [["20:02 – 21:38", "oefening: boot naar zee en terug"], ["21:41", "motor uit, in het boothuis"], ["<b>01:12</b>", "<b>motor aan, rijdt naar de helling</b>"], ["01:17 – 01:21", "stilstand op de helling"], ["01:26", "terug in het boothuis, motor uit"]])) },
+      { t: "Rapport", n: "Onderzoek van de trekker", h: "<ul><li>De stoel van de trekker staat op stand <b>2 van 10</b>, bijna helemaal naar voren.</li>\n   <li>Volgens het handboek van het station: wie langer is dan 1,75 m kan op stand 2 de pedalen niet goed bedienen. Na de oefening om 21:41 stond de stoel op stand 9 (bevestigd door Lourens Nijsingh, die toen reed).</li>\n   <li>In de grijpbak voorop: vezels van de werkjas van het slachtoffer en zand.</li>\n   <li>De trekker start met een sleutel die altijd in het contact zit.</li></ul>" },
+      { t: "Lijst", n: "Bemanningslijst en maten droogpakken", h: DT(["Naam", "Functie", "Lengte", "Mag trekker rijden"], [["M. Okkema", "schipper", "1,94 m", "ja"], ["L. Nijsingh", "plaatsvervangend schipper", "1,88 m", "ja"], ["M. Leemreize", "opstapper en penningmeester", "1,61 m", "ja"], ["O. Moesker", "opstapper", "1,83 m", "nee"], ["L. Monnikhof", "geen bemanning (vrijwilliger winkeltje)", "1,79 m", "nee"]], "<p>Nolda Okkema (vrouw van de schipper) is geen bemanningslid. Zij is 1,66 m.</p>") },
+      { t: "Getijden", n: "Getijdentabel Molenduin", h: DT(["Datum", "Tijd", "Water"], [["za 24 okt", "19:31", "laagwater"], ["zo 25 okt", "<b>01:38</b>", "<b>hoogwater</b>"], ["zo 25 okt", "07:52", "laagwater"]], "<p>Rond hoogwater komt het water tot boven aan de helling. Bij laagwater ligt de helling droog.</p>") },
+      { t: "Verhoor", n: "Nolda Okkema (50), echtgenote", h: DQA([["Wanneer zag u uw man het laatst?", "Zaterdag om vijf uur. Ik ging om tien uur aan het werk, ik heb nachtdienst in het ziekenhuis."], ["Was hij verzekerd?", "Ja, een levensverzekering van € 150.000. Dat hebben we allebei."], ["Had hij ruzie met iemand?", "Met Obbe, over drank. En hij zat de laatste weken met zijn neus in de bankafschriften van het bootfonds. Hij sliep er slecht van."]]) + '<p class="mono">GECONTROLEERD DOOR DE RECHERCHE</p><p>Personeelspas N. Okkema: ziekenhuis in om 21:52, uit om 07:06. Twee collega’s bevestigen dat zij de hele nacht op de afdeling was.</p>' },
+      { t: "Verhoor", n: "Lourens Nijsingh (45), plaatsvervangend schipper", h: DQA([["Wordt u nu schipper?", "Waarschijnlijk wel. Ik wil het al jaren. Mattijs wilde nog lang niet stoppen."], ["Waar was u na de oefening?", "Om kwart voor elf naar huis. Om tien over twaalf kreeg mijn dochter hoge koorts. Ik ben met haar naar de spoedeisende hulp gereden."], ["Reed u na de oefening nog met de trekker?", "Nee. Om 21:41 heb ik hem in het boothuis gezet. Stoel op 9, zoals altijd."]]) + '<p class="mono">GECONTROLEERD DOOR DE RECHERCHE</p><p>Spoedeisende hulp: L. Nijsingh met dochter aangemeld om <b>00:24</b>, weggegaan om <b>02:40</b>. Het ziekenhuis ligt 35 minuten rijden van Molenduin.</p>' },
+      { t: "Verhoor", n: "Obbe Moesker (28), opstapper", h: DQA([["U had ruzie met de schipper?", "Hij heeft me voor een maand geschorst. Ik had twee biertjes op voor een uitruk. Ik riep: daar krijg je spijt van, Okkema. Dat meende ik niet."], ["Waar was u na de oefening?", "In Café De Meeuw in het dorp. Darten. Tot een uur of twee."], ["Uw droogpak hing nat in de kleedkamer.", "Dat van iedereen. We hadden net geoefend."]]) + '<p class="mono">GECONTROLEERD DOOR DE RECHERCHE</p><p>Barman Mink Ottevanger: Obbe was er van 22:55 tot 02:10 en is niet weggeweest. Pinbetalingen van Obbe in het café om 23:40, 00:30 en 01:15.</p>' },
+      { t: "Verhoor", n: "Machteld Leemreize (39), opstapper en penningmeester", h: DQA([["Waar was u na de oefening?", "Om kwart voor elf naar huis. Ik ben meteen gaan slapen. Ik ben de hele nacht thuis geweest."], ["Mattijs belde u om 23:52.", "Ja. Over de koffie voor de open dag van volgende week."], ["Hoe gaat het met het bootfonds?", "Prima. We sparen voor een nieuwe boot. Er staat ruim € 80.000 op."], ["Rijdt u weleens met de trekker?", "Soms, bij een oefening. Ik heb het papiertje."]]) },
+      { t: "Telefoon", n: "Telefoon van Mattijs Okkema, zaterdag", h: DT(["Tijd", "Wat", "Met"], [["17:02", "uitgaand, 1 min", "Nolda"], ["22:51", "sms uitgaand", "Nolda: “Ik blijf nog even, papierwerk. Kus.”"], ["<b>23:52</b>", "<b>uitgaand, 3 min</b>", "<b>M. Leemreize</b>"], ["00:40 – 07:10", "geen activiteit", ""]]) },
+      { t: "Laptop", n: "Laptop in de kantine: concept-e-mail", h: '<p class="mono">CONCEPT · opgeslagen za 24 okt 23:47 · niet verzonden</p>\n   <p><b>Aan:</b> Olle Luyendijk, secretaris district Noord<br><b>Onderwerp:</b> bootfonds Molenduin</p>\n   <p>Beste Olle,</p><p>Ik heb de afschriften van het bootfonds nagelopen. Er ontbreekt <b>€ 31.400</b>. Sinds maart zijn er negen overboekingen gedaan naar een rekening op naam van <b>M.L.</b>, steeds met de omschrijving ‘onderhoud motor’. Er is geen enkele rekening van een monteur.</p><p>Ik spreek de penningmeester er vanavond nog zelf over. Maandag hoor je van mij.</p><p>Mattijs</p>' },
+      { t: "Camera", n: "Deurbelcamera van buurvrouw Liane Mengerink", h: "<p>Liane Mengerink woont tegenover Machteld Leemreize. Haar deurbelcamera kijkt uit op de straat. Van haar huis naar het station is het 8 minuten rijden.</p>\n   ".concat(DT(["Tijd", "Wat"], [["22:56", "rode stationwagen van M. Leemreize komt thuis"], ["<b>00:02</b>", "<b>rode stationwagen rijdt weg</b>"], ["<b>01:48</b>", "<b>rode stationwagen komt terug</b>"], ["01:49", "Machteld loopt naar binnen, met natte broekspijpen"]])) }
+    ],
+    qs: [
+      {
+        q: "Wie heeft Mattijs Okkema vermoord?",
+        o: ["Lourens Nijsingh", "Machteld Leemreize", "Obbe Moesker", "Nolda Okkema", "Niemand: hij gleed van de helling"],
+        a: 1,
+        h: ["Wie zegt dat ze de hele nacht thuis was, maar wordt toch gezien?", "Kijk naar de deurbelcamera, en naar de stand van de stoel in de trekker."],
+        x: "Machteld Leemreize. Ze zei dat ze thuis sliep, maar haar auto reed om 00:02 weg en kwam om 01:48 terug. De trekker werd bestuurd door iemand van onder de 1,75 m die trekker mag rijden: alleen zij. En de mail van Mattijs noemt een rekening van M.L."
+      },
+      {
+        q: "Waar is Mattijs verdronken?",
+        o: ["In zee, bij de helling", "In de douche van de kleedkamer", "In de spoelbak in het boothuis", "In de haven, van de steiger"],
+        a: 2,
+        h: ["Wat zat er in zijn longen?", "Zoet water met chloor en motorolie. Waar op het station is zo’n bak?"],
+        x: "In de spoelbak in het boothuis. In zijn longen zat zoet kraanwater met motorolie, precies het water uit de spoelbak. De vloer eromheen was nat en gedweild, en de bak stond 15 cm lager."
+      },
+      {
+        q: "Hoe kwam zijn lichaam op de helling?",
+        o: ["Met de trekker, tussen 01:12 en 01:26", "Hij liep er zelf naartoe", "Het dreef er met de vloed naartoe", "Met de reddingsboot"],
+        a: 0,
+        h: ["Lees het GPS-logboek van de trekker.", "En wat zat er in de grijpbak?"],
+        x: "Met de trekker. Om 01:12 reed die naar de helling, stond er vier minuten stil en was om 01:26 terug. In de grijpbak zaten vezels van zijn jas. Het was bijna hoogwater, dus de zee nam hem mee tot halverwege de helling."
+      },
+      {
+        q: "Hoe laat stierf Mattijs?",
+        o: ["22:47", "23:52", "00:11", "00:21"],
+        a: 3,
+        h: ["Om 23:52 belde hij nog. Wat gebeurde er met zijn horloge?", "Een horloge dat niet waterdicht is, stopt als er water in komt."],
+        x: "Om 00:21. Toen kwam er water in zijn horloge en stopte het. Om 00:11 ging de loopdeur open: tien minuten later hield Machteld hem onder in de spoelbak."
+      },
+      {
+        q: "Waarom moest Mattijs dood?",
+        o: ["Hij wilde Lourens nooit schipper laten worden", "Hij had Obbe geschorst om drank", "Hij had ontdekt dat er € 31.400 uit het bootfonds was weggesluisd", "Zijn vrouw wilde de levensverzekering"],
+        a: 2,
+        h: ["Lees de concept-e-mail op de laptop.", "Wie is M.L.? Kijk op de bemanningslijst."],
+        x: "Mattijs ontdekte dat er € 31.400 uit het bootfonds naar een rekening van M.L. was overgeboekt. Machteld Leemreize is de penningmeester en de enige M.L. Hij belde haar om 23:52 en wilde maandag naar het district."
+      }
+    ],
+    story: "Machteld Leemreize, penningmeester van Reddingsstation Molenduin, boekte sinds maart € 31.400 uit het bootfonds naar haar eigen rekening. Zaterdagavond ontdekte schipper Mattijs Okkema het. Om 23:52 belde hij haar: kom het uitleggen, maandag gaat het naar het district. Om 00:02 reed ze weg en om 00:11 kwam ze het boothuis in. Ze sloeg hem met de rode brandblusser en hield hem om 00:21 onder water in de spoelbak, tot zijn horloge stilstond. Om 01:12 tilde ze hem met de takel in de grijpbak van de trekker, met de stoel helemaal naar voren, en reed naar de helling. Het was bijna hoogwater; de zee deed de rest. Ze dweilde de vloer en was om 01:48 thuis. Maar het water in zijn longen was zoet."
+  }
+);
 let dd = store.get(DKEY) || { cur: null, cases: {} };
 if (!dd.cases) dd = { cur: null, cases: {} };
 const saveD = () => store.set(DKEY, dd);
@@ -6242,7 +6893,7 @@ const TSKIN = ["#f3cba8", "#ebba94", "#dca47c", "#c88a62", "#a8704b", "#7d5236"]
 const THC = ["#2a1d15", "#4a2f1c", "#6b4527", "#a0703a", "#d6b25e", "#a3a39c", "#b5502c", "#1f1a17"];
 const TTOP = ["#4f6475", "#7a3b32", "#3f5a45", "#4a4f6b", "#8a6a3a", "#5f6468", "#2f3a4a", "#6b3f5c", "#8a4f2a"];
 const TLEG = ["#2b2f36", "#3a3a3c", "#45403a", "#26303d", "#4b4237"];
-const TFEM = new Set("lieneke tamar marlous annick floor hester nienke christa dorette herma inge geertje klaartje froukje aukje mieke corrie hiske karlijn ida afke sjoukje marrit antje klaske dieuwke renske grietje minke annerieke elsbeth dorien neeltje yfke annemijn ariane baukje clementia leonoor josefien jantje eva-lotte linde mientje marlou rosanne selma hedwig quinty gijsje lidewij rowena dirkje annelot jozefien floortje odilia wilmijn nynke djoeke evelien margreet femke-lot vera jildou hinke lize dineke mirabella wendolien silke mariska aleida fenneke mirte jorien hennie saartje agnes truida yvette quirine kirsten liselot annegien marijke imke leonie isaura wieteke rosalie ottelien dorine celine tessel marga henriëtte ylva margje annabel gonda fabienne riet lucienne mirella hanneke selina wendela nadine petronella jitske desirée desiree elodie rinske femmy brecht liesje ingeborg annemoon rixt celeste lotus jolanda ankie sabine adelheid bertha mirthe dewi noortje robin hendrika marlies cornelia tjitske fleur willemijn romy ottilie noa hilde zara juul gonnie saar fien isabella rosalind trui clementine fenna lieke merel femke esmee noor yara camille greta hanna lies marie margaretha lola jikke sterre isolde hendrikje annie liesbeth mevrouw juffrouw barones tante oma zuster moeder dochter zus weduwe mevr anouk ria lotte samira sanne mila lisa eva sophie anneke wilma agatha wilhelmina charlotte ilse esra ingrid marieke femke anna emma julia sara fleur iris noor tess linda petra ellen karin monique yvonne joke truus greet mien els annet margriet hanna saskia nadia fatima yara lieke jet roos kim naomi vera isa nina lena amira julia marloes ilona sylvia gerda bep dora fenna hilde jolien lieve maud nienke romy sanna tamara ymke zoë zoe evi demi sharon anja astrid carla dewi esther floor gwen hester ines jasmijn kiki liza mirjam nora olga pien rosa selma trees ursula veerle wendy aaltje aafke birgit cato daphne elise frida gea heleen joyce kaat loes maaike nelleke odette patricia rianne silvia tineke willemijn yasmin hannelore yolanthe philippa albertine gerdien rozemarijn wanda ietje mareike philomena quirien femmie trijntje annabella godelieve constance jolein geesje coosje".split(" "));
+const TFEM = new Set("berendina annefleur bregje clasina dieneke elske florentine dorothea josien harmke inez juultje hermien koosje klasina janke ike marjolein leontien nicolien lieske nolda machteld liane priscilla suzanna sientje yolande lieneke tamar marlous annick floor hester nienke christa dorette herma inge geertje klaartje froukje aukje mieke corrie hiske karlijn ida afke sjoukje marrit antje klaske dieuwke renske grietje minke annerieke elsbeth dorien neeltje yfke annemijn ariane baukje clementia leonoor josefien jantje eva-lotte linde mientje marlou rosanne selma hedwig quinty gijsje lidewij rowena dirkje annelot jozefien floortje odilia wilmijn nynke djoeke evelien margreet femke-lot vera jildou hinke lize dineke mirabella wendolien silke mariska aleida fenneke mirte jorien hennie saartje agnes truida yvette quirine kirsten liselot annegien marijke imke leonie isaura wieteke rosalie ottelien dorine celine tessel marga henriëtte ylva margje annabel gonda fabienne riet lucienne mirella hanneke selina wendela nadine petronella jitske desirée desiree elodie rinske femmy brecht liesje ingeborg annemoon rixt celeste lotus jolanda ankie sabine adelheid bertha mirthe dewi noortje robin hendrika marlies cornelia tjitske fleur willemijn romy ottilie noa hilde zara juul gonnie saar fien isabella rosalind trui clementine fenna lieke merel femke esmee noor yara camille greta hanna lies marie margaretha lola jikke sterre isolde hendrikje annie liesbeth mevrouw juffrouw barones tante oma zuster moeder dochter zus weduwe mevr anouk ria lotte samira sanne mila lisa eva sophie anneke wilma agatha wilhelmina charlotte ilse esra ingrid marieke femke anna emma julia sara fleur iris noor tess linda petra ellen karin monique yvonne joke truus greet mien els annet margriet hanna saskia nadia fatima yara lieke jet roos kim naomi vera isa nina lena amira julia marloes ilona sylvia gerda bep dora fenna hilde jolien lieve maud nienke romy sanna tamara ymke zoë zoe evi demi sharon anja astrid carla dewi esther floor gwen hester ines jasmijn kiki liza mirjam nora olga pien rosa selma trees ursula veerle wendy aaltje aafke birgit cato daphne elise frida gea heleen joyce kaat loes maaike nelleke odette patricia rianne silvia tineke willemijn yasmin hannelore yolanthe philippa albertine gerdien rozemarijn wanda ietje mareike philomena quirien femmie trijntje annabella godelieve constance jolein geesje coosje".split(" "));
 const TTITLE = {
   Baron: { hat: "top", mono: 1, f: 0, hair: "short" },
   Mevrouw: { f: 1, hair: "bun", pearls: 1 },
@@ -8073,6 +8724,57 @@ DBCASES.push(
   })
 );
 const DBKEY = "md-databank";
+PP.kegels = () => {
+  const pin = (x, y, s) => '<g transform="translate('.concat(x, " ").concat(y, ") scale(").concat(s, ')"><path d="M-5 0C-10-10-10-19-4-27C-2-31-3-34-3-38C-3-44 3-44 3-38C3-34 2-31 4-27C10-19 10-10 5 0Z" fill="#f4f1ea" stroke="#3a3a3a" stroke-width="1.2"/><path d="M-3.6-31.5h7.2M-3.4-34h6.8" stroke="#c8281e" stroke-width="1.6"/></g>');
+  return '<ellipse cy="3" rx="62" ry="7" fill="#000" opacity=".35"/>'.concat([-27, -9, 9, 27].map((x) => pin(x, -14, 0.85)).join("")).concat([-18, 0, 18].map((x) => pin(x, -8, 0.92)).join("")).concat([-9, 9].map((x) => pin(x, -3, 1)).join("")).concat(pin(0, 2, 1.06), '\n <circle cx="44" cy="-11" r="13" fill="#1f2a44" stroke="#0d1220" stroke-width="1.5"/><circle cx="40" cy="-16" r="1.8" fill="#0d1220"/><circle cx="46" cy="-17" r="1.8" fill="#0d1220"/><circle cx="43" cy="-11" r="1.8" fill="#0d1220"/><path d="M36-19a10 10 0 0 1 6-3" stroke="#fff" stroke-width="1.4" opacity=".35" fill="none"/>');
+};
+DBCASES.push(
+  dbCase({
+    id: "bowling",
+    nr: "012",
+    town: "Rijswoud",
+    title: "De laatste worp",
+    blurb: "In de machinekamer achter baan 12 ligt de eigenaar van een bowlingcentrum. De bedrijfsleider zegt dat ze om tien over elf naar huis reed. Maar wie kwam er daarna nog binnen?",
+    brief: dbBrief("dood Radboud Pasveer, Rijswoud", "<p>Op zondag 15 november 2026 om 07:10 vond schoonmaakster <b>Sientje Schalkwijk</b> de eigenaar van <b>Bowlingcentrum Pinhoeve</b>, <b>Radboud Pasveer</b> (61), dood in de machinekamer achter baan 12. Hij is geslagen met de zilveren clubtrofee uit de vitrine in de hal. Die lag naast hem. Hij overleed op zaterdag 14 november tussen 23:00 en 00:30.</p><p>Zijn telefoon, <b>06-58204417</b>, lag naast hem. Het centrum sluit om 23:00.</p><p>Er hangen camera’s bij de <b>voordeur</b> en bij de <b>achterdeur</b> aan de parkeerplaats.</p>"),
+    P: [
+      ["radboud", "Radboud Pasveer", "Overleden 14-11-2026", [["Geboren", "9 april 1965 (61)"], ["Adres", "Kegelweg 10, Rijswoud (woning naast het centrum)"], ["Telefoon", "06-58204417"], ["Functie", "Eigenaar Bowlingcentrum Pinhoeve (50%)"], ["Voertuig", "RW-150-R, zwarte Mercedes"], ["Sleuteltag", "nr. 01"], ["Relaties", "Ex-vrouw en mede-eigenaar <b>Suzanna Quint</b>; bedrijfsleider <b>Priscilla Ruijgrok</b>"], ["Let op", "Ontsloeg op 13-11 de monteur van de pinmachines, <b>Quirijn Sloothaak</b>"]]],
+      ["priscilla", "Priscilla Ruijgrok", "Bedrijfsleider bowlingcentrum", [["Geboren", "2 februari 1982 (44)"], ["Adres", "Sterappelstraat 5, Rijswoud-Noord"], ["Telefoon", "06-31769058"], ["Voertuig", "RW-417-P, rode Kia"], ["Sleuteltag", "nr. 07"], ["Taken", "Kassa, bar en de inschrijfgelden van de bowlingcompetitie"]], ["15 november 2026 · 13:00", [["R", "Wanneer ging u gisteravond weg?"], ["S", "Om tien over elf. Ik heb de voordeur op slot gedraaid en ben naar huis gereden. Radboud zat nog in de machinekamer."], ["R", "En daarna?"], ["S", "Thuis. Tv gekeken, om half twaalf naar bed. Ik ben niet meer teruggegaan."], ["R", "Klopte de kas van de competitie?"], ["S", "Altijd. Daar zorg ik zelf voor."]]]],
+      ["quirijn", "Quirijn Sloothaak", "Monteur pinmachines (ontslagen)", [["Geboren", "23 juli 1987 (39)"], ["Adres", "Rolbalstraat 3, Rijswoud"], ["Telefoon", "06-64018832"], ["Voertuig", "RW-663-S, witte bestelbus"], ["Sleuteltag", "nr. 09 · geblokkeerd sinds 13-11"], ["Let op", "Op 13-11 ontslagen door Pasveer, na een ruzie in de machinekamer"]], ["15 november 2026 · 10:30", [["R", "U was gisteravond bij het bowlingcentrum."], ["S", "Ja, om half elf. Mijn eigen gereedschapskist stond nog in de machinekamer. De achterdeur was open, het was nog geen sluitingstijd."], ["R", "Zag u meneer Pasveer?"], ["S", "Nee. Ik pakte mijn kist en was na vijf minuten weer buiten. Daarna zat ik tot sluitingstijd in Café De Schuimkraag."], ["R", "U werd vrijdag ontslagen."], ["S", "Na elf jaar. Ik was woedend, ja. Maar ik sla niemand dood."]]]],
+      ["suzanna", "Suzanna Quint", "Mede-eigenaar bowlingcentrum (50%)", [["Geboren", "30 oktober 1967 (59)"], ["Adres", "Schelpenhof 21, Rijswoud"], ["Telefoon", "06-27445913"], ["Voertuig", "RW-208-Q, witte Peugeot"], ["Sleuteltag", "nr. 04"], ["Let op", "Wil het centrum verkopen aan een projectontwikkelaar; Pasveer weigerde"]], ["15 november 2026 · 15:30", [["R", "U belde gisteravond met uw ex-man."], ["S", "Hij belde mij, om vijf over tien. Weer over de verkoop. Hij wilde niet, zoals altijd."], ["R", "Waar was u?"], ["S", "Ik at met drie vriendinnen in Restaurant Sluisoord in Steenzand. Ik heb om acht voor twaalf de rekening betaald."], ["R", "Nu kan het centrum misschien wel verkocht worden."], ["S", "Dat weet ik. Het klinkt lelijk. Maar ik was twintig kilometer verderop."]]]],
+      ["sientje", "Sientje Schalkwijk", "Schoonmaakster · vond het lichaam", [["Geboren", "14 mei 1971 (55)"], ["Telefoon", "06-49930267"], ["Verklaring", "“De achterdeur zat op slot. Ik kom altijd om zeven uur. Op de vloer naar baan 12 lagen modderige voetstappen.”"]]]
+    ],
+    K: [
+      ["RW-417-P", "Rode Kia", [["Eigenaar", "<b>Priscilla Ruijgrok</b>"]], ["14-11 · 23:14 · Kegelweg, richting Rijswoud-Noord", "14-11 · 23:34 · Kegelweg, richting bowlingcentrum", "15-11 · 00:21 · Kegelweg, richting Rijswoud-Noord"]],
+      ["RW-150-R", "Zwarte Mercedes", [["Eigenaar", "<b>Radboud Pasveer</b>"]], ["14-11 · 18:02 · Kegelweg, richting bowlingcentrum"]],
+      ["RW-663-S", "Witte bestelbus", [["Eigenaar", "<b>Quirijn Sloothaak</b>"]], ["14-11 · 22:27 · Kegelweg, richting bowlingcentrum", "14-11 · 22:39 · Kegelweg, richting centrum"]],
+      ["RW-208-Q", "Witte Peugeot", [["Eigenaar", "<b>Suzanna Quint</b>"]], ["14-11 · 19:41 · Provinciale weg, richting Steenzand", "15-11 · 00:47 · Provinciale weg, richting Rijswoud"]]
+    ],
+    T: [
+      ["06-58204417", "Houder: Radboud Pasveer", ["14-11 · 21:34 · sms naar 06-31769058: “Ik heb de bonnen van de competitieavonden naast de bankafschriften gelegd. Er is € 38.600 weg. Maandag ga ik naar de politie.”", "14-11 · 21:41 · sms van 06-31769058: “Geef me één kans om het uit te leggen. Na sluiting, als het personeel weg is?”", "14-11 · 21:43 · sms naar 06-31769058: “Ik zit in de machinekamer. Kom maar.”", "14-11 · 22:05 · gesprek met 06-27445913 (4 min)"]],
+      ["06-31769058", "Houder: Priscilla Ruijgrok", ["14-11 · 21:41 · sms naar 06-58204417", "14-11 · 23:16 tot 23:29 · mast Rijswoud-Noord", "14-11 · 23:36 tot 00:18 · mast Kegelweg", "15-11 · 00:25 tot 08:10 · mast Rijswoud-Noord"]],
+      ["06-27445913", "Houder: Suzanna Quint", ["14-11 · 19:55 tot 00:35 · mast Steenzand", "14-11 · 22:05 · gesprek met 06-58204417 (4 min)"]],
+      ["06-64018832", "Houder: Quirijn Sloothaak", ["14-11 · 22:20 tot 22:40 · mast Kegelweg", "14-11 · 22:44 tot 01:10 · mast Centrum Rijswoud"]],
+      ["06-49930267", "Houder: Sientje Schalkwijk", ["14-11 · hele avond · mast Rijswoud-West", "15-11 · 07:12 · gesprek met 112 (6 min)"]]
+    ],
+    A: [
+      [["Bowlingcentrum Pinhoeve", "Pinhoeve", "Kegelweg 8", "Bowling"], "Kegelweg 8 · bowlingcentrum", ["Open tot 23:00. Tijdens openingstijd is de achterdeur open. Na sluiting gaat hij alleen open met een sleuteltag.", "Logboek achterdeur 14-11: 23:39 · sleuteltag nr. <b>07</b> · in", "Logboek achterdeur 15-11: 00:16 · sleuteltag nr. <b>07</b> · uit", "Uit de vitrine in de hal ontbreekt de zilveren clubtrofee. Hij lag naast het lichaam, in de machinekamer achter baan 12."]],
+      [["Restaurant Sluisoord", "Sluisoord", "Steenzand"], "Havenkade 2, Steenzand · restaurant", ["Reservering 14-11 · 19:30 · 4 personen, op naam van S. Quint", "Pinbetaling 23:52 · € 186,40 · pas op naam van S. Quint", "De bediening: “Het gezelschap zat er de hele avond. Ze gingen als laatsten weg.”"]],
+      [["Café De Schuimkraag", "Schuimkraag"], "Marktplein 6, Rijswoud · café", ["Barman: “Quirijn kwam rond kwart voor elf binnen en bleef tot we dichtgingen, om één uur. Hij zat de hele tijd aan de bar te mopperen over zijn baas.”"]],
+      [["Sterappelstraat 5", "Sterappelstraat"], "Sterappelstraat 5, Rijswoud-Noord · woonhuis", ["Bewoner: Priscilla Ruijgrok", "Buurman: “Haar auto kwam om kwart over elf thuis. Een kwartier later reed ze alweer weg, met de lichten uit tot de hoek. Rond half één kwam ze terug.”"]]
+    ],
+    C: [
+      [["Voordeur", "Ingang", "Hal", "Bowlingcentrum Pinhoeve", "Pinhoeve", "Kegelweg"], "Camera voordeur", "Bowlingcentrum Pinhoeve", ["22:58 · het laatste team, De Pinknallers, loopt naar buiten", "23:08 · vrouw in een rode bowlingpolo draait de voordeur van binnen op slot"], [[["night", ["door", 150, 165, 1.1], ["text", 150, 40, 1, "23:08 · voordeur", 14]], "23:08 · voordeur"]]],
+      [["Achterdeur", "Parkeerplaats", "Personeelsingang", "Containers"], "Camera achterdeur", "Achterdeur en parkeerplaats", ["22:31 · man met een pet loopt de achterdeur in", "22:36 · dezelfde man loopt naar buiten met een grote gereedschapskist", "23:12 · rode Kia <b>RW-417-P</b> rijdt weg", "23:37 · auto zonder licht stopt achter de containers, kenteken niet te lezen", "23:39 · iemand in een donkere regenjas met capuchon opent de achterdeur", "00:16 · dezelfde persoon loopt naar buiten en verdwijnt achter de containers"], [[["night", ["door", 150, 165, 1.1], ["text", 150, 40, 1, "23:39 · achterdeur", 14]], "23:39 · achterdeur"], [["night", ["car", 150, 170, 1.1], ["text", 150, 40, 1, "23:12 · RW-417-P", 14]], "23:12 · rode Kia"]]]
+    ],
+    hints: ["Na sluiting ging de achterdeur alleen open met een sleuteltag. Zoek bij Adres op <b>Pinhoeve</b>: welke tag werd om 23:39 gebruikt?", "Van wie is sleuteltag nr. 07? Zoek de mensen rond Radboud op en vergelijk hun verhaal met hun kenteken en telefoon.", "Waarom zou zij het doen? Lees de sms’jes op de telefoon van Radboud."],
+    qs: [
+      { q: "Wie heeft Radboud Pasveer vermoord?", o: ["Quirijn Sloothaak", "Suzanna Quint", "Priscilla Ruijgrok", "Sientje Schalkwijk"], a: 2, x: "Priscilla zei dat ze na 23:12 thuisbleef. Maar haar Kia reed om 23:34 weer naar het centrum, haar telefoon zat van 23:36 tot 00:18 bij de mast Kegelweg en haar sleuteltag nr. 07 opende om 23:39 de achterdeur." },
+      { q: "Welk spoor bewijst dat de dader na sluiting terugkwam in het centrum?", o: ["De man met de gereedschapskist om 22:31", "Het telefoontje van 22:05", "De pinbetaling in Restaurant Sluisoord", "Sleuteltag nr. 07 opende om 23:39 de achterdeur"], a: 3, x: "Op de camera is de persoon in de regenjas niet herkenbaar. Maar het logboek van de achterdeur toont tag nr. 07, en die is van Priscilla Ruijgrok." },
+      { q: "Wat was het motief?", o: ["Ze zou ontslagen worden, net als Quirijn", "Radboud zou maandag naar de politie gaan: € 38.600 aan competitiegeld was weg", "Ze wilde het centrum zelf kopen", "Radboud wilde het centrum verkopen aan een projectontwikkelaar"], a: 1, x: "Om 21:34 sms’te Radboud haar dat er € 38.600 weg was en dat hij maandag naar de politie zou gaan. Zij beheerde de inschrijfgelden van de competitie." }
+    ],
+    story: "Bedrijfsleider Priscilla Ruijgrok hield al twee jaar een deel van de inschrijfgelden van de bowlingcompetitie zelf. Op zaterdagavond legde Radboud Pasveer de bonnen naast de bankafschriften: € 38.600 was weg. Om 21:34 sms’te hij haar dat hij maandag naar de politie ging. Priscilla vroeg om een gesprek na sluiting. Om 23:08 draaide ze de voordeur op slot en om 23:12 reed ze opvallend weg, zodat de camera het zag. Thuis wachtte ze een kwartier. Toen reed ze terug, zonder licht, en parkeerde achter de containers. Om 23:39 opende ze met haar eigen sleuteltag de achterdeur. Ze nam de zilveren clubtrofee uit de vitrine mee naar de machinekamer en sloeg Radboud neer. Om 00:16 ging ze weer naar buiten. Ze vergat dat de deur elke tag onthoudt."
+  })
+);
 let dbd = store.get(DBKEY) || { cur: null, cases: {} };
 if (!dbd.cases) dbd = { cur: null, cases: {} };
 const saveDb = () => store.set(DBKEY, dbd);
@@ -11009,6 +11711,30 @@ STCASES.push(
     ],
     draw: () => "".concat(STO.stall(500, 664, "#b48cff")).concat(stFig(STL.geesje, 516, 704, { s: 0.2, rot: -80 }), '<g transform="translate(550 700)"><path d="M-8 6V-14h14M6 -14V6" stroke="#555" stroke-width="2.6" fill="none"/><rect x="-9" y="-8" width="17" height="7" rx="1" fill="#b48cff" stroke="#333"/><circle cx="-8" cy="8" r="3" fill="#333"/><circle cx="6" cy="8" r="3" fill="#333"/></g>').concat([[-30, 8], [-22, 14], [-10, 18], [4, 16], [14, 10], [24, 20]].map(([a, b]) => '<circle cx="'.concat(520 + a, '" cy="').concat(712 + b, '" r="2.6" fill="#fbf7ee" stroke="#8a8578" stroke-width=".8"/>')).join(""), '\n   <g transform="translate(482 418) rotate(-12)"><circle cx="-9" cy="0" r="7" fill="none" stroke="#222" stroke-width="2"/><circle cx="10" cy="0" r="7" fill="none" stroke="#222" stroke-width="2"/><path d="M-9 0l8 -8 11 8M-1 -8h-4" stroke="#1e6bff" stroke-width="2.4" fill="none"/></g>\n   ').concat(stFig(STL.xander, 138, 414, { s: 0.2, item: STI.bag })).concat(stFig(stLk({ skin: TSKIN[2], top: "#26282a", hat: "fedora", hc: THC[7], legs: "#1c1c1c" }), 164, 414, { s: 0.2, flip: true, item: STI.money }), "\n   ").concat(stFig(STL.xander, 100, 780, { s: 0.2, flip: true }), '<rect x="94" y="806" width="11" height="7" rx="1" fill="#c2261e" stroke="#222"/>\n   ').concat(STO.bench(180, 878)).concat(stFig(STL.xander, 180, 872, { s: 0.2, item: STI.money })),
     story: "Xander Blankevoort had de dure parelketting van mevrouw Geesje Lammertsma al weken gezien. Op de markt duwde hij haar omver, rukte de ketting af en fietste weg. In de straat boven de markt liet hij zijn fiets vallen en rende verder. Bij het station verkocht hij de parels aan een heler met een hoed. Het lege doosje gooide hij in de gracht. Daarna ging hij op een bankje bij de school zijn geld tellen, nog steeds in zijn felblauwe jas."
+  }
+);
+Object.assign(STL, {
+  wubbe: stLk({ skin: TSKIN[2], top: "#ff6f61", hc: THC[3], hair: "curly", legs: "#26303d" }),
+  yolande: stLk({ f: true, skin: TSKIN[1], top: "#14d6c4", hc: THC[6], hair: "long", legs: "#f3efe6" })
+});
+const stVlieg = (x, y, s = 1, rot = 0, c1 = "#e0201c", c2 = "#ffd400", tail = 4) => '<g transform="translate('.concat(x, " ").concat(y, ") rotate(").concat(rot, ") scale(").concat(s, ')"><path d="M0 -15L11 0L0 19L-11 0Z" fill="').concat(c1, '" stroke="#222" stroke-width="1.4"/><path d="M-11 0L11 0L0 19Z" fill="').concat(c2, '" stroke="#222" stroke-width="1.4"/><path d="M0 -15V19M-11 0H11" stroke="#222" stroke-width=".8"/>').concat(tail ? '<path d="M0 19q6 8 0 14t0 14t0 14t0 14" stroke="#222" stroke-width="1" fill="none"/>'.concat(Array.from({ length: tail }, (_, i) => '<path d="M-4 '.concat(25 + i * 14, 'l4 2 4 -2 0 4 -4 -2 -4 2z" fill="').concat(i % 2 ? c2 : c1, '" stroke="#222" stroke-width=".6"/>')).join("")) : "", "</g>");
+STCASES.push(
+  {
+    id: "vlieger",
+    nr: "008",
+    title: "De gestolen vlieger",
+    level: "Gemiddeld",
+    blurb: "Op het vliegerfeest aan de kade verdwijnt de rood-gele vlieger die net de eerste prijs won. Volg de vrouw in de felturquoise jas.",
+    intro: "Op het vliegerfeest aan de oostkade won de elfjarige Wubbe Uiterwijk de eerste prijs met zijn zelfgemaakte rood-gele vlieger. Toen hij de beker ging ophalen, knipte iemand de lijn door. Een vrouw in een felturquoise jas en een witte broek rende weg met de vlieger.",
+    steps: [
+      { q: "Op de kade is het vliegerfeest. Bij de jurytafel staat een jongen in een koraalrode trui naast een lege vliegerstok. Zoek hem.", x: 1322, y: 1612, r: 44, ok: "Daar staat Wubbe Uiterwijk, met de gouden beker in zijn armen en tranen op zijn wangen. Aan de stok hangt alleen nog een doorgeknipt stukje lijn." },
+      { q: "Waar liet de dief de schaar en de haspel met de lijn vallen?", x: 1205, y: 1535, r: 40, h1: "op de straat langs de oostkant van het stadspark", ok: "Op de stoep langs het park ligt een houten haspel met een slap stuk vliegerlijn. Ernaast ligt een rode schaar." },
+      { q: "Waar bleef de vlieger even hangen?", x: 1322, y: 1250, r: 42, h1: "op de straat tussen de bank en de haven, helemaal aan de oostkant", ok: "De wind rukte de vlieger los en hij bleef in een lantaarnpaal hangen. De vrouw in de felturquoise jas trekt hem eruit. Een rood strikje van de staart blijft achter." },
+      { q: "Waar gooide ze de prijsrozet van de vlieger weg?", x: 1210, y: 815, r: 42, ok: "Op de oostelijke brug trekt ze de gouden rozet met EERSTE PRIJS van de vlieger en gooit hem in de gracht. Hij drijft nog." },
+      { q: "Waar is de vrouw in de felturquoise jas nu?", x: 1210, y: 562, r: 44, ok: "Op een bankje naast de kerk verft ze de rood-gele vlieger snel blauw. Aan de staart mist één strikje. Dat is Yolande Zuidervaart. Gearresteerd!" }
+    ],
+    draw: () => "".concat(STO.sign(1318, 1572, "VLIEGERFEEST", "#c2261e")).concat(stFig(stLk({ skin: TSKIN[0], top: "#26282a", hc: THC[5], hair: "bald", glasses: true, legs: "#1c1c1c" }), 1286, 1601, { s: 0.18 }), '<rect x="1270" y="1598" width="44" height="10" fill="#8a6a3a" stroke="#3a2a1a"/><path d="M1274 1608v7M1310 1608v7" stroke="#3a2a1a" stroke-width="2"/><g transform="translate(1302 1598)"><path d="M-6 -13h12q0 9 -6 10q-6 -1 -6 -10z" fill="#f2c21a" stroke="#7a5a10" stroke-width="1"/><path d="M-6 -11q-4 0 -3 4 1 3 4 2M6 -11q4 0 3 4 -1 3 -4 2" fill="none" stroke="#7a5a10" stroke-width="1"/><path d="M-1 -3h2v3h-2z" fill="#f2c21a"/><rect x="-4" y="-1" width="8" height="2.4" fill="#7a5a10"/></g>\n   <path d="M1348 1622V1586" stroke="#6b4a2e" stroke-width="2.6"/><path d="M1348 1588q6 4 3 11" stroke="#222" stroke-width="1" fill="none"/>').concat(stFig(STL.wubbe, 1333, 1624, { s: 0.17, item: STI.sweat + '<g transform="translate(40 -66) scale(1.3)"><path d="M-9 -16h18q0 13 -9 14q-9 -1 -9 -14z" fill="#f2c21a" stroke="#7a5a10" stroke-width="2"/><rect x="-6" y="-2" width="12" height="5" fill="#7a5a10"/></g>' }), "\n   ").concat(stFig(stLk({ f: true, skin: TSKIN[3], top: "#5a6a8a", hair: "bun", hc: THC[1] }), 1258, 1634, { s: 0.16 }), '<path d="M1263 1625L1262 1578" stroke="#444" stroke-width=".8"/>').concat(stVlieg(1262, 1570, 0.7, -10, "#2a6ad8", "#f3efe6", 3), "\n   ").concat(stFig(stLk({ skin: TSKIN[4], top: "#3a4a5a", hair: "short", hc: THC[0] }), 1372, 1638, { s: 0.15, flip: true }), '<path d="M1368 1630L1374 1598" stroke="#444" stroke-width=".8"/>').concat(stVlieg(1374, 1590, 0.6, 12, "#3a9a3a", "#f3efe6", 2), '\n   <g transform="translate(1205 1535)"><circle cx="-8" cy="0" r="7" fill="#b8925a" stroke="#5a3a1a" stroke-width="1.6"/><circle cx="-8" cy="0" r="3.4" fill="none" stroke="#f3efe6" stroke-width="2"/><path d="M-8 -7v14M-15 0h14" stroke="#5a3a1a" stroke-width="1"/><path d="M-2 -2q8 -10 16 -2t14 -6" stroke="#f3efe6" stroke-width="1.4" fill="none"/><path d="M-2 -2q8 -10 16 -2t14 -6" stroke="#555" stroke-width=".5" fill="none"/><g transform="translate(10 8) rotate(-25)"><circle cx="-6" cy="-2" r="2.6" fill="none" stroke="#d0201a" stroke-width="1.8"/><circle cx="-6" cy="4" r="2.6" fill="none" stroke="#d0201a" stroke-width="1.8"/><path d="M-4 -1L10 3M-4 3L10 -1" stroke="#9aa3aa" stroke-width="1.6"/></g></g>\n   ').concat(STO.lamp(1336, 1262)).concat(stVlieg(1342, 1214, 0.75, 28), '<path d="M1330 1254q-3 -4 0 -8" stroke="#222" stroke-width=".8" fill="none"/>').concat(stFig(STL.yolande, 1316, 1262, { s: 0.2, item: '<path d="M29 -53L76 -150" stroke="#222" stroke-width="2"/>' }), "\n   ").concat(stFig(STL.yolande, 1214, 822, { s: 0.2, item: '<g transform="translate(40 -66) rotate(15) scale(2.2)"><path d="M0 -15L11 0L0 19L-11 0Z" fill="#e0201c" stroke="#222" stroke-width="1"/><path d="M-11 0L11 0L0 19Z" fill="#ffd400" stroke="#222" stroke-width="1"/></g>' }), '<g transform="translate(1256 834)"><path d="M-3 4l-4 9M3 4l4 9" stroke="#2a6ad8" stroke-width="3"/><circle r="7" fill="#f2c21a" stroke="#8a6a1a" stroke-width="1.4"/><circle r="3" fill="#fff6c8"/></g><path d="M1244 840q12 -5 24 0" stroke="#a8cde0" stroke-width="1.4" fill="none"/>\n   ').concat(STO.bench(1210, 572)).concat(stFig(STL.yolande, 1204, 566, { s: 0.2, item: '<path d="M29 -53l16 -22" stroke="#5a3a1a" stroke-width="5"/><circle cx="47" cy="-78" r="5" fill="#2a6ad8"/>' }), '<g transform="translate(1236 544) rotate(8)"><path d="M0 -15L11 0L0 19L-11 0Z" fill="#2a6ad8" stroke="#222" stroke-width="1.4"/><path d="M-11 0L11 0L0 19Z" fill="#ffd400" stroke="#222" stroke-width="1.4"/><path d="M0 0L11 0L0 19Z" fill="#2a6ad8" stroke="#222" stroke-width="1"/><path d="M0 19q6 8 0 14t0 14" stroke="#222" stroke-width="1" fill="none"/><path d="M-4 25l4 2 4 -2 0 4 -4 -2 -4 2z" fill="#e0201c" stroke="#222" stroke-width=".6"/></g><g transform="translate(1186 574)"><rect x="-5" y="-9" width="10" height="9" fill="#2a6ad8" stroke="#222"/><path d="M-5 -9q5 -4 10 0" stroke="#222" fill="none"/></g>'),
+    story: "Yolande Zuidervaart werd op het vliegerfeest tweede, achter de elfjarige Wubbe Uiterwijk. Ze gunde hem de prijs niet: met de rood-gele vlieger wilde ze zelf meedoen aan de grote vliegerwedstrijd van volgende week. Toen Wubbe de beker ging halen, knipte ze de lijn door en rende weg. De schaar en de haspel liet ze langs het park vallen. Bij een lantaarnpaal bleef de vlieger hangen, en daar verloor de staart een strikje. Op de oostelijke brug gooide ze de rozet in de gracht. Naast de kerk verfde ze de vlieger blauw, maar het ontbrekende strikje verraadde haar."
   }
 );
 const STADKEY = "md-stad";
@@ -16370,6 +17096,135 @@ SCR.stad.bank = [["t", "Overval op de bank", "bank", "Stadsplattegrond · zaak 0
 SCR.stad.ketting = [["t", "De parelketting", "parelketting", "Stadsplattegrond · zaak 007"], ["s", "Op de markt", ["day", ["kraam", 150, 175, 1.1]], "Het is druk op de markt. Mevrouw Geesje Lammertsma koopt appels."], ["s", "Een duw", ["day", ["bike", 150, 172, 1.2]], "Iemand duwt haar omver en rukt haar parelketting af. Een man in een felblauwe jas fietst weg."], ["e", "Waar gingen de parels heen?", "Naar de plattegrond"]];
 SCREND.stad.bank = [["t", "Zo is het gebeurd", "gebeurd", "Overval op de bank"], ["s", "De zij-ingang", ["day", ["door", 150, 165, 1.1]], "Kick Vermolen wachtte tot de bewaker de deur opendeed, en sloeg hem neer met een zaklamp.", { hit: "metaal", act: "strike", x: 130 }], ["s", "In het park", ["day", ["sporttas", 150, 175, 1.2]], "Achter een boom trok hij een bruine jas aan. Maar zijn rode broek hield hij aan."], ["s", "De haven", ["water", ["boat", 150, 150, 1.1]], "De tas met geld gooide hij in een roeibootje. Daar vond de politie hem terug."], ["x", "Kick Vermolen", "de zaklamp", "de bank"]];
 SCREND.stad.ketting = [["t", "Zo is het gebeurd", "gebeurd", "De parelketting"], ["s", "Op de markt", ["day", ["kraam", 150, 175, 1.1]], "Xander Blankevoort duwde mevrouw Lammertsma omver en rukte haar ketting af."], ["s", "Bij het station", ["day", ["money", 150, 175, 1.4]], "Bij het station verkocht hij de parels aan een heler, voor een stapel geld."], ["s", "De gracht", ["water", ["boat", 150, 150, 1]], "Het lege doosje gooide hij in de gracht. Maar zijn felblauwe jas had iedereen gezien."], ["x", "Xander Blankevoort", "een harde duw", "de markt"]];
+Object.assign(SCR.speur, {
+  kaasmarkt: [
+    ["t", "Met twee maten", "maten", "Een zaak voor Inspecteur Snoek"],
+    ["s", "Bommeldam · vrijdag", SIMG.kaasmarkt.cover, "Elke vrijdag liggen de gele kazen in lange rijen op het Waagplein. In de Waag wordt alles gewogen."],
+    ["s", "Een kaart met getallen", SIMG.kaasmarkt.ch[0], "Op donderdagavond krijgt Inspecteur Snoek een kaart van waagmeester Ambrosius. Er staan bijna alleen getallen op."],
+    ["p", "In de Waag", SIMG.kaasmarkt.ch[7], "De waagmeester", "Naast de grote weegschaal ligt Ambrosius Clabbers. Naast hem een zwaar ijzeren weegloodje."],
+    ["e", "Wie meet hier met twee maten?", "Begin met hoofdstuk 1"]
+  ],
+  zweefvlieg: [
+    ["t", "Buitenlanding", "Buitenlanding", "Een zaak voor Inspecteur Snoek"],
+    ["s", "Zweefvliegveld Bremhorst", SIMG.zweefvlieg.cover, "Op zomeravonden zweven er witte vliegtuigjes zonder motor boven de heide. Snoek heeft net zijn eerste proefvlucht gemaakt."],
+    ["s", "In de startwagen", SIMG.zweefvlieg.ch[0], "Dan kraakt de radio. Het is de voorzitter. Zijn stem valt steeds weg."],
+    ["p", "De uitkijktoren", SIMG.zweefvlieg.ch[8], "De voorzitter", "Onder aan de oude uitkijktoren ligt voorzitter Claes Ceelen. Het hek boven is hoog."],
+    ["e", "Wie wilde niet dat het record werd afgekeurd?", "Begin met hoofdstuk 1"]
+  ]
+});
+Object.assign(SCREND.speur, {
+  kaasmarkt: [
+    ["t", "Zo is het gebeurd", "gebeurd", "Met twee maten"],
+    ["s", "In maart", SIMG.kaasmarkt.ch[5], "Crispijn Akkerdaas gaf de Waag een nieuw loodje van tien kilo. Het woog er elf. Zo kreeg hij elke vrijdag € 600 aan kaas gratis."],
+    ["s", "07:00 · de zijdeur", SIMG.kaasmarkt.ch[6], "Hij kwam met zijn bakfiets naar de zijdeur, om het loodje terug te pakken."],
+    ["s", "07:08 · in de Waag", ["wall", ["barrel", 235, 175, 0.8]], "Ambrosius betrapte hem bij kaas nummer 18. Crispijn sloeg hem met het loodje zelf.", { hit: "metaal", act: "strike", x: 130, why: [["v", "Crispijn! Wat doe je met mijn loodje?"], ["a", "Het is mijn loodje. Ik heb het je gegeven."], ["v", "Het weegt elf kilo. Ik heb het laten nawegen."], ["a", "Dan had je dat beter niet kunnen doen."]] }],
+    ["s", "07:40 · de lijst", SIMG.kaasmarkt.ch[2], "Daarna fietste hij weg. Om 07:40 kwam hij terug, tekende netjes en vond hem."],
+    ["x", "Crispijn Akkerdaas", "het ijzeren weegloodje", "de Waag"]
+  ],
+  zweefvlieg: [
+    ["t", "Zo is het gebeurd", "gebeurd", "Buitenlanding"],
+    ["s", "Vorige week zondag", SIMG.zweefvlieg.ch[4], "Achim Boschloo landde buiten bij Bosweide. Annefleur haalde hem op met de witte aanhanger."],
+    ["s", "Het record", SIMG.zweefvlieg.ch[3], "Thuis knoeide hij met zijn logger. Maar Claes las de kilometerteller en schreef: RECORD VALS."],
+    ["s", "19:46 · de uitkijktoren", ["dusk", ["tower", 150, 195, 1.1]], "Achim klom Claes achterna. Claes riep Snoek nog op met de radio. Toen kwam de duw.", { hit: "duw", act: "fall", top: [158, 40], bottom: [215, 194], s: 0.28, why: [["v", "Je bent buiten geland, Achim. Ik keur het af."], ["a", "Dat record is alles voor mij."], ["v", "Blijf staan! Ik roep de startwagen op."], ["a", "Niemand gaat het weten."]] }],
+    ["s", "De kantine", SIMG.zweefvlieg.ch[6], "Annefleur stond achter de bar en zweeg. Tot Snoek de aanhanger vond."],
+    ["x", "Achim Boschloo", "een duw", "de uitkijktoren"]
+  ]
+});
+Object.assign(SCR.koud, {
+  glasblazer: [
+    ["t", "Gloeiend ijzer", "ijzer", "Dossier 006 · Dalmerveen, 2011"],
+    ["s", "18 november 2011 · 07:32", CIMG.glasblazer.cover, "In de glasblazerij aan de Glasweg branden de ovens nog. Leerling Fedde Egberts duwt de deur open."],
+    ["p", "Het slachtoffer", CIMG.glasblazer.photos[0], "Everhard Dommering, 63", "De meester-glasblazer ligt tussen de scherven van zijn laatste schaal. Gevallen in de hitte, zei de politie."],
+    ["l", "Zes verhoren", [["Dieneke", "echtgenote"], ["Elske", "dochter"], ["Fedde", "leerling"], ["Godert", "galeriehouder"], ["Folmer", "buurman"], ["Dries", "oud-gezel"]], "Zes mensen. Iedereen zegt dat hij ver weg was."],
+    ["e", "Maar wie valt er tegen gloeiend ijzer?", "Open het dossier"]
+  ],
+  ijskelder: [
+    ["t", "Zes centimeter sneeuw", "sneeuw", "Dossier 007 · Dorrebeek, 2010"],
+    ["s", "10 januari 2010 · 08:12", CIMG.ijskelder.cover, "Op landgoed Ganzenwaard ligt verse sneeuw. De tuinman schuift de grendel van de oude ijskelder open.", { snow: true }],
+    ["p", "Het slachtoffer", CIMG.ijskelder.photos[0], "Gustaaf Gansevoort, 81", "De landheer ligt onder aan de trap. Hij ging gisteravond de port halen en kwam nooit terug."],
+    ["l", "Zes verhoren", [["Gerwin", "zoon"], ["Florentine", "dochter"], ["Ebbe", "kleinzoon"], ["Dorothea", "huishoudster"], ["Ernst", "tuinman"], ["Gerjan", "rentmeester"]], "Zes mensen aan één tafel. Daarna ging iedereen zijns weegs."],
+    ["e", "Wie schoof de grendel dicht?", "Open het dossier"]
+  ]
+});
+Object.assign(SCREND.koud, {
+  glasblazer: [
+    ["t", "Zo is het gebeurd", "gebeurd", "Dossier 006 · Gloeiend ijzer"],
+    ["s", "De veilingcatalogus", ["desk", ["books", 150, 170, 1.2], ["letter", 215, 182, 0.5]], "Everhard ontdekte glas met zijn naam erop dat hij nooit had gemaakt. Alles kwam via Galerie Eskes."],
+    ["s", "21:24", ["night", ["garage", 150, 172, 1.2], ["car", 95, 190, 0.6]], "In de pauze glipte Godert Eskes de schouwburg uit. Om 21:24 reed hij de parkeergarage uit, naar Dalmerveen."],
+    ["s", "22:11", ["dark", ["fireplace", 95, 172, 1], ["workbench", 210, 180, 0.6]], "Met een gloeiende pontilstaaf sloeg hij Everhard. De blauwe schaal viel in scherven.", { hit: "metaal", act: "strike", x: 175, why: [["v", "Nummer 1185, Godert? Dat heb ik nooit gemaakt!"], ["a", "Niemand ziet het verschil, Everhard."], ["v", "Morgen bel ik de veiling. En de politie."]] }],
+    ["s", "22:38", ["night", ["pills", 150, 175, 1.6]], "Hij stak de staaf in de oven om het bloed weg te branden en verbrandde zijn hand. Om 22:38 kocht hij brandwondengel, in Dalmerveen."],
+    ["x", "Godert Eskes", "de gloeiende pontilstaaf", "de glasblazerij"]
+  ],
+  ijskelder: [
+    ["t", "Zo is het gebeurd", "gebeurd", "Dossier 007 · Zes centimeter sneeuw"],
+    ["s", "Het Ganzenbos", ["desk", ["letter", 150, 175, 1.5]], "Rentmeester Gerjan Evenhuis verkocht 140 eiken voor € 86.000. In de boeken stond € 12.000."],
+    ["s", "20:15", ["ice", ["house", 150, 172, 1], ["car", 215, 190, 0.6]], "Om kwart over acht nam hij afscheid. Maar hij reed niet weg. Het begon te sneeuwen.", { snow: true }],
+    ["s", "20:42", ["dark", ["stairs", 150, 150, 1.1]], "Bij de ijskelder duwde hij Gustaaf van de trap en schoof de grendel dicht.", { hit: "duw", act: "fall", top: [210, 86], bottom: [85, 192], s: 0.4, why: [["v", "Maandag ga ik naar de accountant. Zonder jou."], ["a", "Gustaaf, laat het me uitleggen."], ["v", "€ 86.000, Gerjan. Mijn eiken."]] }],
+    ["s", "Na 21:30", ["ice", ["house", 90, 170, 0.9], ["tracks", 200, 190, 0.8]], "Hij scheurde de afspraak uit de agenda en reed pas weg toen het niet meer sneeuwde. Zijn parkeerplek bleef kaal."],
+    ["x", "Gerjan Evenhuis", "een duw en de grendel", "de ijskelder"]
+  ]
+});
+Object.assign(SCR.bericht, {
+  vlindertuin: [
+    ["t", "Dood in de vlinderkas", "vlinderkas", "Een telefoon vol geheimen"],
+    ["s", "Vlinderkas Tropenhof · woensdag 07:45", ["day", ["glasswall", 150, 165, 1]], "Vrijwilliger Harmke vindt eigenaar IJsbrand Hoogkamer in de vijver van de tropische kas."],
+    ["p", "Aan de rand van de vijver", ["day", ["palm", 95, 175, 1.2], ["phone", 205, 184, 1.1]], "Zijn telefoon", "Zijn telefoon ligt op de rand. De vijver is maar 50 centimeter diep."],
+    ["e", "Wie kwam er na sluitingstijd nog langs?", "Pak de telefoon"]
+  ],
+  poppenkast: [
+    ["t", "Aan een zijden draad", "draad", "Een telefoon vol geheimen"],
+    ["s", "De Zwevende Draad · zondag 09:40", ["day", ["cafe", 150, 172, 1, "THEATER"]], "Technicus Ilco vindt directeur Hermien Jonkhout op het toneel van haar marionettentheater."],
+    ["p", "Onder de speelbrug", ["dark", ["stairs", 160, 165, 1.2], ["marker", 70, 190, 1, 1]], "Vier meter hoog", "Ze viel van de smalle speelbrug. Maar de deuren zaten op slot."],
+    ["e", "Wie had er een sleutel?", "Pak de telefoon"]
+  ]
+});
+Object.assign(SCREND.bericht, {
+  vlindertuin: [
+    ["t", "Zo is het gebeurd", "gebeurd", "Dood in de vlinderkas"],
+    ["s", "De doos met het rode etiket", ["wall", ["chest", 150, 175, 1.7]], "Karsten Immink smokkelde beschermde vogelvlinders mee in zijn leveringen. IJsbrand vond de doos."],
+    ["s", "20:17 · de poort", ["dusk", ["car", 150, 178, 1.6]], "Karsten zei dat hij eraan kwam. De camera zag zijn witte bus met de blauwe vlinder."],
+    ["s", "20:40 · de vijver", ["water"], "Ze kregen ruzie. Karsten duwde IJsbrand de vijver in en hield hem onder water.", { hit: "duw", act: "drown", x: 150, y: 142, s: 0.42, why: [["v", "Zes beschermde vlinders, Karsten. Morgen bel ik de inspectie."], ["a", "Weet je wat die poppen opbrengen?"], ["v", "Dat kan me niks schelen."], ["a", "Mij wel."]] }],
+    ["s", "21:36", ["wall", ["sofa", 150, 170, 1]], "Thuis schreef hij dat zijn bus niet wilde starten. Maar de camera had hem al gezien."],
+    ["x", "Karsten Immink", "een duw in de vijver", "de vlinderkas"]
+  ],
+  poppenkast: [
+    ["t", "Zo is het gebeurd", "gebeurd", "Aan een zijden draad"],
+    ["s", "De Venetianen", ["dark", ["vitrine", 150, 168, 1.1]], "Ivar Ibelings verving drie oude marionetten door namaak. De echte liet hij veilen in München."],
+    ["s", "22:09 · de achterdeur", ["night", ["door", 150, 165, 1.1], ["key", 215, 140, 0.8]], "Hij zei dat hij in Antwerpen was. Maar met zijn eigen sleutel ging hij het theater in."],
+    ["s", "22:15 · de speelbrug", ["dark", ["stairs", 160, 150, 1.3]], "Boven op de speelbrug kregen ze ruzie. Eén harde duw.", { hit: "duw", act: "fall", top: [232, 76], bottom: [95, 192], s: 0.42, why: [["v", "De echte Venetianen worden geveild, Ivar!"], ["a", "Niemand ziet het verschil."], ["v", "Morgen om negen uur bel ik de politie."], ["a", "Daar komt niks van."]] }],
+    ["s", "22:26", ["night", ["door", 150, 165, 1.1]], "Hij deed de achterdeur van buitenaf op slot en zette een oude festivalfoto online."],
+    ["x", "Ivar Ibelings", "een harde duw", "de speelbrug"]
+  ]
+});
+Object.assign(SCR.dossier, {
+  kaarsenmakerij: [["t", "Het laatste lont", "lont", "Dossier 11 · Lemsterhout"], ["s", "Dinsdag · 08:05", ["wall", ["kookketel", 150, 168, 1.1], ["marker", 90, 184, 1, 1]], "Naast het wasbad ligt kaarsenmaker Meindert Oonk. Om hem heen: gestolde paarse was."], ["s", "Op de vloer", ["wall", ["candle", 150, 165, 1.2], ["marker", 205, 182, 1, 2]], "Een koperen gietvorm. Met bloed, en daaroverheen een laagje was."], ["l", "De verdachten", [["Marjolein", "dochter"], ["Niels", "gieter"], ["Onno", "wasleverancier"], ["Leontien", "leerling"]], "Allemaal hadden ze een reden."], ["e", "Uitgegleden? Of iets anders?", "Open de envelop"]],
+  reddingsboot: [["t", "Laag water bij Molenduin", "Molenduin", "Dossier 12 · Reddingsstation"], ["s", "Zondag · 07:10", ["water", ["boat", 150, 150, 1.2]], "Op de helling naar zee ligt schipper Mattijs Okkema. Verdronken."], ["s", "In het boothuis", ["dark", ["bath", 150, 170, 1], ["marker", 220, 184, 1, 1]], "De vloer bij de spoelbak is nat. Iemand heeft gedweild."], ["l", "De verdachten", [["Machteld", "penningmeester"], ["Lourens", "plaatsvervanger"], ["Obbe", "opstapper"], ["Nolda", "echtgenote"]], "Allemaal hadden ze een reden."], ["e", "Hoe komt er zoet water in zijn longen?", "Open de envelop"]]
+});
+Object.assign(SCREND.dossier, {
+  kaarsenmakerij: [["t", "Zo is het gebeurd", "gebeurd", "Het laatste lont"], ["s", "Nachtroos", ["desk", ["candle", 150, 165, 1.3], ["receipt", 225, 165, 1]], "Niels verkocht het geheime recept aan Noorderhaven. Meindert rook het meteen."], ["s", "19:57 · de gieterij", ["wall", ["kookketel", 225, 168, 0.9]], "Met de code van Leontien kwam hij binnen. Hij sloeg Meindert met een koperen gietvorm.", { hit: "metaal", act: "strike", x: 130, why: [["v", "Noorderhaven verkoopt onze Nachtroos, Niels."], ["a", "Iedereen kan zo’n geur namaken."], ["v", "Niemand. Morgen ga ik naar de politie."], ["a", "Dat ga je niet doen…"]] }], ["s", "20:04", ["night", ["door", 150, 172, 1]], "Hij doopte de vorm in de was. Maar zijn duim bleef erin staan."], ["x", "Niels Lindhout", "een koperen gietvorm", "de gieterij"]],
+  reddingsboot: [["t", "Zo is het gebeurd", "gebeurd", "Laag water bij Molenduin"], ["s", "€ 31.400", ["desk", ["laptop", 150, 170, 1.2]], "Machteld sluisde geld uit het bootfonds. Mattijs zag het in de afschriften."], ["s", "00:21 · het boothuis", ["dark", ["lantern", 262, 110, 0.7]], "Ze sloeg hem met de brandblusser en hield hem onder in de spoelbak.", { hit: "duw", act: "drown", x: 150, y: 142, s: 0.42, why: [["v", "Er ontbreekt € 31.400, Machteld."], ["a", "Dat is voor de motor. Echt."], ["v", "Er is geen monteur. Maandag weet het district het."], ["a", "Nee, Mattijs. Dat weet niemand."]] }], ["s", "01:12", ["night", ["tracks", 150, 160, 1], ["moon", 250, 38, 0.6]], "Met de trekker reed ze hem naar de helling. Het was bijna hoogwater."], ["x", "Machteld Leemreize", "een brandblusser en de spoelbak", "het boothuis"]]
+});
+Object.assign(SCR.databank, {
+  bowling: [
+    ["t", "De laatste worp", "worp", "Politiedatabase · zaak 012 · Rijswoud"],
+    ["s", "Zondag · 07:10", ["dark", ["kegels", 150, 172, 1.3]], "In Bowlingcentrum Pinhoeve staan de kegels nog klaar. Achter baan 12 ligt eigenaar Radboud Pasveer."],
+    ["s", "De vitrine in de hal", ["wall", ["vitrine", 150, 175, 1]], "Hij is geslagen met de zilveren clubtrofee. Die stond gisteravond nog achter glas."],
+    ["l", "In het systeem", [["Priscilla", "bedrijfsleider"], ["Quirijn", "monteur"], ["Suzanna", "mede-eigenaar"], ["Sientje", "schoonmaakster"]], "Namen, kentekens, telefoons, camera’s en een deur die alles onthoudt."],
+    ["e", "Je hebt toegang. Begin met zoeken.", "Naar de melding"]
+  ]
+});
+Object.assign(SCREND.databank, {
+  bowling: [
+    ["t", "Zo is het gebeurd", "gebeurd", "De laatste worp"],
+    ["s", "21:34", ["desk", ["phone", 150, 172, 1.3]], "Radboud sms’te Priscilla: € 38.600 competitiegeld is weg. Maandag gaat hij naar de politie."],
+    ["s", "23:39 · de achterdeur", ["night", ["door", 150, 165, 1.1]], "Ze reed weg, kwam zonder licht terug en opende de achterdeur met haar eigen sleuteltag."],
+    ["s", "De machinekamer", ["dark", ["kegels", 222, 172, 0.75]], "Met de zilveren trofee uit de vitrine sloeg ze Radboud neer.", { hit: "metaal", act: "strike", x: 120, why: [["v", "€ 38.600, Priscilla. Maandag weet de politie het."], ["a", "Ik betaal alles terug! Geef me één kans."], ["v", "Je hebt twee jaar lang gestolen. Geen kansen meer."], ["a", "Dan kies je zelf…"]] }],
+    ["s", "00:21 · Kegelweg", ["night", ["car", 150, 170, 1.1]], "De kentekencamera zag haar rode Kia weer naar huis rijden. En de deur onthield tag nr. 07."],
+    ["x", "Priscilla Ruijgrok", "de trofee", "de machinekamer"]
+  ]
+});
+SCR.stad.vlieger = [["t", "De gestolen vlieger", "vlieger", "Stadsplattegrond · zaak 008"], ["s", "Het vliegerfeest", ["day", ["trophy", 100, 172, 0.8], ["windmill", 222, 172, 0.75]], "Op de oostkade wint de elfjarige Wubbe Uiterwijk de eerste prijs met zijn zelfgemaakte rood-gele vlieger."], ["s", "Even niet opgelet", ["day", ["footprints", 150, 178, 1.2]], "Als Wubbe de beker ophaalt, knipt iemand de lijn door. Een vrouw in een felturquoise jas rent weg."], ["e", "Waar is de rood-gele vlieger?", "Naar de plattegrond"]];
+SCREND.stad.vlieger = [["t", "Zo is het gebeurd", "gebeurd", "De gestolen vlieger"], ["s", "Op de kade", ["day", ["trophy", 150, 172, 1]], "Yolande Zuidervaart werd tweede. Toen Wubbe de beker ging halen, knipte ze zijn lijn door."], ["s", "De oostelijke brug", ["day", ["railing", 150, 176, 0.9]], "Bij een lantaarnpaal verloor de staart een rood strikje. Op de brug gooide ze de rozet in de gracht."], ["s", "Naast de kerk", ["day", ["church", 120, 175, 0.9], ["pot", 250, 178, 1.3]], "Ze verfde de vlieger snel blauw. Maar het ontbrekende strikje verraadde haar."], ["x", "Yolande Zuidervaart", "een schaar", "de kade"]];
 function endOk(game2, id) {
   try {
     if (game2 === "koud") {
@@ -18766,7 +19621,7 @@ function start(data) {
 }
 ((_b = (_a = window.claude) == null ? void 0 : _a.hot) == null ? void 0 : _b.ready) ? window.claude.hot.ready(start) : start((_e = (_d = (_c = window.claude) == null ? void 0 : _c.hot) == null ? void 0 : _d.data) != null ? _e : {});
 </script>
-<script>const APPV = "20261115170507";
+<script>const APPV = "20261117041350";
 if ("serviceWorker" in navigator) {
   addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {
   }));

@@ -1,22 +1,30 @@
 {
- "reveal": "2026-11-23T19:00:00+01:00",
- "release": "2026-11-24T06:00:00+01:00",
- "planEnc": "Nj8QUkBfSEdUQxAfXDkeaxBdQkRVDx4CMEhpEkFCTFUTAQBuQT8QUldERFJZWRAfXzkeaxBSQkJCRFdBT0gAbR5tD0JBSEdBT0gAbW8=",
+ "reveal": "2026-11-30T19:00:00+01:00",
+ "release": "2026-12-01T06:00:00+01:00",
+ "planEnc": "Nj8QQ0JTWEMTAQFtQT8QUkBfSEdUQxEcXzkeaxBUSENYTltET0gAbR5tD1VQWVJSDApZEh4EcB1qD1dfHhdbVUAUAQBsAWgSHhBTVBAaHGxs",
  "lock": {
-  "q": "Ik ben een code van vier cijfers. Mijn eerste twee cijfers zijn het aantal uren in een etmaal, en mijn laatste twee cijfers zijn het aantal seconden in een minuut, min één.",
-  "hint": "Een etmaal duurt 24 uur, en een minuut heeft 60 seconden.",
-  "early": "QURQTEA="
+  "q": "Ik ben een code van vier cijfers: het aantal minuten in één etmaal, plus het aantal dagen in een week.",
+  "hint": "Een etmaal heeft 24 uur, en elk uur heeft 60 minuten.",
+  "early": "VVtHRFhRRg=="
  },
  "prev": {
-  "reveal": "2026-11-16T19:00:00+01:00",
-  "release": "2026-11-17T06:00:00+01:00",
+  "reveal": "2026-11-23T19:00:00+01:00",
+  "release": "2026-11-24T06:00:00+01:00",
   "plan": [
    [
-    "bericht",
-    2
+    "brieven",
+    1
    ],
    [
     "koud",
+    1
+   ],
+   [
+    "stad",
+    2
+   ],
+   [
+    "bericht",
     2
    ],
    [
@@ -26,14 +34,6 @@
    [
     "speur",
     2
-   ],
-   [
-    "stad",
-    1
-   ],
-   [
-    "databank",
-    1
    ]
   ]
  }

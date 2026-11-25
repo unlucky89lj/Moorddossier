@@ -1210,6 +1210,12 @@ body.kiosk-join .tv-jform .btn.primary{font-size:22px;padding:16px}
 .fa-portrait{display:inline-block;background:#d9cba6;border:8px solid #f0e6cc;box-shadow:0 4px 12px #0006;margin:10px 0;animation:faIn 1s ease-out}.fa-open h4{font:700 26px Georgia,serif;margin:4px 0}.fa-years{text-align:center!important;color:#7a6650}
 @keyframes faIn{from{opacity:0;transform:scale(.9) rotate(-3deg)}}@media (prefers-reduced-motion:reduce){.fa-portrait{animation:none}}
 .fa-album{background:var(--paper);color:#2a2118;border-radius:6px;padding:14px}.fa-album h4{font:700 22px Georgia,serif;margin:0 0 10px}.fa-alg{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));grid-gap:10px;gap:10px}.fa-alg figure{margin:0;text-align:center;background:#ece0c2;padding:6px;border-radius:4px}.fa-alg figcaption{font-size:12.5px}
+
+/* filmstijl tekenfilm (v110) */
+.fm-flat .flm-vig{display:none}
+.fm-flat .flm-cap{font:900 30px/1.22 'Arial Rounded MT Bold','Nunito','Varela Round',system-ui,sans-serif;color:#fff;-webkit-text-stroke:6px #111;paint-order:stroke fill;text-align:center;text-shadow:0 3px 0 #111;letter-spacing:.005em}
+.fm-flat .flm-chap{color:#ffb44a}
+.flm-sty{font-size:14px!important;font-weight:800!important}
 </style>
 </head>
 <body>
@@ -1930,7 +1936,7 @@ function drawScene(spec) {
     }
   }
   const [bg, ...items] = spec, one = ([n, x, y, s, a, b]) => '<g transform="translate('.concat(x, " ").concat(y, ") scale(").concat(s || 1, ')">').concat(PP[n] ? PP[n](a, b) : "", "</g>"), ppl = items.filter((i) => i[0] === "person"), obj = items.filter((i) => i[0] !== "person");
-  return (FILM && FBG[bg] || PBG[bg] || PBG.wall)() + (obj.length ? FILM ? '<g filter="url(#pp3d)">'.concat(obj.map(one).join(""), "</g>") : obj.map(one).join("") : "") + ppl.map(one).join("");
+  return (FILM && FMFLAT && FBGF[bg] || FILM && FBG[bg] || PBG[bg] || PBG.wall)() + (obj.length ? FILM ? FMFLAT ? '<g stroke="#1b1612" stroke-width="1.7" stroke-linejoin="round" paint-order="stroke">'.concat(obj.map(one).join(""), "</g>") : '<g filter="url(#pp3d)">'.concat(obj.map(one).join(""), "</g>") : obj.map(one).join("") : "") + ppl.map(one).join("");
 }
 function polaroid(spec, label, cls = "") {
   if (!spec) return "";
@@ -7452,6 +7458,80 @@ function renderDossier() {
     renderDossier();
   });
 }
+var FMSTY = (() => {
+  try {
+    const v = store.get("md-filmstijl");
+    return v === "3d" || v === "flat" || v === "portret" ? v : "portret";
+  } catch (e) {
+    return "portret";
+  }
+})(), FMFLAT = FMSTY === "flat";
+const FMSTYN = { portret: "Portret", "3d": "3D", flat: "Teken" };
+const FMTFC = {};
+function fmTFlook(L) {
+  L = lookOf(L);
+  let h = 0;
+  for (const c of JSON.stringify([L.skin, L.hc, L.top])) h = h * 31 + c.charCodeAt(0) >>> 0;
+  return { f: L.f ? 1 : 0, skin: L.skin, hc: L.hc, hair: L.hair === "bald" ? "receding" : L.hair || "short", eyes: L.eyes || "#4a3a2a", top: L.f ? "blouse" : "shirt", tc: L.top, age: L.age || 32 + h % 28, beard: L.beard ? "full" : void 0, glasses: L.glasses ? "#222" : void 0, alt: "", bg: "transparent", brA: L.mood === "angry" ? -16 : L.mood === "nervous" || L.mood === "broken" ? 15 : void 0, smirk: L.mood === "smug" ? 7 : L.mood === "broken" ? -6 : void 0 };
+}
+const FMTFH = {};
+function fmTFhead(L, hat) {
+  const lk = lookOf(L), key = JSON.stringify([lk.skin, lk.hc, lk.top, lk.hair, lk.f, lk.beard, lk.glasses, lk.age]);
+  let t = FMTFH[key];
+  if (!t) {
+    t = TF(fmTFlook(lk)).replace(/<(ellipse|rect|path|circle)\b[^<>]*filter="url\(#[^"]+\)"[^<>]*\/>/g, "").replace(/<svg viewBox="[^"]+" class="rf tf"[^>]*>/, '<svg x="-20.9" y="-138.7" width="41.8" height="45.6" viewBox="40 30 220 240" overflow="hidden">');
+    let h = 0;
+    for (const c of key) h = h * 31 + c.charCodeAt(0) >>> 0;
+    const id = "fmh" + h.toString(36);
+    t = '<clipPath id="'.concat(id, '"><ellipse cx="0" cy="-114.4" rx="20.4" ry="23"/></clipPath><g clip-path="url(#').concat(id, ')">').concat(t, "</g>");
+    FMTFH[key] = t;
+  }
+  return t + (hat ? '<g transform="translate(0 -116) scale(1.18)">'.concat(hat, "</g>") : "");
+}
+function fmTFhead2(L, hat, k, bl) {
+  const lk = lookOf(L), key = JSON.stringify([lk.skin, lk.hc, lk.top, lk.hair, lk.f, lk.beard, lk.glasses, lk.age, lk.mood || "", k]);
+  let t = FMTFH[key];
+  if (!t) {
+    const x0 = -(150 - 40) * k, y0 = -106 - (253 - 30) * k, cy2 = y0 + (158 - 30) * k;
+    t = TF(fmTFlook(lk)).replace(/<(ellipse|rect|path|circle)\b[^<>]*filter="url\(#[^"]+\)"[^<>]*\/>/g, "").replace(/<svg viewBox="[^"]+" class="rf tf"[^>]*>/, '<svg x="'.concat(x0.toFixed(2), '" y="').concat(y0.toFixed(2), '" width="').concat((220 * k).toFixed(2), '" height="').concat((240 * k).toFixed(2), '" viewBox="40 30 220 240" overflow="hidden">'));
+    let h = 0;
+    for (const c of key) h = h * 31 + c.charCodeAt(0) >>> 0;
+    const id = "fmh" + h.toString(36);
+    t = '<clipPath id="'.concat(id, '"><ellipse cx="0" cy="').concat(cy2.toFixed(2), '" rx="').concat((106 * k).toFixed(2), '" ry="').concat((122 * k).toFixed(2), '"/></clipPath><g clip-path="url(#').concat(id, ')">').concat(t, "</g>");
+    t += "|".concat(cy2.toFixed(2));
+    FMTFH[key] = t;
+  }
+  let [svg, cy] = t.split("|");
+  if (bl) svg = svg.replace('<g class="tf-eyes" style="', '<g class="tf-eyes" style="transform:scaleY(.12);');
+  return svg + (hat ? '<g transform="translate(0 '.concat((+cy - 4).toFixed(2), ") scale(").concat((k / 0.2).toFixed(3), ')">').concat(hat, "</g>") : "");
+}
+function fmTFsvg(L, x, y, w, open) {
+  const k = JSON.stringify(lookOf(L)).slice(0, 300) + w;
+  let t = FMTFC[k];
+  if (!t) {
+    t = TF(fmTFlook(L));
+    FMTFC[k] = t;
+  }
+  return t.replace(/<svg viewBox="([^"]+)" class="rf tf"[^>]*>/, (m, vb) => '<svg x="'.concat(x, '" y="').concat(y, '" width="').concat(w, '" height="').concat((w * 1.2).toFixed(1), '" viewBox="').concat(vb, '" preserveAspectRatio="xMidYMin slice">')).replace('class="tf-open"', 'class="tf-open" style="opacity:'.concat(open || 0, '"'));
+}
+const FBGF = /* @__PURE__ */ (() => {
+  const K = 'stroke="#1b1612" stroke-width="1.6" stroke-linejoin="round"';
+  const room = (w, w2, f, f2, extra = "") => '<rect width="300" height="200" fill="'.concat(w, '"/>').concat([40, 110, 190, 260].map((x) => '<rect x="'.concat(x, '" y="22" width="40" height="70" rx="2" fill="').concat(w2, '" opacity=".55"/>')).join(""), '<rect y="150" width="300" height="50" fill="').concat(f, '"/>').concat([0, 1, 2, 3, 4, 5, 6].map((i) => '<path d="M'.concat(-20 + i * 52, " 200L").concat(20 + i * 44, ' 150" stroke="').concat(f2, '" stroke-width="1.2"/>')).join(""), '<rect y="144" width="300" height="7" fill="').concat(f2, '" ').concat(K, "/>").concat(extra);
+  const sky = (c, g, g2, extra = "") => '<rect width="300" height="200" fill="'.concat(c, '"/>').concat(extra, '<path d="M0 150Q75 140 150 148T300 146V200H0Z" fill="').concat(g, '" ').concat(K, '/><path d="M0 172Q90 164 180 170T300 168V200H0Z" fill="').concat(g2, '"/>');
+  const cloud = (x, y, k = 1) => '<g transform="translate('.concat(x, " ").concat(y, ") scale(").concat(k, ')"><path d="M-22 6Q-24 -6 -10 -6Q-6 -16 6 -12Q18 -16 20 -4Q30 -2 26 6Z" fill="#fff" ').concat(K, "/></g>");
+  return {
+    wall: () => room("#dfe8ef", "#c9d6e0", "#b6c4d0", "#93a3b2"),
+    desk: () => room("#efe6d4", "#e1d3b6", "#c9b38e", "#a88f68", '<rect x="196" y="28" width="78" height="58" rx="3" fill="#bfe3f4" '.concat(K, '/><path d="M235 28V86M196 57H274" stroke="#1b1612" stroke-width="1.4"/>')),
+    dark: () => room("#7d8ea3", "#6a7b90", "#56647a", "#3f4b5e"),
+    night: () => sky("#2a3a64", "#2c3a52", "#222d40", '<circle cx="238" cy="40" r="14" fill="#f7f0c8" '.concat(K, "/>").concat([[40, 30], [90, 52], [150, 22], [190, 60], [270, 80], [60, 80]].map(([x, y]) => '<circle cx="'.concat(x, '" cy="').concat(y, '" r="1.6" fill="#fff"/>')).join(""))),
+    dusk: () => sky("#f4b36a", "#5e4b6e", "#47395a", '<rect y="60" width="300" height="40" fill="#ec8a5e"/><rect y="100" width="300" height="50" fill="#d76f5e"/><circle cx="210" cy="118" r="20" fill="#ffd27a" '.concat(K, "/>")),
+    day: () => sky("#a8daf3", "#9cc96c", "#86b65a", '<circle cx="250" cy="36" r="15" fill="#ffd34d" '.concat(K, "/>").concat(cloud(70, 40)).concat(cloud(170, 28, 0.8))),
+    grass: () => sky("#bfe4f3", "#86c25e", "#72ad4e", "".concat(cloud(90, 36, 0.9), '<path d="M0 140Q40 120 80 138T160 134T240 130T300 136V150H0Z" fill="#5f9e45" ').concat(K, "/>")),
+    water: () => '<rect width="300" height="200" fill="#bfe4f3"/>'.concat(cloud(80, 40, 0.9), '<rect y="120" width="300" height="80" fill="#4d9fd6" ').concat(K, "/>").concat([0, 1, 2, 3, 4].map((i) => '<path d="M'.concat(10 + i * 60, " ").concat(140 + i % 2 * 18, 'q8 -4 16 0t16 0" stroke="#e8f6ff" stroke-width="1.6" fill="none"/>')).join("")),
+    ice: () => sky("#dcecf8", "#eef8ff", "#d6ecfa", "".concat(cloud(220, 40, 0.9), '<path d="M60 172l20 -8 14 10M180 180l16 -12 22 6" stroke="#8fb8d6" stroke-width="1.4" fill="none"/>')),
+    mud: () => sky("#cbd9c4", "#8a6a48", "#76593c", '<ellipse cx="90" cy="178" rx="30" ry="6" fill="#5e4a34"/><ellipse cx="220" cy="170" rx="22" ry="4" fill="#5e4a34"/>')
+  };
+})();
 const FM = {
   clamp: (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)),
   ease: (x) => x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2,
@@ -7466,7 +7546,7 @@ const FM = {
     const x = Math.sin(i * 127.1) * 43758.5453;
     return x - Math.floor(x);
   },
-  svg: (inner, vb = "0 0 300 200") => '<svg viewBox="'.concat(vb, '" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">').concat(FILM ? FDEFS : "").concat(inner).concat(FILM && vb === "0 0 300 200" ? '<rect width="300" height="200" fill="url(#fgGrade)"/><rect width="300" height="200" fill="url(#fgVig)"/>' : "", "</svg>"),
+  svg: (inner, vb = "0 0 300 200") => '<svg viewBox="'.concat(vb, '" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">').concat(FILM ? FDEFS : "").concat(inner).concat(FILM && !FMFLAT && vb === "0 0 300 200" ? '<rect width="300" height="200" fill="url(#fgGrade)"/><rect width="300" height="200" fill="url(#fgVig)"/>' : "", "</svg>"),
   G: (x, y, s, inner, extra = "") => '<g transform="translate('.concat(x, " ").concat(y, ") scale(").concat(s, ')" ').concat(extra, ">").concat(inner, "</g>"),
   rain(t, op = 0.35) {
     let h = "";
@@ -7584,7 +7664,7 @@ function tbHead(L) {
 function toonBody(L) {
   L = lookOf(L);
   tbEnsure();
-  const S = L.skin, H2 = L.hc, T = L.top, G = L.legs, O = "#1a1412", bl = (FILMT + L.ph) % 3.4 < 0.13, F = tbHead(L), Sd = tbSh(S, -0.32), Td = tbSh(T, -0.3);
+  const S = L.skin, H2 = L.hc, T = L.top, G = L.legs, O = "#1a1412", OL = FMFLAT ? ' stroke="#1b1612" stroke-width="2.1" stroke-linejoin="round"' : "", bl = (FILMT + L.ph) % 3.4 < 0.13, F = tbHead(L), Sd = tbSh(S, -0.32), Td = tbSh(T, -0.3);
   const arm = (sx) => {
     const c = sx > 0 ? Td : T, hp = sx > 0 ? L.hand : L.hand2;
     if (hp) {
@@ -7594,13 +7674,13 @@ function toonBody(L) {
       dx *= k;
       dy *= k;
       const hx = x0 + dx, hy = y0 + dy, bend = Math.max(0, 22 - dl / 2) * 0.9, ex = x0 + dx / 2 + -dy / dl * bend * sx, ey = y0 + dy / 2 + dx / dl * bend * sx + 4, pth = "M".concat(x0, " ").concat(y0, "Q").concat(ex.toFixed(1), " ").concat(ey.toFixed(1), " ").concat(hx.toFixed(1), " ").concat(hy.toFixed(1));
-      return '<path d="'.concat(pth, '" stroke="').concat(tbSh(c, -0.45), '" stroke-width="11" stroke-linecap="round" fill="none"/><path d="').concat(pth, '" stroke="').concat(c, '" stroke-width="8.6" stroke-linecap="round" fill="none"/><circle cx="').concat(hx.toFixed(1), '" cy="').concat(hy.toFixed(1), '" r="4.8" fill="').concat(sx > 0 ? tbSh(S, -0.12) : S, '"/><circle cx="').concat(hx.toFixed(1), '" cy="').concat(hy.toFixed(1), '" r="4.8" fill="url(#tbBall)"/>');
+      return '<path d="'.concat(pth, '" stroke="').concat(FMFLAT ? "#1b1612" : tbSh(c, -0.45), '" stroke-width="').concat(FMFLAT ? 11.6 : 11, '" stroke-linecap="round" fill="none"/><path d="').concat(pth, '" stroke="').concat(c, '" stroke-width="8.6" stroke-linecap="round" fill="none"/><circle cx="').concat(hx.toFixed(1), '" cy="').concat(hy.toFixed(1), '" r="4.8" fill="').concat(sx > 0 ? tbSh(S, -0.12) : S, '"/>').concat(FMFLAT ? "" : '<circle cx="'.concat(hx.toFixed(1), '" cy="').concat(hy.toFixed(1), '" r="4.8" fill="url(#tbBall)"/>'));
     }
-    return '<path d="M'.concat(22 * sx, " -94Q").concat(31 * sx, " -78 ").concat(29 * sx, ' -57" stroke="').concat(tbSh(c, -0.45), '" stroke-width="11" stroke-linecap="round" fill="none"/><path d="M').concat(22 * sx, " -94Q").concat(31 * sx, " -78 ").concat(29 * sx, ' -57" stroke="').concat(c, '" stroke-width="8.6" stroke-linecap="round" fill="none"/><path d="M').concat(21 * sx - 1.6 * sx, " -92Q").concat(29 * sx - 2 * sx, " -78 ").concat(27 * sx - 2 * sx, ' -60" stroke="#fff" stroke-opacity="').concat(sx < 0 ? 0.2 : 0.08, '" stroke-width="2.2" stroke-linecap="round" fill="none"/><circle cx="').concat(29 * sx, '" cy="-53" r="4.8" fill="').concat(sx > 0 ? tbSh(S, -0.12) : S, '"/><circle cx="').concat(29 * sx, '" cy="-53" r="4.8" fill="url(#tbBall)"/>');
+    return '<path d="M'.concat(22 * sx, " -94Q").concat(31 * sx, " -78 ").concat(29 * sx, ' -57" stroke="').concat(FMFLAT ? "#1b1612" : tbSh(c, -0.45), '" stroke-width="').concat(FMFLAT ? 11.6 : 11, '" stroke-linecap="round" fill="none"/><path d="M').concat(22 * sx, " -94Q").concat(31 * sx, " -78 ").concat(29 * sx, ' -57" stroke="').concat(c, '" stroke-width="8.6" stroke-linecap="round" fill="none"/><path d="M').concat(21 * sx - 1.6 * sx, " -92Q").concat(29 * sx - 2 * sx, " -78 ").concat(27 * sx - 2 * sx, ' -60" stroke="#fff" stroke-opacity="').concat(sx < 0 ? 0.2 : 0.08, '" stroke-width="2.2" stroke-linecap="round" fill="none"/><circle cx="').concat(29 * sx, '" cy="-53" r="4.8" fill="').concat(sx > 0 ? tbSh(S, -0.12) : S, '"/>').concat(FMFLAT ? "" : '<circle cx="'.concat(29 * sx, '" cy="-53" r="4.8" fill="url(#tbBall)"/>'));
   };
-  const legs = L.f ? '<rect x="-10" y="-16" width="5" height="13" fill="'.concat(S, '"/><rect x="5" y="-16" width="5" height="13" fill="').concat(Sd, '"/><path d="M-21 -54L-25 -14Q0 -9 25 -14L21 -54Z" fill="').concat(T, '"/><path d="M-21 -54L-25 -14Q0 -9 25 -14L21 -54Z" fill="url(#tbLeg)"/><path d="M-25 -14Q0 -9 25 -14" stroke="').concat(tbSh(T, -0.4), '" stroke-width="1.2" fill="none"/>') : '<path d="M-20 -54L-18 -5H-2L0 -38 2 -5H18L20 -54Z" fill="'.concat(G, '"/><path d="M-20 -54L-18 -5H-2L0 -38 2 -5H18L20 -54Z" fill="url(#tbLeg)"/><path d="M0 -38V-50" stroke="#000" stroke-opacity=".25" stroke-width="1"/>');
-  const shoe = (x) => '<ellipse cx="'.concat(x, '" cy="-3" rx="8.4" ry="3.9" fill="#1d1a18"/><ellipse cx="').concat(x - 2.4, '" cy="-4.6" rx="3.2" ry="1.1" fill="#fff" opacity=".28"/>');
-  const hairBlob = (d) => '<path d="'.concat(d, '" fill="').concat(H2, '"/><path d="').concat(d, '" fill="url(#tbHair)"/>');
+  const legs = L.f ? '<rect x="-10" y="-16" width="5" height="13" fill="'.concat(S, '"').concat(OL, '/><rect x="5" y="-16" width="5" height="13" fill="').concat(Sd, '"').concat(OL, '/><path d="M-21 -54L-25 -14Q0 -9 25 -14L21 -54Z" fill="').concat(T, '"').concat(OL, "/>").concat(FMFLAT ? "" : '<path d="M-21 -54L-25 -14Q0 -9 25 -14L21 -54Z" fill="url(#tbLeg)"/>', '<path d="M-25 -14Q0 -9 25 -14" stroke="').concat(tbSh(T, -0.4), '" stroke-width="1.2" fill="none"/>') : '<path d="M-20 -54L-18 -5H-2L0 -38 2 -5H18L20 -54Z" fill="'.concat(G, '"').concat(OL, "/>").concat(FMFLAT ? "" : '<path d="M-20 -54L-18 -5H-2L0 -38 2 -5H18L20 -54Z" fill="url(#tbLeg)"/>', '<path d="M0 -38V-50" stroke="#000" stroke-opacity=".25" stroke-width="1"/>');
+  const shoe = (x) => '<ellipse cx="'.concat(x, '" cy="-3" rx="8.4" ry="3.9" fill="#1d1a18"').concat(OL, '/><ellipse cx="').concat(x - 2.4, '" cy="-4.6" rx="3.2" ry="1.1" fill="#fff" opacity=".28"/>');
+  const hairBlob = (d) => '<path d="'.concat(d, '" fill="').concat(H2, '"').concat(OL, "/>").concat(FMFLAT ? "" : '<path d="'.concat(d, '" fill="url(#tbHair)"/>'));
   const back = L.hair === "long" ? hairBlob("M-15.5 -4Q-19 -24 0 -23Q19 -24 15.5 -4L17 16Q0 21 -17 16Z") : L.hair === "bob" ? hairBlob("M-15.5 -4Q-19 -24 0 -23Q19 -24 15.5 -4L16 8Q0 11 -16 8Z") : "";
   const tp = F.top;
   const front = {
@@ -7608,26 +7688,52 @@ function toonBody(L) {
     bald: hairBlob("M-13.6 3Q-15 -6 -11.4 -10L-10.6 3ZM13.6 3Q15 -6 11.4 -10L10.6 3Z") + '<ellipse cx="-4" cy="'.concat(tp + 4, '" rx="5" ry="2.2" fill="#fff" opacity=".35"/>'),
     curly: [-11, -5.5, 0, 5.5, 11, -13, 13].map((x, i) => {
       const cy = i > 4 ? -8 : tp + 1.4 + Math.abs(x) * 0.25, r = i > 4 ? 4.2 : 5.4;
-      return '<circle cx="'.concat(x, '" cy="').concat(cy, '" r="').concat(r, '" fill="').concat(H2, '"/><circle cx="').concat(x, '" cy="').concat(cy, '" r="').concat(r, '" fill="url(#tbBall)" opacity=".7"/>');
+      return '<circle cx="'.concat(x, '" cy="').concat(cy, '" r="').concat(r, '" fill="').concat(H2, '"').concat(OL, "/>").concat(FMFLAT ? "" : '<circle cx="'.concat(x, '" cy="').concat(cy, '" r="').concat(r, '" fill="url(#tbBall)" opacity=".7"/>'));
     }).join(""),
     long: hairBlob("M-13.6 -3Q-15 ".concat(tp - 2, " 0 ").concat(tp - 2.4, "Q15 ").concat(tp - 2, " 13.6 -3Q8 ").concat(tp + 5, " 0 ").concat(tp + 4, "Q-8 ").concat(tp + 5, " -13.6 -3Z")) + '<path d="M-6 '.concat(tp + 1, "Q0 ").concat(tp - 1.6, " 7 ").concat(tp + 0.6, '" stroke="#fff" stroke-opacity=".35" stroke-width="1.1" fill="none"/>'),
     bob: hairBlob("M-13.6 -3Q-15 ".concat(tp - 2, " 0 ").concat(tp - 2.4, "Q15 ").concat(tp - 2, " 13.6 -3Q6 ").concat(tp + 7, " -2 ").concat(tp + 6.4, "Q-9 ").concat(tp + 6.4, " -13.6 -3Z")),
-    bun: '<circle cy="'.concat(tp - 4, '" r="6.4" fill="').concat(H2, '"/><circle cy="').concat(tp - 4, '" r="6.4" fill="url(#tbBall)" opacity=".7"/>') + hairBlob("M-13.6 -2Q-15 ".concat(tp - 2, " 0 ").concat(tp - 2.4, "Q15 ").concat(tp - 2, " 13.6 -2Q9 ").concat(tp + 5, " 0 ").concat(tp + 4.6, "Q-9 ").concat(tp + 5, " -13.6 -2Z"))
+    bun: '<circle cy="'.concat(tp - 4, '" r="6.4" fill="').concat(H2, '"').concat(OL, "/>").concat(FMFLAT ? "" : '<circle cy="'.concat(tp - 4, '" r="6.4" fill="url(#tbBall)" opacity=".7"/>')) + hairBlob("M-13.6 -2Q-15 ".concat(tp - 2, " 0 ").concat(tp - 2.4, "Q15 ").concat(tp - 2, " 13.6 -2Q9 ").concat(tp + 5, " 0 ").concat(tp + 4.6, "Q-9 ").concat(tp + 5, " -13.6 -2Z"))
   }[L.hair] || "";
   const es = F.eyeS, EC = L.eyes || "#3a2a1c";
-  const eye = (x) => bl ? '<path d="M'.concat(x - 2.8, ' -2.2h5.6" stroke="').concat(O, '" stroke-width="1.1" stroke-linecap="round"/>') : '<ellipse cx="'.concat(x, '" cy="-1.6" rx="').concat(4.2 * es, '" ry="').concat(3.4 * es, '" fill="url(#tbSock)"/><path d="M').concat(x - 2.9 * es, " -2Q").concat(x, " ").concat(-2 - 3.2 * es, " ").concat(x + 2.9 * es, " -2Q").concat(x, " ").concat(-2 + 2.6 * es, " ").concat(x - 2.9 * es, ' -2Z" fill="#f8f3ea"/><circle cx="').concat(x + 0.3 + (L.lx || 0), '" cy="-1.8" r="').concat(1.55 * es, '" fill="').concat(EC, '"/><circle cx="').concat(x + 0.3 + (L.lx || 0), '" cy="-1.8" r="').concat(1.55 * es, '" fill="url(#tbIris)"/><circle cx="').concat(x + 0.3 + (L.lx || 0), '" cy="-1.8" r="').concat(0.72 * es, '" fill="#0e0a08"/><circle cx="').concat(x - 0.35 + (L.lx || 0), '" cy="-2.6" r=".5" fill="#fff"/><path d="M').concat(x - 3.1 * es, " -1.8Q").concat(x, " ").concat(-2 - 3.5 * es, " ").concat(x + 3.1 * es, ' -1.8" stroke="').concat(O, '" stroke-width="').concat(L.f ? 1.3 : 0.9, '" fill="none" stroke-linecap="round"/>');
+  const eye = (x) => bl ? '<path d="M'.concat(x - 2.8, ' -2.2h5.6" stroke="').concat(O, '" stroke-width="1.1" stroke-linecap="round"/>') : "".concat(FMFLAT ? "" : '<ellipse cx="'.concat(x, '" cy="-1.6" rx="').concat(4.2 * es, '" ry="').concat(3.4 * es, '" fill="url(#tbSock)"/>'), '<path d="M').concat(x - 2.9 * es, " -2Q").concat(x, " ").concat(-2 - 3.2 * es, " ").concat(x + 2.9 * es, " -2Q").concat(x, " ").concat(-2 + 2.6 * es, " ").concat(x - 2.9 * es, ' -2Z" fill="#f8f3ea"/><circle cx="').concat(x + 0.3 + (L.lx || 0), '" cy="-1.8" r="').concat(1.55 * es, '" fill="').concat(EC, '"/>').concat(FMFLAT ? "" : '<circle cx="'.concat(x + 0.3 + (L.lx || 0), '" cy="-1.8" r="').concat(1.55 * es, '" fill="url(#tbIris)"/>'), '<circle cx="').concat(x + 0.3 + (L.lx || 0), '" cy="-1.8" r="').concat(0.72 * es, '" fill="#0e0a08"/><circle cx="').concat(x - 0.35 + (L.lx || 0), '" cy="-2.6" r=".5" fill="#fff"/><path d="M').concat(x - 3.1 * es, " -1.8Q").concat(x, " ").concat(-2 - 3.5 * es, " ").concat(x + 3.1 * es, ' -1.8" stroke="').concat(O, '" stroke-width="').concat(L.f ? 1.3 : 0.9, '" fill="none" stroke-linecap="round"/>');
   const hat = {
-    top: '<rect x="-10" y="-40" width="20" height="21" fill="#151515"/><rect x="-10" y="-40" width="20" height="21" fill="url(#tbLeg)"/><rect x="-10" y="-24" width="20" height="3" fill="#7a2a22"/><rect x="-16.5" y="-20" width="33" height="3.6" rx="1.6" fill="#151515"/>',
-    cap: '<path d="M-14 -13Q-14 -24 0 -24Q14 -24 14 -13Z" fill="#f3f1ea"/><path d="M-14 -13Q-14 -24 0 -24Q14 -24 14 -13Z" fill="url(#tbHair)"/><rect x="-15" y="-14" width="30" height="4" fill="#1d2a44"/><path d="M-15 -10Q0 -6 17 -10" stroke="#111" stroke-width="2.4" fill="none"/><circle cy="-12" r="1.7" fill="#d9b45a"/>',
-    chef: '<path d="M-11.6 -15V-23Q-18 -27 -11.6 -33.5Q-6 -40 0 -34.6Q6 -40 11.6 -33.5Q18 -27 11.6 -23V-15Z" fill="#fbfaf6"/><path d="M-11.6 -15V-23Q-18 -27 -11.6 -33.5Q-6 -40 0 -34.6Q6 -40 11.6 -33.5Q18 -27 11.6 -23V-15Z" fill="url(#tbHair)" opacity=".5"/>',
-    police: '<path d="M-14 -12Q-14 -23 0 -23Q14 -23 14 -12Z" fill="#1d2a44"/><path d="M-14 -12Q-14 -23 0 -23Q14 -23 14 -12Z" fill="url(#tbHair)"/><path d="M-15 -11Q0 -7 16 -11" stroke="#111" stroke-width="2.4" fill="none"/><circle cy="-16" r="2.1" fill="#d9b45a"/>',
-    fedora: '<path d="M-11.6 -13Q-11.6 -26 0 -26Q11.6 -26 11.6 -13Z" fill="#3a3028"/><path d="M-11.6 -13Q-11.6 -26 0 -26Q11.6 -26 11.6 -13Z" fill="url(#tbHair)"/><path d="M-11.6 -15h23.2" stroke="#1d1712" stroke-width="2"/><path d="M-18 -12Q0 -15 18 -12" stroke="#3a3028" stroke-width="3.2" fill="none"/>'
+    top: '<rect x="-10" y="-40" width="20" height="21" fill="#151515"/>'.concat(FMFLAT ? "" : '<rect x="-10" y="-40" width="20" height="21" fill="url(#tbLeg)"/>', '<rect x="-10" y="-24" width="20" height="3" fill="#7a2a22"/><rect x="-16.5" y="-20" width="33" height="3.6" rx="1.6" fill="#151515"/>'),
+    cap: '<path d="M-14 -13Q-14 -24 0 -24Q14 -24 14 -13Z" fill="#f3f1ea"/>'.concat(FMFLAT ? "" : '<path d="M-14 -13Q-14 -24 0 -24Q14 -24 14 -13Z" fill="url(#tbHair)"/>', '<rect x="-15" y="-14" width="30" height="4" fill="#1d2a44"/><path d="M-15 -10Q0 -6 17 -10" stroke="#111" stroke-width="2.4" fill="none"/><circle cy="-12" r="1.7" fill="#d9b45a"/>'),
+    chef: '<path d="M-11.6 -15V-23Q-18 -27 -11.6 -33.5Q-6 -40 0 -34.6Q6 -40 11.6 -33.5Q18 -27 11.6 -23V-15Z" fill="#fbfaf6"/>'.concat(FMFLAT ? "" : '<path d="M-11.6 -15V-23Q-18 -27 -11.6 -33.5Q-6 -40 0 -34.6Q6 -40 11.6 -33.5Q18 -27 11.6 -23V-15Z" fill="url(#tbHair)" opacity=".5"/>'),
+    police: '<path d="M-14 -12Q-14 -23 0 -23Q14 -23 14 -12Z" fill="#1d2a44"/>'.concat(FMFLAT ? "" : '<path d="M-14 -12Q-14 -23 0 -23Q14 -23 14 -12Z" fill="url(#tbHair)"/>', '<path d="M-15 -11Q0 -7 16 -11" stroke="#111" stroke-width="2.4" fill="none"/><circle cy="-16" r="2.1" fill="#d9b45a"/>'),
+    fedora: '<path d="M-11.6 -13Q-11.6 -26 0 -26Q11.6 -26 11.6 -13Z" fill="#3a3028"/>'.concat(FMFLAT ? "" : '<path d="M-11.6 -13Q-11.6 -26 0 -26Q11.6 -26 11.6 -13Z" fill="url(#tbHair)"/>', '<path d="M-11.6 -15h23.2" stroke="#1d1712" stroke-width="2"/><path d="M-18 -12Q0 -15 18 -12" stroke="#3a3028" stroke-width="3.2" fill="none"/>')
   }[L.hat] || "";
   const nb = F.ny, br = F.br, my = F.my;
-  const nx = F.nose === 2 ? 0.6 : 0, noseSvg = '<ellipse cx="'.concat(nx + 0.6, '" cy="').concat(nb + br * 0.95, '" rx="').concat(br * 1.1, '" ry="').concat(br * 0.45, '" fill="#5a1e0c" opacity=".16"/><path d="M.2 -3.2Q').concat(br * 0.4, " ").concat(nb * 0.4, " ").concat(br * 0.62, " ").concat(nb - br * 0.55, '" stroke="#5a1e0c" stroke-opacity=".16" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M-.5 -2.6Q').concat(-br * 0.15, " ").concat(nb * 0.4, " ").concat(-br * 0.25, " ").concat(nb - br * 0.8, '" stroke="#fff" stroke-opacity=".22" stroke-width="1" fill="none" stroke-linecap="round"/><ellipse cx="').concat(nx - br * 0.82, '" cy="').concat(nb + br * 0.3, '" rx="').concat(br * 0.48, '" ry="').concat(br * 0.4, '" fill="').concat(S, '"/><ellipse cx="').concat(nx + br * 0.82, '" cy="').concat(nb + br * 0.3, '" rx="').concat(br * 0.48, '" ry="').concat(br * 0.4, '" fill="').concat(S, '"/><ellipse cx="').concat(nx + br * 0.82, '" cy="').concat(nb + br * 0.3, '" rx="').concat(br * 0.48, '" ry="').concat(br * 0.4, '" fill="#5a1e0c" opacity=".12"/><circle cx="').concat(nx, '" cy="').concat(nb, '" r="').concat(br, '" fill="').concat(S, '"/><circle cx="').concat(nx, '" cy="').concat(nb, '" r="').concat(br, '" fill="url(#tbNose)"/><path d="M').concat(nx - br * 0.7, " ").concat(nb + br * 0.66, "q").concat(br * 0.2, " ").concat(br * 0.14, " ").concat(br * 0.36, " 0M").concat(nx + br * 0.34, " ").concat(nb + br * 0.66, "q").concat(br * 0.2, " ").concat(br * 0.14, " ").concat(br * 0.36, ' 0" stroke="#3a1a12" stroke-width=".45" fill="none" opacity=".35" stroke-linecap="round"/>');
+  const nx = F.nose === 2 ? 0.6 : 0, noseSvg = '<ellipse cx="'.concat(nx + 0.6, '" cy="').concat(nb + br * 0.95, '" rx="').concat(br * 1.1, '" ry="').concat(br * 0.45, '" fill="#5a1e0c" opacity=".16"/><path d="M.2 -3.2Q').concat(br * 0.4, " ").concat(nb * 0.4, " ").concat(br * 0.62, " ").concat(nb - br * 0.55, '" stroke="#5a1e0c" stroke-opacity=".16" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M-.5 -2.6Q').concat(-br * 0.15, " ").concat(nb * 0.4, " ").concat(-br * 0.25, " ").concat(nb - br * 0.8, '" stroke="#fff" stroke-opacity=".22" stroke-width="1" fill="none" stroke-linecap="round"/><ellipse cx="').concat(nx - br * 0.82, '" cy="').concat(nb + br * 0.3, '" rx="').concat(br * 0.48, '" ry="').concat(br * 0.4, '" fill="').concat(S, '"/><ellipse cx="').concat(nx + br * 0.82, '" cy="').concat(nb + br * 0.3, '" rx="').concat(br * 0.48, '" ry="').concat(br * 0.4, '" fill="').concat(S, '"/><ellipse cx="').concat(nx + br * 0.82, '" cy="').concat(nb + br * 0.3, '" rx="').concat(br * 0.48, '" ry="').concat(br * 0.4, '" fill="#5a1e0c" opacity=".12"/><circle cx="').concat(nx, '" cy="').concat(nb, '" r="').concat(br, '" fill="').concat(S, '"/>').concat(FMFLAT ? "" : '<circle cx="'.concat(nx, '" cy="').concat(nb, '" r="').concat(br, '" fill="url(#tbNose)"/>'), '<path d="M').concat(nx - br * 0.7, " ").concat(nb + br * 0.66, "q").concat(br * 0.2, " ").concat(br * 0.14, " ").concat(br * 0.36, " 0M").concat(nx + br * 0.34, " ").concat(nb + br * 0.66, "q").concat(br * 0.2, " ").concat(br * 0.14, " ").concat(br * 0.36, ' 0" stroke="#3a1a12" stroke-width=".45" fill="none" opacity=".35" stroke-linecap="round"/>');
   const mouthD = L.mood === "angry" || L.mood === "broken" ? "M-3.8 ".concat(my + 1.4, "Q0 ").concat(my - 0.8, " 3.8 ").concat(my + 1.4) : L.mood === "nervous" ? "M-3.8 ".concat(my + 0.4, "l1.9 -.8 1.9 .8 1.9 -.8 1.9 .8") : L.mood === "smug" ? "M-3.8 ".concat(my + 0.2, "Q1 ").concat(my + 2.2, " 4.2 ").concat(my - 1) : "M-3.8 ".concat(my, "Q0 ").concat(my + 2.2, " 3.8 ").concat(my);
   const browD = L.mood === "angry" ? "M-7.6 -8.6L-2.2 -5.8M2.2 -5.8L7.6 -8.6" : L.mood === "nervous" || L.mood === "broken" ? "M-7.6 -5.8Q-4.8 -9 -2.2 -9.2M2.2 -9.2Q4.8 -9 7.6 -5.8" : L.mood === "smug" ? "M-7.6 -7Q-4.8 -8.8 -2.4 -7.2M2.4 -8.2Q4.8 -9.8 7.6 -8.2" : "M-7.6 -7Q-4.8 -8.8 -2.4 -7.2M2.4 -7.2Q4.8 -8.8 7.6 -7";
-  return '<ellipse cy="1" rx="24" ry="4.6" fill="url(#tbFloor)"/>'.concat(shoe(-8)).concat(shoe(8)).concat(legs, "\n   ").concat(arm(-1)).concat(arm(1), '<path d="M-22 -52L-25 -88Q-24 -99 -10 -100H10Q24 -99 25 -88L22 -52Z" fill="').concat(T, '"/><path d="M-22 -52L-25 -88Q-24 -99 -10 -100H10Q24 -99 25 -88L22 -52Z" fill="url(#tbCloth)"/>\n   <path d="M-8 -100L0 -87 8 -100Z" fill="').concat(L.collar ? "#1d1f22" : "#ece6da", '"/>').concat(L.collar ? '<rect x="-3" y="-100" width="6" height="4" fill="#fff"/>' : "").concat(!L.f ? '<path d="M-8 -100L-3 -78M8 -100L3 -78" stroke="#000" stroke-opacity=".32" stroke-width="1.5"/>' : "", "\n   ").concat(L.pearls ? [-6, -3, 0, 3, 6].map((x) => '<circle cx="'.concat(x, '" cy="').concat(-98 + Math.abs(x) * -0.3 + 3, '" r="1.4" fill="#f6f1e4"/><circle cx="').concat(x - 0.4, '" cy="').concat(-98.4 + Math.abs(x) * -0.3 + 3, '" r=".5" fill="#fff"/>')).join("") : "", '\n   <rect x="-4.5" y="-106" width="9" height="8" fill="').concat(Sd, '"/>\n   <g transform="translate(0 -114)">').concat(back, '<ellipse cx="').concat(-F.cw - 0.4, '" cy="1" rx="3.1" ry="4.4" fill="').concat(S, '"/><ellipse cx="').concat(F.cw + 0.4, '" cy="1" rx="3.1" ry="4.4" fill="').concat(Sd, '"/>\n    <path d="').concat(F.face, '" fill="').concat(S, '"/><path d="').concat(F.face, '" fill="url(#tbHead)"/>\n    <ellipse cx="-7" cy="').concat(nb + 1, '" rx="4" ry="2.6" fill="url(#tbBlush)"/><ellipse cx="7" cy="').concat(nb + 1, '" rx="4" ry="2.6" fill="url(#tbBlush)"/>\n    ').concat(L.beard ? '<path d="M'.concat(-F.cw + 0.6, " 2Q").concat(-F.jx, " ").concat(F.bt, " 0 ").concat(F.bt + 1.4, "Q").concat(F.jx, " ").concat(F.bt, " ").concat(F.cw - 0.6, " 2Q8 ").concat(my + 1.6, " 0 ").concat(my + 1.8, "Q-8 ").concat(my + 1.6, " ").concat(-F.cw + 0.6, ' 2Z" fill="').concat(H2, '" opacity=".9"/><path d="M-4.6 ').concat(my - 1.6, "Q0 ").concat(my - 3.6, " 4.6 ").concat(my - 1.6, "Q0 ").concat(my - 0.6, " -4.6 ").concat(my - 1.6, 'Z" fill="').concat(H2, '"/>') : "", "\n    ").concat(eye(-4.8)).concat(eye(4.8), '<path d="').concat(browD, '" stroke="').concat(L.hair === "bald" ? "#5a4636" : tbSh(H2, -0.15), '" stroke-width="').concat(L.f ? 1.3 : 2, '" fill="none" stroke-linecap="round"/>\n    ').concat(L.mood === "nervous" || L.mood === "broken" ? '<path d="M-10.6 -9q-1 2 0 3q1 -1 0 -3zM11 -3q-1 2 0 3q1 -1 0 -3z" fill="#9fd9ff" stroke="#5aa0d0" stroke-width=".4"/>' : "").concat(L.mood === "broken" ? '<path d="M-4.8 0q-.6 2.6 0 4M4.8 0q.6 2.6 0 4" stroke="#9fd9ff" stroke-width="1" fill="none"/>' : "").concat(L.mood === "angry" ? '<ellipse cx="-7.4" cy="'.concat(nb + 1, '" rx="3" ry="1.7" fill="#e05050" opacity=".35"/><ellipse cx="7.4" cy="').concat(nb + 1, '" rx="3" ry="1.7" fill="#e05050" opacity=".35"/>') : "", '\n    <path d="').concat(mouthD, '" stroke="').concat(L.f ? "#a43a3a" : "#6a2e26", '" stroke-width="').concat(L.f ? 1.7 : 1.3, '" fill="none" stroke-linecap="round"/>').concat(L.f ? '<path d="M-2 '.concat(my + 1.5, 'h3" stroke="#fff" stroke-opacity=".35" stroke-width=".6"/>') : "", "\n    ").concat(noseSvg, "\n    ").concat(front).concat(L.glasses && !L.mono ? '<g fill="none" stroke="#222" stroke-width="1.15"><rect x="-8.6" y="-5.2" width="7.6" height="6.2" rx="2.2"/><rect x="1" y="-5.2" width="7.6" height="6.2" rx="2.2"/><path d="M-1 -2.6h2"/></g><path d="M-7.4 -4l2.4 -.6M2.2 -4l2.4 -.6" stroke="#fff" stroke-width=".7" opacity=".55"/>' : "", "\n    ").concat(L.mono ? '<rect x="1" y="-5.2" width="7.6" height="6.2" rx="3.1" fill="#fff" fill-opacity=".08" stroke="#d9b45a" stroke-width="1.1"/><path d="M8.2 0Q10.2 8 7.2 14" stroke="#d9b45a" stroke-width=".5" fill="none"/>' : "").concat(hat, "</g>");
+  if (FMSTY === "portret" && FILM) {
+    const Gc = G || "#3a3a3c", Tl = tbSh(T, 0.12), floor = '<ellipse cy="1" rx="20" ry="3.6" fill="#000" opacity=".22"/>', shoeR = (x) => '<path d="M'.concat(x - 6.5, ' -7h9.5q5.5 .6 6.5 5.4V0h-17q-1-4.4 1-7z" fill="#221d1a"/><path d="M').concat(x - 4.5, ' -5.8h6.5" stroke="#fff" stroke-opacity=".22" stroke-width="1.1"/>'), legsR = L.f ? '<path d="M-9.5 -18L-8.6 -5H-3.6L-3.4 -18Z" fill="'.concat(S, '"/><path d="M3.4 -18L3.6 -5H8.6L9.5 -18Z" fill="').concat(Sd, '"/><path d="M-19 -56Q-23 -34 -24 -17Q0 -12 24 -17Q23 -34 19 -56Z" fill="').concat(T, '"/><path d="M-19 -56Q-23 -34 -24 -17Q0 -12 24 -17Q23 -34 19 -56Z" fill="url(#tbLeg)"/><path d="M-6 -50Q-7 -32 -9 -18M6 -50Q7 -32 9 -18" stroke="#000" stroke-opacity=".12" stroke-width="1"/>') : '<path d="M-16 -55Q-17 -30 -14.5 -6.5H-3.2Q-2.4 -30 -.6 -45Q1.8 -30 3.2 -6.5H14.5Q17 -30 16 -55Z" fill="'.concat(Gc, '"/><path d="M-16 -55Q-17 -30 -14.5 -6.5H-3.2Q-2.4 -30 -.6 -45Q1.8 -30 3.2 -6.5H14.5Q17 -30 16 -55Z" fill="url(#tbLeg)"/><path d="M-9 -50Q-9.4 -28 -8.8 -8M9 -50Q9.4 -28 8.8 -8" stroke="#000" stroke-opacity=".16" stroke-width=".8"/><path d="M-16 -55H16" stroke="#000" stroke-opacity=".35" stroke-width="2.4"/>'), torsoD = "M-19 -103Q-27.5 -101 -28 -89L-24.5 -55Q-21 -50.5 -12 -50.5H12Q21 -50.5 24.5 -55L28 -89Q27.5 -101 19 -103Q10 -106 0 -106Q-10 -106 -19 -103Z", torso = '<path d="'.concat(torsoD, '" fill="').concat(T, '"/><path d="').concat(torsoD, '" fill="url(#tbCloth)"/><path d="M-19 -100Q-24 -80 -21 -56" stroke="#000" stroke-opacity=".13" stroke-width="3" fill="none"/><path d="M15 -98Q19 -84 18 -60" stroke="#fff" stroke-opacity=".10" stroke-width="3" fill="none"/>') + (L.f ? '<path d="M-7 -105Q0 -92 7 -105" fill="'.concat(S, '"/><path d="M-7 -105Q0 -92 7 -105" fill="none" stroke="').concat(tbSh(T, -0.2), '" stroke-width="1.4"/>') : '<path d="M-7.5 -105L0 -90 7.5 -105Z" fill="'.concat(L.collar ? "#1d1f22" : "#ece6da", '"/><path d="M-7.5 -105L-2 -84M7.5 -105L2 -84" stroke="#000" stroke-opacity=".3" stroke-width="1.3" fill="none"/><path d="M0 -88V-56" stroke="#000" stroke-opacity=".14" stroke-width=".8"/>').concat([-80, -70, -60].map((y) => '<circle cy="'.concat(y, '" r=".9" fill="#000" opacity=".25"/>')).join(""))) + (L.pearls ? [-5, -2.5, 0, 2.5, 5].map((x) => '<circle cx="'.concat(x, '" cy="').concat(-101 + Math.abs(x) * 0.25, '" r="1.2" fill="#f6f1e4"/>')).join("") : ""), neck = '<path d="M-4.6 -110H4.6L4.2 -102Q0 -99.5 -4.2 -102Z" fill="'.concat(Sd, '"/>');
+    const armR = (sx) => {
+      const c = sx > 0 ? Td : T, hp = sx > 0 ? L.hand : L.hand2, ox = 24 * sx, oy = -97, R2 = 52;
+      let hx, hy, ex, ey;
+      if (hp) {
+        let dx = hp[0] - ox, dy = hp[1] - oy;
+        const dl = Math.hypot(dx, dy) || 1, kk = Math.min(1, R2 / dl);
+        dx *= kk;
+        dy *= kk;
+        hx = ox + dx;
+        hy = oy + dy;
+        const d = Math.hypot(dx, dy), b = Math.sqrt(Math.max(0, R2 * R2 / 4 - d * d / 4)), nx2 = -dy / (d || 1), ny = dx / (d || 1), sg = nx2 * sx + ny * 0.5 >= 0 ? 1 : -1;
+        ex = (ox + hx) / 2 + nx2 * b * sg;
+        ey = (oy + hy) / 2 + ny * b * sg;
+      } else {
+        hx = 29 * sx;
+        hy = -45;
+        ex = 30 * sx;
+        ey = -71;
+      }
+      const P = "M".concat(ox, " ").concat(oy, "Q").concat(ex.toFixed(1), " ").concat(ey.toFixed(1), " ").concat(hx.toFixed(1), " ").concat(hy.toFixed(1));
+      return '<path d="'.concat(P, '" stroke="').concat(tbSh(c, -0.3), '" stroke-width="10.6" stroke-linecap="round" fill="none"/><path d="').concat(P, '" stroke="').concat(c, '" stroke-width="8.8" stroke-linecap="round" fill="none"/><path d="').concat(P, '" stroke="#fff" stroke-opacity="').concat(sx < 0 ? 0.12 : 0.05, '" stroke-width="2" stroke-linecap="round" fill="none" transform="translate(').concat(-1.4 * sx, ' 0)"/><ellipse cx="').concat(hx.toFixed(1), '" cy="').concat((hy + 2).toFixed(1), '" rx="3.5" ry="4.3" fill="').concat(sx > 0 ? Sd : S, '"/><ellipse cx="').concat(hx.toFixed(1), '" cy="').concat((hy + 2).toFixed(1), '" rx="3.5" ry="4.3" fill="url(#tbBall)" opacity=".8"/>');
+    };
+    return floor + shoeR(-8) + shoeR(8) + legsR + torso + armR(-1) + armR(1) + neck + fmTFhead2(L, hat, 0.152, bl);
+  }
+  return "".concat(FMFLAT ? '<ellipse cy="1" rx="22" ry="3.6" fill="#000" opacity=".18"/>' : '<ellipse cy="1" rx="24" ry="4.6" fill="url(#tbFloor)"/>').concat(shoe(-8)).concat(shoe(8)).concat(legs, "\n   ").concat(arm(-1)).concat(arm(1), '<path d="M-22 -52L-25 -88Q-24 -99 -10 -100H10Q24 -99 25 -88L22 -52Z" fill="').concat(T, '"').concat(OL, "/>").concat(FMFLAT ? "" : '<path d="M-22 -52L-25 -88Q-24 -99 -10 -100H10Q24 -99 25 -88L22 -52Z" fill="url(#tbCloth)"/>', '\n   <path d="M-8 -100L0 -87 8 -100Z" fill="').concat(L.collar ? "#1d1f22" : "#ece6da", '"/>').concat(L.collar ? '<rect x="-3" y="-100" width="6" height="4" fill="#fff"/>' : "").concat(!L.f ? '<path d="M-8 -100L-3 -78M8 -100L3 -78" stroke="#000" stroke-opacity=".32" stroke-width="1.5"/>' : "", "\n   ").concat(L.pearls ? [-6, -3, 0, 3, 6].map((x) => '<circle cx="'.concat(x, '" cy="').concat(-98 + Math.abs(x) * -0.3 + 3, '" r="1.4" fill="#f6f1e4"/><circle cx="').concat(x - 0.4, '" cy="').concat(-98.4 + Math.abs(x) * -0.3 + 3, '" r=".5" fill="#fff"/>')).join("") : "", '\n   <rect x="-4.5" y="-106" width="9" height="8" fill="').concat(Sd, '"').concat(OL, "/>\n   ").concat(FMSTY === "portret" && FILM ? fmTFhead(L, hat) : '<g transform="translate(0 -114)">'.concat(back, '<ellipse cx="').concat(-F.cw - 0.4, '" cy="1" rx="3.1" ry="4.4" fill="').concat(S, '"').concat(OL, '/><ellipse cx="').concat(F.cw + 0.4, '" cy="1" rx="3.1" ry="4.4" fill="').concat(Sd, '"').concat(OL, '/>\n    <path d="').concat(F.face, '" fill="').concat(S, '"').concat(OL, "/>").concat(FMFLAT ? "" : '<path d="'.concat(F.face, '" fill="url(#tbHead)"/>'), '\n    <ellipse cx="-7" cy="').concat(nb + 1, '" rx="4" ry="2.6" fill="url(#tbBlush)"/><ellipse cx="7" cy="').concat(nb + 1, '" rx="4" ry="2.6" fill="url(#tbBlush)"/>\n    ').concat(L.beard ? '<path d="M'.concat(-F.cw + 0.6, " 2Q").concat(-F.jx, " ").concat(F.bt, " 0 ").concat(F.bt + 1.4, "Q").concat(F.jx, " ").concat(F.bt, " ").concat(F.cw - 0.6, " 2Q8 ").concat(my + 1.6, " 0 ").concat(my + 1.8, "Q-8 ").concat(my + 1.6, " ").concat(-F.cw + 0.6, ' 2Z" fill="').concat(H2, '" opacity=".9"/><path d="M-4.6 ').concat(my - 1.6, "Q0 ").concat(my - 3.6, " 4.6 ").concat(my - 1.6, "Q0 ").concat(my - 0.6, " -4.6 ").concat(my - 1.6, 'Z" fill="').concat(H2, '"/>') : "", "\n    ").concat(eye(-4.8)).concat(eye(4.8), '<path d="').concat(browD, '" stroke="').concat(L.hair === "bald" ? "#5a4636" : tbSh(H2, -0.15), '" stroke-width="').concat(L.f ? 1.3 : 2, '" fill="none" stroke-linecap="round"/>\n    ').concat(L.mood === "nervous" || L.mood === "broken" ? '<path d="M-10.6 -9q-1 2 0 3q1 -1 0 -3zM11 -3q-1 2 0 3q1 -1 0 -3z" fill="#9fd9ff" stroke="#5aa0d0" stroke-width=".4"/>' : "").concat(L.mood === "broken" ? '<path d="M-4.8 0q-.6 2.6 0 4M4.8 0q.6 2.6 0 4" stroke="#9fd9ff" stroke-width="1" fill="none"/>' : "").concat(L.mood === "angry" ? '<ellipse cx="-7.4" cy="'.concat(nb + 1, '" rx="3" ry="1.7" fill="#e05050" opacity=".35"/><ellipse cx="7.4" cy="').concat(nb + 1, '" rx="3" ry="1.7" fill="#e05050" opacity=".35"/>') : "", '\n    <path d="').concat(mouthD, '" stroke="').concat(L.f ? "#a43a3a" : "#6a2e26", '" stroke-width="').concat(L.f ? 1.7 : 1.3, '" fill="none" stroke-linecap="round"/>').concat(L.f ? '<path d="M-2 '.concat(my + 1.5, 'h3" stroke="#fff" stroke-opacity=".35" stroke-width=".6"/>') : "", "\n    ").concat(noseSvg, "\n    ").concat(front).concat(L.glasses && !L.mono ? '<g fill="none" stroke="#222" stroke-width="1.15"><rect x="-8.6" y="-5.2" width="7.6" height="6.2" rx="2.2"/><rect x="1" y="-5.2" width="7.6" height="6.2" rx="2.2"/><path d="M-1 -2.6h2"/></g><path d="M-7.4 -4l2.4 -.6M2.2 -4l2.4 -.6" stroke="#fff" stroke-width=".7" opacity=".55"/>' : "", "\n    ").concat(L.mono ? '<rect x="1" y="-5.2" width="7.6" height="6.2" rx="3.1" fill="#fff" fill-opacity=".08" stroke="#d9b45a" stroke-width="1.1"/><path d="M8.2 0Q10.2 8 7.2 14" stroke="#d9b45a" stroke-width=".5" fill="none"/>' : "").concat(hat, "</g>"));
 }
 function fmSil(lk) {
   return FILM ? toonBody(lk) : '<circle cy="-112" r="15" fill="#1d1e1d" stroke="#9a978f" stroke-width="2.5"/><path d="M-28 0V-70Q-28 -94 0 -94Q28 -94 28 -70V0Z" fill="#1d1e1d" stroke="#9a978f" stroke-width="2.5"/>';
@@ -7800,7 +7906,7 @@ function fmPlay(scenes, opts = {}) {
   ov.setAttribute("role", "dialog");
   ov.setAttribute("aria-modal", "true");
   ov.setAttribute("aria-label", opts.label || "Filmpje");
-  ov.innerHTML = '<div class="flm-v"><div class="flm-stage"></div><div class="flm-chap"></div><div class="flm-cap"></div><div class="flm-title"></div><div class="flm-extra"></div><div class="flm-vig"></div><div class="flm-flash"></div><div class="flm-red"></div><div class="flm-fade"></div></div>\n   <div class="flm-ui"><button type="button" class="flm-b" data-f="snd" aria-label="Geluid aan of uit">🔊</button><div class="flm-bar"><i></i></div><button type="button" class="flm-b" data-f="x" aria-label="Sluit het filmpje">✕</button></div>\n   <div class="flm-end"><button type="button" class="btn" data-f="again">↺ Nog een keer</button><button type="button" class="btn primary" data-f="go">'.concat(opts.end || "Verder", "</button></div>");
+  ov.innerHTML = '<div class="flm-v'.concat(FMFLAT ? " fm-flat" : "", '"><div class="flm-stage"></div><div class="flm-chap"></div><div class="flm-cap"></div><div class="flm-title"></div><div class="flm-extra"></div><div class="flm-vig"></div><div class="flm-flash"></div><div class="flm-red"></div><div class="flm-fade"></div></div>\n   <div class="flm-ui"><button type="button" class="flm-b" data-f="snd" aria-label="Geluid aan of uit">🔊</button><button type="button" class="flm-b flm-sty" data-f="sty" aria-label="Wissel tekenstijl">').concat(FMSTYN[FMSTY], '</button><div class="flm-bar"><i></i></div><button type="button" class="flm-b" data-f="x" aria-label="Sluit het filmpje">✕</button></div>\n   <div class="flm-end"><button type="button" class="btn" data-f="again">↺ Nog een keer</button><button type="button" class="btn primary" data-f="go">').concat(opts.end || "Verder", "</button></div>");
   document.body.appendChild(ov);
   document.body.style.overflow = "hidden";
   const V = ov.querySelector(".flm-v"), q = (c) => ov.querySelector(".flm-" + c), fit = () => {
@@ -7898,6 +8004,17 @@ function fmPlay(scenes, opts = {}) {
     opts.done && opts.done();
   };
   ov.querySelector('[data-f="again"]').onclick = restart;
+  ov.querySelector('[data-f="sty"]').onclick = (e) => {
+    e.stopPropagation();
+    FMSTY = FMSTY === "portret" ? "flat" : FMSTY === "flat" ? "3d" : "portret";
+    FMFLAT = FMSTY === "flat";
+    try {
+      store.set("md-filmstijl", FMSTY);
+    } catch (_) {
+    }
+    V.classList.toggle("fm-flat", FMFLAT);
+    e.currentTarget.textContent = FMSTYN[FMSTY];
+  };
   ov.querySelector('[data-f="snd"]').onclick = (e) => {
     e.stopPropagation();
     if (snd) {
@@ -8372,6 +8489,7 @@ function fmKeyOf(script) {
   return k || "";
 }
 function fmAtmos(u) {
+  if (FMFLAT) return "";
   let h = '<defs><linearGradient id="fmRay" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3d6" stop-opacity=".22"/><stop offset="1" stop-color="#fff3d6" stop-opacity="0"/></linearGradient></defs>';
   [[30, 0, 70], [95, 0, 46], [170, 0, 60]].forEach(([x, y, w], i) => {
     const o = 0.55 + 0.45 * Math.sin(u * 0.9 + i * 2);
@@ -8384,6 +8502,7 @@ function fmAtmos(u) {
   return h;
 }
 const fmDof = (Z, inner) => {
+  if (FMFLAT) return inner;
   const v = FM.clamp((Z - 1.45) * 1.6, 0, 2.2);
   return v < 0.15 ? inner : '<filter id="fmDof" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="'.concat(v.toFixed(2), '"/></filter><g filter="url(#fmDof)">').concat(inner, "</g>");
 };
@@ -8515,7 +8634,12 @@ function fmPre(sc, u, PL, WK) {
       }
     }
   }
-  const vm = fmMood(ACTVIC, u >= TL ? "nervous" : cur && cur[0] === "v" ? "angry" : ""), am = fmMood(ACTWHO, cur && cur[0] === "a" || u >= TL ? "angry" : "");
+  const vm = fmMood(ACTVIC, u >= TL ? "nervous" : cur && cur[0] === "v" ? "angry" : "");
+  let am = fmMood(ACTWHO, cur && cur[0] === "a" || u >= TL ? "angry" : "");
+  if (wp && WS && u > GRAB + 0.3) {
+    const r0 = WPK[WS][0];
+    am = Object.assign({}, am, { hand: [r0[1], r0[2]] });
+  }
   const world = fmDof(Z, drawScene(spec)) + (typeof TB !== "undefined" && TB ? (() => {
     const T2 = fmTub(fx, 0, { u, vlk: vm, calm: 1 });
     return T2.back + T2.vic + T2.water + T2.panel;
@@ -8536,8 +8660,26 @@ function fmPre(sc, u, PL, WK) {
     })(), H2 = 10 + lines.length * 10, X = FM.clamp(bx - w / 2, 6, 294 - w), Y = FM.clamp(by - H2, 18, 150), k = E(FM.seg(u, IN + li * per, IN + li * per + 0.18)), think = poison || L.every((l) => l[0] === "a");
     bub = '<g opacity="'.concat(k, '"><rect x="').concat(X, '" y="').concat(Y, '" width="').concat(w, '" height="').concat(H2, '" rx="').concat(think ? H2 / 2 : 6, '" fill="#fffdf6" stroke="#1d1a16" stroke-width="1"/>').concat(think ? '<circle cx="'.concat(FM.clamp(bx, X + 8, X + w - 8), '" cy="').concat(Y + H2 + 5, '" r="2.6" fill="#fffdf6" stroke="#1d1a16" stroke-width=".8"/><circle cx="').concat(FM.clamp(bx, X + 8, X + w - 8) + 3, '" cy="').concat(Y + H2 + 11, '" r="1.6" fill="#fffdf6" stroke="#1d1a16" stroke-width=".8"/>') : '<path d="M'.concat(FM.clamp(bx, X + 10, X + w - 10) - 5, " ").concat(Y + H2 - 0.5, 'l5 8 4-8z" fill="#fffdf6" stroke="#1d1a16" stroke-width="1"/><path d="M').concat(FM.clamp(bx, X + 10, X + w - 10) - 4.5, " ").concat(Y + H2 - 1, 'h8.5" stroke="#fffdf6" stroke-width="2"/>'), "\n   ").concat(lines.map((ln, i) => '<text x="'.concat(X + w / 2, '" y="').concat(Y + 13 + i * 10, '" text-anchor="middle" font-size="8" font-family="Arial" font-weight="700" fill="').concat(cur[0] === "a" ? "#9a1c12" : "#1d1a16", '">').concat(ln, "</text>")).join(""), "</g>");
   }
+  let PORT = null;
+  if (FMSTY === "portret" && cur && u >= IN && u < TL) {
+    const spk = cur[0], lk = spk === "a" ? am : vm, h = head(spk), oth = spk === "a" ? V ? V[0] : ax - 60 : ax, left = h[0] <= oth, bw = 128, bx2 = left ? 38 : 300 - 38 - bw, by2 = 200 - bw * 1.2 + 6 + Math.sin(u * 18) * 0.6, t = cur[1], k = E(FM.seg(u, IN + li * per, IN + li * per + 0.2));
+    const lines = (() => {
+      const out = [];
+      let c = "";
+      t.split(" ").forEach((w) => {
+        if ((c + " " + w).trim().length > 22 && c) {
+          out.push(c);
+          c = w;
+        } else c = (c + " " + w).trim();
+      });
+      if (c) out.push(c);
+      return out;
+    })(), BW = 118, BH = 12 + lines.length * 11, BX = left ? 176 : 300 - 176 - BW, BY = 34, think = poison || L.every((l) => l[0] === "a");
+    PORT = fmDof(3.2, drawScene(spec)) + '<rect width="300" height="200" fill="#000" opacity=".35"/><g opacity="'.concat(Math.min(1, k * 1.6), '">').concat(fmTFsvg(lk, bx2, by2, bw, u - IN - li * per < per - 0.15 ? Math.sin(u * 23) > 0 ? 1 : 0.35 : 0), '</g><g opacity="').concat(k, '"><rect x="').concat(BX, '" y="').concat(BY, '" width="').concat(BW, '" height="').concat(BH, '" rx="').concat(think ? BH / 2 : 7, '" fill="#fffdf6" stroke="#1d1a16" stroke-width="1.2"/>').concat(think ? '<circle cx="'.concat(left ? BX - 4 : BX + BW + 4, '" cy="').concat(BY + BH, '" r="3" fill="#fffdf6" stroke="#1d1a16" stroke-width=".8"/>') : '<path d="M'.concat(left ? BX + 1 : BX + BW - 1, " ").concat(BY + BH - 14, "l").concat(left ? -10 : 10, " 8 ").concat(left ? 10 : -10, ' 2z" fill="#fffdf6" stroke="#1d1a16" stroke-width="1"/>')).concat(lines.map((ln, i) => '<text x="'.concat(BX + BW / 2, '" y="').concat(BY + 15 + i * 11, '" text-anchor="middle" font-size="9" font-family="Arial" font-weight="700" fill="').concat(spk === "a" ? "#9a1c12" : "#1d1a16", '">').concat(ln, "</text>")).join(""), "</g>");
+  }
   const bars = '<rect width="300" height="15" fill="#000"/><rect y="185" width="300" height="15" fill="#000"/>';
   const rot = cur ? cur[0] === "a" ? -3.5 : 3 : 0, sh = cur && li === L.length - 1 ? Math.sin(u * 70) * 1.4 : 0;
+  if (PORT) return { chap, stage: FM.svg(PORT + fmAtmos(u) + bars), fade: u < 0.5 ? 1 - u / 0.5 : 0, cap: "" };
   return { chap, stage: FM.svg('<g transform="translate('.concat((150 + sh).toFixed(2), " ").concat((100 + sh * 0.6).toFixed(2), ") rotate(").concat(rot, ") scale(").concat(Z.toFixed(3), ") translate(").concat((-cx).toFixed(2), " ").concat((-cy).toFixed(2), ')">').concat(world, "</g>").concat(fmAtmos(u)).concat(bars).concat(bub)), fade: u < 0.5 ? 1 - u / 0.5 : 0, cap: "" };
 }
 function fmCine(sc, XW, XV, XR, WK) {
@@ -13504,10 +13646,10 @@ function fmArrest(o) {
   return { d: 9.5, sfx: [[3, "click"], [3.25, "click"], [5.6, "thud"]], f: (u) => {
     const ph = Math.floor(u * 2.6) % 2, walk = FM.ease(FM.seg(u, 0.8, 2.6)), cuff = FM.seg(u, 2.9, 3.2), ax = 560 - walk * 250, cx = 200;
     const glow = '<radialGradient id="arR" cx=".15" cy=".2" r=".7"><stop offset="0" stop-color="#ff2a2a" stop-opacity="'.concat(ph ? 0.55 : 0.12, '"/><stop offset="1" stop-color="#ff2a2a" stop-opacity="0"/></radialGradient><radialGradient id="arB" cx=".85" cy=".2" r=".7"><stop offset="0" stop-color="#2a6bff" stop-opacity="').concat(ph ? 0.12 : 0.6, '"/><stop offset="1" stop-color="#2a6bff" stop-opacity="0"/></radialGradient>');
-    const cuffs = cuff > 0 ? '<g transform="translate('.concat(cx, ' 700) scale(2.1)" opacity="').concat(cuff, '"><circle cx="-29" cy="-53" r="6.5" fill="none" stroke="#d8dde2" stroke-width="2.6"/><circle cx="29" cy="-53" r="6.5" fill="none" stroke="#d8dde2" stroke-width="2.6"/><path d="M-23 -53Q0 ').concat(-46 + cuff * 4, ' 23 -53" stroke="#aab2ba" stroke-width="1.6" fill="none" stroke-dasharray="2.4 1.2"/></g>') : "";
+    const hy0 = FMSTY === "portret" ? -50 : -55, hx0 = 7, cuffs = cuff > 0 ? '<g transform="translate('.concat(cx, ' 700) scale(2.1)" opacity="').concat(cuff, '"><circle cx="').concat(-hx0, '" cy="').concat(hy0, '" r="4.6" fill="none" stroke="#d8dde2" stroke-width="2.2"/><circle cx="').concat(hx0, '" cy="').concat(hy0, '" r="4.6" fill="none" stroke="#d8dde2" stroke-width="2.2"/><path d="M').concat(-hx0 + 4, " ").concat(hy0, "Q0 ").concat(hy0 + 3, " ").concat(hx0 - 4, " ").concat(hy0, '" stroke="#aab2ba" stroke-width="1.6" fill="none" stroke-dasharray="1.6 1"/></g>') : "", crim = u > 2.7 ? toonBody(Object.assign({}, lookOf(o.who || o.mono), { hand: [hx0, hy0], hand2: [-hx0, hy0], mood: "broken" })) : PP.person(o.who || o.mono);
     const flash = u > 2.9 && u < 3.3 ? '<rect width="540" height="960" fill="#fff" opacity="'.concat((1 - FM.seg(u, 2.9, 3.3)) * 0.5, '"/>') : "";
     const tiles = [["Wie", o.who], ["Waarmee", o.how], ["Waar", o.where]].filter((t) => t[1]);
-    const svg = '<svg class="flm-full" viewBox="0 0 540 960" aria-hidden="true"><defs>'.concat(glow, "</defs>").concat(FDEFS, '<rect width="540" height="960" fill="#0e1524"/><rect y="560" width="540" height="400" fill="#1a1d22"/><path d="M0 560h540" stroke="#2c323b" stroke-width="3"/>\n      ').concat([[60, 90], [170, 60], [300, 110], [420, 70], [480, 150]].map(([x, y]) => '<circle cx="'.concat(x, '" cy="').concat(y, '" r="1.4" fill="#fff" opacity=".6"/>')).join(""), '\n      <g transform="translate(400 560) scale(1.5)"><rect x="-70" y="-40" width="140" height="34" rx="10" fill="#e9edf2"/><path d="M-50 -40Q-40 -66 -10 -66H24Q44 -66 54 -40Z" fill="#e9edf2"/><path d="M-42 -42Q-34 -60 -10 -60H4V-42ZM10 -60H22Q38 -60 46 -42H10Z" fill="#2b3a50"/><rect x="-70" y="-26" width="140" height="8" fill="#2a5ad6"/><rect x="-20" y="-74" width="20" height="8" rx="3" fill="').concat(ph ? "#ff3030" : "#5a1010", '"/><rect x="0" y="-74" width="20" height="8" rx="3" fill="').concat(ph ? "#10205a" : "#3060ff", '"/><text x="0" y="-12" font-size="9" font-family="Arial" font-weight="800" fill="#2a5ad6" text-anchor="middle">POLITIE</text><circle cx="-42" cy="-4" r="11" fill="#111"/><circle cx="44" cy="-4" r="11" fill="#111"/></g>\n      ').concat(FM.G(cx, 700, 2.1, PP.person(o.who || o.mono))).concat(FM.G(ax, 705, 2.05, PP.person("Agent Lars Koopmans"))).concat(cuffs).concat(ME ? FM.G(-60 + FM.ease(FM.seg(u, 3.6, 5)) * 118, 712, 1.85, toonBody(avLook(ME)), 'opacity="'.concat(FM.seg(u, 3.6, 4), '"')) : "", '\n      <rect width="540" height="960" fill="url(#arR)"/><rect width="540" height="960" fill="url(#arB)"/>').concat(flash, "</svg>");
+    const svg = '<svg class="flm-full" viewBox="0 0 540 960" aria-hidden="true"><defs>'.concat(glow, "</defs>").concat(FDEFS).concat(FMFLAT ? '<rect width="540" height="960" fill="#4a6fa8"/><rect y="200" width="540" height="360" fill="#7f9cc6"/>'.concat([30, 150, 270, 390].map((x) => '<rect x="'.concat(x, '" y="300" width="90" height="260" fill="#c9d6e6" stroke="#1b1612" stroke-width="3"/><rect x="').concat(x + 15, '" y="330" width="60" height="70" fill="#f3e3a6" stroke="#1b1612" stroke-width="2.5"/>')).join(""), '<rect y="560" width="540" height="400" fill="#a7b0ba"/><path d="M0 560h540" stroke="#1b1612" stroke-width="4"/>') : '<rect width="540" height="960" fill="#0e1524"/><rect y="560" width="540" height="400" fill="#1a1d22"/><path d="M0 560h540" stroke="#2c323b" stroke-width="3"/>', "\n      ").concat([[60, 90], [170, 60], [300, 110], [420, 70], [480, 150]].map(([x, y]) => '<circle cx="'.concat(x, '" cy="').concat(y, '" r="1.4" fill="#fff" opacity=".6"/>')).join(""), '\n      <g transform="translate(400 560) scale(1.5)"><rect x="-70" y="-40" width="140" height="34" rx="10" fill="#e9edf2"/><path d="M-50 -40Q-40 -66 -10 -66H24Q44 -66 54 -40Z" fill="#e9edf2"/><path d="M-42 -42Q-34 -60 -10 -60H4V-42ZM10 -60H22Q38 -60 46 -42H10Z" fill="#2b3a50"/><rect x="-70" y="-26" width="140" height="8" fill="#2a5ad6"/><rect x="-20" y="-74" width="20" height="8" rx="3" fill="').concat(ph ? "#ff3030" : "#5a1010", '"/><rect x="0" y="-74" width="20" height="8" rx="3" fill="').concat(ph ? "#10205a" : "#3060ff", '"/><text x="0" y="-12" font-size="9" font-family="Arial" font-weight="800" fill="#2a5ad6" text-anchor="middle">POLITIE</text><circle cx="-42" cy="-4" r="11" fill="#111"/><circle cx="44" cy="-4" r="11" fill="#111"/></g>\n      ').concat(FM.G(cx, 700, 2.1, crim)).concat(FM.G(ax, 705, 2.05, PP.person("Agent Lars Koopmans"))).concat(cuffs).concat(ME ? FM.G(-60 + FM.ease(FM.seg(u, 3.6, 5)) * 118, 712, 1.85, toonBody(avLook(ME)), 'opacity="'.concat(FM.seg(u, 3.6, 4), '"')) : "", '\n      <rect width="540" height="960" fill="url(#arR)"/><rect width="540" height="960" fill="url(#arB)"/>').concat(flash, "</svg>");
     return { fade: u < 0.4 ? 1 - u / 0.4 : 0, extra: svg + '<div class="flm-endk" style="opacity:'.concat(FM.seg(u, 1.2, 1.8), '">').concat(u < 3.3 ? "De dader" : "Gearresteerd", '</div><div class="flm-tiles" style="top:760px;opacity:').concat(FM.seg(u, 3.6, 4.3), '">').concat(tiles.map(([a, b]) => "<div><span>".concat(a, "</span><b>").concat(b, "</b></div>")).join(""), '</div>\n      <div class="flm-stamp" style="top:180px;border-color:#7fd1a8;color:#7fd1a8;opacity:').concat(FM.seg(u, 5.6, 5.9), ";transform:translateX(-50%) rotate(-8deg) scale(").concat(1.6 - 0.6 * FM.ease(FM.seg(u, 5.6, 6)), ')">Zaak gesloten</div>\n      <div class="flm-endk" style="top:300px;font-size:18px;opacity:').concat(FM.seg(u, 6.6, 7.2), '">Goed gedaan, rechercheur').concat(MN ? " " + MN : "", "</div>") };
   } };
 }
@@ -14008,7 +14150,7 @@ const TF = /* @__PURE__ */ (() => {
     const jw = (o.jaw || 0) * 1.6;
     const shape = Math.floor(R2(0) * 4);
     const nose = f ? [3, 2, 3, 0][Math.floor(R2(8) * 4)] : Math.floor(R2(8) * 4);
-    const eyeS = 0.9 + R2(16) * 0.35 - (age > 55 ? 0.08 : 0), brA = (R2(24) - 0.5) * 10, smirk = (R2(4) - 0.5) * 8;
+    const eyeS = 0.9 + R2(16) * 0.35 - (age > 55 ? 0.08 : 0), brA = o.brA != null ? o.brA : (R2(24) - 0.5) * 10, smirk = o.smirk != null ? o.smirk : (R2(4) - 0.5) * 8;
     const Tp = 58 + (shape === 2 ? -8 : 0), Bt = 262 + (shape === 2 ? 8 : 0) + (shape === 3 ? -10 : 0);
     const fw = shape === 1 ? 62 : shape === 3 ? 78 : 70, cw = shape === 3 ? 82 : shape === 0 ? 72 : 74, jx = (shape === 1 ? 70 : shape === 0 ? 46 : shape === 3 ? 60 : 52) + jw;
     const FL = [[150, Tp], [150 - fw * 0.62, Tp + 12], [150 - fw, Tp + 52], [150 - cw, Tp + 104], [150 - jx, Tp + 160], [150 - jx * 0.55, Bt - 14], [150, Bt]];
